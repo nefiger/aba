@@ -59,38 +59,28 @@
     x-data="{
       activeSection: 'intelligence',
       activeCountry: 'All Africa',
+      activeCategory: 'All categories',
       countries: ['All Africa', 'South Africa', 'Kenya', 'Nigeria', 'Ghana', 'Uganda'],
+      registrationRecords: [
+        { name: 'BioShield Neem SC', organisation: 'Kijani Bio', country: 'Kenya', manufactureCountry: 'Kenya', category: 'Biopesticide', stage: 'Queries received', monthsInStage: 14, totalMonths: 19, stuck: true, bottlenecks: ['No regulator timeline', 'Repeated clarification requests'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'RhizoLift Soil Boost', organisation: 'AfriBio Inputs', country: 'South Africa', manufactureCountry: 'South Africa', category: 'Biofertiliser', stage: 'Technical review', monthsInStage: 9, totalMonths: 13, stuck: false, bottlenecks: ['Repeated clarification requests'], route: 'Act 36', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'EcoGuard Citrus', organisation: 'Sahel Soil Systems', country: 'Nigeria', manufactureCountry: 'Nigeria', category: 'Biopesticide', stage: 'Queries received', monthsInStage: 12, totalMonths: 18, stuck: true, bottlenecks: ['Category ambiguity', 'No regulator timeline'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'NemaSolve Granules', organisation: 'Volta Growth Labs', country: 'Ghana', manufactureCountry: 'Ghana', category: 'Biopesticide', stage: 'Approval pending', monthsInStage: 7, totalMonths: 11, stuck: false, bottlenecks: ['No regulator timeline'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'RootSpring Liquid', organisation: 'AfriBio Inputs', country: 'South Africa', manufactureCountry: 'South Africa', category: 'Biostimulant', stage: 'Pre-submission', monthsInStage: 3, totalMonths: 3, stuck: false, bottlenecks: ['Seeking pathway clarity'], route: 'Act 36', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'MicroFix Pulse', organisation: 'Savanna BioWorks', country: 'Uganda', manufactureCountry: 'Uganda', category: 'Inoculant', stage: 'Submitted', monthsInStage: 5, totalMonths: 8, stuck: false, bottlenecks: ['Testing / data demands'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'GreenSpore Max', organisation: 'Delta BioForm', country: 'Nigeria', manufactureCountry: 'Nigeria', category: 'Biostimulant', stage: 'Pre-registration interest', monthsInStage: 4, totalMonths: 4, stuck: false, bottlenecks: ['Need pathway guidance'], route: 'Stay informed offshoot', rdLead: true, filingHorizon: '6-12 months' },
+        { name: 'SoilRise Tea', organisation: 'Cape Circular Bio', country: 'South Africa', manufactureCountry: 'South Africa', category: 'Biofertiliser', stage: 'Pre-registration interest', monthsInStage: 2, totalMonths: 2, stuck: false, bottlenecks: ['Need pathway guidance'], route: 'Stay informed offshoot', rdLead: true, filingHorizon: '0-6 months' },
+        { name: 'BioRoot Dry Coat', organisation: 'Kijani Bio', country: 'Kenya', manufactureCountry: 'Kenya', category: 'Inoculant', stage: 'Dossier prep', monthsInStage: 6, totalMonths: 9, stuck: false, bottlenecks: ['Testing / data demands'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'LeafGuard Extract', organisation: 'Nile Field Labs', country: 'Uganda', manufactureCountry: 'Uganda', category: 'Biopesticide', stage: 'Queries received', monthsInStage: 10, totalMonths: 15, stuck: true, bottlenecks: ['Repeated clarification requests', 'Cost burden'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' },
+        { name: 'PulsePrime Coat', organisation: 'Volta Growth Labs', country: 'Ghana', manufactureCountry: 'Ghana', category: 'Inoculant', stage: 'Pre-registration interest', monthsInStage: 5, totalMonths: 5, stuck: false, bottlenecks: ['Need pathway guidance', 'Testing / data demands'], route: 'Stay informed offshoot', rdLead: true, filingHorizon: 'More than 12 months' },
+        { name: 'TerraShield WP', organisation: 'East Africa BioForm', country: 'Kenya', manufactureCountry: 'Kenya', category: 'Biopesticide', stage: 'Technical review', monthsInStage: 11, totalMonths: 16, stuck: true, bottlenecks: ['No regulator timeline', 'Category ambiguity'], route: 'National regulator', rdLead: false, filingHorizon: 'Live case' }
+      ],
+      categories: ['All categories', 'Biopesticide', 'Biofertiliser', 'Biostimulant', 'Inoculant'],
       summaryCards: [
-        { label: 'Registration submissions', value: '128', note: 'evidence records captured', tint: 'var(--blue)' },
-        { label: 'Countries represented', value: '18', note: 'including future chapter signals', tint: 'var(--green)' },
-        { label: 'Flagged as stuck', value: '61', note: 'self-reported or long-delayed', tint: 'var(--rose)' },
-        { label: 'Technical network leads', value: '42', note: 'specialists and consultants', tint: 'var(--amber)' }
-      ],
-      stageDistribution: [
-        { label: 'Pre-submission', count: 21, width: '32%', tint: 'var(--green)' },
-        { label: 'Dossier review', count: 43, width: '66%', tint: 'var(--blue)' },
-        { label: 'Queries unresolved', count: 35, width: '54%', tint: 'var(--amber)' },
-        { label: 'Approval pending', count: 29, width: '45%', tint: 'var(--violet)' }
-      ],
-      bottlenecks: [
-        { label: 'Documentation feedback loop', count: 24, width: '78%', tint: 'var(--blue)' },
-        { label: 'No clear timeline from authority', count: 21, width: '68%', tint: 'var(--rose)' },
-        { label: 'Product category ambiguity', count: 15, width: '48%', tint: 'var(--amber)' },
-        { label: 'Repeated resubmission requests', count: 12, width: '40%', tint: 'var(--violet)' }
-      ],
-      countrySignals: [
-        { country: 'South Africa', records: 46, stuck: 19, network: 16, note: 'Current operational base' },
-        { country: 'Kenya', records: 18, stuck: 11, network: 6, note: 'Strong tracker signal' },
-        { country: 'Nigeria', records: 17, stuck: 9, network: 5, note: 'Growing manufacturer interest' },
-        { country: 'Ghana', records: 11, stuck: 6, network: 4, note: 'Useful future chapter lead pool' },
-        { country: 'Uganda', records: 9, stuck: 5, network: 3, note: 'Early but meaningful activity' }
-      ],
-      submissions: [
-        { name: 'BioShield Neem SC', country: 'Kenya', stage: 'Queries unresolved', time: '14 months', bottleneck: 'No timeline after response', category: 'Biopesticide' },
-        { name: 'RhizoLift Soil Boost', country: 'South Africa', stage: 'Dossier review', time: '9 months', bottleneck: 'Repeated clarification requests', category: 'Biofertilizer' },
-        { name: 'EcoGuard Citrus', country: 'Nigeria', stage: 'Queries unresolved', time: '12 months', bottleneck: 'Category ambiguity', category: 'Biocontrol' },
-        { name: 'NemaSolve Granules', country: 'Ghana', stage: 'Approval pending', time: '7 months', bottleneck: 'No decision communication', category: 'Biopesticide' },
-        { name: 'RootSpring Liquid', country: 'South Africa', stage: 'Pre-submission', time: '3 months', bottleneck: 'Seeking pathway guidance', category: 'Biostimulant' }
+        { label: 'Registration submissions', key: 'registrationCount', note: 'tracker records in current view', tint: 'var(--blue)' },
+        { label: 'Countries represented', key: 'countryCount', note: 'country grouping remains central', tint: 'var(--green)' },
+        { label: 'Flagged as stuck', key: 'stuckCount', note: 'self-reported or long-delayed', tint: 'var(--rose)' },
+        { label: 'R&D pipeline leads', key: 'rdLeadCount', note: 'early manufacturers before filing', tint: 'var(--amber)' }
       ],
       membershipLeads: [
         { name: 'AfriBio Inputs', type: 'Manufacturer', country: 'South Africa', status: 'Reviewing membership pack' },
@@ -106,7 +96,70 @@
         { name: 'Mpho Dlamini', country: 'South Africa', interest: 'Policy updates' },
         { name: 'Joseph Mwangi', country: 'Kenya', interest: 'News and events' },
         { name: 'Ada Okeke', country: 'Nigeria', interest: 'Membership and tracker updates' }
-      ]
+      ],
+      get filteredRecords() {
+        return this.registrationRecords.filter((record) => {
+          const countryMatch = this.activeCountry === 'All Africa' || record.country === this.activeCountry;
+          const categoryMatch = this.activeCategory === 'All categories' || record.category === this.activeCategory;
+          return countryMatch && categoryMatch;
+        });
+      },
+      get countryCount() {
+        return new Set(this.filteredRecords.map((record) => record.country)).size;
+      },
+      get registrationCount() {
+        return this.filteredRecords.length;
+      },
+      get stuckCount() {
+        return this.filteredRecords.filter((record) => record.stuck || record.monthsInStage >= 12).length;
+      },
+      get rdLeadCount() {
+        return this.filteredRecords.filter((record) => record.rdLead).length;
+      },
+      get stageDistribution() {
+        const counts = new Map();
+        for (const record of this.filteredRecords) counts.set(record.stage, (counts.get(record.stage) || 0) + 1);
+        const max = Math.max(...counts.values(), 1);
+        const palette = ['var(--green)', 'var(--blue)', 'var(--amber)', 'var(--violet)', 'var(--rose)', 'var(--forest)'];
+        return [...counts.entries()].map(([label, count], index) => ({ label, count, width: `${Math.round((count / max) * 100)}%`, tint: palette[index % palette.length] }));
+      },
+      get bottlenecks() {
+        const counts = new Map();
+        for (const record of this.filteredRecords) {
+          for (const bottleneck of record.bottlenecks) counts.set(bottleneck, (counts.get(bottleneck) || 0) + 1);
+        }
+        const max = Math.max(...counts.values(), 1);
+        const palette = ['var(--blue)', 'var(--rose)', 'var(--amber)', 'var(--violet)', 'var(--green)'];
+        return [...counts.entries()]
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([label, count], index) => ({ label, count, width: `${Math.round((count / max) * 100)}%`, tint: palette[index % palette.length] }));
+      },
+      get countrySignals() {
+        const grouped = new Map();
+        for (const record of this.filteredRecords) {
+          if (!grouped.has(record.country)) grouped.set(record.country, { country: record.country, records: 0, stuck: 0, network: 0, rd: 0 });
+          const row = grouped.get(record.country);
+          row.records += 1;
+          row.stuck += record.stuck || record.monthsInStage >= 12 ? 1 : 0;
+          row.rd += record.rdLead ? 1 : 0;
+        }
+        const networkMap = new Map();
+        for (const lead of this.networkLeads) networkMap.set(lead.country, (networkMap.get(lead.country) || 0) + 1);
+        return [...grouped.values()]
+          .map((row) => ({ ...row, network: networkMap.get(row.country) || 0, note: row.rd ? `${row.rd} early-stage products in pipeline` : 'Live tracker activity only' }))
+          .sort((a, b) => b.records - a.records);
+      },
+      get submissions() {
+        return this.filteredRecords;
+      },
+      get avgMonthsInStage() {
+        if (!this.filteredRecords.length) return '0.0';
+        return (this.filteredRecords.reduce((sum, record) => sum + record.monthsInStage, 0) / this.filteredRecords.length).toFixed(1);
+      },
+      metricValue(card) {
+        return this[card.key];
+      }
     }"
   >
     <header class="border-b border-black/5 bg-[color:var(--forest-deep)] text-white">
@@ -152,11 +205,16 @@
               </template>
             </div>
           </div>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <template x-for="category in categories" :key="category">
+              <button type="button" @click="activeCategory = category" class="rounded-full border border-black/5 px-4 py-2 text-sm font-semibold transition" :class="activeCategory === category ? 'bg-white text-slate-900 shadow-sm' : 'bg-transparent text-slate-600'" x-text="category"></button>
+            </template>
+          </div>
           <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <template x-for="card in summaryCards" :key="card.label">
               <article class="rounded-[24px] border border-black/5 bg-white/88 p-5">
                 <p class="text-sm font-medium text-[color:var(--muted)]" x-text="card.label"></p>
-                <p class="mt-3 text-4xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="card.value"></p>
+                <p class="mt-3 text-4xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="metricValue(card)"></p>
                 <p class="mt-3 text-sm leading-6" :style="'color:' + card.tint" x-text="card.note"></p>
               </article>
             </template>
@@ -188,7 +246,7 @@
             <div class="mt-6 rounded-[24px] bg-[color:rgba(201,76,76,0.08)] p-5">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--rose)]">Advocacy readout</p>
               <p class="mt-3 text-sm leading-7 text-[color:var(--ink)]">
-                The public story can safely aggregate this into a simple message: a meaningful share of products are reporting long delays, repeated unresolved queries, and inconsistent registration pathways across countries.
+                The public story can safely aggregate this into a simple message: a meaningful share of products are reporting long delays, repeated unresolved queries, and inconsistent registration pathways across countries, while a quieter pre-registration pipeline is building through the lighter-touch signup path.
               </p>
             </div>
           </article>
@@ -206,6 +264,7 @@
                   <div class="mt-3 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--muted)]">
                     <span>Stuck: <span class="text-[color:var(--rose)]" x-text="row.stuck"></span></span>
                     <span>Network leads: <span class="text-[color:var(--green)]" x-text="row.network"></span></span>
+                    <span>R&amp;D leads: <span class="text-[color:var(--amber)]" x-text="row.rd"></span></span>
                   </div>
                   <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]" x-text="row.note"></p>
                 </div>
@@ -231,6 +290,10 @@
                 </div>
               </template>
             </div>
+            <div class="mt-6 rounded-[22px] bg-[color:rgba(15,23,42,0.04)] p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--muted)]">Average months in current stage</p>
+              <p class="mt-2 text-3xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="avgMonthsInStage"></p>
+            </div>
           </article>
 
           <article class="panel rounded-[30px] p-6 sm:p-8">
@@ -246,6 +309,7 @@
                   <tr class="text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--muted)]">
                     <th class="px-3">Submission</th>
                     <th class="px-3">Country</th>
+                    <th class="px-3">Category</th>
                     <th class="px-3">Stage</th>
                     <th class="px-3">Time</th>
                     <th class="px-3">Bottleneck</th>
@@ -256,18 +320,40 @@
                     <tr class="rounded-[20px] bg-white/88 shadow-[0_10px_24px_-20px_rgba(15,23,42,0.28)]">
                       <td class="rounded-l-[18px] px-3 py-4">
                         <p class="font-semibold text-[color:var(--ink)]" x-text="submission.name"></p>
-                        <p class="text-sm text-[color:var(--muted)]" x-text="submission.category"></p>
+                        <p class="text-sm text-[color:var(--muted)]" x-text="submission.organisation"></p>
                       </td>
                       <td class="px-3 py-4 text-sm text-[color:var(--ink)]" x-text="submission.country"></td>
+                      <td class="px-3 py-4 text-sm text-[color:var(--ink)]" x-text="submission.category"></td>
                       <td class="px-3 py-4 text-sm text-[color:var(--ink)]" x-text="submission.stage"></td>
-                      <td class="px-3 py-4 text-sm font-semibold text-[color:var(--rose)]" x-text="submission.time"></td>
-                      <td class="rounded-r-[18px] px-3 py-4 text-sm text-[color:var(--muted)]" x-text="submission.bottleneck"></td>
+                      <td class="px-3 py-4 text-sm font-semibold text-[color:var(--rose)]"><span x-text="submission.monthsInStage"></span> months</td>
+                      <td class="rounded-r-[18px] px-3 py-4 text-sm text-[color:var(--muted)]" x-text="submission.bottlenecks.join(', ')"></td>
                     </tr>
                   </template>
                 </tbody>
               </table>
             </div>
           </article>
+        </section>
+
+        <section x-show="activeSection === 'dashboard' || activeSection === 'intelligence'" x-transition.opacity class="panel rounded-[30px] p-6 sm:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Pre-registration signal</p>
+          <div class="mt-3 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <h3 class="text-2xl font-semibold tracking-tight text-[color:var(--ink)]">Pre-registration manufacturers can enter through a lighter stay-informed branch.</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">
+                These are not yet full tracker cases, but they are valuable early leads. The system should tag them separately, keep expected filing horizon visible, and let membership or tracker journeys nudge people into this softer capture route.
+              </p>
+            </div>
+            <div class="grid gap-3 md:grid-cols-3">
+              <template x-for="horizon in ['0-6 months', '6-12 months', 'More than 12 months']" :key="horizon">
+                <div class="rounded-[22px] bg-[color:rgba(245,158,11,0.09)] p-4">
+                  <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--muted)]" x-text="horizon"></p>
+                  <p class="mt-3 text-3xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="filteredRecords.filter((record) => record.filingHorizon === horizon).length"></p>
+                  <p class="mt-2 text-sm text-[color:var(--muted)]">R&amp;D leads</p>
+                </div>
+              </template>
+            </div>
+          </div>
         </section>
 
         <section class="grid gap-6 xl:grid-cols-3">
