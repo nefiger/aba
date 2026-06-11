@@ -45,7 +45,8 @@
         linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
       background-size: 24px 24px;
     }
-    .signal-bar span {
+    .signal-bar span,
+    .story-bar span {
       display: block;
       height: 100%;
       border-radius: 999px;
@@ -53,431 +54,349 @@
   </style>
 </head>
 <body class="antialiased">
-
-<!--
-  One Alpine root keeps the prototype coherent.
-  Clicking a journey button changes the highlighted preview below.
-  The getter behaves like a computed property for the selected journey.
--->
-<div
-  x-cloak
-  x-data="{
-    selectedJourney: 'registration',
-    journeys: [
-      {
-        id: 'membership',
-        name: 'Membership',
-        color: 'var(--green)',
-        audience: 'Independent manufacturers, distributors, researchers, and aligned operators who want a stronger collective voice.',
-        positioning: 'This is the most direct extension of the existing ABA story on the live site.',
-        steps: [
-          'Identify as a manufacturer, distributor, or aligned stakeholder',
-          'Declare country and organisational context',
-          'Enter a membership follow-up pipeline'
-        ],
-        record: 'Membership Lead',
-        proof: 'Relationship assets, chapter pipeline, and future partnership visibility',
-        fields: ['Name', 'Organisation', 'Country', 'Stakeholder type', 'Membership interest'],
-        cta: 'Express Interest'
-      },
-      {
-        id: 'registration',
-        name: 'Registration Tracker',
-        color: 'var(--blue)',
-        audience: 'Product owners and regulatory leads navigating real registration pathways.',
-        positioning: 'This is the strongest new public journey because it turns a policy story into an evidence story.',
-        steps: [
-          'Describe the product or registration context',
-          'Capture stage, timing, country, and friction points',
-          'Contribute to a continent-wide advocacy picture'
-        ],
-        record: 'Registration Submission',
-        proof: 'Sector intelligence, bottleneck evidence, and time-stuck visibility',
-        fields: ['Product name', 'Country', 'Stage', 'Product category', 'Time in stage', 'Bottlenecks'],
-        cta: 'Share Registration Info'
-      },
-      {
-        id: 'technical',
-        name: 'Technical Network',
-        color: 'var(--amber)',
-        audience: 'Consultants, technical specialists, country experts, and regulatory advisors.',
-        positioning: 'This belongs inside the existing ABA coalition-building narrative, not beside it.',
-        steps: [
-          'Declare expertise and country coverage',
-          'Signal willingness to contribute to ABA capacity',
-          'Enter an expert network that can mature over time'
-        ],
-        record: 'Technical Network Lead',
-        proof: 'Specialist pool, regional capacity map, and future advisory support',
-        fields: ['Name', 'Organisation', 'Country', 'Expertise area', 'Coverage region', 'Availability notes'],
-        cta: 'Join the Network'
-      },
-      {
-        id: 'updates',
-        name: 'Stay Informed',
-        color: 'var(--purple)',
-        audience: 'Observers, sector supporters, regulators, and ecosystem participants who need a lighter-touch entry point.',
-        positioning: 'This flow already exists on the live site and should remain the simplest and least demanding route in.',
-        steps: [
-          'Share contact details',
-          'Choose interest areas',
-          'Receive policy, sector, and membership updates'
-        ],
-        record: 'Contact Record',
-        proof: 'Audience growth, soft lead capture, and future engagement',
-        fields: ['Name', 'Email', 'Organisation', 'Country', 'Interest areas', 'Consent'],
-        cta: 'Keep Me Informed'
+  <div
+    x-cloak
+    x-data="{
+      selectedJourney: 'registration',
+      journeys: [
+        {
+          id: 'membership',
+          name: 'Membership',
+          color: 'var(--green)',
+          kicker: 'For manufacturers, distributors, and aligned operators',
+          summary: 'Join the alliance and help strengthen the collective voice for independent biologicals.',
+          fields: ['Organisation', 'Country', 'Stakeholder type', 'Membership intent'],
+          cta: 'Express interest'
+        },
+        {
+          id: 'registration',
+          name: 'Registration Tracker',
+          color: 'var(--blue)',
+          kicker: 'For product owners and regulatory leads',
+          summary: 'Share your registration experience so ABA can build a stronger public case around bottlenecks, delays, and structural barriers.',
+          fields: ['Product', 'Country', 'Stage', 'Time in stage', 'Bottleneck notes'],
+          cta: 'Share registration experience'
+        },
+        {
+          id: 'technical',
+          name: 'Technical Network',
+          color: 'var(--amber)',
+          kicker: 'For consultants, specialists, and country experts',
+          summary: 'Help build a practical expert network that can support advocacy, chapter growth, and future technical collaboration.',
+          fields: ['Expertise area', 'Country coverage', 'Organisation', 'Availability'],
+          cta: 'Join the network'
+        },
+        {
+          id: 'updates',
+          name: 'Stay Informed',
+          color: 'var(--purple)',
+          kicker: 'For supporters, observers, and wider ecosystem participants',
+          summary: 'Receive policy news, sector updates, and ABA announcements without needing to take on formal participation yet.',
+          fields: ['Name', 'Email', 'Country', 'Interest areas'],
+          cta: 'Stay informed'
+        }
+      ],
+      problems: [
+        {
+          number: '01',
+          title: 'Hazardous legacy',
+          body: 'Pesticides banned elsewhere continue to shape local markets while safer alternatives struggle for recognition.'
+        },
+        {
+          number: '02',
+          title: 'Fragmented registration systems',
+          body: 'Requirements vary across countries in ways that burden smaller African manufacturers.'
+        },
+        {
+          number: '03',
+          title: 'Multinational dominance',
+          body: 'Policy influence and market access still heavily favour imported chemistry and global incumbents.'
+        },
+        {
+          number: '04',
+          title: 'Invisible local alternatives',
+          body: 'Without stronger coordination, biological manufacturers remain underrepresented and structurally unseen.'
+        }
+      ],
+      proofSignals: [
+        { label: 'Countries represented', value: '18', note: 'wider continental participation already matters', width: '56%', tint: 'var(--green)' },
+        { label: 'Products reporting delays', value: '61', note: 'the strongest advocacy signal', width: '76%', tint: 'var(--rose)' },
+        { label: 'Average time stuck', value: '11.4 months', note: 'delay becomes measurable rather than anecdotal', width: '67%', tint: 'var(--amber)' },
+        { label: 'Recurring barrier themes', value: '5', note: 'useful for public evidence and regulator conversations', width: '52%', tint: 'var(--blue)' }
+      ],
+      publicStories: [
+        { title: 'How many are stuck', body: 'A simple public stat block can show how many products have been flagged as delayed or unresolved.', width: '78%', tint: 'var(--rose)' },
+        { title: 'How long delays last', body: 'Time in stage helps ABA talk about drag, not just dissatisfaction.', width: '66%', tint: 'var(--amber)' },
+        { title: 'Where friction clusters', body: 'Country and stage groupings reveal broader patterns across the continent.', width: '58%', tint: 'var(--blue)' }
+      ],
+      get activeJourney() {
+        return this.journeys.find((journey) => journey.id === this.selectedJourney) || this.journeys[1];
       }
-    ],
-    problems: [
-      {
-        number: '01',
-        title: 'Hazardous legacy',
-        body: 'Pesticides banned elsewhere continue to shape local markets while safer alternatives struggle for visibility.'
-      },
-      {
-        number: '02',
-        title: 'Fragmented systems',
-        body: 'Registration requirements vary across countries in ways that favour larger incumbents over local producers.'
-      },
-      {
-        number: '03',
-        title: 'Multinational dominance',
-        body: 'Market access, policy influence, and sector narrative are still heavily skewed toward global chemistry players.'
-      },
-      {
-        number: '04',
-        title: 'Invisible alternatives',
-        body: 'Locally produced biologicals exist, but without organised representation they remain structurally under-recognised.'
-      }
-    ],
-    actions: [
-      {
-        number: '1',
-        title: 'Advocacy and regulatory representation',
-        body: 'ABA creates a structured seat at the table in policy submissions, Act 36 processes, and practical regulatory engagement.'
-      },
-      {
-        number: '2',
-        title: 'Enabling environment and harmonisation',
-        body: 'The alliance identifies barriers and pushes toward requirements that make more sense across African countries.'
-      },
-      {
-        number: '3',
-        title: 'Registration support and knowledge',
-        body: 'This is where the registration tracker, pre-submission insight, and shared evidence-base begin to matter.'
-      },
-      {
-        number: '4',
-        title: 'Local manufacturing and circular economy',
-        body: 'ABA frames African-owned production as a strategic priority, not a niche alternative to imported chemistry.'
-      },
-      {
-        number: '5',
-        title: 'Pan-African chapters and collective voice',
-        body: 'Starting in South Africa, the alliance can grow national and regional chapters under a shared framework.'
-      }
-    ],
-    signals: [
-      { label: 'Countries represented', value: '18', note: 'participation can be broader than current operations', width: '58%', tint: 'var(--green)' },
-      { label: 'Products flagged as stuck', value: '61', note: 'the core advocacy signal', width: '74%', tint: 'var(--rose)' },
-      { label: 'Average time in stage', value: '11.4 months', note: 'delay becomes measurable, not anecdotal', width: '66%', tint: 'var(--amber)' },
-      { label: 'Recurring bottleneck themes', value: '5', note: 'evidence for repeated structural friction', width: '54%', tint: 'var(--blue)' }
-    ],
-    get activeJourney() {
-      return this.journeys.find((journey) => journey.id === this.selectedJourney) || this.journeys[1];
-    }
-  }"
->
-  <header class="bg-[color:var(--forest-deep)] text-white">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-5 sm:px-6 lg:px-8">
-      <a href="#top" class="flex min-w-0 items-center gap-4">
-        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-7 w-7 fill-none stroke-current" stroke-width="1.8">
-            <path d="M12 3l7 3v5c0 5-3.2 8.7-7 10-3.8-1.3-7-5-7-10V6l7-3Z" />
-          </svg>
-        </div>
-        <div class="min-w-0">
-          <h1 class="text-lg font-bold tracking-tight sm:text-2xl">African Biologicals Alliance</h1>
-          <p class="text-sm text-white/72">Independent. African. Biological.</p>
-        </div>
-      </a>
-      <nav class="hidden items-center gap-8 text-sm font-medium text-white/85 md:flex">
-        <a href="#about" class="transition hover:text-white">About</a>
-        <a href="#what-we-do" class="transition hover:text-white">What We Do</a>
-        <a href="#journeys" class="transition hover:text-white">Journeys</a>
-        <a href="#stay-informed" class="transition hover:text-white">Stay Informed</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top" class="bg-[color:var(--forest)] text-white">
-    <section class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
-      <div class="space-y-6">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">African Biologicals Alliance</p>
-        <h2 class="font-display max-w-4xl text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl">
-          A unified voice for Africa’s independent biologicals sector.
-        </h2>
-        <p class="max-w-3xl text-lg leading-8 text-white/78">
-          ABA brings together independent biological and alternative input manufacturers across Africa to build a stronger enabling environment, shape policy, and compete on fair terms against multinational dominance.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="#journeys" class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[color:var(--forest-deep)]">Explore pathways</a>
-          <a href="#stay-informed" class="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 py-3 text-sm font-semibold text-white">Stay informed</a>
-        </div>
+    }"
+  >
+    <header class="bg-[color:var(--forest-deep)] text-white">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-5 sm:px-6 lg:px-8">
+        <a href="#top" class="flex min-w-0 items-center gap-4">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white">
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="h-7 w-7 fill-none stroke-current" stroke-width="1.8">
+              <path d="M12 3l7 3v5c0 5-3.2 8.7-7 10-3.8-1.3-7-5-7-10V6l7-3Z" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-lg font-bold tracking-tight sm:text-2xl">African Biologicals Alliance</h1>
+            <p class="text-sm text-white/72">Independent. African. Biological.</p>
+          </div>
+        </a>
+        <nav class="hidden items-center gap-8 text-sm font-medium text-white/85 md:flex">
+          <a href="#about" class="transition hover:text-white">About</a>
+          <a href="#pathways" class="transition hover:text-white">Pathways</a>
+          <a href="#intelligence" class="transition hover:text-white">Registration Intelligence</a>
+          <a href="#connect" class="transition hover:text-white">Stay Connected</a>
+        </nav>
       </div>
+    </header>
 
-      <aside class="surface soft-grid rounded-[32px] p-6 text-[color:var(--ink)] sm:p-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Scope and formation</p>
-        <div class="mt-6 grid gap-5">
+    <main id="top" class="bg-[color:var(--forest)] text-white">
+      <section class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
+        <div class="space-y-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">A unified sector voice</p>
+          <h2 class="font-display max-w-4xl text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl">
+            A stronger future for Africa’s independent biologicals sector.
+          </h2>
+          <p class="max-w-3xl text-lg leading-8 text-white/78">
+            ABA brings together independent biological and alternative input manufacturers across Africa to improve market conditions, shape policy, and build the evidence base for fairer registration pathways.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#pathways" class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[color:var(--forest-deep)]">Explore pathways</a>
+            <a href="#intelligence" class="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 py-3 text-sm font-semibold text-white">See the evidence story</a>
+          </div>
+        </div>
+
+        <aside class="surface soft-grid rounded-[32px] p-6 text-[color:var(--ink)] sm:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Scope and participation</p>
+          <div class="mt-6 grid gap-5">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Active now</p>
+              <p class="mt-2 text-3xl font-semibold tracking-tight">South Africa</p>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">
+                ABA is currently organizing and operating from South Africa, with immediate emphasis on local manufacturers and regulatory conditions.
+              </p>
+            </div>
+            <div class="rounded-[24px] bg-[color:rgba(63,120,235,0.08)] p-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Open across Africa</p>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--ink)]">
+                Membership interest, registration submissions, and technical network participation are still welcomed from across the continent so future chapters and regional advocacy are grounded in real demand.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="mx-auto flex max-w-7xl flex-col gap-16 px-4 py-14 sm:px-6 lg:px-8">
+      <section id="about" class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="space-y-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">About the alliance</p>
+          <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">Built by manufacturers. For manufacturers.</h3>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            The African Biologicals Alliance is a membership-based sector organisation of independent biological and alternative input manufacturers and distributors. We exist to strengthen the conditions under which safer, locally produced inputs can compete fairly in African agriculture.
+          </p>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            We provide a collective voice in policy and regulatory spaces, work to improve registration pathways and market conditions, and champion local manufacturing as an economic and environmental priority.
+          </p>
+        </div>
+        <aside class="surface rounded-[30px] p-6">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Why this matters</p>
+          <p class="mt-5 text-lg leading-8 text-[color:var(--ink)]">
+            Transitioning away from extractive monopoly business models is as important as transitioning away from the hazardous pesticides those systems continue to privilege.
+          </p>
+        </aside>
+      </section>
+
+      <section class="space-y-6">
+        <div class="grid gap-4 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Founding reality</p>
-            <p class="mt-2 text-3xl font-semibold tracking-tight">South Africa first</p>
-            <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">
-              ABA is forming now with a founding group of South African manufacturers and an immediate need for structured coordination.
-            </p>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Why ABA exists</p>
+            <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">African agriculture faces a structural problem.</h3>
           </div>
-          <div class="rounded-[24px] bg-[color:rgba(63,120,235,0.08)] p-5">
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Continental intention</p>
-            <p class="mt-3 text-sm leading-7 text-[color:var(--ink)]">
-              Interest, registrations, and expert participation should still be captured from across Africa now so future chapters, advocacy, and regional visibility are not starting from zero later.
-            </p>
-          </div>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            Safer local alternatives already exist. What is missing is stronger organisation, better evidence, and a more visible coalition that can challenge the conditions keeping those alternatives peripheral.
+          </p>
         </div>
-      </aside>
-    </section>
-  </main>
-
-  <div class="mx-auto flex max-w-7xl flex-col gap-16 px-4 py-14 sm:px-6 lg:px-8">
-    <section id="about" class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <div class="space-y-5">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">About the Alliance</p>
-        <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">Built by manufacturers. For manufacturers.</h3>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          The African Biologicals Alliance is a membership-based sector organisation of independent biological and alternative input manufacturers and distributors. We exist to strengthen the conditions under which safer, locally produced inputs can compete fairly in African agriculture.
-        </p>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          We provide a collective voice in policy and regulatory spaces, work to improve registration pathways and market conditions, and champion local manufacturing as an economic and environmental priority.
-        </p>
-      </div>
-      <aside class="surface rounded-[30px] p-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Working truth</p>
-        <p class="mt-5 text-lg leading-8 text-[color:var(--ink)]">
-          “Transitioning away from extractive, multinational monopoly business models is as important as transitioning away from the hazardous pesticides they push into African markets.”
-        </p>
-      </aside>
-    </section>
-
-    <section class="space-y-6">
-      <div class="grid gap-4 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Why this exists</p>
-          <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">African agriculture faces a structural problem.</h3>
-        </div>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          The conditions that favour hazardous pesticide imports over safer local alternatives are systemic, and fixing them requires organised, collective action.
-        </p>
-      </div>
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <template x-for="problem in problems" :key="problem.number">
-          <article class="surface rounded-[28px] p-6">
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]" x-text="problem.number"></p>
-            <h4 class="mt-5 text-2xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="problem.title"></h4>
-            <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]" x-text="problem.body"></p>
-          </article>
-        </template>
-      </div>
-    </section>
-
-    <section id="what-we-do" class="space-y-6">
-      <div class="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">What we do</p>
-          <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">Five ways ABA creates structural change.</h3>
-        </div>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          The public journeys should not sit apart from these claims. They are how people actually enter the coalition, contribute evidence, and help strengthen the shared position.
-        </p>
-      </div>
-      <div class="grid gap-6 lg:grid-cols-5">
-        <template x-for="action in actions" :key="action.number">
-          <article class="surface rounded-[26px] p-5">
-            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[color:rgba(15,23,42,0.05)] text-sm font-semibold text-[color:var(--ink)]" x-text="action.number"></div>
-            <h4 class="mt-5 text-xl font-semibold leading-7 tracking-tight text-[color:var(--ink)]" x-text="action.title"></h4>
-            <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]" x-text="action.body"></p>
-          </article>
-        </template>
-      </div>
-    </section>
-
-    <section id="journeys" class="space-y-7">
-      <div class="grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">How people engage with ABA</p>
-          <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">The journeys should feel like part of the site, not separate product modules.</h3>
-        </div>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          This section is where the prototype needs to do real journey work: show how someone enters, what they give, what ABA captures, and what value is created downstream.
-        </p>
-      </div>
-
-      <div class="grid gap-6 xl:grid-cols-[0.4fr_0.6fr]">
-        <div class="grid gap-4">
-          <template x-for="journey in journeys" :key="journey.id">
-            <button
-              type="button"
-              @click="selectedJourney = journey.id"
-              class="surface rounded-[28px] p-5 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-30px_rgba(15,23,42,0.28)]"
-              :style="selectedJourney === journey.id ? 'outline: 2px solid ' + journey.color + '; outline-offset: 0;' : ''"
-            >
-              <div class="flex items-start justify-between gap-3">
-                <div>
-                  <h4 class="text-2xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="journey.name"></h4>
-                  <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]" x-text="journey.audience"></p>
-                </div>
-                <span class="mt-1 h-3 w-3 shrink-0 rounded-full" :style="'background:' + journey.color"></span>
-              </div>
-              <p class="mt-4 text-sm leading-7 text-[color:var(--ink)]" x-text="journey.positioning"></p>
-            </button>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <template x-for="problem in problems" :key="problem.number">
+            <article class="surface rounded-[28px] p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]" x-text="problem.number"></p>
+              <h4 class="mt-5 text-2xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="problem.title"></h4>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]" x-text="problem.body"></p>
+            </article>
           </template>
+        </div>
+      </section>
+
+      <section id="pathways" class="space-y-7">
+        <div class="grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">How to engage</p>
+            <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">Four ways into the alliance.</h3>
+          </div>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            Whether someone wants to become a member, contribute registration evidence, join a specialist network, or simply stay informed, each pathway should feel like a natural part of the ABA site.
+          </p>
+        </div>
+
+        <div class="grid gap-6 xl:grid-cols-[0.4fr_0.6fr]">
+          <div class="grid gap-4">
+            <template x-for="journey in journeys" :key="journey.id">
+              <button
+                type="button"
+                @click="selectedJourney = journey.id"
+                class="surface rounded-[28px] p-5 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-30px_rgba(15,23,42,0.28)]"
+                :style="selectedJourney === journey.id ? 'outline: 2px solid ' + journey.color + '; outline-offset: 0;' : ''"
+              >
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em]" :style="'color:' + journey.color" x-text="journey.kicker"></p>
+                    <h4 class="mt-3 text-2xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="journey.name"></h4>
+                    <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]" x-text="journey.summary"></p>
+                  </div>
+                  <span class="mt-1 h-3 w-3 shrink-0 rounded-full" :style="'background:' + journey.color"></span>
+                </div>
+              </button>
+            </template>
+          </div>
+
+          <div class="surface rounded-[32px] p-6 sm:p-8">
+            <div class="grid gap-6 lg:grid-cols-[0.84fr_1.16fr] lg:items-start">
+              <div class="space-y-4">
+                <div class="inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]" :style="'background: color-mix(in oklch, ' + activeJourney.color + ' 14%, white); color:' + activeJourney.color">
+                  Selected pathway
+                </div>
+                <h4 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="activeJourney.name"></h4>
+                <p class="text-base leading-8 text-[color:var(--muted)]" x-text="activeJourney.summary"></p>
+                <div class="rounded-[24px] px-5 py-5" :style="'background: color-mix(in oklch, ' + activeJourney.color + ' 12%, white)'">
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">What ABA captures</p>
+                  <div class="mt-4 grid gap-3">
+                    <template x-for="field in activeJourney.fields" :key="field">
+                      <div class="rounded-[16px] border border-[color:rgba(15,23,42,0.08)] bg-white/80 px-3 py-3 text-sm text-[color:var(--ink)]" x-text="field"></div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid gap-4">
+                <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-white/92 p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Why this pathway exists</p>
+                  <p class="mt-4 text-sm leading-7 text-[color:var(--ink)]">
+                    Each route creates a different kind of asset for ABA: membership momentum, registration evidence, specialist capacity, or a wider audience that can be activated over time.
+                  </p>
+                </div>
+                <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-white/92 p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Call to action</p>
+                  <div class="mt-4 flex flex-wrap gap-3">
+                    <span class="inline-flex rounded-full px-4 py-2 text-sm font-semibold text-white" :style="'background:' + activeJourney.color" x-text="activeJourney.cta"></span>
+                    <a href="./flow-intelligence.html" class="inline-flex rounded-full border border-[color:rgba(15,23,42,0.1)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--ink)]">View full flow asset</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="intelligence" class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[34px] bg-[color:var(--forest-deep)] p-6 text-white shadow-[0_26px_50px_-30px_rgba(15,23,42,0.45)] sm:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">Registration intelligence</p>
+          <h3 class="mt-4 font-display text-4xl font-semibold tracking-tight">A public evidence story can strengthen the advocacy case.</h3>
+          <p class="mt-4 text-base leading-8 text-white/75">
+            The registration tracker should not appear as a passive intake form. It should show that submissions help reveal how many products are getting stuck, how long delays are lasting, and which barriers recur across countries.
+          </p>
+          <div class="mt-8 grid gap-4">
+            <template x-for="signal in proofSignals" :key="signal.label">
+              <div class="rounded-[22px] border border-white/8 bg-white/5 p-4">
+                <div class="flex flex-wrap items-baseline justify-between gap-3">
+                  <p class="text-sm font-medium text-white" x-text="signal.label"></p>
+                  <p class="text-lg font-semibold tabular-nums" x-text="signal.value"></p>
+                </div>
+                <p class="mt-1 text-sm leading-6 text-white/58" x-text="signal.note"></p>
+                <div class="signal-bar mt-3 h-2 rounded-full bg-white/10">
+                  <span :style="'width:' + signal.width + '; background:' + signal.tint"></span>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <div class="surface rounded-[34px] p-6 sm:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">How this could appear publicly</p>
+          <h3 class="mt-4 font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">Use simple insight blocks, then give people a quiet way to add their own data.</h3>
+          <div class="mt-6 grid gap-4">
+            <template x-for="story in publicStories" :key="story.title">
+              <div class="rounded-[22px] bg-[color:rgba(15,23,42,0.04)] p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                  <h4 class="text-lg font-semibold tracking-tight text-[color:var(--ink)]" x-text="story.title"></h4>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]" x-text="story.body"></p>
+                <div class="story-bar mt-4 h-2 rounded-full bg-white">
+                  <span :style="'width:' + story.width + '; background:' + story.tint"></span>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="inline-flex rounded-full bg-[color:var(--blue)] px-4 py-2 text-sm font-semibold text-white">Share your registration experience</span>
+            <span class="inline-flex rounded-full border border-[color:rgba(15,23,42,0.1)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--ink)]">See full evidence story</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="connect" class="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <div class="space-y-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Stay connected</p>
+          <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">ABA is forming. Be part of it from the start.</h3>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            The lighter-touch signup still matters. It gives people a way to keep in touch with the movement, receive updates, and move into a deeper pathway later if and when the timing is right.
+          </p>
+          <p class="text-base leading-8 text-[color:var(--muted)]">
+            On the live site this can remain the simplest conversion route, while the other pathways become more intentionally structured behind the scenes.
+          </p>
         </div>
 
         <div class="surface rounded-[32px] p-6 sm:p-8">
-          <div class="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div class="space-y-4">
-              <div class="inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]" :style="'background: color-mix(in oklch, ' + activeJourney.color + ' 14%, white); color:' + activeJourney.color">
-                Selected journey
-              </div>
-              <h4 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="activeJourney.name"></h4>
-              <p class="text-base leading-8 text-[color:var(--muted)]" x-text="activeJourney.positioning"></p>
-              <div class="rounded-[24px] px-5 py-5" :style="'background: color-mix(in oklch, ' + activeJourney.color + ' 12%, white)'">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Created record</p>
-                <p class="mt-3 text-2xl font-semibold tabular-nums text-[color:var(--ink)]" x-text="activeJourney.record"></p>
-                <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]" x-text="activeJourney.proof"></p>
-              </div>
-            </div>
-
-            <div class="grid gap-4">
-              <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-white/92 p-5">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Journey preview</p>
-                <ol class="mt-4 grid gap-3">
-                  <template x-for="(step, index) in activeJourney.steps" :key="step">
-                    <li class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-4 text-sm leading-7 text-[color:var(--ink)]">
-                      <span class="mr-2 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]" x-text="String(index + 1).padStart(2, '0')"></span>
-                      <span x-text="step"></span>
-                    </li>
-                  </template>
-                </ol>
-              </div>
-
-              <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-white/92 p-5">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Likely intake fields</p>
-                <div class="mt-4 grid gap-3 sm:grid-cols-2">
-                  <template x-for="field in activeJourney.fields" :key="field">
-                    <div class="rounded-[16px] border border-[color:rgba(15,23,42,0.08)] px-3 py-3 text-sm text-[color:var(--ink)]" x-text="field"></div>
-                  </template>
-                </div>
-                <div class="mt-5 flex flex-wrap gap-3">
-                  <span class="inline-flex rounded-full px-4 py-2 text-sm font-semibold text-white" :style="'background:' + activeJourney.color" x-text="activeJourney.cta"></span>
-                  <a href="./flow-intelligence.html" class="inline-flex rounded-full border border-[color:rgba(15,23,42,0.1)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--ink)]">Open full flow asset</a>
-                </div>
-              </div>
-            </div>
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Signup direction</p>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Name</div>
+            <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Email address</div>
+            <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Organisation</div>
+            <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Country</div>
+          </div>
+          <div class="mt-5 grid gap-3">
+            <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">Membership and alliance updates</div>
+            <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">Policy and regulatory updates</div>
+            <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">News, events, and intelligence highlights</div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="inline-flex rounded-full bg-[color:var(--forest-deep)] px-4 py-2 text-sm font-semibold text-white">Keep me informed</span>
+            <span class="inline-flex rounded-full border border-[color:rgba(15,23,42,0.1)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--ink)]">Low-commitment entry point</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="grid gap-6 lg:grid-cols-[1fr_1fr]">
-      <div class="rounded-[34px] bg-[color:var(--forest-deep)] p-6 text-white shadow-[0_26px_50px_-30px_rgba(15,23,42,0.45)] sm:p-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">Registration intelligence</p>
-        <h3 class="mt-4 font-display text-4xl font-semibold tracking-tight">This needs to feel like an advocacy section, not just a feature list.</h3>
-        <p class="mt-4 text-base leading-8 text-white/75">
-          The site should show that registration submissions create a stronger case about where products are stuck, how long delays last, and which barriers recur across the continent. That is the story that makes the tracker matter.
-        </p>
-        <div class="mt-8 grid gap-4">
-          <template x-for="signal in signals" :key="signal.label">
-            <div class="rounded-[22px] border border-white/8 bg-white/5 p-4">
-              <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <p class="text-sm font-medium text-white" x-text="signal.label"></p>
-                <p class="text-lg font-semibold tabular-nums" x-text="signal.value"></p>
-              </div>
-              <p class="mt-1 text-sm leading-6 text-white/58" x-text="signal.note"></p>
-              <div class="signal-bar mt-3 h-2 rounded-full bg-white/10">
-                <span :style="'width:' + signal.width + '; background:' + signal.tint"></span>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-
-      <div class="surface rounded-[34px] p-6 sm:p-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">How to place this on the real site</p>
-        <h3 class="mt-4 font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">This section belongs inside the existing “What We Do” and “Stay Informed” logic.</h3>
-        <div class="mt-6 grid gap-4">
-          <div class="rounded-[22px] bg-[color:rgba(63,120,235,0.08)] p-5">
-            <h4 class="text-lg font-semibold tracking-tight text-[color:var(--ink)]">Registrations by country</h4>
-            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">Show where activity is being reported and where chapter-readiness signals may be emerging beyond South Africa.</p>
-          </div>
-          <div class="rounded-[22px] bg-[color:rgba(216,155,40,0.11)] p-5">
-            <h4 class="text-lg font-semibold tracking-tight text-[color:var(--ink)]">Time stuck by stage</h4>
-            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">Make delay measurable so the public story feels evidence-led rather than rhetorical.</p>
-          </div>
-          <div class="rounded-[22px] bg-[color:rgba(147,80,232,0.09)] p-5">
-            <h4 class="text-lg font-semibold tracking-tight text-[color:var(--ink)]">Recurring bottlenecks</h4>
-            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">Cluster repeated issues so advocacy is grounded in patterns, not isolated complaints.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="stay-informed" class="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-start">
-      <div class="space-y-5">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Stay Connected</p>
-        <h3 class="font-display text-4xl font-semibold tracking-tight text-[color:var(--ink)]">ABA is forming. Be part of it from the start.</h3>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          Sign up to stay informed as ABA develops — membership announcements, policy updates, sector news, and eventually the stronger differentiated routes that sit behind the public homepage.
-        </p>
-        <p class="text-base leading-8 text-[color:var(--muted)]">
-          On the real site, this can remain the lightest-weight conversion path, while the other flows become more explicit and structured.
-        </p>
-      </div>
-
-      <div class="surface rounded-[32px] p-6 sm:p-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Form direction</p>
-        <div class="mt-5 grid gap-4 sm:grid-cols-2">
-          <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Name</div>
-          <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Email address</div>
-          <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Organisation</div>
-          <div class="rounded-[18px] border border-[color:rgba(15,23,42,0.08)] px-4 py-3 text-sm text-[color:var(--ink)]">Country</div>
-        </div>
-        <div class="mt-5 grid gap-3">
-          <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">Membership</div>
-          <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">Policy and regulatory updates</div>
-          <div class="rounded-[18px] bg-[color:rgba(15,23,42,0.04)] px-4 py-3 text-sm text-[color:var(--ink)]">General news and events</div>
-        </div>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <span class="inline-flex rounded-full bg-[color:var(--forest-deep)] px-4 py-2 text-sm font-semibold text-white">Keep me informed</span>
-          <span class="inline-flex rounded-full border border-[color:rgba(15,23,42,0.1)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--ink)]">No noise, no commitment</span>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer class="bg-[color:var(--forest-deep)] text-white">
-    <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">African Biologicals Alliance</p>
-        <p class="mt-3 max-w-3xl text-sm leading-7 text-white/68">
-          Prototype direction for weaving new journeys into the existing ABA narrative site rather than treating them as isolated landing pages.
-        </p>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="./flow-intelligence.html" class="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white">Flow asset</a>
-        <a href="./requirements/african-biologicals-alliance-html-spec.md" class="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white">Source spec</a>
-      </div>
+      </section>
     </div>
-  </footer>
-</div>
+
+    <footer class="bg-[color:var(--forest-deep)] text-white">
+      <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">African Biologicals Alliance</p>
+          <p class="mt-3 max-w-3xl text-sm leading-7 text-white/68">
+            Public prototype direction for weaving membership, registration evidence, technical capacity, and updates into the existing ABA site story.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="./admin-prototype.html" class="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white">Admin prototype</a>
+          <a href="./flow-intelligence.html" class="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white">Flow asset</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
