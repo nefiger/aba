@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Project Docs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #152032;
+      --muted: #58657a;
+      --line: #d9e0e9;
+      --paper: #fbfcf9;
+      --green: #3fb166;
+      --blue: #3f78eb;
+      --purple: #9350e8;
+      --amber: #d89b28;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(63, 177, 102, 0.13), transparent 28%),
+        radial-gradient(circle at top right, rgba(63, 120, 235, 0.1), transparent 24%),
+        linear-gradient(180deg, #f5faf5 0%, #fcfaf5 100%);
+    }
+    .display { font-family: "Source Serif 4", Georgia, serif; }
+    .wrap {
+      width: min(1100px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 72px;
+    }
+    .hero,
+    .card {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(21, 32, 50, 0.08);
+      border-radius: 28px;
+      box-shadow: 0 24px 40px -32px rgba(21, 32, 50, 0.28);
+      backdrop-filter: blur(10px);
+    }
+    .hero { padding: 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .card { padding: 22px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(21, 32, 50, 0.08);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 999px; }
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.45rem;
+      line-height: 1.1;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 70ch;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .action {
+      display: inline-flex;
+      margin-top: 20px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: #172236;
+      color: white;
+      font-weight: 700;
+    }
+    .link-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(21, 32, 50, 0.08);
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .meta {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="dot" style="background: var(--green)"></span>
+        African Biologicals Alliance
+      </div>
+      <h1 class="display">Prototype workspace and requirements hub.</h1>
+      <p>
+        This repository holds the evolving public-site requirements, the standalone flow and intelligence asset, and the first-pass admin concepting for the ABA project. The main published artifact right now is the flow and intelligence explainer.
+      </p>
+      <a class="action" href="./flow-intelligence.html">Open Flow And Intelligence Asset</a>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="eyebrow">
+          <span class="dot" style="background: var(--blue)"></span>
+          Live artifact
+        </div>
+        <h2 class="display" style="margin-top: 16px;">Flow and intelligence explainer</h2>
+        <p>A standalone HTML asset that maps the four public flows, the normalization layer, the registration intelligence story, and the downstream advocacy outcomes.</p>
+        <a class="action" href="./flow-intelligence.html">View artifact</a>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">
+          <span class="dot" style="background: var(--purple)"></span>
+          Requirements
+        </div>
+        <h2 class="display" style="margin-top: 16px;">Working spec set</h2>
+        <p>The current planning set includes the public website spec, product requirements, standalone asset spec, and admin prototype spec.</p>
+        <div class="link-list">
+          <a class="link-item" href="./requirements/african-biologicals-alliance-html-spec.md">
+            <span>Public website spec</span>
+            <span class="meta">Markdown</span>
+          </a>
+          <a class="link-item" href="./requirements/african-biologicals-alliance-product-requirements.md">
+            <span>Product requirements</span>
+            <span class="meta">Markdown</span>
+          </a>
+          <a class="link-item" href="./requirements/african-biologicals-alliance-admin-prototype-spec.md">
+            <span>Admin prototype spec</span>
+            <span class="meta">Markdown</span>
+          </a>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
