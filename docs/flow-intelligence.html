@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Flow and Intelligence Asset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+    :root {
+      --ink: oklch(0.2 0.03 250);
+      --muted: oklch(0.45 0.03 250);
+      --line: oklch(0.88 0.01 250);
+      --paper: oklch(0.985 0.005 95);
+      --sand: oklch(0.965 0.01 95);
+      --green: oklch(0.69 0.19 150);
+      --blue: oklch(0.6 0.2 258);
+      --purple: oklch(0.63 0.22 305);
+      --amber: oklch(0.76 0.16 80);
+      --rose: oklch(0.72 0.16 26);
+    }
+    body {
+      font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(95, 181, 123, 0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(76, 129, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, #f8fbf7 0%, #fbfaf6 100%);
+      color: var(--ink);
+    }
+    .font-display { font-family: "Source Serif 4", Georgia, serif; }
+    .diagram-grid {
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .data-pill {
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(10px);
+    }
+    .flow-line {
+      background:
+        linear-gradient(90deg, rgba(15, 23, 42, 0.15), rgba(15, 23, 42, 0.04));
+      height: 2px;
+      width: 100%;
+    }
+    .mini-bar span {
+      display: block;
+      border-radius: 999px;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<!--
+  This onepager keeps all state in one Alpine root.
+  `selectedFlow` is the currently highlighted pathway.
+  The getters act like computed properties, so templates stay clean.
+-->
+<div
+  x-cloak
+  x-data="{
+    selectedFlow: 'registration',
+    selectedLayer: 'assets',
+    flows: [
+      {
+        id: 'membership',
+        name: 'Membership Interest',
+        accent: 'var(--green)',
+        eyebrow: 'Relationship capture',
+        audience: 'Manufacturers, distributors, researchers, academics, NGOs, and public-sector stakeholders.',
+        capture: ['Stakeholder type', 'Organisation interest', 'Country', 'Membership intent'],
+        record: 'Membership Lead',
+        outputs: ['Relationship assets', 'Membership pipeline', 'Future chapter leads'],
+        why: 'This flow helps ABA understand who wants to participate formally and where organisational momentum is building.'
+      },
+      {
+        id: 'registration',
+        name: 'Registration Tracker',
+        accent: 'var(--blue)',
+        eyebrow: 'Evidence capture',
+        audience: 'Product owners, regulatory leads, and operators navigating registration pathways.',
+        capture: ['Country', 'Stage', 'Product category', 'Bottlenecks', 'Time in stage'],
+        record: 'Registration Submission',
+        outputs: ['Sector intelligence', 'Advocacy evidence', 'Bottleneck visibility'],
+        why: 'This is the strongest advocacy lane because it turns isolated registration stories into continent-wide evidence.'
+      },
+      {
+        id: 'updates',
+        name: 'Stay Informed',
+        accent: 'var(--purple)',
+        eyebrow: 'Audience growth',
+        audience: 'Observers, supporters, and ecosystem participants who want updates without formal submission.',
+        capture: ['Contact details', 'Communications opt-in', 'Country where useful'],
+        record: 'Contact Record',
+        outputs: ['Future engagement', 'Event distribution', 'Audience growth'],
+        why: 'This flow keeps a wider orbit connected to ABA and creates a lighter-weight pathway into deeper engagement later.'
+      },
+      {
+        id: 'technical',
+        name: 'Technical Network',
+        accent: 'var(--amber)',
+        eyebrow: 'Expert capacity',
+        audience: 'Consultants, regional specialists, technical experts, and regulatory or commercialisation advisors.',
+        capture: ['Country', 'Expertise area', 'Organisation', 'Specialist profile'],
+        record: 'Technical Network Lead',
+        outputs: ['Expert directory', 'Regional specialist pool', 'Support capacity'],
+        why: 'This builds a practical network ABA can draw on as programmes, chapters, and advocacy needs mature.'
+      }
+    ],
+    intelligenceSignals: [
+      { label: 'Country-level registration picture', value: 18, unit: 'countries', width: '82%', tint: 'var(--blue)' },
+      { label: 'Products stuck in process', value: 61, unit: 'flagged cases', width: '74%', tint: 'var(--rose)' },
+      { label: 'Average time stuck', value: 11.4, unit: 'months', width: '66%', tint: 'var(--amber)' },
+      { label: 'Recurring bottlenecks', value: 5, unit: 'dominant themes', width: '58%', tint: 'var(--purple)' }
+    ],
+    outcomeColumns: [
+      {
+        title: 'Advocacy and Evidence',
+        points: [
+          'Show how many products appear stuck',
+          'Show how long they remain delayed',
+          'Support more credible regulator and stakeholder conversations'
+        ]
+      },
+      {
+        title: 'Chapter Readiness',
+        points: [
+          'See where country-level interest is forming',
+          'Retain future leads outside South Africa',
+          'Spot where local participation may justify future chapter energy'
+        ]
+      },
+      {
+        title: 'Network Strength',
+        points: [
+          'Grow expert capacity and specialist coverage',
+          'Build stronger partner and member relationships',
+          'Connect data signals with people who can help interpret them'
+        ]
+      }
+    ],
+    get activeFlow() {
+      return this.flows.find((flow) => flow.id === this.selectedFlow) || this.flows[1];
+    },
+    get activeFlowIndex() {
+      return this.flows.findIndex((flow) => flow.id === this.selectedFlow);
+    },
+    get flowBands() {
+      return this.flows.map((flow, index) => ({
+        ...flow,
+        step: String(index + 1).padStart(2, '0')
+      }));
+    }
+  }"
+  class="min-h-screen"
+>
+  <header class="sticky top-0 z-20 border-b border-[color:rgba(15,23,42,0.08)] bg-[rgba(248,251,247,0.86)] backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div class="min-w-0">
+        <p class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--muted)]">African Biologicals Alliance</p>
+        <h1 class="font-display text-xl font-semibold tracking-tight text-[color:var(--ink)] sm:text-2xl">Flow and intelligence asset</h1>
+      </div>
+      <div class="hidden items-center gap-2 md:flex">
+        <button
+          type="button"
+          @click="selectedLayer = 'flows'"
+          :class="selectedLayer === 'flows' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600'"
+          class="rounded-full border border-[color:rgba(15,23,42,0.08)] px-4 py-2 text-sm font-medium transition"
+        >Flows</button>
+        <button
+          type="button"
+          @click="selectedLayer = 'assets'"
+          :class="selectedLayer === 'assets' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600'"
+          class="rounded-full border border-[color:rgba(15,23,42,0.08)] px-4 py-2 text-sm font-medium transition"
+        >Assets</button>
+        <button
+          type="button"
+          @click="selectedLayer = 'outcomes'"
+          :class="selectedLayer === 'outcomes' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600'"
+          class="rounded-full border border-[color:rgba(15,23,42,0.08)] px-4 py-2 text-sm font-medium transition"
+        >Outcomes</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+    <section class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[color:rgba(15,23,42,0.08)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">
+          <span class="h-2 w-2 rounded-full bg-[color:var(--green)]"></span>
+          Separate stakeholder explainer
+        </div>
+        <div class="space-y-4">
+          <h2 class="font-display max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-[color:var(--ink)] sm:text-5xl">
+            From public participation to sector intelligence, advocacy, and future chapter readiness.
+          </h2>
+          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
+            This asset explains how ABA’s four public flows create records, how those records become usable assets, and why the registration tracker matters as an Africa-wide advocacy engine even while ABA is currently active in South Africa.
+          </p>
+        </div>
+      </div>
+
+      <aside class="rounded-[28px] border border-[color:rgba(15,23,42,0.08)] bg-white/88 p-6 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.22)]">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Geographic truth</p>
+        <div class="mt-4 space-y-4">
+          <p class="text-base leading-7 text-[color:var(--ink)]">
+            ABA welcomes registrations, interest, and network participation from across the African continent.
+          </p>
+          <p class="rounded-2xl bg-[color:rgba(37,99,235,0.08)] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">
+            Current operational activity is centered in South Africa, but the wider lead and data picture should still be captured now so future chapters, advocacy efforts, and regional coordination are grounded in real demand.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid gap-5 lg:grid-cols-4">
+      <!-- x-for renders one element per flow entry from the array above. -->
+      <template x-for="flow in flowBands" :key="flow.id">
+        <button
+          type="button"
+          @click="selectedFlow = flow.id"
+          class="min-w-0 rounded-[28px] border border-[color:rgba(15,23,42,0.08)] bg-white/86 p-5 text-left shadow-[0_16px_38px_-28px_rgba(15,23,42,0.24)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_42px_-26px_rgba(15,23,42,0.26)]"
+          :style="selectedFlow === flow.id ? 'outline: 2px solid ' + flow.accent + '; outline-offset: 0;' : ''"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-3 min-w-0">
+              <p class="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]" x-text="flow.step"></p>
+              <h3 class="text-xl font-semibold leading-7 text-[color:var(--ink)]" x-text="flow.name"></h3>
+            </div>
+            <span class="mt-1 h-3 w-3 shrink-0 rounded-full" :style="'background:' + flow.accent"></span>
+          </div>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.18em]" :style="'color:' + flow.accent" x-text="flow.eyebrow"></p>
+          <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]" x-text="flow.why"></p>
+        </button>
+      </template>
+    </section>
+
+    <section class="rounded-[28px] border border-[color:rgba(15,23,42,0.08)] bg-white/82 p-4 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.24)]">
+      <div class="flex flex-wrap gap-2">
+        <button
+          type="button"
+          @click="selectedLayer = 'flows'"
+          :class="selectedLayer === 'flows' ? 'bg-slate-900 text-white' : 'bg-[color:rgba(15,23,42,0.05)] text-slate-600'"
+          class="rounded-full px-4 py-2 text-sm font-medium transition"
+        >Flow logic</button>
+        <button
+          type="button"
+          @click="selectedLayer = 'assets'"
+          :class="selectedLayer === 'assets' ? 'bg-slate-900 text-white' : 'bg-[color:rgba(15,23,42,0.05)] text-slate-600'"
+          class="rounded-full px-4 py-2 text-sm font-medium transition"
+        >Asset creation</button>
+        <button
+          type="button"
+          @click="selectedLayer = 'outcomes'"
+          :class="selectedLayer === 'outcomes' ? 'bg-slate-900 text-white' : 'bg-[color:rgba(15,23,42,0.05)] text-slate-600'"
+          class="rounded-full px-4 py-2 text-sm font-medium transition"
+        >Outcome story</button>
+      </div>
+
+      <!-- x-show reveals only the currently selected explanatory note.
+           x-transition gives the onepager a small but meaningful motion cue. -->
+      <div class="mt-4">
+        <p
+          x-show="selectedLayer === 'flows'"
+          x-transition.opacity.duration.250ms
+          class="text-sm leading-7 text-[color:var(--muted)]"
+        >Start here if the question is who enters the system and what record each audience creates.</p>
+        <p
+          x-show="selectedLayer === 'assets'"
+          x-transition.opacity.duration.250ms
+          class="text-sm leading-7 text-[color:var(--muted)]"
+        >Use this layer to explain how grouped records become relationship assets, intelligence assets, and strategic capability.</p>
+        <p
+          x-show="selectedLayer === 'outcomes'"
+          x-transition.opacity.duration.250ms
+          class="text-sm leading-7 text-[color:var(--muted)]"
+        >This is the stakeholder-facing payoff: advocacy, chapter readiness, network strength, and clearer sector coordination.</p>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <div class="rounded-[32px] border border-[color:rgba(15,23,42,0.08)] bg-[color:rgba(255,255,255,0.82)] p-6 shadow-[0_20px_44px_-28px_rgba(15,23,42,0.2)] sm:p-8">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]" :style="'background: color-mix(in oklch, ' + activeFlow.accent + ' 12%, white); color:' + activeFlow.accent">
+            <span x-text="activeFlow.eyebrow"></span>
+          </span>
+          <span class="text-sm text-[color:var(--muted)]">Highlighted pathway</span>
+        </div>
+
+        <div class="mt-5 grid gap-6 md:grid-cols-[1fr_1fr]">
+          <div class="space-y-4">
+            <h3 class="font-display text-3xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="activeFlow.name"></h3>
+            <p class="text-base leading-7 text-[color:var(--muted)]" x-text="activeFlow.audience"></p>
+            <div class="rounded-[24px] p-4" :style="'background: color-mix(in oklch, ' + activeFlow.accent + ' 10%, white)'">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Created record</p>
+              <p class="mt-2 text-2xl font-semibold tabular-nums text-[color:var(--ink)]" x-text="activeFlow.record"></p>
+            </div>
+          </div>
+
+          <div class="grid gap-4">
+            <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-[color:var(--paper)] p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Intake fields</p>
+              <ul class="mt-3 grid gap-2">
+                <template x-for="field in activeFlow.capture" :key="field">
+                  <li class="data-pill rounded-2xl px-3 py-2 text-sm leading-6 text-[color:var(--ink)]" x-text="field"></li>
+                </template>
+              </ul>
+            </div>
+            <div class="rounded-[24px] border border-[color:rgba(15,23,42,0.08)] bg-white p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">What this creates downstream</p>
+              <ul class="mt-3 grid gap-2">
+                <template x-for="result in activeFlow.outputs" :key="result">
+                  <li class="text-sm leading-6 text-[color:var(--ink)]" x-text="result"></li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram-grid rounded-[32px] border border-[color:rgba(15,23,42,0.08)] bg-[rgba(255,255,255,0.58)] p-6 sm:p-8">
+        <div class="grid gap-6">
+          <div class="grid gap-4">
+            <div class="grid gap-3 sm:grid-cols-[0.9fr_0.2fr_0.9fr_0.2fr_1fr] sm:items-center">
+              <div class="rounded-[22px] border border-[color:rgba(15,23,42,0.08)] bg-white p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Public flow</p>
+                <p class="mt-2 text-lg font-semibold text-[color:var(--ink)]" x-text="activeFlow.name"></p>
+              </div>
+              <div class="hidden sm:block flow-line"></div>
+              <div class="rounded-[22px] border border-[color:rgba(15,23,42,0.08)] bg-white p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Created record</p>
+                <p class="mt-2 text-lg font-semibold text-[color:var(--ink)]" x-text="activeFlow.record"></p>
+              </div>
+              <div class="hidden sm:block flow-line"></div>
+              <div class="rounded-[22px] border border-[color:rgba(15,23,42,0.08)] bg-white p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Assets created</p>
+                <p class="mt-2 text-base leading-7 text-[color:var(--ink)]" x-text="activeFlow.outputs.join(', ')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[24px] bg-[rgba(15,23,42,0.04)] p-4">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">System logic</p>
+            <p class="mt-3 text-sm leading-7 text-[color:var(--ink)]">
+              Raw public participation is only useful once ABA can group it by country, stage, stakeholder type, product category, expertise area, and recurring bottlenecks. That grouping layer is what turns submissions into relationship assets, sector intelligence assets, and eventually strategic action.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+      <div class="rounded-[32px] border border-[color:rgba(15,23,42,0.08)] bg-slate-950 p-6 text-slate-100 shadow-[0_24px_48px_-28px_rgba(15,23,42,0.45)] sm:p-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Registration intelligence expansion</p>
+        <h3 class="mt-4 font-display text-3xl font-semibold tracking-tight text-white">Why the registration lane now carries the advocacy story.</h3>
+        <p class="mt-4 max-w-2xl text-base leading-8 text-slate-300">
+          Products getting stuck is not only an operational frustration. When enough people contribute registration data, ABA can show where delays cluster, how long they last, which issues recur, and what that means for biologicals progress across the continent.
+        </p>
+
+        <div class="mt-8 grid gap-4">
+          <!-- x-for repeats the stat bars without duplicating HTML. -->
+          <template x-for="signal in intelligenceSignals" :key="signal.label">
+            <div class="rounded-[24px] border border-[color:rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4">
+              <div class="flex flex-wrap items-baseline justify-between gap-3">
+                <p class="text-sm font-medium text-white" x-text="signal.label"></p>
+                <p class="tabular-nums text-lg font-semibold text-white">
+                  <span x-text="signal.value"></span>
+                  <span class="ml-1 text-sm font-medium text-slate-400" x-text="signal.unit"></span>
+                </p>
+              </div>
+              <div class="mini-bar mt-3 h-2 w-full rounded-full bg-white/10">
+                <span :style="'width:' + signal.width + '; background:' + signal.tint"></span>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <div class="rounded-[32px] border border-[color:rgba(15,23,42,0.08)] bg-white/86 p-6 shadow-[0_20px_44px_-28px_rgba(15,23,42,0.2)] sm:p-8">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Sector intelligence sub-assets</p>
+            <h3 class="mt-3 font-display text-3xl font-semibold tracking-tight text-[color:var(--ink)]">What the tracker should make legible.</h3>
+          </div>
+          <span class="hidden rounded-full bg-[color:rgba(37,99,235,0.08)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--blue)] sm:inline-flex">Public-safe, aggregated</span>
+        </div>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          <div class="rounded-[24px] bg-[color:rgba(37,99,235,0.07)] p-5">
+            <p class="text-sm font-semibold text-[color:var(--ink)]">Country-level registration picture</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Where submissions are coming from, and which geographies show the strongest evidence of activity or blockage.</p>
+          </div>
+          <div class="rounded-[24px] bg-[color:rgba(245,158,11,0.1)] p-5">
+            <p class="text-sm font-semibold text-[color:var(--ink)]">Average time stuck</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">A way to show that delay is measurable, comparable, and not just anecdotal.</p>
+          </div>
+          <div class="rounded-[24px] bg-[color:rgba(147,51,234,0.08)] p-5">
+            <p class="text-sm font-semibold text-[color:var(--ink)]">Recurring bottlenecks</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Themes like categorisation ambiguity, submission friction, or regulator response delays can be clustered into repeat patterns.</p>
+          </div>
+          <div class="rounded-[24px] bg-[color:rgba(244,63,94,0.08)] p-5">
+            <p class="text-sm font-semibold text-[color:var(--ink)]">Advocacy evidence base</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">The public story becomes stronger when ABA can say how many are stuck, where, and for how long.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rounded-[36px] border border-[color:rgba(15,23,42,0.08)] bg-white/88 p-6 shadow-[0_20px_44px_-28px_rgba(15,23,42,0.2)] sm:p-8">
+      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Normalization layer</p>
+          <h3 class="font-display text-3xl font-semibold tracking-tight text-[color:var(--ink)]">The middle layer is where raw signals become usable.</h3>
+          <p class="text-base leading-7 text-[color:var(--muted)]">
+            ABA should not only collect records. It should make them sortable and interpretable. That means grouping by country, stakeholder type, expertise area, registration stage, product category, and common bottleneck so the data can support both public storytelling and internal action.
+          </p>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by country</div>
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by stakeholder type</div>
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by expertise area</div>
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by registration stage</div>
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by product category</div>
+          <div class="data-pill rounded-[22px] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]">Grouped by common bottleneck</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-3">
+      <template x-for="column in outcomeColumns" :key="column.title">
+        <article class="rounded-[30px] border border-[color:rgba(15,23,42,0.08)] bg-white/88 p-6 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.24)]">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Outcome layer</p>
+          <h3 class="mt-3 font-display text-2xl font-semibold tracking-tight text-[color:var(--ink)]" x-text="column.title"></h3>
+          <ul class="mt-5 grid gap-3">
+            <template x-for="point in column.points" :key="point">
+              <li class="rounded-[20px] bg-[color:rgba(15,23,42,0.04)] px-4 py-4 text-sm leading-6 text-[color:var(--ink)]" x-text="point"></li>
+            </template>
+          </ul>
+        </article>
+      </template>
+    </section>
+
+    <section class="rounded-[36px] border border-[color:rgba(15,23,42,0.08)] bg-[color:rgba(37,99,235,0.06)] p-6 sm:p-8">
+      <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div class="space-y-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">Why this asset exists</p>
+          <h3 class="font-display text-3xl font-semibold tracking-tight text-[color:var(--ink)]">The website acquires. This asset explains. The admin interprets.</h3>
+          <p class="max-w-3xl text-base leading-7 text-[color:var(--muted)]">
+            The public site should point here for the systems picture, and the admin prototype should absorb these same structures into dashboards and filtered views. That keeps the narrative, the internal logic, and the future build aligned.
+          </p>
+        </div>
+        <a
+          href="./requirements/african-biologicals-alliance-flow-intelligence-asset-spec.md"
+          class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+        >Open source spec</a>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
