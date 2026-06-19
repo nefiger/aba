@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Review | Registration Tracker Wireframe</title>
+    <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">ABA</div>
+          <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
+        </div>
+        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+      </header>
+      <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../intake-flow/index.html">Intake</a>
+        <a href="../company-dashboard/index.html">Company Dashboard</a>
+        <a href="../public-dashboard/index.html">Public Dashboard</a>
+        <a href="../admin-operator-review/index.html" aria-current="page">Admin Review</a>
+        <a href="../registrar-list/index.html">Registrar Export</a>
+      </nav>
+
+      <main class="page">
+        <section class="page-header">
+          <div>
+            <h1>Operator review workspace</h1>
+            <p>Internal control point where raw submissions become trusted tracker records, aggregate inputs, and packet candidates.</p>
+          </div>
+          <span class="role-badge">Operator only</span>
+        </section>
+
+        <section class="grid sidebar">
+          <aside class="panel">
+            <h2>Review queue</h2>
+            <table>
+              <thead><tr><th>Record</th><th>State</th></tr></thead>
+              <tbody>
+                <tr><td>Microbial Soil Blend</td><td>Review pending</td></tr>
+                <tr><td>Bio-Control Spray</td><td>Needs clarification</td></tr>
+                <tr><td>Soil Microbe Blend</td><td>Possible duplicate</td></tr>
+                <tr><td>Compost Inoculant</td><td>Accepted</td></tr>
+              </tbody>
+            </table>
+          </aside>
+
+          <section class="stack">
+            <div class="panel">
+              <h2>Record detail</h2>
+              <div class="form-grid">
+                <div class="field"><label>Company</label><div class="input-box">Example Bio Inputs (Pty) Ltd</div></div>
+                <div class="field"><label>Product</label><div class="input-box">Fictional Microbial Soil Blend</div></div>
+                <div class="field"><label>Functional category</label><div class="input-box">Biofertiliser</div></div>
+                <div class="field"><label>Regime</label><div class="input-box">Agriculture / Act 36</div></div>
+                <div class="field"><label>Current status</label><div class="input-box">Submitted to registrar</div></div>
+                <div class="field"><label>Date status began</label><div class="input-box">2025-09-15</div></div>
+              </div>
+            </div>
+
+            <section class="grid two">
+              <div class="panel">
+                <h2>Membership verification</h2>
+                <table>
+                  <tbody>
+                    <tr><th>Self-reported</th><td>Member</td></tr>
+                    <tr><th>Verified</th><td>Member, active</td></tr>
+                    <tr><th>CRM relationship</th><td>Match to organisation record later</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel">
+                <h2>Consent and visibility</h2>
+                <table>
+                  <tbody>
+                    <tr><th>Internal review</th><td>Allowed</td></tr>
+                    <tr><th>Public aggregate</th><td>Allowed</td></tr>
+                    <tr><th>Named registrar packet</th><td>Explicit opt-in</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="grid two">
+              <div class="panel warn">
+                <h2>Proof and reference review</h2>
+                <table>
+                  <tbody>
+                    <tr><th>Proof</th><td>Uploaded: receipt-placeholder.pdf</td></tr>
+                    <tr><th>Reference</th><td>REF-EXAMPLE-1029</td></tr>
+                    <tr><th>Quality check</th><td>Readable, matches company and product</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel danger">
+                <h2>Possible duplicate state</h2>
+                <p>Similar company, product name, and status date found. Operator must merge, dismiss, or request clarification.</p>
+              </div>
+            </section>
+
+            <section class="grid three">
+              <div class="panel ok">
+                <h2>Public aggregate decision</h2>
+                <div class="options"><span class="option">Eligible</span><span class="option">Exclude</span><span class="option">Needs review</span></div>
+              </div>
+              <div class="panel ok">
+                <h2>Registrar packet eligibility</h2>
+                <div class="options"><span class="option">Eligible</span><span class="option">Blocked</span><span class="option">Excluded</span></div>
+              </div>
+              <div class="panel ok">
+                <h2>Operator inclusion decision</h2>
+                <div class="options"><span class="option">Include</span><span class="option">Exclude</span><span class="option">Needs review</span></div>
+              </div>
+            </section>
+
+            <section class="panel warn">
+              <h2>Needs clarification workflow</h2>
+              <div class="textarea-box">Ask company to upload proof or explain why no registrar reference has been issued. Record remains out of registrar packet until resolved.</div>
+            </section>
+          </section>
+        </section>
+
+        <p class="footer-note">Disposable prototype. Admin review is the v1 internal source-of-truth workflow, while the future CRM remains the likely system of record.</p>
+      </main>
+    </div>
+  </body>
+</html>

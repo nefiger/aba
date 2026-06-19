@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Company Dashboard | Registration Tracker Wireframe</title>
+    <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">ABA</div>
+          <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
+        </div>
+        <a class="home-slot" aria-disabled="true">Back to ABA website placeholder</a>
+      </header>
+      <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../intake-flow/index.html">Intake</a>
+        <a href="../company-dashboard/index.html" aria-current="page">Company Dashboard</a>
+        <a href="../public-dashboard/index.html">Public Dashboard</a>
+        <a href="../admin-operator-review/index.html">Admin Review</a>
+        <a href="../registrar-list/index.html">Registrar Export</a>
+      </nav>
+
+      <main class="page">
+        <section class="page-header">
+          <div>
+            <h1>Member company workspace</h1>
+            <p>Private view of a fictional company's own pipeline, review states, wait-time benchmarks, and registrar packet readiness.</p>
+          </div>
+          <span class="role-badge">Company member workspace</span>
+        </section>
+
+        <section class="grid three">
+          <div class="panel ok"><h2>Workspace gate</h2><p>Member login or invited workspace access required. Intake return links do not unlock this area.</p></div>
+          <div class="panel"><h2>Company</h2><p><strong>Example Bio Inputs (Pty) Ltd</strong><br>Verified ABA member: yes<br>Records visible: own company only</p></div>
+          <div class="panel warn"><h2>No accepted records yet state</h2><p>Show when records are submitted but still under ABA review. Benchmarks remain hidden until review acceptance.</p></div>
+        </section>
+
+        <section class="panel" style="margin-top: 16px;">
+          <h2>Application lanes</h2>
+          <div class="lane-board">
+            <div class="lane">
+              <h3>Pipeline / pre-submission</h3>
+              <div class="record-card">
+                <strong>Fictional Seed Coat</strong>
+                <span class="status-chip">Preparing submission</span>
+                <p class="note">Not counted in registrar backlog.</p>
+              </div>
+            </div>
+            <div class="lane">
+              <h3>With registrar</h3>
+              <div class="record-card">
+                <strong>Fictional Microbial Soil Blend</strong>
+                <span class="status-chip">Accepted tracker record</span>
+                <p>Submitted 2025-09-15. Waiting 9 months.</p>
+              </div>
+              <div class="record-card">
+                <strong>Fictional Bio-Control Spray</strong>
+                <span class="status-chip">Needs clarification</span>
+                <p>ABA requested proof of submission.</p>
+              </div>
+            </div>
+            <div class="lane">
+              <h3>Finalised</h3>
+              <div class="record-card">
+                <strong>Fictional Compost Inoculant</strong>
+                <span class="status-chip">Approved / registered</span>
+                <p>Finalised record retained for history.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <div class="panel">
+            <h2>Benchmark against anonymised sector median</h2>
+            <div class="metric-row">
+              <div class="metric"><span>Company open wait</span><span class="metric-value">9 mo</span><div class="bar medium"></div></div>
+              <div class="metric"><span>Reviewed sector median</span><span class="metric-value">14 mo</span><div class="bar long"></div></div>
+            </div>
+            <p class="note">Informational benchmark from reviewed submissions; no other company is identified.</p>
+          </div>
+          <div class="panel">
+            <h2>Registrar packet readiness</h2>
+            <table>
+              <thead><tr><th>Record</th><th>Status</th><th>Blocker</th></tr></thead>
+              <tbody>
+                <tr><td>Microbial Soil Blend</td><td>Ready candidate</td><td>None</td></tr>
+                <tr><td>Bio-Control Spray</td><td>Not export-ready</td><td>Proof missing</td></tr>
+                <tr><td>Seed Coat</td><td>Not eligible yet</td><td>Pre-submission pipeline</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <div class="panel warn"><h2>Needs clarification</h2><p>ABA needs a proof file or reference-unavailable reason before this record can be accepted for packet review.</p></div>
+          <div class="panel ok"><h2>Included in ABA registrar packet</h2><p>Visible only for consented, reviewed, operator-approved member records. Packet version and sent date appear here once available.</p></div>
+        </section>
+
+        <p class="footer-note">Disposable prototype. Fictional data only. Shared rules come from context-and-decisions-v1.md.</p>
+      </main>
+    </div>
+  </body>
+</html>

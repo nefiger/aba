@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Public Dashboard | Registration Tracker Wireframe</title>
+    <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">ABA</div>
+          <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
+        </div>
+        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+      </header>
+      <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../intake-flow/index.html">Intake</a>
+        <a href="../company-dashboard/index.html">Company Dashboard</a>
+        <a href="../public-dashboard/index.html" aria-current="page">Public Dashboard</a>
+        <a href="../admin-operator-review/index.html">Admin Review</a>
+        <a href="../registrar-list/index.html">Registrar Export</a>
+      </nav>
+
+      <main class="page">
+        <section class="page-header">
+          <div>
+            <h1>Public aggregate dashboard</h1>
+            <p>Anonymised advocacy view based on reviewed submissions only. It separates future pipeline from registrar backlog.</p>
+          </div>
+          <span class="role-badge">Public aggregate view</span>
+        </section>
+
+        <section class="panel muted">
+          <h2>Filters</h2>
+          <div class="options">
+            <span class="option">All reviewed submissions</span>
+            <span class="option">ABA member submissions</span>
+            <span class="option">Non-member submissions</span>
+          </div>
+          <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity.</p>
+        </section>
+
+        <section class="metric-grid" style="margin-top: 16px;">
+          <div class="metric"><span>Applications in backlog</span><span class="metric-value">37</span><p class="note">Reviewed, open, over threshold.</p></div>
+          <div class="metric"><span>Median wait time</span><span class="metric-value">14 mo</span><p class="note">Current open applications.</p></div>
+          <div class="metric"><span>Worst wait time</span><span class="metric-value">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
+          <div class="metric"><span>Product-years waiting</span><span class="metric-value">51.8</span><p class="note">Sum of open durations.</p></div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <div class="panel">
+            <h2>Backlog by legal pathway</h2>
+            <table>
+              <thead><tr><th>Pathway</th><th>Applications</th><th>Time signal</th></tr></thead>
+              <tbody>
+                <tr><td>Group 3 fertilizer</td><td>18</td><td><div class="bar long"></div></td></tr>
+                <tr><td>Agricultural remedy</td><td>12</td><td><div class="bar medium"></div></td></tr>
+                <tr><td>Not sure</td><td>Suppressed</td><td>Small cell hidden</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel warn">
+            <h2>Small-cell suppression</h2>
+            <p>Cells below the anonymisation threshold are hidden so a single company or product cannot be inferred.</p>
+            <div class="callout">Example: "Public-health pest control + non-member + 1 record" is suppressed.</div>
+          </div>
+        </section>
+
+        <section class="grid three" style="margin-top: 16px;">
+          <div class="panel">
+            <h2>Functional category</h2>
+            <p>Biofertiliser</p><div class="bar long"></div>
+            <p>Biopesticide</p><div class="bar medium"></div>
+            <p>Biostimulant</p><div class="bar short"></div>
+          </div>
+          <div class="panel">
+            <h2>Governing regime</h2>
+            <p>Agriculture / Act 36</p><div class="bar long"></div>
+            <p>Water treatment</p><div class="bar short"></div>
+            <p>Other</p><div class="bar medium"></div>
+          </div>
+          <div class="panel">
+            <h2>Future pipeline signal</h2>
+            <span class="metric-value">24</span>
+            <p class="note">Pre-submission products tracked separately. These are not counted as registrar backlog.</p>
+          </div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <div class="panel">
+            <h2>Trend over time</h2>
+            <div class="placeholder-chart">Placeholder trend: reviewed backlog count by month.</div>
+          </div>
+          <div class="panel">
+            <h2>Aggregate evidence packet activity</h2>
+            <table>
+              <tbody>
+                <tr><th>Registrar evidence packets prepared</th><td>3</td></tr>
+                <tr><th>Applications represented</th><td>29</td></tr>
+                <tr><th>Most recent packet period</th><td>Q2 2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <p class="footer-note">Disposable prototype. Fictional aggregate data only. No company, product, proof, or reference details appear publicly.</p>
+      </main>
+    </div>
+  </body>
+</html>

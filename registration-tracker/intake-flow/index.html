@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intake Flow | Registration Tracker Wireframe</title>
+    <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">ABA</div>
+          <div>
+            <p class="product-kicker">Biological Inputs</p>
+            <p class="product-title">Registration Tracker</p>
+          </div>
+        </div>
+        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+      </header>
+      <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../intake-flow/index.html" aria-current="page">Intake</a>
+        <a href="../company-dashboard/index.html">Company Dashboard</a>
+        <a href="../public-dashboard/index.html">Public Dashboard</a>
+        <a href="../admin-operator-review/index.html">Admin Review</a>
+        <a href="../registrar-list/index.html">Registrar Export</a>
+      </nav>
+
+      <main class="page">
+        <section class="page-header">
+          <div>
+            <h1>Submission intake flow</h1>
+            <p>Low-friction, returnable capture flow for fictional company representatives. Raw submissions are reviewed before they appear in any dashboard or packet.</p>
+          </div>
+          <span class="role-badge">Public submission: authorised representatives only</span>
+        </section>
+
+        <section class="grid two">
+          <div class="panel ok stack">
+            <h2>1. Authorised submitter gate</h2>
+            <div class="field full">
+              <label>Eligibility question</label>
+              <div class="select-box">Are you authorised to submit registration information for this company/product?</div>
+            </div>
+            <div class="options">
+              <span class="option">Yes, continue</span>
+              <span class="option">No, stop here</span>
+            </div>
+            <div class="callout">Only responsible company representatives continue. Third-party or unauthorised reporting stops before data capture.</div>
+          </div>
+          <div class="panel danger stack">
+            <h2>Not authorised stop state</h2>
+            <p>You cannot submit this record. Please forward this link to the company person responsible for registration information.</p>
+            <div class="input-box">Copy share link / email template placeholder</div>
+          </div>
+        </section>
+
+        <section class="grid sidebar" style="margin-top: 16px;">
+          <aside class="panel muted stack">
+            <h2>Flow steps</h2>
+            <div class="status-chip">1 Gate</div>
+            <div class="status-chip">2 Company + contact</div>
+            <div class="status-chip">3 Product axes</div>
+            <div class="status-chip">4 Application status</div>
+            <div class="status-chip">5 Proof + consent</div>
+            <div class="status-chip">6 Save/submit</div>
+            <div class="callout">Fictional placeholder data. The application is the unit of backlog; dated status logs are required.</div>
+          </aside>
+
+          <div class="stack">
+            <section class="panel">
+              <h2>2. Company and contact details</h2>
+              <div class="form-grid">
+                <div class="field"><label>Company name</label><div class="input-box">Example Bio Inputs (Pty) Ltd</div></div>
+                <div class="field"><label>Company role</label><div class="select-box">Manufacturer / importer / registration holder</div></div>
+                <div class="field"><label>Country</label><div class="select-box">South Africa</div></div>
+                <div class="field"><label>Self-reported ABA membership</label><div class="select-box">Yes / No / Not sure or pending</div></div>
+                <div class="field"><label>Contact person</label><div class="input-box">Fictional Contact</div></div>
+                <div class="field"><label>Email for return link</label><div class="input-box">contact@example.invalid</div></div>
+                <div class="field full"><label>POPIA/privacy notice</label><div class="textarea-box">ABA uses this information for internal review, anonymised sector evidence, and consented registrar engagement. This is not legal or regulatory advice.</div></div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <h2>3. Product and regime</h2>
+              <div class="form-grid">
+                <div class="field"><label>Product name</label><div class="input-box">Fictional Microbial Soil Blend</div></div>
+                <div class="field"><label>Functional category</label><div class="select-box">Biofertiliser / biopesticide / biostimulant / not sure</div></div>
+                <div class="field"><label>Country for application</label><div class="select-box">South Africa</div></div>
+                <div class="field"><label>Governing regime</label><div class="select-box">Agriculture / Act 36</div></div>
+                <div class="field"><label>Act 36 legal pathway</label><div class="select-box">Group 3 fertilizer / agricultural remedy / not sure</div></div>
+                <div class="field"><label>Classification code</label><div class="select-box">M / L / K / unknown</div></div>
+                <div class="field full"><label>Conditional logic note</label><div class="textarea-box">M/L/K and Group 3 fields appear only for South Africa Agriculture / Act 36 records. Other regimes show their own fields or none.</div></div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <h2>4. Application and status log</h2>
+              <div class="form-grid">
+                <div class="field"><label>Current status</label><div class="select-box">Submitted to registrar</div></div>
+                <div class="field"><label>Date status began</label><div class="input-box">2025-09-15</div></div>
+                <div class="field"><label>Approximate date?</label><div class="select-box">No / Yes, approximate</div></div>
+                <div class="field"><label>Registrar reference</label><div class="select-box">Provided / not issued / unknown / unavailable</div></div>
+                <div class="field full"><label>If reference unavailable</label><div class="textarea-box">Required explanation when no reference number is provided.</div></div>
+              </div>
+              <div class="timeline" style="margin-top: 12px;">
+                <div class="timeline-item"><strong>2025-09-15</strong> Submitted to registrar</div>
+                <div class="timeline-item"><strong>Optional previous entry</strong> Preparing submission</div>
+              </div>
+            </section>
+
+            <section class="grid two">
+              <div class="panel warn stack">
+                <h2>5. Proof upload</h2>
+                <div class="field full"><label>Proof of submission</label><div class="input-box">Upload placeholder: PDF, email, receipt</div></div>
+                <div class="callout">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
+              </div>
+              <div class="panel stack">
+                <h2>Visibility and consent</h2>
+                <table>
+                  <thead><tr><th>Use</th><th>Default</th><th>Submitter control</th></tr></thead>
+                  <tbody>
+                    <tr><td>Internal ABA review</td><td>On</td><td>Required</td></tr>
+                    <tr><td>Anonymised public aggregate</td><td>On</td><td>Can opt out</td></tr>
+                    <tr><td>Named registrar packet</td><td>Off</td><td>Explicit opt-in</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="panel ok">
+              <h2>6. Save and return</h2>
+              <div class="form-grid">
+                <div class="field"><label>Email return link</label><div class="input-box">Send save link</div></div>
+                <div class="field"><label>Submission state</label><div class="select-box">Draft / submitted for ABA review</div></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <p class="footer-note">Disposable prototype. Fictional data only. Shared rules come from context-and-decisions-v1.md.</p>
+      </main>
+    </div>
+  </body>
+</html>
