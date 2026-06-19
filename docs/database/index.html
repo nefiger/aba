@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Biologicals-First Database Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #162338;
+      --muted: #5e6b7d;
+      --line: rgba(22, 35, 56, 0.1);
+      --paper: #f8f5ee;
+      --amber: #ab7411;
+      --amber-soft: rgba(171, 116, 17, 0.12);
+      --card: rgba(255, 255, 255, 0.88);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(201, 145, 41, 0.14), transparent 26%),
+        linear-gradient(180deg, #f5f0e6 0%, var(--paper) 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .display { font-family: "Source Serif 4", Georgia, serif; }
+    .wrap {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    .hero,
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: 0 24px 46px -32px rgba(22, 35, 56, 0.2);
+      backdrop-filter: blur(12px);
+    }
+    .hero {
+      padding: 30px;
+      display: grid;
+      gap: 24px;
+    }
+    .eyebrow,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+    }
+    .pill {
+      padding: 7px 11px;
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+    .grid,
+    .targets {
+      display: grid;
+      gap: 20px;
+    }
+    .grid {
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: end;
+    }
+    .targets {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+    .card {
+      padding: 24px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 4.7rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.7rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    ul {
+      margin: 16px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .button.primary {
+      background: #132136;
+      color: white;
+    }
+    .button.secondary {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    @media (max-width: 920px) {
+      .grid,
+      .targets {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">ABA Demo Workspace</div>
+      <div class="grid">
+        <div>
+          <h1 class="display">Biologicals-first database workspace.</h1>
+          <p style="margin-top: 18px; max-width: 64ch;">
+            This area is reserved for reframing the existing highly hazardous pesticides database into a biologicals-first knowledge and intelligence surface that makes sense inside the ABA story.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="../index.html">Back to hub</a>
+            <a class="button secondary" href="../site/index.html">Open ABA site mockup</a>
+            <a class="button secondary" href="../registration-tracker/">Open tracker workspace</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="pill">Current Focus</div>
+          <p style="margin-top: 14px;">
+            Reposition the data model and presentation so the experience leads with biologicals, registration usefulness, sector intelligence, and member value rather than feeling like a sidecar to hazardous-pesticide work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="targets">
+      <article class="card">
+        <div class="pill">Reframe</div>
+        <h2 class="display" style="margin-top: 16px;">Shift the entry point</h2>
+        <ul>
+          <li>Lead with biological products and categories</li>
+          <li>Make registration readiness and evidence visible</li>
+          <li>Show why the data matters to ABA members</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="pill">Structure</div>
+        <h2 class="display" style="margin-top: 16px;">What the interface should support</h2>
+        <ul>
+          <li>Searchable product and category views</li>
+          <li>Country and regulatory context where useful</li>
+          <li>A clear bridge into the registration tracker story</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="pill">Narrative</div>
+        <h2 class="display" style="margin-top: 16px;">How it fits the meeting demo</h2>
+        <ul>
+          <li>Feels like part of ABA, not an adjacent tool</li>
+          <li>Supports the knowledge-hub concept</li>
+          <li>Strengthens the overall value proposition of the site</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

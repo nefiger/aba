@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join ABA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Domine:wght@500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+    :root {
+      --ink: #16212f;
+      --muted: #617083;
+      --line: rgba(22, 33, 47, 0.12);
+      --soft-line: rgba(22, 33, 47, 0.08);
+      --paper: #f2f1ea;
+      --panel: rgba(255, 255, 255, 0.92);
+      --surface: #faf9f4;
+      --forest: #1f4634;
+      --leaf: #2f7d56;
+      --sea: #2a67bf;
+      --amber: #aa7518;
+      --lavender: #705cc2;
+      --mist: #e8ebee;
+      --success: #1e7a4a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(47, 125, 86, 0.14), transparent 20%),
+        radial-gradient(circle at 85% 0%, rgba(42, 103, 191, 0.08), transparent 22%),
+        linear-gradient(180deg, #edf4ea 0%, var(--paper) 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .display { font-family: "Domine", Georgia, serif; }
+    .shell {
+      width: min(1320px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+    .surface,
+    .card,
+    .form-shell,
+    .field,
+    .selectable,
+    .success-shell,
+    .summary-shell {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 38px -28px rgba(22, 33, 47, 0.26);
+      backdrop-filter: blur(10px);
+    }
+    .surface { border-radius: 24px; }
+    .card,
+    .form-shell,
+    .field,
+    .selectable,
+    .success-shell,
+    .summary-shell { border-radius: 16px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--leaf);
+    }
+    .hero {
+      padding: 30px;
+      display: grid;
+      gap: 24px;
+    }
+    .hero-grid,
+    .membership-grid,
+    .benefit-grid,
+    .application-grid,
+    .field-grid,
+    .option-grid,
+    .review-grid,
+    .success-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .hero-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: end;
+    }
+    .membership-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .benefit-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .application-grid {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      align-items: start;
+    }
+    .field-grid,
+    .review-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .option-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .success-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+    h2 {
+      font-size: 1.8rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+    p {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      transition: transform 140ms ease, background 140ms ease;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary {
+      background: #122034;
+      color: white;
+    }
+    .button.secondary {
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .button.ghost {
+      background: rgba(22, 33, 47, 0.05);
+      color: var(--ink);
+    }
+    .mini-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .card {
+      padding: 20px;
+    }
+    .membership-card {
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+    .membership-card:hover { transform: translateY(-2px); }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .card-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(22, 33, 47, 0.05);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .form-shell {
+      padding: 22px;
+    }
+    .progress-shell {
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(22, 33, 47, 0.04);
+    }
+    .progress-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .progress-step {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: white;
+      border: 1px solid var(--soft-line);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+    }
+    .progress-step.active {
+      background: #122034;
+      color: white;
+      border-color: #122034;
+    }
+    .progress-bar {
+      margin-top: 12px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(22, 33, 47, 0.08);
+      overflow: hidden;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--leaf), var(--sea));
+      transition: width 180ms ease;
+    }
+    .step-screen {
+      padding: 24px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--soft-line);
+    }
+    .field {
+      padding: 12px 14px;
+      border-radius: 12px;
+      box-shadow: none;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 15px;
+    }
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .selectable {
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease;
+      box-shadow: none;
+    }
+    .selectable:hover { transform: translateY(-1px); }
+    .selectable input { display: none; }
+    .selectable span {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      flex-shrink: 0;
+    }
+    .selectable strong {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .selectable.selected span {
+      background: var(--leaf);
+      border-color: var(--leaf);
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .subtle-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(42, 103, 191, 0.08);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .summary-shell {
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+    }
+    .summary-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      padding-top: 10px;
+      border-top: 1px solid var(--soft-line);
+    }
+    .summary-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .summary-key {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .summary-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: right;
+      max-width: 180px;
+    }
+    .summary-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(22, 33, 47, 0.04);
+    }
+    .summary-pill {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: white;
+      border: 1px solid var(--soft-line);
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .success-shell {
+      padding: 24px;
+    }
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(30, 122, 74, 0.1);
+      color: var(--success);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .success-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+    }
+    .divider {
+      height: 1px;
+      background: var(--soft-line);
+      margin: 14px 0;
+    }
+    @media (max-width: 1180px) {
+      .application-grid {
+        grid-template-columns: 1fr;
+      }
+      .summary-shell {
+        position: static;
+      }
+    }
+    @media (max-width: 920px) {
+      .hero-grid,
+      .membership-grid,
+      .benefit-grid,
+      .field-grid,
+      .option-grid,
+      .review-grid,
+      .progress-steps,
+      .success-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div
+    x-cloak
+    x-data="{
+      step: 1,
+      submitted: false,
+      selectedTier: 'full',
+      tiers: {
+        full: {
+          name: 'Full Member',
+          color: 'var(--leaf)',
+          subtitle: 'Core industry membership',
+          audience: 'Manufacturers, importers, distributors, and product owners working directly in biologicals.',
+          promise: 'For organisations who want a formal seat in ABA and direct value from member representation, visibility, and coordination.'
+        },
+        associate: {
+          name: 'Associate Member',
+          color: 'var(--sea)',
+          subtitle: 'Ecosystem participation',
+          audience: 'Researchers, academics, NGOs, technical partners, and aligned service organisations.',
+          promise: 'For organisations who strengthen the biologicals ecosystem through research, implementation, technical support, or collaboration.'
+        },
+        observer: {
+          name: 'Observer',
+          color: 'var(--amber)',
+          subtitle: 'Strategic relationship',
+          audience: 'Government stakeholders, development partners, funders, and public-sector institutions.',
+          promise: 'For institutions who want a formal ABA relationship and visibility into the work without entering the core member lane immediately.'
+        }
+      },
+      form: {
+        full_name: '',
+        role: '',
+        organisation: '',
+        email: '',
+        phone: '',
+        country: '',
+        stakeholder_type: '',
+        focus_area: '',
+        organisation_size: '',
+        goals: '',
+        follow_up: 'call'
+      },
+      totalSteps: 4,
+      next() { if (this.step < this.totalSteps) this.step += 1; },
+      prev() { if (this.step > 1) this.step -= 1; },
+      submit() { this.submitted = true; },
+      restart() { this.submitted = false; this.step = 1; },
+      get tier() { return this.tiers[this.selectedTier]; },
+      get progress() { return `${(this.step / this.totalSteps) * 100}%`; }
+    }"
+  >
+    <main class="shell">
+      <section class="surface hero">
+        <div class="eyebrow">African Biologicals Alliance</div>
+        <div class="hero-grid">
+          <div>
+            <h1 class="display">Join ABA and shape the biologicals sector with us.</h1>
+            <p style="margin-top: 18px; max-width: 70ch;">
+              Membership is open to organisations and institutions across Africa. Choose the relationship that fits you best, complete the application, and ABA will follow up with the next steps.
+            </p>
+            <div class="button-row">
+              <a class="button secondary" href="./membership-types.html">Read about membership types</a>
+            </div>
+          </div>
+          <div class="card" style="align-self: stretch; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div class="mini-label">Membership application</div>
+              <h2 style="margin-top: 10px;">A formal route into the ABA network.</h2>
+              <p style="margin-top: 12px;">
+                Use this application to tell ABA who you are, how you fit into the biologicals sector, and what kind of relationship or support you are looking for.
+              </p>
+            </div>
+            <p style="margin-top: 18px; color: var(--ink); font-size: 14px; font-weight: 600;">
+              Applicants from across Africa are welcome. ABA is currently active operationally in South Africa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <template x-if="!submitted">
+        <section style="margin-top: 18px;">
+          <section class="surface" style="padding: 22px;">
+            <div class="section-head">
+              <div>
+                <div class="mini-label">Membership Options</div>
+                <h2 style="margin-top: 8px;">Choose the membership type that fits your role.</h2>
+              </div>
+            </div>
+            <div class="membership-grid">
+              <template x-for="[key, item] in Object.entries(tiers)" :key="key">
+                <button
+                  type="button"
+                  class="card membership-card"
+                  @click="selectedTier = key"
+                  :style="selectedTier === key ? 'outline: 2px solid ' + item.color + '; outline-offset: 0;' : ''"
+                >
+                  <div class="card-top">
+                    <div>
+                      <div class="mini-label" :style="'color:' + item.color" x-text="item.subtitle"></div>
+                      <h3 style="margin-top: 8px; font-size: 1.35rem;" x-text="item.name"></h3>
+                    </div>
+                    <span class="card-dot" :style="'background:' + item.color"></span>
+                  </div>
+                  <p style="margin-top: 12px; font-size: 14px;" x-text="item.audience"></p>
+                  <p style="margin-top: 12px; color: var(--ink); font-size: 14px;" x-text="item.promise"></p>
+                </button>
+              </template>
+            </div>
+          </section>
+
+          <section class="benefit-grid" style="margin-top: 18px;">
+            <article class="card">
+              <div class="mini-label">Why ABA asks this</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">Place your organisation correctly</h3>
+              <p style="margin-top: 8px;">ABA needs to understand whether you are applying as a core industry participant, an ecosystem contributor, or a strategic institutional stakeholder.</p>
+            </article>
+            <article class="card">
+              <div class="mini-label">Why ABA asks this</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">Understand your priorities</h3>
+              <p style="margin-top: 8px;">The application helps ABA see what kind of visibility, coordination, representation, or support would actually matter to your organisation.</p>
+            </article>
+            <article class="card">
+              <div class="mini-label">Why ABA asks this</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">Route the next conversation</h3>
+              <p style="margin-top: 8px;">Rather than dropping into a generic list, your application gives ABA enough context to decide what the next relationship step should be.</p>
+            </article>
+          </section>
+
+          <section class="application-grid" style="margin-top: 18px;">
+            <section class="form-shell">
+              <div class="progress-shell">
+                <div class="progress-steps">
+                  <div class="progress-step" :class="{ 'active': step === 1 }">1. Basics</div>
+                  <div class="progress-step" :class="{ 'active': step === 2 }">2. Sector fit</div>
+                  <div class="progress-step" :class="{ 'active': step === 3 }">3. Membership goals</div>
+                  <div class="progress-step" :class="{ 'active': step === 4 }">4. Review</div>
+                </div>
+                <div class="progress-bar">
+                  <span :style="'width:' + progress"></span>
+                </div>
+              </div>
+
+              <template x-if="step === 1">
+                <div class="step-screen">
+                  <div class="section-head">
+                    <div>
+                      <div class="mini-label">Step 1</div>
+                      <h2 style="margin-top: 8px;">Tell us who you are.</h2>
+                    </div>
+                    <div class="chip" x-text="tier.name"></div>
+                  </div>
+                  <p style="font-size: 14px;">We’ll use these details to create your application and make sure the right ABA team member follows up.</p>
+                  <div class="field-grid" style="margin-top: 18px;">
+                    <div class="field">
+                      <label for="full_name">Full name</label>
+                      <input id="full_name" type="text" x-model="form.full_name" placeholder="Your full name">
+                    </div>
+                    <div class="field">
+                      <label for="role">Role / job title</label>
+                      <input id="role" type="text" x-model="form.role" placeholder="Your role">
+                    </div>
+                    <div class="field">
+                      <label for="organisation">Organisation / institution</label>
+                      <input id="organisation" type="text" x-model="form.organisation" placeholder="Your organisation">
+                    </div>
+                    <div class="field">
+                      <label for="country">Primary country</label>
+                      <select id="country" x-model="form.country">
+                        <option value="">Select country</option>
+                        <option>South Africa</option>
+                        <option>Kenya</option>
+                        <option>Nigeria</option>
+                        <option>Ghana</option>
+                        <option>Uganda</option>
+                        <option>Malawi</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="email">Email address</label>
+                      <input id="email" type="email" x-model="form.email" placeholder="you@example.org">
+                    </div>
+                    <div class="field">
+                      <label for="phone">Phone / WhatsApp</label>
+                      <input id="phone" type="text" x-model="form.phone" placeholder="+27 ...">
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template x-if="step === 2">
+                <div class="step-screen">
+                  <div class="section-head">
+                    <div>
+                      <div class="mini-label">Step 2</div>
+                      <h2 style="margin-top: 8px;">Help us place your work in the sector.</h2>
+                    </div>
+                    <div class="chip" x-text="tier.name"></div>
+                  </div>
+                  <p style="font-size: 14px;">This helps ABA understand the kind of relationship you’re applying for and where you fit in the wider biologicals picture.</p>
+                  <div class="field-grid" style="margin-top: 18px;">
+                    <div class="field">
+                      <label for="stakeholder_type">Stakeholder type</label>
+                      <select id="stakeholder_type" x-model="form.stakeholder_type">
+                        <option value="">Select stakeholder type</option>
+                        <option>Manufacturer</option>
+                        <option>Distributor</option>
+                        <option>Research institution</option>
+                        <option>NGO / programme partner</option>
+                        <option>Government stakeholder</option>
+                        <option>Development partner / funder</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="focus_area">Biological focus area</label>
+                      <select id="focus_area" x-model="form.focus_area">
+                        <option value="">Select focus area</option>
+                        <option>Biopesticides</option>
+                        <option>Biofertilisers</option>
+                        <option>Biostimulants</option>
+                        <option>Inoculants</option>
+                        <option>Mixed biological portfolio</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="organisation_size">Organisation size</label>
+                      <select id="organisation_size" x-model="form.organisation_size">
+                        <option value="">Select size</option>
+                        <option>1-10 employees</option>
+                        <option>11-50 employees</option>
+                        <option>51-200 employees</option>
+                        <option>200+ employees</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="subtle-note">
+                    ABA welcomes applications from across Africa. Country information helps place relationships, current activity, and future chapter potential appropriately.
+                  </div>
+                </div>
+              </template>
+
+              <template x-if="step === 3">
+                <div class="step-screen">
+                  <div class="section-head">
+                    <div>
+                      <div class="mini-label">Step 3</div>
+                      <h2 style="margin-top: 8px;">Tell us what would make membership valuable.</h2>
+                    </div>
+                    <div class="chip" x-text="tier.name"></div>
+                  </div>
+                  <p style="font-size: 14px;">This is where you tell ABA what kind of relationship or support you’re actually looking for.</p>
+                  <div class="field" style="margin-top: 18px;">
+                    <label for="goals">What are you hoping ABA membership will help you with?</label>
+                    <textarea id="goals" x-model="form.goals" placeholder="Tell us about your goals, priorities, or the kind of support and visibility you are looking for."></textarea>
+                  </div>
+                  <div class="option-grid" style="margin-top: 18px;">
+                    <button type="button" class="selectable" :class="{ 'selected': form.follow_up === 'call' }" @click="form.follow_up = 'call'">
+                      <span></span>
+                      <strong>Membership call</strong>
+                    </button>
+                    <button type="button" class="selectable" :class="{ 'selected': form.follow_up === 'email' }" @click="form.follow_up = 'email'">
+                      <span></span>
+                      <strong>Email follow-up</strong>
+                    </button>
+                    <button type="button" class="selectable" :class="{ 'selected': form.follow_up === 'updates' }" @click="form.follow_up = 'updates'">
+                      <span></span>
+                      <strong>Relevant updates only</strong>
+                    </button>
+                  </div>
+                </div>
+              </template>
+
+              <template x-if="step === 4">
+                <div class="step-screen">
+                  <div class="section-head">
+                    <div>
+                      <div class="mini-label">Step 4</div>
+                      <h2 style="margin-top: 8px;">Review your application.</h2>
+                    </div>
+                    <div class="chip" x-text="tier.name"></div>
+                  </div>
+                  <p style="font-size: 14px;">Before you submit, check that everything looks right. ABA will review this application and follow up using the details below.</p>
+                  <div class="review-grid" style="margin-top: 18px;">
+                    <div class="field">
+                      <label>Full name</label>
+                      <div x-text="form.full_name || 'Not provided yet'"></div>
+                    </div>
+                    <div class="field">
+                      <label>Role</label>
+                      <div x-text="form.role || 'Not provided yet'"></div>
+                    </div>
+                    <div class="field">
+                      <label>Organisation</label>
+                      <div x-text="form.organisation || 'Not provided yet'"></div>
+                    </div>
+                    <div class="field">
+                      <label>Country</label>
+                      <div x-text="form.country || 'Not provided yet'"></div>
+                    </div>
+                    <div class="field">
+                      <label>Stakeholder type</label>
+                      <div x-text="form.stakeholder_type || 'Not provided yet'"></div>
+                    </div>
+                    <div class="field">
+                      <label>Focus area</label>
+                      <div x-text="form.focus_area || 'Not provided yet'"></div>
+                    </div>
+                  </div>
+                  <div class="subtle-note">
+                    By submitting, you’re expressing interest in a formal relationship with ABA. A team member will review your application and contact you about the next step.
+                  </div>
+                </div>
+              </template>
+
+              <div class="button-row" style="justify-content: space-between;">
+                <button type="button" class="button ghost" x-show="step > 1" @click="prev()">Previous</button>
+                <div style="margin-left: auto; display:flex; gap:12px;">
+                  <button type="button" class="button secondary" x-show="step < totalSteps" @click="next()">Continue</button>
+                  <button type="button" class="button primary" x-show="step === totalSteps" @click="submit()">Submit application</button>
+                </div>
+              </div>
+            </section>
+
+            <aside class="summary-shell">
+              <div class="mini-label">Application Summary</div>
+              <h2 style="margin-top: 8px;">What you’ve entered</h2>
+              <div class="summary-list">
+                <div class="summary-row">
+                  <div class="summary-key">Membership type</div>
+                  <div class="summary-value" x-text="tier.name"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Applicant</div>
+                  <div class="summary-value" x-text="form.full_name || 'Waiting for input'"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Organisation</div>
+                  <div class="summary-value" x-text="form.organisation || 'Waiting for input'"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Country</div>
+                  <div class="summary-value" x-text="form.country || 'Waiting for input'"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Follow-up</div>
+                  <div class="summary-value" x-text="form.follow_up === 'call' ? 'Membership call' : (form.follow_up === 'email' ? 'Email follow-up' : 'Relevant updates')"></div>
+                </div>
+              </div>
+
+              <div class="summary-box">
+                <div class="mini-label">What happens next</div>
+                <div class="summary-pill">ABA reviews your application</div>
+                <div class="summary-pill">You receive a follow-up via your chosen contact path</div>
+                <div class="summary-pill">Your organisation is placed in the right membership lane</div>
+              </div>
+            </aside>
+          </section>
+        </section>
+      </template>
+
+      <template x-if="submitted">
+        <section class="surface" style="margin-top: 18px; padding: 24px;">
+          <div class="success-badge">Application received</div>
+          <h2 class="display" style="margin-top: 14px; font-size: 2.45rem;">Thank you for applying to join ABA.</h2>
+          <p style="margin-top: 12px; max-width: 72ch;">
+            Your application has been received. ABA will review your details and follow up with the next step based on the membership type you selected.
+          </p>
+
+          <div class="success-grid" style="margin-top: 22px;">
+            <article class="success-shell">
+              <div class="mini-label">Your application</div>
+              <div class="divider"></div>
+              <h3 style="font-size: 1.4rem;" x-text="tier.name"></h3>
+              <p style="margin-top: 10px;">We’ll contact you using the details you provided once your application has been reviewed.</p>
+              <div class="summary-list">
+                <div class="summary-row">
+                  <div class="summary-key">Applicant</div>
+                  <div class="summary-value" x-text="form.full_name || 'Applicant'"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Organisation</div>
+                  <div class="summary-value" x-text="form.organisation || 'Organisation'"></div>
+                </div>
+                <div class="summary-row">
+                  <div class="summary-key">Contact email</div>
+                  <div class="summary-value" x-text="form.email || 'Email address'"></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="success-shell">
+              <div class="mini-label">Next step</div>
+              <div class="divider"></div>
+              <h3 style="font-size: 1.4rem;">ABA reviews and follows up.</h3>
+              <p style="margin-top: 10px;">Your application is now in ABA’s review flow. If you asked for a call, the team will use that as the first follow-up route.</p>
+              <div class="summary-box" style="margin-top: 18px;">
+                <div class="summary-pill">Review membership fit</div>
+                <div class="summary-pill">Confirm next conversation or contact path</div>
+                <div class="summary-pill">Continue into the formal relationship process</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="button-row">
+            <button type="button" class="button primary" @click="restart()">Start again</button>
+            <a class="button secondary" href="../index.html">Back to demo hub</a>
+          </div>
+        </section>
+      </template>
+    </main>
+  </div>
+</body>
+</html>

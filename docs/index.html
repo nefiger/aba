@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Prototype Suite</title>
+  <title>ABA Meeting Demo Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #142033;
-      --muted: #5a687c;
-      --line: rgba(20, 32, 51, 0.09);
-      --paper: #f7f7f1;
+      --muted: #59677b;
+      --line: rgba(20, 32, 51, 0.1);
+      --paper: #f7f6f0;
       --forest: #173626;
-      --forest-soft: #2c5a41;
-      --blue: #1e67d8;
-      --gold: #c58d18;
+      --forest-soft: #2d6044;
+      --blue: #1f66d4;
+      --gold: #b98218;
+      --purple: #7151c7;
+      --green: #2f7d56;
+      --card: rgba(255, 255, 255, 0.88);
     }
     * { box-sizing: border-box; }
     body {
@@ -24,71 +27,52 @@
       font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(54, 126, 88, 0.18), transparent 28%),
-        linear-gradient(180deg, #eef5ec 0%, var(--paper) 100%);
+        radial-gradient(circle at top left, rgba(55, 125, 87, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(31, 102, 212, 0.08), transparent 24%),
+        linear-gradient(180deg, #edf5eb 0%, var(--paper) 100%);
     }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .display {
-      font-family: "Source Serif 4", Georgia, serif;
-    }
+    a { color: inherit; text-decoration: none; }
+    .display { font-family: "Source Serif 4", Georgia, serif; }
     .wrap {
-      width: min(1180px, calc(100vw - 32px));
+      width: min(1200px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 28px 0 64px;
+      padding: 28px 0 68px;
     }
     .hero,
     .card,
     .specs {
-      background: rgba(255, 255, 255, 0.86);
+      background: var(--card);
       border: 1px solid var(--line);
       border-radius: 30px;
-      box-shadow: 0 28px 50px -34px rgba(20, 32, 51, 0.24);
+      box-shadow: 0 28px 52px -34px rgba(20, 32, 51, 0.22);
       backdrop-filter: blur(12px);
     }
-    .hero {
-      display: grid;
-      gap: 26px;
+    .hero,
+    .specs {
       padding: 30px;
     }
-    .eyebrow {
+    .eyebrow,
+    .tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 12px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+    .eyebrow {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
     }
     .dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #35a85f;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.7rem, 6vw, 5rem);
-      line-height: 0.96;
-      letter-spacing: -0.045em;
-    }
-    h2 {
-      margin: 0;
-      font-size: 1.9rem;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-    }
-    p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.72;
+      background: #3aa463;
     }
     .hero-grid,
     .card-grid,
@@ -97,42 +81,50 @@
       gap: 20px;
     }
     .hero-grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      margin-top: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
       align-items: end;
     }
     .card-grid {
       margin-top: 24px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .spec-grid {
+      margin-top: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
     .card {
       padding: 24px;
     }
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
     .tag {
-      display: inline-flex;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      padding: 7px 10px;
     }
-    .tag.public {
-      background: rgba(44, 90, 65, 0.12);
-      color: var(--forest-soft);
+    .tag.site { background: rgba(45, 96, 68, 0.12); color: var(--forest-soft); }
+    .tag.tracker { background: rgba(31, 102, 212, 0.12); color: var(--blue); }
+    .tag.membership { background: rgba(47, 125, 86, 0.12); color: var(--green); }
+    .tag.database { background: rgba(185, 130, 24, 0.14); color: var(--gold); }
+    .tag.flow { background: rgba(113, 81, 199, 0.12); color: var(--purple); }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.1rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
     }
-    .tag.admin {
-      background: rgba(30, 103, 216, 0.12);
-      color: var(--blue);
+    h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
-    .tag.flow {
-      background: rgba(197, 141, 24, 0.14);
-      color: var(--gold);
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .meta-block {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(20, 32, 51, 0.04);
     }
     .bullet-list {
       display: grid;
@@ -147,11 +139,16 @@
       font-size: 14px;
       line-height: 1.6;
     }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
     .action {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-top: 22px;
       padding: 13px 18px;
       border-radius: 999px;
       font-size: 14px;
@@ -166,25 +163,12 @@
       border: 1px solid var(--line);
       color: var(--ink);
     }
-    .meta-block {
-      padding: 22px;
-      border-radius: 24px;
-      background: rgba(20, 32, 51, 0.04);
-    }
-    .specs {
-      margin-top: 24px;
-      padding: 24px;
-    }
-    .spec-grid {
-      margin-top: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
     .spec-link {
       display: block;
       padding: 18px;
       border-radius: 20px;
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.76);
     }
     .spec-link strong {
       display: block;
@@ -211,24 +195,24 @@
     <section class="hero">
       <div class="eyebrow">
         <span class="dot"></span>
-        African Biologicals Alliance Prototype Suite
+        African Biologicals Alliance Demo Hub
       </div>
       <div class="hero-grid">
         <div>
-          <h1 class="display">Three separate artifacts, three different jobs.</h1>
-          <p style="margin-top: 18px; max-width: 68ch;">
-            This workspace now separates the public-facing prototype, the internal admin prototype, and the standalone flow/value proposition asset. The intention is to make it obvious what is a website experience, what is an internal tool, and what is an explanatory stakeholder artifact.
+          <h1 class="display">One hub, five demo workspaces.</h1>
+          <p style="margin-top: 18px; max-width: 70ch;">
+            This repo is now organized around the founding-members meeting on Thursday, June 25, 2026. Each major demo area has its own folder so the team can work in parallel while still presenting one coherent ABA story from this hub.
           </p>
-          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;">
-            <a class="action primary" href="./public-homepage.html">Open Public Prototype</a>
-            <a class="action secondary" href="./admin-prototype.html">Open Admin Prototype</a>
-            <a class="action secondary" href="./flow-intelligence.html">Open Flow Asset</a>
+          <div class="actions">
+            <a class="action primary" href="./site/index.html">Open main ABA site</a>
+            <a class="action secondary" href="./registration-tracker/">Open registration tracker</a>
+            <a class="action secondary" href="./membership-flow/index.html">Open membership flow</a>
           </div>
         </div>
         <div class="meta-block">
-          <h2 class="display">Project framing</h2>
+          <h2 class="display">Meeting framing</h2>
           <p style="margin-top: 14px;">
-            Participation can come from across Africa. Operational activity is currently centered in South Africa. The registration tracker must tell a public advocacy story while also feeding a more useful internal intelligence view.
+            The story we need to tell is how membership, registration data, and knowledge assets work together. The registration tracker shows value creation, the membership flow shows who ABA is building for, and the site ties those pieces into one public-facing proposition.
           </p>
         </div>
       </div>
@@ -236,75 +220,107 @@
 
     <section class="card-grid">
       <article class="card">
-        <div class="card-top">
-          <div class="tag public">Front-End Prototype</div>
-        </div>
-        <h2 class="display" style="margin-top: 18px;">Public website direction</h2>
+        <div class="tag site">Main Site</div>
+        <h2 class="display" style="margin-top: 18px;">ABA site mockup</h2>
         <p style="margin-top: 14px;">
-          A plausible ABA website prototype that weaves the new journeys into the existing narrative structure rather than presenting them as isolated product cards.
+          The umbrella site prototype that ties the other workspaces together and gives the meeting a believable front door.
         </p>
         <div class="bullet-list">
-          <div class="bullet">Shows the four audience pathways inside a believable public-site story.</div>
-          <div class="bullet">Includes a clearer registration intelligence and advocacy section with soft conversion opportunities.</div>
-          <div class="bullet">Keeps Africa-wide participation visible while staying honest that ABA is active in South Africa today.</div>
+          <div class="bullet">Positions ABA publicly and explains the core proposition.</div>
+          <div class="bullet">Shows how the journeys sit inside the main site narrative.</div>
+          <div class="bullet">Acts as the connective tissue between the other demos.</div>
         </div>
-        <a class="action primary" href="./public-homepage.html">View Public Prototype</a>
+        <div class="actions">
+          <a class="action primary" href="./site/index.html">Open site workspace</a>
+        </div>
       </article>
 
       <article class="card">
-        <div class="card-top">
-          <div class="tag admin">Admin Prototype</div>
-        </div>
-        <h2 class="display" style="margin-top: 18px;">Internal dashboard and records</h2>
+        <div class="tag tracker">Lyle Workspace</div>
+        <h2 class="display" style="margin-top: 18px;">Registration tracker</h2>
         <p style="margin-top: 14px;">
-          A distinct admin concept focused on country-grouped records, registration intelligence, flagged delays, and visibility into membership, network, and subscriber growth.
+          Intake, structured evidence capture, public intelligence, member-facing value, and internal admin visibility live in Lyle's dedicated workspace.
         </p>
         <div class="bullet-list">
-          <div class="bullet">Centers the registration tracker as the main intelligence surface.</div>
-          <div class="bullet">Shows how country filters, stuck signals, and bottleneck groupings can work in practice.</div>
-          <div class="bullet">Keeps membership, technical network, and subscriber records visible without overbuilding workflow.</div>
+          <div class="bullet">Shows how registration cases are captured and structured.</div>
+          <div class="bullet">Demonstrates public and internal dashboard logic.</div>
+          <div class="bullet">Keeps member value centered around visibility, support, and answers.</div>
         </div>
-        <a class="action primary" href="./admin-prototype.html" style="background: var(--blue);">View Admin Prototype</a>
+        <div class="actions">
+          <a class="action primary" href="./registration-tracker/">Open tracker workspace</a>
+        </div>
       </article>
 
       <article class="card">
-        <div class="card-top">
-          <div class="tag flow">Flow / Value Asset</div>
-        </div>
-        <h2 class="display" style="margin-top: 18px;">Stakeholder explainer</h2>
+        <div class="tag membership">Anna Workspace</div>
+        <h2 class="display" style="margin-top: 18px;">Membership flow</h2>
         <p style="margin-top: 14px;">
-          A standalone asset that explains the four flows, what data each captures, what assets they create, and why registration intelligence matters to advocacy and future chapter readiness.
+          The signup journey, target membership types, and the captured data shape for people and organizations entering ABA formally.
         </p>
         <div class="bullet-list">
-          <div class="bullet">Useful for alignment, fundraising, advocacy, and partner conversations.</div>
-          <div class="bullet">Separates value-proposition explanation from website behavior.</div>
-          <div class="bullet">Makes the technical network and intelligence story legible to non-specialists.</div>
+          <div class="bullet">Clarifies who ABA wants to attract as members.</div>
+          <div class="bullet">Makes the data capture flow easy to demo live.</div>
+          <div class="bullet">Shows what membership records need to contain downstream.</div>
         </div>
-        <a class="action primary" href="./flow-intelligence.html" style="background: #8f6715;">View Flow Asset</a>
+        <div class="actions">
+          <a class="action primary" href="./membership-flow/index.html">Open membership workspace</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="tag database">Database</div>
+        <h2 class="display" style="margin-top: 18px;">Biologicals-first database</h2>
+        <p style="margin-top: 14px;">
+          The knowledge-hub and data-surface area that needs to be repositioned away from hazardous-pesticides framing and toward biologicals usefulness.
+        </p>
+        <div class="bullet-list">
+          <div class="bullet">Reframes the current database around biologicals first.</div>
+          <div class="bullet">Supports the wider knowledge-hub story.</div>
+          <div class="bullet">Links naturally into the registration-tracker value proposition.</div>
+        </div>
+        <div class="actions">
+          <a class="action primary" href="./database/index.html">Open database workspace</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="tag flow">Explainer Asset</div>
+        <h2 class="display" style="margin-top: 18px;">Flow and intelligence asset</h2>
+        <p style="margin-top: 14px;">
+          A separate explainer showing how public participation becomes structured records, intelligence assets, and strategic outcomes.
+        </p>
+        <div class="bullet-list">
+          <div class="bullet">Supports stakeholder comprehension outside the main site flow.</div>
+          <div class="bullet">Unpacks the registration tracker into concrete evidence outputs.</div>
+          <div class="bullet">Connects all the record types into one systems view.</div>
+        </div>
+        <div class="actions">
+          <a class="action primary" href="./flow-intelligence/index.html">Open flow asset</a>
+        </div>
       </article>
     </section>
 
-    <section class="specs">
-      <div class="eyebrow">
-        <span class="dot" style="background: var(--blue)"></span>
-        Supporting Requirements
-      </div>
+    <section class="specs" style="margin-top: 24px;">
+      <h2 class="display">Specs and notes</h2>
+      <p style="margin-top: 12px; max-width: 72ch;">
+        The requirements remain the written source of truth. The folders above are the presentation and prototyping surfaces that sit on top of them.
+      </p>
       <div class="spec-grid">
         <a class="spec-link" href="./requirements/african-biologicals-alliance-html-spec.md">
-          <strong>Public website spec</strong>
-          <span>The detailed HTML recreation and public journey requirements.</span>
+          <strong>Public Website Spec</strong>
+          <span>Homepage structure, journey framing, and messaging rules.</span>
         </a>
         <a class="spec-link" href="./requirements/african-biologicals-alliance-admin-prototype-spec.md">
-          <strong>Admin prototype spec</strong>
-          <span>The internal information architecture, dashboard scope, and registration intelligence requirements.</span>
+          <strong>Admin Prototype Spec</strong>
+          <span>Internal information architecture and intelligence requirements.</span>
         </a>
         <a class="spec-link" href="./requirements/african-biologicals-alliance-flow-intelligence-asset-spec.md">
-          <strong>Flow asset spec</strong>
-          <span>The standalone user-journey and sector-intelligence explainer requirements.</span>
+          <strong>Flow and Intelligence Asset Spec</strong>
+          <span>Standalone stakeholder explainer for flows, assets, and outcomes.</span>
         </a>
         <a class="spec-link" href="./requirements/african-biologicals-alliance-product-requirements.md">
-          <strong>Product requirements</strong>
-          <span>The broader notes tying together scope, audiences, geography, and future build direction.</span>
+          <strong>Product Requirements Notes</strong>
+          <span>Cross-cutting product framing for the whole demo package.</span>
         </a>
       </div>
     </section>
