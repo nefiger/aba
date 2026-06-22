@@ -3,19 +3,158 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA | About</title>
+  <title>African Biologicals Alliance | About ABA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ink: oklch(0.23 0.03 215);
+      --muted: oklch(0.49 0.028 205);
+      --paper: oklch(0.985 0.008 98);
+      --line: oklch(0.86 0.018 95);
+      --green-deep: oklch(0.4 0.09 150);
+      --green-soft: oklch(0.95 0.04 145);
+    }
+    body {
+      margin: 0;
+      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
+        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
+    }
+    .font-display { font-family: "Domine", Georgia, serif; }
+    .shell { width: min(1240px, calc(100% - 1.5rem)); margin: 0 auto; }
+    .surface {
+      background: rgba(255, 252, 246, 0.88);
+      border: 1px solid rgba(46, 58, 46, 0.08);
+      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+      backdrop-filter: blur(16px);
+    }
+    .eyebrow {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    a { text-decoration: none; }
+  </style>
 </head>
-<body class="bg-stone-50 text-slate-900 antialiased" style="font-family:'Alegreya Sans',ui-sans-serif,system-ui,sans-serif;">
-  <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-    <a href="./index.html" class="text-sm font-bold uppercase tracking-[0.14em] text-emerald-800">Back to home</a>
-    <section class="mt-6 rounded-[28px] border border-black/5 bg-white/90 px-6 py-8 shadow-[0_20px_50px_-36px_rgba(15,23,42,0.3)]">
-      <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-slate-500">About ABA</p>
-      <h1 class="mt-4 text-5xl leading-[0.98] tracking-[-0.045em]" style="font-family:'Domine',Georgia,serif;">About the alliance.</h1>
-      <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600">This page will hold ABA’s purpose, positioning, role in the sector, and the wider public story of why the alliance exists.</p>
+<body class="antialiased">
+  <header class="shell pt-3 sm:pt-5">
+    <div class="surface rounded-[22px] px-4 py-3 sm:px-5">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex items-center gap-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--green-soft)] text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--green-deep)]">ABA</div>
+          <div>
+            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
+            <p class="mt-1 text-sm text-[color:var(--muted)]">Coordination, visibility, and participation across Africa</p>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-x-4 gap-y-2 text-[13px] font-semibold text-[color:var(--ink)]">
+          <a href="../index.html" class="hover:text-[color:var(--green-deep)]">Demo Hub</a>
+          <a href="./index.html" class="hover:text-[color:var(--green-deep)]">ABA Site</a>
+          <a href="./about.html" class="text-[color:var(--green-deep)]">About ABA</a>
+          <a href="../membership-flow/membership-types.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
+          <a href="../registration-tracker/index.html" class="hover:text-[color:var(--green-deep)]">Registration Tracker</a>
+          <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Knowledge Hub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell pb-10 pt-4 sm:pb-14 sm:pt-5">
+    <section class="surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
+      <div class="grid gap-5 lg:grid-cols-[1.18fr_0.82fr] lg:items-start">
+        <div>
+          <p class="eyebrow">About ABA</p>
+          <h1 class="font-display mt-4 max-w-5xl text-[clamp(2.7rem,5vw,5rem)] leading-[1.01] tracking-[-0.045em] text-[color:var(--ink)]">
+            ABA exists to strengthen how biologicals are understood, represented, and advanced across Africa.
+          </h1>
+          <p class="mt-4 max-w-3xl text-[1.04rem] leading-7 text-[color:var(--muted)] sm:text-[1.12rem]">
+            The African Biologicals Alliance is being built as a coordinating platform for the biologicals sector: a place where industry participants, ecosystem contributors, and institutional stakeholders can engage through a clearer shared structure.
+          </p>
+        </div>
+        <div class="rounded-[24px] bg-[color:rgba(255,255,255,0.72)] px-5 py-5">
+          <p class="eyebrow">In practical terms</p>
+          <p class="mt-3 text-[1.02rem] font-bold text-[color:var(--ink)]">ABA is intended to be useful, not simply symbolic.</p>
+          <p class="mt-3 text-[15px] leading-6 text-[color:var(--muted)]">
+            It should help make the sector more visible, create a stronger basis for participation and representation, and support a more credible public understanding of where biologicals are developing and where friction remains.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-5 grid gap-4 lg:grid-cols-3">
+      <article class="surface rounded-[24px] px-5 py-5">
+        <p class="eyebrow">Role</p>
+        <h2 class="font-display mt-3 text-[2rem] leading-[1.05] tracking-[-0.03em]">A sector platform</h2>
+        <p class="mt-3 text-[15px] leading-6 text-[color:var(--muted)]">
+          ABA is not meant to be only a member list. It is meant to become a platform that links participation, knowledge, and evidence into a more coherent sector story.
+        </p>
+      </article>
+      <article class="surface rounded-[24px] px-5 py-5">
+        <p class="eyebrow">Need</p>
+        <h2 class="font-display mt-3 text-[2rem] leading-[1.05] tracking-[-0.03em]">A clearer collective voice</h2>
+        <p class="mt-3 text-[15px] leading-6 text-[color:var(--muted)]">
+          Biologicals are often discussed with optimism, but the sector still needs better visibility, stronger coordination, and a more grounded basis for advocacy and engagement.
+        </p>
+      </article>
+      <article class="surface rounded-[24px] px-5 py-5">
+        <p class="eyebrow">Scope</p>
+        <h2 class="font-display mt-3 text-[2rem] leading-[1.05] tracking-[-0.03em]">Across Africa</h2>
+        <p class="mt-3 text-[15px] leading-6 text-[color:var(--muted)]">
+          ABA is being designed with a continental horizon, while building from current operational activity in South Africa and growing wider participation over time.
+        </p>
+      </article>
+    </section>
+
+    <section class="mt-5 surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7">
+      <div class="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p class="eyebrow">What ABA Is Building Toward</p>
+          <h2 class="font-display mt-3 text-[clamp(2rem,4vw,3.15rem)] leading-[1.05] tracking-[-0.035em]">A stronger structure for participation, visibility, and action.</h2>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
+            <p class="font-bold text-[color:var(--ink)]">Membership with clearer fit</p>
+            <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Different organisations need different entry routes into ABA, and those relationships should be structured intentionally.</p>
+          </div>
+          <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
+            <p class="font-bold text-[color:var(--ink)]">Better sector visibility</p>
+            <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">A stronger picture of products, organisations, country participation, and recurring sector patterns.</p>
+          </div>
+          <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
+            <p class="font-bold text-[color:var(--ink)]">Public knowledge assets</p>
+            <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">A biologicals-first knowledge layer that helps the category feel legible, credible, and practically useful.</p>
+          </div>
+          <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
+            <p class="font-bold text-[color:var(--ink)]">Stronger evidence for engagement</p>
+            <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Over time, better visibility can support more informed conversations around regulation, market access, and sector development.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-5 grid gap-4 lg:grid-cols-2">
+      <article class="surface rounded-[24px] px-5 py-5">
+        <p class="eyebrow">Who ABA Works With</p>
+        <p class="mt-3 text-[15px] leading-7 text-[color:var(--muted)]">
+          ABA is being designed to work with core industry participants such as manufacturers, importers, distributors, and product owners; ecosystem contributors such as researchers, technical partners, and programme actors; and institutional stakeholders such as funders, development partners, and public-sector bodies.
+        </p>
+      </article>
+      <article class="surface rounded-[24px] px-5 py-5">
+        <p class="eyebrow">How To Continue</p>
+        <div class="mt-3 flex flex-wrap gap-2.5">
+          <a href="../membership-flow/membership-types.html" class="rounded-full bg-[color:var(--green-deep)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--paper)]">Explore membership</a>
+          <a href="../database/index.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">Explore knowledge hub</a>
+          <a href="./technical-network.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">View technical network</a>
+        </div>
+      </article>
     </section>
   </main>
 </body>

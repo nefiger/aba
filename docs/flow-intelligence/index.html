@@ -6,7 +6,7 @@
   <title>ABA Flow and Intelligence Asset</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
@@ -15,8 +15,8 @@
       --ink: oklch(0.2 0.03 250);
       --muted: oklch(0.45 0.03 250);
       --line: oklch(0.88 0.01 250);
-      --paper: oklch(0.985 0.005 95);
-      --sand: oklch(0.965 0.01 95);
+      --paper: oklch(0.985 0.008 98);
+      --sand: oklch(0.97 0.01 96);
       --green: oklch(0.69 0.19 150);
       --blue: oklch(0.6 0.2 258);
       --purple: oklch(0.63 0.22 305);
@@ -24,14 +24,14 @@
       --rose: oklch(0.72 0.16 26);
     }
     body {
-      font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(95, 181, 123, 0.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(76, 129, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, #f8fbf7 0%, #fbfaf6 100%);
+        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
+        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
       color: var(--ink);
     }
-    .font-display { font-family: "Source Serif 4", Georgia, serif; }
+    .font-display { font-family: "Domine", Georgia, serif; }
     .diagram-grid {
       background-image:
         linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
@@ -57,6 +57,27 @@
   </style>
 </head>
 <body class="antialiased">
+<header class="mx-auto mt-3 max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="rounded-[22px] border border-[color:rgba(15,23,42,0.08)] bg-[rgba(255,252,246,0.9)] px-4 py-3 shadow-[0_16px_36px_-30px_rgba(33,39,30,0.3)] backdrop-blur">
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex items-center gap-4">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(114,180,115,0.16)] text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--green)]">ABA</div>
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
+          <p class="mt-1 text-sm text-[color:var(--muted)]">Flow and intelligence support asset</p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap gap-x-4 gap-y-2 text-[13px] font-semibold text-[color:var(--ink)]">
+        <a href="../index.html" class="text-[color:var(--green)]">Demo Hub</a>
+        <a href="../site/index.html" class="hover:text-[color:var(--green)]">ABA Site</a>
+        <a href="../site/about.html" class="hover:text-[color:var(--green)]">About ABA</a>
+        <a href="../membership-flow/membership-types.html" class="hover:text-[color:var(--green)]">Membership</a>
+        <a href="../database/index.html" class="hover:text-[color:var(--green)]">Knowledge Hub</a>
+        <a href="../registration-tracker/index.html" class="hover:text-[color:var(--green)]">Registration Tracker</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
 <!--
   This onepager keeps all state in one Alpine root.
@@ -190,7 +211,7 @@
     </div>
   </header>
 
-  <main class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+  <main class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
     <section class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
       <div class="space-y-6">
         <div class="inline-flex items-center gap-2 rounded-full border border-[color:rgba(15,23,42,0.08)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">

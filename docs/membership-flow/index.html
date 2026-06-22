@@ -11,20 +11,21 @@
   <style>
     [x-cloak] { display: none !important; }
     :root {
-      --ink: #16212f;
-      --muted: #617083;
-      --line: rgba(22, 33, 47, 0.12);
-      --soft-line: rgba(22, 33, 47, 0.08);
-      --paper: #f2f1ea;
-      --panel: rgba(255, 255, 255, 0.92);
+      --ink: oklch(0.23 0.03 215);
+      --muted: oklch(0.49 0.028 205);
+      --line: rgba(46, 58, 46, 0.08);
+      --soft-line: rgba(46, 58, 46, 0.08);
+      --paper: oklch(0.985 0.008 98);
+      --panel: rgba(255, 252, 246, 0.9);
       --surface: #faf9f4;
-      --forest: #1f4634;
-      --leaf: #2f7d56;
-      --sea: #2a67bf;
-      --amber: #aa7518;
-      --lavender: #705cc2;
-      --mist: #e8ebee;
-      --success: #1e7a4a;
+      --forest: oklch(0.34 0.07 155);
+      --leaf: oklch(0.4 0.09 150);
+      --sea: oklch(0.49 0.11 240);
+      --amber: oklch(0.62 0.12 70);
+      --lavender: oklch(0.57 0.12 300);
+      --mist: rgba(244, 246, 239, 0.9);
+      --success: oklch(0.46 0.1 150);
+      --green-soft: oklch(0.95 0.04 145);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -33,9 +34,9 @@
       font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(47, 125, 86, 0.14), transparent 20%),
-        radial-gradient(circle at 85% 0%, rgba(42, 103, 191, 0.08), transparent 22%),
-        linear-gradient(180deg, #edf4ea 0%, var(--paper) 100%);
+        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
+        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
     }
     a { color: inherit; text-decoration: none; }
     button, input, select, textarea { font: inherit; }
@@ -44,6 +45,41 @@
       width: min(1320px, calc(100vw - 32px));
       margin: 0 auto;
       padding: 24px 0 56px;
+    }
+    .topbar {
+      margin-bottom: 18px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+    }
+    .topbar-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--leaf);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
     .surface,
     .card,
@@ -54,10 +90,10 @@
     .summary-shell {
       background: var(--panel);
       border: 1px solid var(--line);
-      box-shadow: 0 18px 38px -28px rgba(22, 33, 47, 0.26);
+      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
       backdrop-filter: blur(10px);
     }
-    .surface { border-radius: 24px; }
+    .surface { border-radius: 22px; }
     .card,
     .form-shell,
     .field,
@@ -165,7 +201,7 @@
     }
     .button:hover { transform: translateY(-1px); }
     .button.primary {
-      background: #122034;
+      background: var(--leaf);
       color: white;
     }
     .button.secondary {
@@ -241,7 +277,7 @@
       text-align: center;
     }
     .progress-step.active {
-      background: #122034;
+      background: color-mix(in srgb, var(--leaf) 88%, #0f1d2d 12%);
       color: white;
       border-color: #122034;
     }
@@ -256,7 +292,7 @@
       display: block;
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--leaf), var(--sea));
+      background: linear-gradient(90deg, var(--leaf), color-mix(in srgb, var(--leaf) 72%, var(--sea) 28%));
       transition: width 180ms ease;
     }
     .step-screen {
@@ -452,21 +488,21 @@
           color: 'var(--leaf)',
           subtitle: 'Core industry membership',
           audience: 'Manufacturers, importers, distributors, and product owners working directly in biologicals.',
-          promise: 'For organisations who want a formal seat in ABA and direct value from member representation, visibility, and coordination.'
+          promise: 'For organisations who need a formal industry relationship with ABA and want their commercial and registration realities understood properly.'
         },
         associate: {
           name: 'Associate Member',
           color: 'var(--sea)',
           subtitle: 'Ecosystem participation',
           audience: 'Researchers, academics, NGOs, technical partners, and aligned service organisations.',
-          promise: 'For organisations who strengthen the biologicals ecosystem through research, implementation, technical support, or collaboration.'
+          promise: 'For organisations who strengthen the sector through evidence, implementation, technical support, training, or specialist collaboration.'
         },
         observer: {
           name: 'Observer',
           color: 'var(--amber)',
           subtitle: 'Strategic relationship',
           audience: 'Government stakeholders, development partners, funders, and public-sector institutions.',
-          promise: 'For institutions who want a formal ABA relationship and visibility into the work without entering the core member lane immediately.'
+          promise: 'For institutions that need a formal route into ABA’s work without joining through the operational membership lanes.'
         }
       },
       form: {
@@ -492,24 +528,42 @@
     }"
   >
     <main class="shell">
+      <section class="surface topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark">ABA</div>
+          <div>
+            <div class="mini-label">African Biologicals Alliance</div>
+            <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Membership application prototype</div>
+          </div>
+        </div>
+        <nav class="topbar-links">
+          <a href="../index.html">Demo Hub</a>
+          <a href="../site/index.html">ABA Site</a>
+          <a href="../site/about.html">About ABA</a>
+          <a href="./index.html" style="color: var(--leaf);">Membership</a>
+          <a href="../database/index.html">Knowledge Hub</a>
+          <a href="../registration-tracker/index.html">Registration Tracker</a>
+        </nav>
+      </section>
       <section class="surface hero">
         <div class="eyebrow">African Biologicals Alliance</div>
         <div class="hero-grid">
           <div>
-            <h1 class="display">Join ABA and shape the biologicals sector with us.</h1>
+            <h1 class="display">Apply for the ABA relationship that fits your organisation.</h1>
             <p style="margin-top: 18px; max-width: 70ch;">
-              Membership is open to organisations and institutions across Africa. Choose the relationship that fits you best, complete the application, and ABA will follow up with the next steps.
+              This application helps ABA understand who you are, where you fit in biologicals, and what kind of relationship should begin from here. Applications are open to organisations and institutions across Africa.
             </p>
             <div class="button-row">
-              <a class="button secondary" href="./membership-types.html">Read about membership types</a>
-            </div>
+            <a class="button secondary" href="./membership-types.html">Read about membership types</a>
+            <a class="button ghost" href="../site/about.html">About ABA</a>
+          </div>
           </div>
           <div class="card" style="align-self: stretch; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="mini-label">Membership application</div>
-              <h2 style="margin-top: 10px;">A formal route into the ABA network.</h2>
+              <h2 style="margin-top: 10px;">Start with a clearer membership fit.</h2>
               <p style="margin-top: 12px;">
-                Use this application to tell ABA who you are, how you fit into the biologicals sector, and what kind of relationship or support you are looking for.
+                Rather than dropping you into a generic list, ABA uses this application to place your organisation in the right lane and follow up with more context.
               </p>
             </div>
             <p style="margin-top: 18px; color: var(--ink); font-size: 14px; font-weight: 600;">
@@ -552,19 +606,19 @@
 
           <section class="benefit-grid" style="margin-top: 18px;">
             <article class="card">
-              <div class="mini-label">Why ABA asks this</div>
-              <h3 style="margin-top: 10px; font-size: 1.2rem;">Place your organisation correctly</h3>
-              <p style="margin-top: 8px;">ABA needs to understand whether you are applying as a core industry participant, an ecosystem contributor, or a strategic institutional stakeholder.</p>
+              <div class="mini-label">Why this matters</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">Your organisation should start in the right lane</h3>
+              <p style="margin-top: 8px;">ABA uses your application to distinguish between operational members, ecosystem contributors, and institutional stakeholders from the beginning.</p>
             </article>
             <article class="card">
-              <div class="mini-label">Why ABA asks this</div>
-              <h3 style="margin-top: 10px; font-size: 1.2rem;">Understand your priorities</h3>
-              <p style="margin-top: 8px;">The application helps ABA see what kind of visibility, coordination, representation, or support would actually matter to your organisation.</p>
+              <div class="mini-label">Why this matters</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">Your priorities should be visible early</h3>
+              <p style="margin-top: 8px;">The application helps ABA understand whether your main need is representation, technical alignment, ecosystem participation, institutional coordination, or something more specific.</p>
             </article>
             <article class="card">
-              <div class="mini-label">Why ABA asks this</div>
-              <h3 style="margin-top: 10px; font-size: 1.2rem;">Route the next conversation</h3>
-              <p style="margin-top: 8px;">Rather than dropping into a generic list, your application gives ABA enough context to decide what the next relationship step should be.</p>
+              <div class="mini-label">Why this matters</div>
+              <h3 style="margin-top: 10px; font-size: 1.2rem;">The next conversation should be more useful</h3>
+              <p style="margin-top: 8px;">Your application gives ABA enough context to follow up more intelligently instead of starting from scratch once you submit.</p>
             </article>
           </section>
 
@@ -591,7 +645,7 @@
                     </div>
                     <div class="chip" x-text="tier.name"></div>
                   </div>
-                  <p style="font-size: 14px;">We’ll use these details to create your application and make sure the right ABA team member follows up.</p>
+                  <p style="font-size: 14px;">These details give ABA a clear contact point and make sure the right follow-up starts with the right person.</p>
                   <div class="field-grid" style="margin-top: 18px;">
                     <div class="field">
                       <label for="full_name">Full name</label>
@@ -638,7 +692,7 @@
                     </div>
                     <div class="chip" x-text="tier.name"></div>
                   </div>
-                  <p style="font-size: 14px;">This helps ABA understand the kind of relationship you’re applying for and where you fit in the wider biologicals picture.</p>
+                  <p style="font-size: 14px;">This helps ABA understand your operating context, your role in biologicals, and how your application should be interpreted.</p>
                   <div class="field-grid" style="margin-top: 18px;">
                     <div class="field">
                       <label for="stakeholder_type">Stakeholder type</label>
@@ -685,14 +739,14 @@
                   <div class="section-head">
                     <div>
                       <div class="mini-label">Step 3</div>
-                      <h2 style="margin-top: 8px;">Tell us what would make membership valuable.</h2>
+                      <h2 style="margin-top: 8px;">Tell us what would make this relationship useful.</h2>
                     </div>
                     <div class="chip" x-text="tier.name"></div>
                   </div>
-                  <p style="font-size: 14px;">This is where you tell ABA what kind of relationship or support you’re actually looking for.</p>
+                  <p style="font-size: 14px;">This is where you tell ABA what needs, priorities, or sticking points sit behind your application.</p>
                   <div class="field" style="margin-top: 18px;">
-                    <label for="goals">What are you hoping ABA membership will help you with?</label>
-                    <textarea id="goals" x-model="form.goals" placeholder="Tell us about your goals, priorities, or the kind of support and visibility you are looking for."></textarea>
+                    <label for="goals">What would you like ABA to understand about your priorities, challenges, or reasons for applying?</label>
+                    <textarea id="goals" x-model="form.goals" placeholder="For example: market access, registration friction, coordination needs, technical collaboration, policy alignment, institutional engagement, or another priority."></textarea>
                   </div>
                   <div class="option-grid" style="margin-top: 18px;">
                     <button type="button" class="selectable" :class="{ 'selected': form.follow_up === 'call' }" @click="form.follow_up = 'call'">
@@ -720,7 +774,7 @@
                     </div>
                     <div class="chip" x-text="tier.name"></div>
                   </div>
-                  <p style="font-size: 14px;">Before you submit, check that everything looks right. ABA will review this application and follow up using the details below.</p>
+                  <p style="font-size: 14px;">Before you submit, check that everything looks right. ABA will review the application in context and follow up using the details below.</p>
                   <div class="review-grid" style="margin-top: 18px;">
                     <div class="field">
                       <label>Full name</label>
@@ -748,7 +802,7 @@
                     </div>
                   </div>
                   <div class="subtle-note">
-                    By submitting, you’re expressing interest in a formal relationship with ABA. A team member will review your application and contact you about the next step.
+                    By submitting, you’re starting a formal relationship process with ABA. A team member will review your application, confirm fit, and contact you about the next step.
                   </div>
                 </div>
               </template>
@@ -791,8 +845,8 @@
               <div class="summary-box">
                 <div class="mini-label">What happens next</div>
                 <div class="summary-pill">ABA reviews your application</div>
-                <div class="summary-pill">You receive a follow-up via your chosen contact path</div>
-                <div class="summary-pill">Your organisation is placed in the right membership lane</div>
+                <div class="summary-pill">Your membership fit and context are reviewed together</div>
+                <div class="summary-pill">You receive follow-up via your chosen contact path</div>
               </div>
             </aside>
           </section>
@@ -804,7 +858,7 @@
           <div class="success-badge">Application received</div>
           <h2 class="display" style="margin-top: 14px; font-size: 2.45rem;">Thank you for applying to join ABA.</h2>
           <p style="margin-top: 12px; max-width: 72ch;">
-            Your application has been received. ABA will review your details and follow up with the next step based on the membership type you selected.
+            Your application has been received. ABA will review your details, your membership fit, and the context behind your application before following up on the next step.
           </p>
 
           <div class="success-grid" style="margin-top: 22px;">
@@ -835,16 +889,17 @@
               <h3 style="font-size: 1.4rem;">ABA reviews and follows up.</h3>
               <p style="margin-top: 10px;">Your application is now in ABA’s review flow. If you asked for a call, the team will use that as the first follow-up route.</p>
               <div class="summary-box" style="margin-top: 18px;">
-                <div class="summary-pill">Review membership fit</div>
-                <div class="summary-pill">Confirm next conversation or contact path</div>
-                <div class="summary-pill">Continue into the formal relationship process</div>
+                <div class="summary-pill">Review fit, context, and stated priorities</div>
+                <div class="summary-pill">Confirm the next conversation or contact path</div>
+                <div class="summary-pill">Continue into the appropriate ABA relationship process</div>
               </div>
             </article>
           </div>
 
           <div class="button-row">
             <button type="button" class="button primary" @click="restart()">Start again</button>
-            <a class="button secondary" href="../index.html">Back to demo hub</a>
+            <a class="button secondary" href="../site/index.html">Back to ABA site</a>
+            <a class="button ghost" href="../database/index.html">Go to knowledge hub</a>
           </div>
         </section>
       </template>

@@ -11,17 +11,18 @@
   <style>
     [x-cloak] { display: none !important; }
     :root {
-      --ink: #16212f;
-      --muted: #617083;
-      --line: rgba(22, 33, 47, 0.12);
-      --paper: #f2f1ea;
-      --panel: rgba(255, 255, 255, 0.95);
-      --leaf: #2f7d56;
-      --sea: #2a67bf;
-      --amber: #aa7518;
-      --forest: #1f4634;
-      --mist: #eef1f3;
+      --ink: oklch(0.23 0.03 215);
+      --muted: oklch(0.49 0.028 205);
+      --line: rgba(46, 58, 46, 0.08);
+      --paper: oklch(0.985 0.008 98);
+      --panel: rgba(255, 252, 246, 0.9);
+      --leaf: oklch(0.4 0.09 150);
+      --sea: oklch(0.49 0.11 240);
+      --amber: oklch(0.62 0.12 70);
+      --forest: oklch(0.34 0.07 155);
+      --mist: rgba(244, 246, 239, 0.9);
       --soft: rgba(22, 33, 47, 0.05);
+      --green-soft: oklch(0.95 0.04 145);
     }
     * { box-sizing: border-box; }
     body {
@@ -29,54 +30,90 @@
       font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(47, 125, 86, 0.14), transparent 22%),
-        radial-gradient(circle at 86% 0%, rgba(42, 103, 191, 0.08), transparent 24%),
-        linear-gradient(180deg, #edf4ea 0%, var(--paper) 100%);
+        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
+        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
     }
     a { color: inherit; text-decoration: none; }
     button, summary { font: inherit; }
     .display { font-family: "Domine", Georgia, serif; }
     .shell {
-      width: min(1240px, calc(100vw - 32px));
+      width: min(1240px, calc(100vw - 36px));
       margin: 0 auto;
-      padding: 24px 0 56px;
+      padding: 18px 0 40px;
+    }
+    .topbar {
+      margin-bottom: 14px;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+    .topbar-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--leaf);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
     .surface,
     .card,
     .panel {
       background: var(--panel);
-      border: 1px solid rgba(22, 33, 47, 0.12);
-      box-shadow: 0 18px 38px -28px rgba(22, 33, 47, 0.22);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+      backdrop-filter: blur(16px);
     }
-    .surface { border-radius: 24px; }
+    .surface { border-radius: 22px; }
     .card,
-    .panel { border-radius: 16px; }
+    .panel { border-radius: 18px; }
     .hero,
     .section {
-      padding: 28px;
+      padding: 24px;
     }
     .hero {
       display: grid;
-      gap: 22px;
+      gap: 18px;
     }
     .hero-grid,
     .tier-grid,
     .expect-grid {
       display: grid;
-      gap: 18px;
+      gap: 16px;
     }
     .hero-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-      align-items: end;
+      grid-template-columns: 1.18fr 0.82fr;
+      align-items: start;
     }
     .tier-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 18px;
+      margin-top: 16px;
       align-items: start;
     }
     .expect-grid {
       grid-template-columns: 1fr 1fr;
-      margin-top: 18px;
+      margin-top: 16px;
     }
     .eyebrow {
       display: inline-flex;
@@ -84,7 +121,7 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(22, 33, 47, 0.12);
+      border: 1px solid var(--line);
       background: white;
       color: var(--muted);
       font-size: 11px;
@@ -101,12 +138,12 @@
     }
     h1, h2, h3, p, ul { margin: 0; }
     h1 {
-      font-size: clamp(3rem, 5vw, 5rem);
-      line-height: 0.94;
+      font-size: clamp(2.65rem, 4.7vw, 4.45rem);
+      line-height: 0.98;
       letter-spacing: -0.05em;
     }
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.65rem;
       line-height: 1.08;
       letter-spacing: -0.03em;
     }
@@ -122,8 +159,8 @@
     .button-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 18px;
     }
     .button {
       display: inline-flex;
@@ -137,13 +174,13 @@
       border: 0;
     }
     .button.primary {
-      background: #122034;
+      background: var(--leaf);
       color: white;
     }
     .button.secondary {
       background: white;
       color: var(--ink);
-      border: 1px solid rgba(22, 33, 47, 0.12);
+      border: 1px solid var(--line);
     }
     .mini-label {
       font-size: 11px;
@@ -153,15 +190,15 @@
       color: var(--muted);
     }
     .hero-note {
-      padding: 20px;
-      border-radius: 16px;
-      background: rgba(31, 70, 52, 0.96);
+      padding: 18px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--forest) 92%, black 8%);
       color: white;
     }
     .hero-note p { color: rgba(255,255,255,0.76); }
     .card,
     .panel {
-      padding: 20px;
+      padding: 18px;
     }
     .card-top {
       display: flex;
@@ -189,11 +226,11 @@
       margin-top: 14px;
     }
     .band {
-      margin-top: 18px;
-      padding: 18px 20px;
+      margin-top: 16px;
+      padding: 16px 18px;
       border-radius: 16px;
       background: var(--mist);
-      border: 1px solid rgba(22, 33, 47, 0.08);
+      border: 1px solid var(--line);
     }
     .strong {
       color: var(--ink);
@@ -206,7 +243,7 @@
     .expand-trigger {
       list-style: none;
       cursor: pointer;
-      padding: 20px;
+      padding: 18px;
     }
     .expand-trigger::-webkit-details-marker {
       display: none;
@@ -216,7 +253,7 @@
       justify-content: space-between;
       gap: 12px;
       align-items: center;
-      margin-top: 16px;
+      margin-top: 14px;
     }
     .expand-label {
       font-size: 13px;
@@ -224,8 +261,8 @@
       color: var(--ink);
     }
     .expand-icon {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
       border: 1px solid var(--line);
       display: inline-flex;
@@ -239,20 +276,20 @@
       transform: rotate(45deg);
     }
     .expand-body {
-      padding: 0 20px 20px;
+      padding: 0 18px 18px;
       border-top: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(22,33,47,0.015) 0%, rgba(22,33,47,0.03) 100%);
     }
     .expand-body p:first-child {
-      margin-top: 18px;
+      margin-top: 16px;
     }
     .body-stack {
       display: grid;
-      gap: 14px;
-      margin-top: 16px;
+      gap: 12px;
+      margin-top: 14px;
     }
     .body-box {
-      padding: 14px 16px;
+      padding: 13px 15px;
       border-radius: 12px;
       background: white;
       border: 1px solid var(--line);
@@ -274,17 +311,35 @@
 </head>
 <body>
   <main class="shell">
+    <section class="surface topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark">ABA</div>
+        <div>
+          <div class="mini-label">African Biologicals Alliance</div>
+          <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Membership prototype</div>
+        </div>
+      </div>
+      <nav class="topbar-links">
+        <a href="../index.html">Demo Hub</a>
+        <a href="../site/index.html">ABA Site</a>
+        <a href="../site/about.html">About ABA</a>
+        <a href="./membership-types.html" style="color: var(--leaf);">Membership</a>
+        <a href="../database/index.html">Knowledge Hub</a>
+        <a href="../registration-tracker/index.html">Registration Tracker</a>
+      </nav>
+    </section>
     <section class="surface hero">
       <div class="eyebrow">African Biologicals Alliance</div>
       <div class="hero-grid">
         <div>
-          <h1 class="display">Find the ABA membership type that fits your organisation.</h1>
+          <h1 class="display">Choose the ABA relationship that matches how you work in biologicals.</h1>
           <p style="margin-top: 18px; max-width: 72ch;">
-            ABA works with different kinds of organisations across the biologicals sector. Some are directly building, importing, distributing, or commercialising products. Others contribute through research, technical support, programmes, public institutions, or funding. The membership types below are intended to make that fit clearer before you apply.
+            Some organisations are actively bringing biological products to market. Others strengthen the sector through research, technical support, programmes, public institutions, or funding. ABA uses different membership lanes so your application starts in the right place from the outset.
           </p>
           <div class="button-row">
             <a class="button primary" href="./index.html">Start membership application</a>
-            <a class="button secondary" href="../index.html">Back to demo hub</a>
+            <a class="button secondary" href="../site/about.html">About ABA</a>
+            <a class="button secondary" href="../site/index.html">Back to ABA site</a>
           </div>
         </div>
         <div class="hero-note">
@@ -297,7 +352,7 @@
       </div>
     </section>
 
-    <section class="surface section" style="margin-top: 18px;">
+    <section class="surface section" style="margin-top: 14px;">
       <div class="mini-label">Membership Types</div>
       <h2 style="margin-top: 8px;">Which option is right for you?</h2>
       <div class="tier-grid">
@@ -313,7 +368,7 @@
             <p style="margin-top: 12px;">
               Full membership is intended for organisations working directly in the biologicals market, including manufacturers, product owners, importers, and distributors.
             </p>
-            <div class="pill">Best if biological products are central to your organisation’s work</div>
+            <div class="pill">Best if your commercial work is directly tied to biological products</div>
             <div class="expand-row">
               <div class="expand-label">Read full details</div>
               <div class="expand-icon">+</div>
@@ -329,13 +384,19 @@
                 <ul>
                   <li>Your organisation manufactures, imports, distributes, or owns biological products</li>
                   <li>Your products are already in market, in registration, or moving toward registration</li>
-                  <li>You want a more active formal relationship with ABA</li>
+                  <li>You want ABA to understand your commercial position, regulatory context, and member priorities clearly</li>
                 </ul>
               </div>
               <div class="body-box">
-                <div class="mini-label">What this is intended to support</div>
+                <div class="mini-label">What full membership is designed to do</div>
                 <p>
-                  Full membership is the clearest fit for organisations who want to be part of ABA’s core industry network and whose work is directly affected by how the biologicals sector develops.
+                  Full membership is for organisations that want a formal industry relationship with ABA. It gives ABA a clearer line of sight into where products are being built, moved, registered, and commercialised, so member needs can be surfaced with more precision and followed up more usefully.
+                </p>
+              </div>
+              <div class="body-box">
+                <div class="mini-label">What value this relationship is meant to create</div>
+                <p>
+                  The value is not abstract membership for its own sake. It is a stronger route into sector visibility, a more credible basis for representation, and a better starting point when ABA is identifying recurring registration or market-access friction affecting members.
                 </p>
               </div>
             </div>
@@ -354,7 +415,7 @@
             <p style="margin-top: 12px;">
               Associate membership is intended for organisations contributing to the sector through research, technical work, programmes, implementation, or specialist support.
             </p>
-            <div class="pill">Best if you support the biologicals sector without operating as a core industry member</div>
+            <div class="pill">Best if you strengthen the sector without joining as a commercial industry member</div>
             <div class="expand-row">
               <div class="expand-label">Read full details</div>
               <div class="expand-icon">+</div>
@@ -369,14 +430,20 @@
                 <div class="mini-label">This may be right for you if</div>
                 <ul>
                   <li>Your organisation contributes research, technical support, programme work, training, or specialist capacity</li>
-                  <li>You want to be part of the biologicals ecosystem without applying as a core industry member</li>
-                  <li>Your relationship with ABA is likely to be collaborative, supportive, or knowledge-based</li>
+                  <li>You want to participate in sector-building work without being placed in the core commercial lane</li>
+                  <li>Your relationship with ABA is likely to centre on knowledge, implementation, capability, or collaboration</li>
                 </ul>
               </div>
               <div class="body-box">
-                <div class="mini-label">What this is intended to support</div>
+                <div class="mini-label">What associate membership is designed to do</div>
                 <p>
-                  Associate membership helps ABA stay connected to the wider network of organisations that contribute to sector growth, capability, and alignment.
+                  Associate membership creates a formal place for the wider ecosystem around biologicals. It helps ABA stay connected to the organisations that generate evidence, deliver programmes, support adoption, build skills, and contribute specialist knowledge that the sector needs.
+                </p>
+              </div>
+              <div class="body-box">
+                <div class="mini-label">What value this relationship is meant to create</div>
+                <p>
+                  This lane gives your organisation a more defined way to participate in sector conversations, share expertise, and stay aligned with industry realities without claiming the same role as a manufacturer, importer, distributor, or product owner.
                 </p>
               </div>
             </div>
@@ -395,7 +462,7 @@
             <p style="margin-top: 12px;">
               Observer status is intended for public institutions, funders, development partners, and other strategic stakeholders who want a formal relationship with ABA.
             </p>
-            <div class="pill">Best if your role is institutional, strategic, or public-facing rather than operational</div>
+            <div class="pill">Best if your role is strategic or institutional rather than operational</div>
             <div class="expand-row">
               <div class="expand-label">Read full details</div>
               <div class="expand-icon">+</div>
@@ -410,14 +477,20 @@
                 <div class="mini-label">This may be right for you if</div>
                 <ul>
                   <li>You represent a public institution, funder, development partner, or similar strategic stakeholder</li>
-                  <li>You want a formal route into the ABA network without entering the same path as operational members</li>
-                  <li>Your relationship with ABA is likely to be institutional, strategic, or public-facing</li>
+                  <li>You want a formal route into ABA without entering the same membership path as industry or ecosystem participants</li>
+                  <li>Your relationship with ABA is likely to focus on policy, coordination, public mandate, or strategic alignment</li>
                 </ul>
               </div>
               <div class="body-box">
-                <div class="mini-label">What this is intended to support</div>
+                <div class="mini-label">What observer status is designed to do</div>
                 <p>
-                  Observer status provides a formal way for ABA to stay connected to important institutional relationships while keeping the distinction between member participation and stakeholder alignment clear.
+                  Observer status provides a structured way to stay connected to ABA’s work while preserving a clear distinction between institutional stakeholders and participating members. It recognises that some relationships matter strategically even when they are not membership relationships in the operational sense.
+                </p>
+              </div>
+              <div class="body-box">
+                <div class="mini-label">What value this relationship is meant to create</div>
+                <p>
+                  This route is meant to support more informed engagement, better coordination, and clearer lines of communication between ABA and the institutions that influence the sector environment around biologicals.
                 </p>
               </div>
             </div>
@@ -428,47 +501,47 @@
       <div class="band">
         <p>
           <span class="strong">If you are applying as a manufacturer, importer, distributor, or product owner, start with Full Membership.</span>
-          If your organisation’s role is primarily research, technical support, programme work, or sector strengthening, Associate Membership is usually a better fit. If you represent a public institution, funder, or similar stakeholder, Observer status is likely to be the most appropriate place to begin.
+          If your organisation primarily supports the sector through research, implementation, technical work, or specialist capacity, Associate Membership is usually the better fit. If you represent a public institution, development partner, funder, or similar stakeholder, Observer status is likely to be the right place to begin.
         </p>
       </div>
     </section>
 
-    <section class="surface section" style="margin-top: 18px;">
-      <div class="mini-label">What To Expect</div>
-      <h2 style="margin-top: 8px;">What joining ABA is intended to help with.</h2>
+    <section class="surface section" style="margin-top: 14px;">
+      <div class="mini-label">What Membership Should Do</div>
+      <h2 style="margin-top: 8px;">What an ABA relationship is meant to make possible.</h2>
       <div class="expect-grid">
         <article class="panel">
-          <h3>A clearer relationship with ABA</h3>
+          <h3>A more accurate starting point</h3>
           <p style="margin-top: 10px;">
-            Membership gives ABA a clearer understanding of who your organisation is, how it fits into the sector, and what kind of relationship or follow-up may be most useful.
+            Your application helps ABA understand who you are, where you sit in the biologicals landscape, and what kind of follow-up or relationship actually makes sense for your organisation.
           </p>
         </article>
 
         <article class="panel">
-          <h3>Better visibility across the sector</h3>
+          <h3>Stronger sector visibility</h3>
           <p style="margin-top: 10px;">
-            Membership helps ABA build a stronger picture of who is active in biologicals, in which countries, and with what kinds of roles, capabilities, or institutional responsibilities.
+            Every application contributes to a clearer picture of who is active in biologicals, where activity is happening, and which products, organisations, and institutional relationships shape the sector.
           </p>
         </article>
 
         <article class="panel">
-          <h3>More relevant follow-up</h3>
+          <h3>More useful follow-up</h3>
           <p style="margin-top: 10px;">
-            The application gives ABA more than contact details. It helps the team understand what kind of conversation, support, or next step is likely to make sense for your organisation.
+            ABA should not come back to you with a generic response. The application is there to make the next conversation more relevant, whether that is membership follow-up, technical discussion, ecosystem alignment, or institutional engagement.
           </p>
         </article>
 
         <article class="panel">
-          <h3>A stronger sector platform over time</h3>
+          <h3>Better evidence for action over time</h3>
           <p style="margin-top: 10px;">
-            For organisations in the core industry lane especially, ABA is working toward a stronger platform for sector visibility, coordination, and practical support as the network matures.
+            As participation grows, ABA is better placed to identify recurring pain points, show where friction is happening, and build a more credible basis for coordination, representation, and practical sector support.
           </p>
         </article>
       </div>
 
       <div class="band">
         <p>
-          ABA membership is not a guarantee of approvals, market outcomes, or institutional access. It is the beginning of a more formal relationship with ABA and a clearer place for your organisation within the broader biologicals sector network.
+          ABA membership is not a guarantee of approvals, market outcomes, or institutional access. It is a structured starting point for a clearer relationship, better sector visibility, and more grounded follow-up.
         </p>
       </div>
 

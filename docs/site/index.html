@@ -35,14 +35,14 @@
     .font-display { font-family: "Domine", Georgia, serif; }
 
     .shell {
-      width: min(1180px, calc(100% - 2rem));
+      width: min(1240px, calc(100% - 1.75rem));
       margin: 0 auto;
     }
 
     .surface {
       background: rgba(255, 252, 246, 0.86);
       border: 1px solid rgba(46, 58, 46, 0.08);
-      box-shadow: 0 20px 50px -36px rgba(33, 39, 30, 0.34);
+      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
       backdrop-filter: blur(16px);
     }
 
@@ -58,65 +58,65 @@
   </style>
 </head>
 <body class="antialiased">
-  <header class="shell pt-5 sm:pt-8">
-    <div class="surface rounded-[26px] px-5 py-4 sm:px-7">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+  <header class="shell pt-3 sm:pt-4">
+    <div class="surface rounded-[22px] px-4 py-3 sm:px-5">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div class="flex items-center gap-4">
-          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--green-soft)] text-sm font-extrabold uppercase tracking-[0.18em] text-[color:var(--green-deep)]">ABA</div>
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--green-soft)] text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--green-deep)]">ABA</div>
           <div>
             <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
             <p class="mt-1 text-sm text-[color:var(--muted)]">Coordination, visibility, and participation across Africa</p>
           </div>
         </div>
-        <nav class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[color:var(--ink)]">
-          <a href="./index.html" class="text-[color:var(--green-deep)]">Home</a>
+        <nav class="flex flex-wrap gap-x-4 gap-y-2 text-[13px] font-semibold text-[color:var(--ink)]">
+          <a href="../index.html" class="hover:text-[color:var(--green-deep)]">Demo Hub</a>
+          <a href="./index.html" class="text-[color:var(--green-deep)]">ABA Site</a>
           <a href="./about.html" class="hover:text-[color:var(--green-deep)]">About ABA</a>
           <a href="../membership-flow/membership-types.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
           <a href="../registration-tracker/index.html" class="hover:text-[color:var(--green-deep)]">Registration Tracker</a>
-          <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Biologicals Database</a>
-          <a href="./technical-network.html" class="hover:text-[color:var(--green-deep)]">Technical Network</a>
-          <a href="./updates.html" class="hover:text-[color:var(--green-deep)]">Updates</a>
+          <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Knowledge Hub</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main class="pb-16 sm:pb-24">
-    <section class="shell mt-5 sm:mt-7">
-      <div class="grid gap-5 lg:grid-cols-[1.18fr_0.82fr]">
-        <div class="surface rounded-[34px] px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+  <main class="pb-8 sm:pb-12">
+    <section class="shell mt-4">
+      <div class="grid gap-3.5 lg:grid-cols-[1.2fr_0.8fr]">
+        <div class="surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7 lg:px-7 lg:py-7">
           <p class="eyebrow">Home</p>
-          <h1 class="font-display mt-4 max-w-5xl text-[clamp(2.6rem,5vw,5.1rem)] leading-[1.01] tracking-[-0.045em] text-[color:var(--ink)]">
+          <h1 class="font-display mt-4 max-w-5xl text-[clamp(2.45rem,4.7vw,4.6rem)] leading-[1.02] tracking-[-0.045em] text-[color:var(--ink)]">
             A stronger biologicals sector needs clearer coordination, better visibility, and a credible collective voice.
           </h1>
-          <p class="mt-6 max-w-3xl text-lg leading-8 text-[color:var(--muted)] sm:text-xl">
+          <p class="mt-4 max-w-3xl text-[1.04rem] leading-7 text-[color:var(--muted)] sm:text-[1.12rem]">
             The African Biologicals Alliance brings together organisations, specialists, and stakeholders working to strengthen how biologicals are represented, understood, and advanced across Africa.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="../membership-flow/index.html" class="rounded-full bg-[color:var(--green-deep)] px-5 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-[color:var(--paper)]">Apply for membership</a>
-            <a href="./about.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-5 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">About ABA</a>
+          <div class="mt-5 flex flex-wrap gap-2.5">
+            <a href="../membership-flow/index.html" class="rounded-full bg-[color:var(--green-deep)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--paper)]">Apply for membership</a>
+            <a href="../database/index.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">Explore knowledge hub</a>
+            <a href="./about.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">About ABA</a>
           </div>
         </div>
 
-        <div class="flex flex-col gap-5">
-          <div class="surface rounded-[30px] px-6 py-6">
+        <div class="flex flex-col gap-3.5">
+          <div class="surface rounded-[24px] px-5 py-4.5">
             <p class="eyebrow">Regional scope</p>
-            <p class="mt-3 text-lg font-bold text-[color:var(--ink)]">Open across Africa. Active now in South Africa.</p>
-            <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">
+            <p class="mt-2.5 text-[1.02rem] font-bold text-[color:var(--ink)]">Open across Africa. Active now in South Africa.</p>
+            <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">
               ABA welcomes participation and sector input from across the continent while building its current operational base in South Africa.
             </p>
           </div>
-          <div class="surface rounded-[30px] px-6 py-6">
-            <p class="eyebrow">How to engage</p>
-            <div class="mt-4 grid gap-3">
-              <div class="rounded-[20px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-                <p class="font-bold text-[color:var(--ink)]">Understand the alliance</p>
+          <div class="surface rounded-[24px] px-5 py-4.5">
+            <p class="eyebrow">Primary paths</p>
+            <div class="mt-3 grid gap-2.5">
+              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
+                <p class="font-bold text-[color:var(--ink)]">Understand ABA and its role</p>
               </div>
-              <div class="rounded-[20px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
+              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
                 <p class="font-bold text-[color:var(--ink)]">Explore membership and participation</p>
               </div>
-              <div class="rounded-[20px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-                <p class="font-bold text-[color:var(--ink)]">Follow the wider ABA story</p>
+              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
+                <p class="font-bold text-[color:var(--ink)]">Explore the biologicals knowledge hub</p>
               </div>
             </div>
           </div>
@@ -124,90 +124,90 @@
       </div>
     </section>
 
-    <section class="shell mt-10 sm:mt-14">
-      <div class="surface rounded-[34px] px-6 py-8 sm:px-8 sm:py-10">
-        <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+    <section class="shell mt-5 sm:mt-6">
+      <div class="surface rounded-[28px] px-5 py-5 sm:px-6 sm:py-6">
+        <div class="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <p class="eyebrow">Why ABA</p>
-            <h2 class="font-display mt-3 text-[clamp(2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.035em]">Biologicals cannot grow on optimism alone.</h2>
+            <h2 class="font-display mt-3 text-[clamp(1.9rem,3.8vw,3rem)] leading-[1.06] tracking-[-0.035em]">Biologicals cannot grow on optimism alone.</h2>
           </div>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-[24px] bg-[color:rgba(255,255,255,0.72)] px-5 py-5">
+          <div class="grid gap-2.5 sm:grid-cols-2">
+            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
               <p class="font-bold text-[color:var(--ink)]">Registration remains hard to read</p>
-              <p class="mt-2 text-base leading-7 text-[color:var(--muted)]">Delays, bottlenecks, and ambiguity are often felt privately rather than understood collectively.</p>
+              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Delays, bottlenecks, and ambiguity are often felt privately rather than understood collectively.</p>
             </div>
-            <div class="rounded-[24px] bg-[color:rgba(255,255,255,0.72)] px-5 py-5">
+            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
               <p class="font-bold text-[color:var(--ink)]">The sector needs better coordination</p>
-              <p class="mt-2 text-base leading-7 text-[color:var(--muted)]">Relationships, expertise, and participation need a clearer public structure.</p>
+              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Relationships, expertise, and participation need a clearer public structure.</p>
             </div>
-            <div class="rounded-[24px] bg-[color:rgba(255,255,255,0.72)] px-5 py-5">
+            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
               <p class="font-bold text-[color:var(--ink)]">Evidence supports stronger advocacy</p>
-              <p class="mt-2 text-base leading-7 text-[color:var(--muted)]">A better picture of what products face can strengthen public and policy conversations.</p>
+              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">A better picture of what products face can strengthen public and policy conversations.</p>
             </div>
-            <div class="rounded-[24px] bg-[color:rgba(255,255,255,0.72)] px-5 py-5">
+            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
               <p class="font-bold text-[color:var(--ink)]">Growth needs a platform</p>
-              <p class="mt-2 text-base leading-7 text-[color:var(--muted)]">Membership, expertise, and country participation can support future chapters and broader visibility.</p>
+              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Membership, expertise, and country participation can support future chapters and broader visibility.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="intelligence" class="shell mt-10 sm:mt-14">
-      <div class="surface rounded-[34px] px-6 py-8 sm:px-8 sm:py-10">
-        <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+    <section id="intelligence" class="shell mt-5 sm:mt-6">
+      <div class="surface rounded-[28px] px-5 py-5 sm:px-6 sm:py-6">
+        <div class="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p class="eyebrow">Registration tracker</p>
-            <h2 class="font-display mt-3 text-[clamp(1.9rem,4vw,3.1rem)] leading-[1.05] tracking-[-0.035em]">Registration tracking and public insights will appear here.</h2>
-            <p class="mt-4 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
+            <h2 class="font-display mt-3 text-[clamp(1.85rem,3.8vw,2.9rem)] leading-[1.06] tracking-[-0.035em]">Registration tracking and public insights will appear here.</h2>
+            <p class="mt-3 max-w-xl text-[1.02rem] leading-7 text-[color:var(--muted)]">
               This area is being prepared for the registration tracker and the public visibility layer that will sit around it.
             </p>
           </div>
-          <div class="rounded-[30px] border border-dashed border-[color:rgba(31,41,55,0.16)] bg-[color:rgba(255,255,255,0.54)] px-6 py-8 sm:px-8">
-            <p class="text-sm font-extrabold uppercase tracking-[0.14em] text-[color:var(--muted)]">Coming soon</p>
-            <div class="mt-5 grid gap-3">
-              <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.78)] px-4 py-4 text-base text-[color:var(--muted)]">Registration tracker entry point</div>
-              <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.78)] px-4 py-4 text-base text-[color:var(--muted)]">Public dashboard or insights layer</div>
-              <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.78)] px-4 py-4 text-base text-[color:var(--muted)]">Linked registration experience</div>
+          <div class="rounded-[24px] border border-dashed border-[color:rgba(31,41,55,0.16)] bg-[color:rgba(255,255,255,0.54)] px-5 py-5 sm:px-6">
+            <p class="text-[13px] font-extrabold uppercase tracking-[0.14em] text-[color:var(--muted)]">Coming soon</p>
+            <div class="mt-4 grid gap-2.5">
+              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Registration tracker entry point</div>
+              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Public dashboard or insights layer</div>
+              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Linked registration experience</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="modules" class="shell mt-10 sm:mt-14">
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section id="modules" class="shell mt-5 sm:mt-6">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p class="eyebrow">Explore ABA</p>
-          <h2 class="font-display mt-3 text-[clamp(2rem,4vw,3.1rem)] leading-[1.05] tracking-[-0.035em]">Go deeper through the main areas of the alliance.</h2>
+          <h2 class="font-display mt-3 text-[clamp(2rem,4vw,3.1rem)] leading-[1.05] tracking-[-0.035em]">The four main surfaces in the current ABA story.</h2>
         </div>
-        <p class="max-w-xl text-base leading-7 text-[color:var(--muted)]">Explore membership, biologicals knowledge, technical contribution, and the wider public story of ABA.</p>
+        <p class="max-w-xl text-[15px] leading-6 text-[color:var(--muted)]">Keep the story tight: public proposition, membership, knowledge, and registration visibility.</p>
       </div>
 
-      <div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        <article class="surface rounded-[30px] px-6 py-6">
+      <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <article class="surface rounded-[24px] px-5 py-4.5">
           <p class="eyebrow text-[color:var(--green-deep)]">Membership</p>
           <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Join ABA</h3>
-          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Membership types, benefits, and application flow.</p>
-          <p class="mt-5 text-base leading-7"><a href="../membership-flow/membership-types.html" class="font-bold text-[color:var(--green-deep)]">View membership</a></p>
+          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Membership types, benefits, and application flow.</p>
+          <p class="mt-4 text-[15px] leading-6"><a href="../membership-flow/membership-types.html" class="font-bold text-[color:var(--green-deep)]">View membership</a></p>
         </article>
-        <article class="surface rounded-[30px] px-6 py-6">
+        <article class="surface rounded-[24px] px-5 py-4.5">
           <p class="eyebrow text-[color:var(--ink)]">About ABA</p>
           <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">About the alliance</h3>
-          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Purpose, role, and the wider public proposition.</p>
-          <p class="mt-5 text-base leading-7"><a href="./about.html" class="font-bold text-[color:var(--green-deep)]">View about ABA</a></p>
+          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Purpose, role, and the wider public proposition.</p>
+          <p class="mt-4 text-[15px] leading-6"><a href="./about.html" class="font-bold text-[color:var(--green-deep)]">View about ABA</a></p>
         </article>
-        <article class="surface rounded-[30px] px-6 py-6">
+        <article class="surface rounded-[24px] px-5 py-4.5">
           <p class="eyebrow text-[color:var(--ink)]">Biologicals database</p>
           <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Knowledge layer</h3>
-          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Biologicals-first public knowledge and market visibility.</p>
-          <p class="mt-5 text-base leading-7"><a href="../database/index.html" class="font-bold text-[color:var(--green-deep)]">View database</a></p>
+          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Biologicals-first public knowledge and market visibility.</p>
+          <p class="mt-4 text-[15px] leading-6"><a href="../database/index.html" class="font-bold text-[color:var(--green-deep)]">View database</a></p>
         </article>
-        <article class="surface rounded-[30px] px-6 py-6">
-          <p class="eyebrow text-[color:var(--ink)]">Technical network</p>
-          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Technical network</h3>
-          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Technical contributors, specialist expertise, and future collaboration.</p>
-          <p class="mt-5 text-base leading-7"><a href="./technical-network.html" class="font-bold text-[color:var(--green-deep)]">View technical network</a></p>
+        <article class="surface rounded-[24px] px-5 py-4.5">
+          <p class="eyebrow text-[color:var(--ink)]">Registration visibility</p>
+          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Registration tracker</h3>
+          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Structured evidence capture, public intelligence, and deeper member value.</p>
+          <p class="mt-4 text-[15px] leading-6"><a href="../registration-tracker/index.html" class="font-bold text-[color:var(--green-deep)]">View registration tracker</a></p>
         </article>
       </div>
     </section>
