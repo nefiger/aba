@@ -16,7 +16,7 @@ Operator only. This area is not accessible to public users or company members.
 
 - Review queue.
 - Record detail panel.
-- Self-reported vs verified membership status.
+- Self-reported vs verified ABA relationship type.
 - Consent and visibility summary.
 - Proof and registrar reference review.
 - Duplicate warning.

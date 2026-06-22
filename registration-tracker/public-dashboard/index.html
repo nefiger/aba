@@ -38,6 +38,7 @@
             <div>
               <h2>Reviewed submissions filter</h2>
               <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity. Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
+              <p class="note">Geographic truth: ABA can receive Africa-wide registration signals, while current operating activity is centered in South Africa.</p>
             </div>
             <div class="segmented-control" aria-label="Public dashboard filter">
               <button type="button" data-public-filter="all" aria-pressed="true">All reviewed</button>
@@ -84,6 +85,19 @@
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
+          <article class="chart-card">
+            <h3>Country-level registration picture</h3>
+            <svg class="chart-svg wide-chart" id="countryChart" viewBox="0 0 520 260" role="img" aria-label="Reviewed records by country"></svg>
+            <p class="note">Country cells remain suppressed where reviewed counts are too small.</p>
+          </article>
+          <article class="chart-card">
+            <h3>Recurring bottleneck themes</h3>
+            <svg class="chart-svg wide-chart" id="bottleneckChart" viewBox="0 0 520 260" role="img" aria-label="Recurring bottleneck themes"></svg>
+            <p class="note">Themes are assigned during ABA operator review, not raw intake.</p>
+          </article>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
           <div class="panel warn">
             <h2>Small-cell suppression</h2>
             <p>Cells below the anonymisation threshold are hidden so a single company or product cannot be inferred.</p>
@@ -102,6 +116,27 @@
         <section class="panel" style="margin-top: 16px;">
           <h2>Public narrative summary</h2>
           <div class="state-summary" id="publicSummary"></div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <div class="panel ok">
+            <h2>What this evidence supports</h2>
+            <div class="support-grid">
+              <div class="support-card"><strong>Advocacy evidence</strong><span>How many applications are delayed, where, and for how long.</span></div>
+              <div class="support-card"><strong>Registrar engagement</strong><span>Reviewed patterns can support more focused conversations.</span></div>
+              <div class="support-card"><strong>Member value</strong><span>Members see why structured participation strengthens ABA's evidence base.</span></div>
+              <div class="support-card"><strong>Country readiness</strong><span>Country signals help identify where future chapter or network activity may matter.</span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Knowledge Hub boundary</h2>
+            <p>The tracker is the deeper reviewed-evidence layer. The Knowledge Hub's Regulatory Signals page should remain a lighter public context layer that points to patterns without duplicating operator or company workflows.</p>
+            <div class="toggle-row" style="margin-top: 12px;">
+              <a class="action-button secondary" href="../../docs/database/product-catalogue.html">Product Catalogue</a>
+              <a class="action-button secondary" href="../../docs/database/regulatory-signals.html">Regulatory Signals</a>
+              <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence Library</a>
+            </div>
+          </div>
         </section>
 
         <p class="footer-note">Disposable prototype. Fictional aggregate data only. No company, product, proof, or reference details appear publicly.</p>
@@ -129,6 +164,19 @@
             ["Biofertiliser", 17],
             ["Biopesticide", 13],
             ["Biostimulant", 7]
+          ],
+          country: [
+            ["South Africa", 26],
+            ["Kenya", 6],
+            ["Nigeria", 3, true],
+            ["Ghana", 2, true]
+          ],
+          bottlenecks: [
+            ["Regulator delay", 16],
+            ["Proof missing", 7],
+            ["Reference issue", 6],
+            ["Classification ambiguity", 5],
+            ["Consent missing", 3, true]
           ],
           regime: [
             ["Agriculture / Act 36", 29],
@@ -165,6 +213,19 @@
             ["Biopesticide", 8],
             ["Biostimulant", 5]
           ],
+          country: [
+            ["South Africa", 19],
+            ["Kenya", 4],
+            ["Nigeria", 1, true],
+            ["Ghana", 1, true]
+          ],
+          bottlenecks: [
+            ["Regulator delay", 11],
+            ["Proof missing", 5],
+            ["Reference issue", 4],
+            ["Classification ambiguity", 3, true],
+            ["Consent missing", 2, true]
+          ],
           regime: [
             ["Agriculture / Act 36", 20],
             ["Water treatment", 4],
@@ -199,6 +260,19 @@
             ["Biofertiliser", 5],
             ["Biopesticide", 5],
             ["Biostimulant", 2, true]
+          ],
+          country: [
+            ["South Africa", 7],
+            ["Kenya", 2, true],
+            ["Nigeria", 2, true],
+            ["Ghana", 1, true]
+          ],
+          bottlenecks: [
+            ["Regulator delay", 5],
+            ["Proof missing", 2, true],
+            ["Reference issue", 2, true],
+            ["Membership not verified", 2, true],
+            ["Other", 1, true]
           ],
           regime: [
             ["Agriculture / Act 36", 9],
@@ -311,8 +385,10 @@
           ["Data refreshed", data.refreshedAt],
           ["Reviewed submissions received", `${data.oldestSubmissionAt} to ${data.newestSubmissionAt}`],
           ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
+          ["Geographic truth", "Africa-wide signals accepted; current operations centered in South Africa."],
           ["Privacy", "Small cells suppressed before publication."],
           ["Backlog definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
+          ["Knowledge Hub boundary", "Tracker evidence feeds deeper pattern logic; Regulatory Signals remains the lighter public context surface."],
           ["Packet activity", `${data.packets.count} packets prepared, ${data.packets.apps} applications represented.`]
         ];
         document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
@@ -337,6 +413,8 @@
         renderTrend(data);
         verticalChart("categoryChart", data.category);
         verticalChart("regimeChart", data.regime);
+        barChart("countryChart", data.country);
+        barChart("bottleneckChart", data.bottlenecks);
         renderPipeline(data);
         renderSuppression(data);
         renderSummary(data);
