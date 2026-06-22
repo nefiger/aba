@@ -6,7 +6,7 @@
   <title>ABA Product Catalogue</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: oklch(0.23 0.03 215);
@@ -20,7 +20,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+      font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
@@ -28,7 +28,7 @@
         linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
     }
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Domine", Georgia, serif; }
+    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
     .wrap { width: min(1240px, calc(100vw - 36px)); margin: 0 auto; padding: 18px 0 40px; }
     .surface, .card { background: var(--card); border: 1px solid var(--line); box-shadow: 0 16px 36px -30px rgba(33,39,30,0.3); backdrop-filter: blur(16px); }
     .surface { border-radius: 22px; padding: 22px; }
@@ -93,7 +93,7 @@
         <div class="brand-mark">ABA</div>
         <div>
           <div class="mini-label">African Biologicals Alliance</div>
-          <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Knowledge hub prototype</div>
+          <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Knowledge hub</div>
         </div>
       </div>
       <nav class="topbar-links">
@@ -107,18 +107,18 @@
       <div class="eyebrow">Product catalogue</div>
       <div class="grid" style="margin-top: 16px;">
         <div>
-          <h1 class="display">Browse biologicals by product logic first.</h1>
+          <h1 class="display">Browse products by category and use.</h1>
           <p style="margin-top: 18px; max-width: 64ch;">
-            This page shows how the database can open with useful product-oriented entry points instead of expecting visitors to begin with hazard framing or technical jargon.
+            Start with the kinds of biological products you are looking for and explore the category through a clearer, more practical product view.
           </p>
         </div>
         <div class="card">
-          <div class="chip">Entry logic</div>
-          <p style="margin-top: 12px;">Users should be able to start by category, intended use, or product type and quickly understand what sits in the database.</p>
+          <div class="chip">Browse</div>
+          <p style="margin-top: 12px;">Explore by category, intended use, or product type to quickly understand what is available.</p>
         </div>
       </div>
       <div class="topbar-links" style="margin-top: 16px;">
-        <a href="./index.html">Knowledge hub home</a>
+        <a href="./index.html">Knowledge hub</a>
         <a href="./regulatory-signals.html">Regulatory signals</a>
         <a href="./evidence-library.html">Evidence library</a>
       </div>
@@ -127,17 +127,17 @@
         <article class="card">
           <div class="chip">Category</div>
           <h3 class="display" style="margin-top: 14px;">Biopesticides</h3>
-          <p style="margin-top: 10px;">Products used for pest management, with entry points by crop context, mode of action, and delivery form.</p>
+          <p style="margin-top: 10px;">Products used for pest management, with room to explore crop context, mode of action, and delivery form.</p>
         </article>
         <article class="card">
           <div class="chip">Category</div>
           <h3 class="display" style="margin-top: 14px;">Biofertilisers</h3>
-          <p style="margin-top: 10px;">Products supporting soil and nutrient performance, with clearer distinctions between microbial and nutrient-support roles.</p>
+          <p style="margin-top: 10px;">Products that support soil health and nutrient performance, including both microbial and nutrient-support roles.</p>
         </article>
         <article class="card">
           <div class="chip">Category</div>
           <h3 class="display" style="margin-top: 14px;">Biostimulants</h3>
-          <p style="margin-top: 10px;">Products oriented toward plant resilience, growth, and performance, presented in a way that feels practical and comparable.</p>
+          <p style="margin-top: 10px;">Products focused on plant resilience, growth, and performance, presented in a way that is easy to compare.</p>
         </article>
       </div>
 
@@ -145,17 +145,17 @@
         <article class="card">
           <div class="chip">Category</div>
           <h3 class="display" style="margin-top: 14px;">Inoculants</h3>
-          <p style="margin-top: 10px;">Products supporting root, soil, and microbial systems, with room for application method and technical context.</p>
+          <p style="margin-top: 10px;">Products that support root, soil, and microbial systems, with space for application method and technical context.</p>
         </article>
         <article class="card">
           <div class="chip">Category</div>
           <h3 class="display" style="margin-top: 14px;">Mixed portfolios</h3>
-          <p style="margin-top: 10px;">A path for organisations or products that span multiple categories and should not be forced into one oversimplified type.</p>
+          <p style="margin-top: 10px;">A path for organisations or products that span multiple categories and do not fit neatly into one group.</p>
         </article>
         <article class="card">
           <div class="chip">Future view</div>
           <h3 class="display" style="margin-top: 14px;">Search and compare</h3>
-          <p style="margin-top: 10px;">The eventual experience can support filtering by country, category, evidence type, and regulatory context once the underlying records are ready.</p>
+          <p style="margin-top: 10px;">Browse by country, category, evidence type, and regulatory context to compare products more easily.</p>
         </article>
       </div>
     </section>

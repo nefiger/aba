@@ -6,7 +6,7 @@
   <title>ABA Membership</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     [x-cloak] { display: none !important; }
@@ -32,7 +32,7 @@
     }
     a { color: inherit; text-decoration: none; }
     button, input, select, textarea { font: inherit; }
-    .display { font-family: "Source Serif 4", Georgia, serif; }
+    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
     .shell {
       width: min(1120px, calc(100vw - 28px));
       margin: 0 auto;
@@ -258,47 +258,47 @@
       <div class="hero-grid">
         <div>
           <div class="eyebrow">Membership</div>
-          <h1 class="display">Membership should feel like joining a serious sector platform.</h1>
-          <p style="margin-top: 10px; max-width: 62ch;">This prototype shows how ABA can present member types, collect the right information, and route applicants into a more intentional relationship with the alliance.</p>
+          <h1 class="display">Join ABA.</h1>
+          <p style="margin-top: 10px; max-width: 62ch;">Membership is open to organisations and stakeholders contributing to the growth of biologicals in Africa. Start by choosing the membership route that best fits your role.</p>
           <div class="button-row">
-            <a class="button secondary" href="./membership-types.html">View membership types</a>
+            <a class="button secondary" href="./membership-types.html">View membership options</a>
           </div>
         </div>
         <aside class="panel tone">
-          <div class="mini">What this flow should do</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Show fit clearly, collect useful data, and leave a credible next step.</p>
+          <div class="mini">Membership</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Join a growing network of organisations, experts, and partners shaping the biologicals sector.</p>
         </aside>
       </div>
     </section>
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">Member routes</div>
-        <h2 class="display" style="margin-top: 6px;">Three entry points, each with a different role.</h2>
+        <div class="eyebrow">Membership options</div>
+        <h2 class="display" style="margin-top: 6px;">Choose the option that fits your organisation.</h2>
       </div>
       <div class="types-grid" style="margin-top: 12px;">
         <article class="card">
           <div class="mini">Full</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Industry members</h3>
-          <p style="margin-top: 8px;">Manufacturers, importers, distributors, and product owners active in the biologicals market.</p>
+          <p style="margin-top: 8px;">For manufacturers, importers, distributors, and product owners active in the biologicals market.</p>
         </article>
         <article class="card">
           <div class="mini">Associate</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Technical contributors</h3>
-          <p style="margin-top: 8px;">Researchers, service providers, implementers, and specialist organisations supporting the sector.</p>
+          <p style="margin-top: 8px;">For researchers, service providers, implementers, and specialist organisations supporting the sector.</p>
         </article>
         <article class="card">
           <div class="mini">Observer</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Institutional stakeholders</h3>
-          <p style="margin-top: 8px;">Funders, development partners, public bodies, and related institutions engaging the category.</p>
+          <p style="margin-top: 8px;">For funders, development partners, public bodies, and related institutions engaging the category.</p>
         </article>
       </div>
     </section>
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">Application prototype</div>
-        <h2 class="display" style="margin-top: 6px;">A tighter registration flow.</h2>
+        <div class="eyebrow">Application</div>
+        <h2 class="display" style="margin-top: 6px;">Apply for membership.</h2>
       </div>
       <div class="application-grid" style="margin-top: 12px;">
         <form class="form-shell" @submit.prevent="submitted = true">
@@ -335,8 +335,8 @@
           </div>
 
           <div class="field" style="margin-top: 12px;">
-            <label for="interest">Why are you engaging ABA now?</label>
-            <textarea id="interest" x-model="form.interest" placeholder="A short note on your work, interest, or reason for joining."></textarea>
+            <label for="interest">Tell us about your interest in ABA</label>
+            <textarea id="interest" x-model="form.interest" placeholder="Share a short note on your work and why you would like to join."></textarea>
           </div>
 
           <div class="actions-end">
@@ -347,11 +347,11 @@
 
         <aside class="stack">
           <div class="summary">
-            <div class="mini">Captured data</div>
-            <p style="margin-top: 8px;">Organisation, geography, contact, member type, and intent all become usable downstream.</p>
+            <div class="mini">Application details</div>
+            <p style="margin-top: 8px;">You will be asked for your organisation, location, contact details, membership option, and a short note about your work.</p>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
-            <div class="mini">Submission preview</div>
+            <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Organisation:</strong> <span x-text="form.org_name || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Country:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
