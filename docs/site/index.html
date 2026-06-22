@@ -6,207 +6,338 @@
   <title>African Biologicals Alliance | Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: oklch(0.23 0.03 215);
-      --muted: oklch(0.49 0.028 205);
-      --paper: oklch(0.985 0.008 98);
-      --line: oklch(0.86 0.018 95);
-      --green-deep: oklch(0.4 0.09 150);
-      --green-soft: oklch(0.95 0.04 145);
-      --gold-soft: oklch(0.96 0.03 90);
-      --clay-soft: oklch(0.95 0.03 45);
+      --ink: #173039;
+      --muted: #5c6f73;
+      --paper: #f7f4ed;
+      --surface: rgba(255, 252, 246, 0.88);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-soft: #e7f0e8;
+      --sand: #f1eadb;
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+      font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
-        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
-        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
 
-    .font-display { font-family: "Domine", Georgia, serif; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .display { font-family: "Source Serif 4", Georgia, serif; }
 
     .shell {
-      width: min(1240px, calc(100% - 1.75rem));
+      width: min(1120px, calc(100vw - 28px));
       margin: 0 auto;
+      padding: 14px 0 28px;
     }
 
     .surface {
-      background: rgba(255, 252, 246, 0.86);
-      border: 1px solid rgba(46, 58, 46, 0.08);
-      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
-      backdrop-filter: blur(16px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
-    .eyebrow {
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-size: 0.72rem;
+    .topbar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 11px;
       font-weight: 800;
-      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
-    a { text-decoration: none; }
+    .mini,
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mini { color: var(--muted); }
+
+    .eyebrow { color: var(--green); }
+
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a.active { color: var(--green); }
+
+    .hero,
+    .section {
+      margin-top: 12px;
+      padding: 20px;
+    }
+
+    .hero-grid,
+    .card-grid,
+    .summary-grid,
+    .path-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      align-items: start;
+    }
+
+    .summary-grid,
+    .path-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 2.1vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 15px;
+    }
+
+    .lede {
+      margin-top: 10px;
+      max-width: 62ch;
+    }
+
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .button.primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .button.secondary {
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .panel {
+      padding: 16px;
+    }
+
+    .card {
+      padding: 16px;
+    }
+
+    .tone {
+      background: var(--sand);
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .summary-grid,
+      .card-grid,
+      .path-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
-<body class="antialiased">
-  <header class="shell pt-3 sm:pt-4">
-    <div class="surface rounded-[22px] px-4 py-3 sm:px-5">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center gap-4">
-          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--green-soft)] text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--green-deep)]">ABA</div>
-          <div>
-            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
-            <p class="mt-1 text-sm text-[color:var(--muted)]">Coordination, visibility, and participation across Africa</p>
-          </div>
-        </div>
-        <nav class="flex flex-wrap gap-x-4 gap-y-2 text-[13px] font-semibold text-[color:var(--ink)]">
-          <a href="../index.html" class="hover:text-[color:var(--green-deep)]">Demo Hub</a>
-          <a href="./index.html" class="text-[color:var(--green-deep)]">ABA Site</a>
-          <a href="./about.html" class="hover:text-[color:var(--green-deep)]">About ABA</a>
-          <a href="../membership-flow/membership-types.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
-          <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Knowledge Hub</a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main class="pb-8 sm:pb-12">
-    <section class="shell mt-4">
-      <div class="grid gap-3.5 lg:grid-cols-[1.2fr_0.8fr]">
-        <div class="surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7 lg:px-7 lg:py-7">
-          <p class="eyebrow">Home</p>
-          <h1 class="font-display mt-4 max-w-5xl text-[clamp(2.45rem,4.7vw,4.6rem)] leading-[1.02] tracking-[-0.045em] text-[color:var(--ink)]">
-            A stronger biologicals sector needs clearer coordination, better visibility, and a credible collective voice.
-          </h1>
-          <p class="mt-4 max-w-3xl text-[1.04rem] leading-7 text-[color:var(--muted)] sm:text-[1.12rem]">
-            The African Biologicals Alliance brings together organisations, specialists, and stakeholders working to strengthen how biologicals are represented, understood, and advanced across Africa.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-2.5">
-            <a href="../membership-flow/index.html" class="rounded-full bg-[color:var(--green-deep)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--paper)]">Apply for membership</a>
-            <a href="../database/index.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">Explore knowledge hub</a>
-            <a href="./about.html" class="rounded-full border border-[color:rgba(31,41,55,0.12)] bg-[color:rgba(255,255,255,0.68)] px-4 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-[color:var(--ink)]">About ABA</a>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-3.5">
-          <div class="surface rounded-[24px] px-5 py-4.5">
-            <p class="eyebrow">Regional scope</p>
-            <p class="mt-2.5 text-[1.02rem] font-bold text-[color:var(--ink)]">Open across Africa. Active now in South Africa.</p>
-            <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">
-              ABA welcomes participation and sector input from across the continent while building its current operational base in South Africa.
-            </p>
-          </div>
-          <div class="surface rounded-[24px] px-5 py-4.5">
-            <p class="eyebrow">Primary paths</p>
-            <div class="mt-3 grid gap-2.5">
-              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
-                <p class="font-bold text-[color:var(--ink)]">Understand ABA and its role</p>
-              </div>
-              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
-                <p class="font-bold text-[color:var(--ink)]">Explore membership and participation</p>
-              </div>
-              <div class="rounded-[16px] bg-[color:rgba(255,255,255,0.72)] px-3.5 py-3.5">
-                <p class="font-bold text-[color:var(--ink)]">Explore the biologicals knowledge hub</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell mt-5 sm:mt-6">
-      <div class="surface rounded-[28px] px-5 py-5 sm:px-6 sm:py-6">
-        <div class="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p class="eyebrow">Why ABA</p>
-            <h2 class="font-display mt-3 text-[clamp(1.9rem,3.8vw,3rem)] leading-[1.06] tracking-[-0.035em]">Biologicals cannot grow on optimism alone.</h2>
-          </div>
-          <div class="grid gap-2.5 sm:grid-cols-2">
-            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-              <p class="font-bold text-[color:var(--ink)]">Registration remains hard to read</p>
-              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Delays, bottlenecks, and ambiguity are often felt privately rather than understood collectively.</p>
-            </div>
-            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-              <p class="font-bold text-[color:var(--ink)]">The sector needs better coordination</p>
-              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Relationships, expertise, and participation need a clearer public structure.</p>
-            </div>
-            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-              <p class="font-bold text-[color:var(--ink)]">Evidence supports stronger advocacy</p>
-              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">A better picture of what products face can strengthen public and policy conversations.</p>
-            </div>
-            <div class="rounded-[18px] bg-[color:rgba(255,255,255,0.72)] px-4 py-4">
-              <p class="font-bold text-[color:var(--ink)]">Growth needs a platform</p>
-              <p class="mt-2 text-[15px] leading-6 text-[color:var(--muted)]">Membership, expertise, and country participation can support future chapters and broader visibility.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="intelligence" class="shell mt-5 sm:mt-6">
-      <div class="surface rounded-[28px] px-5 py-5 sm:px-6 sm:py-6">
-        <div class="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <p class="eyebrow">Registration visibility</p>
-            <h2 class="font-display mt-3 text-[clamp(1.85rem,3.8vw,2.9rem)] leading-[1.06] tracking-[-0.035em]">Registration visibility will plug in here later.</h2>
-            <p class="mt-3 max-w-xl text-[1.02rem] leading-7 text-[color:var(--muted)]">
-              This area is being prepared for the registration story and the public visibility layer that will eventually sit around it.
-            </p>
-          </div>
-          <div class="rounded-[24px] border border-dashed border-[color:rgba(31,41,55,0.16)] bg-[color:rgba(255,255,255,0.54)] px-5 py-5 sm:px-6">
-            <p class="text-[13px] font-extrabold uppercase tracking-[0.14em] text-[color:var(--muted)]">Coming soon</p>
-            <div class="mt-4 grid gap-2.5">
-              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Registration visibility entry point</div>
-              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Public dashboard or insights layer</div>
-              <div class="rounded-[14px] bg-[color:rgba(255,255,255,0.78)] px-3.5 py-3 text-[15px] text-[color:var(--muted)]">Linked registration experience</div>
-            </div>
-            <p class="mt-4 text-[15px] leading-6"><a href="https://github.com/nefiger/aba/tree/main/registration-tracker" class="font-bold text-[color:var(--green-deep)]">Open registration tracker workspace</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="modules" class="shell mt-5 sm:mt-6">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+<body>
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
         <div>
-          <p class="eyebrow">Explore ABA</p>
-          <h2 class="font-display mt-3 text-[clamp(2rem,4vw,3.1rem)] leading-[1.05] tracking-[-0.035em]">The four main surfaces in the current ABA story.</h2>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Coordination, visibility, and participation across Africa</div>
         </div>
-        <p class="max-w-xl text-[15px] leading-6 text-[color:var(--muted)]">Keep the story tight: public proposition, membership, knowledge, and registration visibility.</p>
       </div>
+      <nav class="nav">
+        <a class="active" href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="../membership-flow/index.html">Membership</a>
+        <a href="../database/index.html">Knowledge Hub</a>
+      </nav>
+    </header>
 
-      <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <article class="surface rounded-[24px] px-5 py-4.5">
-          <p class="eyebrow text-[color:var(--green-deep)]">Membership</p>
-          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Join ABA</h3>
-          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Membership types, benefits, and application flow.</p>
-          <p class="mt-4 text-[15px] leading-6"><a href="../membership-flow/membership-types.html" class="font-bold text-[color:var(--green-deep)]">View membership</a></p>
+    <section class="surface hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">African Biologicals Alliance</div>
+          <h1 class="display">ABA gives the biologicals sector a clearer place to organise, participate, and be understood.</h1>
+          <p class="lede">
+            The alliance is being shaped as a practical sector platform: one that supports participation, strengthens public understanding, and creates a more coherent basis for visibility and engagement across Africa.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="../membership-flow/index.html">Start membership</a>
+            <a class="button secondary" href="../database/index.html">Open knowledge hub</a>
+          </div>
+        </div>
+        <aside class="panel tone">
+          <div class="mini">Current position</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Open to participation across Africa, with current operating activity centered in South Africa.</p>
+          <p style="margin-top: 8px;">The site should make that scope legible without trying to explain everything at once.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Why ABA</div>
+          <h2 class="display" style="margin-top: 6px;">The sector needs more than optimism.</h2>
+        </div>
+        <div class="summary-grid">
+          <article class="card">
+            <h3>Biologicals need clearer public visibility</h3>
+            <p style="margin-top: 8px;">The category should be easier to understand, explore, and discuss with confidence.</p>
+          </article>
+          <article class="card">
+            <h3>Participation needs better structure</h3>
+            <p style="margin-top: 8px;">Industry participants, technical contributors, and institutional stakeholders do not all enter in the same way.</p>
+          </article>
+          <article class="card">
+            <h3>Evidence can support stronger engagement</h3>
+            <p style="margin-top: 8px;">Better sector visibility creates a firmer basis for advocacy, coordination, and future action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Explore ABA</div>
+          <h2 class="display" style="margin-top: 6px;">Three clear paths, not three competing homepages.</h2>
+        </div>
+        <div class="path-grid">
+          <article class="card">
+            <div class="mini">01</div>
+            <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">About ABA</h3>
+            <p style="margin-top: 8px;">Understand the role ABA is intended to play and the problem it is trying to solve.</p>
+            <div class="actions" style="margin-top: 12px;">
+              <a class="button secondary" href="./about.html">Open about</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="mini">02</div>
+            <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Membership</h3>
+            <p style="margin-top: 8px;">See membership types, fit, benefits, and the application experience.</p>
+            <div class="actions" style="margin-top: 12px;">
+              <a class="button secondary" href="../membership-flow/index.html">Open membership</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="mini">03</div>
+            <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Knowledge hub</h3>
+            <p style="margin-top: 8px;">Explore the biologicals-first information layer and how it could support credibility and sector understanding.</p>
+            <div class="actions" style="margin-top: 12px;">
+              <a class="button secondary" href="../database/index.html">Open knowledge hub</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="card-grid">
+        <article class="card">
+          <div class="eyebrow">Membership value</div>
+          <p style="margin-top: 10px;">ABA membership should not read like a mailing-list signup. It should feel like entry into a structured sector platform with a clear reason to participate.</p>
         </article>
-        <article class="surface rounded-[24px] px-5 py-4.5">
-          <p class="eyebrow text-[color:var(--ink)]">About ABA</p>
-          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">About the alliance</h3>
-          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Purpose, role, and the wider public proposition.</p>
-          <p class="mt-4 text-[15px] leading-6"><a href="./about.html" class="font-bold text-[color:var(--green-deep)]">View about ABA</a></p>
-        </article>
-        <article class="surface rounded-[24px] px-5 py-4.5">
-          <p class="eyebrow text-[color:var(--ink)]">Biologicals database</p>
-          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Knowledge layer</h3>
-          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Biologicals-first public knowledge and market visibility.</p>
-          <p class="mt-4 text-[15px] leading-6"><a href="../database/index.html" class="font-bold text-[color:var(--green-deep)]">View database</a></p>
-        </article>
-        <article class="surface rounded-[24px] px-5 py-4.5">
-          <p class="eyebrow text-[color:var(--ink)]">Registration visibility</p>
-          <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.02em] text-[color:var(--ink)]">Registration story</h3>
-          <p class="mt-2.5 text-[15px] leading-6 text-[color:var(--muted)]">Structured evidence capture, public intelligence, and deeper member value will connect here once the wider tracker work is ready to integrate.</p>
+        <article class="card">
+          <div class="eyebrow">Knowledge value</div>
+          <p style="margin-top: 10px;">The knowledge hub should help make biologicals more legible in public, while leaving space for registration visibility to plug in later.</p>
         </article>
       </div>
     </section>

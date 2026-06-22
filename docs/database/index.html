@@ -3,184 +3,165 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Biologicals Knowledge Hub</title>
+  <title>ABA Knowledge Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: oklch(0.23 0.03 215);
-      --muted: oklch(0.49 0.028 205);
-      --line: rgba(46, 58, 46, 0.08);
-      --paper: oklch(0.985 0.008 98);
-      --green: oklch(0.4 0.09 150);
-      --green-soft: oklch(0.95 0.04 145);
-      --amber: oklch(0.62 0.12 70);
-      --amber-soft: rgba(205, 176, 92, 0.14);
-      --card: rgba(255, 252, 246, 0.9);
+      --ink: #173039;
+      --muted: #5c6f73;
+      --surface: rgba(255, 252, 246, 0.88);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-soft: #e7f0e8;
+      --sand: #f1eadb;
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+      font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
-        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
-        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Domine", Georgia, serif; }
-    .wrap {
-      width: min(1240px, calc(100vw - 36px));
+    .display { font-family: "Source Serif 4", Georgia, serif; }
+    .shell {
+      width: min(1120px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 18px 0 40px;
+      padding: 14px 0 28px;
     }
-    .surface,
-    .card {
-      background: var(--card);
+    .surface {
+      background: var(--surface);
       border: 1px solid var(--line);
-      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
-      backdrop-filter: blur(16px);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
-    .surface { border-radius: 22px; }
-    .card { border-radius: 18px; }
-    .nav,
-    .hero,
-    .section {
-      padding: 22px;
+    .topbar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .eyebrow,
-    .pill {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      border-radius: 999px;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--green);
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+    .mini,
     .eyebrow {
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
-    .pill {
-      padding: 7px 11px;
-      background: var(--green-soft);
-      color: var(--green);
+    .mini { color: var(--muted); }
+    .eyebrow { color: var(--green); }
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav a.active { color: var(--green); }
+    .hero,
+    .section {
+      margin-top: 12px;
+      padding: 20px;
     }
     .hero-grid,
     .card-grid,
     .feature-grid {
       display: grid;
-      gap: 16px;
+      gap: 12px;
     }
     .hero-grid {
-      grid-template-columns: 1.14fr 0.86fr;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.8fr);
       align-items: start;
     }
     .card-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 16px;
     }
     .feature-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 16px;
     }
-    h1, h2, h3, p, ul { margin: 0; }
+    h1, h2, h3, p { margin: 0; }
     h1 {
-      font-size: clamp(2.45rem, 4.8vw, 4.25rem);
-      line-height: 0.99;
-      letter-spacing: -0.045em;
+      margin-top: 8px;
+      font-size: clamp(1.95rem, 3vw, 2.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
     }
     h2 {
-      font-size: 1.65rem;
-      line-height: 1.08;
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
+      line-height: 1.1;
       letter-spacing: -0.03em;
     }
     h3 {
-      font-size: 1.25rem;
-      line-height: 1.2;
+      font-size: 1rem;
+      line-height: 1.35;
     }
-    p, li {
+    p {
       color: var(--muted);
-      line-height: 1.7;
+      font-size: 15px;
+      line-height: 1.62;
     }
-    ul {
-      padding-left: 18px;
-      margin-top: 12px;
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.66);
+      padding: 16px;
     }
-    .link-row,
-    .button-row,
-    .nav-row {
+    .tone { background: var(--sand); }
+    .actions {
+      margin-top: 14px;
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-    }
-    .nav-row {
-      align-items: center;
-      justify-content: space-between;
-    }
-    .brand-lockup {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--green-soft);
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
     }
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 11px 18px;
+      min-height: 40px;
+      padding: 10px 14px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .button.primary {
-      background: #132136;
+      background: var(--green);
       color: white;
     }
     .button.secondary {
       background: white;
       border: 1px solid var(--line);
-      color: var(--ink);
     }
-    .section { margin-top: 14px; }
-    .card { padding: 18px; }
-    .link-row {
-      margin-top: 14px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .link-row a {
-      color: var(--green);
-    }
-    @media (max-width: 940px) {
+    @media (max-width: 900px) {
       .hero-grid,
       .card-grid,
       .feature-grid {
@@ -190,118 +171,88 @@
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="surface nav">
-      <div class="nav-row">
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
         <div>
-          <div class="brand-lockup">
-            <div class="brand-mark">ABA</div>
-            <div>
-              <div class="eyebrow">ABA Knowledge Hub</div>
-              <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Biologicals-first prototype</div>
-            </div>
-          </div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Knowledge hub</div>
         </div>
-        <nav class="nav-links">
-          <a href="../index.html">Demo Hub</a>
-          <a href="../site/index.html">ABA Site</a>
-          <a href="../site/about.html">About ABA</a>
-          <a href="../membership-flow/membership-types.html">Membership</a>
-          <a href="./index.html" style="color: var(--green);">Knowledge Hub</a>
-          <a href="https://github.com/nefiger/aba/tree/main/registration-tracker">Registration Tracker</a>
-        </nav>
       </div>
-    </section>
+      <nav class="nav">
+        <a href="../site/index.html">Home</a>
+        <a href="../site/about.html">About</a>
+        <a href="../membership-flow/index.html">Membership</a>
+        <a class="active" href="./index.html">Knowledge Hub</a>
+      </nav>
+    </header>
 
-    <section class="surface hero section">
+    <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Biologicals-first database</div>
-          <h1 class="display" style="margin-top: 14px;">A biologicals knowledge layer, not a hazard side-project.</h1>
-          <p style="margin-top: 18px; max-width: 64ch;">
-            This area reframes the existing database concept so it starts with biological products, sector usefulness, and market visibility. Instead of leading with a hazard frame, it becomes a public knowledge surface that helps people understand products, categories, evidence, and regulatory context.
-          </p>
-          <div class="button-row" style="margin-top: 18px;">
-            <a class="button primary" href="./product-catalogue.html">Explore product catalogue</a>
-            <a class="button secondary" href="../site/index.html">Back to ABA site</a>
+          <div class="eyebrow">Knowledge hub</div>
+          <h1 class="display">A biologicals-first information layer can make the sector easier to understand.</h1>
+          <p style="margin-top: 10px; max-width: 62ch;">This area reframes the old database idea so it starts with biologicals, usefulness, and public legibility rather than feeling like a sidecar of technical hazard content.</p>
+          <div class="actions">
+            <a class="button primary" href="./product-catalogue.html">Product catalogue</a>
+            <a class="button secondary" href="./regulatory-signals.html">Regulatory signals</a>
+            <a class="button secondary" href="./evidence-library.html">Evidence library</a>
           </div>
         </div>
-        <div class="card">
-          <div class="pill">Why this matters</div>
-          <h2 class="display" style="margin-top: 12px;">Knowledge, visibility, and credibility belong together.</h2>
-          <p style="margin-top: 12px;">
-            The database should help ABA show that biologicals are a real and growing category, make it easier to explore what kinds of products exist, and create a stronger bridge between public knowledge, sector participation, and future registration intelligence.
-          </p>
-        </div>
+        <aside class="panel tone">
+          <div class="mini">Purpose</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Help biologicals feel legible, credible, and easier to explore.</p>
+          <p style="margin-top: 8px;">This should support the wider ABA story without trying to carry the whole site on its own.</p>
+        </aside>
       </div>
     </section>
 
     <section class="surface section">
-      <div class="eyebrow">Main sections</div>
-      <h2 class="display" style="margin-top: 12px;">The knowledge hub should break into clear, browsable areas.</h2>
-      <div class="card-grid">
+      <div>
+        <div class="eyebrow">Main areas</div>
+        <h2 class="display" style="margin-top: 6px;">The knowledge hub should break into clear browsing modes.</h2>
+      </div>
+      <div class="card-grid" style="margin-top: 12px;">
         <article class="card">
-          <div class="pill">01</div>
-          <h3 class="display" style="margin-top: 14px;">Product catalogue</h3>
-          <p style="margin-top: 10px;">
-            A browsable view of biological categories, product types, and example records so the entry point feels useful immediately.
-          </p>
-          <div class="link-row">
-            <a href="./product-catalogue.html">Open product catalogue</a>
-          </div>
+          <div class="mini">01</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Product catalogue</h3>
+          <p style="margin-top: 8px;">Browse categories, product types, and example records in a way that feels useful immediately.</p>
         </article>
-
         <article class="card">
-          <div class="pill" style="background: var(--amber-soft); color: var(--amber);">02</div>
-          <h3 class="display" style="margin-top: 14px;">Regulatory signals</h3>
-          <p style="margin-top: 10px;">
-            A lighter-touch view of status, country context, and patterns that can later connect to registration intelligence without trying to replace it.
-          </p>
-          <div class="link-row">
-            <a href="./regulatory-signals.html">Open regulatory signals</a>
-          </div>
+          <div class="mini">02</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Regulatory signals</h3>
+          <p style="margin-top: 8px;">Surface patterns, country context, and status cues without pretending to replace registration tooling.</p>
         </article>
-
         <article class="card">
-          <div class="pill">03</div>
-          <h3 class="display" style="margin-top: 14px;">Evidence library</h3>
-          <p style="margin-top: 10px;">
-            A space for trials, use cases, technical references, and supporting material that helps biologicals feel credible and practical.
-          </p>
-          <div class="link-row">
-            <a href="./evidence-library.html">Open evidence library</a>
-          </div>
+          <div class="mini">03</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Evidence library</h3>
+          <p style="margin-top: 8px;">Gather proof points, references, and supporting material that strengthen public understanding.</p>
         </article>
       </div>
     </section>
 
     <section class="surface section">
-      <div class="eyebrow">How it fits ABA</div>
-      <h2 class="display" style="margin-top: 12px;">This should strengthen the site story rather than sit beside it awkwardly.</h2>
-      <div class="feature-grid">
+      <div>
+        <div class="eyebrow">How it supports ABA</div>
+        <h2 class="display" style="margin-top: 6px;">Knowledge, membership, and visibility should reinforce one another.</h2>
+      </div>
+      <div class="feature-grid" style="margin-top: 12px;">
         <article class="card">
-          <h3>Useful to the public</h3>
-          <p style="margin-top: 10px;">
-            The first experience should help users explore biologicals in a structured way, not force them to decode an internal or inherited data model.
-          </p>
+          <h3>Public understanding</h3>
+          <p style="margin-top: 8px;">A clearer knowledge layer makes biologicals easier to explain and explore beyond insider circles.</p>
         </article>
         <article class="card">
-          <h3>Useful to members</h3>
-          <p style="margin-top: 10px;">
-            Over time, the knowledge layer can support stronger visibility for categories, products, and recurring sector questions that matter to members.
-          </p>
+          <h3>Sector credibility</h3>
+          <p style="margin-top: 8px;">The more legible the category feels, the easier it becomes to support serious participation and engagement.</p>
         </article>
         <article class="card">
-          <h3>Useful to the ABA proposition</h3>
-          <p style="margin-top: 10px;">
-            It helps ABA look like a platform with knowledge depth, not only a membership form or a tracker concept.
-          </p>
+          <h3>Membership relevance</h3>
+          <p style="margin-top: 8px;">Members should be able to see how a stronger knowledge surface supports the wider alliance proposition.</p>
         </article>
         <article class="card">
-          <h3>Ready for future integration</h3>
-          <p style="margin-top: 10px;">
-            The regulatory-signals area can later connect to Lyle’s registration tracker without pretending that work is already complete.
-          </p>
+          <h3>Future visibility layers</h3>
+          <p style="margin-top: 8px;">This can later sit alongside registration visibility without becoming tangled up in it now.</p>
         </article>
       </div>
     </section>
