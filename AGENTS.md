@@ -23,8 +23,8 @@ The presentation currently needs to cover:
   meeting hub and entry point
 - `docs/site/`
   main ABA site mockup / umbrella story
-- `docs/registration-tracker/`
-  Lyle's workspace; do not reorganize it unless explicitly asked
+- `registration-tracker/`
+  Lyle's workspace at the repo root; do not reorganize it unless explicitly asked
 - `docs/membership-flow/`
   membership flow workspace
 - `docs/database/`
@@ -36,7 +36,7 @@ The presentation currently needs to cover:
 
 ## Team Split
 
-- Lyle is working on the registration tracker in `docs/registration-tracker/`.
+- Lyle is working on the registration tracker in `registration-tracker/`.
 - Anna is working on the membership flow and captured-data shape.
 - The repo hub should make it easy to demo each area separately while still feeling like one coherent ABA presentation.
 
@@ -67,4 +67,3 @@ The presentation currently needs to cover:
 
 - This is the umbrella narrative surface.
 - It should connect the membership, tracker, and database stories into one believable ABA proposition.
-
