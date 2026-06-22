@@ -1,26 +1,59 @@
 # ABA
 
-Public prototype and planning workspace for the African Biologicals Alliance website, flow assets, and admin concepts.
+Shared prototype workspace for the African Biologicals Alliance.
 
-## Structure
+This repo currently holds the working materials for the ABA founding-members presentation and the prototype surfaces that support it.
 
+## What Lives Here
+
+- a publishable ABA site prototype
+- a membership flow prototype
+- a biologicals-first knowledge hub prototype
+- Lyle's separate registration-tracker workspace
+- internal demo and planning material
+- requirements and supporting notes
+
+## Repo Structure
+
+- `index.html`
+  - root launcher for the main workspaces
+- `docs/site/`
+  - the main ABA site prototype
+- `docs/membership-flow/`
+  - membership types and application flow
+- `docs/database/`
+  - biologicals-first knowledge hub
+- `registration-tracker/`
+  - Lyle's registration-tracker workspace at repo root
+- `docs/index.html`
+  - internal demo material for working sessions and prep
+- `docs/flow-intelligence/`
+  - supporting explainer material
+- `docs/walkthrough/`
+  - supporting presentation flow material
 - `docs/requirements/`
-  - working requirements and spec documents
+  - working requirements and specs
 
-## Current Focus
+## Publishing
 
-This repository currently contains:
-- public website requirements
-- product requirements notes
-- standalone flow/intelligence asset requirements
-- first-pass admin prototype requirements
+GitHub Pages is configured to publish from:
 
-The next phase is to build the public prototype and supporting assets against these requirements.
+- `main:/`
 
-## GitHub Pages Direction
+That means:
 
-This repository is intended to be published as a GitHub Pages site.
+- the live site entry point is root `index.html`
+- `docs/` contains prototype and internal project material, but is not the Pages root anymore
 
-Recommended near-term approach:
-- keep requirements under `docs/requirements/`
-- build public-facing prototype assets inside `docs/` so they are easy to publish via Pages
+## Current Working Model
+
+- `docs/site/` is the public-facing umbrella surface
+- `docs/membership-flow/` and `docs/database/` are supporting destinations inside that broader ABA story
+- `registration-tracker/` remains a separate workspace and should not be duplicated elsewhere in the repo
+- `docs/index.html` is internal working material, not the public homepage
+
+## Notes
+
+- This is a demo suite, not a production application.
+- Optimize for clear story, believable product logic, and easy live walkthroughs.
+- Keep major artifacts in their own folders rather than flattening new pages into `docs/`.
