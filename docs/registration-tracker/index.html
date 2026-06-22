@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Registration Tracker | Demo Material</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #173039;
+      --muted: #5c6f73;
+      --paper: #f7f4ed;
+      --surface: rgba(255, 252, 246, 0.9);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-deep: #214f3c;
+      --green-soft: #e7f0e8;
+      --blue: #3f6da9;
+      --blue-soft: rgba(63, 109, 169, 0.12);
+      --gold: #a97924;
+      --gold-soft: rgba(169, 121, 36, 0.14);
+      --sand: #f1eadb;
+      --white: rgba(255, 255, 255, 0.7);
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(63, 109, 169, 0.1), transparent 22%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .display { font-family: "Source Serif 4", Georgia, serif; }
+
+    .shell {
+      width: min(1120px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 14px 0 32px;
+    }
+
+    .surface {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mini,
+    .eyebrow,
+    .chip {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .mini { color: var(--muted); }
+
+    .eyebrow { color: var(--green); }
+
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a.active { color: var(--green); }
+
+    .hero,
+    .section {
+      margin-top: 12px;
+      padding: 20px;
+    }
+
+    .hero-grid,
+    .value-grid,
+    .audience-grid,
+    .integration-grid,
+    .matrix-grid,
+    .rule-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+      align-items: start;
+    }
+
+    .value-grid,
+    .integration-grid,
+    .rule-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .audience-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .matrix-grid {
+      grid-template-columns: 1.1fr 1fr 0.95fr;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(2.05rem, 3.2vw, 3.05rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 2.1vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .lede {
+      margin-top: 10px;
+      max-width: 66ch;
+      font-size: 16px;
+    }
+
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .button.primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .button.secondary {
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .panel,
+    .card,
+    .flow-step,
+    .matrix-card,
+    .rule-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+    }
+
+    .panel,
+    .card,
+    .matrix-card,
+    .rule-card {
+      padding: 16px;
+    }
+
+    .tone { background: var(--sand); }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 28px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .chip.green {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .chip.gold {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .metric-row {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 13px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .flow {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 154px;
+      padding: 14px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .flow-step p,
+    .card p,
+    .matrix-card p,
+    .rule-card p {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .link-list {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .screen-link {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .screen-link span:last-child {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .matrix-card {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .matrix-card.header {
+      background: var(--green-deep);
+      color: white;
+    }
+
+    .matrix-card.header p {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .rule-card {
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .rule-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .value-grid,
+      .audience-grid,
+      .integration-grid,
+      .matrix-grid,
+      .rule-grid,
+      .flow,
+      .metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step {
+        min-height: 0;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Registration tracker demo material</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Demo navigation">
+        <a href="../index.html">Demo Hub</a>
+        <a href="../site/index.html">ABA Site</a>
+        <a href="../membership-flow/index.html">Membership</a>
+        <a href="../database/index.html">Knowledge Hub</a>
+        <a class="active" href="./index.html">Tracker</a>
+      </nav>
+    </header>
+
+    <section class="surface hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Registration tracker concept</div>
+          <h1 class="display">A practical way for ABA to turn registration friction into member value and sector evidence.</h1>
+          <p class="lede">
+            The tracker is the bridge between product submissions, verified evidence, member support, and public advocacy. It starts with companies sharing structured registration data, then ABA reviews it before anything becomes visible in dashboards or registrar packets.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/index.html">Open combined walkthrough</a>
+            <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">View public dashboard</a>
+            <a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
+          </div>
+        </div>
+        <aside class="panel tone">
+          <div class="mini">Presenter framing</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">This is not just a form or a dashboard.</p>
+          <p style="margin-top: 8px;">It is a controlled evidence system: public enough to support advocacy, private enough to earn company trust, and structured enough to become a real ABA member benefit.</p>
+          <div class="metric-row">
+            <div class="metric"><strong>5</strong><span>role-specific tracker screens</span></div>
+            <div class="metric"><strong>3</strong><span>visibility layers</span></div>
+            <div class="metric"><strong>1</strong><span>review gate before use</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Why ABA needs it</div>
+          <h2 class="display" style="margin-top: 6px;">The tracker makes participation useful before the full platform exists.</h2>
+        </div>
+        <div class="value-grid">
+          <article class="card">
+            <span class="chip green">Member value</span>
+            <h3 style="margin-top: 10px;">Companies get a clearer view of their own registration work.</h3>
+            <p>Members can see record status, blockers, benchmark context, and registrar packet readiness without exposing private company detail to the public.</p>
+          </article>
+          <article class="card">
+            <span class="chip">Advocacy value</span>
+            <h3 style="margin-top: 10px;">ABA gets a stronger evidence base for sector conversations.</h3>
+            <p>Reviewed records can become anonymised public signals about backlog, wait time, bottlenecks, and product categories.</p>
+          </article>
+          <article class="card">
+            <span class="chip gold">Operational value</span>
+            <h3 style="margin-top: 10px;">Staff can separate raw submissions from trusted records.</h3>
+            <p>Operator review controls verification, consent, duplicate handling, public aggregate use, and registrar packet inclusion.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Audience-specific paths</div>
+        <h2 class="display" style="margin-top: 6px;">Different audiences enter the same system through different doors.</h2>
+      </div>
+      <div class="audience-grid" style="margin-top: 12px;">
+        <article class="card">
+          <span class="chip">Public visitor</span>
+          <p>Sees reviewed aggregate evidence only: no company names, no raw records, no proof files.</p>
+          <div class="actions"><a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">Open public view</a></div>
+        </article>
+        <article class="card">
+          <span class="chip green">Company member</span>
+          <p>Logs into a private workspace for its own product pipeline, blockers, and packet readiness.</p>
+          <div class="actions"><a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">Open company view</a></div>
+        </article>
+        <article class="card">
+          <span class="chip gold">ABA operator</span>
+          <p>Reviews submitted records, verifies proof, sets consent and inclusion decisions, and requests clarification.</p>
+          <div class="actions"><a class="button secondary" href="../../registration-tracker/admin-operator-review/index.html">Open admin view</a></div>
+        </article>
+        <article class="card">
+          <span class="chip">Registrar packet</span>
+          <p>Uses a controlled export list of reviewed, consented, operator-approved Full member records.</p>
+          <div class="actions"><a class="button secondary" href="../../registration-tracker/registrar-list/index.html">Open export view</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">From intake to advocacy</div>
+        <h2 class="display" style="margin-top: 6px;">The product logic is simple: capture, review, then publish only the right level of evidence.</h2>
+      </div>
+      <div class="flow" aria-label="Registration tracker data flow">
+        <article class="flow-step">
+          <span class="step-number">1</span>
+          <h3>Intake</h3>
+          <p>Authorised representatives submit company, product, registration status, proof, and consent details.</p>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">2</span>
+          <h3>ABA review</h3>
+          <p>Operators verify relationship type, proof, duplicates, consent, bottleneck themes, and data quality.</p>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">3</span>
+          <h3>Company view</h3>
+          <p>Members see only their own records, action needs, benchmarks, and registrar packet readiness.</p>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">4</span>
+          <h3>Public dashboard</h3>
+          <p>Reviewed eligible records become aggregate signals with suppression rules and neutral filters.</p>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">5</span>
+          <h3>Registrar export</h3>
+          <p>Consented, verified, approved Full member records become controlled packet candidates.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Start at intake</a>
+        <a class="button secondary" href="../../registration-tracker/index.html">Open all screens together</a>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Client-facing versus internal</div>
+        <h2 class="display" style="margin-top: 6px;">The same data supports different views, but the boundaries stay visible.</h2>
+      </div>
+      <div class="matrix-grid" style="margin-top: 12px;">
+        <article class="matrix-card header">
+          <h3>Visible experience</h3>
+          <p>What each audience can reasonably see in a live ABA site.</p>
+        </article>
+        <article class="matrix-card header">
+          <h3>Data boundary</h3>
+          <p>What protects trust and keeps the story credible.</p>
+        </article>
+        <article class="matrix-card header">
+          <h3>Prototype screen</h3>
+          <p>Where the current demo shows the behavior.</p>
+        </article>
+
+        <article class="matrix-card">
+          <h3>Public site proof points</h3>
+          <p>Aggregate registration signals can appear on the homepage or Knowledge Hub.</p>
+        </article>
+        <article class="matrix-card">
+          <h3>Reviewed aggregate only</h3>
+          <p>No raw intake, company names, proof files, or identifiable small cells appear publicly.</p>
+        </article>
+        <article class="matrix-card">
+          <a class="screen-link" href="../../registration-tracker/public-dashboard/index.html"><strong>Public dashboard</strong><span>Open</span></a>
+        </article>
+
+        <article class="matrix-card">
+          <h3>Member company workspace</h3>
+          <p>A logged-in company sees its own records, statuses, blockers, and readiness.</p>
+        </article>
+        <article class="matrix-card">
+          <h3>Company-private scope</h3>
+          <p>Intake return links do not unlock the dashboard; member or invited workspace access is required.</p>
+        </article>
+        <article class="matrix-card">
+          <a class="screen-link" href="../../registration-tracker/company-dashboard/index.html"><strong>Company dashboard</strong><span>Open</span></a>
+        </article>
+
+        <article class="matrix-card">
+          <h3>ABA admin and verification</h3>
+          <p>Staff review records, proof, consent, duplicates, and export readiness.</p>
+        </article>
+        <article class="matrix-card">
+          <h3>Internal source of truth</h3>
+          <p>Only ABA operators can accept records into public aggregates or registrar packet consideration.</p>
+        </article>
+        <article class="matrix-card">
+          <a class="screen-link" href="../../registration-tracker/admin-operator-review/index.html"><strong>Admin review</strong><span>Open</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Trust and rulebook summary</div>
+        <h2 class="display" style="margin-top: 6px;">The tracker is useful because it is selective about what becomes visible.</h2>
+        <p class="lede">This is the deeper rulebook summary to use if the room asks how ABA protects companies while still building a credible evidence base.</p>
+      </div>
+      <div class="rule-grid" style="margin-top: 12px;">
+        <article class="rule-card">
+          <strong>Raw intake is not public.</strong>
+          <p>Submitted records first enter ABA review. They do not automatically feed the public dashboard or registrar packet.</p>
+        </article>
+        <article class="rule-card">
+          <strong>ABA review creates trusted records.</strong>
+          <p>Operators verify proof, membership relationship, references, duplicates, bottleneck themes, and clarification needs.</p>
+        </article>
+        <article class="rule-card">
+          <strong>Consent controls visibility.</strong>
+          <p>Internal review, public aggregate use, and named registrar packet use are separate consent boundaries.</p>
+        </article>
+        <article class="rule-card">
+          <strong>Public dashboards are aggregate.</strong>
+          <p>Only reviewed eligible records appear, and small cells remain suppressed to avoid revealing contributors.</p>
+        </article>
+        <article class="rule-card">
+          <strong>Registrar packets have a stricter default.</strong>
+          <p>Default candidates are reviewed, consented, operator-approved, verified Full member records with proof and reference status handled.</p>
+        </article>
+        <article class="rule-card">
+          <strong>Company dashboards stay private.</strong>
+          <p>A company sees its own records only, plus benchmark context where comparison is safe and meaningful.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Live-site integration</div>
+        <h2 class="display" style="margin-top: 6px;">When the ABA site is ready, the tracker should feel like part of the product, not a separate demo.</h2>
+      </div>
+      <div class="integration-grid" style="margin-top: 12px;">
+        <article class="card">
+          <span class="chip">Homepage</span>
+          <h3 style="margin-top: 10px;">Show selected public signals.</h3>
+          <p>Use a few aggregate registration visuals as proof that ABA is building sector intelligence, not just describing the sector.</p>
+        </article>
+        <article class="card">
+          <span class="chip green">Membership</span>
+          <h3 style="margin-top: 10px;">Make the company workspace a member-value path.</h3>
+          <p>Membership pages can explain registration visibility, pipeline support, and packet readiness as practical reasons to participate.</p>
+        </article>
+        <article class="card">
+          <span class="chip gold">Admin</span>
+          <h3 style="margin-top: 10px;">Keep operator tools behind an internal path.</h3>
+          <p>Admin review and registrar export should read as ABA staff workspaces, not public navigation items.</p>
+        </article>
+      </div>
+      <div class="divider"></div>
+      <div class="link-list">
+        <a class="screen-link" href="../site/index.html"><strong>Return to ABA site prototype</strong><span>Open</span></a>
+        <a class="screen-link" href="../membership-flow/index.html"><strong>Open membership flow</strong><span>Open</span></a>
+        <a class="screen-link" href="../database/index.html"><strong>Open Knowledge Hub</strong><span>Open</span></a>
+        <a class="screen-link" href="../../registration-tracker/index.html"><strong>Open full tracker walkthrough</strong><span>Open</span></a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
