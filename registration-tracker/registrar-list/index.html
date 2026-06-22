@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrar Export | Registration Tracker Wireframe</title>
+    <title>Registrar Export | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
@@ -13,9 +13,10 @@
           <div class="brand-mark">ABA</div>
           <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
         </div>
-        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
       </header>
       <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../index.html">Combined</a>
         <a href="../intake-flow/index.html">Intake</a>
         <a href="../company-dashboard/index.html">Company Dashboard</a>
         <a href="../public-dashboard/index.html">Public Dashboard</a>
@@ -27,95 +28,192 @@
         <section class="page-header">
           <div>
             <h1>Registrar packet workspace</h1>
-            <p>Export-facing operator view for reviewed, consented, operator-approved member records and blocked candidates.</p>
+            <p>Export-facing operator view for reviewed, consented, operator-approved member records and blocked candidates. Toggle inclusion and packet actions to update the draft.</p>
           </div>
           <span class="role-badge">Operator export workspace</span>
         </section>
 
         <section class="grid three">
-          <div class="panel ok"><h2>Packet draft</h2><p><strong>Packet version:</strong> 2026-Q2-v1<br><strong>Date:</strong> 2026-06-19<br><strong>Status:</strong> Draft</p></div>
-          <div class="panel"><h2>Default inclusion rule</h2><p>Reviewed, verified ABA member, named consent, proof attached, reference or reason present, operator included.</p></div>
+          <div class="panel ok"><h2>Packet draft</h2><p><strong>Packet version:</strong> <span id="packetVersion">2026-Q2-v1</span><br><strong>Generated:</strong> <span id="packetDate">2026-06-22 14:50</span><br><strong>Status:</strong> <span id="packetStatus">Draft</span></p></div>
+          <div class="panel"><h2>Included records</h2><span class="metric-value" id="includedCount">2</span><p class="note">Reviewed, consented, operator-approved member records.</p></div>
           <div class="panel warn"><h2>Registrar disclaimer</h2><p>Export packets are prepared for engagement with the registrar and are not legal or regulatory advice.</p></div>
         </section>
 
         <section class="panel" style="margin-top: 16px;">
-          <h2>Export-ready registrar packet list</h2>
+          <div class="dashboard-toolbar">
+            <div>
+              <h2>Registrar packet list</h2>
+              <p class="note">Only export-ready records can be included. Blocked records explain which condition is missing.</p>
+            </div>
+            <div class="segmented-control" aria-label="Registrar list filter">
+              <button type="button" data-export-filter="all" aria-pressed="true">All</button>
+              <button type="button" data-export-filter="included" aria-pressed="false">Included</button>
+              <button type="button" data-export-filter="blocked" aria-pressed="false">Blocked</button>
+            </div>
+          </div>
           <table>
             <thead>
               <tr>
+                <th>Include</th>
                 <th>Company</th>
                 <th>Product</th>
                 <th>Member</th>
                 <th>Status</th>
+                <th>Submitted</th>
                 <th>Reference</th>
                 <th>Proof</th>
                 <th>Consent</th>
-                <th>Packet decision</th>
+                <th>Blocker</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Example Bio Inputs</td>
-                <td>Fictional Microbial Soil Blend</td>
-                <td>Verified</td>
-                <td>Submitted to registrar</td>
-                <td>REF-EXAMPLE-1029</td>
-                <td>Attached</td>
-                <td>Named packet opt-in</td>
-                <td>Include in draft</td>
-              </tr>
-              <tr>
-                <td>Sample Agri Sciences</td>
-                <td>Fictional Biofert Product</td>
-                <td>Verified</td>
-                <td>Under technical review</td>
-                <td>Not issued, reason recorded</td>
-                <td>Attached</td>
-                <td>Named packet opt-in</td>
-                <td>Include in draft</td>
-              </tr>
-            </tbody>
+            <tbody id="packetRows"></tbody>
           </table>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
           <div class="panel danger">
-            <h2>Blocked candidates</h2>
-            <table>
-              <thead><tr><th>Record</th><th>Indicator</th><th>Blocker</th></tr></thead>
-              <tbody>
-                <tr><td>Fictional Bio-Control Spray</td><td>Member</td><td>Proof missing</td></tr>
-                <tr><td>Fictional Water Culture</td><td>Non-member</td><td>Not included by default</td></tr>
-                <tr><td>Fictional Seed Coat</td><td>Member</td><td>Named registrar consent missing</td></tr>
-              </tbody>
-            </table>
+            <h2>Eligibility blockers</h2>
+            <div class="readiness-list" id="blockerList"></div>
           </div>
           <div class="panel">
             <h2>Packet batch concept</h2>
-            <table>
-              <tbody>
-                <tr><th>Generated by</th><td>ABA operator placeholder</td></tr>
-                <tr><th>Attachments included</th><td>Proof files and reference evidence</td></tr>
-                <tr><th>History states</th><td>Draft / sent / revised / withdrawn</td></tr>
-                <tr><th>Preserved snapshot</th><td>Included records, blockers, version, date</td></tr>
-              </tbody>
-            </table>
+            <div class="state-summary" id="packetSummary"></div>
           </div>
         </section>
 
         <section class="panel muted" style="margin-top: 16px;">
-          <h2>Export controls placeholder</h2>
-          <div class="options">
-            <span class="option">Preview packet</span>
-            <span class="option">Download CSV</span>
-            <span class="option">Freeze version</span>
-            <span class="option">Mark sent</span>
+          <h2>Export controls</h2>
+          <div class="toggle-row">
+            <button class="action-button secondary" type="button" id="previewPacket">Preview packet</button>
+            <button class="action-button secondary" type="button" id="downloadCsv">Prepare CSV</button>
+            <button class="action-button secondary" type="button" id="freezeVersion">Freeze version</button>
+            <button class="action-button primary" type="button" id="markSent">Mark sent</button>
           </div>
-          <p class="note">Controls are placeholders only. No backend or real export is assumed in this disposable prototype.</p>
+          <p class="note" id="exportAction">Controls update prototype packet state only. No backend or real export is assumed.</p>
         </section>
 
         <p class="footer-note">Disposable prototype. Fictional data only. Export readiness is controlled by review, consent, proof, reference, membership, and operator inclusion.</p>
       </main>
     </div>
+
+    <script>
+      const records = [
+        { id: "soil", company: "Example Bio Inputs", product: "Fictional Microbial Soil Blend", member: "Verified", status: "Submitted to registrar", submittedAt: "2026-06-22 14:18", reference: "REF-EXAMPLE-1029", proof: "Attached", consent: "Named packet opt-in", ready: true, included: true, blocker: "None" },
+        { id: "biofert", company: "Sample Agri Sciences", product: "Fictional Biofert Product", member: "Verified", status: "Under technical review", submittedAt: "2026-06-21 16:44", reference: "Not issued, reason recorded", proof: "Attached", consent: "Named packet opt-in", ready: true, included: true, blocker: "None" },
+        { id: "spray", company: "Example Bio Inputs", product: "Fictional Bio-Control Spray", member: "Verified", status: "Query requested", submittedAt: "2026-06-22 14:22", reference: "REF-EXAMPLE-2044", proof: "Missing", consent: "Named packet opt-in", ready: false, included: false, blocker: "Proof missing" },
+        { id: "water", company: "Fictional Water Culture", product: "Fictional Water Culture", member: "Non-member", status: "Submitted to authority", submittedAt: "2026-06-21 11:06", reference: "Reason recorded", proof: "Attached", consent: "Named packet opt-in", ready: false, included: false, blocker: "Not included by default" },
+        { id: "seed", company: "Example Bio Inputs", product: "Fictional Seed Coat", member: "Verified", status: "Preparing submission", submittedAt: "2026-06-22 14:28", reference: "Not issued", proof: "Attached", consent: "No named consent", ready: false, included: false, blocker: "Named registrar consent missing" }
+      ];
+
+      let activeFilter = "all";
+      let packetStatus = "Draft";
+      let packetVersion = "2026-Q2-v1";
+      let lastExportAction = "Controls update prototype packet state only. No backend or real export is assumed.";
+
+      function filteredRecords() {
+        return records.filter((record) => {
+          if (activeFilter === "included") return record.included;
+          if (activeFilter === "blocked") return !record.ready;
+          return true;
+        });
+      }
+
+      function renderRows() {
+        document.getElementById("packetRows").innerHTML = filteredRecords().map((record) => `
+          <tr>
+            <td><input type="checkbox" data-include="${record.id}" ${record.included ? "checked" : ""} ${record.ready ? "" : "disabled"} aria-label="Include ${record.product}"></td>
+            <td>${record.company}</td>
+            <td>${record.product}</td>
+            <td>${record.member}</td>
+            <td>${record.status}</td>
+            <td>${record.submittedAt}</td>
+            <td>${record.reference}</td>
+            <td>${record.proof}</td>
+            <td>${record.consent}</td>
+            <td>${record.blocker}</td>
+          </tr>
+        `).join("");
+        document.querySelectorAll("[data-include]").forEach((input) => {
+          input.addEventListener("change", () => {
+            const record = records.find((item) => item.id === input.dataset.include);
+            record.included = input.checked;
+            packetStatus = "Draft";
+            lastExportAction = `${record.product} ${record.included ? "included in" : "removed from"} draft packet.`;
+            render();
+          });
+        });
+      }
+
+      function renderBlockers() {
+        const blockers = records.filter((record) => !record.ready);
+        document.getElementById("blockerList").innerHTML = blockers.map((record) => `
+          <div class="readiness-row blocker-row">
+            <span>${record.product}</span>
+            <strong>${record.blocker}</strong>
+          </div>
+        `).join("");
+      }
+
+      function renderSummary() {
+        const included = records.filter((record) => record.included);
+        const rows = [
+          ["Generated by", "ABA operator placeholder"],
+          ["Packet version", packetVersion],
+          ["Packet generated", document.getElementById("packetDate").textContent],
+          ["Packet status", packetStatus],
+          ["Included records", included.length],
+          ["Included records submitted at", included.map((record) => record.submittedAt).join(", ") || "No records included"],
+          ["Attachments included", `${included.filter((record) => record.proof === "Attached").length} proof/reference sets`],
+          ["History states", "Draft / prepared / frozen / sent / revised / withdrawn"],
+          ["Preserved snapshot", "Included records, blockers, version, date"]
+        ];
+        document.getElementById("packetSummary").innerHTML = rows.map(([key, value]) => `<div class="state-row"><div class="state-key">${key}</div><div class="state-value">${value}</div></div>`).join("");
+        document.getElementById("includedCount").textContent = included.length;
+        document.getElementById("packetStatus").textContent = packetStatus;
+        document.getElementById("packetVersion").textContent = packetVersion;
+        document.getElementById("exportAction").textContent = lastExportAction;
+        document.querySelectorAll("[data-export-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.exportFilter === activeFilter)));
+      }
+
+      function render() {
+        renderRows();
+        renderBlockers();
+        renderSummary();
+      }
+
+      document.querySelectorAll("[data-export-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.exportFilter;
+          render();
+        });
+      });
+
+      document.getElementById("previewPacket").addEventListener("click", () => {
+        packetStatus = "Previewed";
+        lastExportAction = "Packet preview generated in prototype state.";
+        render();
+      });
+
+      document.getElementById("downloadCsv").addEventListener("click", () => {
+        packetStatus = "Prepared";
+        lastExportAction = "CSV preparation marked in prototype state.";
+        render();
+      });
+
+      document.getElementById("freezeVersion").addEventListener("click", () => {
+        packetStatus = "Frozen";
+        packetVersion = "2026-Q2-v2";
+        lastExportAction = "Packet version frozen for registrar engagement.";
+        render();
+      });
+
+      document.getElementById("markSent").addEventListener("click", () => {
+        packetStatus = "Sent";
+        lastExportAction = "Packet marked sent in prototype state.";
+        render();
+      });
+
+      render();
+    </script>
   </body>
 </html>

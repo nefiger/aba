@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Public Dashboard | Registration Tracker Wireframe</title>
+    <title>Public Dashboard | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
@@ -13,9 +13,10 @@
           <div class="brand-mark">ABA</div>
           <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
         </div>
-        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
       </header>
       <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../index.html">Combined</a>
         <a href="../intake-flow/index.html">Intake</a>
         <a href="../company-dashboard/index.html">Company Dashboard</a>
         <a href="../public-dashboard/index.html" aria-current="page">Public Dashboard</a>
@@ -27,86 +28,332 @@
         <section class="page-header">
           <div>
             <h1>Public aggregate dashboard</h1>
-            <p>Anonymised advocacy view based on reviewed submissions only. It separates future pipeline from registrar backlog.</p>
+            <p>Anonymised advocacy view based on reviewed submissions only. Filters update the aggregate metrics while suppression rules protect contributor identity.</p>
           </div>
           <span class="role-badge">Public aggregate view</span>
         </section>
 
         <section class="panel muted">
-          <h2>Filters</h2>
-          <div class="options">
-            <span class="option">All reviewed submissions</span>
-            <span class="option">ABA member submissions</span>
-            <span class="option">Non-member submissions</span>
+          <div class="dashboard-toolbar">
+            <div>
+              <h2>Reviewed submissions filter</h2>
+              <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity. Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
+            </div>
+            <div class="segmented-control" aria-label="Public dashboard filter">
+              <button type="button" data-public-filter="all" aria-pressed="true">All reviewed</button>
+              <button type="button" data-public-filter="member" aria-pressed="false">ABA member</button>
+              <button type="button" data-public-filter="nonmember" aria-pressed="false">Non-member</button>
+            </div>
           </div>
-          <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity.</p>
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
-          <div class="metric"><span>Applications in backlog</span><span class="metric-value">37</span><p class="note">Reviewed, open, over threshold.</p></div>
-          <div class="metric"><span>Median wait time</span><span class="metric-value">14 mo</span><p class="note">Current open applications.</p></div>
-          <div class="metric"><span>Worst wait time</span><span class="metric-value">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
-          <div class="metric"><span>Product-years waiting</span><span class="metric-value">51.8</span><p class="note">Sum of open durations.</p></div>
+          <div class="metric"><span>Applications in backlog</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed, open, over threshold.</p></div>
+          <div class="metric"><span>Median wait time</span><span class="metric-value" id="metricMedian">14 mo</span><p class="note">Current open applications.</p></div>
+          <div class="metric"><span>Worst wait time</span><span class="metric-value" id="metricWorst">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
+          <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">51.8</span><p class="note">Sum of open durations.</p></div>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
-          <div class="panel">
-            <h2>Backlog by legal pathway</h2>
-            <table>
-              <thead><tr><th>Pathway</th><th>Applications</th><th>Time signal</th></tr></thead>
-              <tbody>
-                <tr><td>Group 3 fertilizer</td><td>18</td><td><div class="bar long"></div></td></tr>
-                <tr><td>Agricultural remedy</td><td>12</td><td><div class="bar medium"></div></td></tr>
-                <tr><td>Not sure</td><td>Suppressed</td><td>Small cell hidden</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <article class="chart-card">
+            <h3>Backlog by legal pathway</h3>
+            <svg class="chart-svg wide-chart" id="pathwayChart" viewBox="0 0 520 260" role="img" aria-label="Backlog by legal pathway"></svg>
+            <p class="note">Small cells are suppressed rather than shown as exact counts.</p>
+          </article>
+          <article class="chart-card">
+            <h3>Backlog trend over time</h3>
+            <svg class="chart-svg wide-chart" id="trendChart" viewBox="0 0 520 260" role="img" aria-label="Reviewed backlog trend over time"></svg>
+            <p class="note" id="trendCaption">Trend shows reviewed backlog records only; future pipeline is charted separately.</p>
+          </article>
+        </section>
+
+        <section class="chart-grid" style="margin-top: 16px;">
+          <article class="chart-card">
+            <h3>Functional category</h3>
+            <svg class="chart-svg" id="categoryChart" viewBox="0 0 360 220" role="img" aria-label="Backlog by functional category"></svg>
+          </article>
+          <article class="chart-card">
+            <h3>Governing regime</h3>
+            <svg class="chart-svg" id="regimeChart" viewBox="0 0 360 220" role="img" aria-label="Backlog by governing regime"></svg>
+          </article>
+          <article class="chart-card">
+            <h3>Future pipeline signal</h3>
+            <svg class="chart-svg" id="pipelineChart" viewBox="0 0 360 220" role="img" aria-label="Future pipeline separate from backlog"></svg>
+            <p class="note">Pre-submission products are tracked separately and do not count as registrar backlog.</p>
+          </article>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
           <div class="panel warn">
             <h2>Small-cell suppression</h2>
             <p>Cells below the anonymisation threshold are hidden so a single company or product cannot be inferred.</p>
-            <div class="callout">Example: "Public-health pest control + non-member + 1 record" is suppressed.</div>
-          </div>
-        </section>
-
-        <section class="grid three" style="margin-top: 16px;">
-          <div class="panel">
-            <h2>Functional category</h2>
-            <p>Biofertiliser</p><div class="bar long"></div>
-            <p>Biopesticide</p><div class="bar medium"></div>
-            <p>Biostimulant</p><div class="bar short"></div>
-          </div>
-          <div class="panel">
-            <h2>Governing regime</h2>
-            <p>Agriculture / Act 36</p><div class="bar long"></div>
-            <p>Water treatment</p><div class="bar short"></div>
-            <p>Other</p><div class="bar medium"></div>
-          </div>
-          <div class="panel">
-            <h2>Future pipeline signal</h2>
-            <span class="metric-value">24</span>
-            <p class="note">Pre-submission products tracked separately. These are not counted as registrar backlog.</p>
-          </div>
-        </section>
-
-        <section class="grid two" style="margin-top: 16px;">
-          <div class="panel">
-            <h2>Trend over time</h2>
-            <div class="placeholder-chart">Placeholder trend: reviewed backlog count by month.</div>
+            <div class="suppression-grid" id="suppressionGrid" style="margin-top: 12px;"></div>
           </div>
           <div class="panel">
             <h2>Aggregate evidence packet activity</h2>
-            <table>
-              <tbody>
-                <tr><th>Registrar evidence packets prepared</th><td>3</td></tr>
-                <tr><th>Applications represented</th><td>29</td></tr>
-                <tr><th>Most recent packet period</th><td>Q2 2026</td></tr>
-              </tbody>
-            </table>
+            <div class="mini-kpi-row">
+              <div class="metric"><span>Packets prepared</span><span class="metric-value" id="packetCount">3</span></div>
+              <div class="metric"><span>Applications represented</span><span class="metric-value" id="packetApps">29</span></div>
+              <div class="metric"><span>Most recent period</span><span class="metric-value" id="packetPeriod">Q2</span></div>
+            </div>
           </div>
+        </section>
+
+        <section class="panel" style="margin-top: 16px;">
+          <h2>Public narrative summary</h2>
+          <div class="state-summary" id="publicSummary"></div>
         </section>
 
         <p class="footer-note">Disposable prototype. Fictional aggregate data only. No company, product, proof, or reference details appear publicly.</p>
       </main>
     </div>
+
+    <script>
+      const datasets = {
+        all: {
+          label: "All reviewed submissions",
+          refreshedAt: "2026-06-22 14:45",
+          oldestSubmissionAt: "2024-04-20 10:12",
+          newestSubmissionAt: "2026-06-22 14:28",
+          backlog: 37,
+          median: 14,
+          worst: 42,
+          years: 51.8,
+          pathway: [
+            ["Group 3 fertilizer", 18],
+            ["Agricultural remedy", 12],
+            ["Not sure", 2, true],
+            ["Other", 5]
+          ],
+          category: [
+            ["Biofertiliser", 17],
+            ["Biopesticide", 13],
+            ["Biostimulant", 7]
+          ],
+          regime: [
+            ["Agriculture / Act 36", 29],
+            ["Water treatment", 5],
+            ["Other", 3, true]
+          ],
+          trend: [22, 25, 27, 31, 34, 37],
+          pipeline: 24,
+          packets: { count: 3, apps: 29, period: "Q2" },
+          suppression: [
+            ["Public-health pest + non-member", "Suppressed", true],
+            ["Water treatment + member", "5 records", false],
+            ["Other regime + non-member", "Suppressed", true],
+            ["Agriculture / Act 36", "29 records", false]
+          ]
+        },
+        member: {
+          label: "ABA member submissions",
+          refreshedAt: "2026-06-22 14:45",
+          oldestSubmissionAt: "2024-04-20 10:12",
+          newestSubmissionAt: "2026-06-22 14:28",
+          backlog: 25,
+          median: 13,
+          worst: 36,
+          years: 34.2,
+          pathway: [
+            ["Group 3 fertilizer", 13],
+            ["Agricultural remedy", 8],
+            ["Not sure", 1, true],
+            ["Other", 4]
+          ],
+          category: [
+            ["Biofertiliser", 12],
+            ["Biopesticide", 8],
+            ["Biostimulant", 5]
+          ],
+          regime: [
+            ["Agriculture / Act 36", 20],
+            ["Water treatment", 4],
+            ["Other", 1, true]
+          ],
+          trend: [16, 17, 19, 21, 23, 25],
+          pipeline: 18,
+          packets: { count: 3, apps: 23, period: "Q2" },
+          suppression: [
+            ["Other regime + member", "Suppressed", true],
+            ["Water treatment + member", "4 records", false],
+            ["Act 36 + member", "20 records", false],
+            ["Not sure pathway", "Suppressed", true]
+          ]
+        },
+        nonmember: {
+          label: "Non-member submissions",
+          refreshedAt: "2026-06-22 14:45",
+          oldestSubmissionAt: "2025-02-03 09:30",
+          newestSubmissionAt: "2026-06-21 11:06",
+          backlog: 12,
+          median: 17,
+          worst: 42,
+          years: 17.6,
+          pathway: [
+            ["Group 3 fertilizer", 5],
+            ["Agricultural remedy", 4],
+            ["Not sure", 1, true],
+            ["Other", 2, true]
+          ],
+          category: [
+            ["Biofertiliser", 5],
+            ["Biopesticide", 5],
+            ["Biostimulant", 2, true]
+          ],
+          regime: [
+            ["Agriculture / Act 36", 9],
+            ["Water treatment", 1, true],
+            ["Other", 2, true]
+          ],
+          trend: [6, 8, 8, 10, 11, 12],
+          pipeline: 6,
+          packets: { count: 0, apps: 6, period: "Review" },
+          suppression: [
+            ["Water treatment + non-member", "Suppressed", true],
+            ["Other regime + non-member", "Suppressed", true],
+            ["Biostimulant + non-member", "Suppressed", true],
+            ["Act 36 + non-member", "9 records", false]
+          ]
+        }
+      };
+
+      let activeFilter = "all";
+
+      function activeData() {
+        return datasets[activeFilter];
+      }
+
+      function setText(id, text) {
+        document.getElementById(id).textContent = text;
+      }
+
+      function barChart(id, rows, options = {}) {
+        const max = Math.max(1, ...rows.map((row) => row[2] ? 0 : row[1]));
+        const rowHeight = 44;
+        const width = options.width || 520;
+        const chartWidth = width - 190;
+        const content = rows.map(([label, value, suppressed], index) => {
+          const y = 36 + index * rowHeight;
+          const barWidth = suppressed ? 58 : Math.max(10, chartWidth * value / max);
+          const fill = suppressed ? "#a97924" : (options.color || "#2f7a56");
+          const text = suppressed ? "Suppressed" : value;
+          return `
+            <text x="18" y="${y + 18}" font-size="13" fill="#66706b">${label}</text>
+            <rect x="170" y="${y}" width="${barWidth}" height="24" rx="12" fill="${fill}" opacity="${suppressed ? 0.45 : 0.9}"></rect>
+            <text x="${180 + barWidth}" y="${y + 18}" font-size="13" font-weight="700" fill="#22302d">${text}</text>
+          `;
+        }).join("");
+        document.getElementById(id).innerHTML = content;
+      }
+
+      function verticalChart(id, rows) {
+        const max = Math.max(1, ...rows.map((row) => row[2] ? 0 : row[1]));
+        const colors = ["#2f7a56", "#4069b2", "#a97924", "#b74a36"];
+        document.getElementById(id).innerHTML = rows.map(([label, value, suppressed], index) => {
+          const x = 40 + index * 105;
+          const h = suppressed ? 24 : 122 * value / max;
+          const y = 154 - h;
+          return `
+            <rect x="${x}" y="${y}" width="58" height="${h}" rx="10" fill="${colors[index % colors.length]}" opacity="${suppressed ? 0.42 : 0.9}"></rect>
+            <text x="${x + 29}" y="${y - 10}" text-anchor="middle" font-size="18" font-weight="700" fill="#22302d">${suppressed ? "*" : value}</text>
+            <text x="${x + 29}" y="188" text-anchor="middle" font-size="11" fill="#66706b">${label.split(" ")[0]}</text>
+          `;
+        }).join("");
+      }
+
+      function renderTrend(data) {
+        const values = data.trend;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        const points = values.map((value, index) => {
+          const x = 34 + index * 88;
+          const y = 190 - ((value - min) / Math.max(1, max - min)) * 126;
+          return [x, y, value];
+        });
+        const path = points.map(([x, y], index) => `${index ? "L" : "M"} ${x} ${y}`).join(" ");
+        const dots = points.map(([x, y, value]) => `<circle cx="${x}" cy="${y}" r="5" fill="#2f7a56"></circle><text x="${x}" y="${y - 12}" text-anchor="middle" font-size="12" fill="#22302d">${value}</text>`).join("");
+        document.getElementById("trendChart").innerHTML = `
+          <line x1="30" y1="196" x2="488" y2="196" stroke="rgba(46,58,46,.16)"></line>
+          <line x1="30" y1="50" x2="30" y2="196" stroke="rgba(46,58,46,.16)"></line>
+          <path d="${path}" fill="none" stroke="#2f7a56" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+          ${dots}
+          <text x="34" y="228" font-size="12" fill="#66706b">Jan</text>
+          <text x="474" y="228" font-size="12" fill="#66706b">Jun</text>
+        `;
+      }
+
+      function renderPipeline(data) {
+        const backlog = data.backlog;
+        const pipeline = data.pipeline;
+        const max = Math.max(backlog, pipeline, 1);
+        document.getElementById("pipelineChart").innerHTML = `
+          <text x="32" y="46" font-size="13" fill="#66706b">Reviewed backlog</text>
+          <rect x="32" y="62" width="${260 * backlog / max}" height="34" rx="17" fill="#4069b2"></rect>
+          <text x="${42 + 260 * backlog / max}" y="85" font-size="20" font-weight="700" fill="#22302d">${backlog}</text>
+          <text x="32" y="136" font-size="13" fill="#66706b">Future pre-submission pipeline</text>
+          <rect x="32" y="152" width="${260 * pipeline / max}" height="34" rx="17" fill="#a97924"></rect>
+          <text x="${42 + 260 * pipeline / max}" y="175" font-size="20" font-weight="700" fill="#22302d">${pipeline}</text>
+        `;
+      }
+
+      function renderSuppression(data) {
+        document.getElementById("suppressionGrid").innerHTML = data.suppression.map(([label, value, suppressed]) => `
+          <div class="suppression-cell ${suppressed ? "suppressed" : ""}">
+            <strong>${label}</strong>
+            <span>${value}</span>
+          </div>
+        `).join("");
+      }
+
+      function renderSummary(data) {
+        const rows = [
+          ["Filter", data.label],
+          ["Data refreshed", data.refreshedAt],
+          ["Reviewed submissions received", `${data.oldestSubmissionAt} to ${data.newestSubmissionAt}`],
+          ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
+          ["Privacy", "Small cells suppressed before publication."],
+          ["Backlog definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
+          ["Packet activity", `${data.packets.count} packets prepared, ${data.packets.apps} applications represented.`]
+        ];
+        document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
+          <div class="state-row">
+            <div class="state-key">${key}</div>
+            <div class="state-value">${value}</div>
+          </div>
+        `).join("");
+      }
+
+      function render() {
+        const data = activeData();
+        setText("metricBacklog", data.backlog);
+        setText("metricMedian", `${data.median} mo`);
+        setText("metricWorst", `${data.worst} mo`);
+        setText("metricYears", data.years);
+        setText("packetCount", data.packets.count);
+        setText("packetApps", data.packets.apps);
+        setText("packetPeriod", data.packets.period);
+        setText("dataRefreshed", data.refreshedAt);
+        barChart("pathwayChart", data.pathway);
+        renderTrend(data);
+        verticalChart("categoryChart", data.category);
+        verticalChart("regimeChart", data.regime);
+        renderPipeline(data);
+        renderSuppression(data);
+        renderSummary(data);
+        setText("trendCaption", `${data.label}: reviewed backlog trend over the last six months.`);
+        document.querySelectorAll("[data-public-filter]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.publicFilter === activeFilter));
+        });
+      }
+
+      document.querySelectorAll("[data-public-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.publicFilter;
+          render();
+        });
+      });
+
+      render();
+    </script>
   </body>
 </html>

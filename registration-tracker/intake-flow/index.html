@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Intake Flow | Registration Tracker Wireframe</title>
+    <title>Intake Flow | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
@@ -16,9 +16,10 @@
             <p class="product-title">Registration Tracker</p>
           </div>
         </div>
-        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
       </header>
       <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../index.html">Combined</a>
         <a href="../intake-flow/index.html" aria-current="page">Intake</a>
         <a href="../company-dashboard/index.html">Company Dashboard</a>
         <a href="../public-dashboard/index.html">Public Dashboard</a>
@@ -30,9 +31,28 @@
         <section class="page-header">
           <div>
             <h1>Submission intake flow</h1>
-            <p>Low-friction, returnable capture flow for fictional company representatives. Raw submissions are reviewed before they appear in any dashboard or packet.</p>
+            <p>Interactive low-fidelity capture flow for fictional company representatives. Selections update the visible state summary and conditional fields.</p>
           </div>
           <span class="role-badge">Public submission: authorised representatives only</span>
+        </section>
+
+        <section class="tracker-context" aria-label="Current intake state">
+          <div class="context-card">
+            <strong>Current path</strong>
+            <span id="summary-path">Waiting for authorisation answer.</span>
+          </div>
+          <div class="context-card">
+            <strong>Registrar packet readiness</strong>
+            <span id="summary-readiness">Not assessed yet.</span>
+          </div>
+          <div class="context-card">
+            <strong>Last action</strong>
+            <span id="summary-action">No action taken.</span>
+          </div>
+          <div class="context-card">
+            <strong>Submission timestamp</strong>
+            <span id="summary-submission-timestamp">Not submitted yet.</span>
+          </div>
         </section>
 
         <section class="grid two">
@@ -40,43 +60,46 @@
             <h2>1. Authorised submitter gate</h2>
             <div class="field full">
               <label>Eligibility question</label>
-              <div class="select-box">Are you authorised to submit registration information for this company/product?</div>
+              <p style="margin: 0;">Are you authorised to submit registration information for this company/product?</p>
             </div>
-            <div class="options">
-              <span class="option">Yes, continue</span>
-              <span class="option">No, stop here</span>
+            <div class="toggle-row" role="group" aria-label="Authorisation status">
+              <button class="choice-button" type="button" data-authorised="yes" aria-pressed="false">Yes, continue</button>
+              <button class="choice-button" type="button" data-authorised="no" aria-pressed="false">No, stop here</button>
             </div>
             <div class="callout">Only responsible company representatives continue. Third-party or unauthorised reporting stops before data capture.</div>
           </div>
-          <div class="panel danger stack">
+          <div class="panel danger stack" id="not-authorised-panel">
             <h2>Not authorised stop state</h2>
-            <p>You cannot submit this record. Please forward this link to the company person responsible for registration information.</p>
-            <div class="input-box">Copy share link / email template placeholder</div>
+            <p>If the submitter is not authorised, the intake remains stopped and asks them to forward the link.</p>
+            <div class="field full">
+              <label>Share instruction</label>
+              <input class="control" value="Please forward this link to the person responsible for registration information." readonly>
+            </div>
           </div>
         </section>
 
-        <section class="grid sidebar" style="margin-top: 16px;">
+        <section class="grid sidebar" id="capture-flow" style="margin-top: 16px;">
           <aside class="panel muted stack">
             <h2>Flow steps</h2>
-            <div class="status-chip">1 Gate</div>
-            <div class="status-chip">2 Company + contact</div>
-            <div class="status-chip">3 Product axes</div>
-            <div class="status-chip">4 Application status</div>
-            <div class="status-chip">5 Proof + consent</div>
-            <div class="status-chip">6 Save/submit</div>
-            <div class="callout">Fictional placeholder data. The application is the unit of backlog; dated status logs are required.</div>
+            <span class="status-chip">1 Gate</span>
+            <span class="status-chip">2 Company + contact</span>
+            <span class="status-chip">3 Product axes</span>
+            <span class="status-chip">4 Application status</span>
+            <span class="status-chip">5 Proof + consent</span>
+            <span class="status-chip">6 Save/submit</span>
+            <div class="callout">This prototype stores selections in page state only. No backend write happens here.</div>
           </aside>
 
           <div class="stack">
             <section class="panel">
               <h2>2. Company and contact details</h2>
               <div class="form-grid">
-                <div class="field"><label>Company name</label><div class="input-box">Example Bio Inputs (Pty) Ltd</div></div>
-                <div class="field"><label>Company role</label><div class="select-box">Manufacturer / importer / registration holder</div></div>
-                <div class="field"><label>Country</label><div class="select-box">South Africa</div></div>
-                <div class="field"><label>Self-reported ABA membership</label><div class="select-box">Yes / No / Not sure or pending</div></div>
-                <div class="field"><label>Contact person</label><div class="input-box">Fictional Contact</div></div>
-                <div class="field"><label>Email for return link</label><div class="input-box">contact@example.invalid</div></div>
+                <div class="field"><label for="companyName">Company name</label><input id="companyName" class="control" value="Example Bio Inputs (Pty) Ltd"></div>
+                <div class="field"><label for="companyRole">Company role</label><select id="companyRole" class="control-select"><option>Manufacturer</option><option>Importer</option><option>Local registration holder</option><option>Distributor responsible for registration</option><option>Other authorised representative</option></select></div>
+                <div class="field"><label for="companyCountry">Company country</label><select id="companyCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
+                <div class="field"><label for="membership">Self-reported ABA membership</label><select id="membership" class="control-select"><option>Yes</option><option>No</option><option>Not sure / pending</option></select></div>
+                <div class="field"><label for="contactName">Contact person</label><input id="contactName" class="control" value="Fictional Contact"></div>
+                <div class="field"><label for="contactEmail">Email for return link</label><input id="contactEmail" class="control" type="email" value="contact@example.invalid"></div>
                 <div class="field full"><label>POPIA/privacy notice</label><div class="textarea-box">ABA uses this information for internal review, anonymised sector evidence, and consented registrar engagement. This is not legal or regulatory advice.</div></div>
               </div>
             </section>
@@ -84,27 +107,28 @@
             <section class="panel">
               <h2>3. Product and regime</h2>
               <div class="form-grid">
-                <div class="field"><label>Product name</label><div class="input-box">Fictional Microbial Soil Blend</div></div>
-                <div class="field"><label>Functional category</label><div class="select-box">Biofertiliser / biopesticide / biostimulant / not sure</div></div>
-                <div class="field"><label>Country for application</label><div class="select-box">South Africa</div></div>
-                <div class="field"><label>Governing regime</label><div class="select-box">Agriculture / Act 36</div></div>
-                <div class="field"><label>Act 36 legal pathway</label><div class="select-box">Group 3 fertilizer / agricultural remedy / not sure</div></div>
-                <div class="field"><label>Classification code</label><div class="select-box">M / L / K / unknown</div></div>
-                <div class="field full"><label>Conditional logic note</label><div class="textarea-box">M/L/K and Group 3 fields appear only for South Africa Agriculture / Act 36 records. Other regimes show their own fields or none.</div></div>
+                <div class="field"><label for="productName">Product name</label><input id="productName" class="control" value="Fictional Microbial Soil Blend"></div>
+                <div class="field"><label for="functionalCategory">Functional category</label><select id="functionalCategory" class="control-select"><option>Biofertiliser</option><option>Biopesticide</option><option>Biostimulant</option><option>Not sure</option></select></div>
+                <div class="field"><label for="applicationCountry">Country for application</label><select id="applicationCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
+                <div class="field"><label for="regime">Governing regime</label><select id="regime" class="control-select"><option>Agriculture / Act 36</option><option>Public-health pest control</option><option>Water treatment</option><option>Other</option></select></div>
+                <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Group 3 fertilizer</option><option>Agricultural remedy</option><option>Not sure</option></select></div>
+                <div class="field act36-field"><label for="classificationCode">Classification code</label><select id="classificationCode" class="control-select"><option>M</option><option>L</option><option>K</option><option>Unknown</option></select></div>
+                <div class="field full" id="nonAct36Note"><label>Conditional regime note</label><div class="textarea-box">Act 36 legal pathway and M/L/K classification are hidden unless Agriculture / Act 36 is selected.</div></div>
               </div>
             </section>
 
             <section class="panel">
               <h2>4. Application and status log</h2>
               <div class="form-grid">
-                <div class="field"><label>Current status</label><div class="select-box">Submitted to registrar</div></div>
-                <div class="field"><label>Date status began</label><div class="input-box">2025-09-15</div></div>
-                <div class="field"><label>Approximate date?</label><div class="select-box">No / Yes, approximate</div></div>
-                <div class="field"><label>Registrar reference</label><div class="select-box">Provided / not issued / unknown / unavailable</div></div>
-                <div class="field full"><label>If reference unavailable</label><div class="textarea-box">Required explanation when no reference number is provided.</div></div>
+                <div class="field"><label for="currentStatus">Current status</label><select id="currentStatus" class="control-select"><option>Preparing submission</option><option selected>Submitted to registrar</option><option>Acknowledged / reference issued</option><option>Under screening</option><option>Under technical review</option><option>Query / additional information requested</option><option>Response submitted</option><option>Awaiting decision</option><option>Approved / registered</option><option>Rejected / withdrawn</option><option>Unknown / not sure</option></select></div>
+                <div class="field"><label for="statusDate">Date status began</label><input id="statusDate" class="control" type="date" value="2025-09-15"></div>
+                <div class="field"><label>Approximate date?</label><label class="checkbox-item"><input id="approximateDate" type="checkbox"> <span>Yes, this date is approximate</span></label></div>
+                <div class="field"><label for="referenceStatus">Registrar reference</label><select id="referenceStatus" class="control-select"><option>Provided</option><option>Not issued</option><option>Unknown</option><option>Lost / unavailable</option></select></div>
+                <div class="field full" id="referenceNumberField"><label for="referenceNumber">Reference number</label><input id="referenceNumber" class="control" value="REF-EXAMPLE-1029"></div>
+                <div class="field full is-hidden" id="referenceReasonField"><label for="referenceReason">Reference unavailable reason</label><textarea id="referenceReason" class="control-textarea">Registrar has not issued a reference number yet.</textarea></div>
               </div>
               <div class="timeline" style="margin-top: 12px;">
-                <div class="timeline-item"><strong>2025-09-15</strong> Submitted to registrar</div>
+                <div class="timeline-item"><strong id="timelineDate">2025-09-15</strong> <span id="timelineStatus">Submitted to registrar</span></div>
                 <div class="timeline-item"><strong>Optional previous entry</strong> Preparing submission</div>
               </div>
             </section>
@@ -112,27 +136,32 @@
             <section class="grid two">
               <div class="panel warn stack">
                 <h2>5. Proof upload</h2>
-                <div class="field full"><label>Proof of submission</label><div class="input-box">Upload placeholder: PDF, email, receipt</div></div>
-                <div class="callout">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
+                <label class="checkbox-item"><input id="proofAttached" type="checkbox"> <span>Proof of submission attached</span></label>
+                <div class="field full"><label for="proofDescription">Proof description</label><input id="proofDescription" class="control" value="Receipt or registrar email placeholder"></div>
+                <div class="callout" id="proofNote">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
               </div>
               <div class="panel stack">
                 <h2>Visibility and consent</h2>
-                <table>
-                  <thead><tr><th>Use</th><th>Default</th><th>Submitter control</th></tr></thead>
-                  <tbody>
-                    <tr><td>Internal ABA review</td><td>On</td><td>Required</td></tr>
-                    <tr><td>Anonymised public aggregate</td><td>On</td><td>Can opt out</td></tr>
-                    <tr><td>Named registrar packet</td><td>Off</td><td>Explicit opt-in</td></tr>
-                  </tbody>
-                </table>
+                <div class="checkbox-list">
+                  <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review required</span></label>
+                  <label class="checkbox-item"><input id="consentPublic" type="checkbox" checked> <span>Anonymised public aggregate use</span></label>
+                  <label class="checkbox-item"><input id="consentRegistrar" type="checkbox"> <span>Named registrar packet use</span></label>
+                </div>
               </div>
             </section>
 
-            <section class="panel ok">
-              <h2>6. Save and return</h2>
-              <div class="form-grid">
-                <div class="field"><label>Email return link</label><div class="input-box">Send save link</div></div>
-                <div class="field"><label>Submission state</label><div class="select-box">Draft / submitted for ABA review</div></div>
+            <section class="grid two">
+              <div class="panel ok stack">
+                <h2>6. Save and submit</h2>
+                <div class="toggle-row">
+                  <button class="action-button secondary" type="button" id="saveDraft">Save draft and email return link</button>
+                  <button class="action-button primary" type="button" id="submitReview">Submit for ABA review</button>
+                </div>
+                <p class="note">Buttons update prototype state only. A production version would call the CRM or tracker API.</p>
+              </div>
+              <div class="panel stack">
+                <h2>Current captured variables</h2>
+                <div class="state-summary" id="stateSummary"></div>
               </div>
             </section>
           </div>
@@ -141,5 +170,161 @@
         <p class="footer-note">Disposable prototype. Fictional data only. Shared rules come from context-and-decisions-v1.md.</p>
       </main>
     </div>
+
+    <script>
+      const state = {
+        authorised: null,
+        submittedAt: null,
+        lastSavedAt: null,
+        lastAction: "No action taken."
+      };
+
+      const fields = [
+        "companyName",
+        "companyRole",
+        "companyCountry",
+        "membership",
+        "contactName",
+        "contactEmail",
+        "productName",
+        "functionalCategory",
+        "applicationCountry",
+        "regime",
+        "legalPathway",
+        "classificationCode",
+        "currentStatus",
+        "statusDate",
+        "referenceStatus",
+        "referenceNumber",
+        "referenceReason",
+        "proofDescription"
+      ];
+
+      const checks = [
+        "approximateDate",
+        "proofAttached",
+        "consentPublic",
+        "consentRegistrar"
+      ];
+
+      function value(id) {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      }
+
+      function checked(id) {
+        const el = document.getElementById(id);
+        return Boolean(el && el.checked);
+      }
+
+      function currentTimestamp() {
+        const date = new Date();
+        const pad = (value) => String(value).padStart(2, "0");
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      }
+
+      function setHidden(id, hidden) {
+        document.getElementById(id).classList.toggle("is-hidden", hidden);
+      }
+
+      function packetReadiness() {
+        if (state.authorised !== true) return "Not eligible until authorised submitter is confirmed.";
+        if (!checked("proofAttached")) return "Blocked: proof is missing.";
+        if (!checked("consentRegistrar")) return "Blocked: named registrar packet consent is missing.";
+        if (value("referenceStatus") === "Provided" && !value("referenceNumber").trim()) return "Blocked: reference number is blank.";
+        if (value("referenceStatus") !== "Provided" && !value("referenceReason").trim()) return "Blocked: reference-unavailable reason is required.";
+        if (value("membership") !== "Yes") return "Permission captured, but member status must be verified before default packet inclusion.";
+        return "Potentially packet-ready after ABA operator review.";
+      }
+
+      function renderSummary() {
+        const isAct36 = value("regime") === "Agriculture / Act 36";
+        document.querySelectorAll(".act36-field").forEach((el) => el.classList.toggle("is-hidden", !isAct36));
+        setHidden("nonAct36Note", isAct36);
+
+        const referenceProvided = value("referenceStatus") === "Provided";
+        setHidden("referenceNumberField", !referenceProvided);
+        setHidden("referenceReasonField", referenceProvided);
+
+        document.getElementById("not-authorised-panel").classList.toggle("is-hidden", state.authorised !== false);
+        document.getElementById("capture-flow").classList.toggle("is-hidden", state.authorised === false);
+
+        document.querySelectorAll("[data-authorised]").forEach((button) => {
+          const selected = (button.dataset.authorised === "yes" && state.authorised === true) || (button.dataset.authorised === "no" && state.authorised === false);
+          button.setAttribute("aria-pressed", String(selected));
+        });
+
+        document.getElementById("timelineDate").textContent = value("statusDate") || "No date set";
+        document.getElementById("timelineStatus").textContent = value("currentStatus");
+        document.getElementById("proofNote").textContent = checked("proofAttached")
+          ? "Proof is present for operator review. ABA still verifies it before packet inclusion."
+          : "Missing proof can continue for review, but blocks registrar packet inclusion until resolved.";
+
+        document.getElementById("summary-path").textContent = state.authorised === false
+          ? "Stopped: submitter is not authorised."
+          : state.authorised === true
+            ? `${value("companyName")} / ${value("productName")} / ${value("currentStatus")}`
+            : "Waiting for authorisation answer.";
+        document.getElementById("summary-readiness").textContent = packetReadiness();
+        document.getElementById("summary-action").textContent = state.lastAction;
+        const submittedAt = state.submittedAt || "Not submitted yet";
+        document.getElementById("summary-submission-timestamp").textContent = submittedAt;
+
+        const rows = [
+          ["Authorised", state.authorised === null ? "Not answered" : state.authorised ? "Yes" : "No"],
+          ["Submission timestamp", submittedAt],
+          ["Draft saved", state.lastSavedAt || "Not saved yet"],
+          ["Company", value("companyName")],
+          ["Membership", value("membership")],
+          ["Product", value("productName")],
+          ["Category", value("functionalCategory")],
+          ["Regime", value("regime")],
+          ["Act 36 fields", isAct36 ? `${value("legalPathway")} / ${value("classificationCode")}` : "Hidden for this regime"],
+          ["Status log", `${value("currentStatus")} since ${value("statusDate")}${checked("approximateDate") ? " (approx.)" : ""}`],
+          ["Reference", referenceProvided ? value("referenceNumber") : `${value("referenceStatus")}: ${value("referenceReason")}`],
+          ["Proof", checked("proofAttached") ? "Attached" : "Missing"],
+          ["Consent", `Public aggregate: ${checked("consentPublic") ? "yes" : "no"}; named packet: ${checked("consentRegistrar") ? "yes" : "no"}`]
+        ];
+
+        document.getElementById("stateSummary").innerHTML = rows.map(([key, val]) => `
+          <div class="state-row">
+            <div class="state-key">${key}</div>
+            <div class="state-value">${val || "Not provided"}</div>
+          </div>
+        `).join("");
+      }
+
+      document.querySelectorAll("[data-authorised]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.authorised = button.dataset.authorised === "yes";
+          if (!state.authorised) state.submittedAt = null;
+          state.lastAction = state.authorised ? "Authorised submitter confirmed." : "Submission stopped for unauthorised user.";
+          renderSummary();
+        });
+      });
+
+      fields.forEach((id) => document.getElementById(id)?.addEventListener("input", renderSummary));
+      fields.forEach((id) => document.getElementById(id)?.addEventListener("change", renderSummary));
+      checks.forEach((id) => document.getElementById(id)?.addEventListener("change", renderSummary));
+
+      document.getElementById("saveDraft").addEventListener("click", () => {
+        state.lastSavedAt = currentTimestamp();
+        state.lastAction = `Draft saved at ${state.lastSavedAt} for ${value("contactEmail") || "return email not provided"}.`;
+        renderSummary();
+      });
+
+      document.getElementById("submitReview").addEventListener("click", () => {
+        if (state.authorised) {
+          state.submittedAt = currentTimestamp();
+          state.lastAction = `Submitted for ABA operator review at ${state.submittedAt}.`;
+        } else {
+          state.lastAction = "Cannot submit until authorised submitter is confirmed.";
+        }
+        renderSummary();
+      });
+
+      state.authorised = true;
+      renderSummary();
+    </script>
   </body>
 </html>

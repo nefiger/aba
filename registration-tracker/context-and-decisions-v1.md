@@ -458,6 +458,14 @@ Suggested reference status:
 
 When no reference number is provided, require a reference note.
 
+## Submission Timestamp Rule
+
+Every completed submission should receive a system-generated timestamp when it is sent for ABA review.
+
+Do not expose submission timestamp as an intake form input. Draft saves may have a separate saved-at timestamp, but they are not submissions.
+
+Downstream operator, company, and registrar views can display `submittedAt` as read-only audit metadata. Public dashboard views should only expose aggregate timestamp ranges where useful for transparency.
+
 ## Public Dashboard Metrics
 
 The public dashboard should be auditably derived from reviewed records, even if the first prototype uses placeholder data.

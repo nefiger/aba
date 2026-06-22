@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Review | Registration Tracker Wireframe</title>
+    <title>Admin Review | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
@@ -13,9 +13,10 @@
           <div class="brand-mark">ABA</div>
           <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
         </div>
-        <a class="home-slot" aria-disabled="true">ABA Home placeholder</a>
+        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
       </header>
       <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="../index.html">Combined</a>
         <a href="../intake-flow/index.html">Intake</a>
         <a href="../company-dashboard/index.html">Company Dashboard</a>
         <a href="../public-dashboard/index.html">Public Dashboard</a>
@@ -27,96 +28,107 @@
         <section class="page-header">
           <div>
             <h1>Operator review workspace</h1>
-            <p>Internal control point where raw submissions become trusted tracker records, aggregate inputs, and packet candidates.</p>
+            <p>Internal control point where raw submissions become trusted tracker records, aggregate inputs, and packet candidates. Select a queue record and set decisions.</p>
           </div>
           <span class="role-badge">Operator only</span>
+        </section>
+
+        <section class="tracker-context">
+          <div class="context-card"><strong>Selected record</strong><span id="selectedSummary">Microbial Soil Blend</span></div>
+          <div class="context-card"><strong>Current outcome</strong><span id="outcomeSummary">Waiting for operator decisions.</span></div>
+          <div class="context-card"><strong>Last action</strong><span id="lastAction">No action taken.</span></div>
         </section>
 
         <section class="grid sidebar">
           <aside class="panel">
             <h2>Review queue</h2>
-            <table>
-              <thead><tr><th>Record</th><th>State</th></tr></thead>
-              <tbody>
-                <tr><td>Microbial Soil Blend</td><td>Review pending</td></tr>
-                <tr><td>Bio-Control Spray</td><td>Needs clarification</td></tr>
-                <tr><td>Soil Microbe Blend</td><td>Possible duplicate</td></tr>
-                <tr><td>Compost Inoculant</td><td>Accepted</td></tr>
-              </tbody>
-            </table>
+            <div class="queue-list" id="reviewQueue"></div>
           </aside>
 
           <section class="stack">
             <div class="panel">
               <h2>Record detail</h2>
-              <div class="form-grid">
-                <div class="field"><label>Company</label><div class="input-box">Example Bio Inputs (Pty) Ltd</div></div>
-                <div class="field"><label>Product</label><div class="input-box">Fictional Microbial Soil Blend</div></div>
-                <div class="field"><label>Functional category</label><div class="input-box">Biofertiliser</div></div>
-                <div class="field"><label>Regime</label><div class="input-box">Agriculture / Act 36</div></div>
-                <div class="field"><label>Current status</label><div class="input-box">Submitted to registrar</div></div>
-                <div class="field"><label>Date status began</label><div class="input-box">2025-09-15</div></div>
-              </div>
+              <div class="form-grid" id="recordDetail"></div>
             </div>
 
             <section class="grid two">
               <div class="panel">
                 <h2>Membership verification</h2>
-                <table>
-                  <tbody>
-                    <tr><th>Self-reported</th><td>Member</td></tr>
-                    <tr><th>Verified</th><td>Member, active</td></tr>
-                    <tr><th>CRM relationship</th><td>Match to organisation record later</td></tr>
-                  </tbody>
-                </table>
+                <div class="form-grid">
+                  <div class="field"><label>Self-reported</label><div class="input-box" id="selfReported"></div></div>
+                  <div class="field"><label for="verifiedMembership">Verified membership</label><select id="verifiedMembership" class="control-select"><option>Member, active</option><option>Non-member</option><option>Unknown / pending</option><option>Lapsed</option></select></div>
+                  <div class="field full"><label>CRM relationship</label><div class="textarea-box">Match to organisation record later. CRM remains likely system of record.</div></div>
+                </div>
               </div>
               <div class="panel">
                 <h2>Consent and visibility</h2>
-                <table>
-                  <tbody>
-                    <tr><th>Internal review</th><td>Allowed</td></tr>
-                    <tr><th>Public aggregate</th><td>Allowed</td></tr>
-                    <tr><th>Named registrar packet</th><td>Explicit opt-in</td></tr>
-                  </tbody>
-                </table>
+                <div class="checkbox-list">
+                  <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review allowed</span></label>
+                  <label class="checkbox-item"><input id="consentPublic" type="checkbox"> <span>Public aggregate consent</span></label>
+                  <label class="checkbox-item"><input id="consentRegistrar" type="checkbox"> <span>Named registrar packet opt-in</span></label>
+                </div>
               </div>
             </section>
 
             <section class="grid two">
               <div class="panel warn">
                 <h2>Proof and reference review</h2>
-                <table>
-                  <tbody>
-                    <tr><th>Proof</th><td>Uploaded: receipt-placeholder.pdf</td></tr>
-                    <tr><th>Reference</th><td>REF-EXAMPLE-1029</td></tr>
-                    <tr><th>Quality check</th><td>Readable, matches company and product</td></tr>
-                  </tbody>
-                </table>
+                <div class="form-grid">
+                  <div class="field"><label for="proofStatus">Proof check</label><select id="proofStatus" class="control-select"><option>Verified</option><option>Missing</option><option>Unreadable</option><option>Mismatch</option></select></div>
+                  <div class="field"><label for="referenceStatus">Reference check</label><select id="referenceStatus" class="control-select"><option>Verified</option><option>Reason accepted</option><option>Missing reason</option><option>Mismatch</option></select></div>
+                  <div class="field full"><label for="qualityNote">Quality note</label><textarea id="qualityNote" class="control-textarea"></textarea></div>
+                </div>
               </div>
               <div class="panel danger">
-                <h2>Possible duplicate state</h2>
-                <p>Similar company, product name, and status date found. Operator must merge, dismiss, or request clarification.</p>
+                <h2>Duplicate / clarification state</h2>
+                <div class="checkbox-list">
+                  <label class="checkbox-item"><input id="possibleDuplicate" type="checkbox"> <span>Possible duplicate</span></label>
+                  <label class="checkbox-item"><input id="clarificationNeeded" type="checkbox"> <span>Needs clarification from company</span></label>
+                </div>
+                <div class="field full" style="margin-top: 10px;"><label for="clarificationNote">Clarification request</label><textarea id="clarificationNote" class="control-textarea"></textarea></div>
               </div>
             </section>
 
             <section class="grid three">
               <div class="panel ok">
                 <h2>Public aggregate decision</h2>
-                <div class="options"><span class="option">Eligible</span><span class="option">Exclude</span><span class="option">Needs review</span></div>
+                <div class="toggle-row" data-decision-group="publicDecision">
+                  <button class="choice-button" type="button" data-decision="Eligible">Eligible</button>
+                  <button class="choice-button" type="button" data-decision="Exclude">Exclude</button>
+                  <button class="choice-button" type="button" data-decision="Needs review">Needs review</button>
+                </div>
               </div>
               <div class="panel ok">
                 <h2>Registrar packet eligibility</h2>
-                <div class="options"><span class="option">Eligible</span><span class="option">Blocked</span><span class="option">Excluded</span></div>
+                <div class="toggle-row" data-decision-group="packetDecision">
+                  <button class="choice-button" type="button" data-decision="Eligible">Eligible</button>
+                  <button class="choice-button" type="button" data-decision="Blocked">Blocked</button>
+                  <button class="choice-button" type="button" data-decision="Excluded">Excluded</button>
+                </div>
               </div>
               <div class="panel ok">
                 <h2>Operator inclusion decision</h2>
-                <div class="options"><span class="option">Include</span><span class="option">Exclude</span><span class="option">Needs review</span></div>
+                <div class="toggle-row" data-decision-group="operatorDecision">
+                  <button class="choice-button" type="button" data-decision="Include">Include</button>
+                  <button class="choice-button" type="button" data-decision="Exclude">Exclude</button>
+                  <button class="choice-button" type="button" data-decision="Needs review">Needs review</button>
+                </div>
               </div>
             </section>
 
-            <section class="panel warn">
-              <h2>Needs clarification workflow</h2>
-              <div class="textarea-box">Ask company to upload proof or explain why no registrar reference has been issued. Record remains out of registrar packet until resolved.</div>
+            <section class="grid two">
+              <div class="panel">
+                <h2>Decision summary</h2>
+                <div class="state-summary" id="decisionSummary"></div>
+              </div>
+              <div class="panel warn">
+                <h2>Needs clarification workflow</h2>
+                <div class="textarea-box" id="workflowText">Select a record and decisions to see operator workflow text.</div>
+                <div class="toggle-row" style="margin-top: 12px;">
+                  <button class="action-button secondary" type="button" id="saveReview">Save review state</button>
+                  <button class="action-button primary" type="button" id="requestClarification">Request clarification</button>
+                </div>
+              </div>
             </section>
           </section>
         </section>
@@ -124,5 +136,146 @@
         <p class="footer-note">Disposable prototype. Admin review is the v1 internal source-of-truth workflow, while the future CRM remains the likely system of record.</p>
       </main>
     </div>
+
+    <script>
+      const records = [
+        { id: "soil", product: "Fictional Microbial Soil Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Review pending", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-15", submittedAt: "2026-06-22 14:18", reviewedAt: "Not reviewed yet", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: true, proof: "Verified", reference: "Verified", duplicate: false, clarification: false, publicDecision: "Needs review", packetDecision: "Eligible", operatorDecision: "Needs review", note: "Readable, matches company and product." },
+        { id: "spray", product: "Fictional Bio-Control Spray", company: "Example Bio Inputs (Pty) Ltd", state: "Needs clarification", category: "Biopesticide", regime: "Agriculture / Act 36", status: "Query / additional information requested", date: "2025-12-01", submittedAt: "2026-06-22 14:22", reviewedAt: "2026-06-22 14:39", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: true, proof: "Missing", reference: "Verified", duplicate: false, clarification: true, publicDecision: "Needs review", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Proof of submission missing." },
+        { id: "dupe", product: "Fictional Soil Microbe Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Possible duplicate", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-16", submittedAt: "2026-06-22 14:25", reviewedAt: "2026-06-22 14:41", self: "Member", verified: "Member, active", publicConsent: false, registrarConsent: false, proof: "Verified", reference: "Mismatch", duplicate: true, clarification: true, publicDecision: "Exclude", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Looks similar to Microbial Soil Blend record." },
+        { id: "compost", product: "Fictional Compost Inoculant", company: "Sample Agri Sciences", state: "Accepted", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Approved / registered", date: "2024-04-20", submittedAt: "2026-06-21 16:44", reviewedAt: "2026-06-22 09:15", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: false, proof: "Verified", reference: "Reason accepted", duplicate: false, clarification: false, publicDecision: "Eligible", packetDecision: "Excluded", operatorDecision: "Exclude", note: "Finalised historical record." }
+      ];
+
+      let selectedId = "soil";
+      let lastAction = "No action taken.";
+
+      function current() {
+        return records.find((record) => record.id === selectedId);
+      }
+
+      function setChoice(group, value) {
+        current()[group] = value;
+        lastAction = `${group.replace("Decision", " decision")} set to ${value}.`;
+        render();
+      }
+
+      function renderQueue() {
+        document.getElementById("reviewQueue").innerHTML = records.map((record) => `
+          <button class="queue-button" type="button" data-record="${record.id}" aria-pressed="${record.id === selectedId}">
+            <strong>${record.product}</strong>
+            <span>${record.state}</span>
+            <span>Submitted at ${record.submittedAt}</span>
+          </button>
+        `).join("");
+        document.querySelectorAll("[data-record]").forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedId = button.dataset.record;
+            lastAction = `Selected ${current().product}.`;
+            render();
+          });
+        });
+      }
+
+      function renderDetail(record) {
+        const rows = [
+          ["Company", record.company],
+          ["Product", record.product],
+          ["Submitted at", record.submittedAt],
+          ["Last ABA review", record.reviewedAt],
+          ["Functional category", record.category],
+          ["Regime", record.regime],
+          ["Current status", record.status],
+          ["Date status began", record.date]
+        ];
+        document.getElementById("recordDetail").innerHTML = rows.map(([label, value]) => `<div class="field"><label>${label}</label><div class="input-box">${value}</div></div>`).join("");
+        document.getElementById("selfReported").textContent = record.self;
+        document.getElementById("verifiedMembership").value = record.verified;
+        document.getElementById("consentPublic").checked = record.publicConsent;
+        document.getElementById("consentRegistrar").checked = record.registrarConsent;
+        document.getElementById("proofStatus").value = record.proof;
+        document.getElementById("referenceStatus").value = record.reference;
+        document.getElementById("qualityNote").value = record.note;
+        document.getElementById("possibleDuplicate").checked = record.duplicate;
+        document.getElementById("clarificationNeeded").checked = record.clarification;
+        document.getElementById("clarificationNote").value = record.clarification ? "Please confirm proof/reference details and whether this duplicates another record." : "";
+      }
+
+      function renderDecisionButtons(record) {
+        document.querySelectorAll("[data-decision-group]").forEach((groupEl) => {
+          const group = groupEl.dataset.decisionGroup;
+          groupEl.querySelectorAll("button").forEach((button) => {
+            button.setAttribute("aria-pressed", String(record[group] === button.dataset.decision));
+            button.onclick = () => setChoice(group, button.dataset.decision);
+          });
+        });
+      }
+
+      function renderSummary(record) {
+        const ready = record.verified === "Member, active" && record.registrarConsent && record.proof === "Verified" && (record.reference === "Verified" || record.reference === "Reason accepted") && record.packetDecision === "Eligible" && record.operatorDecision === "Include";
+        const rows = [
+          ["Review state", record.state],
+          ["Submitted at", record.submittedAt],
+          ["Last ABA review", record.reviewedAt],
+          ["Verified member", record.verified],
+          ["Public aggregate", record.publicDecision],
+          ["Registrar eligibility", record.packetDecision],
+          ["Operator inclusion", record.operatorDecision],
+          ["Duplicate", record.duplicate ? "Possible duplicate flagged" : "No duplicate flag"],
+          ["Clarification", record.clarification ? "Needed" : "Not currently needed"],
+          ["Export outcome", ready ? "Ready for registrar packet" : "Not export-ready"]
+        ];
+        document.getElementById("decisionSummary").innerHTML = rows.map(([key, value]) => `<div class="state-row"><div class="state-key">${key}</div><div class="state-value">${value}</div></div>`).join("");
+        document.getElementById("workflowText").textContent = record.clarification
+          ? "Send clarification request to the company and keep record out of registrar packet until resolved."
+          : ready
+            ? "Record can flow to registrar export list after saving this operator review."
+            : "Record remains reviewed or pending, but not export-ready under current decisions.";
+        document.getElementById("selectedSummary").textContent = `${record.product} / ${record.state}`;
+        document.getElementById("outcomeSummary").textContent = ready ? "Ready for registrar export." : `${record.publicDecision} for public aggregates; ${record.packetDecision} for packet.`;
+        document.getElementById("lastAction").textContent = lastAction;
+      }
+
+      function syncRecordFromControls() {
+        const record = current();
+        record.verified = document.getElementById("verifiedMembership").value;
+        record.publicConsent = document.getElementById("consentPublic").checked;
+        record.registrarConsent = document.getElementById("consentRegistrar").checked;
+        record.proof = document.getElementById("proofStatus").value;
+        record.reference = document.getElementById("referenceStatus").value;
+        record.note = document.getElementById("qualityNote").value;
+        record.duplicate = document.getElementById("possibleDuplicate").checked;
+        record.clarification = document.getElementById("clarificationNeeded").checked;
+      }
+
+      function render() {
+        renderQueue();
+        const record = current();
+        renderDetail(record);
+        renderDecisionButtons(record);
+        renderSummary(record);
+      }
+
+      ["verifiedMembership", "consentPublic", "consentRegistrar", "proofStatus", "referenceStatus", "qualityNote", "possibleDuplicate", "clarificationNeeded"].forEach((id) => {
+        document.getElementById(id).addEventListener("change", () => {
+          syncRecordFromControls();
+          lastAction = "Review fields updated.";
+          renderSummary(current());
+        });
+      });
+
+      document.getElementById("saveReview").addEventListener("click", () => {
+        syncRecordFromControls();
+        lastAction = `Saved review state for ${current().product}.`;
+        renderSummary(current());
+      });
+
+      document.getElementById("requestClarification").addEventListener("click", () => {
+        current().clarification = true;
+        current().state = "Needs clarification";
+        lastAction = `Clarification requested for ${current().product}.`;
+        render();
+      });
+
+      render();
+    </script>
   </body>
 </html>

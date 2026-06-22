@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BioRegistration Tracker - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e2",
+                        "outline": "#747878",
+                        "on-surface": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "secondary-fixed": "#e3e2e2",
+                        "on-tertiary-fixed": "#1c1b1a",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary": "#5e5e5e",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#5f5e5e",
+                        "tertiary-container": "#1c1b1a",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#444748",
+                        "on-background": "#1a1c1c",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "secondary-container": "#e3e2e2",
+                        "inverse-surface": "#2f3131",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-secondary-container": "#646464",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f3f3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "on-tertiary-container": "#868381",
+                        "on-secondary-fixed-variant": "#464747",
+                        "surface-variant": "#e2e2e2",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-container": "#858383",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c7c7",
+                        "surface": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "annotation-width": "240px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "annotation": ["Space Mono"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Space Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "annotation": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f9f9f9; color: #1a1c1c; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen font-body-md text-body-md antialiased bg-background text-on-background">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest text-primary font-body-md text-body-md w-full border-b-2 border-primary flat no shadows flex justify-between items-center px-gutter py-4">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">BioRegistration Tracker</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-primary font-bold border-b-2 border-primary transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-secondary hover:bg-secondary-container transition-colors duration-200" href="#">Registrations</a>
+<a class="text-secondary hover:bg-secondary-container transition-colors duration-200" href="#">Reporting</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="Help" class="p-2 hover:bg-secondary-container rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="help">help</span>
+</button>
+<button aria-label="Notifications" class="p-2 hover:bg-secondary-container rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<div aria-label="User avatar" class="w-8 h-8 rounded-full border-2 border-primary overflow-hidden bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="close">close</span>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full max-w-container-max mx-auto">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full w-64 border-r-2 border-primary bg-surface-container-low text-primary font-label-sm text-label-sm flat no shadows">
+<div class="p-6 border-b border-primary">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 border-2 border-primary bg-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="close">close</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Tracker Admin</span>
+</div>
+<span class="text-secondary">V2.4.0-Alpha</span>
+</div>
+<nav class="flex-1 py-4 flex flex-col gap-2 px-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary font-bold rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Overview
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Live Tracking
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    History
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                    Support
+                </a>
+</nav>
+<div class="p-4 border-t border-primary">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-DEFAULT transition-transform scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex w-full relative">
+<div class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<header class="mb-12">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">COMPANY PRIVATE DASHBOARD</h1>
+<p class="font-body-lg text-body-lg text-secondary border-b border-primary pb-4">Internal overview of active biological inputs and timeline benchmarking.</p>
+</header>
+<!-- Section 1: My Pipeline -->
+<section class="mb-16">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="timeline">timeline</span>
+<h2 class="font-headline-md text-headline-md text-primary">My Pipeline</h2>
+</div>
+<div class="border-2 border-primary bg-surface p-6 flex flex-col gap-6">
+<!-- Pipeline Item 1 -->
+<div class="border border-outline bg-surface-container-lowest p-4 relative">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-primary text-body-lg">BioStimulant Alpha-X</h3>
+<p class="font-label-sm text-label-sm text-secondary">ID: REG-2023-001 | Submitted: 2023-05-12</p>
+</div>
+<span class="bg-surface-container-high text-primary px-3 py-1 font-label-sm border border-outline">In Review</span>
+</div>
+<!-- Timeline -->
+<div class="relative pt-8 pb-2">
+<div class="absolute left-0 top-10 w-full h-[2px] bg-outline"></div>
+<div class="flex justify-between relative z-10">
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-primary border-2 border-primary rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-primary text-center w-20">Submission<br/>Complete</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-primary border-2 border-primary rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-primary text-center w-20">Dossier<br/>Accepted</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-surface border-2 border-primary rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-primary font-bold text-center w-20">Technical<br/>Review</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-surface border-2 border-outline rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-outline text-center w-20">Final<br/>Decision</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pipeline Item 2 -->
+<div class="border border-outline bg-surface-container-lowest p-4 relative">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-primary text-body-lg">NemaControl Pro</h3>
+<p class="font-label-sm text-label-sm text-secondary">ID: REG-2024-042 | Submitted: 2024-01-05</p>
+</div>
+<span class="bg-surface-container-high text-primary px-3 py-1 font-label-sm border border-outline">Pre-Submission</span>
+</div>
+<!-- Timeline -->
+<div class="relative pt-8 pb-2">
+<div class="absolute left-0 top-10 w-full h-[2px] bg-outline"></div>
+<div class="flex justify-between relative z-10">
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-primary border-2 border-primary rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-primary text-center w-20">Data<br/>Gathering</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-surface border-2 border-primary rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-primary font-bold text-center w-20">Dossier<br/>Prep</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-surface border-2 border-outline rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-outline text-center w-20">Submission</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-surface border-2 border-outline rounded-full mb-2"></div>
+<span class="font-annotation text-annotation text-outline text-center w-20">Review</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Wait-Time Benchmarking -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="bar_chart">bar_chart</span>
+<h2 class="font-headline-md text-headline-md text-primary">Wait-Time Benchmarking</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Metric Cards -->
+<div class="flex flex-col gap-4">
+<div class="border-2 border-primary bg-surface p-6 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary mb-2 uppercase">Your Average Wait Time</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">450</span>
+<span class="font-body-md text-body-md text-secondary pb-1">Days</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="trending_up">trending_up</span>
+<span class="font-annotation text-annotation text-error">+15% vs Last Year</span>
+</div>
+</div>
+<div class="border border-outline bg-surface p-6 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary mb-2 uppercase">Sector Median</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-xl text-headline-xl text-primary">380</span>
+<span class="font-body-md text-body-md text-secondary pb-1">Days</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="compare_arrows">compare_arrows</span>
+<span class="font-annotation text-annotation text-secondary">Across 45 Companies</span>
+</div>
+</div>
+</div>
+<!-- Bar Chart Placeholder -->
+<div class="border-2 border-primary bg-surface p-6 flex flex-col relative min-h-[300px]">
+<h3 class="font-label-sm text-label-sm text-secondary mb-6 uppercase">Distribution by Stage (Days)</h3>
+<div class="flex-1 flex flex-col justify-end gap-4 relative">
+<!-- Y Axis Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
+<div class="border-b border-dashed border-outline w-full h-0"></div>
+<div class="border-b border-dashed border-outline w-full h-0"></div>
+<div class="border-b border-dashed border-outline w-full h-0"></div>
+<div class="border-b border-solid border-primary w-full h-0"></div>
+</div>
+<!-- Bars -->
+<div class="flex items-end justify-around w-full h-full pb-6 z-10 relative">
+<div class="flex flex-col items-center gap-2 w-16">
+<div class="w-full bg-primary border border-primary h-[80%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-on-primary">120</span>
+</div>
+<div class="w-full bg-surface-container-highest border border-outline h-[60%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-primary">90</span>
+</div>
+<span class="font-annotation text-annotation text-secondary absolute -bottom-4">Review</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-16">
+<div class="w-full bg-primary border border-primary h-[100%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-on-primary">250</span>
+</div>
+<div class="w-full bg-surface-container-highest border border-outline h-[85%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-primary">200</span>
+</div>
+<span class="font-annotation text-annotation text-secondary absolute -bottom-4">Tech</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-16">
+<div class="w-full bg-primary border border-primary h-[40%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-on-primary">80</span>
+</div>
+<div class="w-full bg-surface-container-highest border border-outline h-[50%] flex items-end justify-center pb-2">
+<span class="font-annotation text-annotation text-primary">90</span>
+</div>
+<span class="font-annotation text-annotation text-secondary absolute -bottom-4">Final</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex justify-center gap-6 mt-8">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-primary border border-primary"></div>
+<span class="font-annotation text-annotation text-secondary">Your Avg</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-surface-container-highest border border-outline"></div>
+<span class="font-annotation text-annotation text-secondary">Sector Median</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Annotation Gutter -->
+<aside class="hidden xl:block w-annotation-width border-l border-outline bg-surface-container-lowest p-6 overflow-y-auto">
+<h4 class="font-label-sm text-label-sm font-bold text-primary border-b border-primary pb-2 mb-6 uppercase tracking-widest">UX Notes</h4>
+<div class="flex flex-col gap-6">
+<div class="border border-dashed border-outline p-4 bg-surface">
+<span class="material-symbols-outlined text-secondary mb-2 block" data-icon="info">info</span>
+<p class="font-annotation text-annotation text-secondary leading-relaxed">
+<strong>Logic:</strong> Note that wait times are derived from the dated status log. Values update nightly based on state changes in the pipeline.
+                        </p>
+</div>
+<div class="border border-dashed border-outline p-4 bg-surface">
+<span class="material-symbols-outlined text-secondary mb-2 block" data-icon="security">security</span>
+<p class="font-annotation text-annotation text-secondary leading-relaxed">
+<strong>Data Privacy:</strong> Note that sector data is anonymized and aggregated. Individual competitor timelines are never exposed.
+                        </p>
+</div>
+</div>
+</aside>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-dim text-outline font-annotation text-annotation w-full border-t border-outline flat no shadows flex justify-between items-center px-margin-desktop py-4 mt-auto">
+<span class="font-label-sm text-label-sm text-on-surface">© 2024 Biological Inputs Tracker. Internal Use Only.</span>
+<nav class="flex gap-4">
+<a class="text-secondary hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="text-secondary hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+<a class="text-secondary hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Security Protocols</a>
+</nav>
+</footer>
+</body></html>

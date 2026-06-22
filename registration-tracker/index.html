@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Combined View | ABA Registration Tracker</title>
+    <link rel="stylesheet" href="shared/tracker-wireframe.css">
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">ABA</div>
+          <div>
+            <p class="product-kicker">Biological Inputs</p>
+            <p class="product-title">Registration Tracker</p>
+          </div>
+        </div>
+        <a class="home-slot" href="../docs/site/index.html">Back to ABA site</a>
+      </header>
+      <nav class="prototype-nav" aria-label="Prototype areas">
+        <a href="index.html" aria-current="page">Combined</a>
+        <a href="intake-flow/index.html">Intake</a>
+        <a href="company-dashboard/index.html">Company Dashboard</a>
+        <a href="public-dashboard/index.html">Public Dashboard</a>
+        <a href="admin-operator-review/index.html">Admin Review</a>
+        <a href="registrar-list/index.html">Registrar Export</a>
+      </nav>
+
+      <main class="page">
+        <section class="page-header">
+          <div>
+            <h1>Registration tracker combined view</h1>
+            <p>This joined prototype keeps the five individual tracker views together for review. Each section below is the live individual HTML page, so changes to a view automatically carry through here.</p>
+          </div>
+          <span class="role-badge">Cross-role review package</span>
+        </section>
+
+        <section class="tracker-context" aria-label="Prototype context">
+          <div class="context-card">
+            <strong>Use this for walkthroughs</strong>
+            <span>One scrollable package for the ABA registration story: intake, member workspace, public evidence, operator review, and registrar export.</span>
+          </div>
+          <div class="context-card">
+            <strong>Use individual pages for detail</strong>
+            <span>The separate views remain the source pages. Open them directly when reviewing role boundaries or a specific workflow.</span>
+          </div>
+          <div class="context-card">
+            <strong>Prototype status</strong>
+            <span>Fictional data, disposable HTML, and product-logic wireframes. The tracker remains separate from the final CRM/site architecture.</span>
+          </div>
+        </section>
+
+        <section class="combined-stack" aria-label="Combined tracker views">
+          <article class="combined-view" id="intake">
+            <div class="combined-view-header">
+              <h2>1. Intake flow</h2>
+              <a href="intake-flow/index.html">Open individual view</a>
+            </div>
+            <iframe class="combined-frame" title="Intake flow" src="intake-flow/index.html" height="1180"></iframe>
+          </article>
+
+          <article class="combined-view" id="company-dashboard">
+            <div class="combined-view-header">
+              <h2>2. Company dashboard</h2>
+              <a href="company-dashboard/index.html">Open individual view</a>
+            </div>
+            <iframe class="combined-frame" title="Company dashboard" src="company-dashboard/index.html" height="980"></iframe>
+          </article>
+
+          <article class="combined-view" id="public-dashboard">
+            <div class="combined-view-header">
+              <h2>3. Public dashboard</h2>
+              <a href="public-dashboard/index.html">Open individual view</a>
+            </div>
+            <iframe class="combined-frame" title="Public dashboard" src="public-dashboard/index.html" height="1040"></iframe>
+          </article>
+
+          <article class="combined-view" id="admin-review">
+            <div class="combined-view-header">
+              <h2>4. Admin / operator review</h2>
+              <a href="admin-operator-review/index.html">Open individual view</a>
+            </div>
+            <iframe class="combined-frame" title="Admin operator review" src="admin-operator-review/index.html" height="1060"></iframe>
+          </article>
+
+          <article class="combined-view" id="registrar-export">
+            <div class="combined-view-header">
+              <h2>5. Registrar export</h2>
+              <a href="registrar-list/index.html">Open individual view</a>
+            </div>
+            <iframe class="combined-frame" title="Registrar export" src="registrar-list/index.html" height="980"></iframe>
+          </article>
+        </section>
+
+        <p class="footer-note">Combined view embeds the individual HTML pages to avoid content drift between joined and separate prototypes.</p>
+      </main>
+    </div>
+  </body>
+</html>

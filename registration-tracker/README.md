@@ -46,11 +46,21 @@ The workspace is organised into five areas:
 - `admin-operator-review`
 - `registrar-list`
 
+There is also a combined review page at `index.html`. Keep the combined and individual views aligned; the current combined page embeds the individual views so updates should be made in the individual pages first.
+
 ## Shared Context
 
 Read `context-and-decisions-v1.md` before creating or revising any wireframes.
 
 Read `starting-prompt-v1.md` for the original master prompt that launched the low-fidelity wireframe work.
+
+## Current Working Notes
+
+- Buttons, filters, toggles, and selections in the HTML wireframes should be real interactive controls, not visual labels only.
+- Submission timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed submission is sent.
+- Draft save state can show its own saved-at time, but it must not create or imply a submission timestamp.
+- Downstream views may display `submittedAt` as read-only audit metadata. Public views should show only aggregate timestamp ranges, not identifiable submission timestamps.
+- Verify interactive behavior in the browser, not just with screenshots.
 
 ## Relationship To Main ABA Work
 
