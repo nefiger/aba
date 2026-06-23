@@ -289,6 +289,19 @@
       font-size: 13px;
       line-height: 1.45;
     }
+    .recommendation {
+      border: 1px solid rgba(43, 107, 79, 0.22);
+      border-radius: 12px;
+      background: var(--green-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .recommendation p {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.45;
+    }
     .sidebar-membership-help {
       grid-column: 2;
       grid-row: 2;
@@ -464,6 +477,13 @@
                   <label class="choice"><input type="checkbox" value="Research or academic organisation" x-model="form.org_roles"> Research or academic organisation</label>
                   <label class="choice"><input type="checkbox" value="Funder or development partner" x-model="form.org_roles"> Funder or development partner</label>
                   <label class="choice"><input type="checkbox" value="Public institution" x-model="form.org_roles"> Public institution</label>
+                </div>
+                <div class="recommendation" x-show="membershipRecommendation" x-cloak>
+                  <div class="mini">Suggested membership route</div>
+                  <p x-text="membershipRecommendation"></p>
+                  <div class="button-row" x-show="recommendedType" x-cloak>
+                    <button class="button secondary" type="button" @click="setType(recommendedType)">Use this membership type</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -652,6 +672,25 @@
           observer_interests: [],
           aggregate_consent: false,
           followup_consent: false
+        },
+        get recommendedType() {
+          const fullRoles = ["Manufacturer", "Importer", "Distributor", "Product owner"];
+          const associateRoles = ["Technical service provider", "Research or academic organisation"];
+          const observerRoles = ["Funder or development partner", "Public institution"];
+          const buckets = [
+            ["Full membership", fullRoles],
+            ["Associate membership", associateRoles],
+            ["Observer status", observerRoles]
+          ].filter(([, roles]) => roles.some((role) => this.form.org_roles.includes(role)));
+
+          return buckets.length === 1 ? buckets[0][0] : "";
+        },
+        get membershipRecommendation() {
+          if (!this.form.org_roles.length) return "";
+          if (this.recommendedType) {
+            return `Based on the selected organisation role(s), ${this.recommendedType} may be the best fit. You can still choose a different route if ABA advises otherwise.`;
+          }
+          return "The selected roles cross more than one membership route. Please review the member types and choose the route that best matches the applicant's primary purpose.";
         },
         setType(type) {
           this.form.type = type;
