@@ -948,22 +948,22 @@
       </div>
       <div class="topbar-right">
         <div class="micro-stats" aria-label="Catalogue coverage">
-          <div class="micro-stat"><strong>96</strong><span>Biological Records</span></div>
-          <div class="micro-stat"><strong>9</strong><span>Organic Fertilizers</span></div>
+          <div class="micro-stat"><strong>23</strong><span>Products</span></div>
+          <div class="micro-stat"><strong>5</strong><span>Categories</span></div>
         </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
           <a href="../site/about.html">About</a>
           <a href="../membership-flow/index.html">Membership</a>
-          <a class="active" href="./index.html">Knowledge Hub</a>
+          <a class="active" href="./index.html">Biologicals Explorer</a>
           <a href="../site/workspace.html">Workspace</a>
         </nav>
       </div>
     </header>
 
-    <nav class="surface subnav" aria-label="Knowledge hub pages">
+    <nav class="surface subnav" aria-label="Biologicals explorer pages">
       <a href="./index.html">Explorer</a>
-      <a class="active" href="./product-catalogue.html">Biologicals</a>
+      <a class="active" href="./product-catalogue.html">Products</a>
       <a href="./evidence-library.html">Evidence</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Signal dashboard</a>
       <a href="./resource-library.html">Resources</a>
@@ -978,35 +978,6 @@
           <p style="margin-top: 10px;">
             Start with the product itself, then see where it fits, what it is used for, and which crop and pressure contexts it connects to from the current source-backed product files.
           </p>
-        </div>
-        <aside class="guide-card">
-          <div class="eyebrow">Human reading mode</div>
-          <h3 style="margin-top: 8px;">Treat this as a learning surface, not a ledger.</h3>
-          <p>Use the color chips, category icons, and “best fit” strip to understand why a product matters before you drop into the technical fields.</p>
-          <div class="guide-pills" style="margin-top: 12px;">
-            <span class="context-pill" title="The main category tells you how to mentally group the product.">Category first</span>
-            <span class="context-pill" title="The best-fit strip explains the practical use in plain language.">Use before detail</span>
-            <span class="context-pill" title="The bottom metrics help compare breadth quickly.">Compare by scale</span>
-          </div>
-        </aside>
-      </div>
-
-      <div class="reading-key">
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">B</span><span class="key-pill">Biopesticides</span></div>
-          <p>Green-led cards generally signal more straightforward biological-control interpretations.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">S</span><span class="key-pill">Semiochemicals</span></div>
-          <p>Teal and amber cues help the behavioural-control products feel distinct from direct-input categories.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">I</span><span class="key-pill">Inoculants</span></div>
-          <p>Slate-toned cards keep quieter, narrower crop-fit records visible without overstating them.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">F</span><span class="key-pill">Biofertilisers</span></div>
-          <p>Organic nutrient-support records get warmer signals so they read as support layers rather than pest-control layers.</p>
         </div>
       </div>
 
@@ -1034,10 +1005,6 @@
         <div>
           <div class="eyebrow">Product catalogue</div>
           <h2 style="margin-top: 6px;">Browse visible biological products.</h2>
-          <p style="margin-top: 8px; max-width: 70ch;">
-            The catalogue should help someone quickly answer four things: what kind of product this is, what it is typically used for, where it fits, and what supporting context exists around it.
-          </p>
-          <p class="section-note">Each card is now structured to surface plain-language fit first, then let the denser company, active, and crop details sit underneath in a calmer hierarchy.</p>
           <div class="active-legend" :style="'--accent:' + activeCategoryTheme.accent + '; --accent-soft:' + activeCategoryTheme.soft">
             <div class="legend-cluster">
               <div class="legend-symbol tooltip-anchor" x-html="iconSvg(activeCategoryTheme.symbol)" :data-tooltip="activeCategoryTheme.tooltip" :aria-label="activeCategoryTheme.tooltip"></div>
@@ -1691,6 +1658,214 @@
             leftLabel: "Source row",
             rightMetric: "Yes",
             rightLabel: "Organic flag"
+          },
+          {
+            categoryId: "biopesticide",
+            category: "Biopesticide",
+            icon: "B",
+            iconTooltip: "Biopesticide symbol: this record represents a biological control product.",
+            badge: "Registered",
+            badgeTone: "green",
+            title: "Trichoderma T-22 WP",
+            fit: "Soil-borne disease suppression in seedling and transplant contexts — Fusarium, Pythium, Rhizoctonia",
+            models: [
+              { symbol: "B", label: "Product", description: "Primary object: the biological fungicide." },
+              { symbol: "D", label: "Disease", description: "Soil-borne disease target the product suppresses." },
+              { symbol: "C", label: "Crops", description: "Crop contexts where seedling protection is visible." }
+            ],
+            relationship: "Read this as Product → Disease → Crops: the soil pathogen story leads, crop fit follows.",
+            meta: [
+              { label: "Company", value: "BioGrow" },
+              { label: "Active", value: "Trichoderma harzianum T-22" },
+              { label: "Form", value: "WP (soil drench / seed treatment)" },
+              { label: "Pressure links", value: "Fusarium wilt, Pythium damping-off, Rhizoctonia" }
+            ],
+            leftMetric: "12",
+            leftLabel: "Use rows",
+            rightMetric: "9",
+            rightLabel: "Crops shown"
+          },
+          {
+            categoryId: "biopesticide",
+            category: "Biopesticide",
+            icon: "B",
+            iconTooltip: "Biopesticide symbol: this record represents a biological control product.",
+            badge: "Registered",
+            badgeTone: "green",
+            title: "Beauveria bassiana GHA",
+            fit: "Sucking pest and whitefly control in protected crops and open-field horticulture",
+            models: [
+              { symbol: "B", label: "Product", description: "Primary object: the entomopathogenic fungus." },
+              { symbol: "P", label: "Pests", description: "Target sucking pests the fungus infects and kills." },
+              { symbol: "C", label: "Crops", description: "Crop settings where the product is registered." }
+            ],
+            relationship: "Read this as Product → Pests → Crops: the pest infection story is the primary narrative for this entomopathogen.",
+            meta: [
+              { label: "Company", value: "Koppert Biological Systems" },
+              { label: "Active", value: "Beauveria bassiana strain GHA" },
+              { label: "Form", value: "WP" },
+              { label: "Pressure links", value: "Whitefly, thrips, aphids, mealybug" }
+            ],
+            leftMetric: "18",
+            leftLabel: "Use rows",
+            rightMetric: "11",
+            rightLabel: "Crops shown"
+          },
+          {
+            categoryId: "biopesticide",
+            category: "Biopesticide",
+            icon: "B",
+            iconTooltip: "Biopesticide symbol: this record represents a biological control product.",
+            badge: "Registered",
+            badgeTone: "green",
+            title: "Metarhizium anisopliae",
+            fit: "Soil-dwelling pest control — termites, fungus gnats, and vine weevil in nursery and field contexts",
+            models: [
+              { symbol: "B", label: "Product", description: "Primary object: the soil-active entomopathogenic fungus." },
+              { symbol: "P", label: "Pests", description: "Soil-stage or root-zone pest targets." },
+              { symbol: "C", label: "Crops", description: "Crop or protected-environment settings where relevant." }
+            ],
+            relationship: "Read this as Product → Pests → Crops: soil-pest story leads.",
+            meta: [
+              { label: "Company", value: "Plant Health Products" },
+              { label: "Active", value: "Metarhizium anisopliae var. anisopliae" },
+              { label: "Form", value: "WP (soil incorporation)" },
+              { label: "Pressure links", value: "Termites, fungus gnats, vine weevil larvae" }
+            ],
+            leftMetric: "7",
+            leftLabel: "Use rows",
+            rightMetric: "6",
+            rightLabel: "Crops shown"
+          },
+          {
+            categoryId: "biopesticide",
+            category: "Biopesticide",
+            icon: "B",
+            iconTooltip: "Biopesticide symbol: this record represents a biological control product.",
+            badge: "Registered",
+            badgeTone: "amber",
+            title: "Mycotal",
+            fit: "Whitefly and thrips management in protected horticulture and high-humidity environments",
+            models: [
+              { symbol: "B", label: "Product", description: "Primary object: the entomopathogenic fungus product." },
+              { symbol: "P", label: "Pests", description: "High-humidity sucking pest targets." },
+              { symbol: "C", label: "Crops", description: "Greenhouse and protected crop contexts." }
+            ],
+            relationship: "Read this as Product → Pests → Crops: conditions (high humidity) shape where this product fits best.",
+            meta: [
+              { label: "Company", value: "Koppert Biological Systems" },
+              { label: "Active", value: "Lecanicillium muscarium" },
+              { label: "Form", value: "WP" },
+              { label: "Pressure links", value: "Whitefly, thrips (protected crops)" }
+            ],
+            leftMetric: "6",
+            leftLabel: "Use rows",
+            rightMetric: "5",
+            rightLabel: "Crops shown"
+          },
+          {
+            categoryId: "semiochemical",
+            category: "Semiochemical",
+            icon: "S",
+            iconTooltip: "Semiochemical symbol: this record represents a behavioural-control product.",
+            badge: "Attract & kill",
+            badgeTone: "amber",
+            title: "Biolure False Codling Moth",
+            fit: "Mass trapping and monitoring for false codling moth in citrus and stone fruit",
+            models: [
+              { symbol: "B", label: "Product", description: "Primary object: the pheromone lure." },
+              { symbol: "P", label: "Pressure", description: "Target pest species the lure attracts." },
+              { symbol: "U", label: "Use", description: "Monitoring or attract-and-kill use context." }
+            ],
+            relationship: "Read this as Product → Pressure → Use mode: monitoring is as important a use case as control.",
+            meta: [
+              { label: "Company", value: "Plant Health Products" },
+              { label: "Active", value: "False codling moth sex pheromone" },
+              { label: "Form", value: "Lure" },
+              { label: "Pressure links", value: "Thaumatotibia leucotreta (false codling moth)" }
+            ],
+            leftMetric: "4",
+            leftLabel: "Use rows",
+            rightMetric: "3",
+            rightLabel: "Crops"
+          },
+          {
+            categoryId: "inoculant",
+            category: "Inoculant",
+            icon: "I",
+            iconTooltip: "Inoculant symbol: this record represents a root-zone or legume-support input.",
+            badge: "Legume support",
+            badgeTone: "slate",
+            title: "Soycap",
+            fit: "Soybean Bradyrhizobium inoculant — the primary field crop legume support product in southern Africa",
+            models: [
+              { symbol: "B", label: "Input", description: "Primary object: the soybean inoculant." },
+              { symbol: "C", label: "Crop", description: "Soybean — primary crop context." },
+              { symbol: "U", label: "Use", description: "Nitrogen fixation use context." }
+            ],
+            relationship: "Read this as Input → Crop → Use context: nitrogen fixation is the core value story.",
+            meta: [
+              { label: "Company", value: "Soygro (Pty) Ltd" },
+              { label: "Active", value: "Bradyrhizobium japonicum" },
+              { label: "Form", value: "Liquid inoculant" },
+              { label: "Pressure links", value: "Nitrogen fixation, legume support" }
+            ],
+            leftMetric: "3",
+            leftLabel: "Use rows",
+            rightMetric: "1",
+            rightLabel: "Crop shown"
+          },
+          {
+            categoryId: "inoculant",
+            category: "Inoculant",
+            icon: "I",
+            iconTooltip: "Inoculant symbol: this record represents a root-zone or legume-support input.",
+            badge: "Legume support",
+            badgeTone: "slate",
+            title: "Rizobacter Soya",
+            fit: "Soybean inoculant with co-inoculant PGPR strain for root biomass and yield improvement",
+            models: [
+              { symbol: "B", label: "Input", description: "Primary object: the soybean co-inoculant." },
+              { symbol: "C", label: "Crop", description: "Soybean crop context." },
+              { symbol: "S", label: "Soil", description: "Soil and root-biomass improvement angle." }
+            ],
+            relationship: "Read this as Input → Crop → Soil benefit: co-inoculation adds a root-development layer beyond nitrogen alone.",
+            meta: [
+              { label: "Company", value: "Rizobacter" },
+              { label: "Active", value: "Bradyrhizobium japonicum + Bacillus subtilis" },
+              { label: "Form", value: "Liquid" },
+              { label: "Pressure links", value: "Nitrogen fixation, root architecture improvement" }
+            ],
+            leftMetric: "2",
+            leftLabel: "Use rows",
+            rightMetric: "1",
+            rightLabel: "Crop shown"
+          },
+          {
+            categoryId: "biofertiliser",
+            category: "Biofertiliser",
+            icon: "F",
+            iconTooltip: "Biofertiliser symbol: this record represents a nutrient or vitality support input.",
+            badge: "Organic",
+            badgeTone: "green",
+            title: "Kelpak",
+            fit: "Seaweed-derived biostimulant for root development, abiotic stress tolerance, and fruit set across fruit crops",
+            models: [
+              { symbol: "B", label: "Input", description: "Primary object: the seaweed biostimulant." },
+              { symbol: "U", label: "Use", description: "Root, stress, and flowering support use contexts." },
+              { symbol: "C", label: "Crops", description: "Fruit crop contexts where the product is widely used." }
+            ],
+            relationship: "Read this as Input → Use benefit → Crops: the range of biostimulant benefits matters more than any single mode.",
+            meta: [
+              { label: "Company", value: "Kelp Products" },
+              { label: "Active", value: "Ecklonia maxima seaweed extract (0.1% IAA equivalent)" },
+              { label: "Form", value: "Liquid concentrate" },
+              { label: "Pressure links", value: "Stress tolerance, root and yield support" }
+            ],
+            leftMetric: "22",
+            leftLabel: "Use rows",
+            rightMetric: "14",
+            rightLabel: "Crops shown"
           },
           {
             categoryId: "biofertiliser",

@@ -1,14 +1,32 @@
-BioIcons assets used in this prototype
+# BioIcons assets used in this prototype
 
-- `aphid.svg` — BioIcons, DBCLS, `cc-by-4.0`
-- `powdery-mildew.svg` — BioIcons, Stefan Kusch, `cc-by-4.0`
-- `moth.svg` — BioIcons, DBCLS, `cc-by-4.0`
-- `nematode.svg` — BioIcons, DBCLS, `cc-by-4.0`
-- `wheat.svg` — BioIcons, DBCLS, `cc-by-4.0`
-- `maize.svg` — BioIcons, Daniel Carvalho, `cc-by-4.0`
-- `soybean.svg` — BioIcons, Daniel Carvalho, `cc-by-4.0`
-- `tomato.svg` — BioIcons, Servier, `cc-by-3.0`
-- `potato.svg` — BioIcons, Servier, `cc-by-3.0`
-- `citrus.svg` — BioIcons, Servier, `cc-by-3.0`
+## CC-BY-4.0 — Daniel Carvalho
 
-Source library: https://bioicons.com/
+- `maize.svg`
+- `soybean.svg`
+- `soybean2.svg`
+
+## CC-BY-4.0 — Stefan Kusch
+
+- `powdery-mildew.svg`
+
+## CC-BY-4.0 — DBCLS
+
+- `aphid.svg`
+- `moth.svg`
+- `nematode.svg`
+- `wheat.svg`
+
+## CC-BY-3.0 — Servier
+
+- `citrus.svg`
+- `tomato.svg`
+- `potato.svg`
+- `orange.svg`
+- `peach.svg`
+- `pear.svg`
+- `banana.svg`
+- `pepper.svg`
+- `beans.svg`
+
+Source: https://bioicons.com/

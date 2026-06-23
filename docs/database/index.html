@@ -814,25 +814,105 @@
       align-items: center;
     }
 
-    .key-card,
-    .guide-card {
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--surface-strong);
+    /* ── hero path entry cards ── */
+    .hero-section {
+      margin-top: 12px;
+      padding: 28px 22px 22px;
     }
 
-    .key-symbol {
+    .hero-intro {
+      text-align: center;
+      max-width: 52ch;
+      margin: 0 auto 28px;
+    }
+
+    .hero-intro h1 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-top: 8px;
+    }
+
+    .path-entry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .path-entry-card {
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 22px;
+      padding: 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.82);
+      transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+      box-shadow: 0 12px 28px -18px rgba(23, 48, 57, 0.2);
+      position: relative;
+    }
+
+    .path-entry-card.active {
+      border-color: var(--path-accent, var(--green));
+      box-shadow: 0 16px 36px -16px rgba(23, 48, 57, 0.28), 0 0 0 4px var(--path-soft-ring, rgba(43, 107, 79, 0.1));
+    }
+
+    .path-entry-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px -16px rgba(23, 48, 57, 0.25);
+    }
+
+    .path-visual {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 160px;
+      padding: 16px 20px 0;
+      overflow: hidden;
+    }
+
+    .path-visual img {
+      display: block;
+      max-height: 144px;
+      max-width: 144px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    .path-visual svg.path-illus {
+      max-height: 144px;
+      max-width: 160px;
+      width: 100%;
+      height: auto;
+    }
+
+    .path-body {
+      padding: 18px;
+    }
+
+    .path-body h2 {
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .path-body > p {
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .path-stat {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
+      margin-top: 12px;
+      min-height: 28px;
+      padding: 5px 10px;
       border-radius: 999px;
-      background: rgba(31, 122, 121, 0.1);
-      color: var(--teal);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .section-note {
@@ -843,11 +923,8 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid,
+      .path-entry-grid,
       .intro-band,
-      .reading-key,
-      .path-grid,
-      .path-primary-grid,
       .filter-grid,
       .card-grid,
       .results-head,
@@ -869,98 +946,136 @@
       </div>
       <div class="topbar-right">
         <div class="micro-stats" aria-label="Explorer coverage">
-          <div class="micro-stat"><strong>96</strong><span>Biologicals</span></div>
-          <div class="micro-stat"><strong>26,784</strong><span>Use Rows</span></div>
+          <div class="micro-stat"><strong>38</strong><span>Crop contexts</span></div>
+          <div class="micro-stat"><strong>42</strong><span>Pressure patterns</span></div>
         </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
           <a href="../site/about.html">About</a>
           <a href="../membership-flow/index.html">Membership</a>
-          <a class="active" href="./index.html">Knowledge Hub</a>
+          <a class="active" href="./index.html">Biologicals Explorer</a>
           <a href="../site/workspace.html">Workspace</a>
         </nav>
       </div>
     </header>
 
-    <nav class="surface subnav" aria-label="Knowledge hub pages">
+    <nav class="surface subnav" aria-label="Biologicals explorer pages">
       <a class="active" href="./index.html">Explorer</a>
-      <a href="./product-catalogue.html">Biologicals</a>
+      <a href="./product-catalogue.html">Products</a>
       <a href="./evidence-library.html">Evidence</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Signal dashboard</a>
       <a href="./resource-library.html">Resources</a>
       <a href="./standards-regulations.html">Standards</a>
     </nav>
 
-    <section class="surface hero">
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Biologicals explorer</div>
-          <h1>Find biological products, crops, and pest pressures.</h1>
-          <p style="margin-top: 10px;">
-            Explore biologicals by product, by crop, or by the pest and disease pressures they are used to address, using source-backed remedy and use records to make the category feel more substantial.
-          </p>
-          <div class="search-shell" style="margin-top: 18px;">
-            <div class="search-row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="7"></circle>
-                <path d="m20 20-3.5-3.5"></path>
-              </svg>
-              <input type="text" :placeholder="active.placeholder">
-            </div>
-          </div>
-        </div>
-        <aside class="guide-card">
-          <div class="eyebrow">How to read it</div>
-          <h3 style="margin-top: 8px;">This page is built to teach, not just list.</h3>
-          <p style="margin-top: 10px;">
-            Start with the question you already have, then use the symbols, color tags, and metric blocks to judge where the strongest visible knowledge sits.
-          </p>
-          <div class="card-context">
-            <span class="context-pill" title="These tags identify the kind of record you are looking at.">Entry path</span>
-            <span class="context-pill" title="These color states signal how much visible biological activity or concern sits in the current source set.">Signal strength</span>
-            <span class="context-pill" title="These number blocks help people compare scale quickly.">Scale clues</span>
-          </div>
-        </aside>
+    <section class="surface hero-section">
+      <div class="hero-intro">
+        <div class="eyebrow">Biologicals Explorer</div>
+        <h1>What are you looking for?</h1>
+        <p style="margin-top: 8px; font-size: 15px;">Start with the lens that fits your question — by crop, by pest or disease, or by product.</p>
       </div>
 
-      <div class="reading-key">
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">◎</span> browse path</div>
-          <p style="margin-top: 8px;">Use crops, pressures, and products as human entry points instead of forcing database language first.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">●</span> color signal</div>
-          <p style="margin-top: 8px;">Green suggests stronger visible biological fit, amber signals mixed or emerging relevance, slate marks thinner current visibility.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">#</span> metric pair</div>
-          <p style="margin-top: 8px;">Each card ends with two comparison numbers so someone can read scale before reading all the details.</p>
-        </div>
-        <div class="key-card">
-          <div class="key-chip"><span class="key-symbol">?</span> hover hint</div>
-          <p style="margin-top: 8px;">Small information dots carry plain-English tooltips for people who need a softer on-ramp into the data.</p>
-        </div>
-      </div>
-    </section>
+      <div class="path-entry-grid">
 
-    <section class="surface section">
-      <div class="path-grid">
-        <div>
-          <div class="eyebrow">Start with the question you already have</div>
-          <h2 style="margin-top: 6px;">Choose a main path into the explorer.</h2>
-          <div class="path-primary-grid">
-            <template x-for="mode in primaryModes" :key="mode.id">
-              <article class="path-card" :class="{ active: activeId === mode.id }" :style="'--symbol-accent:' + mode.accent + '; --symbol-soft:' + mode.soft" @click="activeId = mode.id">
-                <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-                  <div class="path-number" x-text="mode.step"></div>
-                  <div class="path-symbol tooltip-anchor" x-html="iconSvg(mode.symbol)" :data-tooltip="mode.symbolTooltip" :aria-label="mode.symbolTooltip"></div>
-                </div>
-                <h3 style="margin-top: 10px; font-size: 1.05rem;" x-text="mode.label"></h3>
-                <p style="margin-top: 8px;" x-text="mode.summary"></p>
-              </article>
-            </template>
+        <!-- Crops -->
+        <article class="path-entry-card"
+          :class="{ active: activeId === 'crops' }"
+          style="--path-accent: #7a6b26; --path-soft-ring: rgba(240,228,177,0.5)"
+          @click="activeId = 'crops'"
+          role="button" tabindex="0" aria-pressed="false"
+          @keydown.enter="activeId = 'crops'" @keydown.space.prevent="activeId = 'crops'">
+          <div class="path-visual" style="background: linear-gradient(180deg, #fdf4d4 0%, #f5e48c 100%)">
+            <img src="./assets/bioicons/maize.svg" alt="Maize crop illustration">
           </div>
-        </div>
+          <div class="path-body">
+            <h2 style="color: #5a4d1a">Crops</h2>
+            <p>Browse biological activity by production context — citrus, maize, potatoes, grapes, and more.</p>
+            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">38 crop contexts</div>
+          </div>
+        </article>
+
+        <!-- Pests & Diseases -->
+        <article class="path-entry-card"
+          :class="{ active: activeId === 'pressures' }"
+          style="--path-accent: #b05b37; --path-soft-ring: rgba(246,219,203,0.5)"
+          @click="activeId = 'pressures'"
+          role="button" tabindex="0" aria-pressed="false"
+          @keydown.enter="activeId = 'pressures'" @keydown.space.prevent="activeId = 'pressures'">
+          <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
+            <svg class="path-illus" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Leaf -->
+              <path d="M18 108 Q22 72 52 50 Q82 28 118 30 Q96 62 68 82 Q46 98 22 108 Z" fill="#6aaa5e"/>
+              <path d="M22 107 Q44 82 68 64 Q92 46 114 32" stroke="#4a8844" stroke-width="1.5" fill="none"/>
+              <!-- Leaf bite notches (pest damage) -->
+              <path d="M68 83 Q74 75 80 80 Q86 72 92 76" stroke="#fce8db" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <!-- Caterpillar — elongated segments, diagonal across leaf -->
+              <ellipse cx="44" cy="94" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-30 44 94)"/>
+              <ellipse cx="57" cy="87" rx="11" ry="7.5" fill="#d6af2c" transform="rotate(-28 57 87)"/>
+              <ellipse cx="71" cy="80" rx="11.5" ry="7.5" fill="#c9a228" transform="rotate(-25 71 80)"/>
+              <ellipse cx="85" cy="73" rx="11.5" ry="7.5" fill="#d6af2c" transform="rotate(-22 85 73)"/>
+              <ellipse cx="99" cy="66" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-20 99 66)"/>
+              <ellipse cx="112" cy="59" rx="10" ry="7.5" fill="#b89022" transform="rotate(-18 112 59)"/>
+              <!-- Head -->
+              <circle cx="124" cy="53" r="10" fill="#6e4f14"/>
+              <!-- Eye — small, realistic -->
+              <circle cx="129" cy="48" r="3.5" fill="#1a1204"/>
+              <circle cx="130.2" cy="47" r="1.1" fill="rgba(255,255,255,0.6)"/>
+              <!-- Mandibles hint -->
+              <path d="M118 57 Q122 62 127 59" stroke="#4a3208" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <!-- Dorsal stripe -->
+              <path d="M46 91 Q59 84 73 77 Q87 70 101 63 Q111 57 120 51" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- Prolegs -->
+              <path d="M60 92 L56 102" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M74 85 L70 95" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M88 78 L85 88" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- True legs (smaller, near head) -->
+              <path d="M102 69 L101 78" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
+              <path d="M114 62 L114 70" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="path-body">
+            <h2 style="color: #8a3e20">Pests &amp; Diseases</h2>
+            <p>Start with the problem — bollworm, thrips, powdery mildew, rust, and more.</p>
+            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">42 pressure patterns</div>
+          </div>
+        </article>
+
+        <!-- Biologicals -->
+        <article class="path-entry-card"
+          :class="{ active: activeId === 'products' }"
+          style="--path-accent: #2b6b4f; --path-soft-ring: rgba(220,238,224,0.5)"
+          @click="activeId = 'products'"
+          role="button" tabindex="0" aria-pressed="false"
+          @keydown.enter="activeId = 'products'" @keydown.space.prevent="activeId = 'products'">
+          <div class="path-visual" style="background: linear-gradient(180deg, rgba(220,238,224,0.2) 0%, rgba(220,238,224,0.5) 100%)">
+            <svg class="path-illus" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Stopper -->
+              <rect x="38" y="10" width="44" height="13" rx="5" fill="#2b6b4f"/>
+              <!-- Neck -->
+              <rect x="42" y="22" width="36" height="44" rx="4" fill="#e4f5ec" stroke="#2b6b4f" stroke-width="2.2"/>
+              <!-- Flask shoulder + body -->
+              <path d="M42 65 L18 108 Q16 122 60 122 Q104 122 102 108 L78 65 Z" fill="#d2eedf" stroke="#2b6b4f" stroke-width="2.2"/>
+              <!-- Liquid fill -->
+              <path d="M22 103 Q60 97 98 103 L97 114 Q60 122 23 114 Z" fill="#9fd4b8" opacity="0.75"/>
+              <!-- Microorganism elements -->
+              <circle cx="44" cy="86" r="7" fill="#2b6b4f" opacity="0.42"/>
+              <circle cx="66" cy="78" r="5.5" fill="#2b6b4f" opacity="0.38"/>
+              <circle cx="57" cy="96" r="4.5" fill="#2b6b4f" opacity="0.52"/>
+              <ellipse cx="80" cy="89" rx="9" ry="4.5" fill="#1f7a50" opacity="0.32" transform="rotate(-28 80 89)"/>
+              <circle cx="72" cy="102" r="3.5" fill="#2b6b4f" opacity="0.4"/>
+              <!-- Neck shine -->
+              <path d="M48 28 Q52 22 55 28" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- Body shine -->
+              <path d="M26 90 Q32 80 36 90" stroke="rgba(255,255,255,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="path-body">
+            <h2 style="color: #1e4f39">Biologicals</h2>
+            <p>Browse registered products — biopesticides, inoculants, semiochemicals, and more.</p>
+            <div class="path-stat" style="background: rgba(220,238,224,0.7); color: #2b6b4f">23 products in catalogue</div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -1051,26 +1166,28 @@
     <section class="surface section">
       <div class="path-grid">
         <div>
-          <div class="eyebrow">Go deeper once the browse question is clear</div>
-          <h2 style="margin-top: 6px;">Supporting layers for evidence, standards, and source material.</h2>
-          <div class="path-primary-grid">
+          <div class="eyebrow">Go deeper</div>
+          <h2 style="margin-top: 6px;">Evidence, standards, source material, and sector signals.</h2>
+          <div class="path-primary-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
             <article class="path-card">
-              <div class="path-number">04</div>
-              <h3 style="margin-top: 10px; font-size: 1.05rem;">Resource library</h3>
-              <p style="margin-top: 8px;">Search guidance notes, legislation summaries, standards references, and linked research once someone needs more than a browse card.</p>
-              <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library</a></p>
+              <h3 style="font-size: 1.05rem;">Evidence library</h3>
+              <p style="margin-top: 8px;">Field trials, case studies, and technical reference material behind the product and pressure records.</p>
+              <p style="margin-top: 12px;"><a href="./evidence-library.html" style="color: var(--green); font-weight: 800;">Open evidence library →</a></p>
             </article>
             <article class="path-card">
-              <div class="path-number">05</div>
-              <h3 style="margin-top: 10px; font-size: 1.05rem;">Standards and regulations</h3>
-              <p style="margin-top: 8px;">Add the market-access and compliance layer through MRL references, standards cards, and simple jurisdiction comparison.</p>
-              <p style="margin-top: 12px;"><a href="./standards-regulations.html" style="color: var(--green); font-weight: 800;">Open standards layer</a></p>
+              <h3 style="font-size: 1.05rem;">Standards &amp; regulations</h3>
+              <p style="margin-top: 8px;">MRL references, certification standards, and jurisdiction comparison for market access and compliance.</p>
+              <p style="margin-top: 12px;"><a href="./standards-regulations.html" style="color: var(--green); font-weight: 800;">Open standards layer →</a></p>
             </article>
             <article class="path-card">
-              <div class="path-number">06</div>
-              <h3 style="margin-top: 10px; font-size: 1.05rem;">Evidence first, then signals</h3>
-              <p style="margin-top: 8px;">Keep proof and sector context visible as secondary layers so the experience stays biologicals-first and understandable to non-specialists.</p>
-              <p style="margin-top: 12px;"><a href="./evidence-library.html" style="color: var(--green); font-weight: 800;">Open evidence library</a></p>
+              <h3 style="font-size: 1.05rem;">Resource library</h3>
+              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and linked research for anyone who needs more than a browse card.</p>
+              <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library →</a></p>
+            </article>
+            <article class="path-card">
+              <h3 style="font-size: 1.05rem;">Regulatory signals</h3>
+              <p style="margin-top: 8px;">Country context, recurring patterns, and signs of movement across the African biologicals registration landscape.</p>
+              <p style="margin-top: 12px;"><a href="./regulatory-signals.html" style="color: var(--green); font-weight: 800;">Open regulatory signals →</a></p>
             </article>
           </div>
         </div>
@@ -1180,7 +1297,7 @@
         catalogueHref(crop) {
           return `./product-catalogue.html?crop=${encodeURIComponent(crop)}`;
         },
-        activeId: "pressures",
+        activeId: "crops",
         modes: [
           {
             id: "crops",
