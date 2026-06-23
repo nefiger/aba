@@ -120,6 +120,14 @@
     .review-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .compact-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 8px;
+    }
+    .compact-options.three {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
     h1, h2, h3, p, label { margin: 0; }
     h1 {
       margin-top: 8px;
@@ -187,7 +195,23 @@
       border: 1px solid var(--line);
       color: var(--ink);
     }
-    .form-shell { padding: 16px; }
+    .form-shell { padding: 18px; }
+    .form-section {
+      display: grid;
+      gap: 12px;
+    }
+    .form-section + .form-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+    .section-label {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
     .field {
       padding: 12px;
       display: grid;
@@ -209,16 +233,23 @@
       resize: vertical;
     }
     .choice {
-      display: block;
-      padding: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px;
       border-radius: 12px;
       border: 1px solid var(--line);
       background: white;
       cursor: pointer;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
     }
     .choice input {
       width: auto;
-      margin-right: 8px;
+      margin: 2px 0 0;
+      flex: 0 0 auto;
     }
     .checkbox-list {
       display: grid;
@@ -339,48 +370,68 @@
       </div>
       <div class="application-grid" style="margin-top: 12px;">
         <form class="form-shell" @submit.prevent="submitted = true">
-          <div class="field-grid">
-            <div class="field">
-              <label for="org_name">Organisation name</label>
-              <input id="org_name" x-model="form.org_name" type="text" placeholder="Organisation name">
+          <div class="form-section">
+            <div class="section-label">Organisation</div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="org_name">Organisation name</label>
+                <input id="org_name" x-model="form.org_name" type="text" placeholder="Organisation name">
+              </div>
+              <div class="field">
+                <label for="country">Country of business registration</label>
+                <select id="country" x-model="form.country">
+                  <option value="">Select country</option>
+                  <option>South Africa</option>
+                  <option>Kenya</option>
+                  <option>Nigeria</option>
+                  <option>Ghana</option>
+                  <option>Uganda</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="contact_name">Primary contact</label>
+                <input id="contact_name" x-model="form.contact_name" type="text" placeholder="Full name">
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" x-model="form.email" type="email" placeholder="name@organisation.com">
+              </div>
+              <div class="field full">
+                <label for="org_role">Organisation role in the biologicals sector</label>
+                <select id="org_role" x-model="form.org_role">
+                  <option value="">Select role</option>
+                  <option>Manufacturer</option>
+                  <option>Importer</option>
+                  <option>Distributor</option>
+                  <option>Product owner</option>
+                  <option>Technical service provider</option>
+                  <option>Research or academic organisation</option>
+                  <option>Funder or development partner</option>
+                  <option>Public institution</option>
+                  <option>Other sector participant</option>
+                </select>
+              </div>
             </div>
-            <div class="field">
-              <label for="country">Country of business registration</label>
-              <select id="country" x-model="form.country">
-                <option value="">Select country</option>
-                <option>South Africa</option>
-                <option>Kenya</option>
-                <option>Nigeria</option>
-                <option>Ghana</option>
-                <option>Uganda</option>
-              </select>
+          </div>
+
+          <div class="form-section">
+            <div class="section-label">Membership</div>
+            <div>
+              <label>Membership type</label>
+              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
             </div>
-            <div class="field">
-              <label for="contact_name">Primary contact</label>
-              <input id="contact_name" x-model="form.contact_name" type="text" placeholder="Full name">
+            <div class="compact-options three">
+              <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
+              <label class="choice"><input type="radio" value="Associate membership" x-model="form.type"> Associate membership</label>
+              <label class="choice"><input type="radio" value="Observer status" x-model="form.type"> Observer status</label>
             </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" x-model="form.email" type="email" placeholder="name@organisation.com">
-            </div>
-            <div class="field">
-              <label for="org_role">Organisation role in the biologicals sector</label>
-              <select id="org_role" x-model="form.org_role">
-                <option value="">Select role</option>
-                <option>Manufacturer</option>
-                <option>Importer</option>
-                <option>Distributor</option>
-                <option>Product owner</option>
-                <option>Technical service provider</option>
-                <option>Research or academic organisation</option>
-                <option>Funder or development partner</option>
-                <option>Public institution</option>
-                <option>Other sector participant</option>
-              </select>
-            </div>
-            <div class="field full">
+          </div>
+
+          <div class="form-section">
+            <div class="section-label">Activity and markets</div>
+            <div>
               <label>Biologicals activity areas</label>
-              <div class="checkbox-list">
+              <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
                 <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
@@ -388,9 +439,9 @@
                 <label class="choice"><input type="checkbox" value="Research, policy, or market development" x-model="form.activity_areas"> Research, policy, or market development</label>
               </div>
             </div>
-            <div class="field full">
+            <div>
               <label>Countries where registration or market access matters to you</label>
-              <div class="checkbox-list">
+              <div class="compact-options three" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
                 <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
                 <label class="choice"><input type="checkbox" value="Nigeria" x-model="form.market_countries"> Nigeria</label>
@@ -401,19 +452,9 @@
             </div>
           </div>
 
-          <div style="margin-top: 12px;" class="stack">
-            <div class="field">
-              <label>Membership type</label>
-              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
-            </div>
-            <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
-            <label class="choice"><input type="radio" value="Associate membership" x-model="form.type"> Associate membership</label>
-            <label class="choice"><input type="radio" value="Observer status" x-model="form.type"> Observer status</label>
-          </div>
-
-          <div class="field" style="margin-top: 12px;">
-            <label>Consent and use</label>
-            <div class="checkbox-list">
+          <div class="form-section">
+            <div class="section-label">Consent</div>
+            <div class="compact-options">
               <label class="choice"><input type="checkbox" checked disabled> Internal ABA membership review</label>
               <label class="choice"><input type="checkbox" x-model="form.aggregate_consent"> Anonymised aggregate insight for sector advocacy</label>
               <label class="choice"><input type="checkbox" x-model="form.followup_consent"> ABA may follow up about relevant registration support</label>
@@ -428,14 +469,10 @@
 
         <aside class="stack">
           <div class="summary">
-            <div class="mini">Application details</div>
-            <p style="margin-top: 8px;">You will be asked for your organisation, registration country, sector role, activity areas, relevant countries, and membership option.</p>
-          </div>
-          <div class="summary">
             <div class="mini">Product intake</div>
             <p style="margin-top: 8px;">Do you currently have biological products in market or development?</p>
             <div class="button-row">
-              <a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Open product intake</a>
+              <a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Open product intake form</a>
             </div>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
