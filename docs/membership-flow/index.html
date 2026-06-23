@@ -302,6 +302,32 @@
       font-size: 14px;
       line-height: 1.45;
     }
+    .select-all-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(23, 48, 57, 0.08);
+      border-radius: 10px;
+      background: rgba(23, 48, 57, 0.04);
+    }
+    .select-all-row span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .select-all-row button {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
     .sidebar-membership-help {
       grid-column: 2;
       grid-row: 2;
@@ -468,6 +494,10 @@
               <div class="field full">
                 <label>Organisation role(s) in the biologicals sector</label>
                 <p class="hint">Select all roles that describe how your organisation participates.</p>
+                <div class="select-all-row">
+                  <span>Useful if several roles apply.</span>
+                  <button type="button" @click="selectAll('org_roles', roleOptions)">Select all listed options</button>
+                </div>
                 <div class="compact-options" style="margin-top: 8px;">
                   <label class="choice"><input type="checkbox" value="Manufacturer" x-model="form.org_roles"> Manufacturer</label>
                   <label class="choice"><input type="checkbox" value="Importer" x-model="form.org_roles"> Importer</label>
@@ -507,6 +537,10 @@
             <div x-show="form.type === 'Full membership'" x-cloak>
               <label>Full membership details</label>
               <p class="hint">Commercial members can connect membership to product, registration, and market-access support.</p>
+              <div class="select-all-row">
+                <span>For companies covering the full commercial chain.</span>
+                <button type="button" @click="selectAll('full_product_roles', fullProductRoleOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Owns biological products" x-model="form.full_product_roles"> Owns biological products</label>
                 <label class="choice"><input type="checkbox" value="Manufactures biological products" x-model="form.full_product_roles"> Manufactures biological products</label>
@@ -525,6 +559,10 @@
             <div x-show="form.type === 'Associate membership'" x-cloak>
               <label>Associate membership details</label>
               <p class="hint">Associate members strengthen the sector through expertise, services, research, or implementation support.</p>
+              <div class="select-all-row">
+                <span>For cross-functional technical contributors.</span>
+                <button type="button" @click="selectAll('associate_expertise', associateExpertiseOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
                 <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
@@ -553,6 +591,10 @@
                 <label>How would you like to engage with ABA?</label>
                 <p class="hint">This is not a commitment; it helps ABA understand whether observers mainly want information, convening access, or programme visibility.</p>
               </div>
+              <div class="select-all-row">
+                <span>For observers who want broad visibility.</span>
+                <button type="button" @click="selectAll('observer_interests', observerInterestOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Receive sector updates</label>
                 <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Join convenings or briefings</label>
@@ -566,6 +608,10 @@
             <div x-show="form.type === 'Full membership'" x-cloak>
               <label>Biological product categories</label>
               <p class="hint">Select the product categories that are relevant to your organisation.</p>
+              <div class="select-all-row">
+                <span>Select all categories shown.</span>
+                <button type="button" @click="selectAll('activity_areas', fullActivityOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
@@ -576,6 +622,10 @@
             <div x-show="form.type === 'Associate membership'" x-cloak>
               <label>Biologicals focus areas</label>
               <p class="hint">Select the biological categories your services, research, or implementation work relates to.</p>
+              <div class="select-all-row">
+                <span>Select all focus areas shown.</span>
+                <button type="button" @click="selectAll('activity_areas', associateActivityOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
@@ -586,6 +636,10 @@
             <div x-show="form.type === 'Observer status'" x-cloak>
               <label>Sector interest areas</label>
               <p class="hint">Select the biologicals categories or sector themes you want to track as an observer.</p>
+              <div class="select-all-row">
+                <span>Select all interest areas shown.</span>
+                <button type="button" @click="selectAll('activity_areas', observerActivityOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
@@ -596,6 +650,10 @@
             <div>
               <label x-text="form.type === 'Observer status' ? 'Countries or regions relevant to your mandate' : form.type === 'Associate membership' ? 'Countries or regions where your work is active' : 'Countries where registration or market access matters to you'"></label>
               <p class="hint" x-text="form.type === 'Observer status' ? 'This helps ABA understand which regional priorities observers are following.' : form.type === 'Associate membership' ? 'This helps ABA understand where technical capacity and implementation support exist.' : 'This helps ABA understand where members need support and sector visibility.'"></p>
+              <div class="select-all-row">
+                <span>All listed countries and regions.</span>
+                <button type="button" @click="selectAll('market_countries', marketCountryOptions)">Select all listed options</button>
+              </div>
               <div class="compact-options three" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
                 <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
@@ -609,6 +667,10 @@
 
           <div class="form-section consent-section">
             <div class="section-label">Consent</div>
+            <div class="select-all-row">
+              <span>Apply optional consent choices.</span>
+              <button type="button" @click="selectAll('consents', consentOptions)">Select optional consent</button>
+            </div>
             <div class="compact-options">
               <label class="choice"><input type="checkbox" checked disabled> Internal ABA membership review</label>
               <label class="choice"><input type="checkbox" x-model="form.aggregate_consent"> Anonymised aggregate insight for sector advocacy</label>
@@ -657,6 +719,15 @@
     function membershipApp() {
       return {
         submitted: false,
+        roleOptions: ["Manufacturer", "Importer", "Distributor", "Product owner", "Technical service provider", "Research or academic organisation", "Funder or development partner", "Public institution"],
+        fullProductRoleOptions: ["Owns biological products", "Manufactures biological products", "Imports biological products", "Distributes biological products"],
+        associateExpertiseOptions: ["Research or trials", "Regulatory support", "Training or extension", "Field implementation", "Testing, data, or evidence"],
+        observerInterestOptions: ["Sector updates", "Convenings", "Programme or policy visibility"],
+        fullActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Other biological category"],
+        associateActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Cross-category or enabling support"],
+        observerActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Sector development or policy"],
+        marketCountryOptions: ["South Africa", "Kenya", "Nigeria", "Ghana", "Uganda", "Other African countries"],
+        consentOptions: ["aggregate_consent", "followup_consent"],
         form: {
           org_name: "",
           country: "",
@@ -702,6 +773,15 @@
           this.form.associate_expertise = [];
           this.form.observer_institution = "";
           this.form.observer_interests = [];
+        },
+        selectAll(field, options) {
+          if (field === "consents") {
+            options.forEach((option) => {
+              this.form[option] = true;
+            });
+            return;
+          }
+          this.form[field] = [...options];
         }
       };
     }
