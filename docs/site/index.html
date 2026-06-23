@@ -124,7 +124,8 @@
     }
 
     .summary-grid,
-    .path-grid {
+    .path-grid,
+    .metric-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
@@ -217,6 +218,29 @@
       background: var(--sand);
     }
 
+    .data-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric {
+      display: grid;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .metric strong {
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1;
+    }
+
     .stack {
       display: grid;
       gap: 10px;
@@ -226,7 +250,8 @@
       .hero-grid,
       .summary-grid,
       .card-grid,
-      .path-grid {
+      .path-grid,
+      .metric-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -247,6 +272,7 @@
         <a href="./about.html">About</a>
         <a href="../membership-flow/index.html">Membership</a>
         <a href="../database/index.html">Knowledge Hub</a>
+        <a href="./workspace.html">Workspace</a>
       </nav>
     </header>
 
@@ -268,6 +294,31 @@
           <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Companies, technical experts, researchers, partners, and institutions working in biologicals.</p>
           <p style="margin-top: 8px;">ABA welcomes participation from across Africa while building from its current base in South Africa.</p>
         </aside>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Registration intelligence</div>
+          <h2 class="display" style="margin-top: 6px;">A shared view of registration activity helps members and the sector act with confidence.</h2>
+          <p style="margin-top: 8px; max-width: 72ch;">ABA can turn member-submitted registration records into public aggregate signals, member-specific workspace views, and trusted review workflows for advocacy and engagement.</p>
+        </div>
+        <div class="data-label">Prototype data — illustrative only</div>
+        <div class="metric-grid" style="display: grid; gap: 12px;">
+          <article class="metric">
+            <strong>38</strong>
+            <p>sample biological product records visible across the tracker</p>
+          </article>
+          <article class="metric">
+            <strong>6</strong>
+            <p>countries represented in the prototype registration view</p>
+          </article>
+          <article class="metric">
+            <strong>14</strong>
+            <p>records flagged for evidence or status review before sharing</p>
+          </article>
+        </div>
       </div>
     </section>
 

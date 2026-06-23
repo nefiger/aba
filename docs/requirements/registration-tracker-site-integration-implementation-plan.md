@@ -32,7 +32,7 @@ The integration should keep Jen's current public website work on `origin/main` a
 - Use the label `Workspace`, not `Login`.
 - Keep admin/operator/registrar tools behind the Workspace gateway rather than exposing them as ordinary public site sections.
 - Add the exact demo-data label wherever mock registration metrics appear:
-  `Prototype data - illustrative only`
+  `Prototype data — illustrative only`
 
 ## Workspace Gateway Routes
 
@@ -73,7 +73,7 @@ Avoid touching `docs/site/technical-network.html`, `docs/site/updates.html`, `do
 - Verify public pages show only aggregate or sample intelligence.
 - Verify admin/operator/registrar views are only exposed through the Workspace role gateway.
 - Verify the exact mock-data label appears wherever sample metrics appear:
-  `Prototype data - illustrative only`
+  `Prototype data — illustrative only`
 - Check mobile and desktop layout for:
   - no horizontal overflow
   - no clipped buttons
