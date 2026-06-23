@@ -261,10 +261,17 @@
     }
     .actions-end {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 10px;
       flex-wrap: wrap;
       margin-top: 14px;
+    }
+    .inline-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
     }
     @media (max-width: 900px) {
       .hero-grid,
@@ -416,9 +423,12 @@
 
           <div class="form-section">
             <div class="section-label">Membership</div>
-            <div>
-              <label>Membership type</label>
-              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
+            <div class="inline-heading">
+              <div>
+                <label>Membership type</label>
+                <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
+              </div>
+              <a class="button secondary" href="./membership-types.html">Review member types</a>
             </div>
             <div class="compact-options three">
               <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
@@ -462,7 +472,6 @@
           </div>
 
           <div class="actions-end">
-            <a class="button secondary" href="./membership-types.html">Review member types</a>
             <button class="button primary" type="submit">Preview submission</button>
           </div>
         </form>
