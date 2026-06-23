@@ -1243,9 +1243,11 @@
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           const crop = params.get('crop');
+          const pressure = params.get('pressure');
           const search = params.get('q');
           if (category && this.categories.some((item) => item.id === category)) this.activeCategory = category;
           if (crop) this.activeCrop = crop;
+          if (pressure) this.searchQuery = pressure;
           if (search) this.searchQuery = search;
         },
         syncUrl() {

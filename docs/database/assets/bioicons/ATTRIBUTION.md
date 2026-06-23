@@ -28,5 +28,14 @@
 - `banana.svg`
 - `pepper.svg`
 - `beans.svg`
+- `strawberry.svg`
+- `lemon.svg`
+- `cabbage.svg`
+- `raspberry.svg`
+- `fruit-fly.svg` (fruitfly_drosophila-yellow)
+- `corn.svg`
+- `green-beans.svg`
+- `eggplant.svg`
+- `kiwi.svg`
 
 Source: https://bioicons.com/
