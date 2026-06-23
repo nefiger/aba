@@ -476,9 +476,9 @@
               <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
             </div>
             <div class="compact-options three">
-              <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
-              <label class="choice"><input type="radio" value="Associate membership" x-model="form.type"> Associate membership</label>
-              <label class="choice"><input type="radio" value="Observer status" x-model="form.type"> Observer status</label>
+              <label class="choice"><input type="radio" value="Full membership" :checked="form.type === 'Full membership'" @change="setType('Full membership')"> Full membership</label>
+              <label class="choice"><input type="radio" value="Associate membership" :checked="form.type === 'Associate membership'" @change="setType('Associate membership')"> Associate membership</label>
+              <label class="choice"><input type="radio" value="Observer status" :checked="form.type === 'Observer status'" @change="setType('Observer status')"> Observer status</label>
             </div>
           </div>
 
@@ -527,30 +527,53 @@
                   <option>Other institutional stakeholder</option>
                 </select>
               </div>
+              <div style="margin-top: 12px;">
+                <label>How would you like to engage with ABA?</label>
+                <p class="hint">This is not a commitment; it helps ABA understand whether observers mainly want information, convening access, or programme visibility.</p>
+              </div>
               <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Sector updates</label>
-                <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Convenings</label>
-                <label class="choice"><input type="checkbox" value="Programme or policy visibility" x-model="form.observer_interests"> Programme or policy visibility</label>
+                <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Receive sector updates</label>
+                <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Join convenings or briefings</label>
+                <label class="choice"><input type="checkbox" value="Programme or policy visibility" x-model="form.observer_interests"> Follow programme or policy signals</label>
               </div>
             </div>
           </div>
 
           <div class="form-section activity-section">
             <div class="section-label">Activity and markets</div>
-            <div>
-              <label>Biologicals activity areas</label>
-              <p class="hint">Select all areas that describe your work or capability.</p>
+            <div x-show="form.type === 'Full membership' || !form.type" x-cloak>
+              <label>Biological product categories</label>
+              <p class="hint">Select the product categories that are relevant to your organisation.</p>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
                 <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
-                <label class="choice"><input type="checkbox" value="Technical services or implementation support" x-model="form.activity_areas"> Technical services or implementation support</label>
-                <label class="choice"><input type="checkbox" value="Research, policy, or market development" x-model="form.activity_areas"> Research, policy, or market development</label>
+                <label class="choice"><input type="checkbox" value="Other biological category" x-model="form.activity_areas"> Other biological category</label>
+              </div>
+            </div>
+            <div x-show="form.type === 'Associate membership'" x-cloak>
+              <label>Biologicals focus areas</label>
+              <p class="hint">Select the biological categories your services, research, or implementation work relates to.</p>
+              <div class="compact-options" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
+                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
+                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
+                <label class="choice"><input type="checkbox" value="Cross-category or enabling support" x-model="form.activity_areas"> Cross-category or enabling support</label>
+              </div>
+            </div>
+            <div x-show="form.type === 'Observer status'" x-cloak>
+              <label>Sector interest areas</label>
+              <p class="hint">Select the biologicals categories or sector themes you want to track as an observer.</p>
+              <div class="compact-options" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
+                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
+                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
+                <label class="choice"><input type="checkbox" value="Sector development or policy" x-model="form.activity_areas"> Sector development or policy</label>
               </div>
             </div>
             <div>
-              <label>Countries where registration or market access matters to you</label>
-              <p class="hint">This helps ABA understand where members need support and sector visibility.</p>
+              <label x-text="form.type === 'Observer status' ? 'Countries or regions relevant to your mandate' : form.type === 'Associate membership' ? 'Countries or regions where your work is active' : 'Countries where registration or market access matters to you'"></label>
+              <p class="hint" x-text="form.type === 'Observer status' ? 'This helps ABA understand which regional priorities observers are following.' : form.type === 'Associate membership' ? 'This helps ABA understand where technical capacity and implementation support exist.' : 'This helps ABA understand where members need support and sector visibility.'"></p>
               <div class="compact-options three" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
                 <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
@@ -629,6 +652,15 @@
           observer_interests: [],
           aggregate_consent: false,
           followup_consent: false
+        },
+        setType(type) {
+          this.form.type = type;
+          this.form.activity_areas = [];
+          this.form.full_product_roles = [];
+          this.form.registration_support = "";
+          this.form.associate_expertise = [];
+          this.form.observer_institution = "";
+          this.form.observer_interests = [];
         }
       };
     }
