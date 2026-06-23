@@ -17,7 +17,7 @@ Public submission flow, but only authorised representatives may continue. The fi
 - Authorised submitter gate.
 - POPIA/privacy and participation notice.
 - Company and contact details.
-- Self-reported ABA membership status.
+- Self-reported ABA relationship type: Full member, Associate, Observer, Non-member, or Not sure / pending.
 - Product entry with functional category.
 - Country and governing regime.
 - Conditional Act 36 fields for South Africa agriculture records.

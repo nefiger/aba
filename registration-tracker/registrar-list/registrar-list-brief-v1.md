@@ -10,12 +10,12 @@ Show the current export-ready registrar packet list and blocked candidates, whil
 
 ## Access / Role
 
-Operator export workspace. Default focus is reviewed, consented, operator-approved ABA member records.
+Operator export workspace. Default focus is reviewed, consented, operator-approved verified Full member records.
 
 ## Key Screens Or Sections
 
 - Export-ready packet list.
-- Member/non-member indicators.
+- ABA relationship type indicators.
 - Proof and reference columns.
 - Eligibility blockers.
 - Export packet/batch header.
