@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Resource Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --ink: #173039;
+      --muted: #5c6f73;
+      --surface: rgba(255, 252, 246, 0.9);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-soft: #e7f0e8;
+      --teal: #1f7a79;
+      --teal-soft: #def1f0;
+      --amber: #f0b429;
+      --amber-soft: #fff2cf;
+      --slate-soft: #eceef0;
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+
+    .shell {
+      width: min(1260px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 14px 0 28px;
+    }
+
+    .surface,
+    .card,
+    .search-shell,
+    .category-card,
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mini,
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mini { color: var(--muted); }
+    .eyebrow { color: var(--green); }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .micro-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .micro-stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .micro-stat strong {
+      font-size: 0.95rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .micro-stat span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a.active { color: var(--green); }
+
+    .subnav {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .subnav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .subnav a.active {
+      background: var(--green-soft);
+      border-color: rgba(43, 107, 79, 0.18);
+      color: var(--green);
+    }
+
+    .section {
+      margin-top: 12px;
+      padding: 18px;
+    }
+
+    .hero-grid,
+    .category-grid,
+    .results-grid,
+    .result-layout,
+    .result-meta,
+    .recent-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-grid { grid-template-columns: minmax(0, 1fr); }
+
+    .category-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .results-grid,
+    .recent-list {
+      margin-top: 14px;
+    }
+
+    .result-layout {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      align-items: start;
+      margin-top: 14px;
+    }
+
+    .result-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(1.7rem, 2vw, 2.25rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2vw, 1.85rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      line-height: 1.28;
+      font-weight: 800;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .search-shell,
+    .card,
+    .category-card,
+    .result-card {
+      padding: 14px;
+    }
+
+    .search-shell {
+      padding: 0;
+      overflow: hidden;
+      background: white;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 62px;
+      padding: 0 18px;
+    }
+
+    .search-row input {
+      border: 0;
+      outline: 0;
+      width: 100%;
+      background: transparent;
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    .search-row svg {
+      width: 24px;
+      height: 24px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .response-card {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .summary-strip {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid rgba(31, 122, 121, 0.12);
+      border-radius: 12px;
+      background: rgba(222, 241, 240, 0.88);
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .summary-strip span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .source-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink);
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .source-item {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .category-card {
+      min-height: 152px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .category-card.active {
+      border-color: rgba(43, 107, 79, 0.35);
+      background: rgba(231, 240, 232, 0.82);
+    }
+
+    .category-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge.green { background: var(--green-soft); color: var(--green); }
+    .badge.amber { background: var(--amber-soft); color: #8d6400; }
+    .badge.slate { background: var(--slate-soft); color: #59656b; }
+
+    .result-card {
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .result-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .result-type {
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .meta-value {
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .recent-card {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .recent-card h3 {
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 1120px) {
+      .category-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .category-grid,
+      .result-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body x-data="resourceLibraryPage()">
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="micro-stats" aria-label="Resource coverage">
+          <div class="micro-stat"><strong>136</strong><span>Resources</span></div>
+          <div class="micro-stat"><strong>6</strong><span>Categories</span></div>
+        </div>
+        <nav class="nav">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a class="active" href="./index.html">Knowledge Hub</a>
+          <a href="../site/workspace.html">Workspace</a>
+        </nav>
+      </div>
+    </header>
+
+    <nav class="surface subnav" aria-label="Knowledge hub pages">
+      <a href="./index.html">Explorer</a>
+      <a href="./product-catalogue.html">Biologicals</a>
+      <a href="./evidence-library.html">Evidence</a>
+      <a href="../../registration-tracker/public-dashboard/index.html">Signal dashboard</a>
+      <a class="active" href="./resource-library.html">Resources</a>
+      <a href="./standards-regulations.html">Standards</a>
+    </nav>
+
+    <section class="surface section">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Resource library</div>
+          <h1>Search documents, standards, legislation, research, and guidance.</h1>
+          <p style="margin-top: 10px; max-width: 72ch;">
+            This deeper reference layer supports the explorer with source material people can actually use once they move beyond a simple browse question.
+          </p>
+        </div>
+      </div>
+
+      <div class="search-shell" style="margin-top: 18px;">
+        <div class="search-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <input type="text" :placeholder="activePrompt">
+        </div>
+      </div>
+
+      <div class="response-card">
+        <div class="eyebrow">AI response</div>
+        <h3 style="margin-top: 8px;">Dynamic answer area</h3>
+        <p style="margin-top: 8px;">
+          The prototype answer should summarise what matters first, then point visitors to the most relevant standards, legislation notes, field evidence, and ABA guidance records underneath.
+        </p>
+        <div class="summary-strip">
+          <span>Example response:</span>
+          “Show the current South African biological registration requirements for citrus pest-control products, related MRL guidance, and the strongest visible evidence links.”
+        </div>
+
+        <button type="button" class="source-toggle" @click="sourcesOpen = !sourcesOpen" :aria-expanded="sourcesOpen.toString()">
+          <span>Sources</span>
+          <span x-text="sourcesOpen ? 'Hide' : 'Show'"></span>
+        </button>
+
+        <div class="source-list" x-show="sourcesOpen" x-transition.opacity>
+          <template x-for="source in sources" :key="source.title">
+            <div class="source-item">
+              <div class="meta-label" x-text="source.type"></div>
+              <div style="margin-top: 4px; font-weight: 800;" x-text="source.title"></div>
+              <p style="margin-top: 6px;" x-text="source.summary"></p>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Browse by category</div>
+        <h2 style="margin-top: 6px;">Use a familiar entry point, then go deeper.</h2>
+      </div>
+
+      <div class="category-grid">
+        <template x-for="category in categories" :key="category.id">
+          <article class="category-card" :class="{ active: activeCategory === category.id }" @click="activeCategory = category.id">
+            <div class="category-icon" x-text="category.icon"></div>
+            <div>
+              <h3 style="margin-top: 14px;" x-text="category.label"></h3>
+              <p style="margin-top: 8px;" x-text="category.summary"></p>
+            </div>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Resource results</div>
+        <h2 style="margin-top: 6px;">Supporting material for the questions people ask next.</h2>
+      </div>
+
+      <div class="result-layout">
+        <div class="results-grid">
+          <template x-for="resource in filteredResources" :key="resource.title">
+            <article class="result-card">
+              <div class="result-top">
+                <div class="category-icon" x-text="resource.icon"></div>
+                <div class="badge" :class="resource.badgeTone" x-text="resource.badge"></div>
+              </div>
+
+              <div class="result-type" x-text="resource.type"></div>
+              <h3 style="margin-top: 10px;" x-text="resource.title"></h3>
+              <p style="margin-top: 8px;" x-text="resource.summary"></p>
+
+              <div class="summary-strip">
+                <span>Linked context:</span>
+                <span x-text="resource.linked" style="color: var(--ink); font-weight: 700;"></span>
+              </div>
+
+              <div class="result-meta" style="margin-top: 14px;">
+                <template x-for="item in resource.meta" :key="item.label">
+                  <div>
+                    <div class="meta-label" x-text="item.label"></div>
+                    <div class="meta-value" x-text="item.value"></div>
+                  </div>
+                </template>
+              </div>
+            </article>
+          </template>
+        </div>
+
+        <aside class="card">
+          <div class="eyebrow">Recent resources</div>
+          <h2 style="margin-top: 6px;">Latest additions</h2>
+          <div class="recent-list">
+            <template x-for="recent in recentResources" :key="recent.title">
+              <article class="recent-card">
+                <div class="meta-label" x-text="recent.type"></div>
+                <h3 style="margin-top: 8px;" x-text="recent.title"></h3>
+                <p style="margin-top: 6px;" x-text="recent.summary"></p>
+              </article>
+            </template>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function resourceLibraryPage() {
+      return {
+        sourcesOpen: true,
+        activeCategory: "biologicals",
+        activePrompt: "Ask about legislation, standards, trial evidence, or practical guidance for a biological product or crop context...",
+        categories: [
+          { id: "hhps", icon: "H", label: "HHP transition", summary: "Reference material that helps explain where biologicals sit within wider transition work." },
+          { id: "biologicals", icon: "B", label: "Biologicals", summary: "Guides, category notes, and product interpretation records for the biologicals landscape itself." },
+          { id: "pests", icon: "P", label: "Pests & crops", summary: "Crop-pressure documents, linked pest guidance, and practical context records." },
+          { id: "regulations", icon: "R", label: "Regulations & MRLs", summary: "Jurisdiction notes, MRL references, and public-facing interpretation guidance." },
+          { id: "standards", icon: "S", label: "Standards", summary: "Certification, export, and compliance material that affects real product use and trade." },
+          { id: "research", icon: "T", label: "Research", summary: "Trials, reviews, and contributed references that strengthen sector credibility." }
+        ],
+        sources: [
+          {
+            type: "Guidance",
+            title: "ABA interpretation note: how to read biological product claims",
+            summary: "Explains how visitors should interpret product category, target use, and supporting evidence strength."
+          },
+          {
+            type: "Legislation",
+            title: "South Africa registration pathway overview for biological inputs",
+            summary: "Summarises key public steps, submission expectations, and known document dependencies."
+          },
+          {
+            type: "Research",
+            title: "Citrus pest-control biological evidence bundle",
+            summary: "Groups trial summaries, crop context, and linked pressure notes in one place."
+          }
+        ],
+        resources: [
+          {
+            categoryId: "biologicals",
+            icon: "B",
+            badge: "Guide",
+            badgeTone: "green",
+            type: "Category guide",
+            title: "How ABA groups biological products",
+            summary: "A public-facing reference explaining the distinction between biopesticides, biostimulants, inoculants, and biofertilisers in the explorer.",
+            linked: "Cross-category orientation, member onboarding, product browse",
+            meta: [
+              { label: "Audience", value: "Public and member readers" },
+              { label: "Use", value: "Orientation and category understanding" },
+              { label: "Format", value: "Interpretation note" },
+              { label: "Status", value: "Current prototype reference" }
+            ]
+          },
+          {
+            categoryId: "regulations",
+            icon: "R",
+            badge: "MRLs",
+            badgeTone: "amber",
+            type: "Regulatory note",
+            title: "Reading MRL requirements for export-sensitive crops",
+            summary: "Connects crop-specific compliance pressure to the biological options and standards material visitors need to review next.",
+            linked: "Citrus, table grapes, export crops, standards layer",
+            meta: [
+              { label: "Jurisdictions", value: "South Africa, EU, selected export destinations" },
+              { label: "Use", value: "Compliance interpretation" },
+              { label: "Format", value: "Reference brief" },
+              { label: "Status", value: "Illustrative prototype" }
+            ]
+          },
+          {
+            categoryId: "research",
+            icon: "T",
+            badge: "Evidence",
+            badgeTone: "green",
+            type: "Trial bundle",
+            title: "Field-evidence starter pack for maize foliar pressure",
+            summary: "Bundles linked field trials, technical notes, and expert interpretation around a practical maize pressure question.",
+            linked: "Maize, foliar pests, product comparison, evidence layer",
+            meta: [
+              { label: "Crop context", value: "Field crops" },
+              { label: "Use", value: "Evidence grounding" },
+              { label: "Format", value: "Linked record set" },
+              { label: "Status", value: "Growing library area" }
+            ]
+          },
+          {
+            categoryId: "standards",
+            icon: "S",
+            badge: "Standards",
+            badgeTone: "slate",
+            type: "Standards summary",
+            title: "Certification requirements that matter for biological inputs",
+            summary: "Summarises the standards most likely to shape what producers, importers, and technical teams need to understand next.",
+            linked: "GlobalG.A.P., Organic, Fair Trade, export supply chains",
+            meta: [
+              { label: "Audience", value: "Producers, exporters, technical teams" },
+              { label: "Use", value: "Standards orientation" },
+              { label: "Format", value: "Comparison summary" },
+              { label: "Status", value: "Prototype reference" }
+            ]
+          },
+          {
+            categoryId: "pests",
+            icon: "P",
+            badge: "Context",
+            badgeTone: "amber",
+            type: "Crop-pressure guide",
+            title: "Starting from a pest or crop question",
+            summary: "A guidance layer that helps people move from a practical production question into products, evidence, and sector signals without losing context.",
+            linked: "Pests & diseases, crops, explorer entry modes",
+            meta: [
+              { label: "Audience", value: "General visitors and member prospects" },
+              { label: "Use", value: "Navigation support" },
+              { label: "Format", value: "Guide note" },
+              { label: "Status", value: "Current prototype reference" }
+            ]
+          },
+          {
+            categoryId: "hhps",
+            icon: "H",
+            badge: "Transition",
+            badgeTone: "slate",
+            type: "Landscape note",
+            title: "Why biologicals matter in wider transition work",
+            summary: "Provides public-interest context without letting the explorer become hazard-led or anti-biologicals in tone.",
+            linked: "Sector signals, wider transition conversations, advocacy context",
+            meta: [
+              { label: "Audience", value: "Institutional and ecosystem readers" },
+              { label: "Use", value: "Landscape framing" },
+              { label: "Format", value: "Context note" },
+              { label: "Status", value: "Secondary layer" }
+            ]
+          }
+        ],
+        recentResources: [
+          {
+            type: "Regulatory note",
+            title: "South Africa biological registration pathway overview",
+            summary: "A plain-language view of public steps, known bottlenecks, and required supporting material."
+          },
+          {
+            type: "Standards summary",
+            title: "Export standards that intersect with citrus biological use",
+            summary: "A quick-reference sheet for certification and buyer requirement overlap."
+          },
+          {
+            type: "Trial bundle",
+            title: "Tomato pest-pressure evidence bundle",
+            summary: "Linked trials, case notes, and expert context for protected-crop biological use."
+          }
+        ],
+        get filteredResources() {
+          return this.resources.filter((resource) => resource.categoryId === this.activeCategory);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
