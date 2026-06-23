@@ -266,12 +266,13 @@
       flex-wrap: wrap;
       margin-top: 14px;
     }
-    .inline-heading {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .sidebar-membership-help {
+      margin-top: 196px;
     }
     @media (max-width: 900px) {
       .hero-grid,
@@ -281,6 +282,9 @@
       .field-grid,
       .review-grid {
         grid-template-columns: 1fr;
+      }
+      .sidebar-membership-help {
+        margin-top: 0;
       }
     }
   </style>
@@ -386,6 +390,7 @@
               </div>
               <div class="field">
                 <label for="country">Country of business registration</label>
+                <p class="hint">Where the applicant organisation is legally registered.</p>
                 <select id="country" x-model="form.country">
                   <option value="">Select country</option>
                   <option>South Africa</option>
@@ -405,6 +410,7 @@
               </div>
               <div class="field full">
                 <label for="org_role">Organisation role in the biologicals sector</label>
+                <p class="hint">Choose the role that best describes your primary contribution.</p>
                 <select id="org_role" x-model="form.org_role">
                   <option value="">Select role</option>
                   <option>Manufacturer</option>
@@ -423,12 +429,9 @@
 
           <div class="form-section">
             <div class="section-label">Membership</div>
-            <div class="inline-heading">
-              <div>
-                <label>Membership type</label>
-                <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
-              </div>
-              <a class="button secondary" href="./membership-types.html">Review member types</a>
+            <div>
+              <label>Membership type</label>
+              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
             </div>
             <div class="compact-options three">
               <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
@@ -441,6 +444,7 @@
             <div class="section-label">Activity and markets</div>
             <div>
               <label>Biologicals activity areas</label>
+              <p class="hint">Select all areas that describe your work or capability.</p>
               <div class="compact-options" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
                 <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
@@ -451,6 +455,7 @@
             </div>
             <div>
               <label>Countries where registration or market access matters to you</label>
+              <p class="hint">This helps ABA understand where members need support and sector visibility.</p>
               <div class="compact-options three" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
                 <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
@@ -477,6 +482,13 @@
         </form>
 
         <aside class="stack">
+          <div class="summary sidebar-membership-help">
+            <div class="mini">Membership type</div>
+            <p style="margin-top: 8px;">Not sure whether Full, Associate, or Observer fits best?</p>
+            <div class="button-row">
+              <a class="button secondary" href="./membership-types.html">Review member types</a>
+            </div>
+          </div>
           <div class="summary">
             <div class="mini">Product intake</div>
             <p style="margin-top: 8px;">Do you currently have biological products in market or development?</p>
