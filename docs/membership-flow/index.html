@@ -114,7 +114,8 @@
     }
     .application-grid {
       grid-template-columns: minmax(0, 1fr) 320px;
-      align-items: start;
+      grid-template-rows: auto auto auto auto auto;
+      align-items: stretch;
     }
     .field-grid,
     .review-grid {
@@ -195,16 +196,29 @@
       border: 1px solid var(--line);
       color: var(--ink);
     }
-    .form-shell { padding: 18px; }
+    .form-shell {
+      display: contents;
+    }
     .form-section {
       display: grid;
       gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.66);
     }
     .form-section + .form-section {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
+      margin-top: 0;
     }
+    .form-section,
+    .actions-end {
+      grid-column: 1;
+    }
+    .organisation-section { grid-row: 1; }
+    .membership-section { grid-row: 2; }
+    .activity-section { grid-row: 3; }
+    .consent-section { grid-row: 4; }
+    .actions-end { grid-row: 5; }
     .section-label {
       color: var(--green);
       font-size: 11px;
@@ -259,12 +273,15 @@
       display: grid;
       gap: 10px;
     }
+    .application-sidebar {
+      display: contents;
+    }
     .actions-end {
       display: flex;
       justify-content: flex-end;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 0;
     }
     .hint {
       color: var(--muted);
@@ -272,7 +289,17 @@
       line-height: 1.45;
     }
     .sidebar-membership-help {
-      margin-top: 150px;
+      grid-column: 2;
+      grid-row: 2;
+      margin-top: 0;
+    }
+    .sidebar-product-intake {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .sidebar-preview {
+      grid-column: 2;
+      grid-row: 5;
     }
     @media (max-width: 900px) {
       .hero-grid,
@@ -282,6 +309,17 @@
       .field-grid,
       .review-grid {
         grid-template-columns: 1fr;
+      }
+      .application-grid {
+        grid-template-rows: none;
+      }
+      .form-section,
+      .actions-end,
+      .sidebar-product-intake,
+      .sidebar-membership-help,
+      .sidebar-preview {
+        grid-column: 1;
+        grid-row: auto;
       }
       .sidebar-membership-help {
         margin-top: 0;
@@ -381,7 +419,7 @@
       </div>
       <div class="application-grid" style="margin-top: 12px;">
         <form class="form-shell" @submit.prevent="submitted = true">
-          <div class="form-section">
+          <div class="form-section organisation-section">
             <div class="section-label">Organisation</div>
             <div class="field-grid">
               <div class="field">
@@ -427,7 +465,7 @@
             </div>
           </div>
 
-          <div class="form-section">
+          <div class="form-section membership-section">
             <div class="section-label">Membership</div>
             <div>
               <label>Membership type</label>
@@ -440,7 +478,7 @@
             </div>
           </div>
 
-          <div class="form-section">
+          <div class="form-section activity-section">
             <div class="section-label">Activity and markets</div>
             <div>
               <label>Biologicals activity areas</label>
@@ -467,7 +505,7 @@
             </div>
           </div>
 
-          <div class="form-section">
+          <div class="form-section consent-section">
             <div class="section-label">Consent</div>
             <div class="compact-options">
               <label class="choice"><input type="checkbox" checked disabled> Internal ABA membership review</label>
@@ -481,8 +519,8 @@
           </div>
         </form>
 
-        <aside class="stack">
-          <div class="summary">
+        <aside class="application-sidebar">
+          <div class="summary sidebar-product-intake">
             <div class="mini">Product intake</div>
             <p style="margin-top: 8px;">Do you currently have biological products in market or development?</p>
             <div class="button-row">
@@ -496,7 +534,7 @@
               <a class="button secondary" href="./membership-types.html">Review member types</a>
             </div>
           </div>
-          <div class="summary" x-show="submitted" x-cloak>
+          <div class="summary sidebar-preview" x-show="submitted" x-cloak>
             <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Organisation:</strong> <span x-text="form.org_name || 'Not provided yet'"></span></p>
