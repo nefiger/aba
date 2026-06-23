@@ -114,7 +114,7 @@
     }
     .application-grid {
       grid-template-columns: minmax(0, 1fr) 320px;
-      grid-template-rows: auto auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto auto;
       align-items: stretch;
     }
     .field-grid,
@@ -216,9 +216,10 @@
     }
     .organisation-section { grid-row: 1; }
     .membership-section { grid-row: 2; }
-    .activity-section { grid-row: 3; }
-    .consent-section { grid-row: 4; }
-    .actions-end { grid-row: 5; }
+    .type-detail-section { grid-row: 3; }
+    .activity-section { grid-row: 4; }
+    .consent-section { grid-row: 5; }
+    .actions-end { grid-row: 6; }
     .section-label {
       color: var(--green);
       font-size: 11px;
@@ -299,7 +300,7 @@
     }
     .sidebar-preview {
       grid-column: 2;
-      grid-row: 5;
+      grid-row: 6;
     }
     @media (max-width: 900px) {
       .hero-grid,
@@ -439,6 +440,11 @@
                 </select>
               </div>
               <div class="field">
+                <label for="registration_number">Business registration number</label>
+                <p class="hint">Optional for this demo; useful for verification later.</p>
+                <input id="registration_number" x-model="form.registration_number" type="text" placeholder="Registration number">
+              </div>
+              <div class="field">
                 <label for="contact_name">Primary contact</label>
                 <input id="contact_name" x-model="form.contact_name" type="text" placeholder="Full name">
               </div>
@@ -447,20 +453,18 @@
                 <input id="email" x-model="form.email" type="email" placeholder="name@organisation.com">
               </div>
               <div class="field full">
-                <label for="org_role">Organisation role in the biologicals sector</label>
-                <p class="hint">Choose the role that best describes your primary contribution.</p>
-                <select id="org_role" x-model="form.org_role">
-                  <option value="">Select role</option>
-                  <option>Manufacturer</option>
-                  <option>Importer</option>
-                  <option>Distributor</option>
-                  <option>Product owner</option>
-                  <option>Technical service provider</option>
-                  <option>Research or academic organisation</option>
-                  <option>Funder or development partner</option>
-                  <option>Public institution</option>
-                  <option>Other sector participant</option>
-                </select>
+                <label>Organisation role(s) in the biologicals sector</label>
+                <p class="hint">Select all roles that describe how your organisation participates.</p>
+                <div class="compact-options" style="margin-top: 8px;">
+                  <label class="choice"><input type="checkbox" value="Manufacturer" x-model="form.org_roles"> Manufacturer</label>
+                  <label class="choice"><input type="checkbox" value="Importer" x-model="form.org_roles"> Importer</label>
+                  <label class="choice"><input type="checkbox" value="Distributor" x-model="form.org_roles"> Distributor</label>
+                  <label class="choice"><input type="checkbox" value="Product owner" x-model="form.org_roles"> Product owner</label>
+                  <label class="choice"><input type="checkbox" value="Technical service provider" x-model="form.org_roles"> Technical service provider</label>
+                  <label class="choice"><input type="checkbox" value="Research or academic organisation" x-model="form.org_roles"> Research or academic organisation</label>
+                  <label class="choice"><input type="checkbox" value="Funder or development partner" x-model="form.org_roles"> Funder or development partner</label>
+                  <label class="choice"><input type="checkbox" value="Public institution" x-model="form.org_roles"> Public institution</label>
+                </div>
               </div>
             </div>
           </div>
@@ -475,6 +479,59 @@
               <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
               <label class="choice"><input type="radio" value="Associate membership" x-model="form.type"> Associate membership</label>
               <label class="choice"><input type="radio" value="Observer status" x-model="form.type"> Observer status</label>
+            </div>
+          </div>
+
+          <div class="form-section type-detail-section" x-show="form.type" x-cloak>
+            <div class="section-label">Membership detail</div>
+            <div x-show="form.type === 'Full membership'" x-cloak>
+              <label>Full membership details</label>
+              <p class="hint">Commercial members can connect membership to product, registration, and market-access support.</p>
+              <div class="compact-options" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Owns biological products" x-model="form.full_product_roles"> Owns biological products</label>
+                <label class="choice"><input type="checkbox" value="Manufactures biological products" x-model="form.full_product_roles"> Manufactures biological products</label>
+                <label class="choice"><input type="checkbox" value="Imports biological products" x-model="form.full_product_roles"> Imports biological products</label>
+                <label class="choice"><input type="checkbox" value="Distributes biological products" x-model="form.full_product_roles"> Distributes biological products</label>
+              </div>
+              <div style="margin-top: 12px;">
+                <label>Registration support interest</label>
+                <div class="compact-options three" style="margin-top: 8px;">
+                  <label class="choice"><input type="radio" value="Yes" x-model="form.registration_support"> Yes</label>
+                  <label class="choice"><input type="radio" value="Not yet" x-model="form.registration_support"> Not yet</label>
+                  <label class="choice"><input type="radio" value="Not sure" x-model="form.registration_support"> Not sure</label>
+                </div>
+              </div>
+            </div>
+            <div x-show="form.type === 'Associate membership'" x-cloak>
+              <label>Associate membership details</label>
+              <p class="hint">Associate members strengthen the sector through expertise, services, research, or implementation support.</p>
+              <div class="compact-options" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
+                <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
+                <label class="choice"><input type="checkbox" value="Training or extension" x-model="form.associate_expertise"> Training or extension</label>
+                <label class="choice"><input type="checkbox" value="Field implementation" x-model="form.associate_expertise"> Field implementation</label>
+                <label class="choice"><input type="checkbox" value="Testing, data, or evidence" x-model="form.associate_expertise"> Testing, data, or evidence</label>
+              </div>
+            </div>
+            <div x-show="form.type === 'Observer status'" x-cloak>
+              <label>Observer status details</label>
+              <p class="hint">Observer organisations usually follow, fund, convene, or coordinate sector development.</p>
+              <div class="field" style="margin-top: 8px;">
+                <label for="observer_institution">Institution type</label>
+                <select id="observer_institution" x-model="form.observer_institution">
+                  <option value="">Select institution type</option>
+                  <option>Funder</option>
+                  <option>Development partner</option>
+                  <option>Public body</option>
+                  <option>Regional or multilateral body</option>
+                  <option>Other institutional stakeholder</option>
+                </select>
+              </div>
+              <div class="compact-options" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Sector updates</label>
+                <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Convenings</label>
+                <label class="choice"><input type="checkbox" value="Programme or policy visibility" x-model="form.observer_interests"> Programme or policy visibility</label>
+              </div>
             </div>
           </div>
 
@@ -541,7 +598,7 @@
               <p><strong style="color: var(--ink);">Business registration:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Contact:</strong> <span x-text="form.contact_name || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Member type:</strong> <span x-text="form.type || 'Not selected yet'"></span></p>
-              <p><strong style="color: var(--ink);">Sector role:</strong> <span x-text="form.org_role || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Sector roles:</strong> <span x-text="form.org_roles.length ? form.org_roles.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Activity areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Market access countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
             </div>
@@ -558,12 +615,18 @@
         form: {
           org_name: "",
           country: "",
+          registration_number: "",
           contact_name: "",
           email: "",
-          org_role: "",
+          org_roles: [],
           activity_areas: [],
           market_countries: [],
           type: "",
+          full_product_roles: [],
+          registration_support: "",
+          associate_expertise: [],
+          observer_institution: "",
+          observer_interests: [],
           aggregate_consent: false,
           followup_consent: false
         }
