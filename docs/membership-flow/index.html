@@ -283,6 +283,11 @@
       gap: 10px;
       flex-wrap: wrap;
       margin-top: 0;
+      justify-self: end;
+      align-self: start;
+    }
+    .actions-end .button {
+      flex: 0 0 auto;
     }
     .hint {
       color: var(--muted);
@@ -318,7 +323,9 @@
     }
     .sidebar-preview {
       grid-column: 2;
-      grid-row: 6;
+      grid-row: 1 / 7;
+      align-self: end;
+      z-index: 1;
     }
     @media (max-width: 900px) {
       .hero-grid,
@@ -339,6 +346,7 @@
       .sidebar-preview {
         grid-column: 1;
         grid-row: auto;
+        align-self: stretch;
       }
       .sidebar-membership-help {
         margin-top: 0;
@@ -655,6 +663,9 @@
               <p><strong style="color: var(--ink);">Sector roles:</strong> <span x-text="form.org_roles.length ? form.org_roles.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Activity areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Market access countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
+            </div>
+            <div class="button-row">
+              <button class="button secondary" type="button" @click="submitted = false">Clear preview</button>
             </div>
           </div>
         </aside>
