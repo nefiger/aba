@@ -539,9 +539,9 @@
             </div>
           </div>
 
-          <div class="form-section activity-section">
+          <div class="form-section activity-section" x-show="form.type" x-cloak>
             <div class="section-label">Activity and markets</div>
-            <div x-show="form.type === 'Full membership' || !form.type" x-cloak>
+            <div x-show="form.type === 'Full membership'" x-cloak>
               <label>Biological product categories</label>
               <p class="hint">Select the product categories that are relevant to your organisation.</p>
               <div class="compact-options" style="margin-top: 8px;">
