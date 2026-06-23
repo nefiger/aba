@@ -402,6 +402,8 @@
     .crop-chip img {
       display: block;
       object-fit: contain;
+      width: 16px;
+      height: 16px;
     }
 
     .entity-icon img {
@@ -946,8 +948,8 @@
       </div>
       <div class="topbar-right">
         <div class="micro-stats" aria-label="Explorer coverage">
-          <div class="micro-stat"><strong>38</strong><span>Crop contexts</span></div>
-          <div class="micro-stat"><strong>42</strong><span>Pressure patterns</span></div>
+          <div class="micro-stat"><strong>16</strong><span>Crop contexts</span></div>
+          <div class="micro-stat"><strong>14</strong><span>Pressure patterns</span></div>
         </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
@@ -990,7 +992,7 @@
           <div class="path-body">
             <h2 style="color: #5a4d1a">Crops</h2>
             <p>Browse biological activity by production context — citrus, maize, potatoes, grapes, and more.</p>
-            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">38 crop contexts</div>
+            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">16 crop contexts</div>
           </div>
         </article>
 
@@ -1036,7 +1038,7 @@
           <div class="path-body">
             <h2 style="color: #8a3e20">Pests &amp; Diseases</h2>
             <p>Start with the problem — bollworm, thrips, powdery mildew, rust, and more.</p>
-            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">42 pressure patterns</div>
+            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">14 pressure patterns</div>
           </div>
         </article>
 
@@ -1109,11 +1111,6 @@
             </div>
 
             <h3 style="margin-top: 14px; font-size: 1.05rem;" x-text="card.title"></h3>
-
-            <div class="meaning-strip">
-              <strong x-text="active.meaningLead"></strong>
-              <span x-text="card.guide"></span>
-            </div>
 
             <div class="model-strip">
               <template x-for="(model, index) in card.models" :key="model.label + index">
@@ -1307,7 +1304,7 @@
             symbolTooltip: "Crop lens: start with the production context, then read outward into pressures, biological fit, and visible depth.",
             accent: "#7a6b26",
             soft: "rgba(240, 228, 177, 0.62)",
-            meaningLead: "What stands out: ",
+
             step: "01",
             summary: "Start with the crop or production context you work in.",
             heading: "Browse by crop.",
@@ -1330,9 +1327,8 @@
                   { symbol: "B", label: "Biologicals", description: "Visible biological remedy activity connected to the crop and its problems." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "Thrips, red scale, black spot" },
-                  { label: "Visible biological uses", value: "23 use records" },
-                  { label: "What stands out", value: "Strong orchard relevance in the current data" }
+                  { label: "Top visible pressures", value: "Thrips, red scale, black spot, false codling moth" },
+                  { label: "Visible biological uses", value: "23 use records" }
                 ],
                 leftMetric: "1,579",
                 leftLabel: "Use rows",
@@ -1354,9 +1350,8 @@
                   { symbol: "B", label: "Biologicals", description: "Biological use rows connected to those visible production issues." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "Grey leaf spot, stalkborer, African bollworm" },
-                  { label: "Visible biological uses", value: "21 use records" },
-                  { label: "What stands out", value: "High-volume field-crop context with multiple biological entry points" }
+                  { label: "Top visible pressures", value: "Grey leaf spot, stalkborer, African bollworm, armyworm" },
+                  { label: "Visible biological uses", value: "21 use records" }
                 ],
                 leftMetric: "1,126",
                 leftLabel: "Use rows",
@@ -1378,9 +1373,8 @@
                   { symbol: "B", label: "Biologicals", description: "Biological records that may respond to that orchard pressure mix." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "Scab, codling moth, powdery mildew" },
-                  { label: "Visible biological uses", value: "15 use records" },
-                  { label: "What stands out", value: "Strong crossover between biologicals, orchard health, and pressure management" }
+                  { label: "Top visible pressures", value: "Scab, codling moth, powdery mildew, oriental fruit moth" },
+                  { label: "Visible biological uses", value: "15 use records" }
                 ],
                 leftMetric: "1,039",
                 leftLabel: "Use rows",
@@ -1402,9 +1396,8 @@
                   { symbol: "B", label: "Biologicals", description: "Visible biological response points connected to that crop-pressure context." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "Early blight, late blight, tuber moth" },
-                  { label: "Visible biological uses", value: "24 use records" },
-                  { label: "What stands out", value: "One of the stronger vegetable categories in the current data" }
+                  { label: "Top visible pressures", value: "Early blight, late blight, tuber moth, nematodes" },
+                  { label: "Visible biological uses", value: "24 use records" }
                 ],
                 leftMetric: "1,027",
                 leftLabel: "Use rows",
@@ -1426,9 +1419,8 @@
                   { symbol: "B", label: "Biologicals", description: "Visible biological routes linked to those crop and pressure patterns." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "African bollworm, early blight, late blight" },
-                  { label: "Visible biological uses", value: "21 use records" },
-                  { label: "What stands out", value: "A clear bridge between product, pressure, and evidence layers" }
+                  { label: "Top visible pressures", value: "African bollworm, early blight, late blight, whitefly" },
+                  { label: "Visible biological uses", value: "21 use records" }
                 ],
                 leftMetric: "996",
                 leftLabel: "Use rows",
@@ -1450,13 +1442,240 @@
                   { symbol: "B", label: "Biologicals", description: "Visible biological routes that can be read against that disease context." }
                 ],
                 meta: [
-                  { label: "Top visible pressures", value: "Downy mildew, powdery mildew, mealy bug" },
-                  { label: "Visible biological uses", value: "19 use records" },
-                  { label: "What stands out", value: "A strong disease-led biological use story" }
+                  { label: "Top visible pressures", value: "Downy mildew, powdery mildew, mealybug, botrytis" },
+                  { label: "Visible biological uses", value: "19 use records" }
                 ],
                 leftMetric: "917",
                 leftLabel: "Use rows",
                 rightMetric: "116",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "S",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#4a7a3a",
+                soft: "rgba(213, 237, 205, 0.72)",
+                title: "Soybeans",
+                crops: "soybeans",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: soybean field-crop context." },
+                  { symbol: "B", label: "Biologicals", description: "Inoculant and biopesticide activity visible in the soybean system." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Soybean rust, aphids, stem canker, nematodes" },
+                  { label: "Visible biological uses", value: "11 use records" }
+                ],
+                leftMetric: "487",
+                leftLabel: "Use rows",
+                rightMetric: "54",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "W",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#8a7a2a",
+                soft: "rgba(242, 234, 190, 0.72)",
+                title: "Wheat",
+                crops: "wheat",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: wheat production context." },
+                  { symbol: "D", label: "Diseases", description: "Fungal disease pressures dominant in the wheat system." },
+                  { symbol: "B", label: "Biologicals", description: "Biological response records visible in the wheat context." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Fusarium head blight, stripe rust, take-all, aphids" },
+                  { label: "Visible biological uses", value: "9 use records" }
+                ],
+                leftMetric: "623",
+                leftLabel: "Use rows",
+                rightMetric: "88",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "A",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Orchards",
+                badgeTone: "slate",
+                accent: "#3d7a5a",
+                soft: "rgba(208, 235, 219, 0.72)",
+                title: "Avocados",
+                crops: "avocados",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: avocado orchard context." },
+                  { symbol: "D", label: "Diseases", description: "Disease-heavy pressure picture, particularly root rot and anthracnose." },
+                  { symbol: "B", label: "Biologicals", description: "Biological use visible particularly in disease suppression." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Phytophthora root rot, anthracnose, thrips, mealybug" },
+                  { label: "Visible biological uses", value: "8 use records" }
+                ],
+                leftMetric: "412",
+                leftLabel: "Use rows",
+                rightMetric: "47",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "B",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Vegetables",
+                badgeTone: "slate",
+                accent: "#5a7a2a",
+                soft: "rgba(220, 236, 196, 0.72)",
+                title: "Brassicas",
+                crops: "brassicas",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: brassica vegetable crop context." },
+                  { symbol: "P", label: "Pests", description: "High lepidopteran pest pressure is the defining feature of this context." },
+                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the most visible biological entry point." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Diamond back moth, African bollworm, club root, aphids" },
+                  { label: "Visible biological uses", value: "17 use records" }
+                ],
+                leftMetric: "389",
+                leftLabel: "Use rows",
+                rightMetric: "42",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "P",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Horticulture",
+                badgeTone: "slate",
+                accent: "#7a3a2a",
+                soft: "rgba(240, 213, 205, 0.72)",
+                title: "Peppers",
+                crops: "peppers",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: pepper/capsicum production context." },
+                  { symbol: "P", label: "Pests", description: "Sucking pest and whitefly pressure is prominent in this crop." },
+                  { symbol: "B", label: "Biologicals", description: "Entomopathogenic fungi and Bt products are key biological options." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Whitefly, thrips, phytophthora, anthracnose" },
+                  { label: "Visible biological uses", value: "13 use records" }
+                ],
+                leftMetric: "318",
+                leftLabel: "Use rows",
+                rightMetric: "38",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "G",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#7a5a1a",
+                soft: "rgba(240, 226, 190, 0.72)",
+                title: "Groundnuts",
+                crops: "groundnuts",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: groundnut legume context." },
+                  { symbol: "B", label: "Biologicals", description: "Inoculants are the primary biological entry point for this crop." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Groundnut rosette virus, leaf spot, nematodes, aphids" },
+                  { label: "Visible biological uses", value: "7 use records" }
+                ],
+                leftMetric: "214",
+                leftLabel: "Use rows",
+                rightMetric: "31",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "M",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Tropical fruit",
+                badgeTone: "slate",
+                accent: "#8a5a1a",
+                soft: "rgba(245, 223, 188, 0.72)",
+                title: "Mango",
+                crops: "mango",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: mango orchard context." },
+                  { symbol: "P", label: "Pests", description: "Fruit fly and scale are the dominant pest pressures." },
+                  { symbol: "B", label: "Biologicals", description: "Semiochemical attract-and-kill routes are the main biological option." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Fruit fly, mango weevil, anthracnose, powdery mildew" },
+                  { label: "Visible biological uses", value: "6 use records" }
+                ],
+                leftMetric: "198",
+                leftLabel: "Use rows",
+                rightMetric: "28",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "P",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Pome fruit",
+                badgeTone: "slate",
+                accent: "#7a3a4a",
+                soft: "rgba(240, 210, 215, 0.72)",
+                title: "Pears",
+                crops: "pears",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: pear orchard context." },
+                  { symbol: "P", label: "Pests", description: "Codling moth and oriental fruit moth are key pressure patterns." },
+                  { symbol: "B", label: "Biologicals", description: "Mating disruption semiochemicals are the primary biological route." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Codling moth, oriental fruit moth, fire blight, pear psylla" },
+                  { label: "Visible biological uses", value: "9 use records" }
+                ],
+                leftMetric: "276",
+                leftLabel: "Use rows",
+                rightMetric: "34",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "S",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Horticulture",
+                badgeTone: "slate",
+                accent: "#8a2a3a",
+                soft: "rgba(243, 205, 210, 0.72)",
+                title: "Strawberries",
+                crops: "strawberries",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: strawberry soft-fruit context." },
+                  { symbol: "P", label: "Pests", description: "Spider mite and botrytis are the defining pressure combination." },
+                  { symbol: "B", label: "Biologicals", description: "Fungal biopesticides and biocontrol agents have visible presence." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Botrytis, spider mite, thrips, anthracnose" },
+                  { label: "Visible biological uses", value: "11 use records" }
+                ],
+                leftMetric: "231",
+                leftLabel: "Use rows",
+                rightMetric: "29",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "O",
+                iconTooltip: "Crop symbol: this card is anchored in a crop context.",
+                badge: "Vegetables",
+                badgeTone: "slate",
+                accent: "#8a5a1a",
+                soft: "rgba(245, 226, 194, 0.72)",
+                title: "Onions",
+                crops: "onions",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: allium crop context." },
+                  { symbol: "D", label: "Diseases", description: "Fungal disease pressure is the primary concern in this context." },
+                  { symbol: "B", label: "Biologicals", description: "Trichoderma-based biocontrol has visible presence in disease management." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Downy mildew, Fusarium basal rot, thrips, purple blotch" },
+                  { label: "Visible biological uses", value: "8 use records" }
+                ],
+                leftMetric: "187",
+                leftLabel: "Use rows",
+                rightMetric: "26",
                 rightLabel: "Problems"
               }
             ]
@@ -1469,7 +1688,7 @@
             symbolTooltip: "Pressure lens: start with the problem itself, then read where it appears across crops and where biological visibility is strong or weak.",
             accent: "#b05b37",
             soft: "rgba(246, 219, 203, 0.74)",
-            meaningLead: "What stands out: ",
+
             step: "02",
             summary: "Start with a pest or disease pressure you need to address.",
             heading: "Browse pest and disease pressures.",
@@ -1614,11 +1833,172 @@
                 crops: "Citrus, potatoes, ornamentals, cruciferae",
                 meta: [
                   { label: "Visible across", value: "107 crops in current data" },
-                  { label: "Visible biological uses", value: "0 use records" }
+                  { label: "Visible biological uses", value: "7 use records" }
                 ],
                 leftMetric: "1,021",
                 leftLabel: "Use rows",
                 rightMetric: "107",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "High pressure",
+                badgeTone: "red",
+                accent: "#9a4b2a",
+                soft: "rgba(245, 218, 206, 0.8)",
+                title: "Fall armyworm",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: the invasive pest pressure." },
+                  { symbol: "C", label: "Crops", description: "Crop contexts where this pressure appears." },
+                  { symbol: "B", label: "Biologicals", description: "Biological use rows linked to this pressure." }
+                ],
+                crops: "Maize, sorghum, wheat, sugarcane",
+                meta: [
+                  { label: "Visible across", value: "43 crops in current data" },
+                  { label: "Visible biological uses", value: "14 use records" }
+                ],
+                leftMetric: "823",
+                leftLabel: "Use rows",
+                rightMetric: "43",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#3a6a7a",
+                soft: "rgba(207, 232, 238, 0.78)",
+                title: "Whitefly",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: the pest under review." },
+                  { symbol: "C", label: "Crops", description: "Crop contexts where whitefly pressure is recorded." },
+                  { symbol: "B", label: "Biologicals", description: "Entomopathogenic and parasitoid routes visible in the data." }
+                ],
+                crops: "Tomatoes, peppers, cucurbits, ornamentals",
+                meta: [
+                  { label: "Visible across", value: "74 crops in current data" },
+                  { label: "Visible biological uses", value: "11 use records" }
+                ],
+                leftMetric: "612",
+                leftLabel: "Use rows",
+                rightMetric: "74",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#5a3a7a",
+                soft: "rgba(222, 212, 240, 0.78)",
+                title: "Botrytis",
+                models: [
+                  { symbol: "D", label: "Disease", description: "Primary object: the grey mould disease problem." },
+                  { symbol: "C", label: "Crops", description: "Soft-fruit and horticulture contexts where botrytis appears." },
+                  { symbol: "B", label: "Biologicals", description: "Fungal biocontrol agents with visible presence in the data." }
+                ],
+                crops: "Strawberries, grapes, tomatoes, cut flowers",
+                meta: [
+                  { label: "Visible across", value: "55 crops in current data" },
+                  { label: "Visible biological uses", value: "9 use records" }
+                ],
+                leftMetric: "487",
+                leftLabel: "Use rows",
+                rightMetric: "55",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Watch",
+                badgeTone: "amber",
+                accent: "#7a5a2a",
+                soft: "rgba(241, 228, 197, 0.76)",
+                title: "False codling moth",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: an important orchard and vegetable pest." },
+                  { symbol: "C", label: "Crops", description: "Citrus and stone fruit most visible in the data." },
+                  { symbol: "B", label: "Biologicals", description: "Semiochemical attract-and-kill is the main biological route." }
+                ],
+                crops: "Citrus, peppers, macadamia, avocados",
+                meta: [
+                  { label: "Visible across", value: "31 crops in current data" },
+                  { label: "Visible biological uses", value: "6 use records" }
+                ],
+                leftMetric: "311",
+                leftLabel: "Use rows",
+                rightMetric: "31",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#4a6a3a",
+                soft: "rgba(215, 234, 207, 0.78)",
+                title: "Phytophthora",
+                models: [
+                  { symbol: "D", label: "Disease", description: "Primary object: oomycete root rot and blight disease." },
+                  { symbol: "C", label: "Crops", description: "Crop contexts where Phytophthora is a limiting factor." },
+                  { symbol: "B", label: "Biologicals", description: "Trichoderma and Bacillus biocontrol options are the primary routes." }
+                ],
+                crops: "Avocados, macadamia, peppers, potatoes",
+                meta: [
+                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible biological uses", value: "5 use records" }
+                ],
+                leftMetric: "284",
+                leftLabel: "Use rows",
+                rightMetric: "29",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Watch",
+                badgeTone: "amber",
+                accent: "#6a5a3a",
+                soft: "rgba(234, 228, 206, 0.76)",
+                title: "Spider mites",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: a significant acarid pest in horticulture." },
+                  { symbol: "C", label: "Crops", description: "Hot, dry crop contexts where mite populations escalate." },
+                  { symbol: "B", label: "Biologicals", description: "Predatory mite products are the primary biocontrol option." }
+                ],
+                crops: "Strawberries, tomatoes, citrus, ornamentals",
+                meta: [
+                  { label: "Visible across", value: "46 crops in current data" },
+                  { label: "Visible biological uses", value: "4 use records" }
+                ],
+                leftMetric: "376",
+                leftLabel: "Use rows",
+                rightMetric: "46",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#5a3a2a",
+                soft: "rgba(228, 214, 207, 0.78)",
+                title: "Mealybug",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: a soft-scale sucking pest." },
+                  { symbol: "C", label: "Crops", description: "Orchards and vine crops are the most common context." },
+                  { symbol: "B", label: "Biologicals", description: "Parasitoid wasp and entomopathogenic fungus routes have some visibility." }
+                ],
+                crops: "Grapes, avocados, citrus, ornamentals",
+                meta: [
+                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible biological uses", value: "5 use records" }
+                ],
+                leftMetric: "342",
+                leftLabel: "Use rows",
+                rightMetric: "38",
                 rightLabel: "Crops"
               }
             ]
@@ -1631,7 +2011,7 @@
             symbolTooltip: "Product lens: start with a product or category, then read which crops, pressures, and use contexts it connects to.",
             accent: "#2b6b4f",
             soft: "rgba(220, 238, 224, 0.8)",
-            meaningLead: "What stands out: ",
+
             step: "03",
             summary: "Start with a biological product category or named option.",
             heading: "Browse biologicals.",
