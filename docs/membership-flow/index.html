@@ -474,7 +474,6 @@
                 <label>Organisation role(s) in the biologicals sector</label>
                 <p class="hint">Select all roles that describe how your organisation participates.</p>
                 <div class="compact-options" style="margin-top: 8px;">
-                  <label class="choice select-all-choice"><input type="checkbox" :checked="allSelected('org_roles', roleOptions)" @change="toggleAll('org_roles', roleOptions, $event.target.checked)"> Select all listed options</label>
                   <label class="choice"><input type="checkbox" value="Manufacturer" x-model="form.org_roles"> Manufacturer</label>
                   <label class="choice"><input type="checkbox" value="Importer" x-model="form.org_roles"> Importer</label>
                   <label class="choice"><input type="checkbox" value="Distributor" x-model="form.org_roles"> Distributor</label>
@@ -667,7 +666,6 @@
     function membershipApp() {
       return {
         submitted: false,
-        roleOptions: ["Manufacturer", "Importer", "Distributor", "Product owner", "Technical service provider", "Research or academic organisation", "Funder or development partner", "Public institution"],
         fullActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Other biological category"],
         associateActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Cross-category or enabling support"],
         observerActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Sector development or policy"],
