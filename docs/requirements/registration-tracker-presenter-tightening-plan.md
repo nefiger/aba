@@ -291,6 +291,28 @@ Rationale:
 5. Tune CTA labels so they match the presentation flow.
 6. Run a browser pass for desktop and mobile layout after editing.
 
+## Implementation Outcome
+
+Implemented in commit `a2f5569 Tighten registration tracker presenter brief`.
+
+The presenter page now uses this meeting-brief structure:
+
+1. Registration tracker meeting brief
+2. Why ABA needs the registration picture
+3. Registration record lifecycle
+4. What a record contains
+5. Who benefits from trusted records
+6. Trust boundaries
+7. Demo links and site fit
+
+Follow-up refinements from the flow-intelligence review have been added locally after `a2f5569`:
+
+- Normalization layer: trusted records are grouped by country, registration stage, biological category, bottleneck theme, and time stuck.
+- Geographic truth: South Africa is active now, but the tracker should support an Africa-wide registration picture.
+- What the tracker makes legible: country picture, time stuck, and recurring bottlenecks.
+
+These additions are intended to bring across the useful parts of `docs/flow-intelligence/index.html` without importing the broader four-flow framework into the tracker meeting brief.
+
 ## Non-Goals
 
 - Do not redesign the underlying tracker screens in this pass.
