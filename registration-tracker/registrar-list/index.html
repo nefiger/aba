@@ -43,7 +43,7 @@
           <div class="dashboard-toolbar">
             <div>
               <h2>Registrar packet list</h2>
-              <p class="note">Only export-ready records can be included. Blocked records explain which condition is missing.</p>
+              <p class="note">Only reviewed, consented Full member records are included by default. Other relationship types require operator exception and remain excluded in this prototype.</p>
             </div>
             <div class="segmented-control" aria-label="Registrar list filter">
               <button type="button" data-export-filter="all" aria-pressed="true">All</button>
@@ -57,12 +57,14 @@
                 <th>Include</th>
                 <th>Company</th>
                 <th>Product</th>
-                <th>Member</th>
+                <th>ABA relationship</th>
+                <th>Country</th>
                 <th>Status</th>
                 <th>Submitted</th>
                 <th>Reference</th>
                 <th>Proof</th>
                 <th>Consent</th>
+                <th>Bottleneck theme</th>
                 <th>Blocker</th>
               </tr>
             </thead>
@@ -98,11 +100,11 @@
 
     <script>
       const records = [
-        { id: "soil", company: "Example Bio Inputs", product: "Fictional Microbial Soil Blend", member: "Verified", status: "Submitted to registrar", submittedAt: "2026-06-22 14:18", reference: "REF-EXAMPLE-1029", proof: "Attached", consent: "Named packet opt-in", ready: true, included: true, blocker: "None" },
-        { id: "biofert", company: "Sample Agri Sciences", product: "Fictional Biofert Product", member: "Verified", status: "Under technical review", submittedAt: "2026-06-21 16:44", reference: "Not issued, reason recorded", proof: "Attached", consent: "Named packet opt-in", ready: true, included: true, blocker: "None" },
-        { id: "spray", company: "Example Bio Inputs", product: "Fictional Bio-Control Spray", member: "Verified", status: "Query requested", submittedAt: "2026-06-22 14:22", reference: "REF-EXAMPLE-2044", proof: "Missing", consent: "Named packet opt-in", ready: false, included: false, blocker: "Proof missing" },
-        { id: "water", company: "Fictional Water Culture", product: "Fictional Water Culture", member: "Non-member", status: "Submitted to authority", submittedAt: "2026-06-21 11:06", reference: "Reason recorded", proof: "Attached", consent: "Named packet opt-in", ready: false, included: false, blocker: "Not included by default" },
-        { id: "seed", company: "Example Bio Inputs", product: "Fictional Seed Coat", member: "Verified", status: "Preparing submission", submittedAt: "2026-06-22 14:28", reference: "Not issued", proof: "Attached", consent: "No named consent", ready: false, included: false, blocker: "Named registrar consent missing" }
+        { id: "soil", company: "Example Bio Inputs", product: "Fictional Microbial Soil Blend", member: "Full member, active", applicationCountry: "South Africa", status: "Submitted to registrar", submittedAt: "2026-06-22 14:18", reference: "REF-EXAMPLE-1029", proof: "Attached", consent: "Named packet opt-in", bottleneckTheme: "Regulator delay", ready: true, included: true, blocker: "None" },
+        { id: "biofert", company: "Sample Agri Sciences", product: "Fictional Biofert Product", member: "Full member, active", applicationCountry: "South Africa", status: "Under technical review", submittedAt: "2026-06-21 16:44", reference: "Not issued, reason recorded", proof: "Attached", consent: "Named packet opt-in", bottleneckTheme: "Reference issue", ready: true, included: true, blocker: "None" },
+        { id: "spray", company: "Example Bio Inputs", product: "Fictional Bio-Control Spray", member: "Full member, active", applicationCountry: "South Africa", status: "Query requested", submittedAt: "2026-06-22 14:22", reference: "REF-EXAMPLE-2044", proof: "Missing", consent: "Named packet opt-in", bottleneckTheme: "Proof missing", ready: false, included: false, blocker: "Proof missing" },
+        { id: "water", company: "Fictional Water Culture", product: "Fictional Water Culture", member: "Non-member", applicationCountry: "Kenya", status: "Submitted to authority", submittedAt: "2026-06-21 11:06", reference: "Reason recorded", proof: "Attached", consent: "Named packet opt-in", bottleneckTheme: "Membership not verified", ready: false, included: false, blocker: "Not included by default" },
+        { id: "seed", company: "Example Bio Inputs", product: "Fictional Seed Coat", member: "Associate", applicationCountry: "Nigeria", status: "Preparing submission", submittedAt: "2026-06-22 14:28", reference: "Not issued", proof: "Attached", consent: "No named consent", bottleneckTheme: "Consent missing", ready: false, included: false, blocker: "Named registrar consent missing" }
       ];
 
       let activeFilter = "all";
@@ -125,11 +127,13 @@
             <td>${record.company}</td>
             <td>${record.product}</td>
             <td>${record.member}</td>
+            <td>${record.applicationCountry}</td>
             <td>${record.status}</td>
             <td>${record.submittedAt}</td>
             <td>${record.reference}</td>
             <td>${record.proof}</td>
             <td>${record.consent}</td>
+            <td>${record.bottleneckTheme}</td>
             <td>${record.blocker}</td>
           </tr>
         `).join("");
@@ -149,7 +153,7 @@
         document.getElementById("blockerList").innerHTML = blockers.map((record) => `
           <div class="readiness-row blocker-row">
             <span>${record.product}</span>
-            <strong>${record.blocker}</strong>
+            <strong>${record.bottleneckTheme}: ${record.blocker}</strong>
           </div>
         `).join("");
       }
@@ -162,7 +166,9 @@
           ["Packet generated", document.getElementById("packetDate").textContent],
           ["Packet status", packetStatus],
           ["Included records", included.length],
+          ["Default inclusion rule", "Full member, active + reviewed + consented + proof/reference + operator included"],
           ["Included records submitted at", included.map((record) => record.submittedAt).join(", ") || "No records included"],
+          ["Included countries", [...new Set(included.map((record) => record.applicationCountry))].join(", ") || "No records included"],
           ["Attachments included", `${included.filter((record) => record.proof === "Attached").length} proof/reference sets`],
           ["History states", "Draft / prepared / frozen / sent / revised / withdrawn"],
           ["Preserved snapshot", "Included records, blockers, version, date"]

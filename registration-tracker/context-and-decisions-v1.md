@@ -168,14 +168,14 @@ This should remain aggregate and should not name companies.
 
 The registrar list is the final export-facing packet/list.
 
-It should default to reviewed, consented, operator-approved ABA member records.
+It should default to reviewed, consented, operator-approved verified Full member records.
 
 Non-member submissions may be visible in adjacent review context or as excluded/upgrade candidates, but they should not be included in the registrar packet by default.
 
 Registrar packet inclusion should require:
 
 - reviewed record
-- verified ABA member status
+- verified ABA relationship type
 - consent for named registrar packet use
 - proof attached
 - registrar reference number present, or an explicit reference-unavailable reason
@@ -191,7 +191,7 @@ An export packet is evidence sent at a moment in time. It should conceptually pr
 - packet version
 - sent/revised/withdrawn state
 - attachments included
-- member/non-member exclusion logic
+- relationship-type exclusion logic
 
 ### Admin / Operator Review
 
@@ -202,7 +202,7 @@ It should allow ABA staff to:
 - triage submissions
 - verify proof
 - inspect consent and visibility settings
-- verify member status
+- verify ABA relationship type
 - detect duplicates or obvious errors
 - request clarification
 - decide whether a record is accepted into the tracker
@@ -222,36 +222,42 @@ Admin/operator review is the internal source of truth for v1 record state, not m
 Canonical review fields may include:
 
 - review status
-- verified membership status
+- verified ABA relationship type
 - data quality status
 - public aggregate eligibility
 - registrar packet eligibility
 - operator inclusion decision
 - clarification needed
 
-## Membership Status
+## ABA Relationship Type
 
-ABA membership status should be a first-class company-level field that carries through every view.
+ABA relationship type should be a first-class company-level field that carries through every view.
 
 Suggested statuses:
 
-- member
+- full member
+- associate
+- observer
 - non-member
 - unknown / pending
 - lapsed, if needed later
 
-The intake flow should ask for self-reported membership status:
+The intake flow should ask for self-reported ABA relationship type:
 
-- yes
-- no
+- full member
+- associate
+- observer
+- non-member
 - not sure / pending
 
 The admin/operator review area should distinguish between:
 
-- self-reported membership status
-- verified membership status
+- self-reported ABA relationship type
+- verified ABA relationship type
 
-Membership status affects:
+Verified `Full member, active` is the default registrar-packet eligible relationship type. Other relationship types may contribute to reviewed aggregate intelligence but require operator exception before named packet inclusion.
+
+ABA relationship type affects:
 
 - company dashboard access
 - registrar packet inclusion by default
@@ -314,7 +320,7 @@ Company fields may include:
 
 - company name
 - country
-- ABA membership status
+- ABA relationship type
 - company role
 
 Contact person fields may include:
@@ -386,6 +392,12 @@ Under Agriculture / Act 36, show:
 
 For non-South Africa countries, the model should remain country-aware and flexible.
 
+## Geographic Truth
+
+ABA can receive registration signals from across Africa, while current operating activity is centered in South Africa.
+
+Tracker views should make this boundary visible where it helps interpretation: intake, public dashboard, and country-level aggregate reporting. South African Act 36 fields can be more specific, but non-South Africa records must remain country-aware and flexible.
+
 ## Status Logs And Wait Time
 
 Each application should maintain a dated status log.
@@ -424,6 +436,23 @@ Public metrics should distinguish:
 `Backlog applications` means open applications that have exceeded a configurable threshold.
 
 Thresholds should initially be stage-specific, with room to vary later by regime and country.
+
+## Bottleneck Themes
+
+Admin/operator review should assign a controlled bottleneck theme so private blockers can be aggregated safely.
+
+Starter values:
+
+- Proof missing
+- Reference issue
+- Classification ambiguity
+- Regulator delay
+- Consent missing
+- Membership not verified
+- Possible duplicate
+- Other
+
+Company and registrar views may show record-level blockers. Public dashboard views should show only aggregate bottleneck themes after review and suppression.
 
 ## Status List
 
@@ -488,6 +517,8 @@ The public dashboard should include an anonymisation/suppression note, for examp
 
 `Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity.`
 
+The public dashboard should also make the Knowledge Hub boundary clear: tracker metrics are deeper reviewed evidence, while Knowledge Hub Regulatory Signals are lighter public context. Functional category should conceptually align with Product Catalogue, and proof/reference material should conceptually align with Evidence Library.
+
 ## CRM Relationship
 
 The tracker should assume the custom CRM is the eventual system of record, but not overfit the wireframes to final CRM implementation.
@@ -496,7 +527,7 @@ Conceptual CRM-linked entities:
 
 - Company / Organisation
 - Contact Person
-- Membership Status
+- ABA Relationship Type
 - Product
 - Application / Registration Event
 - Status Log Entry

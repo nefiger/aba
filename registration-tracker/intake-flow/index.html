@@ -55,6 +55,16 @@
           </div>
         </section>
 
+        <section class="panel muted" style="margin-bottom: 16px;">
+          <div class="dashboard-toolbar">
+            <div>
+              <h2>Geographic truth</h2>
+              <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa, so South African Act 36 detail is shown first while other country records stay flexible.</p>
+            </div>
+            <a class="action-button secondary" href="../../docs/database/regulatory-signals.html">Regulatory signals context</a>
+          </div>
+        </section>
+
         <section class="grid two">
           <div class="panel ok stack">
             <h2>1. Authorised submitter gate</h2>
@@ -75,6 +85,7 @@
               <label>Share instruction</label>
               <input class="control" value="Please forward this link to the person responsible for registration information." readonly>
             </div>
+            <div class="callout">If you are a technical contributor rather than an authorised company representative, use ABA's future expert or technical-context route. This prototype does not allow third-party product registration reporting.</div>
           </div>
         </section>
 
@@ -97,7 +108,7 @@
                 <div class="field"><label for="companyName">Company name</label><input id="companyName" class="control" value="Example Bio Inputs (Pty) Ltd"></div>
                 <div class="field"><label for="companyRole">Company role</label><select id="companyRole" class="control-select"><option>Manufacturer</option><option>Importer</option><option>Local registration holder</option><option>Distributor responsible for registration</option><option>Other authorised representative</option></select></div>
                 <div class="field"><label for="companyCountry">Company country</label><select id="companyCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
-                <div class="field"><label for="membership">Self-reported ABA membership</label><select id="membership" class="control-select"><option>Yes</option><option>No</option><option>Not sure / pending</option></select></div>
+                <div class="field"><label for="membership">Self-reported ABA relationship</label><select id="membership" class="control-select"><option>Full member</option><option>Associate</option><option>Observer</option><option>Non-member</option><option>Not sure / pending</option></select></div>
                 <div class="field"><label for="contactName">Contact person</label><input id="contactName" class="control" value="Fictional Contact"></div>
                 <div class="field"><label for="contactEmail">Email for return link</label><input id="contactEmail" class="control" type="email" value="contact@example.invalid"></div>
                 <div class="field full"><label>POPIA/privacy notice</label><div class="textarea-box">ABA uses this information for internal review, anonymised sector evidence, and consented registrar engagement. This is not legal or regulatory advice.</div></div>
@@ -114,6 +125,7 @@
                 <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Group 3 fertilizer</option><option>Agricultural remedy</option><option>Not sure</option></select></div>
                 <div class="field act36-field"><label for="classificationCode">Classification code</label><select id="classificationCode" class="control-select"><option>M</option><option>L</option><option>K</option><option>Unknown</option></select></div>
                 <div class="field full" id="nonAct36Note"><label>Conditional regime note</label><div class="textarea-box">Act 36 legal pathway and M/L/K classification are hidden unless Agriculture / Act 36 is selected.</div></div>
+                <div class="field full"><label>Knowledge Hub connection</label><div class="textarea-box">Functional category aligns with the Product Catalogue; reviewed status patterns can later support public Regulatory Signals.</div></div>
               </div>
             </section>
 
@@ -139,6 +151,7 @@
                 <label class="checkbox-item"><input id="proofAttached" type="checkbox"> <span>Proof of submission attached</span></label>
                 <div class="field full"><label for="proofDescription">Proof description</label><input id="proofDescription" class="control" value="Receipt or registrar email placeholder"></div>
                 <div class="callout" id="proofNote">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
+                <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence library concept</a>
               </div>
               <div class="panel stack">
                 <h2>Visibility and consent</h2>
@@ -233,7 +246,7 @@
         if (!checked("consentRegistrar")) return "Blocked: named registrar packet consent is missing.";
         if (value("referenceStatus") === "Provided" && !value("referenceNumber").trim()) return "Blocked: reference number is blank.";
         if (value("referenceStatus") !== "Provided" && !value("referenceReason").trim()) return "Blocked: reference-unavailable reason is required.";
-        if (value("membership") !== "Yes") return "Permission captured, but member status must be verified before default packet inclusion.";
+        if (value("membership") !== "Full member") return "Permission captured, but Full member status must be verified before default packet inclusion.";
         return "Potentially packet-ready after ABA operator review.";
       }
 
@@ -275,9 +288,10 @@
           ["Submission timestamp", submittedAt],
           ["Draft saved", state.lastSavedAt || "Not saved yet"],
           ["Company", value("companyName")],
-          ["Membership", value("membership")],
+          ["ABA relationship", value("membership")],
           ["Product", value("productName")],
           ["Category", value("functionalCategory")],
+          ["Application country", value("applicationCountry")],
           ["Regime", value("regime")],
           ["Act 36 fields", isAct36 ? `${value("legalPathway")} / ${value("classificationCode")}` : "Hidden for this regime"],
           ["Status log", `${value("currentStatus")} since ${value("statusDate")}${checked("approximateDate") ? " (approx.)" : ""}`],

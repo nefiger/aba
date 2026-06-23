@@ -35,8 +35,8 @@
 
         <section class="grid three">
           <div class="panel ok"><h2>Workspace gate</h2><p>Member login or invited workspace access required. Intake return links do not unlock this area.</p></div>
-          <div class="panel"><h2>Company</h2><p><strong>Example Bio Inputs (Pty) Ltd</strong><br>Verified ABA member: yes<br>Records visible: own company only<br>Data refreshed: 2026-06-22 14:40</p></div>
-          <div class="panel warn"><h2>No accepted records yet state</h2><p>Show when records are submitted but still under ABA review. Benchmarks remain hidden until review acceptance.</p></div>
+          <div class="panel"><h2>Company</h2><p><strong>Example Bio Inputs (Pty) Ltd</strong><br>Verified ABA relationship: Full member, active<br>Records visible: own company only<br>Data refreshed: 2026-06-22 14:40</p></div>
+          <div class="panel warn"><h2>Knowledge Hub boundary</h2><p>Company records stay private here. Reviewed aggregate patterns may later support public Regulatory Signals and Evidence Library context.</p></div>
         </section>
 
         <section class="panel" style="margin-top: 16px;">
@@ -118,6 +118,9 @@
         {
           id: "soil-blend",
           product: "Fictional Microbial Soil Blend",
+          applicationCountry: "South Africa",
+          verifiedMemberType: "Full member, active",
+          knowledgeHubLinkType: "Product catalogue",
           submittedAt: "2026-06-22 14:18",
           reviewedAt: "2026-06-22 14:36",
           lane: "with registrar",
@@ -127,6 +130,7 @@
           sectorMedian: 14,
           packet: "Ready candidate",
           blocker: "None",
+          bottleneckTheme: "Regulator delay",
           ready: true,
           needsAction: false,
           timeline: ["Submitted", "Reference issued", "Waiting"]
@@ -134,6 +138,9 @@
         {
           id: "bio-control",
           product: "Fictional Bio-Control Spray",
+          applicationCountry: "South Africa",
+          verifiedMemberType: "Full member, active",
+          knowledgeHubLinkType: "Evidence library",
           submittedAt: "2026-06-22 14:22",
           reviewedAt: "2026-06-22 14:39",
           lane: "with registrar",
@@ -143,6 +150,7 @@
           sectorMedian: 14,
           packet: "Not export-ready",
           blocker: "Proof missing",
+          bottleneckTheme: "Proof missing",
           ready: false,
           needsAction: true,
           timeline: ["Submitted", "Query received", "Proof needed"]
@@ -150,6 +158,9 @@
         {
           id: "seed-coat",
           product: "Fictional Seed Coat",
+          applicationCountry: "Kenya",
+          verifiedMemberType: "Full member, active",
+          knowledgeHubLinkType: "Product catalogue",
           submittedAt: "2026-06-22 14:28",
           reviewedAt: "Pending review",
           lane: "pipeline",
@@ -159,6 +170,7 @@
           sectorMedian: 14,
           packet: "Not eligible yet",
           blocker: "Pre-submission pipeline",
+          bottleneckTheme: "Other",
           ready: false,
           needsAction: false,
           timeline: ["Draft", "Preparing"]
@@ -166,6 +178,9 @@
         {
           id: "compost",
           product: "Fictional Compost Inoculant",
+          applicationCountry: "South Africa",
+          verifiedMemberType: "Full member, active",
+          knowledgeHubLinkType: "Regulatory signals",
           submittedAt: "2026-06-21 16:44",
           reviewedAt: "2026-06-22 09:15",
           lane: "finalised",
@@ -175,6 +190,7 @@
           sectorMedian: 14,
           packet: "Historical record",
           blocker: "Finalised, not current packet",
+          bottleneckTheme: "Regulator delay",
           ready: false,
           needsAction: false,
           timeline: ["Submitted", "Review", "Approved"]
@@ -284,6 +300,7 @@
             <button type="button" class="record-card" data-record="${record.id}" aria-pressed="${record.id === selectedId}">
               <strong>${record.product}</strong>
               <span class="status-chip">${record.review}</span>
+              <span class="status-chip">${record.applicationCountry}</span>
               <p class="note">Submitted at ${record.submittedAt}</p>
               <p>${record.status}${record.waitMonths ? `. Waiting ${record.waitMonths} months.` : "."}</p>
             </button>
@@ -305,6 +322,8 @@
         const rows = [
           ["Product", selected.product],
           ["Submitted at", selected.submittedAt],
+          ["Application country", selected.applicationCountry],
+          ["Verified ABA relationship", selected.verifiedMemberType],
           ["Last ABA review", selected.reviewedAt],
           ["Lane", laneLabels[selected.lane]],
           ["Current status", selected.status],
@@ -312,7 +331,9 @@
           ["Wait time", selected.waitMonths ? `${selected.waitMonths} months` : "Not yet submitted"],
           ["Timeline", selected.timeline.join(" -> ")],
           ["Packet status", selected.packet],
-          ["Blocker", selected.blocker]
+          ["Blocker", selected.blocker],
+          ["Bottleneck theme", selected.bottleneckTheme],
+          ["Knowledge Hub link", selected.knowledgeHubLinkType]
         ];
         document.getElementById("selectedRecord").innerHTML = rows.map(([key, value]) => `
           <div class="state-row">
@@ -324,7 +345,7 @@
 
       function renderReadinessTable(items) {
         document.getElementById("readinessTable").innerHTML = items.map((record) => `
-          <tr><td>${record.product}<br><span class="note">Submitted at ${record.submittedAt}</span></td><td>${record.packet}</td><td>${record.blocker}</td></tr>
+          <tr><td>${record.product}<br><span class="note">${record.applicationCountry}; ${record.verifiedMemberType}</span></td><td>${record.packet}</td><td>${record.bottleneckTheme}: ${record.blocker}</td></tr>
         `).join("");
       }
 

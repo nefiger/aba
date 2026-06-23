@@ -109,6 +109,9 @@
     .types-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+    .support-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
     .application-grid {
       grid-template-columns: minmax(0, 1fr) 280px;
       align-items: start;
@@ -228,6 +231,7 @@
     @media (max-width: 900px) {
       .hero-grid,
       .types-grid,
+      .support-grid,
       .application-grid,
       .field-grid,
       .review-grid {
@@ -251,6 +255,7 @@
         <a href="../site/about.html">About</a>
         <a class="active" href="./index.html">Membership</a>
         <a href="../database/index.html">Knowledge Hub</a>
+        <a href="../site/workspace.html">Workspace</a>
       </nav>
     </header>
 
@@ -291,6 +296,31 @@
           <div class="mini">Observer</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Institutional stakeholders</h3>
           <p style="margin-top: 8px;">For funders, development partners, public bodies, and related institutions engaging the category.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div>
+        <div class="eyebrow">Member value</div>
+        <h2 class="display" style="margin-top: 6px;">Membership also creates a route into registration support.</h2>
+        <p style="margin-top: 8px; max-width: 72ch;">The data captured here should help ABA understand who a member is, what products or capabilities they bring, and where structured registration visibility could support them downstream.</p>
+      </div>
+      <div class="support-grid" style="display: grid; gap: 12px; margin-top: 12px;">
+        <article class="card">
+          <div class="mini">Workspace</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">A member company dashboard</h3>
+          <p style="margin-top: 8px;">Full members can access a workspace that organises their registration records, evidence, status notes, and support needs.</p>
+        </article>
+        <article class="card">
+          <div class="mini">Data capture</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Intentional member records</h3>
+          <p style="margin-top: 8px;">Membership data can connect organisation type, country presence, product ownership, and support needs.</p>
+        </article>
+        <article class="card">
+          <div class="mini">Advocacy</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Better evidence for ABA</h3>
+          <p style="margin-top: 8px;">Structured member inputs help ABA separate member-specific assistance from sector-wide advocacy signals.</p>
         </article>
       </div>
     </section>

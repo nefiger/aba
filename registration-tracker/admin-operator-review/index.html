@@ -56,7 +56,7 @@
                 <h2>Membership verification</h2>
                 <div class="form-grid">
                   <div class="field"><label>Self-reported</label><div class="input-box" id="selfReported"></div></div>
-                  <div class="field"><label for="verifiedMembership">Verified membership</label><select id="verifiedMembership" class="control-select"><option>Member, active</option><option>Non-member</option><option>Unknown / pending</option><option>Lapsed</option></select></div>
+                  <div class="field"><label for="verifiedMembership">Verified ABA relationship</label><select id="verifiedMembership" class="control-select"><option>Full member, active</option><option>Associate</option><option>Observer</option><option>Non-member</option><option>Unknown / pending</option><option>Lapsed</option></select></div>
                   <div class="field full"><label>CRM relationship</label><div class="textarea-box">Match to organisation record later. CRM remains likely system of record.</div></div>
                 </div>
               </div>
@@ -85,6 +85,7 @@
                   <label class="checkbox-item"><input id="possibleDuplicate" type="checkbox"> <span>Possible duplicate</span></label>
                   <label class="checkbox-item"><input id="clarificationNeeded" type="checkbox"> <span>Needs clarification from company</span></label>
                 </div>
+                <div class="field full" style="margin-top: 10px;"><label for="bottleneckTheme">Bottleneck theme</label><select id="bottleneckTheme" class="control-select"><option>Proof missing</option><option>Reference issue</option><option>Classification ambiguity</option><option>Regulator delay</option><option>Consent missing</option><option>Membership not verified</option><option>Possible duplicate</option><option>Other</option></select></div>
                 <div class="field full" style="margin-top: 10px;"><label for="clarificationNote">Clarification request</label><textarea id="clarificationNote" class="control-textarea"></textarea></div>
               </div>
             </section>
@@ -139,10 +140,10 @@
 
     <script>
       const records = [
-        { id: "soil", product: "Fictional Microbial Soil Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Review pending", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-15", submittedAt: "2026-06-22 14:18", reviewedAt: "Not reviewed yet", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: true, proof: "Verified", reference: "Verified", duplicate: false, clarification: false, publicDecision: "Needs review", packetDecision: "Eligible", operatorDecision: "Needs review", note: "Readable, matches company and product." },
-        { id: "spray", product: "Fictional Bio-Control Spray", company: "Example Bio Inputs (Pty) Ltd", state: "Needs clarification", category: "Biopesticide", regime: "Agriculture / Act 36", status: "Query / additional information requested", date: "2025-12-01", submittedAt: "2026-06-22 14:22", reviewedAt: "2026-06-22 14:39", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: true, proof: "Missing", reference: "Verified", duplicate: false, clarification: true, publicDecision: "Needs review", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Proof of submission missing." },
-        { id: "dupe", product: "Fictional Soil Microbe Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Possible duplicate", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-16", submittedAt: "2026-06-22 14:25", reviewedAt: "2026-06-22 14:41", self: "Member", verified: "Member, active", publicConsent: false, registrarConsent: false, proof: "Verified", reference: "Mismatch", duplicate: true, clarification: true, publicDecision: "Exclude", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Looks similar to Microbial Soil Blend record." },
-        { id: "compost", product: "Fictional Compost Inoculant", company: "Sample Agri Sciences", state: "Accepted", category: "Biofertiliser", regime: "Agriculture / Act 36", status: "Approved / registered", date: "2024-04-20", submittedAt: "2026-06-21 16:44", reviewedAt: "2026-06-22 09:15", self: "Member", verified: "Member, active", publicConsent: true, registrarConsent: false, proof: "Verified", reference: "Reason accepted", duplicate: false, clarification: false, publicDecision: "Eligible", packetDecision: "Excluded", operatorDecision: "Exclude", note: "Finalised historical record." }
+        { id: "soil", product: "Fictional Microbial Soil Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Review pending", category: "Biofertiliser", applicationCountry: "South Africa", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-15", submittedAt: "2026-06-22 14:18", reviewedAt: "Not reviewed yet", self: "Full member", verified: "Full member, active", publicConsent: true, registrarConsent: true, proof: "Verified", reference: "Verified", bottleneckTheme: "Regulator delay", knowledgeHubLinkType: "Regulatory signals", duplicate: false, clarification: false, publicDecision: "Needs review", packetDecision: "Eligible", operatorDecision: "Needs review", note: "Readable, matches company and product." },
+        { id: "spray", product: "Fictional Bio-Control Spray", company: "Example Bio Inputs (Pty) Ltd", state: "Needs clarification", category: "Biopesticide", applicationCountry: "South Africa", regime: "Agriculture / Act 36", status: "Query / additional information requested", date: "2025-12-01", submittedAt: "2026-06-22 14:22", reviewedAt: "2026-06-22 14:39", self: "Full member", verified: "Full member, active", publicConsent: true, registrarConsent: true, proof: "Missing", reference: "Verified", bottleneckTheme: "Proof missing", knowledgeHubLinkType: "Evidence library", duplicate: false, clarification: true, publicDecision: "Needs review", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Proof of submission missing." },
+        { id: "dupe", product: "Fictional Soil Microbe Blend", company: "Example Bio Inputs (Pty) Ltd", state: "Possible duplicate", category: "Biofertiliser", applicationCountry: "Kenya", regime: "Agriculture / Act 36", status: "Submitted to registrar", date: "2025-09-16", submittedAt: "2026-06-22 14:25", reviewedAt: "2026-06-22 14:41", self: "Associate", verified: "Associate", publicConsent: false, registrarConsent: false, proof: "Verified", reference: "Mismatch", bottleneckTheme: "Possible duplicate", knowledgeHubLinkType: "Product catalogue", duplicate: true, clarification: true, publicDecision: "Exclude", packetDecision: "Blocked", operatorDecision: "Needs review", note: "Looks similar to Microbial Soil Blend record." },
+        { id: "compost", product: "Fictional Compost Inoculant", company: "Sample Agri Sciences", state: "Accepted", category: "Biofertiliser", applicationCountry: "South Africa", regime: "Agriculture / Act 36", status: "Approved / registered", date: "2024-04-20", submittedAt: "2026-06-21 16:44", reviewedAt: "2026-06-22 09:15", self: "Observer", verified: "Observer", publicConsent: true, registrarConsent: false, proof: "Verified", reference: "Reason accepted", bottleneckTheme: "Regulator delay", knowledgeHubLinkType: "Regulatory signals", duplicate: false, clarification: false, publicDecision: "Eligible", packetDecision: "Excluded", operatorDecision: "Exclude", note: "Finalised historical record." }
       ];
 
       let selectedId = "soil";
@@ -163,6 +164,7 @@
           <button class="queue-button" type="button" data-record="${record.id}" aria-pressed="${record.id === selectedId}">
             <strong>${record.product}</strong>
             <span>${record.state}</span>
+            <span>${record.applicationCountry} / ${record.bottleneckTheme}</span>
             <span>Submitted at ${record.submittedAt}</span>
           </button>
         `).join("");
@@ -182,9 +184,11 @@
           ["Submitted at", record.submittedAt],
           ["Last ABA review", record.reviewedAt],
           ["Functional category", record.category],
+          ["Application country", record.applicationCountry],
           ["Regime", record.regime],
           ["Current status", record.status],
-          ["Date status began", record.date]
+          ["Date status began", record.date],
+          ["Knowledge Hub link", record.knowledgeHubLinkType]
         ];
         document.getElementById("recordDetail").innerHTML = rows.map(([label, value]) => `<div class="field"><label>${label}</label><div class="input-box">${value}</div></div>`).join("");
         document.getElementById("selfReported").textContent = record.self;
@@ -196,6 +200,7 @@
         document.getElementById("qualityNote").value = record.note;
         document.getElementById("possibleDuplicate").checked = record.duplicate;
         document.getElementById("clarificationNeeded").checked = record.clarification;
+        document.getElementById("bottleneckTheme").value = record.bottleneckTheme;
         document.getElementById("clarificationNote").value = record.clarification ? "Please confirm proof/reference details and whether this duplicates another record." : "";
       }
 
@@ -210,12 +215,13 @@
       }
 
       function renderSummary(record) {
-        const ready = record.verified === "Member, active" && record.registrarConsent && record.proof === "Verified" && (record.reference === "Verified" || record.reference === "Reason accepted") && record.packetDecision === "Eligible" && record.operatorDecision === "Include";
+        const ready = record.verified === "Full member, active" && record.registrarConsent && record.proof === "Verified" && (record.reference === "Verified" || record.reference === "Reason accepted") && record.packetDecision === "Eligible" && record.operatorDecision === "Include";
         const rows = [
           ["Review state", record.state],
           ["Submitted at", record.submittedAt],
           ["Last ABA review", record.reviewedAt],
-          ["Verified member", record.verified],
+          ["Verified ABA relationship", record.verified],
+          ["Bottleneck theme", record.bottleneckTheme],
           ["Public aggregate", record.publicDecision],
           ["Registrar eligibility", record.packetDecision],
           ["Operator inclusion", record.operatorDecision],
@@ -244,6 +250,7 @@
         record.note = document.getElementById("qualityNote").value;
         record.duplicate = document.getElementById("possibleDuplicate").checked;
         record.clarification = document.getElementById("clarificationNeeded").checked;
+        record.bottleneckTheme = document.getElementById("bottleneckTheme").value;
       }
 
       function render() {
@@ -254,7 +261,7 @@
         renderSummary(record);
       }
 
-      ["verifiedMembership", "consentPublic", "consentRegistrar", "proofStatus", "referenceStatus", "qualityNote", "possibleDuplicate", "clarificationNeeded"].forEach((id) => {
+      ["verifiedMembership", "consentPublic", "consentRegistrar", "proofStatus", "referenceStatus", "qualityNote", "possibleDuplicate", "clarificationNeeded", "bottleneckTheme"].forEach((id) => {
         document.getElementById(id).addEventListener("change", () => {
           syncRecordFromControls();
           lastAction = "Review fields updated.";

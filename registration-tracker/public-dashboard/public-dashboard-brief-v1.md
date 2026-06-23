@@ -15,7 +15,7 @@ Public aggregate view. No company-specific or proof-level information should app
 ## Key Screens Or Sections
 
 - Headline metrics: applications in backlog, median wait time, worst wait time, product-years waiting.
-- Member/non-member/all reviewed-submissions filter.
+- All / ABA relationship / non-member reviewed-submissions filter.
 - Backlog by legal pathway.
 - Functional category and regime breakdowns.
 - Trend over time.

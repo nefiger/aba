@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>African Biologicals Alliance | About</title>
+  <title>African Biologicals Alliance | Workspace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Public Sans", system-ui, sans-serif;
@@ -29,13 +30,17 @@
         radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
         linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
+
     a { color: inherit; text-decoration: none; }
+
     .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
+
     .shell {
       width: min(1120px, calc(100vw - 28px));
       margin: 0 auto;
       padding: 14px 0 28px;
     }
+
     .surface {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -43,6 +48,7 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
+
     .topbar {
       padding: 12px 16px;
       display: flex;
@@ -51,11 +57,13 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .mark {
       width: 36px;
       height: 36px;
@@ -70,6 +78,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+
     .mini,
     .eyebrow {
       font-size: 11px;
@@ -77,8 +86,10 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+
     .mini { color: var(--muted); }
     .eyebrow { color: var(--green); }
+
     .nav {
       display: flex;
       gap: 14px;
@@ -86,53 +97,61 @@
       font-size: 13px;
       font-weight: 700;
     }
+
     .nav a.active { color: var(--green); }
+
     .hero,
     .section {
       margin-top: 12px;
       padding: 20px;
     }
+
     .hero-grid,
-    .card-grid,
-    .detail-grid {
+    .gateway-grid {
       display: grid;
       gap: 12px;
     }
+
     .hero-grid {
       grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
       align-items: start;
     }
-    .card-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .detail-grid {
+
+    .gateway-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    h1, h2, h3, p { margin: 0; }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
     h1 {
       margin-top: 8px;
       font-size: clamp(1.95rem, 3vw, 2.8rem);
       line-height: 1.06;
       letter-spacing: -0.035em;
     }
+
     h2 {
-      font-size: clamp(1.45rem, 2vw, 1.95rem);
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
       line-height: 1.1;
       letter-spacing: -0.03em;
     }
+
     h3 {
       font-size: 1rem;
       line-height: 1.35;
     }
+
     p {
       color: var(--muted);
       font-size: 15px;
       line-height: 1.62;
     }
-    .lede {
-      margin-top: 10px;
-      max-width: 62ch;
-    }
+
     .panel,
     .card {
       border: 1px solid var(--line);
@@ -140,13 +159,16 @@
       background: rgba(255, 255, 255, 0.66);
       padding: 16px;
     }
+
     .tone { background: var(--sand); }
+
     .actions {
       margin-top: 14px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -159,18 +181,20 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
+
     .button.primary {
       background: var(--green);
       color: white;
     }
+
     .button.secondary {
       background: white;
       border: 1px solid var(--line);
     }
+
     @media (max-width: 900px) {
       .hero-grid,
-      .card-grid,
-      .detail-grid {
+      .gateway-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -183,89 +207,71 @@
         <div class="mark">ABA</div>
         <div>
           <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Coordination, visibility, and participation across Africa</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Workspace gateway</div>
         </div>
       </div>
       <nav class="nav">
         <a href="./index.html">Home</a>
-        <a class="active" href="./about.html">About</a>
+        <a href="./about.html">About</a>
         <a href="../membership-flow/index.html">Membership</a>
         <a href="../database/index.html">Knowledge Hub</a>
-        <a href="./workspace.html">Workspace</a>
+        <a class="active" href="./workspace.html">Workspace</a>
       </nav>
     </header>
 
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">About ABA</div>
-          <h1 class="display">ABA exists to support and strengthen the biologicals sector in Africa.</h1>
-          <p class="lede">
-            The African Biologicals Alliance brings together organisations, specialists, and partners who are working to grow the reach, credibility, and contribution of biologicals across the continent.
-          </p>
+          <div class="eyebrow">Workspace</div>
+          <h1 class="display">Choose a demo workspace role.</h1>
+          <p style="margin-top: 10px; max-width: 62ch;">This is a prototype role gateway for the meeting. It is not a real login; it simply routes to the member, ABA review, registrar, and meeting-brief views.</p>
         </div>
         <aside class="panel tone">
-          <div class="mini">What ABA does</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">ABA connects people, knowledge, and shared sector interests.</p>
-          <p style="margin-top: 8px;">It creates a place for participation, visibility, and practical collaboration.</p>
+          <div class="mini">Access model</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Public visitors see aggregate signals. Workspaces show the deeper record views.</p>
+          <p style="margin-top: 8px;">Use this page to keep internal tools out of ordinary public navigation while still making the demo easy to present.</p>
         </aside>
       </div>
     </section>
 
     <section class="surface section">
-      <div class="card-grid">
-        <article class="card">
-          <div class="eyebrow">Role</div>
-          <p style="margin-top: 10px;">Provide a clearer structure for how the biologicals sector connects, participates, and presents itself.</p>
-        </article>
-        <article class="card">
-          <div class="eyebrow">Need</div>
-          <p style="margin-top: 10px;">Support stronger visibility, better coordination, and more informed engagement.</p>
-        </article>
-        <article class="card">
-          <div class="eyebrow">Scope</div>
-          <p style="margin-top: 10px;">Work across Africa while building from current activity in South Africa.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
       <div>
-        <div class="eyebrow">How ABA helps</div>
-        <h2 class="display" style="margin-top: 6px;">Support for participation, knowledge, and shared progress.</h2>
+        <div class="eyebrow">Registration tracker</div>
+        <h2 class="display" style="margin-top: 6px;">Open the view that matches the role in the story.</h2>
       </div>
-      <div class="detail-grid" style="margin-top: 12px;">
+      <div class="gateway-grid" style="margin-top: 12px;">
         <article class="card">
-          <h3>Membership that fits different roles</h3>
-          <p style="margin-top: 8px;">Companies, technical contributors, and institutional stakeholders can each join in a way that makes sense for their role.</p>
+          <div class="mini">Member company</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Company workspace</h3>
+          <p style="margin-top: 8px;">Shows the member-facing registration status, evidence, and next-action view.</p>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/company-dashboard/index.html">Open member view</a>
+          </div>
         </article>
         <article class="card">
-          <h3>Clearer sector visibility</h3>
-          <p style="margin-top: 8px;">A better picture of products, organisations, and participation helps the sector become easier to understand.</p>
+          <div class="mini">ABA operator</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Operator review</h3>
+          <p style="margin-top: 8px;">Shows how ABA reviews submitted records before they become trusted intelligence.</p>
+          <div class="actions">
+            <a class="button secondary" href="../../registration-tracker/admin-operator-review/index.html">Open review view</a>
+          </div>
         </article>
         <article class="card">
-          <h3>Member-specific advocacy</h3>
-          <p style="margin-top: 8px;">Members can bring product, evidence, and registration context into a structured workspace so ABA can understand where support is needed.</p>
+          <div class="mini">Registrar</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Registrar export</h3>
+          <p style="margin-top: 8px;">Shows the structured export view for regulator or registrar-facing engagement.</p>
+          <div class="actions">
+            <a class="button secondary" href="../../registration-tracker/registrar-list/index.html">Open export view</a>
+          </div>
         </article>
         <article class="card">
-          <h3>Sector-wide advocacy</h3>
-          <p style="margin-top: 8px;">Aggregated signals help ABA speak about shared bottlenecks and opportunities without exposing sensitive member-level detail.</p>
+          <div class="mini">Meeting brief</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Tracker presentation</h3>
+          <p style="margin-top: 8px;">Opens the full presenter brief for explaining the registration tracker flow.</p>
+          <div class="actions">
+            <a class="button secondary" href="../registration-tracker/index.html">Open tracker brief</a>
+          </div>
         </article>
-        <article class="card">
-          <h3>Trusted review layer</h3>
-          <p style="margin-top: 8px;">ABA review keeps records useful, credible, and ready for the right audience before they become public intelligence or advocacy evidence.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
-      <div>
-        <div class="eyebrow">Next steps</div>
-        <h2 class="display" style="margin-top: 6px;">Explore membership and the knowledge hub.</h2>
-      </div>
-      <div class="actions">
-        <a class="button primary" href="../membership-flow/index.html">Membership</a>
-        <a class="button secondary" href="../database/index.html">Knowledge hub</a>
       </div>
     </section>
   </main>

@@ -140,7 +140,7 @@ Show:
 
 - eligibility gate for authorised submitter
 - company/contact details
-- self-reported ABA membership status
+- self-reported ABA relationship type
 - POPIA/privacy notice
 - product entry
 - functional category
@@ -178,7 +178,7 @@ Show:
 - median wait time
 - worst wait time
 - product-years waiting
-- member/non-member/all filter
+- all / ABA relationship / non-member filter
 - backlog by legal pathway
 - breakdown by functional category and regime
 - trend over time
@@ -193,7 +193,7 @@ Show:
 
 - review queue
 - record detail panel
-- self-reported vs verified membership status
+- self-reported vs verified ABA relationship type
 - consent and visibility summary
 - proof/reference review
 - duplicate or possible duplicate state
@@ -209,7 +209,7 @@ Show:
 
 - export-ready registrar packet list
 - default focus on reviewed, consented, operator-approved member records
-- member/non-member indicators
+- ABA relationship type indicators
 - proof and reference columns
 - eligibility blockers
 - export packet/batch concept

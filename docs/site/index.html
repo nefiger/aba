@@ -124,7 +124,8 @@
     }
 
     .summary-grid,
-    .path-grid {
+    .path-grid,
+    .metric-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
@@ -217,6 +218,29 @@
       background: var(--sand);
     }
 
+    .data-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric {
+      display: grid;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .metric strong {
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1;
+    }
+
     .stack {
       display: grid;
       gap: 10px;
@@ -226,7 +250,8 @@
       .hero-grid,
       .summary-grid,
       .card-grid,
-      .path-grid {
+      .path-grid,
+      .metric-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -247,6 +272,7 @@
         <a href="./about.html">About</a>
         <a href="../membership-flow/index.html">Membership</a>
         <a href="../database/index.html">Knowledge Hub</a>
+        <a href="./workspace.html">Workspace</a>
       </nav>
     </header>
 
@@ -288,7 +314,7 @@
           </article>
           <article class="card">
             <h3>Support better sector engagement</h3>
-            <p style="margin-top: 8px;">Stronger information and clearer participation can support better conversation, coordination, and action.</p>
+            <p style="margin-top: 8px;">Stronger information, including public registration signals, can support better conversation, coordination, and action.</p>
           </article>
         </div>
       </div>
@@ -320,7 +346,7 @@
           <article class="card">
             <div class="mini">03</div>
             <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Knowledge hub</h3>
-            <p style="margin-top: 8px;">Explore products, evidence, and regulatory information related to biologicals.</p>
+            <p style="margin-top: 8px;">Explore products, evidence, and public registration signals that make the biologicals landscape easier to understand.</p>
             <div class="actions" style="margin-top: 12px;">
               <a class="button secondary" href="../database/index.html">Open knowledge hub</a>
             </div>
