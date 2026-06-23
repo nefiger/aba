@@ -703,6 +703,27 @@
       letter-spacing: 0.06em;
     }
 
+    .card-cta {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(23, 48, 57, 0.06);
+    }
+
+    .card-cta-link {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--card-accent, var(--green));
+      text-decoration: none;
+      transition: opacity 140ms ease;
+    }
+
+    .card-cta-link:hover {
+      opacity: 0.75;
+    }
+
     .active-legend {
       display: flex;
       align-items: center;
@@ -948,8 +969,8 @@
       </div>
       <div class="topbar-right">
         <div class="micro-stats" aria-label="Explorer coverage">
-          <div class="micro-stat"><strong>16</strong><span>Crop contexts</span></div>
-          <div class="micro-stat"><strong>14</strong><span>Pressure patterns</span></div>
+          <div class="micro-stat"><strong>22</strong><span>Crop contexts</span></div>
+          <div class="micro-stat"><strong>20</strong><span>Pressure patterns</span></div>
         </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
@@ -973,8 +994,8 @@
     <section class="surface hero-section">
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
-        <h1>What are you looking for?</h1>
-        <p style="margin-top: 8px; font-size: 15px;">Start with the lens that fits your question — by crop, by pest or disease, or by product.</p>
+        <h1>Explore the biologicals knowledge base.</h1>
+        <p style="margin-top: 8px; font-size: 15px;">ABA maintains a shared knowledge layer for the sector — products, crop contexts, pest and disease pressures, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
       </div>
 
       <div class="path-entry-grid">
@@ -992,7 +1013,7 @@
           <div class="path-body">
             <h2 style="color: #5a4d1a">Crops</h2>
             <p>Browse biological activity by production context — citrus, maize, potatoes, grapes, and more.</p>
-            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">16 crop contexts</div>
+            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">22 crop contexts</div>
           </div>
         </article>
 
@@ -1038,7 +1059,7 @@
           <div class="path-body">
             <h2 style="color: #8a3e20">Pests &amp; Diseases</h2>
             <p>Start with the problem — bollworm, thrips, powdery mildew, rust, and more.</p>
-            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">14 pressure patterns</div>
+            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">20 pressure patterns</div>
           </div>
         </article>
 
@@ -1155,6 +1176,24 @@
                 <div class="mini-metric-label" x-text="card.rightLabel"></div>
               </div>
             </div>
+
+            <div class="card-cta">
+              <template x-if="activeId === 'crops'">
+                <a class="card-cta-link" :href="'./product-catalogue.html?crop=' + encodeURIComponent(card.title)">
+                  Browse products for <span x-text="card.title"></span> →
+                </a>
+              </template>
+              <template x-if="activeId === 'pressures'">
+                <a class="card-cta-link" :href="'./product-catalogue.html?pressure=' + encodeURIComponent(card.title)">
+                  Find biological solutions →
+                </a>
+              </template>
+              <template x-if="activeId === 'products'">
+                <a class="card-cta-link" href="./product-catalogue.html">
+                  View in full catalogue →
+                </a>
+              </template>
+            </div>
           </article>
         </template>
       </div>
@@ -1238,6 +1277,33 @@
           if (key.includes('rust')) {
             return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15.5c0-3.9 2.7-7.3 6.4-8.2 2.3 1.8 3.6 4.2 3.6 6.8A5.9 5.9 0 0 1 11.1 20c-2.5 0-4.1-1.8-4.1-4.5Z"/><circle cx="10.2" cy="14" r=".9"/><circle cx="13.5" cy="12.1" r=".9"/><circle cx="14.9" cy="15.8" r=".9"/></svg>';
           }
+          if (key.includes('fruit fly') || key.includes('ceratitis') || key.includes('drosophila')) {
+            return this.assetIcon('./assets/bioicons/fruit-fly.svg');
+          }
+          if (key.includes('whitefly') || key.includes('white fly')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2.5-3-2.5-7 0-9 2.5 2 2.5 6 0 9Z"/><path d="M12 12c2.5-3 6.5-3.5 8.5-1.5-1 2.5-5 3.5-8.5 1.5Z"/><path d="M12 12c-2.5-3-6.5-3.5-8.5-1.5 1 2.5 5 3.5 8.5 1.5Z"/><circle cx="12" cy="12" r="1.2"/><path d="M12 13.2V19"/></svg>';
+          }
+          if (key.includes('spider mite') || key.includes('mite')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="11" r="3"/><path d="M7 8.5 4.5 6"/><path d="m17 8.5 2.5-2.5"/><path d="M7 11H4"/><path d="M17 11h3"/><path d="M7 13.5 4.5 16"/><path d="m17 13.5 2.5 2.5"/><path d="M10 15.5 9 19"/><path d="M14 15.5l1 3.5"/></svg>';
+          }
+          if (key.includes('botrytis') || key.includes('grey mould') || key.includes('gray mould')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9.5" cy="9.5" r="2.5"/><circle cx="14.5" cy="8.5" r="2"/><circle cx="8.5" cy="14.5" r="2"/><circle cx="14" cy="14" r="2.5"/><circle cx="11.5" cy="11.5" r="3"/></svg>';
+          }
+          if (key.includes('scale insect') || key.includes('scale')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="13" rx="6" ry="4"/><path d="M12 9c0-3 2-5 2-5s-4 0-4 5"/><path d="m9.5 11-1.5 1"/><path d="m14.5 11 1.5 1"/></svg>';
+          }
+          if (key.includes('fusarium') || key.includes('wilt') || key.includes('pythium') || key.includes('phytophthora')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20c0-5 1.5-9 3-12"/><path d="M12 20c0-4-1.5-7-3-10"/><path d="M12 8 11 4"/><path d="M14.5 9l1-4"/><path d="M9.5 10.5 7 7"/></svg>';
+          }
+          if (key.includes('cutworm') || key.includes('armyworm') || key.includes('caterpillar') || key.includes('larva')) {
+            return this.assetIcon('./assets/bioicons/moth.svg');
+          }
+          if (key.includes('mealybug')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="5" ry="3.5"/><path d="M8 10.5c-1.5-.5-3-1-3.5-2"/><path d="M8 13.5c-1.5.5-3 1-3.5 2"/><path d="M16 10.5c1.5-.5 3-1 3.5-2"/><path d="M16 13.5c1.5.5 3 1 3.5 2"/><path d="M10.5 8.5c-.3-1.5-.3-3 .5-3.5"/><path d="M13.5 8.5c.3-1.5.3-3-.5-3.5"/></svg>';
+          }
+          if (key.includes('diamondback') || key.includes('false codling') || key.includes('codling')) {
+            return this.assetIcon('./assets/bioicons/moth.svg');
+          }
           return this.iconSvg("P");
         },
         recordIcon(card) {
@@ -1248,31 +1314,67 @@
         },
         cropIcon(name) {
           const key = name.toLowerCase();
-          if (key.includes('citrus')) {
+          if (key.includes('citrus') || key.includes('lemon') || key.includes('lime') || key.includes('orange')) {
             return this.assetIcon('./assets/bioicons/citrus.svg');
           }
-          if (key.includes('apples') || key.includes('peaches') || key.includes('pears') || key.includes('avocado') || key.includes('mango') || key.includes('fruit trees') || key.includes('orchard')) {
+          if (key.includes('strawberr')) {
+            return this.assetIcon('./assets/bioicons/strawberry.svg');
+          }
+          if (key.includes('pear')) {
+            return this.assetIcon('./assets/bioicons/pear.svg');
+          }
+          if (key.includes('peach') || key.includes('apricot') || key.includes('plum') || key.includes('stone fruit')) {
+            return this.assetIcon('./assets/bioicons/peach.svg');
+          }
+          if (key.includes('apples') || key.includes('avocado') || key.includes('mango') || key.includes('macadamia') || key.includes('kiwi')) {
             return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-4"/><path d="M9.3 20h5.4"/><path d="M8.2 15.7c-1.7-1-2.7-2.7-2.7-4.7 0-3.2 2.5-5.7 5.7-5.7.4 0 .9.1 1.3.2.7-.8 1.7-1.2 2.9-1.2 2 0 3.8 1.6 3.8 3.6 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2.3 5.1-5.3 5.1Z"/></svg>';
           }
-          if (key.includes('grapes')) {
+          if (key.includes('grapes') || key.includes('berr') || key.includes('blueberr') || key.includes('raspberr')) {
             return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.8 5.6c.4-1 1.2-1.8 2.5-2.1"/><circle cx="12" cy="8.8" r="1.8"/><circle cx="9.2" cy="11.4" r="1.8"/><circle cx="14.8" cy="11.4" r="1.8"/><circle cx="10.4" cy="14.3" r="1.8"/><circle cx="13.6" cy="14.3" r="1.8"/><circle cx="12" cy="17.2" r="1.8"/></svg>';
           }
-          if (key.includes('tomatoes') || key.includes('peppers') || key.includes('vegetables')) {
+          if (key.includes('tomatoes') || key.includes('tomato')) {
             return this.assetIcon('./assets/bioicons/tomato.svg');
           }
-          if (key.includes('potatoes') || key.includes('groundnuts')) {
+          if (key.includes('pepper')) {
+            return this.assetIcon('./assets/bioicons/pepper.svg');
+          }
+          if (key.includes('brassica') || key.includes('cabbage') || key.includes('broccoli')) {
+            return this.assetIcon('./assets/bioicons/cabbage.svg');
+          }
+          if (key.includes('potatoes') || key.includes('potato')) {
             return this.assetIcon('./assets/bioicons/potato.svg');
           }
-          if (key.includes('onions') || key.includes('flowers') || key.includes('ornamentals')) {
+          if (key.includes('groundnut') || key.includes('peanut')) {
+            return this.assetIcon('./assets/bioicons/beans.svg');
+          }
+          if (key.includes('onions') || key.includes('allium')) {
             return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.2"/><path d="M12 5.5c1.3 1.3 1.9 2.5 1.9 3.6S13.3 11 12 12.2c-1.3-1.2-1.9-2.3-1.9-3.1S10.7 6.8 12 5.5Z"/><path d="M18.5 12c-1.3 1.3-2.5 1.9-3.6 1.9S13 13.3 11.8 12c1.2-1.3 2.3-1.9 3.1-1.9s2.3.6 3.6 1.9Z"/><path d="M12 18.5c-1.3-1.3-1.9-2.5-1.9-3.6s.6-1.9 1.9-3.1c1.3 1.2 1.9 2.3 1.9 3.1s-.6 2.3-1.9 3.6Z"/><path d="M5.5 12c1.3-1.3 2.5-1.9 3.6-1.9s1.9.6 3.1 1.9c-1.2 1.3-2.3 1.9-3.1 1.9S6.8 13.3 5.5 12Z"/></svg>';
           }
-          if (key.includes('maize') || key.includes('sweetcorn')) {
+          if (key.includes('flowers') || key.includes('ornamental') || key.includes('cut flower')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.2"/><path d="M12 5.5c1.3 1.3 1.9 2.5 1.9 3.6S13.3 11 12 12.2c-1.3-1.2-1.9-2.3-1.9-3.1S10.7 6.8 12 5.5Z"/><path d="M18.5 12c-1.3 1.3-2.5 1.9-3.6 1.9S13 13.3 11.8 12c1.2-1.3 2.3-1.9 3.1-1.9s2.3.6 3.6 1.9Z"/><path d="M12 18.5c-1.3-1.3-1.9-2.5-1.9-3.6s.6-1.9 1.9-3.1c1.3 1.2 1.9 2.3 1.9 3.1s-.6 2.3-1.9 3.6Z"/><path d="M5.5 12c1.3-1.3 2.5-1.9 3.6-1.9s1.9.6 3.1 1.9c-1.2 1.3-2.3 1.9-3.1 1.9S6.8 13.3 5.5 12Z"/></svg>';
+          }
+          if (key.includes('maize') || key.includes('sweetcorn') || key.includes('corn')) {
             return this.assetIcon('./assets/bioicons/maize.svg');
           }
-          if (key.includes('wheat')) {
+          if (key.includes('sugarcane') || key.includes('sugar cane')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 20c1-5 3-9 6-12"/><path d="M12 8c1-2 3-3.5 6-4"/><path d="M12 8c-.5-2-2-3.5-4-4"/><path d="M12 8v12"/><path d="M9.5 13c1 .5 2 .5 3 0"/><path d="M9.5 17c1 .5 2 .5 3 0"/></svg>';
+          }
+          if (key.includes('cotton')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16v4"/><path d="M10 20h4"/><circle cx="12" cy="12" r="3"/><path d="M9.5 9.5c-2 0-3.5-1.5-3.5-3.5a3.5 3.5 0 0 1 6 0"/><path d="M14.5 9.5c2 0 3.5-1.5 3.5-3.5a3.5 3.5 0 0 0-6 0"/><path d="M12 9a3.5 3.5 0 0 1 0-6"/></svg>';
+          }
+          if (key.includes('cucurbit') || key.includes('cucumber') || key.includes('squash') || key.includes('courgette')) {
+            return this.assetIcon('./assets/bioicons/eggplant.svg');
+          }
+          if (key.includes('sunflower')) {
+            return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 18.4 2.1-2.1"/><path d="M3 12h3"/><path d="m5.6 5.6 2.1 2.1"/></svg>';
+          }
+          if (key.includes('wheat') || key.includes('barley') || key.includes('oat') || key.includes('rye')) {
             return this.assetIcon('./assets/bioicons/wheat.svg');
           }
-          if (key.includes('beans') || key.includes('soy') || key.includes('lucerne')) {
+          if (key.includes('beans') || key.includes('legume') || key.includes('chickpea') || key.includes('cowpea')) {
+            return this.assetIcon('./assets/bioicons/beans.svg');
+          }
+          if (key.includes('soy') || key.includes('lucerne')) {
             return this.assetIcon('./assets/bioicons/soybean.svg');
           }
           if (key.includes('forestry')) {
@@ -1677,6 +1779,138 @@
                 leftLabel: "Use rows",
                 rightMetric: "26",
                 rightLabel: "Problems"
+              },
+              {
+                icon: "S",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#5a7a3a",
+                soft: "rgba(218, 235, 200, 0.72)",
+                title: "Sugarcane",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: sugarcane production context." },
+                  { symbol: "P", label: "Pests", description: "Stem borer and aphid pressure dominate." },
+                  { symbol: "B", label: "Biologicals", description: "Entomopathogenic fungi and parasitoids are the main biological routes." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Eldana stem borer, aphids, smut, leaf scald" },
+                  { label: "Visible biological uses", value: "6 use records" }
+                ],
+                leftMetric: "243",
+                leftLabel: "Use rows",
+                rightMetric: "29",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "M",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Orchards",
+                badgeTone: "slate",
+                accent: "#4a6a3a",
+                soft: "rgba(210, 230, 196, 0.72)",
+                title: "Macadamia",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: macadamia nut orchard context." },
+                  { symbol: "P", label: "Pests", description: "False codling moth and stink bug are the dominant pest pressures." },
+                  { symbol: "B", label: "Biologicals", description: "Semiochemical and entomopathogenic options have some visibility." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "False codling moth, stink bug, anthracnose, Phytophthora" },
+                  { label: "Visible biological uses", value: "5 use records" }
+                ],
+                leftMetric: "178",
+                leftLabel: "Use rows",
+                rightMetric: "22",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "C",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#7a6a2a",
+                soft: "rgba(238, 231, 195, 0.72)",
+                title: "Cucurbits",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: cucumber, squash, pumpkin, and melon contexts." },
+                  { symbol: "P", label: "Pests", description: "Whitefly, powdery mildew, and Phytophthora are the defining pressures." },
+                  { symbol: "B", label: "Biologicals", description: "Trichoderma biocontrol and entomopathogenic fungi have visible presence." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Powdery mildew, whitefly, Phytophthora, thrips" },
+                  { label: "Visible biological uses", value: "9 use records" }
+                ],
+                leftMetric: "201",
+                leftLabel: "Use rows",
+                rightMetric: "31",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "C",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Field crops",
+                badgeTone: "slate",
+                accent: "#6a4a2a",
+                soft: "rgba(230, 213, 196, 0.72)",
+                title: "Cotton",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: cotton field-crop context." },
+                  { symbol: "P", label: "Pests", description: "Bollworm and aphid pressure are the most visible in the current data." },
+                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the primary biological option in this context." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "African bollworm, aphids, spider mites, root knot nematodes" },
+                  { label: "Visible biological uses", value: "7 use records" }
+                ],
+                leftMetric: "192",
+                leftLabel: "Use rows",
+                rightMetric: "24",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "B",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Horticulture",
+                badgeTone: "slate",
+                accent: "#3a4a7a",
+                soft: "rgba(205, 210, 238, 0.72)",
+                title: "Blueberries",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: blueberry soft-fruit production context." },
+                  { symbol: "P", label: "Pests", description: "Botrytis and mummification are the dominant disease pressures." },
+                  { symbol: "B", label: "Biologicals", description: "Fungal biocontrol agents and Bacillus-based products have growing visibility." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Botrytis, mummification berry, spotted wing drosophila, mites" },
+                  { label: "Visible biological uses", value: "8 use records" }
+                ],
+                leftMetric: "163",
+                leftLabel: "Use rows",
+                rightMetric: "19",
+                rightLabel: "Problems"
+              },
+              {
+                icon: "C",
+                iconTooltip: "Crop symbol: anchored in a crop context.",
+                badge: "Horticulture",
+                badgeTone: "slate",
+                accent: "#6a3a5a",
+                soft: "rgba(228, 207, 220, 0.72)",
+                title: "Cut flowers",
+                models: [
+                  { symbol: "C", label: "Crop", description: "Primary object: cut flower production (roses, proteas, carnations)." },
+                  { symbol: "P", label: "Pests", description: "Botrytis, thrips, and spider mites are the defining pressure combination." },
+                  { symbol: "B", label: "Biologicals", description: "Predatory mites, fungal biocontrol, and entomopathogenic options are visible." }
+                ],
+                meta: [
+                  { label: "Top visible pressures", value: "Botrytis, thrips, spider mites, powdery mildew" },
+                  { label: "Visible biological uses", value: "11 use records" }
+                ],
+                leftMetric: "147",
+                leftLabel: "Use rows",
+                rightMetric: "17",
+                rightLabel: "Problems"
               }
             ]
           },
@@ -1999,6 +2233,144 @@
                 leftMetric: "342",
                 leftLabel: "Use rows",
                 rightMetric: "38",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "High pressure",
+                badgeTone: "red",
+                accent: "#7a4a2a",
+                soft: "rgba(241, 218, 206, 0.8)",
+                title: "Diamondback moth",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: a key lepidopteran pest of brassicas." },
+                  { symbol: "C", label: "Crops", description: "Brassica contexts where diamondback moth is the dominant pest." },
+                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the primary biological route with strong visibility." }
+                ],
+                crops: "Brassicas, cabbage, broccoli, cauliflower",
+                meta: [
+                  { label: "Visible across", value: "18 crops in current data" },
+                  { label: "Visible biological uses", value: "16 use records" }
+                ],
+                leftMetric: "384",
+                leftLabel: "Use rows",
+                rightMetric: "18",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#5a3a7a",
+                soft: "rgba(222, 212, 240, 0.78)",
+                title: "Fusarium wilt",
+                models: [
+                  { symbol: "D", label: "Disease", description: "Primary object: soilborne vascular wilt disease." },
+                  { symbol: "C", label: "Crops", description: "High-value horticultural and field-crop contexts where Fusarium is limiting." },
+                  { symbol: "B", label: "Biologicals", description: "Trichoderma and Bacillus-based biocontrol are the primary biological routes." }
+                ],
+                crops: "Tomatoes, peppers, cucurbits, onions",
+                meta: [
+                  { label: "Visible across", value: "44 crops in current data" },
+                  { label: "Visible biological uses", value: "8 use records" }
+                ],
+                leftMetric: "412",
+                leftLabel: "Use rows",
+                rightMetric: "44",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#3a5a3a",
+                soft: "rgba(208, 228, 207, 0.78)",
+                title: "Grey leaf spot",
+                models: [
+                  { symbol: "D", label: "Disease", description: "Primary object: a key fungal foliar disease of maize." },
+                  { symbol: "C", label: "Crops", description: "Maize and cereal contexts where the disease is prevalent." },
+                  { symbol: "B", label: "Biologicals", description: "Trichoderma seed treatments and foliar biofungicides are emerging options." }
+                ],
+                crops: "Maize, sorghum, wheat",
+                meta: [
+                  { label: "Visible across", value: "12 crops in current data" },
+                  { label: "Visible biological uses", value: "3 use records" }
+                ],
+                leftMetric: "287",
+                leftLabel: "Use rows",
+                rightMetric: "12",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "Watch",
+                badgeTone: "amber",
+                accent: "#6a5a2a",
+                soft: "rgba(230, 224, 197, 0.76)",
+                title: "Scale insects",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: armoured and soft scale pests of orchards." },
+                  { symbol: "C", label: "Crops", description: "Citrus, stone fruit, and avocado contexts where scale is a recurring problem." },
+                  { symbol: "B", label: "Biologicals", description: "Parasitoid wasps and entomopathogenic fungi are the biological route." }
+                ],
+                crops: "Citrus, avocados, macadamia, grapes",
+                meta: [
+                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible biological uses", value: "4 use records" }
+                ],
+                leftMetric: "253",
+                leftLabel: "Use rows",
+                rightMetric: "29",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "○",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                accent: "#8a4a2a",
+                soft: "rgba(244, 215, 204, 0.8)",
+                title: "Fruit fly",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: Ceratitis capitata and related tephritid fruit flies." },
+                  { symbol: "C", label: "Crops", description: "Stone fruit, citrus, and tropical fruit contexts are most affected." },
+                  { symbol: "B", label: "Biologicals", description: "Attract-and-kill semiochemical products are the dominant biological route." }
+                ],
+                crops: "Citrus, peaches, mango, avocados",
+                meta: [
+                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible biological uses", value: "9 use records" }
+                ],
+                leftMetric: "378",
+                leftLabel: "Use rows",
+                rightMetric: "38",
+                rightLabel: "Crops"
+              },
+              {
+                icon: "◐",
+                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
+                badge: "Watch",
+                badgeTone: "amber",
+                accent: "#4a5a2a",
+                soft: "rgba(214, 222, 197, 0.76)",
+                title: "Cutworm",
+                models: [
+                  { symbol: "P", label: "Pressure", description: "Primary object: a soil-dwelling lepidopteran pest active at seedling stage." },
+                  { symbol: "C", label: "Crops", description: "Vegetable seedlings and young field crops are the most vulnerable contexts." },
+                  { symbol: "B", label: "Biologicals", description: "Entomopathogenic nematodes and fungi are the primary biological options." }
+                ],
+                crops: "Tomatoes, maize, brassicas, potatoes",
+                meta: [
+                  { label: "Visible across", value: "33 crops in current data" },
+                  { label: "Visible biological uses", value: "5 use records" }
+                ],
+                leftMetric: "219",
+                leftLabel: "Use rows",
+                rightMetric: "33",
                 rightLabel: "Crops"
               }
             ]

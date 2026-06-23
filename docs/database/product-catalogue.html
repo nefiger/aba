@@ -679,19 +679,6 @@
       letter-spacing: 0.06em;
     }
 
-    .guide-card,
-    .key-card {
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--surface-strong);
-    }
-
-    .key-card p,
-    .guide-card p {
-      margin-top: 8px;
-    }
-
     .key-symbol {
       display: inline-flex;
       align-items: center;
@@ -976,7 +963,7 @@
           <div class="eyebrow">Biologicals</div>
           <h1>Find biological products by category, crop fit, and practical use.</h1>
           <p style="margin-top: 10px;">
-            Start with the product itself, then see where it fits, what it is used for, and which crop and pressure contexts it connects to from the current source-backed product files.
+            ABA maintains a structured catalogue of biological products visible in the African market — biopesticides, biostimulants, inoculants, and semiochemicals. Browse by product name, category, or the crop and pressure contexts each product connects to.
           </p>
         </div>
       </div>
@@ -1256,9 +1243,11 @@
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           const crop = params.get('crop');
+          const pressure = params.get('pressure');
           const search = params.get('q');
           if (category && this.categories.some((item) => item.id === category)) this.activeCategory = category;
           if (crop) this.activeCrop = crop;
+          if (pressure) this.searchQuery = pressure;
           if (search) this.searchQuery = search;
         },
         syncUrl() {
