@@ -113,7 +113,7 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .application-grid {
-      grid-template-columns: minmax(0, 1fr) 280px;
+      grid-template-columns: minmax(0, 1fr) 320px;
       align-items: start;
     }
     .field-grid,
@@ -193,6 +193,9 @@
       display: grid;
       gap: 6px;
     }
+    .field.full {
+      grid-column: 1 / -1;
+    }
     input, select, textarea {
       width: 100%;
       border: 1px solid var(--line);
@@ -216,6 +219,10 @@
     .choice input {
       width: auto;
       margin-right: 8px;
+    }
+    .checkbox-list {
+      display: grid;
+      gap: 8px;
     }
     .stack {
       display: grid;
@@ -338,7 +345,7 @@
               <input id="org_name" x-model="form.org_name" type="text" placeholder="Organisation name">
             </div>
             <div class="field">
-              <label for="country">Country</label>
+              <label for="country">Country of business registration</label>
               <select id="country" x-model="form.country">
                 <option value="">Select country</option>
                 <option>South Africa</option>
@@ -356,17 +363,61 @@
               <label for="email">Email</label>
               <input id="email" x-model="form.email" type="email" placeholder="name@organisation.com">
             </div>
+            <div class="field">
+              <label for="org_role">Organisation role in the biologicals sector</label>
+              <select id="org_role" x-model="form.org_role">
+                <option value="">Select role</option>
+                <option>Manufacturer</option>
+                <option>Importer</option>
+                <option>Distributor</option>
+                <option>Product owner</option>
+                <option>Technical service provider</option>
+                <option>Research or academic organisation</option>
+                <option>Funder or development partner</option>
+                <option>Public institution</option>
+                <option>Other sector participant</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>Biologicals activity areas</label>
+              <div class="checkbox-list">
+                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
+                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
+                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
+                <label class="choice"><input type="checkbox" value="Technical services or implementation support" x-model="form.activity_areas"> Technical services or implementation support</label>
+                <label class="choice"><input type="checkbox" value="Research, policy, or market development" x-model="form.activity_areas"> Research, policy, or market development</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label>Countries where registration or market access matters to you</label>
+              <div class="checkbox-list">
+                <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
+                <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
+                <label class="choice"><input type="checkbox" value="Nigeria" x-model="form.market_countries"> Nigeria</label>
+                <label class="choice"><input type="checkbox" value="Ghana" x-model="form.market_countries"> Ghana</label>
+                <label class="choice"><input type="checkbox" value="Uganda" x-model="form.market_countries"> Uganda</label>
+                <label class="choice"><input type="checkbox" value="Other African countries" x-model="form.market_countries"> Other African countries</label>
+              </div>
+            </div>
           </div>
 
           <div style="margin-top: 12px;" class="stack">
+            <div class="field">
+              <label>Membership type</label>
+              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
+            </div>
             <label class="choice"><input type="radio" value="Full membership" x-model="form.type"> Full membership</label>
             <label class="choice"><input type="radio" value="Associate membership" x-model="form.type"> Associate membership</label>
             <label class="choice"><input type="radio" value="Observer status" x-model="form.type"> Observer status</label>
           </div>
 
           <div class="field" style="margin-top: 12px;">
-            <label for="interest">Tell us about your interest in ABA</label>
-            <textarea id="interest" x-model="form.interest" placeholder="Share a short note on your work and why you would like to join."></textarea>
+            <label>Consent and use</label>
+            <div class="checkbox-list">
+              <label class="choice"><input type="checkbox" checked disabled> Internal ABA membership review</label>
+              <label class="choice"><input type="checkbox" x-model="form.aggregate_consent"> Anonymised aggregate insight for sector advocacy</label>
+              <label class="choice"><input type="checkbox" x-model="form.followup_consent"> ABA may follow up about relevant registration support</label>
+            </div>
           </div>
 
           <div class="actions-end">
@@ -378,15 +429,25 @@
         <aside class="stack">
           <div class="summary">
             <div class="mini">Application details</div>
-            <p style="margin-top: 8px;">You will be asked for your organisation, location, contact details, membership option, and a short note about your work.</p>
+            <p style="margin-top: 8px;">You will be asked for your organisation, registration country, sector role, activity areas, relevant countries, and membership option.</p>
+          </div>
+          <div class="summary">
+            <div class="mini">Product intake</div>
+            <p style="margin-top: 8px;">Do you currently have biological products in market or development?</p>
+            <div class="button-row">
+              <a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Open product intake</a>
+            </div>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
             <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Organisation:</strong> <span x-text="form.org_name || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Country:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Business registration:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Contact:</strong> <span x-text="form.contact_name || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Member type:</strong> <span x-text="form.type || 'Not selected yet'"></span></p>
+              <p><strong style="color: var(--ink);">Sector role:</strong> <span x-text="form.org_role || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Activity areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Market access countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
             </div>
           </div>
         </aside>
@@ -403,8 +464,12 @@
           country: "",
           contact_name: "",
           email: "",
+          org_role: "",
+          activity_areas: [],
+          market_countries: [],
           type: "",
-          interest: ""
+          aggregate_consent: false,
+          followup_consent: false
         }
       };
     }
