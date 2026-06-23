@@ -1,5 +1,11 @@
 # Registration Tracker Site Integration Implementation Plan
 
+## Completion Note
+
+Implemented via PR #1 and merged into `main` at `58759d2 Merge pull request #1 from nefiger/codex/registration-tracker-site-integration`.
+
+Final implementation differs from one early plan detail: the homepage no longer carries a dedicated registration intelligence metric band. Tracker visibility is mentioned lightly on the homepage, while public dashboard access lives under Knowledge Hub / Regulatory Signals and member/admin/registrar views remain behind the Workspace gateway.
+
 ## Purpose
 
 Integrate the registration tracker into the ABA public demo website as a believable member-value pathway for the Thursday, June 25, 2026 founding-members meeting.

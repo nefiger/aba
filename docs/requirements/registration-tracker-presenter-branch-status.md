@@ -2,6 +2,16 @@
 
 Context date: 2026-06-23
 
+## Superseded Status
+
+This note is preserved as a branch handoff record. The presenter work was later included in PR #1, merged into `main` at `58759d2 Merge pull request #1 from nefiger/codex/registration-tracker-site-integration`.
+
+Current active state after merge:
+
+- `docs/registration-tracker/index.html` is present on `main`.
+- Root launcher and demo hub links open the presentation HTML instead of GitHub source.
+- The integration branch `codex/registration-tracker-site-integration` remains as a restore point.
+
 ## Current Branch
 
 - Branch: `codex/registration-tracker-presenter`

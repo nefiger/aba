@@ -2,6 +2,18 @@
 
 Context date: 2026-06-22
 
+## Completion Note
+
+This decision map is preserved as discovery history. The final integration was implemented via PR #1 and merged into `main` at `58759d2 Merge pull request #1 from nefiger/codex/registration-tracker-site-integration`.
+
+Final decisions:
+
+- The root launcher now opens `./docs/registration-tracker/index.html`, not GitHub source.
+- The public homepage stays light and does not show tracker metrics.
+- Public dashboard access sits in Knowledge Hub / Regulatory Signals.
+- Member company, ABA operator, and registrar export views sit behind the Workspace gateway.
+- Lyle's root `registration-tracker/` workspace remains in place and was not reorganized.
+
 Source context:
 
 - Live launcher checked at `https://nefiger.github.io/aba/`.

@@ -4,6 +4,10 @@ Context date: 2026-06-23
 
 This is a local implementation note for the registration tracker presenter-page work on branch `codex/registration-tracker-presenter`.
 
+## Completion Note
+
+The presenter-page work was later included in PR #1 and merged into `main` at `58759d2 Merge pull request #1 from nefiger/codex/registration-tracker-site-integration`. The follow-up items below are retained as historical context, not current blockers.
+
 ## Lessons Learned
 
 - Create the feature branch before editing whenever possible. This work started on `main` and was moved safely before commit, but starting on the branch keeps the story cleaner.
