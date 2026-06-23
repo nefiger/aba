@@ -3,34 +3,48 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Public Dashboard | ABA Registration Tracker</title>
+    <title>ABA Public Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
-    <div class="prototype-shell">
-      <header class="topbar">
+    <div class="prototype-shell public-dashboard-shell">
+      <header class="topbar site-topbar">
         <div class="brand-block">
           <div class="brand-mark">ABA</div>
-          <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
+          <div>
+            <p class="product-kicker">African Biologicals Alliance</p>
+            <p class="product-title">Knowledge hub</p>
+          </div>
         </div>
-        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
+        <nav class="site-links" aria-label="ABA site">
+          <a href="../../docs/site/index.html">Home</a>
+          <a href="../../docs/site/about.html">About</a>
+          <a href="../../docs/membership-flow/index.html">Membership</a>
+          <a href="../../docs/database/index.html" aria-current="page">Knowledge Hub</a>
+          <a href="../../docs/site/workspace.html">Workspace</a>
+        </nav>
       </header>
-      <nav class="prototype-nav" aria-label="Prototype areas">
-        <a href="../index.html">Combined</a>
-        <a href="../intake-flow/index.html">Intake</a>
-        <a href="../company-dashboard/index.html">Company Dashboard</a>
-        <a href="../public-dashboard/index.html" aria-current="page">Public Dashboard</a>
-        <a href="../admin-operator-review/index.html">Admin Review</a>
-        <a href="../registrar-list/index.html">Registrar Export</a>
-      </nav>
 
       <main class="page">
         <section class="page-header">
           <div>
+            <div class="knowledge-eyebrow">Public dashboard</div>
             <h1>Public aggregate dashboard</h1>
             <p>Anonymised advocacy view based on reviewed submissions only. Filters update the aggregate metrics while suppression rules protect contributor identity.</p>
           </div>
-          <span class="role-badge">Public aggregate view</span>
+          <div class="knowledge-context-card">
+            <div class="knowledge-chip">Reviewed signals</div>
+            <p>This view adds a deeper, dashboard-style signal layer to the Knowledge Hub without exposing company or product-level submissions.</p>
+          </div>
+          <nav class="knowledge-subnav" aria-label="Knowledge Hub sections">
+            <a href="../../docs/database/index.html">Knowledge hub</a>
+            <a href="../../docs/database/product-catalogue.html">Product catalogue</a>
+            <a href="../../docs/database/regulatory-signals.html">Regulatory signals</a>
+            <a href="../../docs/database/evidence-library.html">Evidence library</a>
+          </nav>
         </section>
 
         <section class="panel muted">

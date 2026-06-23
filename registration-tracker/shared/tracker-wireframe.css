@@ -136,6 +136,176 @@ button {
   background: rgba(255, 255, 255, 0.82);
 }
 
+.site-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 12px 16px;
+}
+
+.site-topbar .product-title {
+  font-family: "Alegreya Sans", Arial, Helvetica, sans-serif;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.site-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.site-links a {
+  text-decoration: none;
+}
+
+.site-links a:hover,
+.site-links a[aria-current="page"] {
+  color: var(--green-deep);
+}
+
+.public-dashboard-shell {
+  font-family: "Public Sans", system-ui, sans-serif;
+}
+
+.public-dashboard-shell .topbar,
+.public-dashboard-shell .page-header,
+.public-dashboard-shell .panel,
+.public-dashboard-shell .metric,
+.public-dashboard-shell .chart-card {
+  background: var(--panel);
+  border-color: rgba(46, 58, 46, 0.08);
+  box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+}
+
+.public-dashboard-shell .site-topbar {
+  margin-bottom: 14px;
+  border-radius: 22px;
+}
+
+.public-dashboard-shell .brand-block {
+  gap: 14px;
+}
+
+.public-dashboard-shell .brand-mark {
+  width: 40px;
+  height: 40px;
+  border-color: transparent;
+  color: var(--green-deep);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+.public-dashboard-shell .product-kicker {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.public-dashboard-shell .site-topbar .product-title {
+  font-family: "Public Sans", system-ui, sans-serif;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.public-dashboard-shell .site-links {
+  font-weight: 700;
+}
+
+.public-dashboard-shell .page {
+  margin-top: 0;
+}
+
+.public-dashboard-shell .page-header {
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.public-dashboard-shell .page-header h1 {
+  margin-top: 16px;
+  font-family: "Public Sans", system-ui, sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.public-dashboard-shell .page-header p {
+  margin-top: 18px;
+  max-width: 64ch;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.knowledge-eyebrow,
+.knowledge-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.knowledge-eyebrow {
+  padding: 8px 12px;
+  border: 1px solid rgba(46, 58, 46, 0.08);
+  background: #ffffff;
+  color: var(--muted);
+}
+
+.knowledge-chip {
+  padding: 7px 11px;
+  color: var(--green-deep);
+  background: var(--green-soft);
+}
+
+.knowledge-context-card {
+  border: 1px solid rgba(46, 58, 46, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  background: var(--panel);
+  box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+}
+
+.public-dashboard-shell .knowledge-context-card p {
+  margin-top: 12px;
+}
+
+.knowledge-subnav {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: -2px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.knowledge-subnav a {
+  text-decoration: none;
+}
+
+.knowledge-subnav a:hover {
+  color: var(--green-deep);
+}
+
+.public-dashboard-shell .panel h2,
+.public-dashboard-shell .metric-value {
+  font-family: "Public Sans", system-ui, sans-serif;
+}
+
 .prototype-nav {
   display: flex;
   gap: 8px;
