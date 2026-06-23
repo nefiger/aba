@@ -1001,35 +1001,36 @@
           @click="activeId = 'pressures'"
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="activeId = 'pressures'" @keydown.space.prevent="activeId = 'pressures'">
-          <div class="path-visual" style="background: linear-gradient(180deg, rgba(246,219,203,0.2) 0%, rgba(246,219,203,0.46) 100%)">
-            <svg class="path-illus" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Caterpillar body segments -->
-              <circle cx="26" cy="76" r="17" fill="#c8643e"/>
-              <circle cx="52" cy="71" r="16" fill="#b85c3a"/>
-              <circle cx="77" cy="67" r="16" fill="#c8643e"/>
-              <circle cx="102" cy="64" r="16" fill="#b85c3a"/>
+          <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
+            <svg class="path-illus" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Leaf -->
+              <path d="M18 108 Q22 72 52 50 Q82 28 118 30 Q96 62 68 82 Q46 98 22 108 Z" fill="#6aaa5e"/>
+              <path d="M22 107 Q44 82 68 64 Q92 46 114 32" stroke="#4a8844" stroke-width="1.5" fill="none"/>
+              <!-- Leaf bite notches (pest damage) -->
+              <path d="M68 83 Q74 75 80 80 Q86 72 92 76" stroke="#fce8db" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <!-- Caterpillar — elongated segments, diagonal across leaf -->
+              <ellipse cx="44" cy="94" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-30 44 94)"/>
+              <ellipse cx="57" cy="87" rx="11" ry="7.5" fill="#d6af2c" transform="rotate(-28 57 87)"/>
+              <ellipse cx="71" cy="80" rx="11.5" ry="7.5" fill="#c9a228" transform="rotate(-25 71 80)"/>
+              <ellipse cx="85" cy="73" rx="11.5" ry="7.5" fill="#d6af2c" transform="rotate(-22 85 73)"/>
+              <ellipse cx="99" cy="66" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-20 99 66)"/>
+              <ellipse cx="112" cy="59" rx="10" ry="7.5" fill="#b89022" transform="rotate(-18 112 59)"/>
               <!-- Head -->
-              <circle cx="128" cy="59" r="19" fill="#a84e30"/>
-              <!-- Eye white -->
-              <circle cx="135" cy="51" r="7" fill="white"/>
-              <circle cx="137" cy="49.5" r="4" fill="#1a1a1a"/>
-              <circle cx="138.5" cy="48" r="1.5" fill="white"/>
-              <!-- Mouth -->
-              <path d="M123 63 Q129 69 137 64" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <!-- Antennae -->
-              <path d="M120 43 Q114 29 106 21" stroke="#8a3e20" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <circle cx="104" cy="19" r="5" fill="#8a3e20"/>
-              <path d="M131 41 Q138 27 145 20" stroke="#8a3e20" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <circle cx="146" cy="18" r="5" fill="#8a3e20"/>
-              <!-- Legs -->
-              <line x1="30" y1="91" x2="26" y2="103" stroke="#8a4028" stroke-width="3" stroke-linecap="round"/>
-              <line x1="56" y1="86" x2="52" y2="98" stroke="#8a4028" stroke-width="3" stroke-linecap="round"/>
-              <line x1="81" y1="82" x2="77" y2="94" stroke="#8a4028" stroke-width="3" stroke-linecap="round"/>
-              <line x1="106" y1="79" x2="102" y2="91" stroke="#8a4028" stroke-width="3" stroke-linecap="round"/>
-              <!-- Segment markings -->
-              <path d="M26 61 Q31 57 36 61" stroke="rgba(0,0,0,0.12)" stroke-width="2" fill="none"/>
-              <path d="M52 57 Q57 53 62 57" stroke="rgba(0,0,0,0.12)" stroke-width="2" fill="none"/>
-              <path d="M77 53 Q82 49 87 53" stroke="rgba(0,0,0,0.12)" stroke-width="2" fill="none"/>
+              <circle cx="124" cy="53" r="10" fill="#6e4f14"/>
+              <!-- Eye — small, realistic -->
+              <circle cx="129" cy="48" r="3.5" fill="#1a1204"/>
+              <circle cx="130.2" cy="47" r="1.1" fill="rgba(255,255,255,0.6)"/>
+              <!-- Mandibles hint -->
+              <path d="M118 57 Q122 62 127 59" stroke="#4a3208" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <!-- Dorsal stripe -->
+              <path d="M46 91 Q59 84 73 77 Q87 70 101 63 Q111 57 120 51" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- Prolegs -->
+              <path d="M60 92 L56 102" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M74 85 L70 95" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M88 78 L85 88" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- True legs (smaller, near head) -->
+              <path d="M102 69 L101 78" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
+              <path d="M114 62 L114 70" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="path-body">
