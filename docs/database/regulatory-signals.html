@@ -56,6 +56,33 @@
       font-size: 13px;
       font-weight: 700;
     }
+    .subnav {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .subnav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .subnav a.active {
+      background: var(--amber-soft);
+      border-color: rgba(205, 176, 92, 0.2);
+      color: var(--amber);
+    }
     .brand-lockup { display: flex; align-items: center; gap: 14px; }
     .brand-mark {
       width: 40px;
@@ -113,6 +140,12 @@
         <a href="../site/workspace.html">Workspace</a>
       </nav>
     </section>
+    <nav class="surface subnav" aria-label="Knowledge hub pages">
+      <a href="./index.html">Explorer</a>
+      <a href="./product-catalogue.html">Products</a>
+      <a href="./evidence-library.html">Evidence</a>
+      <a class="active" href="./regulatory-signals.html">Signals</a>
+    </nav>
     <section class="surface">
       <div class="eyebrow">Regulatory signals</div>
       <div class="grid" style="margin-top: 16px;">

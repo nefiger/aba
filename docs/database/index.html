@@ -3,37 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Knowledge Hub</title>
+  <title>ABA Biologicals Explorer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     :root {
       --ink: #173039;
       --muted: #5c6f73;
-      --surface: rgba(255, 252, 246, 0.88);
+      --surface: rgba(255, 252, 246, 0.9);
       --line: rgba(23, 48, 57, 0.1);
       --green: #2b6b4f;
       --green-soft: #e7f0e8;
-      --sand: #f1eadb;
+      --sage: #eef6ef;
+      --amber: #f0b429;
+      --amber-soft: #fff2cf;
+      --red: #d94a4a;
+      --red-soft: #fde4e4;
+      --teal: #1f7a79;
+      --teal-soft: #def1f0;
       --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
         linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
+
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
+    button, input, select { font: inherit; }
+
     .shell {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1260px, calc(100vw - 28px));
       margin: 0 auto;
       padding: 14px 0 28px;
     }
+
     .surface {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -41,6 +53,7 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
+
     .topbar {
       padding: 12px 16px;
       display: flex;
@@ -49,11 +62,13 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .mark {
       width: 36px;
       height: 36px;
@@ -68,6 +83,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+
     .mini,
     .eyebrow {
       font-size: 11px;
@@ -75,8 +91,10 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+
     .mini { color: var(--muted); }
     .eyebrow { color: var(--green); }
+
     .nav {
       display: flex;
       gap: 14px;
@@ -84,203 +102,799 @@
       font-size: 13px;
       font-weight: 700;
     }
+
     .nav a.active { color: var(--green); }
+
+    .subnav {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .subnav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .subnav a.active {
+      background: var(--green-soft);
+      border-color: rgba(43, 107, 79, 0.18);
+      color: var(--green);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .micro-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .micro-stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .micro-stat strong {
+      font-size: 0.95rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .micro-stat span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     .hero,
     .section {
       margin-top: 12px;
-      padding: 20px;
+      padding: 18px;
     }
+
     .hero-grid,
+    .metrics-strip,
+    .path-grid,
     .card-grid,
-    .feature-grid {
+    .filter-grid,
+    .results-head {
       display: grid;
       gap: 12px;
     }
+
     .hero-grid {
-      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.8fr);
+      grid-template-columns: minmax(0, 1fr);
       align-items: start;
     }
+
+    .filter-grid {
+      grid-template-columns: repeat(3, minmax(170px, 0.26fr));
+      align-items: center;
+    }
+
+    .path-grid {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
     .card-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 12px;
     }
-    .feature-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .results-head {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      margin-bottom: 12px;
     }
-    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
     h1 {
       margin-top: 8px;
-      font-size: clamp(1.95rem, 3vw, 2.8rem);
-      line-height: 1.06;
+      font-size: clamp(1.7rem, 2vw, 2.25rem);
+      line-height: 1.04;
       letter-spacing: -0.035em;
+      font-weight: 800;
     }
+
     h2 {
-      font-size: clamp(1.4rem, 2vw, 1.9rem);
+      font-size: clamp(1.3rem, 2vw, 1.85rem);
       line-height: 1.1;
       letter-spacing: -0.03em;
+      font-weight: 800;
     }
+
     h3 {
       font-size: 1rem;
       line-height: 1.35;
+      font-weight: 800;
     }
+
     p {
       color: var(--muted);
       font-size: 15px;
       line-height: 1.62;
     }
+
     .panel,
-    .card {
+    .card,
+    .search-shell,
+    .path-card,
+    .support-card {
       border: 1px solid var(--line);
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.66);
-      padding: 16px;
+      background: rgba(255, 255, 255, 0.72);
     }
-    .tone { background: var(--sand); }
-    .actions {
-      margin-top: 14px;
+
+    .panel,
+    .card,
+    .search-shell,
+    .path-card,
+    .support-card {
+      padding: 14px;
+    }
+
+    .search-shell {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .search-row {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .button {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 12px;
+      gap: 12px;
+      min-height: 64px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 0;
+      background: white;
+    }
+
+    .search-row input {
+      border: 0;
+      outline: 0;
+      width: 100%;
+      background: transparent;
+      color: var(--ink);
+      font-size: 19px;
+    }
+
+    .search-row svg {
+      width: 26px;
+      height: 26px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .select {
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      color: var(--ink);
+      padding: 0 14px;
+      width: 100%;
+    }
+
+    .path-primary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .path-card {
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .path-card.active {
+      border-color: rgba(43, 107, 79, 0.35);
+      background: rgba(231, 240, 232, 0.8);
+    }
+
+    .path-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .path-number {
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--muted);
     }
-    .button.primary {
-      background: var(--green);
-      color: white;
+
+    .result-shell {
+      margin-top: 12px;
+      padding: 16px;
     }
-    .button.secondary {
-      background: white;
-      border: 1px solid var(--line);
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
     }
-    @media (max-width: 900px) {
+
+    .entity-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badge.red { background: var(--red-soft); color: var(--red); }
+    .badge.amber { background: var(--amber-soft); color: #8d6400; }
+    .badge.green { background: var(--green-soft); color: var(--green); }
+    .badge.slate { background: #eceef0; color: #59656b; }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .meta-row {
+      display: grid;
+      gap: 4px;
+    }
+
+    .meta.compact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .crop-line {
+      margin-top: 14px;
+      padding: 8px 10px;
+      border: 1px solid rgba(43, 107, 79, 0.12);
+      border-radius: 12px;
+      background: rgba(238, 246, 239, 0.88);
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .crop-line span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .mini-metric-value {
+      font-size: 1.1rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mini-metric-label {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pressure-card {
+      padding: 16px;
+    }
+
+    .pressure-card .card-top {
+      align-items: center;
+    }
+
+    @media (max-width: 980px) {
       .hero-grid,
+      .metrics-strip,
+      .path-grid,
+      .path-primary-grid,
+      .filter-grid,
       .card-grid,
-      .feature-grid {
+      .results-head,
+      .mini-metrics {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
+<body x-data="explorerPage()">
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
         <div>
           <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Knowledge hub</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
         </div>
       </div>
-      <nav class="nav">
-        <a href="../site/index.html">Home</a>
-        <a href="../site/about.html">About</a>
-        <a href="../membership-flow/index.html">Membership</a>
-        <a class="active" href="./index.html">Knowledge Hub</a>
-        <a href="../site/workspace.html">Workspace</a>
-      </nav>
+      <div class="topbar-right">
+        <div class="micro-stats" aria-label="Explorer coverage">
+          <div class="micro-stat"><strong>148</strong><span>Products</span></div>
+          <div class="micro-stat"><strong>36</strong><span>Crops</span></div>
+        </div>
+        <nav class="nav">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a class="active" href="./index.html">Knowledge Hub</a>
+          <a href="../site/workspace.html">Workspace</a>
+        </nav>
+      </div>
     </header>
+
+    <nav class="surface subnav" aria-label="Knowledge hub pages">
+      <a class="active" href="./index.html">Explorer</a>
+      <a href="./product-catalogue.html">Products</a>
+      <a href="./evidence-library.html">Evidence</a>
+      <a href="./regulatory-signals.html">Signals</a>
+      <a href="../../registration-tracker/public-dashboard/index.html">Signals dashboard</a>
+    </nav>
 
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Knowledge hub</div>
-          <h1 class="display">Explore biologicals in one place.</h1>
-          <p style="margin-top: 10px; max-width: 62ch;">Browse product information, evidence, and regulatory context designed to make the biologicals landscape easier to understand.</p>
-          <div class="actions">
-            <a class="button primary" href="./product-catalogue.html">Product catalogue</a>
-            <a class="button secondary" href="./regulatory-signals.html">Regulatory signals</a>
-            <a class="button secondary" href="./evidence-library.html">Evidence library</a>
-            <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">Registration signals dashboard</a>
+          <div class="eyebrow">Biologicals explorer</div>
+          <h1>Find biological products, crops, and pest pressures.</h1>
+          <p style="margin-top: 10px;">
+            Explore biologicals by product, by crop, or by the pest and disease pressures they are used to address.
+          </p>
+          <div class="search-shell" style="margin-top: 18px;">
+            <div class="search-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.5-3.5"></path>
+              </svg>
+              <input type="text" :placeholder="active.placeholder">
+            </div>
           </div>
         </div>
-        <aside class="panel tone">
-          <div class="mini">Why this matters</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Reliable information helps build understanding, confidence, and visibility.</p>
-          <p style="margin-top: 8px;">This section is intended to help visitors move from curiosity to clearer knowledge.</p>
-        </aside>
       </div>
     </section>
 
     <section class="surface section">
-      <div>
-        <div class="eyebrow">Explore</div>
-        <h2 class="display" style="margin-top: 6px;">Browse the information that matters most to you.</h2>
-      </div>
-      <div class="card-grid" style="margin-top: 12px;">
-        <article class="card">
-          <div class="mini">01</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Product catalogue</h3>
-          <p style="margin-top: 8px;">Browse categories, product types, and example records through a product-focused view.</p>
-        </article>
-        <article class="card">
-          <div class="mini">02</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Regulatory signals</h3>
-          <p style="margin-top: 8px;">Explore patterns, country context, and status cues that help explain the landscape more clearly.</p>
-        </article>
-        <article class="card">
-          <div class="mini">03</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Evidence library</h3>
-          <p style="margin-top: 8px;">Find supporting references, case material, and proof points that deepen understanding of the category.</p>
-        </article>
-        <article class="card">
-          <div class="mini">04</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Registration signals dashboard</h3>
-          <p style="margin-top: 8px;">View aggregate registration patterns from reviewed submissions without exposing company-level records.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
-      <div>
-        <div class="eyebrow">Why it is useful</div>
-        <h2 class="display" style="margin-top: 6px;">A stronger information base supports a stronger sector.</h2>
-      </div>
-      <div class="feature-grid" style="margin-top: 12px;">
-        <article class="card">
-          <h3>Public understanding</h3>
-          <p style="margin-top: 8px;">Clearer information makes biologicals easier to explain and explore beyond specialist circles.</p>
-        </article>
-        <article class="card">
-          <h3>Sector credibility</h3>
-          <p style="margin-top: 8px;">A better-understood category is easier to support, discuss, and grow.</p>
-        </article>
-        <article class="card">
-          <h3>Membership relevance</h3>
-          <p style="margin-top: 8px;">Good information makes it easier for members and partners to engage with confidence.</p>
-        </article>
-        <article class="card">
-          <h3>Registration visibility</h3>
-          <p style="margin-top: 8px;">Knowledge records can connect to public registration signals, helping visitors understand where biologicals are active and where barriers remain.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
-      <div class="feature-grid">
-        <article class="card">
-          <div class="eyebrow">Bridge to tracker</div>
-          <h2 class="display" style="margin-top: 6px;">From biologicals knowledge to registration insight.</h2>
-          <p style="margin-top: 8px;">The public Knowledge Hub stays biologicals-first, while the registration tracker adds a separate visibility layer for status, readiness, and evidence signals.</p>
-        </article>
-        <article class="card">
-          <div class="eyebrow">Public signal</div>
-          <p style="margin-top: 10px;">Visitors can explore aggregate regulatory signals here, then open a registration signals dashboard with sample country, category, and status patterns. Member-specific records, ABA review, and registrar export tools remain behind the Workspace gateway.</p>
-          <div class="actions">
-            <a class="button secondary" href="./regulatory-signals.html">Open regulatory signals</a>
-            <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">Open registration signals dashboard</a>
+      <div class="path-grid">
+        <div>
+          <div class="eyebrow">Start with the question you already have</div>
+          <h2 style="margin-top: 6px;">Choose a main path into the explorer.</h2>
+          <div class="path-primary-grid">
+            <template x-for="mode in primaryModes" :key="mode.id">
+              <article class="path-card" :class="{ active: activeId === mode.id }" @click="activeId = mode.id">
+                <div class="path-number" x-text="mode.step"></div>
+                <h3 style="margin-top: 10px; font-size: 1.05rem;" x-text="mode.label"></h3>
+                <p style="margin-top: 8px;" x-text="mode.summary"></p>
+              </article>
+            </template>
           </div>
-        </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface result-shell">
+      <div class="results-head">
+        <div>
+          <div class="eyebrow" x-text="active.label"></div>
+          <h2 style="margin-top: 6px;" x-text="active.heading"></h2>
+          <p style="margin-top: 8px; max-width: 70ch;" x-text="active.description"></p>
+        </div>
+      </div>
+
+      <div class="filter-grid">
+        <select class="select">
+          <option x-text="active.filters[0]"></option>
+        </select>
+        <select class="select">
+          <option x-text="active.filters[1]"></option>
+        </select>
+        <select class="select">
+          <option x-text="active.filters[2]"></option>
+        </select>
+      </div>
+
+      <div class="card-grid">
+        <template x-for="card in active.cards" :key="card.title">
+          <article class="card" :class="{ 'pressure-card': activeId === 'pressures' }">
+            <div class="card-top">
+              <div class="entity-icon" x-text="card.icon"></div>
+              <div class="badge" :class="card.badgeTone" x-text="card.badge"></div>
+            </div>
+
+            <h3 style="margin-top: 18px; font-size: 1.05rem;" x-text="card.title"></h3>
+
+            <div class="crop-line" x-show="card.crops">
+              <span>Crops:</span>
+              <span x-text="card.crops" style="color: var(--ink); font-weight: 700;"></span>
+            </div>
+
+            <div class="meta" :class="{ 'compact-grid': activeId === 'pressures' }" style="margin-top: 14px;">
+              <template x-for="item in card.meta" :key="item.label">
+                <div class="meta-row">
+                  <div class="meta-label" x-text="item.label"></div>
+                  <div x-text="item.value"></div>
+                </div>
+              </template>
+            </div>
+
+            <div class="mini-metrics">
+              <div>
+                <div class="mini-metric-value" x-text="card.leftMetric"></div>
+                <div class="mini-metric-label" x-text="card.leftLabel"></div>
+              </div>
+              <div>
+                <div class="mini-metric-value" x-text="card.rightMetric"></div>
+                <div class="mini-metric-label" x-text="card.rightLabel"></div>
+              </div>
+            </div>
+          </article>
+        </template>
       </div>
     </section>
   </main>
+
+  <script>
+    function explorerPage() {
+      return {
+        activeId: "pressures",
+        modes: [
+          {
+            id: "crops",
+            label: "Crops",
+            step: "01",
+            summary: "Start with the crop or production context you work in.",
+            heading: "Browse by crop.",
+            description: "See which biological options, pest pressures, and evidence records are linked to each crop context.",
+            placeholder: "Search crops by name, region, production system, or pressure...",
+            filters: ["All categories", "All regions", "All signal levels"],
+            cards: [
+              {
+                icon: "M",
+                badge: "Field crops",
+                badgeTone: "slate",
+                title: "Maize",
+                meta: [
+                  { label: "Regions", value: "National" },
+                  { label: "Linked pressures", value: "12 pressures" },
+                  { label: "Product coverage", value: "Biopesticides, inoculants, biostimulants" }
+                ],
+                leftMetric: "18",
+                leftLabel: "Products",
+                rightMetric: "14",
+                rightLabel: "Evidence"
+              },
+              {
+                icon: "C",
+                badge: "Orchards",
+                badgeTone: "slate",
+                title: "Citrus",
+                meta: [
+                  { label: "Regions", value: "Eastern Cape, Western Cape" },
+                  { label: "Linked pressures", value: "24 pressures" },
+                  { label: "Product coverage", value: "Biopesticides, biostimulants, inoculants" }
+                ],
+                leftMetric: "32",
+                leftLabel: "Products",
+                rightMetric: "28",
+                rightLabel: "Evidence"
+              },
+              {
+                icon: "T",
+                badge: "Horticulture",
+                badgeTone: "slate",
+                title: "Tomatoes",
+                meta: [
+                  { label: "Regions", value: "National" },
+                  { label: "Linked pressures", value: "18 pressures" },
+                  { label: "Product coverage", value: "Biopesticides, biostimulants" }
+                ],
+                leftMetric: "26",
+                leftLabel: "Products",
+                rightMetric: "22",
+                rightLabel: "Evidence"
+              }
+            ]
+          },
+          {
+            id: "pressures",
+            label: "Pests & diseases",
+            step: "02",
+            summary: "Start with a pest or disease pressure you need to address.",
+            heading: "Browse pest and disease pressures.",
+            description: "Explore common pressures, the crops they affect, and the biological options currently visible against them.",
+            placeholder: "Search pests or diseases by name, crop, or taxonomic group...",
+            filters: ["All applications", "All groups", "All levels"],
+            cards: [
+              {
+                icon: "○",
+                badge: "High pressure",
+                badgeTone: "red",
+                title: "Fall Armyworm",
+                crops: "Maize, sorghum, millet",
+                meta: [
+                  { label: "Group", value: "Lepidoptera" },
+                  { label: "Concern", value: "Rapid foliar damage" }
+                ],
+                leftMetric: "12",
+                leftLabel: "Options",
+                rightMetric: "8",
+                rightLabel: "Evidence"
+              },
+              {
+                icon: "○",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                title: "Red Spider Mite",
+                crops: "Citrus, cotton, vegetables",
+                meta: [
+                  { label: "Group", value: "Arachnida" },
+                  { label: "Concern", value: "Persistent dry-season pressure" }
+                ],
+                leftMetric: "18",
+                leftLabel: "Options",
+                rightMetric: "15",
+                rightLabel: "Evidence"
+              },
+              {
+                icon: "◐",
+                badge: "Medium pressure",
+                badgeTone: "amber",
+                title: "Wheat Rust",
+                crops: "Wheat, barley",
+                meta: [
+                  { label: "Type", value: "Fungal disease" },
+                  { label: "Concern", value: "Yield and quality loss" }
+                ],
+                leftMetric: "9",
+                leftLabel: "Options",
+                rightMetric: "6",
+                rightLabel: "Evidence"
+              }
+            ]
+          },
+          {
+            id: "products",
+            label: "Products",
+            step: "03",
+            summary: "Start with a biological product category or named option.",
+            heading: "Browse biological products.",
+            description: "Explore visible product categories, product types, and linked crop or pressure contexts.",
+            placeholder: "Search biological products by name, category, crop, or use...",
+            filters: ["All categories", "All crops", "All signal levels"],
+            cards: [
+              {
+                icon: "B",
+                badge: "Registered",
+                badgeTone: "green",
+                title: "TrichoShield WP",
+                meta: [
+                  { label: "Category", value: "Biopesticide" },
+                  { label: "Target use", value: "Caterpillar and foliar pest management" },
+                  { label: "Linked crops", value: "Maize, tomatoes, peppers" }
+                ],
+                leftMetric: "6",
+                leftLabel: "Evidence records",
+                rightMetric: "4",
+                rightLabel: "Country signals"
+              },
+              {
+                icon: "B",
+                badge: "Growing",
+                badgeTone: "amber",
+                title: "RootRise Bio",
+                meta: [
+                  { label: "Category", value: "Biostimulant" },
+                  { label: "Target use", value: "Root development and plant resilience" },
+                  { label: "Linked crops", value: "Citrus, maize, leafy greens" }
+                ],
+                leftMetric: "9",
+                leftLabel: "Evidence records",
+                rightMetric: "3",
+                rightLabel: "Country signals"
+              },
+              {
+                icon: "B",
+                badge: "Early-stage",
+                badgeTone: "slate",
+                title: "SoilKind Inoculant",
+                meta: [
+                  { label: "Category", value: "Inoculant" },
+                  { label: "Target use", value: "Soil biology and root-zone support" },
+                  { label: "Linked crops", value: "Soy, legumes, field crops" }
+                ],
+                leftMetric: "4",
+                leftLabel: "Evidence records",
+                rightMetric: "2",
+                rightLabel: "Country signals"
+              }
+            ]
+          },
+          {
+            id: "evidence",
+            label: "Evidence",
+            summary: "See trials, case studies, and technical reference material.",
+            heading: "Browse evidence and reference material.",
+            description: "Use this layer once you want proof points, field records, and technical context behind a product or pressure.",
+            placeholder: "Search trials, case studies, and reference records...",
+            filters: ["All evidence types", "All categories", "All crops"],
+            cards: [
+              {
+                icon: "E",
+                badge: "Field trial",
+                badgeTone: "green",
+                title: "Maize foliar pest control trial",
+                meta: [
+                  { label: "Location", value: "Free State" },
+                  { label: "Related products", value: "4 listed biological options" },
+                  { label: "Focus", value: "Efficacy under field conditions" }
+                ],
+                leftMetric: "3",
+                leftLabel: "Seasons",
+                rightMetric: "4",
+                rightLabel: "Products reviewed"
+              },
+              {
+                icon: "E",
+                badge: "Case study",
+                badgeTone: "amber",
+                title: "Citrus orchard resilience programme",
+                meta: [
+                  { label: "Location", value: "Eastern Cape" },
+                  { label: "Related products", value: "Biostimulants and inoculants" },
+                  { label: "Focus", value: "Root health and plant performance" }
+                ],
+                leftMetric: "6",
+                leftLabel: "Contributors",
+                rightMetric: "7",
+                rightLabel: "Records linked"
+              },
+              {
+                icon: "E",
+                badge: "Technical note",
+                badgeTone: "slate",
+                title: "Reading biological category claims",
+                meta: [
+                  { label: "Type", value: "Reference note" },
+                  { label: "Audience", value: "Public and member readers" },
+                  { label: "Focus", value: "Definitions, category language, and use context" }
+                ],
+                leftMetric: "12",
+                leftLabel: "Linked records",
+                rightMetric: "5",
+                rightLabel: "Related categories"
+              }
+            ]
+          },
+          {
+            id: "signals",
+            label: "Sector signals",
+            summary: "See country visibility and wider landscape signals.",
+            heading: "Browse sector and country signals.",
+            description: "Use this layer for broader public signals about visibility, comparison, and where activity is becoming legible.",
+            placeholder: "Search countries, categories, or product signals...",
+            filters: ["All countries", "All categories", "All signal levels"],
+            cards: [
+              {
+                icon: "R",
+                badge: "High visibility",
+                badgeTone: "green",
+                title: "South Africa",
+                meta: [
+                  { label: "Visible categories", value: "Biopesticides, biostimulants, inoculants" },
+                  { label: "Public signal", value: "Most complete currently visible landscape" },
+                  { label: "Focus", value: "Registration and market visibility" }
+                ],
+                leftMetric: "54",
+                leftLabel: "Products visible",
+                rightMetric: "21",
+                rightLabel: "Evidence links"
+              },
+              {
+                icon: "R",
+                badge: "Developing",
+                badgeTone: "amber",
+                title: "Kenya",
+                meta: [
+                  { label: "Visible categories", value: "Biopesticides, biostimulants" },
+                  { label: "Public signal", value: "Growing visibility by crop and pressure" },
+                  { label: "Focus", value: "Category and crop-linked relevance" }
+                ],
+                leftMetric: "27",
+                leftLabel: "Products visible",
+                rightMetric: "12",
+                rightLabel: "Evidence links"
+              },
+              {
+                icon: "R",
+                badge: "Early signal",
+                badgeTone: "slate",
+                title: "Regional comparison",
+                meta: [
+                  { label: "Visible categories", value: "Cross-country comparative view" },
+                  { label: "Public signal", value: "Useful for broad pattern recognition" },
+                  { label: "Focus", value: "Visibility and emerging contrasts" }
+                ],
+                leftMetric: "5",
+                leftLabel: "Countries in view",
+                rightMetric: "9",
+                rightLabel: "Category comparisons"
+              }
+            ]
+          }
+        ],
+        primaryIds: ["crops", "pressures", "products"],
+        get primaryModes() {
+          return this.modes.filter((mode) => this.primaryIds.includes(mode.id));
+        },
+        get active() {
+          return this.modes.find((mode) => mode.id === this.activeId);
+        }
+      };
+    }
+  </script>
 </body>
 </html>

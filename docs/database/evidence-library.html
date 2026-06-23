@@ -7,58 +7,73 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     :root {
-      --ink: oklch(0.23 0.03 215);
-      --muted: oklch(0.49 0.028 205);
-      --line: rgba(46, 58, 46, 0.08);
-      --paper: oklch(0.985 0.008 98);
-      --green: oklch(0.4 0.09 150);
-      --green-soft: oklch(0.95 0.04 145);
-      --card: rgba(255,252,246,0.9);
+      --ink: #173039;
+      --muted: #5c6f73;
+      --surface: rgba(255, 252, 246, 0.9);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-soft: #e7f0e8;
+      --teal: #1f7a79;
+      --teal-soft: #def1f0;
+      --amber: #f0b429;
+      --amber-soft: #fff2cf;
+      --slate-soft: #eceef0;
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
     }
+
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; color: var(--ink); background:
-        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
-        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
-        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%); }
+
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+    }
+
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
-    .wrap { width: min(1240px, calc(100vw - 36px)); margin: 0 auto; padding: 18px 0 40px; }
-    .surface, .card { background: var(--card); border: 1px solid var(--line); box-shadow: 0 16px 36px -30px rgba(33,39,30,0.3); backdrop-filter: blur(16px); }
-    .surface { border-radius: 22px; padding: 22px; }
-    .card { border-radius: 18px; padding: 18px; }
-    .grid, .library { display: grid; gap: 18px; }
-    .grid { grid-template-columns: 1fr 320px; }
-    .library { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; }
-    .eyebrow, .chip { display: inline-flex; align-items: center; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
-    .eyebrow { padding: 8px 12px; border: 1px solid var(--line); background: white; color: var(--muted); }
-    .chip { padding: 7px 11px; background: var(--green-soft); color: var(--green); }
-    h1, h2, h3, p, ul { margin: 0; }
-    h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 0.96; letter-spacing: -0.045em; }
-    h3 { font-size: 1.2rem; line-height: 1.24; }
-    p, li { color: var(--muted); line-height: 1.7; }
-    ul { padding-left: 18px; margin-top: 12px; }
+    button, input, select { font: inherit; }
+
+    .shell {
+      width: min(1260px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 14px 0 28px;
+    }
+
+    .surface,
+    .card,
+    .search-shell,
+    .type-chip,
+    .shortcut-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
     .topbar {
-      margin-bottom: 14px;
       padding: 12px 16px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
-      gap: 12px;
       align-items: center;
-    }
-    .topbar-links {
-      display: flex;
-      flex-wrap: wrap;
       gap: 12px;
-      font-size: 13px;
-      font-weight: 700;
+      flex-wrap: wrap;
     }
-    .brand-lockup { display: flex; align-items: center; gap: 14px; }
-    .brand-mark {
-      width: 40px;
-      height: 40px;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
@@ -67,96 +82,654 @@
       color: var(--green);
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
-    .mini-label {
+
+    .mini,
+    .eyebrow {
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .mini { color: var(--muted); }
+    .eyebrow { color: var(--green); }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .micro-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .micro-stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .micro-stat strong {
+      font-size: 0.95rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .micro-stat span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--muted);
     }
-    @media (max-width: 940px) { .grid, .library { grid-template-columns: 1fr; } }
+
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a.active { color: var(--green); }
+
+    .subnav {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .subnav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .subnav a.active {
+      background: var(--green-soft);
+      border-color: rgba(43, 107, 79, 0.18);
+      color: var(--green);
+    }
+
+    .section {
+      margin-top: 12px;
+      padding: 18px;
+    }
+
+    .hero-grid,
+    .shortcuts,
+    .results-head,
+    .filter-grid,
+    .library-grid,
+    .card-meta,
+    .card-metrics {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-grid,
+    .results-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .shortcuts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+
+    .filter-grid {
+      grid-template-columns: minmax(260px, 1.25fr) repeat(3, minmax(180px, 0.4fr));
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .library-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(1.7rem, 2vw, 2.25rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2vw, 1.85rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      line-height: 1.28;
+      font-weight: 800;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .search-shell,
+    .card,
+    .shortcut-card {
+      padding: 14px;
+    }
+
+    .search-shell {
+      padding: 0;
+      overflow: hidden;
+      box-shadow: none;
+      backdrop-filter: none;
+      background: white;
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 62px;
+      padding: 0 18px;
+    }
+
+    .search-row input {
+      border: 0;
+      outline: 0;
+      width: 100%;
+      background: transparent;
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    .search-row svg {
+      width: 24px;
+      height: 24px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .select {
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      color: var(--ink);
+      padding: 0 14px;
+      width: 100%;
+    }
+
+    .shortcut-card {
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .shortcut-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .shortcut-card.active {
+      border-color: rgba(43, 107, 79, 0.35);
+      background: rgba(231, 240, 232, 0.8);
+    }
+
+    .shortcut-number {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .type-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .type-chip {
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .type-chip.active {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .results-head {
+      margin-bottom: 12px;
+    }
+
+    .card {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: none;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge.green { background: var(--green-soft); color: var(--green); }
+    .badge.amber { background: var(--amber-soft); color: #8d6400; }
+    .badge.slate { background: var(--slate-soft); color: #59656b; }
+
+    .type-label {
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .summary-strip {
+      margin-top: 12px;
+      padding: 9px 10px;
+      border: 1px solid rgba(31, 122, 121, 0.12);
+      border-radius: 12px;
+      background: rgba(222, 241, 240, 0.88);
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .summary-strip span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .card-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+      margin-top: 14px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .meta-value {
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .card-metrics {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .metric-label {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 1100px) {
+      .filter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-grid .search-shell {
+        grid-column: 1 / -1;
+      }
+
+      .library-grid,
+      .shortcuts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .filter-grid,
+      .card-meta,
+      .card-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
-<body>
-  <main class="wrap">
-    <section class="surface topbar">
-      <div class="brand-lockup">
-        <div class="brand-mark">ABA</div>
+<body x-data="evidenceLibraryPage()">
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
         <div>
-          <div class="mini-label">African Biologicals Alliance</div>
-          <div style="margin-top: 4px; font-size: 14px; color: var(--muted);">Knowledge hub</div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
         </div>
       </div>
-      <nav class="topbar-links">
-        <a href="../site/index.html">Home</a>
-        <a href="../site/about.html">About</a>
-        <a href="../membership-flow/index.html">Membership</a>
-        <a href="./index.html" style="color: var(--green);">Knowledge Hub</a>
-        <a href="../site/workspace.html">Workspace</a>
-      </nav>
-    </section>
-    <section class="surface">
-      <div class="eyebrow">Evidence library</div>
-      <div class="grid" style="margin-top: 16px;">
+      <div class="topbar-right">
+        <div class="micro-stats" aria-label="Evidence coverage">
+          <div class="micro-stat"><strong>92</strong><span>Records</span></div>
+          <div class="micro-stat"><strong>4</strong><span>Types</span></div>
+        </div>
+        <nav class="nav">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a class="active" href="./index.html">Knowledge Hub</a>
+          <a href="../site/workspace.html">Workspace</a>
+        </nav>
+      </div>
+    </header>
+
+    <nav class="surface subnav" aria-label="Knowledge hub pages">
+      <a href="./index.html">Explorer</a>
+      <a href="./product-catalogue.html">Products</a>
+      <a class="active" href="./evidence-library.html">Evidence</a>
+      <a href="./regulatory-signals.html">Signals</a>
+    </nav>
+
+    <section class="surface section">
+      <div class="hero-grid">
         <div>
-          <h1 class="display">Explore evidence, references, and practical context.</h1>
-          <p style="margin-top: 18px; max-width: 64ch;">
-            Find the supporting material that helps explain how biologicals are used, tested, discussed, and understood in practice.
+          <div class="eyebrow">Evidence</div>
+          <h1>Find the trials, notes, and reference material behind the category.</h1>
+          <p style="margin-top: 10px;">
+            Use the evidence layer once you want proof, context, or technical grounding behind a product, crop, or pest pressure.
           </p>
         </div>
-        <div class="card">
-          <div class="chip">Purpose</div>
-          <p style="margin-top: 12px;">This section brings depth to the knowledge hub through trials, technical notes, case examples, and reference material.</p>
-        </div>
-      </div>
-      <div class="topbar-links" style="margin-top: 16px;">
-        <a href="./index.html">Knowledge hub</a>
-        <a href="./product-catalogue.html">Product catalogue</a>
-        <a href="./regulatory-signals.html">Regulatory signals</a>
       </div>
 
-      <div class="library">
-        <article class="card">
-          <div class="chip">Reference type</div>
-          <h3 class="display" style="margin-top: 14px;">Trials and field evidence</h3>
-          <ul>
-            <li>Review field trials and observed outcomes</li>
-            <li>Browse use-case summaries by category or product type</li>
-            <li>See evidence that supports stronger public understanding</li>
-          </ul>
+      <div class="shortcuts">
+        <article class="shortcut-card" :class="{ active: activeView === 'trial' }" @click="activeView = 'trial'">
+          <div class="shortcut-number">01</div>
+          <h3 style="margin-top: 10px;">Trials and field results</h3>
+          <p style="margin-top: 8px;">Start with outcome-oriented records when you want applied evidence first.</p>
         </article>
-        <article class="card">
-          <div class="chip">Reference type</div>
-          <h3 class="display" style="margin-top: 14px;">Technical notes</h3>
-          <ul>
-            <li>Definitions, terminology, and category guidance</li>
-            <li>Practical notes that support non-specialist readers</li>
-            <li>Room for deeper expert contribution over time</li>
-          </ul>
+        <article class="shortcut-card" :class="{ active: activeView === 'reference' }" @click="activeView = 'reference'">
+          <div class="shortcut-number">02</div>
+          <h3 style="margin-top: 10px;">Technical references</h3>
+          <p style="margin-top: 8px;">Use reference material for definitions, interpretation, and category understanding.</p>
         </article>
-        <article class="card">
-          <div class="chip">Reference type</div>
-          <h3 class="display" style="margin-top: 14px;">Country or market context</h3>
-          <ul>
-            <li>Background notes on local usage and relevance</li>
-            <li>Comparative views where they help explain the market</li>
-            <li>Room for future country-specific deep dives</li>
-          </ul>
+        <article class="shortcut-card" :class="{ active: activeView === 'expert' }" @click="activeView = 'expert'">
+          <div class="shortcut-number">03</div>
+          <h3 style="margin-top: 10px;">Expert contribution</h3>
+          <p style="margin-top: 8px;">Surface specialist notes and contributed insight where deeper context matters.</p>
         </article>
-        <article class="card">
-          <div class="chip">Reference type</div>
-          <h3 class="display" style="margin-top: 14px;">Expert contribution</h3>
-          <ul>
-            <li>Material contributed by specialists and practitioners</li>
-            <li>Curated insights from expert contributors</li>
-            <li>A stronger bridge between shared knowledge and sector participation</li>
-          </ul>
-        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="results-head">
+        <div>
+          <div class="eyebrow">Evidence library</div>
+          <h2 style="margin-top: 6px;">Browse supporting records by type and relevance.</h2>
+          <p style="margin-top: 8px; max-width: 70ch;">
+            Evidence is most useful when it is easy to relate back to a practical question. Each record should therefore make the linked product, crop, pressure, and use context visible at a glance.
+          </p>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <template x-for="type in types" :key="type.id">
+          <button
+            type="button"
+            class="type-chip"
+            :class="{ active: activeType === type.id }"
+            @click="activeType = type.id"
+            x-text="type.label"></button>
+        </template>
+      </div>
+
+      <div class="filter-grid">
+        <div class="search-shell">
+          <div class="search-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input type="text" placeholder="Search trials, notes, case studies, or linked products...">
+          </div>
+        </div>
+        <select class="select">
+          <option x-text="activeFilters[0]"></option>
+        </select>
+        <select class="select">
+          <option x-text="activeFilters[1]"></option>
+        </select>
+        <select class="select">
+          <option x-text="activeFilters[2]"></option>
+        </select>
+      </div>
+
+      <div class="library-grid">
+        <template x-for="record in filteredRecords" :key="record.title">
+          <article class="card">
+            <div class="card-top">
+              <div class="card-icon" x-text="record.icon"></div>
+              <div class="badge" :class="record.badgeTone" x-text="record.badge"></div>
+            </div>
+
+            <div class="type-label" x-text="record.type"></div>
+            <h3 style="margin-top: 10px;" x-text="record.title"></h3>
+
+            <div class="summary-strip">
+              <span>Linked context:</span>
+              <span x-text="record.linked" style="color: var(--ink); font-weight: 700;"></span>
+            </div>
+
+            <div class="card-meta">
+              <template x-for="item in record.meta" :key="item.label">
+                <div>
+                  <div class="meta-label" x-text="item.label"></div>
+                  <div class="meta-value" x-text="item.value"></div>
+                </div>
+              </template>
+            </div>
+
+            <div class="card-metrics">
+              <div>
+                <div class="metric-value" x-text="record.leftMetric"></div>
+                <div class="metric-label" x-text="record.leftLabel"></div>
+              </div>
+              <div>
+                <div class="metric-value" x-text="record.rightMetric"></div>
+                <div class="metric-label" x-text="record.rightLabel"></div>
+              </div>
+            </div>
+          </article>
+        </template>
       </div>
     </section>
   </main>
+
+  <script>
+    function evidenceLibraryPage() {
+      return {
+        activeView: "trial",
+        activeType: "all",
+        types: [
+          { id: "all", label: "All evidence" },
+          { id: "trial", label: "Field trials" },
+          { id: "case", label: "Case studies" },
+          { id: "technical", label: "Technical notes" },
+          { id: "expert", label: "Expert notes" }
+        ],
+        filtersByView: {
+          trial: ["All evidence types", "All crops", "All products"],
+          reference: ["All note types", "All categories", "All crops"],
+          expert: ["All contributor types", "All pressures", "All crops"]
+        },
+        records: [
+          {
+            typeId: "trial",
+            type: "Field trial",
+            icon: "T",
+            badge: "Applied",
+            badgeTone: "green",
+            title: "Maize foliar pest-control field trial",
+            linked: "TrichoShield WP, maize, fall armyworm pressure",
+            meta: [
+              { label: "Location", value: "Free State" },
+              { label: "Focus", value: "Foliar pest control under field conditions" },
+              { label: "Related product", value: "TrichoShield WP" },
+              { label: "Crop", value: "Maize" }
+            ],
+            leftMetric: "3",
+            leftLabel: "Seasons",
+            rightMetric: "4",
+            rightLabel: "Linked records"
+          },
+          {
+            typeId: "case",
+            type: "Case study",
+            icon: "C",
+            badge: "Operational",
+            badgeTone: "amber",
+            title: "Citrus orchard resilience programme",
+            linked: "RootRise Bio, citrus, seasonal stress management",
+            meta: [
+              { label: "Location", value: "Eastern Cape" },
+              { label: "Focus", value: "Root resilience and plant performance" },
+              { label: "Related product", value: "RootRise Bio" },
+              { label: "Crop", value: "Citrus" }
+            ],
+            leftMetric: "6",
+            leftLabel: "Contributors",
+            rightMetric: "7",
+            rightLabel: "Linked records"
+          },
+          {
+            typeId: "technical",
+            type: "Technical note",
+            icon: "N",
+            badge: "Reference",
+            badgeTone: "slate",
+            title: "How to read biological category claims",
+            linked: "Product categories, use context, and interpretation language",
+            meta: [
+              { label: "Audience", value: "Public and member readers" },
+              { label: "Focus", value: "Definitions, interpretation, and claims language" },
+              { label: "Related category", value: "Cross-category" },
+              { label: "Use case", value: "Orientation and comparison" }
+            ],
+            leftMetric: "12",
+            leftLabel: "Linked records",
+            rightMetric: "5",
+            rightLabel: "Categories"
+          },
+          {
+            typeId: "expert",
+            type: "Expert note",
+            icon: "E",
+            badge: "Contributor",
+            badgeTone: "green",
+            title: "Soil inoculant interpretation note",
+            linked: "SoilKind Inoculant, legumes, establishment support",
+            meta: [
+              { label: "Contributor type", value: "Technical specialist" },
+              { label: "Focus", value: "Interpreting inoculant use and expected outcomes" },
+              { label: "Related product", value: "SoilKind Inoculant" },
+              { label: "Crop", value: "Legumes" }
+            ],
+            leftMetric: "2",
+            leftLabel: "Contributors",
+            rightMetric: "4",
+            rightLabel: "Linked records"
+          }
+        ],
+        get activeFilters() {
+          return this.filtersByView[this.activeView];
+        },
+        get filteredRecords() {
+          if (this.activeType === "all") return this.records;
+          return this.records.filter((record) => record.typeId === this.activeType);
+        }
+      };
+    }
+  </script>
 </body>
 </html>
