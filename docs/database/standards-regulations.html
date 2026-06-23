@@ -394,8 +394,8 @@
       </div>
       <div class="topbar-right">
         <div class="micro-stats" aria-label="Standards coverage">
-          <div class="micro-stat"><strong>3</strong><span>Jurisdictions</span></div>
-          <div class="micro-stat"><strong>6</strong><span>Standards</span></div>
+          <div class="micro-stat"><strong>12</strong><span>MRL entries</span></div>
+          <div class="micro-stat"><strong>9</strong><span>Standards</span></div>
         </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
@@ -421,9 +421,6 @@
         <div>
           <div class="eyebrow">Standards and regulations</div>
           <h1>Compare regulatory requirements, MRLs, and certification standards.</h1>
-          <p style="margin-top: 10px; max-width: 72ch;">
-            This page gives the knowledge hub a clearer compliance and market-access layer without turning the whole experience into a regulatory-first product.
-          </p>
         </div>
       </div>
 
@@ -533,43 +530,99 @@
         ],
         mrlRows: [
           {
-            chemical: "Biological residue tolerance note",
-            crop: "Citrus",
-            mrl: "Market-specific review required",
-            source: "Export guidance brief",
-            status: "Watch",
-            badgeTone: "amber"
+            chemical: "Bacillus thuringiensis (Bt)",
+            crop: "Brassicas",
+            mrl: "Exempt (microbial, naturally occurring) — EU Reg 396/2005",
+            source: "EU MRL database",
+            status: "Exempt",
+            badgeTone: "green"
           },
           {
-            chemical: "Microbial biocontrol reference",
+            chemical: "Bacillus thuringiensis (Bt)",
             crop: "Tomatoes",
-            mrl: "Low residue concern, verify buyer standard",
-            source: "ABA standards summary",
-            status: "Reference",
-            badgeTone: "slate"
+            mrl: "Exempt — no residue concern; DAFF ZA confirm not required",
+            source: "DAFF / EU",
+            status: "Exempt",
+            badgeTone: "green"
           },
           {
-            chemical: "Botanical pest-control input",
-            crop: "Table grapes",
-            mrl: "Destination-market dependent",
-            source: "EU comparison note",
-            status: "Variable",
+            chemical: "Bacillus thuringiensis (Bt)",
+            crop: "Maize",
+            mrl: "Exempt — verify where GM crop overlap creates buyer questions",
+            source: "DAFF / EU",
+            status: "Verify",
             badgeTone: "amber"
           },
           {
-            chemical: "Conventional comparator",
-            crop: "Maize",
-            mrl: "Established limit in source market",
-            source: "Regulatory note",
+            chemical: "Ampelomyces quisqualis (AQ-10)",
+            crop: "Grapes",
+            mrl: "0.01 mg/kg default (EU); ZA: approval under Act 36/1947",
+            source: "EU MRL / DAFF Act 36",
             status: "Active",
             badgeTone: "green"
           },
           {
-            chemical: "Fermentation-derived input",
-            crop: "Leafy greens",
-            mrl: "Documentation review required",
-            source: "Public interpretation brief",
-            status: "Review",
+            chemical: "Trichoderma harzianum",
+            crop: "Tomatoes / peppers",
+            mrl: "Exempt — soil/root application, no harvest residue pathway",
+            source: "EU guidance",
+            status: "Exempt",
+            badgeTone: "green"
+          },
+          {
+            chemical: "Beauveria bassiana",
+            crop: "Peppers (protected)",
+            mrl: "0.01 mg/kg default (EU); ZA registration pending extension",
+            source: "EU MRL / DAFF",
+            status: "Watch",
+            badgeTone: "amber"
+          },
+          {
+            chemical: "Lecanicillium muscarium (Mycotal)",
+            crop: "Cucumbers / lettuce",
+            mrl: "Exempt in EU (naturally occurring micro-organism)",
+            source: "EU Reg 396/2005",
+            status: "Exempt",
+            badgeTone: "green"
+          },
+          {
+            chemical: "E,E-8,10-dodecadien-1-ol (codlemone)",
+            crop: "Citrus / apples",
+            mrl: "Exempt — pheromone, no food-contact residue pathway",
+            source: "EU / US EPA",
+            status: "Exempt",
+            badgeTone: "green"
+          },
+          {
+            chemical: "Seaweed extract (Ecklonia maxima)",
+            crop: "Table grapes",
+            mrl: "Not a pesticide; OMRI-listed; buyer standard determines labelling",
+            source: "OMRI / buyer spec",
+            status: "Reference",
+            badgeTone: "slate"
+          },
+          {
+            chemical: "Bradyrhizobium japonicum",
+            crop: "Soybeans",
+            mrl: "Not applicable — fertiliser/inoculant classification",
+            source: "DAFF Fertiliser Act",
+            status: "N/A",
+            badgeTone: "slate"
+          },
+          {
+            chemical: "Metarhizium anisopliae",
+            crop: "Various (soil application)",
+            mrl: "Exempt — no foliar residue; EU guidance applies",
+            source: "EU Reg 396/2005",
+            status: "Exempt",
+            badgeTone: "green"
+          },
+          {
+            chemical: "Streptomyces auerofaciens (Bacrid)",
+            crop: "Field crops",
+            mrl: "ZA only; export MRL status not established — flag for buyer review",
+            source: "DAFF Act 36",
+            status: "Watch",
             badgeTone: "amber"
           }
         ],
@@ -577,32 +630,47 @@
           {
             type: "Certification",
             title: "GlobalG.A.P.",
-            summary: "Useful where market access, traceability, and documented input practices intersect with biological product use."
+            summary: "Primary market-access certification for export producers. Biological inputs must appear on the approved input list and be applied within documented IPM protocols."
           },
           {
             type: "Certification",
-            title: "Organic",
-            summary: "Relevant for understanding approved-input expectations, audit requirements, and evidence needed around product composition."
+            title: "Organic (SABS / IFOAM)",
+            summary: "Approved biological inputs must be on the relevant permitted substances list. Not all registered biologicals qualify — compostable inoculants and pheromones generally permitted; synthetic carriers may disqualify a product."
+          },
+          {
+            type: "Regulatory framework",
+            title: "DAFF Act 36 of 1947",
+            summary: "South African primary legislation governing pesticide registration. Biological products require Act 36 registration before sale. Registration pathways for microbials and semiochemicals are distinct from conventional actives."
+          },
+          {
+            type: "Regulatory framework",
+            title: "AREGAWI / SADC harmonisation",
+            summary: "Regional framework aimed at mutual recognition of registration data. Relevant for cross-border market access in SADC. Still in development — product-by-product verification required."
+          },
+          {
+            type: "Export standard",
+            title: "EU MRL Regulation 396/2005",
+            summary: "Sets maximum residue limits for produce entering the EU. Most microbial actives (Bt, Trichoderma, Beauveria) are exempt or default to 0.01 mg/kg. Key reference for export-oriented producers using biologicals."
           },
           {
             type: "Trade standard",
-            title: "Fair Trade",
-            summary: "Helps frame how social and production standards can overlap with transition and responsible input-use narratives."
-          },
-          {
-            type: "Management system",
-            title: "ISO 14001",
-            summary: "Provides environmental management context for larger operations thinking beyond individual product choice."
-          },
-          {
-            type: "Certification",
-            title: "Rainforest Alliance",
-            summary: "Relevant where crop-specific buyer expectations and sustainability compliance need to be understood together."
+            title: "Rainforest Alliance 2020",
+            summary: "Requires documented IPM plans and evidence of pesticide risk reduction. Biological inputs support compliance — particularly where pest pressure records, product rotation, and application records are maintained."
           },
           {
             type: "Food safety",
             title: "FSSC 22000",
-            summary: "Adds an operational quality and systems layer where processing and chain-of-custody questions matter."
+            summary: "Food safety management certification relevant to processors and packers. Impacts input documentation requirements and supplier approval processes that biological input users need to satisfy."
+          },
+          {
+            type: "Trade standard",
+            title: "Fair Trade (FLO)",
+            summary: "Where fair trade certification intersects with biological input transition programmes, documentation of reduced synthetic use and training records are relevant to audits."
+          },
+          {
+            type: "Management system",
+            title: "ISO 14001",
+            summary: "Environmental management systems standard. Biological input adoption can contribute to measurable impact on pesticide load — relevant for larger operations tracking environmental KPIs."
           }
         ]
       };
