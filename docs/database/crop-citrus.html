@@ -83,6 +83,31 @@
       margin-bottom: 12px;
       padding: 12px 16px;
     }
+    .return-bar {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .return-bar.is-visible {
+      display: flex;
+    }
+    .return-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.82);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
     .hero-layout {
       grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.8fr);
       align-items: start;
@@ -285,11 +310,14 @@
       <a class="active" href="./index.html">Explorer</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
+    <nav class="surface return-bar" data-return-bar aria-label="Return navigation">
+      <a class="return-link" data-return-link href="./index.html">Back to explorer</a>
+    </nav>
 
     <section class="surface hero-layout">
       <div class="hero-main">
         <div class="breadcrumb">
-          <a href="./index.html">Explorer</a>
+          <a data-return-link href="./index.html">Explorer</a>
           <span>→</span>
           <span>Crops</span>
           <span>→</span>
@@ -318,15 +346,15 @@
           <span class="signal-chip">Export-sensitive crop</span>
         </div>
         <div class="chip-row" style="margin-top: 16px;">
-          <a class="chip" href="./problem-african-bollworm.html">African bollworm</a>
+          <a class="chip" data-return-forward href="./problem-african-bollworm.html">African bollworm</a>
           <span class="chip">False codling moth</span>
           <span class="chip">Thrips</span>
           <span class="chip">Red scale</span>
-          <a class="chip" href="./product-thuricide-wp.html">Thuricide WP</a>
+          <a class="chip" data-return-forward href="./product-thuricide-wp.html">Thuricide WP</a>
         </div>
         <div class="hero-actions" style="margin-top: 18px;">
-          <a class="action-link" href="./product-catalogue.html?crop=Citrus">See linked biological products</a>
-          <a class="action-link secondary" href="./resource-library.html">Open guidance and HHP references</a>
+          <a class="action-link" data-return-forward href="./product-catalogue.html?crop=Citrus">See linked biological products</a>
+          <a class="action-link secondary" data-return-forward href="./resource-library.html">Open guidance and HHP references</a>
         </div>
       </div>
 
@@ -334,10 +362,10 @@
         <div class="card">
           <div class="eyebrow">Related workspaces</div>
           <div class="quick-links" style="margin-top: 12px;">
-            <a class="chip" href="./product-catalogue.html?crop=Citrus">Linked products</a>
-            <a class="chip" href="./evidence-library.html">Evidence</a>
-            <a class="chip" href="./standards-regulations.html">Standards</a>
-            <a class="chip" href="./resource-library.html">Guidance and HHP</a>
+            <a class="chip" data-return-forward href="./product-catalogue.html?crop=Citrus">Linked products</a>
+            <a class="chip" data-return-forward href="./evidence-library.html">Evidence</a>
+            <a class="chip" data-return-forward href="./standards-regulations.html">Standards</a>
+            <a class="chip" data-return-forward href="./resource-library.html">Guidance and HHP</a>
           </div>
         </div>
         <div class="card">
@@ -383,7 +411,7 @@
               <div class="fact-label">Where to go deeper</div>
               <h3 style="margin-top: 8px;">Use the HHP transition resources as interpretation support</h3>
               <p>The current corpus already includes <strong>Highly hazardous pesticides: Africa landscape overview</strong> and <strong>HHP-to-biological substitution map — priority crops</strong> to help explain where citrus sits in broader transition work.</p>
-              <p><a href="./resource-library.html">Open resource library →</a></p>
+              <p><a data-return-forward href="./resource-library.html">Open resource library →</a></p>
             </article>
           </div>
         </section>
@@ -401,7 +429,7 @@
               <div class="fact-label">Operational record</div>
               <h3 style="margin-top: 8px;">Citrus orchard resilience programme</h3>
               <p>Shows how the citrus story is not only about direct intervention. The wider record already connects orchard stress management and resilience to biological use in practice.</p>
-              <p><a href="./evidence-library.html">Open evidence library →</a></p>
+              <p><a data-return-forward href="./evidence-library.html">Open evidence library →</a></p>
             </article>
           </div>
         </section>
@@ -436,7 +464,7 @@
               <div class="fact-label">Bundle</div>
               <h3 style="margin-top: 8px;">Citrus biological use interpretation bundle</h3>
               <p>Brings together crop context, linked evidence, and standards framing so the citrus story reads as a decision aid rather than a raw catalogue extract.</p>
-              <p><a href="./resource-library.html">Open resource library →</a></p>
+              <p><a data-return-forward href="./resource-library.html">Open resource library →</a></p>
             </article>
           </div>
         </section>
@@ -448,22 +476,22 @@
             <article class="action-tile">
               <h3>Linked products</h3>
               <p>Open the product workspace filtered around citrus use contexts.</p>
-              <a href="./product-catalogue.html?crop=Citrus">Open product catalogue →</a>
+              <a data-return-forward href="./product-catalogue.html?crop=Citrus">Open product catalogue →</a>
             </article>
             <article class="action-tile">
               <h3>Registration and compliance</h3>
               <p>Move from crop story into the registration and standards layers when market readiness matters.</p>
-              <a href="./standards-regulations.html">Open standards layer →</a>
+              <a data-return-forward href="./standards-regulations.html">Open standards layer →</a>
             </article>
             <article class="action-tile">
               <h3>Evidence corpus</h3>
               <p>Review the wider record set supporting citrus-related claims and use patterns.</p>
-              <a href="./evidence-library.html">Open evidence library →</a>
+              <a data-return-forward href="./evidence-library.html">Open evidence library →</a>
             </article>
             <article class="action-tile">
               <h3>HHP transition references</h3>
               <p>Use the HHP and interpretation resources when the conversation is about replacement and risk reduction rather than crop browsing alone.</p>
-              <a href="./resource-library.html">Open resource library →</a>
+              <a data-return-forward href="./resource-library.html">Open resource library →</a>
             </article>
           </div>
         </section>
@@ -490,5 +518,27 @@
       </aside>
     </section>
   </main>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const returnTo = params.get('returnTo');
+      const returnBar = document.querySelector('[data-return-bar]');
+      const returnLinks = document.querySelectorAll('[data-return-link]');
+      const forwardLinks = document.querySelectorAll('[data-return-forward]');
+      if (returnTo && returnBar) {
+        returnBar.classList.add('is-visible');
+        returnLinks.forEach((link) => {
+          link.setAttribute('href', returnTo);
+        });
+      }
+      const current = `${window.location.pathname}${window.location.search}`;
+      forwardLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const joiner = href.includes('?') ? '&' : '?';
+        link.setAttribute('href', `${href}${joiner}returnTo=${encodeURIComponent(current)}`);
+      });
+    }());
+  </script>
 </body>
 </html>

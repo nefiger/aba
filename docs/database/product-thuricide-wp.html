@@ -55,6 +55,13 @@
     .nav, .subnav { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; font-weight: 700; }
     .nav a.active, .subnav a.active { color: var(--green); }
     .subnav { margin-bottom: 12px; padding: 12px 16px; }
+    .return-bar { margin-bottom: 12px; padding: 10px 14px; display: none; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .return-bar.is-visible { display: flex; }
+    .return-link {
+      display: inline-flex; align-items: center; min-height: 36px; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.82); font-size: 12px; font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted);
+    }
     .hero-layout { grid-template-columns: minmax(0, 1.35fr) minmax(270px, 0.82fr); align-items: start; }
     .hero-main {
       padding: 24px; border-radius: 24px;
@@ -128,11 +135,14 @@
       <a class="active" href="./index.html">Explorer</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
+    <nav class="surface return-bar" data-return-bar aria-label="Return navigation">
+      <a class="return-link" data-return-link href="./index.html">Back to explorer</a>
+    </nav>
 
     <section class="surface hero-layout">
       <div class="hero-main">
         <div class="breadcrumb">
-          <a href="./index.html">Explorer</a>
+          <a data-return-link href="./index.html">Explorer</a>
           <span>→</span>
           <span>Biologicals</span>
           <span>→</span>
@@ -161,15 +171,15 @@
           <span class="signal-chip">HHP substitution pathway visible</span>
         </div>
         <div class="chip-row" style="margin-top: 16px;">
-          <a class="chip" href="./problem-african-bollworm.html">African bollworm</a>
-          <a class="chip" href="./crop-citrus.html">Citrus</a>
+          <a class="chip" data-return-forward href="./problem-african-bollworm.html">African bollworm</a>
+          <a class="chip" data-return-forward href="./crop-citrus.html">Citrus</a>
           <span class="chip">Cruciferae</span>
           <span class="chip">Lucerne</span>
           <span class="chip">Diamond back moth</span>
         </div>
         <div class="hero-actions" style="margin-top: 18px;">
-          <a class="action-link" href="./product-catalogue.html?q=Thuricide%20WP">Compare in product catalogue</a>
-          <a class="action-link secondary" href="./evidence-library.html">Open supporting evidence</a>
+          <a class="action-link" data-return-forward href="./product-catalogue.html?q=Thuricide%20WP">Compare in product catalogue</a>
+          <a class="action-link secondary" data-return-forward href="./evidence-library.html">Open supporting evidence</a>
         </div>
       </div>
 
@@ -177,10 +187,10 @@
         <div class="card">
           <div class="eyebrow">Related workspaces</div>
           <div class="quick-links" style="margin-top: 12px;">
-            <a class="chip" href="./product-catalogue.html?q=Thuricide%20WP">Product workspace</a>
-            <a class="chip" href="./evidence-library.html">Evidence</a>
-            <a class="chip" href="./standards-regulations.html">Standards</a>
-            <a class="chip" href="./resource-library.html">Guidance and HHP</a>
+            <a class="chip" data-return-forward href="./product-catalogue.html?q=Thuricide%20WP">Product workspace</a>
+            <a class="chip" data-return-forward href="./evidence-library.html">Evidence</a>
+            <a class="chip" data-return-forward href="./standards-regulations.html">Standards</a>
+            <a class="chip" data-return-forward href="./resource-library.html">Guidance and HHP</a>
           </div>
         </div>
         <div class="card">
@@ -225,7 +235,7 @@
               <div class="fact-label">Where to go deeper</div>
               <h3 style="margin-top: 8px;">Use the HHP and crop-priority references to frame the product</h3>
               <p>The current resource corpus already carries the broader HHP landscape overview and the crop-priority substitution mapping that help explain where products like Thuricide WP matter.</p>
-              <p><a href="./resource-library.html">Open resource library →</a></p>
+              <p><a data-return-forward href="./resource-library.html">Open resource library →</a></p>
             </article>
           </div>
         </section>
@@ -243,7 +253,7 @@
               <div class="fact-label">Technical note</div>
               <h3 style="margin-top: 8px;">Transitioning from pyrethroid-led to Bt-led programmes</h3>
               <p>This record is especially useful because it bridges evidence and transition language, helping the product detail page feel grounded rather than promotional.</p>
-              <p><a href="./evidence-library.html">Open evidence library →</a></p>
+              <p><a data-return-forward href="./evidence-library.html">Open evidence library →</a></p>
             </article>
           </div>
         </section>
@@ -278,7 +288,7 @@
               <div class="fact-label">Orientation guide</div>
               <h3 style="margin-top: 8px;">How ABA groups biological products</h3>
               <p>Useful for readers who need quick category context before comparing Thuricide WP with other visible biologicals in the wider catalogue.</p>
-              <p><a href="./resource-library.html">Open resource library →</a></p>
+              <p><a data-return-forward href="./resource-library.html">Open resource library →</a></p>
             </article>
           </div>
         </section>
@@ -290,22 +300,22 @@
             <article class="action-tile">
               <h3>Compare similar products</h3>
               <p>Return to the full product workspace to compare Thuricide WP against other visible options.</p>
-              <a href="./product-catalogue.html?q=Thuricide%20WP">Open product catalogue →</a>
+              <a data-return-forward href="./product-catalogue.html?q=Thuricide%20WP">Open product catalogue →</a>
             </article>
             <article class="action-tile">
               <h3>Review proof</h3>
               <p>Open the broader evidence corpus supporting the product and its linked use programmes.</p>
-              <a href="./evidence-library.html">Open evidence library →</a>
+              <a data-return-forward href="./evidence-library.html">Open evidence library →</a>
             </article>
             <article class="action-tile">
               <h3>Check compliance context</h3>
               <p>Move into the full standards workspace for microbial actives and export-facing interpretation.</p>
-              <a href="./standards-regulations.html">Open standards layer →</a>
+              <a data-return-forward href="./standards-regulations.html">Open standards layer →</a>
             </article>
             <article class="action-tile">
               <h3>Use HHP references</h3>
               <p>Open the guidance corpus when the product conversation becomes a replacement or risk-reduction conversation.</p>
-              <a href="./resource-library.html">Open resource library →</a>
+              <a data-return-forward href="./resource-library.html">Open resource library →</a>
             </article>
           </div>
         </section>
@@ -332,5 +342,25 @@
       </aside>
     </section>
   </main>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const returnTo = params.get('returnTo');
+      const returnBar = document.querySelector('[data-return-bar]');
+      const returnLinks = document.querySelectorAll('[data-return-link]');
+      const forwardLinks = document.querySelectorAll('[data-return-forward]');
+      if (returnTo && returnBar) {
+        returnBar.classList.add('is-visible');
+        returnLinks.forEach((link) => link.setAttribute('href', returnTo));
+      }
+      const current = `${window.location.pathname}${window.location.search}`;
+      forwardLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const joiner = href.includes('?') ? '&' : '?';
+        link.setAttribute('href', `${href}${joiner}returnTo=${encodeURIComponent(current)}`);
+      });
+    }());
+  </script>
 </body>
 </html>

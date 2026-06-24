@@ -559,6 +559,22 @@
       gap: 8px;
     }
 
+    button.badge {
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    button.badge:hover,
+    button.badge:focus-visible {
+      outline: none;
+      border-color: rgba(23, 48, 57, 0.12);
+      transform: translateY(-1px);
+    }
+
+    button.badge.is-active {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--card-soft) 75%, white);
+    }
+
     .badge::before {
       content: "";
       width: 7px;
@@ -676,6 +692,17 @@
 
     .support-metric strong {
       font-size: 14px;
+    }
+
+    .support-metric svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
     }
 
     .card-cta {
@@ -861,9 +888,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'crops' }"
           style="--path-accent: #7a6b26; --path-soft-ring: rgba(240,228,177,0.5)"
-          @click="activeId = 'crops'"
+          @click="setActiveMode('crops')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'crops'" @keydown.space.prevent="activeId = 'crops'">
+          @keydown.enter="setActiveMode('crops')" @keydown.space.prevent="setActiveMode('crops')">
           <div class="path-visual" style="background: linear-gradient(180deg, #fdf4d4 0%, #f5e48c 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #7a6b26">
@@ -885,9 +912,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'problems' }"
           style="--path-accent: #b05b37; --path-soft-ring: rgba(246,219,203,0.5)"
-          @click="activeId = 'problems'"
+          @click="setActiveMode('problems')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'problems'" @keydown.space.prevent="activeId = 'problems'">
+          @keydown.enter="setActiveMode('problems')" @keydown.space.prevent="setActiveMode('problems')">
           <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #b05b37">
@@ -913,9 +940,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'products' }"
           style="--path-accent: #2b6b4f; --path-soft-ring: rgba(220,238,224,0.5)"
-          @click="activeId = 'products'"
+          @click="setActiveMode('products')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'products'" @keydown.space.prevent="activeId = 'products'">
+          @keydown.enter="setActiveMode('products')" @keydown.space.prevent="setActiveMode('products')">
           <div class="path-visual" style="background: linear-gradient(180deg, rgba(220,238,224,0.2) 0%, rgba(220,238,224,0.5) 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #2b6b4f">
@@ -946,8 +973,10 @@
       </div>
 
       <div class="filter-grid">
-        <select class="select">
-          <option x-text="active.filters[0]"></option>
+        <select class="select" x-model="primaryFilter" @change="applyPrimaryFilter()">
+          <template x-for="option in primaryFilterOptions()" :key="option.value">
+            <option :value="option.value" x-text="option.label"></option>
+          </template>
         </select>
         <select class="select">
           <option x-text="active.filters[1]"></option>
@@ -958,7 +987,7 @@
       </div>
 
       <div class="card-grid">
-        <template x-for="card in active.cards" :key="card.title">
+        <template x-for="card in filteredCards" :key="card.title">
           <article
             class="card"
             :class="{ 'is-featured': isFeaturedCard(card) }"
@@ -970,7 +999,13 @@
             @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
               <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
-              <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
+              <button
+                type="button"
+                class="badge"
+                :class="[card.badgeTone, { 'is-active': primaryFilter === displayBadge(card) }]"
+                :title="badgeTitle(card)"
+                @click.stop="togglePrimaryFilter(displayBadge(card))"
+                x-text="displayBadge(card)"></button>
             </div>
             <h3 style="margin-top: 12px; font-size: 1.15rem;" x-text="card.title"></h3>
 
@@ -994,6 +1029,7 @@
                   <span x-text="supportMetricLabel(card)"></span>
                 </div>
                 <div class="support-metric" x-show="hhpInsight(card)">
+                  <span x-html="hhpIconSvg()" aria-hidden="true"></span>
                   <strong>HHP</strong>
                   <span x-text="hhpLabel(card)"></span>
                 </div>
@@ -1001,7 +1037,7 @@
               <a
                 class="card-cta"
                 x-show="!isFeaturedCard(card)"
-                :href="cardHref(card)"
+                :href="withReturnTo(cardHref(card))"
                 @click.stop
                 x-text="defaultOpenLabel()"></a>
             </div>
@@ -1067,6 +1103,9 @@
         },
         assetIcon(path) {
           return `<img src="${path}" alt="" aria-hidden="true">`;
+        },
+        hhpIconSvg() {
+          return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8 21 19.5H3L12 3.8Z"/><circle cx="12" cy="10.2" r="2.1"/><path d="M9.4 15.1c.6-1.1 1.5-1.7 2.6-1.7s2 .6 2.6 1.7"/><path d="M8 17.8h3.1"/><path d="M12.9 17.8H16"/></svg>';
         },
         problemIcon(name) {
           const key = String(name || '').toLowerCase();
@@ -1210,7 +1249,7 @@
         openCard(card, event) {
           if (!this.isFeaturedCard(card)) return;
           if (event?.target?.closest('a, button')) return;
-          window.location.href = this.cardHref(card);
+          window.location.href = this.withReturnTo(this.cardHref(card));
         },
         featuredDetails: {
           crops: {
@@ -1237,10 +1276,38 @@
           }
           return `./product-catalogue.html?q=${encodeURIComponent(card.title)}`;
         },
+        withReturnTo(url) {
+          const joiner = url.includes('?') ? '&' : '?';
+          return `${url}${joiner}returnTo=${encodeURIComponent(`${window.location.pathname}${window.location.search}`)}`;
+        },
         defaultOpenLabel() {
           if (this.activeId === 'crops') return 'See linked products';
           if (this.activeId === 'problems') return 'See biological options';
           return 'Open full product view';
+        },
+        primaryFilter: '__all__',
+        primaryFilterOptions() {
+          return [
+            { value: '__all__', label: this.active.filters[0] },
+            ...this.availablePrimaryFilters.map((label) => ({ value: label, label }))
+          ];
+        },
+        togglePrimaryFilter(value) {
+          this.primaryFilter = this.primaryFilter === value ? '__all__' : value;
+        },
+        applyPrimaryFilter() {
+          if (!this.primaryFilter) this.primaryFilter = '__all__';
+        },
+        setActiveMode(id) {
+          this.activeId = id;
+          this.primaryFilter = '__all__';
+        },
+        get availablePrimaryFilters() {
+          return [...new Set(this.active.cards.map((card) => this.displayBadge(card)).filter(Boolean))];
+        },
+        get filteredCards() {
+          if (this.primaryFilter === '__all__') return this.active.cards;
+          return this.active.cards.filter((card) => this.displayBadge(card) === this.primaryFilter);
         },
         cardCount(card, label) {
           return (card.meta || []).find((item) => item.label === label)?.value || '';
@@ -1268,7 +1335,7 @@
             problems: {
               "African bollworm": "Strong substitution pathway where Bt-led options can displace higher-risk insecticide programmes.",
               Thrips: "Partial replacement story where biological options exist but coverage is uneven.",
-              Aphids: "Transition need is clear, but visible biological options remain thin.",
+              Aphids: "Transition need is clear, but linked biological options remain thin.",
               "Diamond back moth": "Priority HHP transition context in high-intensity vegetable programmes."
             },
             products: {
@@ -1289,35 +1356,93 @@
         cardSummary(card) {
           const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
           if (this.activeId === 'crops') {
-            return `${card.title} is a clear crop entry point with linked problems, visible biological routes, and deeper supporting material. ${biologicalUses ? `${biologicalUses} options are shown here.` : ''}`.trim();
+            const problems = this.shortList(this.cardCount(card, 'Top visible pressures'));
+            if (problems && biologicalUses) {
+              return `Linked problems include ${problems}. ${biologicalUses} biological options linked.`;
+            }
+            if (problems) return `Linked problems include ${problems}.`;
+            if (biologicalUses) return `${biologicalUses} biological options linked.`;
+            return '';
           }
           if (this.activeId === 'problems') {
-            return `${card.title} is a useful problem-led view because the affected crops and biological options can be compared quickly. ${biologicalUses ? `${biologicalUses} options are shown here.` : ''}`.trim();
+            const crops = this.shortList(card.crops);
+            if (crops && biologicalUses) {
+              return `Linked crops include ${crops}. ${biologicalUses} biological options linked.`;
+            }
+            if (crops) return `Linked crops include ${crops}.`;
+            if (biologicalUses) return `${biologicalUses} biological options linked.`;
+            return '';
           }
-          const category = (card.meta || []).find((item) => item.label === 'Category')?.value || card.category || 'Biological product';
-          return `${card.title} is a ${String(category).toLowerCase()} record showing where this biological fits, what it addresses, and why it matters in transition conversations.`;
+          return this.productCardSummary(card);
+        },
+        productCardSummary(card) {
+          const category = this.cardCount(card, 'Category');
+          const linkedCrops = this.cardCount(card, 'Linked crops');
+          const cropSummary = !/use context/i.test(linkedCrops) ? this.shortList(linkedCrops) : '';
+          const linkCount = this.productLinkCount(card);
+
+          if (category && cropSummary && linkCount) {
+            return `${category} linked to ${cropSummary}. ${linkCount}.`;
+          }
+          if (category && cropSummary) {
+            return `${category} linked to ${cropSummary}.`;
+          }
+          if (category && linkCount) {
+            return `${category}. ${linkCount}.`;
+          }
+          if (cropSummary && linkCount) {
+            return `Linked to ${cropSummary}. ${linkCount}.`;
+          }
+          return category ? `${category}.` : '';
+        },
+        productLinkCount(card) {
+          const rawCount = String(card.rightMetric || '').trim();
+          const rawLabel = String(card.rightLabel || '').trim().toLowerCase();
+          if (!rawCount || !rawLabel) return '';
+          if (rawLabel === 'problem') return `${rawCount} linked problem`;
+          if (rawLabel === 'problems') return `${rawCount} linked problems`;
+          if (rawLabel === 'crop') return `${rawCount} linked crop`;
+          if (rawLabel === 'crops') return `${rawCount} linked crops`;
+          return `${rawCount} linked ${rawLabel}`;
+        },
+        shortList(value, limit = 4) {
+          const items = String(value || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean);
+          if (!items.length) return '';
+          if (items.length <= 1) return items[0];
+          if (items.length === 2) return `${items[0]} and ${items[1]}`;
+          const trimmed = items.slice(0, limit);
+          if (trimmed.length === 1) return trimmed[0];
+          if (trimmed.length === 2) return `${trimmed[0]} and ${trimmed[1]}`;
+          return `${trimmed.slice(0, -1).join(', ')}, and ${trimmed[trimmed.length - 1]}`;
+        },
+        fitSummary(card) {
+          const fit = String(card.fit || '').replace(/\.$/, '');
+          return fit.charAt(0).toUpperCase() + fit.slice(1);
         },
         primaryContextLabel(card) {
           if (this.activeId === 'crops') return 'Linked problems';
           if (this.activeId === 'problems') return 'Linked crops';
-          return 'Key problems';
+          return 'Linked crops';
         },
         primaryContextValue(card) {
-          if (this.activeId === 'crops') return this.cardCount(card, 'Top visible pressures') || 'Visible crop problems are still being refined.';
-          if (this.activeId === 'problems') return card.crops || 'Linked crops are still being refined.';
-          return (card.meta || []).find((item) => item.label === 'Pressure links')?.value || 'Problem links are still being refined.';
+          if (this.activeId === 'crops') return this.cardCount(card, 'Top visible pressures') || '';
+          if (this.activeId === 'problems') return card.crops || '';
+          return this.cardCount(card, 'Linked crops') || this.cardCount(card, 'Category') || '';
         },
         secondaryContextLabel(card) {
           if (this.activeId === 'crops') return 'Visible biological options';
           if (this.activeId === 'problems') return 'Visible biological options';
-          return 'Use context';
+          return 'Active';
         },
         secondaryContextValue(card) {
           const uses = this.cardCount(card, 'Visible biological uses');
           if (this.activeId === 'crops' || this.activeId === 'problems') {
-            return uses || 'Visible options are still being refined.';
+            return uses || '';
           }
-          return String(card.fit || '').replace(/\.$/, '');
+          return this.cardCount(card, 'Active') || this.cardCount(card, 'Category') || '';
         },
         displayBadge(card) {
           if (this.activeId === 'problems') {
@@ -1623,7 +1748,7 @@
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: brassica vegetable crop context." },
                   { symbol: "P", label: "Pests", description: "High lepidopteran pest activity is the defining feature of this context." },
-                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the most visible biological entry point." }
+                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the clearest biological entry point." }
                 ],
                 meta: [
                   { label: "Top visible pressures", value: "Diamond back moth, African bollworm, club root, aphids" },
