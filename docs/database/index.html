@@ -1321,7 +1321,7 @@
         },
         supportMetricLabel(card) {
           if (this.activeId === 'products') return 'source records';
-          return 'visible options';
+          return 'linked options';
         },
         hhpInsight(card) {
           const map = {
@@ -1433,8 +1433,8 @@
           return this.cardCount(card, 'Linked crops') || this.cardCount(card, 'Category') || '';
         },
         secondaryContextLabel(card) {
-          if (this.activeId === 'crops') return 'Visible biological options';
-          if (this.activeId === 'problems') return 'Visible biological options';
+          if (this.activeId === 'crops') return 'Biological options';
+          if (this.activeId === 'problems') return 'Biological options';
           return 'Active';
         },
         secondaryContextValue(card) {
@@ -1526,7 +1526,7 @@
             step: "01",
             summary: "Start with the crop or production context you work in.",
             heading: "Browse by crop.",
-            description: "See where biological activity is already visible around each crop, and which pests and diseases appear most often.",
+            description: "See which biological options are already linked to each crop, and which pests and diseases appear most often.",
             placeholder: "Search crops by name, region, production system, or problem...",
             filters: ["All categories", "All regions", "All problem mixes"],
             cards: [
@@ -2042,7 +2042,7 @@
             step: "02",
             summary: "Start with a pest or disease you need to address.",
             heading: "Browse by pest or disease.",
-            description: "Explore the pest and disease profiles that appear most often in the current remedy register, then see where biological products are visibly present.",
+            description: "Explore the pest and disease profiles that appear most often, then see which biological options are already linked.",
             placeholder: "Search pests or diseases by name, crop, or taxonomic group...",
             filters: ["All problem types", "All crop groups", "All biological coverage"],
             cards: [
@@ -2505,7 +2505,7 @@
             heading: "Browse biologicals.",
             description: "Explore biological product records, including biopesticides, inoculants, and semiochemical products.",
             placeholder: "Search biological products by name, category, crop, or use...",
-            filters: ["All categories", "All crops", "All visibility levels"],
+            filters: ["All categories", "All crops", "All use profiles"],
             cards: [
               {
                 icon: "B",
