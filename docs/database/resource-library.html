@@ -478,7 +478,7 @@
       <div class="hero-grid">
         <div>
           <div class="eyebrow">Resource library</div>
-          <h1>Search documents, standards, legislation, research, and guidance.</h1>
+          <h1>Search guidance, legislation, standards, research, and HHP transition references.</h1>
         </div>
       </div>
 
@@ -492,15 +492,15 @@
         </div>
       </div>
 
-      <div class=”response-card”>
-        <div class=”eyebrow”>Search result</div>
-        <h3 style=”margin-top: 8px;”>Matched resources appear here</h3>
-        <p style=”margin-top: 8px;”>
-          Resources are matched across standards, legislation, field evidence, guidance notes, and technical references — surfacing the most relevant materials for your search.
+      <div class="response-card">
+        <div class="eyebrow">Search result</div>
+        <h3 style="margin-top: 8px;">Matched resources appear here</h3>
+        <p style="margin-top: 8px;">
+          Resources are matched across guidance, standards, legislation, HHP transition notes, and technical references — surfacing the most relevant interpretation material for your search.
         </p>
-        <div class=”summary-strip”>
+        <div class="summary-strip">
           <span>Example:</span>
-          “South African biological registration requirements for citrus pest-control products, related MRL guidance, and field evidence records.”
+          “South African biological registration requirements for citrus pest-control products, related HHP transition guidance, MRL notes, and field evidence records.”
         </div>
 
         <button type="button" class="source-toggle" @click="sourcesOpen = !sourcesOpen" :aria-expanded="sourcesOpen.toString()">
@@ -596,12 +596,12 @@
     function resourceLibraryPage() {
       return {
         sourcesOpen: true,
-        activeCategory: "biologicals",
-        activePrompt: "Ask about legislation, standards, trial evidence, or practical guidance for a biological product or crop context...",
+        activeCategory: "hhps",
+        activePrompt: "Ask about HHP transition, legislation, standards, trial evidence, or practical guidance for a biological product or crop context...",
         categories: [
           { id: "hhps", icon: "H", label: "HHP transition", summary: "Reference material that helps explain where biologicals sit within wider transition work." },
           { id: "biologicals", icon: "B", label: "Biologicals", summary: "Guides, category notes, and product interpretation records for the biologicals landscape itself." },
-          { id: "pests", icon: "P", label: "Pests & crops", summary: "Crop-pressure documents, linked pest guidance, and practical context records." },
+          { id: "pests", icon: "P", label: "Pests & crops", summary: "Problem-led crop documents, linked pest guidance, and practical context records." },
           { id: "regulations", icon: "R", label: "Regulations & MRLs", summary: "Jurisdiction notes, MRL references, and public-facing interpretation guidance." },
           { id: "standards", icon: "S", label: "Standards", summary: "Certification, export, and compliance material that affects real product use and trade." },
           { id: "research", icon: "T", label: "Research", summary: "Trials, reviews, and contributed references that strengthen sector credibility." }
@@ -620,7 +620,12 @@
           {
             type: "Research",
             title: "Citrus pest-control biological evidence bundle",
-            summary: "Groups trial summaries, crop context, and linked pressure notes in one place."
+            summary: "Groups trial summaries, crop context, and linked problem notes in one place."
+          },
+          {
+            type: "Transition",
+            title: "HHP-to-biological substitution map — priority crops",
+            summary: "Shows where crop-level replacement pathways are already visible in the current ABA story."
           }
         ],
         resources: [
@@ -647,7 +652,7 @@
             badgeTone: "amber",
             type: "Regulatory note",
             title: "Reading MRL requirements for export-sensitive crops",
-            summary: "Connects crop-specific compliance pressure to the biological options and standards material visitors need to review next.",
+            summary: "Connects crop-specific compliance demands to the biological options and standards material visitors need to review next.",
             linked: "Citrus, table grapes, export crops, standards layer",
             meta: [
               { label: "Jurisdictions", value: "South Africa, EU, selected export destinations" },
@@ -662,8 +667,8 @@
             badge: "Evidence",
             badgeTone: "green",
             type: "Trial bundle",
-            title: "Field-evidence starter pack for maize foliar pressure",
-            summary: "Bundles linked field trials, technical notes, and expert interpretation around a practical maize pressure question.",
+            title: "Field-evidence starter pack for maize foliar problems",
+            summary: "Bundles linked field trials, technical notes, and expert interpretation around a practical maize problem question.",
             linked: "Maize, foliar pests, product comparison, evidence layer",
             meta: [
               { label: "Crop context", value: "Field crops" },
@@ -693,7 +698,7 @@
             icon: "P",
             badge: "Context",
             badgeTone: "amber",
-            type: "Crop-pressure guide",
+            type: "Crop-problem guide",
             title: "Starting from a pest or crop question",
             summary: "A guidance layer that helps people move from a practical production question into products, evidence, and sector signals without losing context.",
             linked: "Pests & diseases, crops, explorer entry modes",
@@ -805,7 +810,7 @@
             icon: "P",
             badge: "Context",
             badgeTone: "amber",
-            type: "Crop-pressure guide",
+            type: "Crop-problem guide",
             title: "Starting from a pest or crop question",
             summary: "Guides visitors from a practical production question into products, evidence, and sector signals without losing context.",
             linked: "Pests & diseases, crops, explorer entry modes",
@@ -823,7 +828,7 @@
             badgeTone: "green",
             type: "Trial bundle",
             title: "Bollworm management: biological options across vegetable crops",
-            summary: "Bundles field trial references, registered product options, and pressure context for African bollworm and diamond back moth across brassicas, tomatoes, and peppers.",
+            summary: "Bundles field trial references, registered product options, and problem context for African bollworm and diamond back moth across brassicas, tomatoes, and peppers.",
             linked: "Thuricide WP, Florbac WG, DiPel DF, bollworm, DBM",
             meta: [
               { label: "Crop context", value: "Vegetables (brassicas, tomatoes, peppers)" },
@@ -838,8 +843,8 @@
             badge: "Context",
             badgeTone: "amber",
             type: "Crop context",
-            title: "Citrus pest pressure: biological options and evidence",
-            summary: "Covers false codling moth, mealybug, and aphid pressure on citrus — linking registered semiochemicals, biopesticides, and available field evidence.",
+            title: "Citrus pest problems: biological options and evidence",
+            summary: "Covers false codling moth, mealybug, and aphid problems on citrus — linking registered semiochemicals, biopesticides, and available field evidence.",
             linked: "Citrus, FCM, Isomate C Plus, Beauveria bassiana",
             meta: [
               { label: "Crop context", value: "Citrus (export and local market)" },
@@ -855,7 +860,7 @@
             badgeTone: "amber",
             type: "Regulatory note",
             title: "Reading MRL requirements for export-sensitive crops",
-            summary: "Connects crop-specific compliance pressure to biological options and standards material for export producers.",
+            summary: "Connects crop-specific compliance demands to biological options and standards material for export producers.",
             linked: "Citrus, table grapes, export crops, standards layer",
             meta: [
               { label: "Jurisdictions", value: "South Africa, EU, selected export destinations" },
@@ -950,7 +955,7 @@
             badge: "Evidence",
             badgeTone: "green",
             type: "Trial bundle",
-            title: "Field-evidence starter pack: maize foliar pressure",
+            title: "Field-evidence starter pack: maize foliar problems",
             summary: "Bundles linked field trials, technical notes, and expert interpretation around practical maize bollworm and armyworm questions.",
             linked: "Maize, foliar pests, DiPel DF, TrichoShield, evidence layer",
             meta: [
@@ -995,18 +1000,18 @@
         ],
         recentResources: [
           {
+            type: "Policy brief",
+            title: "Highly hazardous pesticides: Africa landscape overview",
+            summary: "Sector-facing context on phase-out commitments and where biological alternatives are already visible."
+          },
+          {
             type: "Regulatory note",
             title: "South Africa biological registration pathway overview",
             summary: "A plain-language view of public steps, known bottlenecks, and required supporting material."
           },
           {
-            type: "Standards summary",
-            title: "Export standards that intersect with citrus biological use",
-            summary: "A quick-reference sheet for certification and buyer requirement overlap."
-          },
-          {
             type: "Trial bundle",
-            title: "Tomato pest-pressure evidence bundle",
+            title: "Tomato pest-problem evidence bundle",
             summary: "Linked trials, case notes, and expert context for protected-crop biological use."
           }
         ],

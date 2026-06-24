@@ -411,57 +411,6 @@
       height: 28px;
     }
 
-    .tooltip-anchor {
-      position: relative;
-    }
-
-    .tooltip-anchor::before,
-    .tooltip-anchor::after {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 140ms ease, transform 140ms ease;
-      z-index: 12;
-    }
-
-    .tooltip-anchor::before {
-      content: "";
-      left: 18px;
-      bottom: calc(100% + 2px);
-      transform: translate(0, 4px);
-      border: 6px solid transparent;
-      border-top-color: rgba(23, 48, 57, 0.92);
-    }
-
-    .tooltip-anchor::after {
-      content: attr(data-tooltip);
-      left: 0;
-      bottom: calc(100% + 12px);
-      transform: translate(0, 4px);
-      min-width: 180px;
-      max-width: 240px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(23, 48, 57, 0.94);
-      color: #f7f4ee;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      text-transform: none;
-      text-align: left;
-      box-shadow: 0 14px 30px -20px rgba(0,0,0,0.45);
-      white-space: normal;
-    }
-
-    .tooltip-anchor:hover::before,
-    .tooltip-anchor:hover::after,
-    .tooltip-anchor:focus-visible::before,
-    .tooltip-anchor:focus-visible::after {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-
     .path-number {
       font-size: 11px;
       font-weight: 800;
@@ -753,14 +702,6 @@
       background: currentColor;
     }
 
-    .pressure-card {
-      padding: 16px;
-    }
-
-    .pressure-card .card-top {
-      align-items: center;
-    }
-
     /* ── hero path entry cards ── */
     .hero-section {
       margin-top: 12px;
@@ -1036,7 +977,6 @@
         <template x-for="card in active.cards" :key="card.title">
           <article
             class="card"
-            :class="{ 'pressure-card': activeId === 'problems' }"
             :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)"
             role="link"
             tabindex="0"
@@ -1341,7 +1281,7 @@
               "African bollworm": "Strong substitution pathway where Bt-led options can displace higher-risk insecticide programmes.",
               Thrips: "Partial replacement story where biological options exist but coverage is uneven.",
               Aphids: "Transition need is clear, but visible biological options remain thin.",
-              "Diamond back moth": "Priority HHP transition context in high-pressure vegetable programmes."
+              "Diamond back moth": "Priority HHP transition context in high-intensity vegetable programmes."
             },
             products: {
               "Thuricide WP": "Useful in HHP transition programmes where Bt replaces higher-risk caterpillar chemistry.",
