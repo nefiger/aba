@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Membership Types</title>
+  <title>ABA Membership Routes | Detailed Comparison</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --surface: rgba(255, 252, 246, 0.88);
-      --line: rgba(23, 48, 57, 0.1);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --sand: #f1eadb;
-      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
+      --ink: oklch(0.26 0.04 204);
+      --muted: oklch(0.5 0.025 198);
+      --surface: oklch(0.988 0.004 95 / 0.9);
+      --line: oklch(0.87 0.018 165);
+      --green-deep: oklch(0.36 0.074 158);
+      --green-soft: oklch(0.93 0.028 150);
+      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
     }
     * { box-sizing: border-box; }
     body {
@@ -25,11 +23,10 @@
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.15), transparent 24%),
         linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
     .shell {
       width: min(1120px, calc(100vw - 28px));
       margin: 0 auto;
@@ -37,144 +34,88 @@
     }
     .surface {
       background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
-    .topbar {
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .topbar, .section { padding: 18px; margin-top: 12px; }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 12px; }
     .mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       background: var(--green-soft);
-      color: var(--green);
+      color: var(--green-deep);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
-    .mini,
-    .eyebrow {
+    .mini, .eyebrow {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--green-deep);
     }
-    .mini { color: var(--muted); }
-    .eyebrow { color: var(--green); }
-    .nav {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .nav a.active { color: var(--green); }
-    .hero,
-    .section {
+    .nav { display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav a { font-size: 14px; font-weight: 700; }
+    .nav a.active { color: var(--green-deep); }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
       margin-top: 12px;
-      padding: 20px;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
     }
-    .hero-grid,
-    .card-grid {
+    h2 {
+      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    h3 {
+      font-size: 1.25rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    p, li { color: var(--muted); font-size: 15px; line-height: 1.66; }
+    .hero-grid, .compare-grid { display: grid; gap: 16px; }
+    .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr); align-items: start; }
+    .compare-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 18px;
       display: grid;
       gap: 12px;
     }
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      align-items: start;
-    }
-    .card-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    h1, h2, h3, p, summary, ul { margin: 0; }
-    h1 {
-      margin-top: 8px;
-      font-size: clamp(1.95rem, 3vw, 2.8rem);
-      line-height: 1.06;
-      letter-spacing: -0.035em;
-    }
-    h2 {
-      font-size: clamp(1.4rem, 2vw, 1.9rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-    h3 {
-      font-size: 1rem;
-      line-height: 1.35;
-    }
-    p, li {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.62;
-    }
-    ul {
-      padding-left: 18px;
-      margin-top: 10px;
-    }
-    .panel,
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.66);
-      padding: 16px;
-    }
-    .tone { background: var(--sand); }
-    details.card summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: baseline;
-    }
-    details.card summary::-webkit-details-marker { display: none; }
-    .plus {
-      color: var(--green);
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    .button-row {
-      margin-top: 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 10px 14px;
+      min-height: 42px;
+      padding: 0 16px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      border: 1px solid var(--line);
-      background: white;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(73, 95, 82, 0.12);
     }
-    @media (max-width: 900px) {
-      .hero-grid,
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
+    .button.primary { background: var(--green-deep); color: #f7f7f2; }
+    @media (max-width: 960px) {
+      .hero-grid, .compare-grid { grid-template-columns: 1fr; }
+      h1 { max-width: none; }
     }
   </style>
 </head>
@@ -185,89 +126,75 @@
         <div class="mark">ABA</div>
         <div>
           <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Membership types</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Detailed route comparison</div>
         </div>
       </div>
       <nav class="nav">
         <a href="../site/index.html">Home</a>
         <a href="../site/about.html">About</a>
-        <a class="active" href="./membership-types.html">Membership</a>
+        <a class="active" href="./index.html">Membership</a>
         <a href="../database/index.html">Biologicals Explorer</a>
-        <a href="../site/workspace.html">Workspace</a>
       </nav>
     </header>
 
-    <section class="surface hero">
+    <section class="surface section">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Membership types</div>
-          <h1 class="display">Choose the membership option that fits your organisation.</h1>
-          <p style="margin-top: 10px; max-width: 60ch;">ABA offers different membership routes for commercial participants, technical contributors, and institutional stakeholders.</p>
+          <div class="eyebrow">Membership routes</div>
+          <h1>See the three membership routes side by side.</h1>
+          <p style="margin-top: 12px; max-width: 60ch;">Use this page if you want the clearest route comparison before moving into an application form.</p>
+          <div class="actions">
+            <a class="button" href="./index.html">Back to membership</a>
+          </div>
         </div>
-        <aside class="panel tone">
-          <div class="mini">At a glance</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Full for commercial participants, Associate for technical contributors, Observer for institutional stakeholders.</p>
-        </aside>
+        <div class="card">
+          <div class="mini">Quick rule</div>
+          <p>If you are commercially active in biologicals, start with Full. If you strengthen the sector through expertise or enabling work, start with Associate. If you are an institutional stakeholder, start with Observer.</p>
+        </div>
       </div>
     </section>
 
     <section class="surface section">
-      <div>
-        <div class="eyebrow">Membership detail</div>
-        <h2 class="display" style="margin-top: 6px;">Compare the available membership routes.</h2>
-      </div>
-      <div class="card-grid" style="margin-top: 12px;">
-        <details class="card" open>
-          <summary>
-            <div>
-              <div class="mini">Full membership</div>
-              <h3 style="margin-top: 6px; color: var(--ink); font-size: 18px;">For commercial biologicals participants</h3>
-            </div>
-            <span class="plus">+</span>
-          </summary>
-          <p style="margin-top: 12px;">This route is intended for manufacturers, importers, distributors, and product owners who are directly active in the biologicals market.</p>
+      <div class="compare-grid">
+        <article class="card">
+          <div class="mini">Full</div>
+          <h2>Commercial route</h2>
+          <p>For product owners, manufacturers, distributors, importers, and smaller local producers active in biologicals.</p>
           <ul>
-            <li>Best for organisations with direct commercial activity in biologicals.</li>
-            <li>Suitable for businesses with products, market presence, or commercial operations.</li>
-            <li>Includes a pathway to registration support for commercial product owners.</li>
-            <li>Designed for organisations playing a central role in the market.</li>
+            <li>Voting membership route</li>
+            <li>Strongest connection to registration and market-access support</li>
+            <li>Requires eligibility and independence review</li>
           </ul>
-        </details>
-
-        <details class="card">
-          <summary>
-            <div>
-              <div class="mini">Associate membership</div>
-              <h3 style="margin-top: 6px; color: var(--ink); font-size: 18px;">For technical and ecosystem contributors</h3>
-            </div>
-            <span class="plus">+</span>
-          </summary>
-          <p style="margin-top: 12px;">This route is intended for organisations that strengthen the sector through research, field implementation, specialist services, technical support, or adjacent ecosystem work.</p>
+          <div class="actions">
+            <a class="button primary" href="./apply-full.html">Apply</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="mini">Associate</div>
+          <h2>Technical route</h2>
+          <p>For researchers, consultants, specialists, service providers, implementers, and allied ecosystem contributors.</p>
           <ul>
-            <li>Suitable for contributors whose role is technical, specialist, or supportive.</li>
-            <li>Creates space for expertise, services, and implementation support.</li>
-            <li>Helps keep technical capacity visible within the alliance.</li>
+            <li>Non-voting route</li>
+            <li>Captures expertise, biologicals focus, and contribution model</li>
+            <li>Designed for people and organisations strengthening sector capability</li>
           </ul>
-        </details>
-
-        <details class="card">
-          <summary>
-            <div>
-              <div class="mini">Observer status</div>
-              <h3 style="margin-top: 6px; color: var(--ink); font-size: 18px;">For institutional and public-interest stakeholders</h3>
-            </div>
-            <span class="plus">+</span>
-          </summary>
-          <p style="margin-top: 12px;">This route is intended for funders, development partners, public institutions, and similar stakeholders who want to engage the sector without being framed as core commercial members.</p>
+          <div class="actions">
+            <a class="button primary" href="./apply-associate.html">Apply</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="mini">Observer</div>
+          <h2>Institutional route</h2>
+          <p>For funders, development partners, public institutions, and other sector stakeholders engaging from an institutional position.</p>
           <ul>
-            <li>Suitable for organisations that want to stay connected to the sector.</li>
-            <li>Supports engagement without treating every participant as a commercial member.</li>
-            <li>Creates room for wider institutional participation.</li>
+            <li>Non-voting route</li>
+            <li>Captures engagement intent and sector-interest areas</li>
+            <li>Creates a cleaner place for institutional participation</li>
           </ul>
-        </details>
-      </div>
-      <div class="button-row">
-        <a class="button" href="./index.html">Start application</a>
+          <div class="actions">
+            <a class="button primary" href="./apply-observer.html">Apply</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>

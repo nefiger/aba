@@ -131,6 +131,7 @@ It should feel useful to both members and non-members by making products, eviden
 - Preserve `Public Sans`
 - Preserve the restrained public visual language already used across the ABA public pages
 - Keep Africa-wide participation and South Africa-active positioning explicit
+- Do not set `max-width` constraints on headings across ABA public pages; if a heading wraps badly, fix the copy, type size, or layout instead of narrowing the heading measure
 
 ## Practical editing reminder
 

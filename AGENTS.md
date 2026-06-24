@@ -73,6 +73,10 @@ Read these when working on related surfaces:
 - Preserve the core ABA framing:
   Africa-wide participation, South Africa currently active, registration tracker as a member-value and advocacy engine.
 - If you add new pages for a workspace, keep relative links stable from that folder back to the hub.
+- Typography rule across the entire site:
+  do not set `max-width` constraints on headings.
+  If a heading wraps awkwardly, fix the copy length, type size, or layout width instead of forcing a narrow heading measure.
+  As pages are touched, remove heading-width constraints that violate this rule.
 
 ## Workspace Notes
 
