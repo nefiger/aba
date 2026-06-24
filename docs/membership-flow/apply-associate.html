@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apply for ABA Associate Membership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+    :root {
+      --ink: #173039;
+      --muted: #5c6f73;
+      --surface: rgba(255, 252, 246, 0.9);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-soft: #e7f0e8;
+      --sand: #eef6ef;
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .shell { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 28px; }
+    .surface { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+    .topbar, .hero, .section { margin-top: 12px; padding: 20px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .mark {
+      width: 38px; height: 38px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;
+      background: var(--green-soft); color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .mini, .eyebrow, .section-label { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+    .nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; font-weight: 700; }
+    .nav a.active { color: var(--green); }
+    .hero-grid, .field-grid, .choice-grid { display: grid; gap: 14px; }
+    .hero-grid { grid-template-columns: 1fr; align-items: start; }
+    .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .choice-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+    h1, h2, h3, p, label { margin: 0; }
+    h1 { margin-top: 10px; font-size: clamp(1.7rem, 2.35vw, 2.4rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 800; white-space: nowrap; }
+    h2 { font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1.05; letter-spacing: -0.04em; }
+    h3 { font-size: 1rem; line-height: 1.3; color: var(--ink); }
+    p, label { color: var(--muted); font-size: 15px; line-height: 1.62; }
+    .card, .panel, .form-section, .field, .summary { border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.7); }
+    .card, .panel, .summary { padding: 16px; }
+    .form-section { display: grid; gap: 14px; padding: 18px; }
+    .field { display: grid; gap: 6px; padding: 12px; }
+    .field.full { grid-column: 1 / -1; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 11px; background: white; color: var(--ink); }
+    textarea { min-height: 100px; resize: vertical; }
+    .choice {
+      display: flex; align-items: flex-start; gap: 8px; min-height: 48px; padding: 10px; border: 1px solid var(--line);
+      border-radius: 12px; background: white; color: var(--ink); cursor: pointer; font-size: 14px; line-height: 1.4;
+    }
+    .choice input { width: auto; margin-top: 2px; }
+    .button-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; border-radius: 999px;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 0; cursor: pointer;
+    }
+    .button.primary { background: var(--green); color: white; }
+    .button.secondary { background: white; border: 1px solid var(--line); color: var(--ink); }
+    .stack { display: grid; gap: 14px; }
+    .section-head { display: grid; gap: 6px; }
+    .section-head p { max-width: 64ch; }
+    details.form-section > summary { list-style: none; cursor: pointer; }
+    details.form-section > summary::-webkit-details-marker { display: none; }
+    .summary-row { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+    .summary-toggle {
+      flex: none; min-width: 28px; min-height: 28px; border-radius: 999px; border: 1px solid var(--line);
+      display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: var(--green); background: white;
+    }
+    details.form-section[open] .summary-toggle::before { content: "-"; }
+    details.form-section:not([open]) .summary-toggle::before { content: "+"; }
+    .form-body { display: grid; gap: 14px; margin-top: 14px; }
+    .success { padding: 14px; border-radius: 14px; background: var(--green-soft); border: 1px solid rgba(43, 107, 79, 0.18); color: var(--ink); }
+    @media (max-width: 960px) {
+      .hero-grid, .field-grid, .choice-grid { grid-template-columns: 1fr; }
+      h1 { white-space: nowrap; }
+    }
+  </style>
+</head>
+<body x-data="associateMembershipApp()">
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Associate membership application</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="../site/index.html">Home</a>
+        <a class="active" href="./index.html">Membership</a>
+        <a href="./membership-types.html">Routes</a>
+      </nav>
+    </header>
+
+    <section class="surface hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Associate membership</div>
+          <h1>Apply for Associate membership.</h1>
+          <p style="margin-top: 12px; max-width: 62ch;">For researchers, service providers, consultants, and other ecosystem contributors.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <form class="stack" @submit.prevent="submitted = true">
+          <details class="form-section" open>
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Applicant shape</div>
+                <h2>Organisation or individual?</h2>
+                <p>Choose who the membership would represent.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Applying as an organisation</label>
+              <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Applying as an individual</label>
+            </div>
+            </div>
+          </details>
+
+          <details class="form-section" open>
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Applicant basics</div>
+                <h2>Applicant and contact details</h2>
+                <p>Contact details and the main role this applicant plays in the sector.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+            <div class="field-grid">
+              <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
+                <label>Organisation name</label>
+                <input x-model="form.org_name" type="text" placeholder="Organisation name">
+              </div>
+              <div class="field" x-show="form.applicant_shape === 'Individual'" x-cloak>
+                <label>Applicant name</label>
+                <input x-model="form.individual_name" type="text" placeholder="Full name">
+              </div>
+              <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
+                <label>Primary contact</label>
+                <input x-model="form.contact_name" type="text" placeholder="Full name">
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input x-model="form.email" type="email" placeholder="name@example.com">
+              </div>
+              <div class="field">
+                <label>Country</label>
+                <select x-model="form.country">
+                  <option value="">Select country</option>
+                  <option>South Africa</option>
+                  <option>Kenya</option>
+                  <option>Nigeria</option>
+                  <option>Ghana</option>
+                  <option>Uganda</option>
+                  <option>Other African country</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Primary role or title</label>
+                <input x-model="form.role_title" type="text" placeholder="Research lead, consultant, trials specialist...">
+              </div>
+            </div>
+            </div>
+          </details>
+
+          <details class="form-section">
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Expertise and focus</div>
+                <h2>Expertise and biologicals focus</h2>
+                <p>Show the technical or enabling strengths ABA should understand during review.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+            <div class="field full">
+              <label>Expertise areas</label>
+              <div class="choice-grid" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
+                <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
+                <label class="choice"><input type="checkbox" value="Training or extension" x-model="form.associate_expertise"> Training or extension</label>
+                <label class="choice"><input type="checkbox" value="Field implementation" x-model="form.associate_expertise"> Field implementation</label>
+                <label class="choice"><input type="checkbox" value="Testing, data, or evidence" x-model="form.associate_expertise"> Testing, data, or evidence</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label>Biologicals focus areas</label>
+              <div class="choice-grid" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
+                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
+                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
+                <label class="choice"><input type="checkbox" value="Cross-category or enabling support" x-model="form.activity_areas"> Cross-category or enabling support</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label>Countries or regions where your work is active</label>
+              <div class="choice-grid" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
+                <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
+                <label class="choice"><input type="checkbox" value="Nigeria" x-model="form.market_countries"> Nigeria</label>
+                <label class="choice"><input type="checkbox" value="Ghana" x-model="form.market_countries"> Ghana</label>
+                <label class="choice"><input type="checkbox" value="Uganda" x-model="form.market_countries"> Uganda</label>
+                <label class="choice"><input type="checkbox" value="Other African countries" x-model="form.market_countries"> Other African countries</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label>How do you want to contribute to ABA?</label>
+              <textarea x-model="form.contribution_notes" placeholder="Describe the technical, advisory, or enabling role you want to play."></textarea>
+            </div>
+            </div>
+          </details>
+
+          <details class="form-section">
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Consent and follow-up</div>
+                <h2>Consent and follow-up</h2>
+                <p>Choose what ABA may use for review, reporting, and future contact.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" checked disabled> ABA may use this application for internal membership review.</label>
+              <label class="choice"><input type="checkbox" x-model="form.aggregate_consent"> ABA may use anonymised aggregate signals for sector advocacy and reporting.</label>
+              <label class="choice"><input type="checkbox" x-model="form.followup_consent"> ABA may follow up about membership or related collaboration.</label>
+              <label class="choice"><input type="checkbox" x-model="form.newsletter_consent"> I want to receive newsletter or membership updates.</label>
+            </div>
+            <div class="field full">
+              <label>How did you hear about ABA?</label>
+              <input x-model="form.source_notes" type="text" placeholder="Referral, event, website, partner organisation...">
+            </div>
+            </div>
+          </details>
+
+          <div class="button-row">
+            <button class="button primary" type="submit">Preview application</button>
+            <a class="button secondary" href="./index.html">Back to membership</a>
+          </div>
+          <div class="summary" x-show="submitted" x-cloak>
+            <div class="mini">Application preview</div>
+            <div class="stack" style="margin-top: 10px;">
+              <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
+              <p><strong style="color: var(--ink);">Expertise:</strong> <span x-text="form.associate_expertise.length ? form.associate_expertise.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Biologicals focus:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
+            </div>
+            <div class="success" style="margin-top: 12px;">Demo preview only. In production, this would create a membership application record for review.</div>
+          </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function associateMembershipApp() {
+      return {
+        submitted: false,
+        form: {
+          applicant_shape: "Organisation",
+          org_name: "",
+          individual_name: "",
+          contact_name: "",
+          email: "",
+          country: "",
+          role_title: "",
+          associate_expertise: [],
+          activity_areas: [],
+          market_countries: [],
+          contribution_notes: "",
+          aggregate_consent: false,
+          followup_consent: false,
+          newsletter_consent: false,
+          source_notes: ""
+        }
+      };
+    }
+  </script>
+</body>
+</html>

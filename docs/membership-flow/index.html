@@ -3,739 +3,703 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Membership</title>
+  <title>ABA Membership | Find the Right Membership Route</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
-    [x-cloak] { display: none !important; }
     :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --surface: rgba(255, 252, 246, 0.88);
-      --line: rgba(23, 48, 57, 0.1);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --sand: #f1eadb;
-      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
-      --paper: #f7f4ed;
+      --ink: oklch(0.26 0.04 204);
+      --muted: oklch(0.5 0.025 198);
+      --surface: oklch(0.988 0.004 95 / 0.9);
+      --line: oklch(0.87 0.018 165);
+      --green: oklch(0.48 0.09 156);
+      --green-deep: oklch(0.36 0.074 158);
+      --green-soft: oklch(0.93 0.028 150);
+      --sand-soft: oklch(0.95 0.024 82);
+      --teal-soft: oklch(0.935 0.022 194);
+      --gold-soft: oklch(0.96 0.028 95);
+      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.15), transparent 24%),
+        radial-gradient(circle at top right, rgba(213, 186, 112, 0.12), transparent 22%),
         linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
     }
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .shell {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1220px, calc(100vw - 32px));
       margin: 0 auto;
       padding: 14px 0 28px;
     }
+
     .surface {
       background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
     }
+
     .topbar {
-      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: var(--space-md);
+      padding: 14px 18px;
+      margin-bottom: var(--space-sm);
       flex-wrap: wrap;
     }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: var(--space-sm);
     }
+
     .mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--green-soft);
-      color: var(--green);
+      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+      color: var(--green-deep);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
-    .mini,
-    .eyebrow {
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong,
+    .eyebrow,
+    .section-label,
+    .mini {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
-    .mini { color: var(--muted); }
-    .eyebrow { color: var(--green); }
+
+    .brand-copy span,
+    p,
+    li {
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 15px;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .nav {
       display: flex;
-      gap: 14px;
+      align-items: center;
+      gap: var(--space-lg);
       flex-wrap: wrap;
-      font-size: 13px;
+    }
+
+    .nav a {
+      font-size: 14px;
       font-weight: 700;
+      color: color-mix(in oklab, var(--ink) 82%, white);
+      white-space: nowrap;
     }
-    .nav a.active { color: var(--green); }
-    .hero,
-    .section {
-      margin-top: 12px;
-      padding: 20px;
+
+    .nav a.active,
+    .nav a:hover {
+      color: var(--green-deep);
     }
-    .hero-grid,
-    .types-grid,
-    .application-grid,
-    .field-grid,
-    .review-grid {
-      display: grid;
-      gap: 12px;
-    }
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
-      align-items: start;
-    }
-    .types-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .support-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .application-grid {
-      grid-template-columns: minmax(0, 1fr) 320px;
-      grid-template-rows: auto auto auto auto auto auto;
-      align-items: stretch;
-    }
-    .field-grid,
-    .review-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .compact-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 8px;
-    }
-    .compact-options.three {
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-    h1, h2, h3, p, label { margin: 0; }
-    h1 {
-      margin-top: 8px;
-      font-size: clamp(1.95rem, 3vw, 2.8rem);
-      line-height: 1.06;
-      letter-spacing: -0.035em;
-    }
-    h2 {
-      font-size: clamp(1.4rem, 2vw, 1.9rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-    h3 {
-      font-size: 1rem;
-      line-height: 1.35;
-    }
-    p, label {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.62;
-    }
-    .panel,
-    .card,
-    .form-shell,
-    .field,
-    .summary {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.66);
-    }
-    .panel,
-    .card,
-    .summary {
-      padding: 16px;
-    }
-    .tone {
-      background: var(--sand);
-    }
-    .button-row {
-      margin-top: 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+
+    .nav-cta,
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 10px 14px;
-      border-radius: 999px;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: var(--radius-pill);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      border: 0;
-      cursor: pointer;
+      white-space: nowrap;
     }
+
+    .nav-cta,
     .button.primary {
-      background: var(--green);
-      color: white;
+      background: var(--green-deep);
+      color: #f7f7f2;
     }
+
     .button.secondary {
-      background: white;
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(73, 95, 82, 0.14);
       color: var(--ink);
     }
-    .form-shell {
-      display: contents;
+
+    .hero,
+    .section {
+      margin-top: var(--space-sm);
+      padding: clamp(24px, 4vw, 40px);
     }
-    .form-section {
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+    }
+
+    .hero-grid,
+    .compare-grid,
+    .value-grid,
+    .criteria-grid,
+    .path-grid,
+    .process-grid,
+    .fee-grid {
       display: grid;
-      gap: 12px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.66);
+      gap: 16px;
     }
-    .form-section + .form-section {
-      margin-top: 0;
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 18px;
     }
-    .form-section,
-    .actions-end {
-      grid-column: 1;
+
+    .compare-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    .organisation-section { grid-row: 1; }
-    .membership-section { grid-row: 2; }
-    .type-detail-section { grid-row: 3; }
-    .activity-section { grid-row: 4; }
-    .consent-section { grid-row: 5; }
-    .actions-end { grid-row: 6; }
+
+    .value-grid,
+    .criteria-grid,
+    .process-grid,
+    .fee-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      max-width: none;
+    }
+
+    .eyebrow,
     .section-label {
-      color: var(--green);
-      font-size: 11px;
+      color: var(--green-deep);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
       font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .field {
-      padding: 12px;
-      display: grid;
-      gap: 6px;
-    }
-    .field.full {
-      grid-column: 1 / -1;
-    }
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 10px 11px;
-      background: white;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
       color: var(--ink);
+      text-wrap: balance;
     }
-    textarea {
-      min-height: 96px;
-      resize: vertical;
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      white-space: nowrap;
     }
-    .choice {
+
+    h2 {
+      margin-top: 10px;
+      font-size: clamp(1.8rem, 2.5vw, 2.45rem);
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      line-height: 1.12;
+    }
+
+    .lede {
+      margin-top: 18px;
+      max-width: none;
+      font-size: 17px;
+      line-height: 1.74;
+    }
+
+    .hero-actions,
+    .actions {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      min-height: 44px;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: white;
-      cursor: pointer;
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.35;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
     }
-    .choice input {
-      width: auto;
-      margin: 2px 0 0;
-      flex: 0 0 auto;
+
+    .panel,
+    .card,
+    .route-card {
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
-    .checkbox-list {
+
+    .panel,
+    .card {
+      padding: 18px;
+    }
+
+    .route-card {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      min-height: 100%;
+    }
+
+    .route-card.full { background: linear-gradient(180deg, rgba(244, 235, 219, 0.98), rgba(255, 249, 240, 0.84)); }
+    .route-card.associate { background: linear-gradient(180deg, rgba(227, 240, 236, 0.98), rgba(247, 251, 250, 0.84)); }
+    .route-card.observer { background: linear-gradient(180deg, rgba(247, 240, 216, 0.98), rgba(255, 251, 241, 0.84)); }
+
+    .route-card .mini {
+      color: color-mix(in oklab, var(--green-deep) 84%, white);
+    }
+
+    .route-card p,
+    .card p,
+    .panel p {
+      margin: 0;
+    }
+
+    .route-meta {
+      display: grid;
+      gap: 10px;
+    }
+
+    .route-meta strong,
+    .callout strong {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: color-mix(in oklab, var(--muted) 72%, white);
+      margin-bottom: 4px;
+    }
+
+    .route-card ul,
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
       display: grid;
       gap: 8px;
     }
+
     .stack {
       display: grid;
       gap: 10px;
     }
-    .application-sidebar {
-      display: contents;
-    }
-    .actions-end {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 0;
-      justify-self: end;
-      align-self: start;
-    }
-    .actions-end .button {
-      flex: 0 0 auto;
-    }
-    .hint {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .recommendation {
-      border: 1px solid rgba(43, 107, 79, 0.22);
-      border-radius: 12px;
-      background: var(--green-soft);
-      padding: 12px;
+
+    .comparison-row {
       display: grid;
       gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(73, 95, 82, 0.12);
     }
-    .recommendation p {
+
+    .comparison-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .comparison-row span {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--muted) 78%, white);
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .process-step b {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .callout {
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(238, 232, 217, 0.86), rgba(247, 244, 235, 0.74));
+      border: 1px solid rgba(73, 95, 82, 0.1);
+    }
+
+    .compact-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compact-list li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      background: rgba(255, 255, 255, 0.76);
       color: var(--ink);
-      font-size: 14px;
-      line-height: 1.45;
+      font-weight: 600;
     }
-    .select-all-choice {
-      background: rgba(23, 48, 57, 0.04);
-      border-color: rgba(23, 48, 57, 0.12);
-      font-weight: 700;
+
+    footer.section {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    .sidebar-membership-help {
-      grid-column: 2;
-      grid-row: 2;
-      margin-top: 0;
-    }
-    .sidebar-product-intake {
-      grid-column: 2;
-      grid-row: 1;
-    }
-    .sidebar-preview {
-      grid-column: 2;
-      grid-row: 1 / 7;
-      align-self: end;
-      z-index: 1;
-    }
-    @media (max-width: 900px) {
+
+    @media (max-width: 1040px) {
       .hero-grid,
-      .types-grid,
-      .support-grid,
-      .application-grid,
-      .field-grid,
-      .review-grid {
+      .compare-grid,
+      .value-grid,
+      .criteria-grid,
+      .path-grid,
+      .process-grid,
+      .fee-grid {
         grid-template-columns: 1fr;
       }
-      .application-grid {
-        grid-template-rows: none;
+
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(100vw - 20px, 1220px);
       }
-      .form-section,
-      .actions-end,
-      .sidebar-product-intake,
-      .sidebar-membership-help,
-      .sidebar-preview {
-        grid-column: 1;
-        grid-row: auto;
-        align-self: stretch;
+
+      h1 {
+        white-space: normal;
       }
-      .sidebar-membership-help {
-        margin-top: 0;
+
+      .topbar,
+      .hero,
+      .section {
+        border-radius: 22px;
+      }
+
+      .process-step {
+        grid-template-columns: 1fr;
+      }
+
+      .process-step b {
+        width: 40px;
+        height: 40px;
       }
     }
   </style>
 </head>
-<body x-data="membershipApp()">
+<body>
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
-        <div>
-          <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Membership</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Membership</span>
         </div>
       </div>
-      <nav class="nav">
-        <a href="../site/index.html">Home</a>
-        <a href="../site/about.html">About</a>
-        <a class="active" href="./index.html">Membership</a>
-        <a href="../database/index.html">Biologicals Explorer</a>
-        <a href="../site/workspace.html">Workspace</a>
-      </nav>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a class="active" href="./index.html">Membership</a>
+          <a href="../database/index.html">Biologicals Explorer</a>
+        </nav>
+        <a class="nav-cta" href="#routes">Choose a route</a>
+      </div>
     </header>
 
     <section class="surface hero">
       <div class="hero-grid">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow">Membership</div>
-          <h1 class="display">Be part of building something that doesn't exist yet.</h1>
-          <p style="margin-top: 10px; max-width: 62ch;">ABA is at its founding stage. The organisations joining now are not joining an established body — they are shaping one. That means your priorities, your sector experience, and your registration challenges directly inform what ABA becomes.</p>
-          <div class="button-row">
-            <a class="button secondary" href="./membership-types.html">View membership options</a>
+          <h1>Join ABA for a stronger biologicals sector in Africa.</h1>
+          <p class="lede">ABA membership gives people and organisations across Africa stronger representation, better regulatory visibility, and a more credible operating environment for local biologicals.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#routes">Find your membership route</a>
+            <a class="button secondary" href="#process">See how application works</a>
           </div>
         </div>
-        <aside class="panel tone">
-          <div class="mini">Founding membership</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Founding members help define ABA's governance, priorities, and direction before the structure is set.</p>
-          <p style="margin-top: 8px;">That is a meaningful distinction — and one that will not be available to organisations that join later.</p>
-        </aside>
       </div>
     </section>
 
     <section class="surface section">
-      <div>
-        <div class="eyebrow">Membership options</div>
-        <h2 class="display" style="margin-top: 6px;">Choose the option that fits your organisation.</h2>
+      <div class="section-label">Member value</div>
+      <h2>Why join ABA.</h2>
+      <div class="value-grid" style="margin-top: 18px;">
+        <article class="card">
+          <h3>Representation and policy voice</h3>
+          <p style="margin-top: 10px;">ABA gives independent African biologicals participants a stronger shared presence in regulatory and policy spaces than any one organisation can carry alone.</p>
+        </article>
+        <article class="card">
+          <h3>Compliance and registration support</h3>
+          <p style="margin-top: 10px;">Members gain access to registration guidance, visibility into product pathways, and a more structured basis for support and advocacy.</p>
+        </article>
+        <article class="card">
+          <h3>Knowledge and capability</h3>
+          <p style="margin-top: 10px;">Training, briefings, templates, and biologicals intelligence help members make stronger decisions and strengthen their teams.</p>
+        </article>
+        <article class="card">
+          <h3>Credibility and collaboration</h3>
+          <p style="margin-top: 10px;">Membership helps create a more visible, better organised, and more credible sector with room for local producers, researchers, service providers, and aligned institutions.</p>
+        </article>
       </div>
-      <div class="types-grid" style="margin-top: 12px;">
+    </section>
+
+    <section class="surface section" id="routes">
+      <div class="section-label">Three routes</div>
+      <h2>Choose your membership route.</h2>
+      <div class="path-grid" style="margin-top: 18px;">
+        <article class="route-card full">
+          <div class="mini">Full membership</div>
+          <h3>For commercial biologicals participants.</h3>
+          <p>For manufacturers, product owners, importers, distributors, and smaller local producers directly active in the biologicals market.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Organisations or individuals with products, commercial biologicals activity, or direct market participation.</p>
+            </div>
+            <div>
+              <strong>What matters in review</strong>
+              <p>Product role, category fit, market footprint, and independence from multinational agrochemical control.</p>
+            </div>
+            <div>
+              <strong>Includes</strong>
+              <p>Voting membership route, stronger policy voice, and the clearest connection to registration enablement.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="./apply-full.html">Apply for Full membership</a>
+          </div>
+        </article>
+
+        <article class="route-card associate">
+          <div class="mini">Associate membership</div>
+          <h3>For technical and ecosystem contributors.</h3>
+          <p>For researchers, consultants, implementers, service providers, and allied specialists who strengthen the biologicals sector through expertise or enabling work.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>People and organisations contributing research, trials, testing, extension, regulatory support, or cross-category technical work.</p>
+            </div>
+            <div>
+              <strong>What matters in review</strong>
+              <p>Expertise area, biologicals focus, country relevance, and how the applicant strengthens the alliance.</p>
+            </div>
+            <div>
+              <strong>Includes</strong>
+              <p>Access to ABA’s knowledge and sector work without framing every applicant as a commercial voting member.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="./apply-associate.html">Apply for Associate membership</a>
+          </div>
+        </article>
+
+        <article class="route-card observer">
+          <div class="mini">Observer membership</div>
+          <h3>For institutional and public-interest stakeholders.</h3>
+          <p>For funders, development partners, public institutions, and related bodies that want to engage the category without being framed as core commercial members.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Institutions following biologicals sector development, programme visibility, policy shifts, or collaboration opportunities.</p>
+            </div>
+            <div>
+              <strong>What matters in review</strong>
+              <p>Institution type, engagement intent, country relevance, and the kind of relationship they want with ABA.</p>
+            </div>
+            <div>
+              <strong>Includes</strong>
+              <p>A cleaner route for observers to stay connected without being pushed into the wrong membership frame.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="./apply-observer.html">Apply for Observer membership</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="section-label">Compare the routes</div>
+      <h2>Compare Full, Associate, and Observer.</h2>
+      <div class="compare-grid" style="margin-top: 18px;">
         <article class="card">
           <div class="mini">Full</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Industry members</h3>
-          <p style="margin-top: 8px;">For manufacturers, importers, distributors, and product owners active in the biologicals market.</p>
+          <div class="comparison-row">
+            <span>Who it is for</span>
+            <p>Commercial biologicals participants, including smaller local producers and product-led businesses.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Key signals captured</span>
+            <p>Product role, product category, registration relevance, market countries, ownership, and independence.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Membership position</span>
+            <p>Voting membership route with the strongest fit to ABA’s commercial and regulatory agenda.</p>
+          </div>
         </article>
+
         <article class="card">
           <div class="mini">Associate</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Technical contributors</h3>
-          <p style="margin-top: 8px;">For researchers, service providers, implementers, and specialist organisations supporting the sector.</p>
+          <div class="comparison-row">
+            <span>Who it is for</span>
+            <p>Technical contributors, researchers, consultants, extension actors, service providers, and other supporting specialists.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Key signals captured</span>
+            <p>Expertise area, biologicals focus, contribution model, and country or region relevance.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Membership position</span>
+            <p>Non-voting route for people and organisations that strengthen the sector without being its commercial core.</p>
+          </div>
         </article>
+
         <article class="card">
           <div class="mini">Observer</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Institutional stakeholders</h3>
-          <p style="margin-top: 8px;">For funders, development partners, public bodies, and related institutions engaging the category.</p>
+          <div class="comparison-row">
+            <span>Who it is for</span>
+            <p>Funders, public bodies, regional institutions, and other stakeholders following the sector from an institutional position.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Key signals captured</span>
+            <p>Institution type, engagement intent, sector-interest areas, and geographic relevance.</p>
+          </div>
+          <div class="comparison-row">
+            <span>Membership position</span>
+            <p>Non-voting route that keeps institutional participation visible without confusing it with commercial membership.</p>
+          </div>
         </article>
       </div>
     </section>
 
     <section class="surface section">
-      <div>
-        <div class="eyebrow">Member value</div>
-        <h2 class="display" style="margin-top: 6px;">Registration support is what makes membership distinctively useful.</h2>
-        <p style="margin-top: 8px; max-width: 72ch;">Most sector bodies offer networking and advocacy. ABA adds something more concrete: a structured route for members to submit registration records, receive member-specific Registrar-office support, and benefit from the sector-wide intelligence that shared data creates.</p>
-      </div>
-      <div class="support-grid" style="display: grid; gap: 12px; margin-top: 12px;">
-        <article class="card">
-          <div class="mini">Workspace</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">A member company dashboard</h3>
-          <p style="margin-top: 8px;">Full members can access a workspace that organises their registration records, evidence, status notes, and support needs.</p>
+      <div class="section-label">Fit and eligibility</div>
+      <h2>Full membership is for independent commercial participation in biologicals.</h2>
+      <div class="criteria-grid" style="margin-top: 18px;">
+        <article class="callout">
+          <strong>Full membership review</strong>
+          <ul class="compact-list" style="margin-top: 12px;">
+            <li>Commercial role in biologicals</li>
+            <li>Product and market relevance</li>
+            <li>African ownership and control</li>
+            <li>Independence from multinational agrochemical control</li>
+          </ul>
         </article>
-        <article class="card">
-          <div class="mini">Data capture</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Intentional member records</h3>
-          <p style="margin-top: 8px;">Membership data can connect organisation type, country presence, product ownership, and support needs.</p>
-        </article>
-        <article class="card">
-          <div class="mini">Advocacy</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Better evidence for ABA</h3>
-          <p style="margin-top: 8px;">Structured member inputs help ABA separate member-specific assistance from sector-wide advocacy signals.</p>
+        <article class="callout">
+          <strong>Smaller producers are welcome</strong>
+          <ul class="compact-list" style="margin-top: 12px;">
+            <li>Early-stage businesses can apply</li>
+            <li>Current production or market stage can be described clearly</li>
+            <li>Large portfolio size is not required</li>
+            <li>Small-producer fee treatment can be handled during review</li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section class="surface section">
-      <div>
-        <div class="eyebrow">Application</div>
-        <h2 class="display" style="margin-top: 6px;">Apply for membership.</h2>
-      </div>
-      <div class="application-grid" style="margin-top: 12px;">
-        <form class="form-shell" @submit.prevent="submitted = true">
-          <div class="form-section organisation-section">
-            <div class="section-label">Organisation</div>
-            <div class="field-grid">
-              <div class="field">
-                <label for="org_name">Organisation name</label>
-                <input id="org_name" x-model="form.org_name" type="text" placeholder="Organisation name">
-              </div>
-              <div class="field">
-                <label for="country">Country of business registration</label>
-                <p class="hint">Where the applicant organisation is legally registered.</p>
-                <select id="country" x-model="form.country">
-                  <option value="">Select country</option>
-                  <option>South Africa</option>
-                  <option>Kenya</option>
-                  <option>Nigeria</option>
-                  <option>Ghana</option>
-                  <option>Uganda</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="registration_number">Business registration number</label>
-                <p class="hint">Optional for this demo; useful for verification later.</p>
-                <input id="registration_number" x-model="form.registration_number" type="text" placeholder="Registration number">
-              </div>
-              <div class="field">
-                <label for="contact_name">Primary contact</label>
-                <input id="contact_name" x-model="form.contact_name" type="text" placeholder="Full name">
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" x-model="form.email" type="email" placeholder="name@organisation.com">
-              </div>
-              <div class="field full">
-                <label>Organisation role(s) in the biologicals sector</label>
-                <p class="hint">Select all roles that describe how your organisation participates.</p>
-                <div class="compact-options" style="margin-top: 8px;">
-                  <label class="choice"><input type="checkbox" value="Manufacturer" x-model="form.org_roles"> Manufacturer</label>
-                  <label class="choice"><input type="checkbox" value="Importer" x-model="form.org_roles"> Importer</label>
-                  <label class="choice"><input type="checkbox" value="Distributor" x-model="form.org_roles"> Distributor</label>
-                  <label class="choice"><input type="checkbox" value="Product owner" x-model="form.org_roles"> Product owner</label>
-                  <label class="choice"><input type="checkbox" value="Technical service provider" x-model="form.org_roles"> Technical service provider</label>
-                  <label class="choice"><input type="checkbox" value="Research or academic organisation" x-model="form.org_roles"> Research or academic organisation</label>
-                  <label class="choice"><input type="checkbox" value="Funder or development partner" x-model="form.org_roles"> Funder or development partner</label>
-                  <label class="choice"><input type="checkbox" value="Public institution" x-model="form.org_roles"> Public institution</label>
-                </div>
-                <div class="recommendation" x-show="membershipRecommendation" x-cloak>
-                  <div class="mini">Suggested membership route</div>
-                  <p x-text="membershipRecommendation"></p>
-                  <div class="button-row" x-show="recommendedType" x-cloak>
-                    <button class="button secondary" type="button" @click="setType(recommendedType)">Use this membership type</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <section class="surface section" id="process">
+      <div class="section-label">Application process</div>
+      <h2>How application works.</h2>
+      <div class="process-grid" style="margin-top: 18px;">
+        <article class="card process-step">
+          <b>01</b>
+          <div>
+            <h3>Choose your route</h3>
+            <p style="margin-top: 8px;">Start with Full, Associate, or Observer based on how you participate in the sector.</p>
           </div>
-
-          <div class="form-section membership-section">
-            <div class="section-label">Membership</div>
-            <div>
-              <label>Membership type</label>
-              <p>Select the route that best matches how your organisation participates in the biologicals sector.</p>
-            </div>
-            <div class="compact-options three">
-              <label class="choice"><input type="radio" value="Full membership" :checked="form.type === 'Full membership'" @change="setType('Full membership')"> Full membership</label>
-              <label class="choice"><input type="radio" value="Associate membership" :checked="form.type === 'Associate membership'" @change="setType('Associate membership')"> Associate membership</label>
-              <label class="choice"><input type="radio" value="Observer status" :checked="form.type === 'Observer status'" @change="setType('Observer status')"> Observer status</label>
-            </div>
+        </article>
+        <article class="card process-step">
+          <b>02</b>
+          <div>
+            <h3>Apply as an individual or organisation</h3>
+            <p style="margin-top: 8px;">Each application route supports both applicant shapes.</p>
           </div>
-
-          <div class="form-section type-detail-section" x-show="form.type" x-cloak>
-            <div class="section-label">Membership detail</div>
-            <div x-show="form.type === 'Full membership'" x-cloak>
-              <label>Full membership details</label>
-              <p class="hint">Commercial members can connect membership to product, registration, and market-access support.</p>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice"><input type="checkbox" value="Owns biological products" x-model="form.full_product_roles"> Owns biological products</label>
-                <label class="choice"><input type="checkbox" value="Manufactures biological products" x-model="form.full_product_roles"> Manufactures biological products</label>
-                <label class="choice"><input type="checkbox" value="Imports biological products" x-model="form.full_product_roles"> Imports biological products</label>
-                <label class="choice"><input type="checkbox" value="Distributes biological products" x-model="form.full_product_roles"> Distributes biological products</label>
-              </div>
-              <div style="margin-top: 12px;">
-                <label>Registration support interest</label>
-                <div class="compact-options three" style="margin-top: 8px;">
-                  <label class="choice"><input type="radio" value="Yes" x-model="form.registration_support"> Yes</label>
-                  <label class="choice"><input type="radio" value="Not yet" x-model="form.registration_support"> Not yet</label>
-                  <label class="choice"><input type="radio" value="Not sure" x-model="form.registration_support"> Not sure</label>
-                </div>
-              </div>
-            </div>
-            <div x-show="form.type === 'Associate membership'" x-cloak>
-              <label>Associate membership details</label>
-              <p class="hint">Associate members strengthen the sector through expertise, services, research, or implementation support.</p>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
-                <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
-                <label class="choice"><input type="checkbox" value="Training or extension" x-model="form.associate_expertise"> Training or extension</label>
-                <label class="choice"><input type="checkbox" value="Field implementation" x-model="form.associate_expertise"> Field implementation</label>
-                <label class="choice"><input type="checkbox" value="Testing, data, or evidence" x-model="form.associate_expertise"> Testing, data, or evidence</label>
-              </div>
-            </div>
-            <div x-show="form.type === 'Observer status'" x-cloak>
-              <label>Observer status details</label>
-              <p class="hint">Observer organisations usually follow, fund, convene, or coordinate sector development.</p>
-              <div class="field" style="margin-top: 8px;">
-                <label for="observer_institution">Institution type</label>
-                <select id="observer_institution" x-model="form.observer_institution">
-                  <option value="">Select institution type</option>
-                  <option>Funder or donor</option>
-                  <option>Development partner</option>
-                  <option>Public-sector institution</option>
-                  <option>Regional or multilateral body</option>
-                  <option>Research or policy institution</option>
-                  <option>Industry association or sector body</option>
-                  <option>Other institutional stakeholder</option>
-                </select>
-              </div>
-              <div style="margin-top: 12px;">
-                <label>How would you like to engage with ABA?</label>
-                <p class="hint">This is not a commitment; it helps ABA understand whether observers mainly want information, convening access, or programme visibility.</p>
-              </div>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Receive sector updates</label>
-                <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Join convenings or briefings</label>
-                <label class="choice"><input type="checkbox" value="Programme or policy visibility" x-model="form.observer_interests"> Follow programme or policy signals</label>
-              </div>
-            </div>
+        </article>
+        <article class="card process-step">
+          <b>03</b>
+          <div>
+            <h3>Complete the relevant form</h3>
+            <p style="margin-top: 8px;">Share the product, market, expertise, geographic, and consent details relevant to your route.</p>
           </div>
-
-          <div class="form-section activity-section" x-show="form.type" x-cloak>
-            <div class="section-label">Activity and markets</div>
-            <div x-show="form.type === 'Full membership'" x-cloak>
-              <label>Biological product categories</label>
-              <p class="hint">Select the product categories that are relevant to your organisation.</p>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice select-all-choice"><input type="checkbox" :checked="allSelected('activity_areas', fullActivityOptions)" @change="toggleAll('activity_areas', fullActivityOptions, $event.target.checked)"> Select all listed options</label>
-                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
-                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
-                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
-                <label class="choice"><input type="checkbox" value="Other biological category" x-model="form.activity_areas"> Other biological category</label>
-              </div>
-            </div>
-            <div x-show="form.type === 'Associate membership'" x-cloak>
-              <label>Biologicals focus areas</label>
-              <p class="hint">Select the biological categories your services, research, or implementation work relates to.</p>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice select-all-choice"><input type="checkbox" :checked="allSelected('activity_areas', associateActivityOptions)" @change="toggleAll('activity_areas', associateActivityOptions, $event.target.checked)"> Select all listed options</label>
-                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
-                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
-                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
-                <label class="choice"><input type="checkbox" value="Cross-category or enabling support" x-model="form.activity_areas"> Cross-category or enabling support</label>
-              </div>
-            </div>
-            <div x-show="form.type === 'Observer status'" x-cloak>
-              <label>Sector interest areas</label>
-              <p class="hint">Select the biologicals categories or sector themes you want to track as an observer.</p>
-              <div class="compact-options" style="margin-top: 8px;">
-                <label class="choice select-all-choice"><input type="checkbox" :checked="allSelected('activity_areas', observerActivityOptions)" @change="toggleAll('activity_areas', observerActivityOptions, $event.target.checked)"> Select all listed options</label>
-                <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
-                <label class="choice"><input type="checkbox" value="Biopesticides" x-model="form.activity_areas"> Biopesticides</label>
-                <label class="choice"><input type="checkbox" value="Biostimulants" x-model="form.activity_areas"> Biostimulants</label>
-                <label class="choice"><input type="checkbox" value="Sector development or policy" x-model="form.activity_areas"> Sector development or policy</label>
-              </div>
-            </div>
-            <div>
-              <label x-text="form.type === 'Observer status' ? 'Countries or regions relevant to your mandate' : form.type === 'Associate membership' ? 'Countries or regions where your work is active' : 'Countries where registration or market access matters to you'"></label>
-              <p class="hint" x-text="form.type === 'Observer status' ? 'This helps ABA understand which regional priorities observers are following.' : form.type === 'Associate membership' ? 'This helps ABA understand where technical capacity and implementation support exist.' : 'This helps ABA understand where members need support and sector visibility.'"></p>
-              <div class="compact-options three" style="margin-top: 8px;">
-                <label class="choice select-all-choice"><input type="checkbox" :checked="allSelected('market_countries', marketCountryOptions)" @change="toggleAll('market_countries', marketCountryOptions, $event.target.checked)"> Select all listed options</label>
-                <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
-                <label class="choice"><input type="checkbox" value="Kenya" x-model="form.market_countries"> Kenya</label>
-                <label class="choice"><input type="checkbox" value="Nigeria" x-model="form.market_countries"> Nigeria</label>
-                <label class="choice"><input type="checkbox" value="Ghana" x-model="form.market_countries"> Ghana</label>
-                <label class="choice"><input type="checkbox" value="Uganda" x-model="form.market_countries"> Uganda</label>
-                <label class="choice"><input type="checkbox" value="Other African countries" x-model="form.market_countries"> Other African countries</label>
-              </div>
-            </div>
+        </article>
+        <article class="card process-step">
+          <b>04</b>
+          <div>
+            <h3>ABA reviews the application</h3>
+            <p style="margin-top: 8px;">ABA reviews fit, follows up where needed, and confirms next steps.</p>
           </div>
-
-          <div class="form-section consent-section">
-            <div class="section-label">Consent</div>
-            <div class="compact-options">
-              <label class="choice"><input type="checkbox" checked disabled> Internal ABA membership review</label>
-              <label class="choice"><input type="checkbox" x-model="form.aggregate_consent"> Anonymised aggregate insight for sector advocacy</label>
-              <label class="choice"><input type="checkbox" x-model="form.followup_consent"> ABA may follow up about relevant registration support</label>
-            </div>
-          </div>
-
-          <div class="actions-end">
-            <button class="button primary" type="submit">Preview submission</button>
-          </div>
-        </form>
-
-        <aside class="application-sidebar">
-          <div class="summary sidebar-product-intake">
-            <div class="mini">Product intake</div>
-            <p style="margin-top: 8px;">Do you currently have biological products in market or development?</p>
-            <div class="button-row">
-              <a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Open product intake form</a>
-            </div>
-          </div>
-          <div class="summary sidebar-membership-help">
-            <div class="mini">Membership type</div>
-            <p style="margin-top: 8px;">Not sure whether Full, Associate, or Observer fits best?</p>
-            <div class="button-row">
-              <a class="button secondary" href="./membership-types.html">Review member types</a>
-            </div>
-          </div>
-          <div class="summary sidebar-preview" x-show="submitted" x-cloak>
-            <div class="mini">Application preview</div>
-            <div class="stack" style="margin-top: 10px;">
-              <p><strong style="color: var(--ink);">Organisation:</strong> <span x-text="form.org_name || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Business registration:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Contact:</strong> <span x-text="form.contact_name || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Member type:</strong> <span x-text="form.type || 'Not selected yet'"></span></p>
-              <p><strong style="color: var(--ink);">Sector roles:</strong> <span x-text="form.org_roles.length ? form.org_roles.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Activity areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Market access countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
-            </div>
-            <div class="button-row">
-              <button class="button secondary" type="button" @click="submitted = false">Clear preview</button>
-            </div>
-          </div>
-        </aside>
+        </article>
       </div>
     </section>
+
+    <footer class="surface section">
+      <div>
+        <div class="section-label">Next step</div>
+        <p>Choose your membership route and continue to the relevant application form.</p>
+      </div>
+      <div class="actions" style="margin-top: 0;">
+        <a class="button primary" href="./apply-full.html">Full membership</a>
+        <a class="button secondary" href="./apply-associate.html">Associate</a>
+        <a class="button secondary" href="./apply-observer.html">Observer</a>
+      </div>
+    </footer>
   </main>
-
-  <script>
-    function membershipApp() {
-      return {
-        submitted: false,
-        fullActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Other biological category"],
-        associateActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Cross-category or enabling support"],
-        observerActivityOptions: ["Biofertilisers", "Biopesticides", "Biostimulants", "Sector development or policy"],
-        marketCountryOptions: ["South Africa", "Kenya", "Nigeria", "Ghana", "Uganda", "Other African countries"],
-        form: {
-          org_name: "",
-          country: "",
-          registration_number: "",
-          contact_name: "",
-          email: "",
-          org_roles: [],
-          activity_areas: [],
-          market_countries: [],
-          type: "",
-          full_product_roles: [],
-          registration_support: "",
-          associate_expertise: [],
-          observer_institution: "",
-          observer_interests: [],
-          aggregate_consent: false,
-          followup_consent: false
-        },
-        get recommendedType() {
-          const fullRoles = ["Manufacturer", "Importer", "Distributor", "Product owner"];
-          const associateRoles = ["Technical service provider", "Research or academic organisation"];
-          const observerRoles = ["Funder or development partner", "Public institution"];
-          const buckets = [
-            ["Full membership", fullRoles],
-            ["Associate membership", associateRoles],
-            ["Observer status", observerRoles]
-          ].filter(([, roles]) => roles.some((role) => this.form.org_roles.includes(role)));
-
-          return buckets.length === 1 ? buckets[0][0] : "";
-        },
-        get membershipRecommendation() {
-          if (!this.form.org_roles.length) return "";
-          if (this.recommendedType) {
-            return `Based on the selected organisation role(s), ${this.recommendedType} may be the best fit. You can still choose a different route if ABA advises otherwise.`;
-          }
-          return "The selected roles cross more than one membership route. Please review the member types and choose the route that best matches the applicant's primary purpose.";
-        },
-        setType(type) {
-          this.form.type = type;
-          this.form.activity_areas = [];
-          this.form.full_product_roles = [];
-          this.form.registration_support = "";
-          this.form.associate_expertise = [];
-          this.form.observer_institution = "";
-          this.form.observer_interests = [];
-        },
-        allSelected(field, options) {
-          return options.every((option) => this.form[field].includes(option));
-        },
-        toggleAll(field, options, checked) {
-          this.form[field] = checked ? [...options] : [];
-        }
-      };
-    }
-  </script>
 </body>
 </html>
