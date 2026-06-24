@@ -26,7 +26,7 @@
         linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
     }
     .font-display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
-    .shell { width: min(1240px, calc(100% - 1.5rem)); margin: 0 auto; }
+    .shell { width: min(1220px, calc(100vw - 32px)); margin: 0 auto; }
     .surface {
       background: rgba(255, 252, 246, 0.88);
       border: 1px solid rgba(46, 58, 46, 0.08);
@@ -48,19 +48,22 @@
     <div class="surface rounded-[22px] px-4 py-3 sm:px-5">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div class="flex items-center gap-4">
-          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--green-soft)] text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--green-deep)]">ABA</div>
+          <div class="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[linear-gradient(135deg,rgba(87,140,105,0.18),rgba(87,140,105,0.06))] text-[11px] font-black uppercase tracking-[0.16em] text-[color:var(--green-deep)]">ABA</div>
           <div>
             <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
             <p class="mt-1 text-sm text-[color:var(--muted)]">Coordination, visibility, and participation across Africa</p>
           </div>
         </div>
-        <nav class="flex flex-wrap gap-x-4 gap-y-2 text-[13px] font-semibold text-[color:var(--ink)]">
-          <a href="./index.html" class="hover:text-[color:var(--green-deep)]">Home</a>
-          <a href="./about.html" class="hover:text-[color:var(--green-deep)]">About</a>
-          <a href="../membership-flow/index.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
-          <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Biologicals Explorer</a>
-          <a href="./workspace.html" class="hover:text-[color:var(--green-deep)]">Workspace</a>
-        </nav>
+        <div class="flex flex-wrap items-center justify-end gap-4">
+          <nav class="flex flex-wrap gap-x-[18px] gap-y-2 text-[14px] font-semibold text-[color:var(--ink)]">
+            <a href="./index.html" class="hover:text-[color:var(--green-deep)]">Home</a>
+            <a href="./about.html" class="hover:text-[color:var(--green-deep)]">About</a>
+            <a href="../membership-flow/index.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
+            <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Biologicals Explorer</a>
+            <a href="../registration-tracker/index.html" class="hover:text-[color:var(--green-deep)]">Track Registrations</a>
+          </nav>
+          <a href="../membership-flow/index.html" class="inline-flex min-h-[42px] items-center justify-center rounded-full bg-[color:var(--green-deep)] px-4 text-[12px] font-black uppercase tracking-[0.08em] text-[#f7f7f2]">Join ABA</a>
+        </div>
       </div>
     </div>
   </header>
@@ -68,7 +71,7 @@
   <main class="shell pb-10 pt-4 sm:pb-14 sm:pt-5">
     <section class="surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
       <p class="eyebrow">Technical Network</p>
-      <h1 class="font-display mt-4 text-[clamp(1.95rem,3vw,2.8rem)] leading-[1.06] tracking-[-0.035em]">Connect with technical expertise across the sector.</h1>
+      <h1 class="font-display mt-4 text-[clamp(1.9rem,2.8vw,2.7rem)] leading-[1.06] tracking-[-0.035em]">Connect with technical expertise across the sector.</h1>
       <p class="mt-4 max-w-3xl text-[1.04rem] leading-7 text-[color:var(--muted)] sm:text-[1.12rem]">
         The ABA technical network can help surface specialist knowledge, connect contributors, and strengthen access to practical expertise across biologicals.
       </p>

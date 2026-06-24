@@ -10,246 +10,176 @@
   <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --muted-strong: #41565b;
-      --surface: rgba(255, 252, 246, 0.9);
-      --surface-strong: rgba(255, 255, 255, 0.92);
-      --line: rgba(23, 48, 57, 0.1);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --sage: #eef6ef;
-      --amber: #f0b429;
-      --amber-soft: #fff2cf;
-      --red: #d94a4a;
-      --red-soft: #fde4e4;
-      --teal: #1f7a79;
-      --teal-soft: #def1f0;
-      --slate-soft: #eceef0;
-      --shadow: 0 18px 40px -30px rgba(20, 32, 34, 0.22);
+      --page: oklch(0.972 0.012 92);
+      --page-deep: oklch(0.942 0.02 92);
+      --ink: oklch(0.26 0.04 204);
+      --muted: oklch(0.5 0.025 198);
+      --muted-strong: color-mix(in oklab, var(--ink) 76%, white);
+      --surface: oklch(0.988 0.004 95 / 0.9);
+      --line: oklch(0.87 0.018 165);
+      --green: oklch(0.48 0.09 156);
+      --green-deep: oklch(0.36 0.074 158);
+      --green-soft: oklch(0.93 0.028 150);
+      --teal: oklch(0.56 0.08 200);
+      --amber: oklch(0.76 0.14 84);
+      --red: oklch(0.64 0.19 27);
+      --slate: oklch(0.58 0.03 280);
+      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
-        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
-      background-size: 28px 28px, 28px 28px, auto, auto;
+        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
+        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
+        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
     }
 
     a { color: inherit; text-decoration: none; }
     button, input, select { font: inherit; }
 
     .shell {
-      width: min(1260px, calc(100vw - 28px));
+      width: min(1220px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 14px 0 28px;
+      padding: var(--space-md) 0 var(--space-2xl);
     }
 
     .surface,
     .card,
     .search-shell,
     .category-chip,
-    .shortcut-card {
+    .filter-pill {
       background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .topbar {
-      padding: 12px 16px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+      padding: 14px 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: var(--space-sm);
+      min-width: 0;
     }
 
     .mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--green-soft);
-      color: var(--green);
+      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+      color: var(--green-deep);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .mini,
-    .eyebrow {
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong,
+    .eyebrow,
+    .label {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .mini { color: var(--muted); }
-    .eyebrow { color: var(--green); }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-left: auto;
-    }
-
-    .micro-stats {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .micro-stat {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      min-height: 32px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-    }
-
-    .micro-stat strong {
-      font-size: 0.95rem;
-      line-height: 1;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .micro-stat span {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
       color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .eyebrow,
+    .label {
+      color: var(--green-deep);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin-left: auto;
     }
 
     .nav {
       display: flex;
-      gap: 14px;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
-      font-size: 13px;
+    }
+
+    .nav a {
+      font-size: 14px;
       font-weight: 700;
+      color: color-mix(in oklab, var(--ink) 82%, white);
     }
 
-    .nav a.active { color: var(--green); }
-
-    .subnav {
-      margin-top: 12px;
-      padding: 10px 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
+    .nav a.active,
+    .nav a:hover {
+      color: var(--green-deep);
     }
 
-    .subnav a {
+    .nav-cta {
       display: inline-flex;
       align-items: center;
-      min-height: 36px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.76);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 14px;
+      background: var(--green-deep);
+      color: #f7f7f2;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
+      white-space: nowrap;
+      transition: background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
-    .subnav a.active {
-      background: var(--green-soft);
-      border-color: rgba(43, 107, 79, 0.18);
-      color: var(--green);
-    }
-    .return-bar {
-      margin-top: 12px;
-      padding: 10px 14px;
-      display: none;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .return-bar.is-visible { display: flex; }
-    .return-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.76);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      outline: none;
+      background: color-mix(in oklab, var(--green-deep) 92%, black);
+      box-shadow: 0 14px 24px -22px rgba(27, 72, 48, 0.68);
     }
 
     .section {
-      margin-top: 12px;
-      padding: 22px;
-    }
-
-    .hero-grid,
-    .shortcuts,
-    .results-head,
-    .filter-grid,
-    .catalogue-grid,
-    .card-meta,
-    .card-metrics,
-    .reading-key {
-      display: grid;
-      gap: 12px;
-    }
-
-    .hero-grid,
-    .results-head {
-      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-    }
-
-    .shortcuts {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 12px;
-    }
-
-    .filter-grid {
-      grid-template-columns: minmax(260px, 1.25fr) repeat(3, minmax(180px, 0.4fr));
-      align-items: center;
-      margin-top: 14px;
-    }
-
-    .catalogue-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      margin-top: 14px;
-    }
-
-    .reading-key {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 18px;
+      margin-top: var(--space-sm);
+      padding: clamp(22px, 3.2vw, 30px);
     }
 
     h1, h2, h3, p {
@@ -257,52 +187,271 @@
     }
 
     h1 {
-      margin-top: 8px;
-      font-size: clamp(1.7rem, 2vw, 2.25rem);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      font-weight: 800;
+      font-size: clamp(1.72rem, 2.45vw, 2.5rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 900;
     }
 
     h2 {
-      font-size: clamp(1.3rem, 2vw, 1.85rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      font-weight: 800;
+      font-size: clamp(1.55rem, 2.3vw, 2.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      font-weight: 900;
     }
 
     h3 {
-      font-size: 1.05rem;
-      line-height: 1.28;
-      font-weight: 800;
+      font-size: 1.45rem;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 900;
     }
 
     p {
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.62;
+      line-height: 1.68;
     }
 
-    .search-shell,
-    .card,
-    .shortcut-card {
-      padding: 14px;
+    .catalogue-shell {
+      display: grid;
+      gap: 18px;
+    }
+
+    .catalogue-intro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .catalogue-copy {
+      display: grid;
+      gap: 8px;
+      text-align: center;
+      max-width: 52ch;
+      margin: 0 auto;
+    }
+
+    .catalogue-copy p {
+      font-size: 14px;
+      line-height: 1.56;
+      color: var(--muted-strong);
+    }
+
+    .active-legend {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .legend-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .legend-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--accent-soft, rgba(31, 122, 121, 0.12));
+      color: var(--accent, var(--teal));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.78);
+    }
+
+    .legend-symbol svg,
+    .chip-symbol svg,
+    .card-icon svg,
+    .model-symbol svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .legend-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .legend-title strong {
+      font-size: 0.98rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .legend-title span {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .legend-copy {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted-strong);
+    }
+
+    .controls-shell {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+    }
+
+    .category-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .category-chip {
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 12px;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.78);
+      cursor: pointer;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    }
+
+    .category-chip:hover,
+    .category-chip:focus-visible {
+      outline: none;
+      border-color: rgba(73, 95, 82, 0.18);
+      box-shadow: 0 12px 22px -22px rgba(23, 48, 57, 0.3);
+    }
+
+    .category-chip.active {
+      border-color: rgba(34, 83, 60, 0.28);
+      box-shadow: 0 14px 24px -24px rgba(23, 48, 57, 0.28);
+    }
+
+    .chip-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .chip-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.74);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.78);
+      flex: 0 0 auto;
+    }
+
+    .results-summary {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .result-count {
+      display: grid;
+      gap: 3px;
+      font-size: 13px;
+      line-height: 1.38;
+      color: var(--muted-strong);
+      font-weight: 700;
+    }
+
+    .result-count strong {
+      font-size: 0.92rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .result-count span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .filter-pill {
+      min-height: 30px;
+      padding: 0 9px;
+      border-radius: 11px;
+      box-shadow: none;
+      background: rgba(255,255,255,0.88);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-pill button {
+      border: 0;
+      background: transparent;
+      color: var(--green-deep);
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
     }
 
     .search-shell {
+      grid-column: 1 / -1;
       padding: 0;
       overflow: hidden;
-      box-shadow: none;
-      backdrop-filter: none;
-      background: white;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.94);
     }
 
     .search-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      min-height: 62px;
-      padding: 0 18px;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 14px;
     }
 
     .search-row input {
@@ -311,209 +460,70 @@
       width: 100%;
       background: transparent;
       color: var(--ink);
-      font-size: 18px;
+      font-size: 15px;
     }
 
     .search-row svg {
-      width: 24px;
-      height: 24px;
+      width: 21px;
+      height: 21px;
       color: var(--muted);
       flex-shrink: 0;
     }
 
     .select {
-      min-height: 54px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: white;
+      min-height: 48px;
+      border: 1px solid rgba(73, 95, 82, 0.14);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.92);
       color: var(--ink);
       padding: 0 14px;
       width: 100%;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+      transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
     }
 
-    .shortcut-card {
-      cursor: pointer;
-      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
-      box-shadow: none;
-      background: rgba(255, 255, 255, 0.78);
-      position: relative;
-      overflow: visible;
+    .select:hover,
+    .select:focus-visible {
+      outline: none;
+      border-color: rgba(73, 95, 82, 0.22);
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 0 0 3px rgba(231, 240, 232, 0.7);
     }
 
-    .shortcut-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .shortcut-card.active {
-      border-color: rgba(43, 107, 79, 0.35);
-      background: rgba(231, 240, 232, 0.8);
-    }
-
-    .shortcut-number {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .category-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .category-chip {
-      min-height: 40px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: none;
-      cursor: pointer;
-    }
-
-    .category-row .category-chip:nth-child(2) { color: var(--green); background: rgba(231, 240, 232, 0.86); }
-    .category-row .category-chip:nth-child(3) { color: var(--teal); background: rgba(222, 241, 240, 0.86); }
-    .category-row .category-chip:nth-child(4) { color: #8d6400; background: rgba(255, 242, 207, 0.92); }
-    .category-row .category-chip:nth-child(5) { color: #59656b; background: rgba(236, 238, 240, 0.92); }
-
-    .category-chip.active {
-      background: var(--green);
-      color: white;
-      border-color: var(--green);
-    }
-
-    .chip-content {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .chip-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.7);
-      font-size: 12px;
-      font-weight: 800;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-    }
-
-    .chip-symbol svg,
-    .legend-symbol svg,
-    .card-icon svg,
-    .model-symbol svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.9;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .card-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .crop-chip img {
-      display: block;
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-    }
-
-    .results-head {
-      margin-bottom: 12px;
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
     }
 
     .card {
       --card-accent: var(--green);
       --card-soft: var(--green-soft);
-      position: relative;
-      overflow: visible;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: none;
-    }
-
-    .shortcut-card::after,
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(43, 107, 79, 0.95), rgba(31, 122, 121, 0.42));
-      opacity: 0.72;
-    }
-
-    .card::after {
-      background: linear-gradient(90deg, var(--card-accent) 0%, color-mix(in srgb, var(--card-accent) 34%, white) 100%);
+      display: grid;
+      gap: 10px;
+      padding: 17px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.18);
     }
 
     .card-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 10px;
     }
 
     .card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      font-weight: 800;
-      background: linear-gradient(180deg, #f7fbf7 0%, var(--card-soft, var(--green-soft)) 100%);
+      background: rgba(241, 245, 239, 0.94);
       color: var(--card-accent, var(--green));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      gap: 8px;
-    }
-
-    .badge::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: currentColor;
-      opacity: 0.8;
-    }
-
-    .badge.green { background: var(--green-soft); color: var(--green); }
-    .badge.amber { background: var(--amber-soft); color: #8d6400; }
-    .badge.red { background: var(--red-soft); color: var(--red); }
-    .badge.slate { background: #eceef0; color: #59656b; }
-
-    .category-label {
-      margin-top: 12px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.78);
     }
 
     .category-filter-button,
@@ -526,305 +536,143 @@
       color: inherit;
     }
 
-    .category-filter-button {
-      text-align: left;
-    }
-
     .category-filter-button:hover,
     .category-filter-button:focus-visible,
     .icon-filter-button:hover,
-    .icon-filter-button:focus-visible {
-      color: var(--card-accent, var(--green));
+    .icon-filter-button:focus-visible,
+    .crop-chip:hover,
+    .crop-chip:focus-visible {
       outline: none;
+      color: var(--card-accent, var(--green));
     }
 
-    .card-context,
-    .key-chip,
-    .guide-pills {
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.85;
+    }
+
+    .badge.green { background: rgba(231, 240, 232, 0.9); color: var(--green-deep); }
+    .badge.amber { background: rgba(247, 233, 196, 0.9); color: #8a6216; }
+    .badge.red { background: rgba(248, 225, 222, 0.94); color: #a83d31; }
+    .badge.slate { background: rgba(232, 229, 238, 0.94); color: #665d78; }
+
+    .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 18px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card-summary {
+      display: grid;
+      gap: 8px;
+    }
+
+    .fit-lead {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--card-accent, var(--green));
+    }
+
+    .fit-copy {
+      font-size: 13px;
+      line-height: 1.46;
+      color: var(--muted-strong);
+    }
+
+    .model-strip,
+    .crop-chip-row {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .context-pill,
-    .key-pill {
+    .model-strip {
+      padding-top: 2px;
+    }
+
+    .model-node {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 32px;
-      padding: 7px 11px;
-      border-radius: 999px;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 12px;
+      background: color-mix(in oklab, var(--card-soft, var(--green-soft)) 70%, white);
+      color: var(--card-accent, var(--green));
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: rgba(31, 122, 121, 0.08);
-      color: var(--teal);
     }
 
-    .context-pill {
-      background: var(--card-soft, rgba(31, 122, 121, 0.08));
-      color: var(--card-accent, var(--teal));
-    }
-
-    .info-dot {
+    .model-symbol {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: rgba(23, 48, 57, 0.08);
-      color: var(--muted-strong);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: help;
+      background: rgba(255,255,255,0.78);
     }
 
-    .summary-strip {
-      margin-top: 12px;
-      padding: 10px 12px;
-      border: 1px solid rgba(43, 107, 79, 0.12);
-      border-radius: 14px;
-      background: rgba(238, 246, 239, 0.94);
-      font-size: 14px;
-      line-height: 1.45;
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .summary-strip span {
+    .model-arrow {
       color: var(--muted);
-      font-weight: 600;
-    }
-
-    .card-meta {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 16px;
-      margin-top: 14px;
-    }
-
-    .meta-label {
       font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .meta-value {
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    .card-meta > div {
-      padding: 11px 12px;
-      border-radius: 14px;
-      background: rgba(244, 248, 246, 0.92);
-    }
-
-    .card-metrics {
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(23, 48, 57, 0.08);
-    }
-
-    .card-metrics > div {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(23, 48, 57, 0.04);
-    }
-
-    .metric-value {
-      font-size: 1.25rem;
-      line-height: 1;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .metric-label {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .key-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: rgba(31, 122, 121, 0.1);
-      color: var(--teal);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .section-note {
-      margin-top: 12px;
-      max-width: 72ch;
-      font-size: 14px;
-      color: var(--muted-strong);
-    }
-
-    .results-summary {
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .result-count {
-      font-size: 14px;
-      color: var(--muted-strong);
-      font-weight: 700;
-    }
-
-    .filter-pills {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .filter-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(23, 48, 57, 0.1);
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-    }
-
-    .filter-pill button {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font: inherit;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .filter-pill button:hover,
-    .filter-pill button:focus-visible {
-      color: var(--ink);
-      outline: none;
-    }
-
-    .active-legend {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.86);
-    }
-
-    .legend-cluster {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .legend-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      background: var(--accent-soft, rgba(31, 122, 121, 0.12));
-      color: var(--accent, var(--teal));
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .legend-copy {
-      max-width: 46ch;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--muted-strong);
-    }
-
-    .legend-note-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .legend-note {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(23, 48, 57, 0.05);
-      color: var(--muted-strong);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .meaning-strip strong {
-      color: var(--card-accent, var(--green));
-    }
-
-    .crop-chip-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
+      font-weight: 900;
     }
 
     .crop-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 32px;
-      padding: 7px 10px;
+      min-height: 34px;
+      padding: 0 12px;
       border: 1px solid transparent;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 72%, white);
+      border-radius: 12px;
+      background: color-mix(in oklab, var(--card-soft, var(--green-soft)) 62%, white);
       color: var(--ink);
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.02em;
-      text-decoration: none;
       cursor: pointer;
-      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
-    }
-
-    .crop-chip:hover,
-    .crop-chip:focus-visible {
-      transform: translateY(-1px);
-      border-color: color-mix(in srgb, var(--card-accent, var(--green)) 22%, white);
-      outline: none;
+      transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease;
     }
 
     .crop-chip.is-active {
-      border-color: color-mix(in srgb, var(--card-accent, var(--green)) 48%, white);
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 88%, white);
+      border-color: color-mix(in oklab, var(--card-accent, var(--green)) 42%, white);
+      background: color-mix(in oklab, var(--card-soft, var(--green-soft)) 84%, white);
+    }
+
+    .crop-chip img {
+      display: block;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
     }
 
     .crop-chip svg {
@@ -838,78 +686,108 @@
       flex-shrink: 0;
     }
 
-    .model-strip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.88);
-      border: 1px dashed rgba(23, 48, 57, 0.14);
+    .card-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(73, 95, 82, 0.14);
     }
 
-    .model-node {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 30px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 78%, white);
-      color: var(--card-accent, var(--green));
+    .card-meta > div {
+      display: grid;
+      gap: 6px;
+    }
+
+    .meta-label {
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .model-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      color: inherit;
-    }
-
-    .model-arrow {
       color: var(--muted);
-      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       font-weight: 800;
     }
 
-    .relationship-note {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.5;
+    .meta-value {
+      font-size: 14px;
+      line-height: 1.56;
       color: var(--muted-strong);
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid,
-      .reading-key,
+    .card-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(73, 95, 82, 0.14);
+    }
+
+    .card-metrics > div {
+      display: grid;
+      gap: 4px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(244, 247, 243, 0.92);
+    }
+
+    .metric-value {
+      font-size: 1.45rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .empty-state {
+      padding: 32px 20px;
+      border-radius: 24px;
+      border: 1px dashed rgba(73, 95, 82, 0.18);
+      background: rgba(255,255,255,0.62);
+      text-align: center;
+    }
+
+    .empty-state p {
+      max-width: 44ch;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+      .catalogue-intro,
       .filter-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .filter-grid .search-shell {
-        grid-column: 1 / -1;
-      }
-
-      .catalogue-grid,
-      .shortcuts {
         grid-template-columns: 1fr;
+      }
+
+      .nav-wrap {
+        justify-content: flex-start;
       }
     }
 
-    @media (max-width: 820px) {
-      .hero-grid,
-      .reading-key,
-      .filter-grid,
+    @media (max-width: 760px) {
+      .shell {
+        width: min(100vw - 20px, 1220px);
+        padding-top: 10px;
+      }
+
+      .topbar,
+      .section {
+        border-radius: 22px;
+      }
+
+      .category-row {
+        justify-content: flex-start;
+      }
+
+      .filter-pills {
+        justify-content: flex-start;
+      }
+
       .card-meta,
       .card-metrics {
         grid-template-columns: 1fr;
@@ -922,176 +800,175 @@
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
-        <div>
-          <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
-      <div class="topbar-right">
-        <div class="micro-stats" aria-label="Catalogue coverage">
-          <div class="micro-stat"><strong>23</strong><span>Products</span></div>
-          <div class="micro-stat"><strong>5</strong><span>Categories</span></div>
-        </div>
+      <div class="nav-wrap">
         <nav class="nav">
           <a href="../site/index.html">Home</a>
           <a href="../site/about.html">About</a>
           <a href="../membership-flow/index.html">Membership</a>
           <a class="active" href="./index.html">Biologicals Explorer</a>
-          <a href="../site/workspace.html">Workspace</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
         </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
       </div>
     </header>
 
-    <nav class="surface subnav" aria-label="Biologicals explorer pages">
-      <a href="./index.html">Explorer</a>
-      <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
-    </nav>
-    <nav class="surface return-bar" data-return-bar aria-label="Return navigation">
-      <a class="return-link" data-return-link href="./index.html">Back to previous view</a>
-    </nav>
-
     <section class="surface section">
-      <div class="results-head">
-        <div>
-          <div class="eyebrow">Product catalogue</div>
-          <h2 style="margin-top: 6px;">Browse biological products.</h2>
+      <div class="catalogue-shell">
+        <div class="catalogue-intro">
+          <div class="catalogue-copy">
+            <div class="eyebrow">Product catalogue</div>
+            <h1>Browse biological products.</h1>
+            <p>Move from crop and problem signals into the actual product set. Compare biological routes, narrow by crop, and see which product families are doing the work.</p>
+          </div>
           <div class="active-legend" :style="'--accent:' + activeCategoryTheme.accent + '; --accent-soft:' + activeCategoryTheme.soft">
             <div class="legend-cluster">
               <div class="legend-symbol" x-html="iconSvg(activeCategoryTheme.symbol)" aria-hidden="true"></div>
-              <div>
-                <div style="font-weight: 800;" x-text="activeCategoryTheme.title"></div>
+              <div class="legend-title">
+                <span x-text="viewLabel"></span>
+                <strong x-text="activeCategoryTheme.title"></strong>
               </div>
             </div>
-            <div>
-              <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
-            </div>
+            <div class="legend-copy" x-text="viewDescription"></div>
           </div>
         </div>
-      </div>
 
-      <div class="category-row">
-        <template x-for="category in categories" :key="category.id">
-          <button
-            type="button"
-            class="category-chip"
-            :class="{ active: activeCategory === category.id }"
-            @click="setCategoryFilter(category.id)"
-            :style="'color:' + category.accent + '; background:' + category.soft">
-            <span class="chip-content">
-              <span class="chip-symbol" x-html="iconSvg(category.symbol)" aria-hidden="true"></span>
-              <span x-text="category.label"></span>
-            </span>
-          </button>
-        </template>
-      </div>
+        <div class="controls-shell">
+          <div class="category-row">
+            <template x-for="category in categories" :key="category.id">
+              <button
+                type="button"
+                class="category-chip"
+                :class="{ active: activeCategory === category.id }"
+                @click="setCategoryFilter(category.id)"
+                :style="categoryChipStyle(category)">
+                <span class="chip-content">
+                  <span class="chip-symbol" x-html="iconSvg(category.symbol)" aria-hidden="true"></span>
+                  <span x-text="category.label"></span>
+                </span>
+              </button>
+            </template>
+          </div>
 
-      <div class="results-summary">
-        <div class="result-count" x-text="resultsSummary"></div>
-        <div class="filter-pills" x-show="hasActiveFilters">
-          <div class="filter-pill" x-show="activeCategory !== 'all'">
-            <span>Category: <span x-text="activeCategoryTheme.label"></span></span>
-            <button type="button" @click="setCategoryFilter('all')" title="Clear category filter">Clear</button>
-          </div>
-          <div class="filter-pill" x-show="activeCrop !== 'all'">
-            <span>Crop: <span x-text="activeCrop"></span></span>
-            <button type="button" @click="setCropFilter('all')" title="Clear crop filter">Clear</button>
-          </div>
-          <div class="filter-pill" x-show="searchQuery.trim().length">
-            <span>Search: <span x-text="searchQuery"></span></span>
-            <button type="button" @click="searchQuery = ''; syncUrl()" title="Clear search filter">Clear</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="filter-grid">
-        <div class="search-shell">
-          <div class="search-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7"></circle>
-              <path d="m20 20-3.5-3.5"></path>
-            </svg>
-            <input type="text" x-model="searchQuery" @input="syncUrl()" placeholder="Search products by name, category, crop, or use...">
-          </div>
-        </div>
-        <select class="select" x-model="activeCrop" @change="syncUrl()">
-          <option value="all">All crops</option>
-          <template x-for="crop in allCrops" :key="crop">
-            <option :value="crop" x-text="crop"></option>
-          </template>
-        </select>
-        <select class="select" x-model="activeCategory" @change="syncUrl()">
-          <template x-for="category in categories" :key="category.id">
-            <option :value="category.id" x-text="category.label"></option>
-          </template>
-        </select>
-        <select class="select" x-model="activeView">
-          <option value="named">Named products</option>
-          <option value="category">Category browse</option>
-          <option value="use">Use context</option>
-        </select>
-      </div>
-
-      <div class="catalogue-grid">
-        <template x-for="product in filteredProducts" :key="product.title">
-          <article class="card" :style="'--card-accent:' + categoryTheme(product.categoryId).accent + '; --card-soft:' + categoryTheme(product.categoryId).soft">
-            <div class="card-top">
-              <button type="button" class="card-icon icon-filter-button" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :title="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
-              <div class="badge" :class="product.badgeTone" :title="productBadgeTitle(product)" x-text="displayProductBadge(product)"></div>
+          <div class="results-summary">
+            <div class="result-count">
+              <strong x-text="filteredProducts.length"></strong>
+              <div x-text="resultsSummary"></div>
+              <span x-text="resultsHint"></span>
             </div>
-
-            <div class="card-context" style="margin-top: 12px;">
-              <button type="button" class="category-label category-filter-button" @click="setCategoryFilter(product.categoryId)" x-text="product.category"></button>
+            <div class="filter-pills" x-show="hasActiveFilters">
+              <div class="filter-pill" x-show="activeCategory !== 'all'">
+                <span>Category: <span x-text="activeCategoryTheme.label"></span></span>
+                <button type="button" @click="setCategoryFilter('all')" title="Clear category filter">Clear</button>
+              </div>
+              <div class="filter-pill" x-show="activeCrop !== 'all'">
+                <span>Crop: <span x-text="activeCrop"></span></span>
+                <button type="button" @click="setCropFilter('all')" title="Clear crop filter">Clear</button>
+              </div>
+              <div class="filter-pill" x-show="searchQuery.trim().length">
+                <span>Search: <span x-text="searchQuery"></span></span>
+                <button type="button" @click="searchQuery = ''; syncUrl()" title="Clear search filter">Clear</button>
+              </div>
             </div>
-            <h3 style="margin-top: 10px;" x-text="product.title"></h3>
+          </div>
 
-            <div class="summary-strip">
-              <strong x-text="summaryLead(product)"></strong>
-              <span style="margin-left: 6px;"> </span>
-              <span x-text="fitText(product)" style="color: var(--ink); font-weight: 700;"></span>
+          <div class="filter-grid">
+            <div class="search-shell">
+              <div class="search-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <path d="m20 20-3.5-3.5"></path>
+                </svg>
+                <input type="text" x-model="searchQuery" @input="syncUrl()" placeholder="Search products by name, category, crop, or use...">
+              </div>
             </div>
-
-            <div class="model-strip">
-              <template x-for="(model, index) in product.models" :key="model.label + index">
-                <template>
-                  <div class="model-node" :title="modelDescription(model)">
-                    <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
-                    <span x-text="modelLabel(model)"></span>
-                  </div>
-                  <span class="model-arrow" x-show="index < product.models.length - 1">→</span>
-                </template>
+            <select class="select" x-model="activeCrop" @change="syncUrl()">
+              <option value="all">All crops</option>
+              <template x-for="crop in allCrops" :key="crop">
+                <option :value="crop" x-text="crop"></option>
               </template>
-            </div>
-
-            <div class="crop-chip-row" x-show="extractCropLinks(product).length">
-              <template x-for="crop in extractCropLinks(product)" :key="crop.label">
-                <button type="button" class="crop-chip" :class="{ 'is-active': activeCrop === crop.label }" :title="crop.tooltip" @click="setCropFilter(crop.label)">
-                  <span x-html="crop.icon"></span>
-                  <span x-text="crop.label"></span>
-                </button>
+            </select>
+            <select class="select" x-model="activeCategory" @change="syncUrl()">
+              <template x-for="category in categories" :key="category.id">
+                <option :value="category.id" x-text="category.label"></option>
               </template>
-            </div>
+            </select>
+            <select class="select" x-model="activeView" @change="syncUrl()">
+              <option value="named">Named products</option>
+              <option value="category">Category browse</option>
+              <option value="use">Use context</option>
+            </select>
+          </div>
+        </div>
 
-            <div class="card-meta">
-              <template x-for="item in product.meta" :key="item.label">
-                <div :title="metaLabel(item) + ': ' + item.value">
-                  <div class="meta-label" x-text="metaLabel(item)"></div>
-                  <div class="meta-value" x-text="item.value"></div>
+        <div class="catalogue-grid" x-show="filteredProducts.length">
+          <template x-for="product in filteredProducts" :key="product.title">
+            <article class="card" :style="'--card-accent:' + categoryTheme(product.categoryId).accent + '; --card-soft:' + categoryTheme(product.categoryId).soft">
+              <div class="card-top">
+                <button type="button" class="card-icon icon-filter-button" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :title="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
+                <div class="badge" :class="product.badgeTone" :title="productBadgeTitle(product)" x-text="displayProductBadge(product)"></div>
+              </div>
+
+              <div class="card-summary">
+                <button type="button" class="card-kicker category-filter-button" @click="setCategoryFilter(product.categoryId)" x-text="product.category"></button>
+                <h3 x-text="product.title"></h3>
+                <div>
+                  <div class="fit-lead" x-text="summaryLead(product)"></div>
+                  <div class="fit-copy" x-text="fitText(product)"></div>
                 </div>
-              </template>
-            </div>
+              </div>
 
-            <div class="card-metrics">
-              <div>
-                <div class="metric-value" x-text="product.leftMetric"></div>
-                <div class="metric-label" x-text="metricLabel(product.leftLabel)"></div>
+              <div class="model-strip">
+                <template x-for="(model, index) in product.models" :key="model.label + index">
+                  <template>
+                    <div class="model-node" :title="modelDescription(model)">
+                      <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
+                      <span x-text="modelLabel(model)"></span>
+                    </div>
+                    <span class="model-arrow" x-show="index < product.models.length - 1">→</span>
+                  </template>
+                </template>
               </div>
-              <div>
-                <div class="metric-value" x-text="product.rightMetric"></div>
-                <div class="metric-label" x-text="metricLabel(product.rightLabel)"></div>
+
+              <div class="crop-chip-row" x-show="extractCropLinks(product).length">
+                <template x-for="crop in extractCropLinks(product)" :key="crop.label">
+                  <button type="button" class="crop-chip" :class="{ 'is-active': activeCrop === crop.label }" :title="crop.tooltip" @click="setCropFilter(crop.label)">
+                    <span x-html="crop.icon"></span>
+                    <span x-text="crop.label"></span>
+                  </button>
+                </template>
               </div>
-            </div>
-          </article>
-        </template>
+
+              <div class="card-meta">
+                <template x-for="item in product.meta" :key="item.label">
+                  <div :title="metaLabel(item) + ': ' + item.value">
+                    <div class="meta-label" x-text="metaLabel(item)"></div>
+                    <div class="meta-value" x-text="item.value"></div>
+                  </div>
+                </template>
+              </div>
+
+              <div class="card-metrics">
+                <div>
+                  <div class="metric-value" x-text="product.leftMetric"></div>
+                  <div class="metric-label" x-text="metricLabel(product.leftLabel)"></div>
+                </div>
+                <div>
+                  <div class="metric-value" x-text="product.rightMetric"></div>
+                  <div class="metric-label" x-text="metricLabel(product.rightLabel)"></div>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+
+        <div class="empty-state" x-show="!filteredProducts.length">
+          <p>No products match this combination yet. Clear one of the filters or step back to a broader category or crop view.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -1177,6 +1054,7 @@
           { label: "Fruit trees", pattern: /\bfruit trees?\b/i },
           { label: "Garden plants", pattern: /\bgarden plants?\b/i }
         ],
+        returnTo: "",
         detectCropsFromText(text) {
           return this.cropDictionary
             .filter((entry) => entry.pattern.test(text))
@@ -1208,17 +1086,27 @@
           const problem = params.get('problem');
           const pressure = params.get('pressure');
           const search = params.get('q');
+          const view = params.get('view');
+          const returnTo = params.get('returnTo');
           if (category && this.categories.some((item) => item.id === category)) this.activeCategory = category;
           if (crop) this.activeCrop = crop;
           if (problem) this.searchQuery = problem;
           if (!problem && pressure) this.searchQuery = pressure;
           if (search) this.searchQuery = search;
+          if (view && this.filtersByView[view]) this.activeView = view;
+          if (returnTo) this.returnTo = returnTo;
         },
         displayProductBadge(product) {
           if (product.badge !== 'Registered') return product.badge;
           const problemLinks = (product.meta || []).find((item) => item.label === 'Pressure links')?.value?.toLowerCase() || '';
           if (/mildew|blight|wilt|fung|bacterial|disease|rhizoctonia|pythium/.test(problemLinks)) return 'Disease control';
           return 'Insect control';
+        },
+        categoryChipStyle(category) {
+          if (this.activeCategory === category.id) {
+            return `color:${category.accent}; background:color-mix(in oklab, ${category.soft} 88%, white); border-color:color-mix(in oklab, ${category.accent} 26%, white);`;
+          }
+          return `color:${category.accent}; background:color-mix(in oklab, ${category.soft} 74%, white);`;
         },
         productIconTooltip(product) {
           return `Filter to ${product.category} records`;
@@ -1279,6 +1167,8 @@
           if (this.activeCategory !== 'all') params.set('category', this.activeCategory);
           if (this.activeCrop !== 'all') params.set('crop', this.activeCrop);
           if (this.searchQuery.trim()) params.set('q', this.searchQuery.trim());
+          if (this.activeView !== 'category') params.set('view', this.activeView);
+          if (this.returnTo) params.set('returnTo', this.returnTo);
           const query = params.toString();
           const next = `${window.location.pathname}${query ? `?${query}` : ''}`;
           window.history.replaceState({}, '', next);
@@ -1916,6 +1806,24 @@
         get activeCategoryTheme() {
           return this.categoryTheme(this.activeCategory);
         },
+        get viewLabel() {
+          const labels = {
+            named: 'Browse by product',
+            category: 'Browse by product family',
+            use: 'Browse by use context'
+          };
+          return labels[this.activeView] || labels.category;
+        },
+        get viewDescription() {
+          const base = this.activeCategoryTheme.copy;
+          if (this.activeView === 'named') {
+            return `${base} Focus on the named products first, then compare where each one shows up.`;
+          }
+          if (this.activeView === 'use') {
+            return `${base} Group the view around fit and use patterns so the catalogue reads more like a decision tool.`;
+          }
+          return `${base} Start from product families, then narrow into specific products and crop links.`;
+        },
         get allCrops() {
           return [...new Set(this.products.flatMap((product) => this.extractCropLinks(product).map((crop) => crop.label)))].sort((a, b) => a.localeCompare(b));
         },
@@ -1923,14 +1831,20 @@
           return this.activeCategory !== "all" || this.activeCrop !== "all" || this.searchQuery.trim().length > 0;
         },
         get resultsSummary() {
-          const pieces = [`${this.filteredProducts.length} visible products`];
+          const pieces = ['products currently visible'];
           if (this.activeCrop !== "all") pieces.push(`for ${this.activeCrop}`);
           if (this.activeCategory !== "all") pieces.push(`in ${this.activeCategoryTheme.label.toLowerCase()}`);
           if (this.searchQuery.trim()) pieces.push(`matching "${this.searchQuery.trim()}"`);
           return pieces.join(" ");
         },
+        get resultsHint() {
+          if (this.hasActiveFilters) return 'Clear a filter to widen the product set.';
+          if (this.activeView === 'use') return 'Use crops and search to narrow the strongest fit patterns.';
+          if (this.activeView === 'named') return 'Search by product name when you already know what you want to compare.';
+          return 'Start broad, then narrow by crop, category, or search.';
+        },
         get filteredProducts() {
-          return this.products.filter((product) => {
+          const matches = this.products.filter((product) => {
             const matchesCategory = this.activeCategory === "all" || product.categoryId === this.activeCategory;
             const matchesCrop = this.activeCrop === "all" || this.extractCropLinks(product).some((crop) => crop.label === this.activeCrop);
             const haystack = [
@@ -1945,19 +1859,19 @@
             const matchesQuery = !query || haystack.includes(query);
             return matchesCategory && matchesCrop && matchesQuery;
           });
+          if (this.activeView === 'named') {
+            return [...matches].sort((a, b) => a.title.localeCompare(b.title));
+          }
+          if (this.activeView === 'use') {
+            return [...matches].sort((a, b) => this.fitText(a).localeCompare(this.fitText(b)));
+          }
+          return [...matches].sort((a, b) => {
+            if (a.categoryId !== b.categoryId) return a.categoryId.localeCompare(b.categoryId);
+            return a.title.localeCompare(b.title);
+          });
         }
       };
     }
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const returnTo = params.get('returnTo');
-      const returnBar = document.querySelector('[data-return-bar]');
-      const returnLink = document.querySelector('[data-return-link]');
-      if (returnTo && returnBar && returnLink) {
-        returnBar.classList.add('is-visible');
-        returnLink.setAttribute('href', returnTo);
-      }
-    }());
   </script>
 </body>
 </html>

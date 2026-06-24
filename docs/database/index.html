@@ -10,149 +10,170 @@
   <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
     :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --muted-strong: #41565b;
-      --surface: rgba(255, 252, 246, 0.9);
-      --surface-strong: rgba(255, 255, 255, 0.92);
-      --line: rgba(23, 48, 57, 0.1);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --sage: #eef6ef;
-      --amber: #f0b429;
-      --amber-soft: #fff2cf;
-      --red: #d94a4a;
-      --red-soft: #fde4e4;
-      --teal: #1f7a79;
-      --teal-soft: #def1f0;
-      --slate-soft: #eceef0;
-      --shadow: 0 18px 40px -30px rgba(20, 32, 34, 0.22);
+      --page: oklch(0.972 0.012 92);
+      --page-deep: oklch(0.942 0.02 92);
+      --ink: oklch(0.26 0.04 204);
+      --muted: oklch(0.5 0.025 198);
+      --muted-strong: color-mix(in oklab, var(--ink) 76%, white);
+      --surface: oklch(0.988 0.004 95 / 0.9);
+      --surface-strong: oklch(0.985 0.007 96);
+      --line: oklch(0.87 0.018 165);
+      --green: oklch(0.48 0.09 156);
+      --green-deep: oklch(0.36 0.074 158);
+      --green-soft: oklch(0.93 0.028 150);
+      --sage: oklch(0.95 0.016 146);
+      --amber: oklch(0.76 0.14 84);
+      --amber-soft: oklch(0.96 0.04 93);
+      --red: oklch(0.64 0.19 27);
+      --red-soft: oklch(0.95 0.04 28);
+      --teal: oklch(0.56 0.08 200);
+      --teal-soft: oklch(0.93 0.02 194);
+      --slate-soft: oklch(0.94 0.01 220);
+      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
       --space-2xs: 4px;
       --space-xs: 8px;
       --space-sm: 12px;
       --space-md: 16px;
       --space-lg: 24px;
       --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 72px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
-        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
-      background-size: 28px 28px, 28px 28px, auto, auto;
+        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
+        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
+        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
     }
 
     a { color: inherit; text-decoration: none; }
     button, input, select { font: inherit; }
 
     .shell {
-      width: min(1260px, calc(100vw - 28px));
+      width: min(1220px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 14px 0 28px;
+      padding: var(--space-md) 0 var(--space-2xl);
     }
 
     .surface {
       background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .topbar {
-      padding: 12px 16px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: var(--space-md);
       flex-wrap: wrap;
+      padding: 14px 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: var(--space-sm);
+      min-width: 0;
     }
 
     .mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--green-soft);
-      color: var(--green);
+      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+      color: var(--green-deep);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong,
     .mini,
     .eyebrow {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
     .mini { color: var(--muted); }
-    .eyebrow { color: var(--green); }
+    .eyebrow { color: var(--green-deep); }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
     .nav {
       display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .nav a.active { color: var(--green); }
-
-    .subnav {
-      margin-top: 12px;
-      padding: 10px 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
       align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
     }
 
-    .subnav a {
+    .nav a {
+      font-size: 14px;
+      font-weight: 700;
+      color: color-mix(in oklab, var(--ink) 82%, white);
+    }
+
+    .nav a.active,
+    .nav a:hover { color: var(--green-deep); }
+
+    .nav-cta {
       display: inline-flex;
       align-items: center;
-      min-height: 36px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.76);
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 14px;
+      background: var(--green-deep);
+      color: #f7f7f2;
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
+      white-space: nowrap;
+      transition: background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
-    .subnav a.active {
-      background: var(--green-soft);
-      border-color: rgba(43, 107, 79, 0.18);
-      color: var(--green);
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-left: auto;
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      outline: none;
+      background: color-mix(in oklab, var(--green-deep) 92%, black);
+      box-shadow: 0 14px 24px -22px rgba(27, 72, 48, 0.68);
     }
 
     .micro-stats {
@@ -211,8 +232,9 @@
     }
 
     .filter-grid {
-      grid-template-columns: repeat(3, minmax(170px, 0.26fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
+      margin-top: 18px;
     }
 
     .path-grid {
@@ -278,9 +300,10 @@
     .search-shell,
     .path-card,
     .support-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 24px;
       background: rgba(255, 255, 255, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
     }
 
     .panel,
@@ -288,7 +311,7 @@
     .search-shell,
     .path-card,
     .support-card {
-      padding: 16px;
+      padding: 18px;
     }
 
     .search-shell {
@@ -326,11 +349,21 @@
     .select {
       min-height: 54px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: white;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
       color: var(--ink);
-      padding: 0 14px;
+      padding: 0 16px;
       width: 100%;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    }
+
+    .select:hover,
+    .select:focus-visible {
+      outline: none;
+      border-color: rgba(73, 95, 82, 0.22);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 0 0 3px rgba(231, 240, 232, 0.7);
     }
 
     .path-primary-grid {
@@ -353,17 +386,97 @@
     }
 
     .path-card:hover {
-      transform: translateY(-2px);
+      border-color: rgba(43, 107, 79, 0.2);
+      box-shadow: 0 14px 26px -24px rgba(23, 48, 57, 0.16);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+    }
+
+    .path-head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .path-head span {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--green-deep) 84%, white);
+    }
+
+    .path-head strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .path-kicker {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.6;
+      color: color-mix(in oklab, var(--ink) 80%, white);
+    }
+
+    .path-meta {
+      display: grid;
+      gap: 10px;
+      padding-top: 6px;
+    }
+
+    .path-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding-top: 8px;
+    }
+
+    .meta-row {
+      display: grid;
+      gap: 4px;
+    }
+
+    .meta-row label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--muted) 78%, white);
+    }
+
+    .meta-row p {
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .route-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--muted) 72%, white);
     }
 
     .path-card::after,
     .card::after {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(43, 107, 79, 0.9), rgba(31, 122, 121, 0.45));
-      opacity: 0.7;
+      display: none;
     }
 
     .path-symbol {
@@ -420,20 +533,15 @@
     }
 
     .result-shell {
-      margin-top: 12px;
-      padding: 20px;
+      margin-top: var(--space-sm);
+      padding: 24px;
       position: relative;
       overflow: visible;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .result-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top right, var(--accent-soft, rgba(31, 122, 121, 0.12)), transparent 30%),
-        linear-gradient(180deg, rgba(255,255,255,0.08), transparent 40%);
-      pointer-events: none;
+      display: none;
     }
 
     .results-head {
@@ -445,6 +553,20 @@
 
     .results-head-copy p {
       max-width: 58ch;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .results-head-copy h2 {
+      font-size: clamp(2rem, 2.8vw, 2.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .results-head-copy {
+      text-align: center;
     }
 
     .legend-panel {
@@ -501,9 +623,15 @@
       --card-soft: var(--green-soft);
       position: relative;
       overflow: visible;
-      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-      padding: 18px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.18);
+      transition: box-shadow 160ms ease, border-color 160ms ease;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
     }
 
     .card.is-featured {
@@ -512,8 +640,7 @@
 
     .card.is-featured:hover,
     .card.is-featured:focus-visible {
-      transform: translateY(-3px);
-      box-shadow: 0 24px 36px -26px rgba(23, 48, 57, 0.36);
+      box-shadow: 0 22px 34px -28px rgba(23, 48, 57, 0.24);
       outline: none;
     }
 
@@ -527,23 +654,29 @@
 
     .card-top {
       display: flex;
-      justify-content: space-between;
       gap: 12px;
       align-items: flex-start;
     }
 
+    .card-title-block {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
     .entity-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
-      background: linear-gradient(180deg, #f7fbf7 0%, var(--card-soft, var(--green-soft)) 100%);
+      background: rgba(241, 245, 239, 0.92);
       color: var(--card-accent, var(--green));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
     }
 
     .badge {
@@ -557,6 +690,7 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       gap: 8px;
+      transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
     }
 
     button.badge {
@@ -567,8 +701,8 @@
     button.badge:hover,
     button.badge:focus-visible {
       outline: none;
-      border-color: rgba(23, 48, 57, 0.12);
-      transform: translateY(-1px);
+      border-color: rgba(73, 95, 82, 0.2);
+      background: rgba(255, 255, 255, 0.96);
     }
 
     button.badge.is-active {
@@ -584,10 +718,45 @@
       opacity: 0.8;
     }
 
-    .badge.red { background: var(--red-soft); color: var(--red); }
-    .badge.amber { background: var(--amber-soft); color: #8d6400; }
-    .badge.green { background: var(--green-soft); color: var(--green); }
-    .badge.slate { background: #eceef0; color: #59656b; }
+    .badge.red { background: rgba(244, 240, 235, 0.95); color: color-mix(in oklab, var(--ink) 78%, white); }
+    .badge.amber { background: rgba(244, 240, 235, 0.95); color: color-mix(in oklab, var(--ink) 78%, white); }
+    .badge.green { background: rgba(237, 242, 236, 0.95); color: color-mix(in oklab, var(--ink) 78%, white); }
+    .badge.slate { background: rgba(239, 241, 242, 0.95); color: color-mix(in oklab, var(--ink) 78%, white); }
+
+    .category-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+      cursor: pointer;
+    }
+
+    .category-link::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      background: currentColor;
+      opacity: 0.72;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 7.5A2.5 2.5 0 0 1 6.5 5H10l1.6 2H17.5A2.5 2.5 0 0 1 20 9.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9Z'/%3E%3C/svg%3E") center / contain no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 7.5A2.5 2.5 0 0 1 6.5 5H10l1.6 2H17.5A2.5 2.5 0 0 1 20 9.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .category-link:hover,
+    .category-link:focus-visible {
+      outline: none;
+      color: var(--green-deep);
+    }
 
     .context-pill,
     .key-chip,
@@ -603,13 +772,13 @@
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      background: rgba(23, 48, 57, 0.05);
+      background: rgba(255, 255, 255, 0.7);
       color: var(--muted-strong);
     }
 
     .context-pill {
-      background: var(--card-soft, rgba(31, 122, 121, 0.08));
-      color: var(--card-accent, var(--teal));
+      background: rgba(241, 245, 239, 0.9);
+      color: color-mix(in oklab, var(--ink) 82%, white);
     }
 
     .support-chip {
@@ -622,51 +791,95 @@
     }
 
     .card-summary {
-      margin-top: 12px;
       font-size: 15px;
-      line-height: 1.58;
+      line-height: 1.62;
       color: var(--muted-strong);
+    }
+
+    .card h3 {
+      font-size: 1.08rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
 
     .card-context-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 10px;
-      margin-top: 16px;
     }
 
     .context-panel {
       display: grid;
-      gap: 4px;
-      padding: 11px 12px;
-      border-radius: 14px;
-      background: rgba(244, 248, 246, 0.92);
-      border: 1px solid rgba(23, 48, 57, 0.05);
+      gap: 8px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      background: rgba(248, 246, 240, 0.8);
+    }
+
+    .context-panel.problems {
+      background: linear-gradient(180deg, rgba(255, 244, 239, 0.95), rgba(255, 248, 245, 0.95));
+      border-color: rgba(197, 96, 83, 0.18);
+    }
+
+    .context-panel.products {
+      background: linear-gradient(180deg, rgba(240, 247, 241, 0.95), rgba(247, 251, 247, 0.95));
+      border-color: rgba(76, 126, 92, 0.16);
     }
 
     .context-label,
     .meta-label {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+    }
+
+    .context-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .context-label::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      background: currentColor;
+      opacity: 0.78;
+    }
+
+    .context-panel.problems .context-label {
+      color: #9d4a3f;
+    }
+
+    .context-panel.products .context-label {
+      color: #2f6b4b;
+    }
+
+    .context-panel.problems .context-label::before {
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3.8 21 19.5H3L12 3.8Z'/%3E%3Cpath fill='white' d='M12 8.2a1 1 0 0 1 1 1V13a1 1 0 1 1-2 0V9.2a1 1 0 0 1 1-1Zm0 8.1a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3Z'/%3E%3C/svg%3E") center / contain no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3.8 21 19.5H3L12 3.8Z'/%3E%3Cpath fill='white' d='M12 8.2a1 1 0 0 1 1 1V13a1 1 0 1 1-2 0V9.2a1 1 0 0 1 1-1Zm0 8.1a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .context-panel.products .context-label::before {
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 5c5.2 0 9.5 4.4 10.8 6-.6.8-4.8 8-10.8 8S1.8 11.8 1.2 11C2.5 9.4 6.8 5 12 5Zm0 2c-3.5 0-6.8 2.7-8.5 4 1.7 1.3 5 4 8.5 4s6.8-2.7 8.5-4C18.8 9.7 15.5 7 12 7Zm0 1.8A3.2 3.2 0 1 1 8.8 12 3.2 3.2 0 0 1 12 8.8Zm0 2A1.2 1.2 0 1 0 13.2 12 1.2 1.2 0 0 0 12 10.8Z'/%3E%3C/svg%3E") center / contain no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 5c5.2 0 9.5 4.4 10.8 6-.6.8-4.8 8-10.8 8S1.8 11.8 1.2 11C2.5 9.4 6.8 5 12 5Zm0 2c-3.5 0-6.8 2.7-8.5 4 1.7 1.3 5 4 8.5 4s6.8-2.7 8.5-4C18.8 9.7 15.5 7 12 7Zm0 1.8A3.2 3.2 0 1 1 8.8 12 3.2 3.2 0 0 1 12 8.8Zm0 2A1.2 1.2 0 1 0 13.2 12 1.2 1.2 0 0 0 12 10.8Z'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
     .context-value {
       font-size: 14px;
-      line-height: 1.48;
+      line-height: 1.56;
       color: var(--muted-strong);
     }
 
     .card-support-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
       gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
+      margin-top: auto;
       padding-top: 14px;
-      border-top: 1px solid rgba(23, 48, 57, 0.08);
+      border-top: 1px solid rgba(73, 95, 82, 0.14);
     }
 
     .support-cluster {
@@ -679,24 +892,38 @@
     .support-metric {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      min-height: 34px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      background: rgba(23, 48, 57, 0.04);
-      color: var(--ink);
-      font-size: 12px;
+      gap: 8px;
+      min-height: 0;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(176, 67, 54, 0.18);
+      background: linear-gradient(180deg, rgba(205, 76, 60, 0.12), rgba(205, 76, 60, 0.06));
+      color: #8a2f24;
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .support-metric.amber {
+      border-color: rgba(183, 131, 43, 0.22);
+      background: linear-gradient(180deg, rgba(224, 178, 77, 0.18), rgba(224, 178, 77, 0.08));
+      color: #8b6215;
+    }
+
+    .support-metric.red {
+      border-color: rgba(176, 67, 54, 0.2);
+      background: linear-gradient(180deg, rgba(205, 76, 60, 0.14), rgba(205, 76, 60, 0.06));
+      color: #8a2f24;
     }
 
     .support-metric strong {
-      font-size: 14px;
+      font-size: 1em;
     }
 
     .support-metric svg {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       stroke: currentColor;
       fill: none;
       stroke-width: 1.8;
@@ -705,89 +932,124 @@
       flex-shrink: 0;
     }
 
+    .support-metric span:last-child {
+      letter-spacing: 0.02em;
+    }
+
     .card-cta {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 36px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(23, 48, 57, 0.1);
-      background: rgba(255, 255, 255, 0.84);
-      color: var(--card-accent, var(--green));
+      min-height: 24px;
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      background: transparent;
+      color: var(--green-deep);
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
+      font-weight: 900;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.18em;
+      transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+
+    .card-cta::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 5c5.2 0 9.5 4.4 10.8 6-.6.8-4.8 8-10.8 8S1.8 11.8 1.2 11C2.5 9.4 6.8 5 12 5Zm0 2c-3.5 0-6.8 2.7-8.5 4 1.7 1.3 5 4 8.5 4s6.8-2.7 8.5-4C18.8 9.7 15.5 7 12 7Zm0 1.8A3.2 3.2 0 1 1 8.8 12 3.2 3.2 0 0 1 12 8.8Zm0 2A1.2 1.2 0 1 0 13.2 12 1.2 1.2 0 0 0 12 10.8Z'/%3E%3C/svg%3E") center / contain no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 5c5.2 0 9.5 4.4 10.8 6-.6.8-4.8 8-10.8 8S1.8 11.8 1.2 11C2.5 9.4 6.8 5 12 5Zm0 2c-3.5 0-6.8 2.7-8.5 4 1.7 1.3 5 4 8.5 4s6.8-2.7 8.5-4C18.8 9.7 15.5 7 12 7Zm0 1.8A3.2 3.2 0 1 1 8.8 12 3.2 3.2 0 0 1 12 8.8Zm0 2A1.2 1.2 0 1 0 13.2 12 1.2 1.2 0 0 0 12 10.8Z'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
     .card-cta:hover,
     .card-cta:focus-visible {
       outline: none;
-      border-color: color-mix(in srgb, var(--card-accent) 34%, white);
-      background: color-mix(in srgb, var(--card-soft) 60%, white);
+      color: color-mix(in oklab, var(--green-deep) 82%, black);
+      text-decoration-color: color-mix(in oklab, var(--green-deep) 82%, black);
+    }
+
+    .card-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     /* ── hero path entry cards ── */
     .hero-section {
-      margin-top: 12px;
-      padding: 28px 22px 22px;
+      margin-top: var(--space-sm);
+      padding: clamp(24px, 4vw, 44px);
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .hero-intro {
+      display: grid;
+      gap: 8px;
       text-align: center;
-      max-width: 52ch;
-      margin: 0 auto 28px;
+      max-width: 60ch;
+      margin: 0 auto 24px;
     }
 
-    .hero-intro h1 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      margin-top: 8px;
+    .hero-intro p {
+      max-width: 62ch;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .path-entry-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .path-entry-card {
       cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 22px;
-      padding: 0;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.82);
-      transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
-      box-shadow: 0 12px 28px -18px rgba(23, 48, 57, 0.2);
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 26px;
+      padding: 22px;
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      min-height: 100%;
+      overflow: visible;
+      background: rgba(255, 255, 255, 0.88);
+      transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 14px 28px -24px rgba(23, 48, 57, 0.26);
       position: relative;
     }
 
     .path-entry-card.active {
-      border-color: var(--path-accent, var(--green));
-      box-shadow: 0 16px 36px -16px rgba(23, 48, 57, 0.28), 0 0 0 4px var(--path-soft-ring, rgba(43, 107, 79, 0.1));
+      border-color: rgba(73, 95, 82, 0.18);
+      box-shadow: 0 18px 32px -24px rgba(23, 48, 57, 0.24);
     }
 
     .path-entry-card:hover {
-      transform: translateY(-3px);
+      border-color: rgba(73, 95, 82, 0.18);
       box-shadow: 0 20px 40px -16px rgba(23, 48, 57, 0.25);
     }
 
     .path-visual {
       display: flex;
       align-items: center;
-      justify-content: center;
-      height: 160px;
-      padding: 20px;
+      justify-content: flex-start;
+      height: auto;
+      padding: 0;
       overflow: hidden;
     }
 
     .path-emblem {
-      width: min(168px, 100%);
-      padding: 16px;
-      border-radius: 22px;
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      background: rgba(255, 255, 255, 0.74);
+      width: 64px;
+      height: 64px;
+      padding: 0;
+      border-radius: 20px;
+      border: 1px solid rgba(73, 95, 82, 0.08);
+      background: rgba(241, 245, 239, 0.94);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
       display: flex;
       align-items: center;
@@ -795,13 +1057,13 @@
     }
 
     .path-emblem-icon {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.96);
       box-shadow: inset 0 0 0 1px rgba(23, 48, 57, 0.08);
     }
 
@@ -821,20 +1083,22 @@
     }
 
     .path-body {
-      padding: 18px;
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      text-align: center;
     }
 
     .path-body h2 {
-      font-size: 1.25rem;
-      letter-spacing: -0.025em;
-      font-weight: 800;
-      margin: 0;
+      display: none;
     }
 
     .path-body > p {
-      margin-top: 6px;
-      font-size: 14px;
-      line-height: 1.5;
+      margin: 0;
+    }
+
+    .path-primary-grid .path-card:nth-child(4) {
+      background: linear-gradient(180deg, rgba(239, 242, 233, 0.98), rgba(249, 251, 246, 0.84));
     }
 
     @media (max-width: 980px) {
@@ -847,6 +1111,36 @@
         grid-template-columns: 1fr;
       }
     }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(100vw - 20px, 1220px);
+        padding-top: 10px;
+      }
+
+      .topbar,
+      .hero-section,
+      .result-shell,
+      .section {
+        border-radius: 22px;
+      }
+
+      .topbar {
+        padding: 14px;
+      }
+
+      .nav-wrap {
+        justify-content: flex-start;
+      }
+
+      .nav {
+        gap: 12px 16px;
+      }
+
+      .hero-intro h1 {
+        font-size: clamp(2.2rem, 11vw, 3.35rem);
+      }
+    }
   </style>
 </head>
 <body x-data="explorerPage()">
@@ -854,31 +1148,26 @@
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
-        <div>
-          <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
-      <div class="topbar-right">
+      <div class="nav-wrap">
         <nav class="nav">
           <a href="../site/index.html">Home</a>
           <a href="../site/about.html">About</a>
           <a href="../membership-flow/index.html">Membership</a>
           <a class="active" href="./index.html">Biologicals Explorer</a>
-          <a href="../site/workspace.html">Workspace</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
         </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
       </div>
     </header>
-
-    <nav class="surface subnav" aria-label="Biologicals explorer pages">
-      <a class="active" href="./index.html">Explorer</a>
-      <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
-    </nav>
 
     <section class="surface hero-section">
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
-        <h1>Explore</h1>
         <p style="margin-top: 8px; font-size: 15px;">Start with a crop, a pest or disease, or a biological product. The deeper evidence, guidance, standards, and transition context sit underneath the records you open.</p>
       </div>
 
@@ -891,7 +1180,7 @@
           @click="setActiveMode('crops')"
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="setActiveMode('crops')" @keydown.space.prevent="setActiveMode('crops')">
-          <div class="path-visual" style="background: linear-gradient(180deg, #fdf4d4 0%, #f5e48c 100%)">
+          <div class="path-visual" style="background: linear-gradient(180deg, rgba(243, 237, 220, 0.95) 0%, rgba(248, 244, 234, 0.95) 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #7a6b26">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -903,8 +1192,20 @@
             </div>
           </div>
           <div class="path-body">
-            <h2 style="color: #5a4d1a">Crops</h2>
-            <p>Browse biological activity by production context — citrus, maize, potatoes, grapes, and more.</p>
+            <div class="path-head">
+              <span>Start with</span>
+              <strong>Crops</strong>
+            </div>
+            <p class="path-kicker">Browse biological activity by production context.</p>
+            <div class="path-meta">
+              <div class="meta-row">
+                <label>Includes</label>
+                <p>citrus, maize, potatoes, grapes, and more.</p>
+              </div>
+            </div>
+            <div class="path-actions">
+              <span class="route-link">Browse by crop</span>
+            </div>
           </div>
         </article>
 
@@ -915,7 +1216,7 @@
           @click="setActiveMode('problems')"
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="setActiveMode('problems')" @keydown.space.prevent="setActiveMode('problems')">
-          <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
+          <div class="path-visual" style="background: linear-gradient(180deg, rgba(239, 236, 229, 0.95) 0%, rgba(246, 242, 237, 0.95) 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #b05b37">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -931,8 +1232,20 @@
             </div>
           </div>
           <div class="path-body">
-            <h2 style="color: #8a3e20">Pests &amp; Diseases</h2>
-            <p>Start with the problem — bollworm, thrips, powdery mildew, rust, and more.</p>
+            <div class="path-head">
+              <span>Start with</span>
+              <strong>Pests &amp; Diseases</strong>
+            </div>
+            <p class="path-kicker">Start with the problem.</p>
+            <div class="path-meta">
+              <div class="meta-row">
+                <label>Includes</label>
+                <p>bollworm, thrips, powdery mildew, rust, and more.</p>
+              </div>
+            </div>
+            <div class="path-actions">
+              <span class="route-link">Browse by problem</span>
+            </div>
           </div>
         </article>
 
@@ -943,7 +1256,7 @@
           @click="setActiveMode('products')"
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="setActiveMode('products')" @keydown.space.prevent="setActiveMode('products')">
-          <div class="path-visual" style="background: linear-gradient(180deg, rgba(220,238,224,0.2) 0%, rgba(220,238,224,0.5) 100%)">
+          <div class="path-visual" style="background: linear-gradient(180deg, rgba(236, 242, 238, 0.95) 0%, rgba(243, 247, 244, 0.95) 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #2b6b4f">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -955,8 +1268,20 @@
             </div>
           </div>
           <div class="path-body">
-            <h2 style="color: #1e4f39">Biologicals</h2>
-            <p>Browse biological products — biopesticides, inoculants, semiochemicals, and more.</p>
+            <div class="path-head">
+              <span>Start with</span>
+              <strong>Biologicals</strong>
+            </div>
+            <p class="path-kicker">Browse biological products.</p>
+            <div class="path-meta">
+              <div class="meta-row">
+                <label>Includes</label>
+                <p>biopesticides, inoculants, semiochemicals, and more.</p>
+              </div>
+            </div>
+            <div class="path-actions">
+              <span class="route-link">Browse by product</span>
+            </div>
           </div>
         </article>
 
@@ -999,24 +1324,25 @@
             @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
               <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
-              <button
-                type="button"
-                class="badge"
-                :class="[card.badgeTone, { 'is-active': primaryFilter === displayBadge(card) }]"
-                :title="badgeTitle(card)"
-                @click.stop="togglePrimaryFilter(displayBadge(card))"
-                x-text="displayBadge(card)"></button>
+              <div class="card-title-block">
+                <h3 style="font-size: 1.15rem;" x-text="card.title"></h3>
+                <button
+                  type="button"
+                  class="category-link"
+                  :title="badgeTitle(card)"
+                  @click.stop="togglePrimaryFilter(displayBadge(card))"
+                  x-text="displayBadge(card)"></button>
+              </div>
             </div>
-            <h3 style="margin-top: 12px; font-size: 1.15rem;" x-text="card.title"></h3>
 
-            <p class="card-summary" x-text="cardSummary(card)"></p>
+            <p class="card-summary" x-show="cardSummary(card)" x-text="cardSummary(card)"></p>
 
             <div class="card-context-grid">
-              <div class="context-panel">
+              <div class="context-panel problems">
                 <div class="context-label" x-text="primaryContextLabel(card)"></div>
                 <div class="context-value" x-text="primaryContextValue(card)"></div>
               </div>
-              <div class="context-panel">
+              <div class="context-panel products">
                 <div class="context-label" x-text="secondaryContextLabel(card)"></div>
                 <div class="context-value" x-text="secondaryContextValue(card)"></div>
               </div>
@@ -1024,22 +1350,20 @@
 
             <div class="card-support-row">
               <div class="support-cluster">
-                <div class="support-metric">
-                  <strong x-text="supportMetricValue(card)"></strong>
-                  <span x-text="supportMetricLabel(card)"></span>
-                </div>
-                <div class="support-metric" x-show="hhpInsight(card)">
+                <div class="support-metric" :class="hhpTone(card)" x-show="hhpInsight(card)">
                   <span x-html="hhpIconSvg()" aria-hidden="true"></span>
                   <strong>HHP</strong>
                   <span x-text="hhpLabel(card)"></span>
                 </div>
               </div>
-              <a
-                class="card-cta"
-                x-show="!isFeaturedCard(card)"
-                :href="withReturnTo(cardHref(card))"
-                @click.stop
-                x-text="defaultOpenLabel()"></a>
+              <div class="card-cta-row">
+                <a
+                  class="card-cta"
+                  x-show="!isFeaturedCard(card)"
+                  :href="withReturnTo(cardHref(card))"
+                  @click.stop
+                  x-text="defaultOpenLabel(card)"></a>
+              </div>
             </div>
           </article>
         </template>
@@ -1280,9 +1604,13 @@
           const joiner = url.includes('?') ? '&' : '?';
           return `${url}${joiner}returnTo=${encodeURIComponent(`${window.location.pathname}${window.location.search}`)}`;
         },
-        defaultOpenLabel() {
-          if (this.activeId === 'crops') return 'See linked products';
-          if (this.activeId === 'problems') return 'See biological options';
+        defaultOpenLabel(card) {
+          if (this.activeId === 'crops') {
+            return `View ${this.linkedProductCount(card) || ''} linked products`.replace(/\s+/g, ' ').trim();
+          }
+          if (this.activeId === 'problems') {
+            return `View ${this.linkedProductCount(card) || ''} linked products`.replace(/\s+/g, ' ').trim();
+          }
           return 'Open full product view';
         },
         primaryFilter: '__all__',
@@ -1315,13 +1643,14 @@
         cleanCount(value) {
           return String(value || '').replace(/\s*use records?/i, '').trim();
         },
-        supportMetricValue(card) {
-          if (this.activeId === 'products') return card.leftMetric;
+        linkedProductCount(card) {
           return this.cleanCount(this.cardCount(card, 'Visible biological uses'));
         },
-        supportMetricLabel(card) {
-          if (this.activeId === 'products') return 'source records';
-          return 'linked options';
+        listCount(value) {
+          return String(value || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean).length;
         },
         hhpInsight(card) {
           const map = {
@@ -1349,28 +1678,23 @@
         },
         hhpLabel(card) {
           if (!this.hhpInsight(card)) return "";
-          if (/strong|priority/i.test(this.hhpInsight(card))) return "Priority replacement context";
-          if (/partial|uneven/i.test(this.hhpInsight(card))) return "Substitution pathway visible";
-          return "HHP transition relevance";
+          if (/strong|priority/i.test(this.hhpInsight(card))) return "Priority replacement";
+          if (/partial|uneven/i.test(this.hhpInsight(card))) return "Visible transition risk";
+          return "Transition relevance";
+        },
+        hhpTone(card) {
+          const insight = this.hhpInsight(card);
+          if (!insight) return "";
+          if (/strong|priority/i.test(insight)) return "red";
+          return "amber";
         },
         cardSummary(card) {
-          const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
           if (this.activeId === 'crops') {
-            const problems = this.shortList(this.cardCount(card, 'Top visible pressures'));
-            if (problems && biologicalUses) {
-              return `Linked problems include ${problems}. ${biologicalUses} biological options linked.`;
-            }
-            if (problems) return `Linked problems include ${problems}.`;
-            if (biologicalUses) return `${biologicalUses} biological options linked.`;
             return '';
           }
           if (this.activeId === 'problems') {
             const crops = this.shortList(card.crops);
-            if (crops && biologicalUses) {
-              return `Linked crops include ${crops}. ${biologicalUses} biological options linked.`;
-            }
             if (crops) return `Linked crops include ${crops}.`;
-            if (biologicalUses) return `${biologicalUses} biological options linked.`;
             return '';
           }
           return this.productCardSummary(card);
@@ -1423,8 +1747,14 @@
           return fit.charAt(0).toUpperCase() + fit.slice(1);
         },
         primaryContextLabel(card) {
-          if (this.activeId === 'crops') return 'Linked problems';
-          if (this.activeId === 'problems') return 'Linked crops';
+          if (this.activeId === 'crops') {
+            const count = this.listCount(this.cardCount(card, 'Top visible pressures'));
+            return count ? `${count} linked problems` : 'Linked problems';
+          }
+          if (this.activeId === 'problems') {
+            const count = this.listCount(card.crops);
+            return count ? `${count} linked crops` : 'Linked crops';
+          }
           return 'Linked crops';
         },
         primaryContextValue(card) {
@@ -1433,14 +1763,27 @@
           return this.cardCount(card, 'Linked crops') || this.cardCount(card, 'Category') || '';
         },
         secondaryContextLabel(card) {
-          if (this.activeId === 'crops') return 'Biological options';
-          if (this.activeId === 'problems') return 'Biological options';
+          if (this.activeId === 'crops') return 'Linked products';
+          if (this.activeId === 'problems') return 'Linked products';
           return 'Active';
         },
         secondaryContextValue(card) {
-          const uses = this.cardCount(card, 'Visible biological uses');
-          if (this.activeId === 'crops' || this.activeId === 'problems') {
-            return uses || '';
+          const uses = this.linkedProductCount(card);
+          if (this.activeId === 'crops') {
+            const pressureCount = this.listCount(this.cardCount(card, 'Top visible pressures'));
+            if (uses && pressureCount) {
+              return `${uses} products across ${pressureCount} visible problems`;
+            }
+            if (uses) return `${uses} products available to review`;
+            return '';
+          }
+          if (this.activeId === 'problems') {
+            const cropCount = this.listCount(card.crops);
+            if (uses && cropCount) {
+              return `${uses} products across ${cropCount} linked crops`;
+            }
+            if (uses) return `${uses} products available to review`;
+            return '';
           }
           return this.cardCount(card, 'Active') || this.cardCount(card, 'Category') || '';
         },
