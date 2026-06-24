@@ -487,22 +487,97 @@
       pointer-events: none;
     }
 
+    .results-head {
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.9fr);
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .results-head-copy p {
+      max-width: 58ch;
+    }
+
+    .legend-panel {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid rgba(23, 48, 57, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 16px 26px -24px rgba(23, 48, 57, 0.28);
+    }
+
+    .legend-panel h3 {
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .legend-item {
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(244, 248, 246, 0.95);
+      border: 1px solid rgba(23, 48, 57, 0.06);
+    }
+
+    .legend-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .legend-value {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--muted-strong);
+    }
+
+    .legend-footnote {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted-strong);
+    }
+
+    .card {
+      --card-accent: var(--green);
+      --card-soft: var(--green-soft);
+      position: relative;
+      overflow: visible;
+      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      padding: 18px;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 36px -26px rgba(23, 48, 57, 0.36);
+      outline: none;
+    }
+
+    .card:focus-visible {
+      border-color: color-mix(in srgb, var(--card-accent) 38%, white);
+    }
+
+    .card::after {
+      background: linear-gradient(90deg, var(--card-accent) 0%, color-mix(in srgb, var(--card-accent) 35%, white) 100%);
+    }
+
     .card-top {
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      align-items: start;
-    }
-    .card-title-link {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 160ms ease;
-    }
-    .card-title-link:hover,
-    .card-title-link:focus-visible {
-      border-color: currentColor;
-      outline: none;
+      align-items: center;
     }
 
     .entity-icon {
@@ -546,29 +621,10 @@
     .badge.green { background: var(--green-soft); color: var(--green); }
     .badge.slate { background: #eceef0; color: #59656b; }
 
-    .card {
-      --card-accent: var(--green);
-      --card-soft: var(--green-soft);
-      position: relative;
-      overflow: visible;
-      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
-    }
-
-    .card::after {
-      background: linear-gradient(90deg, var(--card-accent) 0%, color-mix(in srgb, var(--card-accent) 35%, white) 100%);
-    }
-
-    .card-context {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
     .context-pill,
     .key-chip,
-    .legend-chip {
+    .legend-chip,
+    .support-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -588,39 +644,39 @@
       color: var(--card-accent, var(--teal));
     }
 
-    .info-dot {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(23, 48, 57, 0.08);
+    .support-chip {
+      background: rgba(23, 48, 57, 0.06);
       color: var(--muted-strong);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: help;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .meta {
+    .card-summary {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.58;
+      color: var(--muted-strong);
+    }
+
+    .card-context-grid {
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       margin-top: 16px;
     }
 
-    .meta-row {
+    .context-panel {
       display: grid;
       gap: 4px;
       padding: 11px 12px;
       border-radius: 14px;
       background: rgba(244, 248, 246, 0.92);
+      border: 1px solid rgba(23, 48, 57, 0.05);
     }
 
-    .meta.compact-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 16px;
-    }
-
+    .context-label,
     .meta-label {
       font-size: 12px;
       color: var(--muted);
@@ -628,216 +684,73 @@
       letter-spacing: 0.06em;
     }
 
-    .crop-line {
-      margin-top: 14px;
-      padding: 12px 12px;
-      border: 1px solid rgba(43, 107, 79, 0.12);
-      border-radius: 14px;
-      background: rgba(238, 246, 239, 0.94);
+    .context-value {
+      font-size: 14px;
+      line-height: 1.48;
+      color: var(--muted-strong);
     }
 
-    .crop-line span {
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .crop-chip-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .crop-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 32px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.82);
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: transform 140ms ease, box-shadow 140ms ease;
-    }
-
-    .crop-chip:hover,
-    .crop-chip:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 8px 18px rgba(23, 48, 57, 0.08);
-      outline: none;
-    }
-
-    .crop-chip svg {
-      width: 16px;
-      height: 16px;
-      stroke: var(--card-accent, var(--green));
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
-    }
-
-    .mini-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(23, 48, 57, 0.08);
-    }
-
-    .mini-metrics > div {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(23, 48, 57, 0.04);
-    }
-
-    .mini-metric-value {
-      font-size: 1.25rem;
-      line-height: 1.05;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .mini-metric-label {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .card-cta {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(23, 48, 57, 0.06);
-    }
-
-    .card-cta-link {
-      display: inline-flex;
-      align-items: center;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--card-accent, var(--green));
-      text-decoration: none;
-      transition: opacity 140ms ease;
-    }
-
-    .card-cta-link:hover {
-      opacity: 0.75;
-    }
-
-    .active-legend {
+    .card-support-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.86);
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(23, 48, 57, 0.08);
     }
 
-    .legend-cluster {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .legend-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 10px;
-      background: var(--accent-soft, rgba(31, 122, 121, 0.12));
-      color: var(--accent, var(--teal));
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .legend-copy {
-      max-width: 46ch;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--muted-strong);
-    }
-
-    .meaning-strip {
-      margin-top: 12px;
-      padding: 11px 12px;
-      border-radius: 14px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 74%, white);
-      color: var(--muted-strong);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .meaning-strip strong {
-      color: var(--card-accent, var(--green));
-    }
-
-    .model-strip {
+    .support-cluster {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px dashed rgba(23, 48, 57, 0.14);
     }
 
-    .model-node {
+    .support-metric {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      min-height: 30px;
-      padding: 7px 10px;
+      gap: 6px;
+      min-height: 34px;
+      padding: 8px 11px;
       border-radius: 999px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 78%, white);
-      color: var(--card-accent, var(--green));
-      font-size: 11px;
+      background: rgba(23, 48, 57, 0.04);
+      color: var(--ink);
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.02em;
+    }
+
+    .support-metric strong {
+      font-size: 14px;
+    }
+
+    .support-link {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--card-accent, var(--green));
       text-transform: uppercase;
     }
 
-    .model-symbol {
+    .result-card-feature {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      color: inherit;
-    }
-
-    .model-arrow {
-      color: var(--muted);
+      gap: 6px;
+      margin-top: 12px;
+      color: var(--card-accent, var(--green));
       font-size: 12px;
       font-weight: 800;
+      letter-spacing: 0.03em;
     }
 
-    .relationship-note {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted-strong);
+    .result-card-feature::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: currentColor;
     }
 
     .pressure-card {
@@ -957,20 +870,13 @@
       line-height: 1.5;
     }
 
-    .section-note {
-      margin-top: 12px;
-      max-width: 72ch;
-      font-size: 14px;
-      color: var(--muted-strong);
-    }
-
     @media (max-width: 980px) {
       .path-entry-grid,
-      .intro-band,
       .filter-grid,
       .card-grid,
       .results-head,
-      .mini-metrics {
+      .legend-grid,
+      .card-context-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1006,7 +912,7 @@
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
         <h1>Explore</h1>
-        <p style="margin-top: 8px; font-size: 15px;">ABA maintains a shared knowledge layer for the sector — products, crop contexts, pest and disease problems, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
+        <p style="margin-top: 8px; font-size: 15px;">ABA brings together products, crop contexts, pest and disease problems, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
       </div>
 
       <div class="path-entry-grid">
@@ -1092,11 +998,26 @@
 
     <section class="surface result-shell" :style="'--accent:' + active.accent + '; --accent-soft:' + active.soft">
       <div class="results-head">
-        <div>
+        <div class="results-head-copy">
           <div class="eyebrow" x-text="active.label"></div>
           <h2 style="margin-top: 6px;" x-text="active.heading"></h2>
           <p style="margin-top: 8px; max-width: none;" x-text="active.description"></p>
         </div>
+        <aside class="legend-panel">
+          <div>
+            <div class="eyebrow">Legend</div>
+            <h3 style="margin-top: 6px;" x-text="legendTitle()"></h3>
+          </div>
+          <div class="legend-grid">
+            <template x-for="item in legendItems()" :key="item.label">
+              <div class="legend-item">
+                <div class="legend-kicker" x-text="item.label"></div>
+                <div class="legend-value" x-text="item.value"></div>
+              </div>
+            </template>
+          </div>
+          <p class="legend-footnote" x-text="legendNote()"></p>
+        </aside>
       </div>
 
       <div class="filter-grid">
@@ -1113,83 +1034,50 @@
 
       <div class="card-grid">
         <template x-for="card in active.cards" :key="card.title">
-          <article class="card" :class="{ 'pressure-card': activeId === 'problems' }" :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)">
+          <article
+            class="card"
+            :class="{ 'pressure-card': activeId === 'problems' }"
+            :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)"
+            role="link"
+            tabindex="0"
+            @click="openCard(card, $event)"
+            @keydown.enter.prevent="openCard(card, $event)"
+            @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
-              <div class="entity-icon tooltip-anchor" x-html="recordIcon(card)" :data-tooltip="cardIconTooltip(card)" :aria-label="cardIconTooltip(card)"></div>
+              <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
               <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
             </div>
 
-            <h3 style="margin-top: 14px; font-size: 1.05rem;">
-              <template x-if="isFeaturedCard(card)">
-                <a class="card-title-link" :href="cardHref(card)" x-text="card.title"></a>
-              </template>
-              <template x-if="!isFeaturedCard(card)">
-                <span x-text="card.title"></span>
-              </template>
-            </h3>
+            <div class="result-card-feature" x-show="isFeaturedCard(card)">Includes evidence, standards, resources, and HHP transition context</div>
 
-            <div class="model-strip">
-              <template x-for="(model, index) in card.models" :key="model.label + index">
-                <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
-                    <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
-                    <span x-text="modelLabel(model)"></span>
-                  </div>
-                  <span class="model-arrow" x-show="index < card.models.length - 1">→</span>
-                </template>
-              </template>
-            </div>
+            <h3 style="margin-top: 12px; font-size: 1.15rem;" x-text="card.title"></h3>
 
-            <div class="crop-line" x-show="card.crops">
-              <span>Linked crops</span>
-              <div class="crop-chip-row">
-                <template x-for="crop in cropChips(card.crops)" :key="crop.label">
-                  <a class="crop-chip tooltip-anchor" :href="catalogueHref(crop.label)" :data-tooltip="crop.tooltip" :aria-label="crop.tooltip">
-                    <span x-html="crop.icon"></span>
-                    <span x-text="crop.label"></span>
-                  </a>
-                </template>
+            <p class="card-summary" x-text="cardSummary(card)"></p>
+
+            <div class="card-context-grid">
+              <div class="context-panel">
+                <div class="context-label" x-text="primaryContextLabel(card)"></div>
+                <div class="context-value" x-text="primaryContextValue(card)"></div>
+              </div>
+              <div class="context-panel">
+                <div class="context-label" x-text="secondaryContextLabel(card)"></div>
+                <div class="context-value" x-text="secondaryContextValue(card)"></div>
               </div>
             </div>
 
-            <div class="meta" :class="{ 'compact-grid': activeId === 'problems' }" style="margin-top: 14px;">
-              <template x-for="item in card.meta" :key="item.label">
-                <div class="meta-row" :title="metaLabel(item) + ': ' + item.value">
-                  <div class="meta-label" x-text="metaLabel(item)"></div>
-                  <div x-text="item.value"></div>
+            <div class="card-support-row">
+              <div class="support-cluster">
+                <div class="support-metric">
+                  <strong x-text="supportMetricValue(card)"></strong>
+                  <span x-text="supportMetricLabel(card)"></span>
                 </div>
-              </template>
-            </div>
-
-            <div class="mini-metrics">
-              <div>
-                <div class="mini-metric-value" x-text="card.leftMetric"></div>
-                <div class="mini-metric-label" x-text="metricLabel(card.leftLabel)"></div>
+                <div class="support-metric" x-show="hhpInsight(card)">
+                  <strong>HHP</strong>
+                  <span x-text="hhpLabel(card)"></span>
+                </div>
               </div>
-              <div>
-                <div class="mini-metric-value" x-text="card.rightMetric"></div>
-                <div class="mini-metric-label" x-text="metricLabel(card.rightLabel)"></div>
-              </div>
+              <div class="support-link" x-text="isFeaturedCard(card) ? 'Open detail page' : defaultOpenLabel()"></div>
             </div>
-
-            <div class="card-cta">
-              <template x-if="activeId === 'crops'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-              <template x-if="activeId === 'problems'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-              <template x-if="activeId === 'products'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-            </div>
-            <p class="section-note" x-show="isFeaturedCard(card)" style="margin-top: 10px;">Includes linked evidence, standards, and resource context.</p>
           </article>
         </template>
       </div>
@@ -1213,7 +1101,7 @@
             </article>
             <article class="path-card">
               <h3 style="font-size: 1.05rem;">Resource library</h3>
-              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and interpretation material that help explain what a result means.</p>
+              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and HHP transition references that help explain what a result means in wider change work.</p>
               <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library →</a></p>
             </article>
             <article class="path-card">
@@ -1392,6 +1280,10 @@
         catalogueHref(crop) {
           return `./product-catalogue.html?crop=${encodeURIComponent(crop)}`;
         },
+        openCard(card, event) {
+          if (event?.target?.closest('a, button')) return;
+          window.location.href = this.cardHref(card);
+        },
         featuredDetails: {
           crops: {
             Citrus: './crop-citrus.html'
@@ -1415,15 +1307,121 @@
           if (this.activeId === 'problems') {
             return `./product-catalogue.html?problem=${encodeURIComponent(card.title)}`;
           }
-          return './product-catalogue.html';
+          return `./product-catalogue.html?q=${encodeURIComponent(card.title)}`;
         },
-        cardCtaLabel(card) {
-          if (this.isFeaturedCard(card)) {
-            return 'Open detail view';
+        defaultOpenLabel() {
+          if (this.activeId === 'crops') return 'Open linked products';
+          if (this.activeId === 'problems') return 'Open biological options';
+          return 'Open product view';
+        },
+        cardCount(card, label) {
+          return (card.meta || []).find((item) => item.label === label)?.value || '';
+        },
+        cleanCount(value) {
+          return String(value || '').replace(/\s*use records?/i, '').trim();
+        },
+        supportMetricValue(card) {
+          if (this.activeId === 'products') return card.leftMetric;
+          return this.cleanCount(this.cardCount(card, 'Visible biological uses'));
+        },
+        supportMetricLabel(card) {
+          if (this.activeId === 'products') return 'source records';
+          return 'visible options';
+        },
+        hhpInsight(card) {
+          const map = {
+            crops: {
+              Citrus: "Priority crop for HHP replacement mapping in orchard systems.",
+              Tomatoes: "High replacement relevance where insect and blight programmes still rely on higher-risk chemistry.",
+              Potatoes: "Transition relevance visible in disease-heavy programmes with limited biological substitutes.",
+              Brassicas: "Strong substitution story around lepidopteran control.",
+              Grapes: "Risk-reduction context visible in export-sensitive spray programmes."
+            },
+            problems: {
+              "African bollworm": "Strong substitution pathway where Bt-led options can displace higher-risk insecticide programmes.",
+              Thrips: "Partial replacement story where biological options exist but coverage is uneven.",
+              Aphids: "Transition need is clear, but visible biological options remain thin.",
+              "Diamond back moth": "Priority HHP transition context in high-pressure vegetable programmes."
+            },
+            products: {
+              "Thuricide WP": "Useful in HHP transition programmes where Bt replaces higher-risk caterpillar chemistry.",
+              "DiPel DF": "Useful in HHP transition programmes where Bt replaces higher-risk caterpillar chemistry.",
+              "Florbac WG": "Visible replacement pathway in vegetable pest-control programmes.",
+              "Isomate C Plus": "Supports lower-risk transition by reducing reliance on conventional insecticide use."
+            }
+          };
+          return map[this.activeId]?.[card.title] || "";
+        },
+        hhpLabel(card) {
+          if (!this.hhpInsight(card)) return "";
+          if (/strong|priority/i.test(this.hhpInsight(card))) return "Priority replacement context";
+          if (/partial|uneven/i.test(this.hhpInsight(card))) return "Substitution pathway visible";
+          return "HHP transition relevance";
+        },
+        cardSummary(card) {
+          const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
+          if (this.activeId === 'crops') {
+            return `${card.title} is a strong crop entry point because the linked problems and visible biological options are already legible in the current explorer. ${biologicalUses ? `${biologicalUses} visible options are currently surfaced here.` : ''}`.trim();
           }
-          if (this.activeId === 'crops') return 'See linked products';
-          if (this.activeId === 'problems') return 'See biological options';
-          return 'Open full product view';
+          if (this.activeId === 'problems') {
+            return `${card.title} is useful as a problem-led view because it connects clearly to affected crops and biological routes that people can compare quickly. ${biologicalUses ? `${biologicalUses} visible options are currently surfaced here.` : ''}`.trim();
+          }
+          const category = (card.meta || []).find((item) => item.label === 'Category')?.value || card.category || 'Biological product';
+          return `${card.title} is a ${String(category).toLowerCase()} record that helps explain where this biological fits, what it addresses, and how it may support a lower-risk transition.`;
+        },
+        primaryContextLabel(card) {
+          if (this.activeId === 'crops') return 'Linked problems';
+          if (this.activeId === 'problems') return 'Linked crops';
+          return 'Key problems';
+        },
+        primaryContextValue(card) {
+          if (this.activeId === 'crops') return this.cardCount(card, 'Top visible pressures') || 'Visible crop problems are still being refined.';
+          if (this.activeId === 'problems') return card.crops || 'Linked crops are still being refined.';
+          return (card.meta || []).find((item) => item.label === 'Pressure links')?.value || 'Problem links are still being refined.';
+        },
+        secondaryContextLabel(card) {
+          if (this.activeId === 'crops') return 'Visible biological options';
+          if (this.activeId === 'problems') return 'Visible biological options';
+          return 'Use context';
+        },
+        secondaryContextValue(card) {
+          const uses = this.cardCount(card, 'Visible biological uses');
+          if (this.activeId === 'crops' || this.activeId === 'problems') {
+            return uses || 'Visible options are still being refined.';
+          }
+          return String(card.fit || '').replace(/\.$/, '');
+        },
+        legendTitle() {
+          if (this.activeId === 'crops') return 'How to read the crop results';
+          if (this.activeId === 'problems') return 'How to read the problem results';
+          return 'How to read the biological product results';
+        },
+        legendItems() {
+          if (this.activeId === 'crops') {
+            return [
+              { label: 'Icon', value: 'The record starts from a crop context.' },
+              { label: 'Type tag', value: 'Shows the production grouping, such as orchards or field crops.' },
+              { label: 'Linked problems', value: 'The main pests or diseases that anchor the crop story.' },
+              { label: 'HHP relevance', value: 'Appears only where the crop has a visible substitution or risk-reduction story.' }
+            ];
+          }
+          if (this.activeId === 'problems') {
+            return [
+              { label: 'Icon', value: 'The record starts from a pest or disease problem.' },
+              { label: 'Type tag', value: 'Shows whether the result is read mainly as a pest or disease case.' },
+              { label: 'Linked crops', value: 'The crop contexts most clearly affected by the problem.' },
+              { label: 'HHP relevance', value: 'Marks problems where lower-risk replacement pathways are part of the story.' }
+            ];
+          }
+          return [
+            { label: 'Icon', value: 'The record starts from a biological product.' },
+            { label: 'Type tag', value: 'Shows the main product family or control context.' },
+            { label: 'Key problems', value: 'The main use cases or linked problem contexts.' },
+            { label: 'HHP relevance', value: 'Marks products that visibly support substitution away from high-hazard conventional chemistry.' }
+          ];
+        },
+        legendNote() {
+          return 'Tooltips are now reserved for true micro-interactions. The main card structure should be understandable without hover.';
         },
         displayBadge(card) {
           if (this.activeId === 'problems') {

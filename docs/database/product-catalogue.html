@@ -791,6 +791,27 @@
       color: var(--muted-strong);
     }
 
+    .legend-note-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .legend-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(23, 48, 57, 0.05);
+      color: var(--muted-strong);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     .meaning-strip strong {
       color: var(--card-accent, var(--green));
     }
@@ -960,13 +981,20 @@
           <h2 style="margin-top: 6px;">Browse visible biological products.</h2>
           <div class="active-legend" :style="'--accent:' + activeCategoryTheme.accent + '; --accent-soft:' + activeCategoryTheme.soft">
             <div class="legend-cluster">
-              <div class="legend-symbol tooltip-anchor" x-html="iconSvg(activeCategoryTheme.symbol)" :data-tooltip="activeCategoryTheme.tooltip" :aria-label="activeCategoryTheme.tooltip"></div>
+              <div class="legend-symbol" x-html="iconSvg(activeCategoryTheme.symbol)" aria-hidden="true"></div>
               <div>
                 <div class="meta-label">Current lens</div>
                 <div style="margin-top: 4px; font-weight: 800;" x-text="activeCategoryTheme.title"></div>
               </div>
             </div>
-            <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
+            <div>
+              <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
+              <div class="legend-note-row">
+                <span class="legend-note">Icon = product family</span>
+                <span class="legend-note">Category tag = comparable group</span>
+                <span class="legend-note">Crop chips = linked contexts</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -981,7 +1009,7 @@
             @click="setCategoryFilter(category.id)"
             :style="'color:' + category.accent + '; background:' + category.soft">
             <span class="chip-content">
-              <span class="chip-symbol tooltip-anchor" x-html="iconSvg(category.symbol)" :data-tooltip="category.tooltip" :aria-label="category.tooltip"></span>
+              <span class="chip-symbol" x-html="iconSvg(category.symbol)" aria-hidden="true"></span>
               <span x-text="category.label"></span>
             </span>
           </button>
@@ -1044,7 +1072,6 @@
 
             <div class="card-context" style="margin-top: 12px;">
               <button type="button" class="category-label category-filter-button" @click="setCategoryFilter(product.categoryId)" x-text="product.category"></button>
-              <span class="info-dot tooltip-anchor" tabindex="0" data-tooltip="This category tag identifies which product family the record belongs to, so readers can compare like with like." aria-label="This category tag identifies which product family the record belongs to, so readers can compare like with like.">i</span>
             </div>
             <h3 style="margin-top: 10px;" x-text="product.title"></h3>
 
@@ -1057,7 +1084,7 @@
             <div class="model-strip">
               <template x-for="(model, index) in product.models" :key="model.label + index">
                 <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
+                  <div class="model-node" :title="modelDescription(model)">
                     <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
                     <span x-text="modelLabel(model)"></span>
                   </div>
@@ -1068,7 +1095,7 @@
 
             <div class="crop-chip-row" x-show="extractCropLinks(product).length">
               <template x-for="crop in extractCropLinks(product)" :key="crop.label">
-                <button type="button" class="crop-chip tooltip-anchor" :class="{ 'is-active': activeCrop === crop.label }" :data-tooltip="crop.tooltip" :aria-label="crop.tooltip" @click="setCropFilter(crop.label)">
+                <button type="button" class="crop-chip" :class="{ 'is-active': activeCrop === crop.label }" :title="crop.tooltip" @click="setCropFilter(crop.label)">
                   <span x-html="crop.icon"></span>
                   <span x-text="crop.label"></span>
                 </button>

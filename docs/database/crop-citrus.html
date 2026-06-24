@@ -6,7 +6,7 @@
   <title>ABA Biologicals Explorer | Citrus</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #173039;
@@ -14,9 +14,9 @@
       --line: rgba(23, 48, 57, 0.1);
       --surface: rgba(255, 252, 246, 0.92);
       --paper: #f4efe5;
+      --accent: #7a6b26;
+      --accent-soft: rgba(240, 228, 177, 0.62);
       --green: #2b6b4f;
-      --gold: #7a6b26;
-      --gold-soft: rgba(240, 228, 177, 0.58);
       --shadow: 0 18px 34px -28px rgba(20, 32, 34, 0.28);
     }
     * { box-sizing: border-box; }
@@ -25,22 +25,21 @@
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.12), transparent 24%),
-        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+        radial-gradient(circle at top left, rgba(122, 107, 38, 0.12), transparent 22%),
+        linear-gradient(180deg, var(--paper) 0%, #fbf8f2 48%, #f2f4ed 100%);
     }
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Source Serif 4", Georgia, serif; }
-    .shell { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 32px; }
+    .shell { width: min(1220px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 36px; }
     .surface, .card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 22px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
     }
     .surface { padding: 18px; }
     .card { padding: 18px; }
-    .topbar, .subnav, .hero-grid, .section-grid, .link-grid, .context-grid, .evidence-grid {
+    .topbar, .hero-layout, .body-layout, .module-grid, .action-grid, .topbar-right {
       display: grid;
       gap: 14px;
     }
@@ -51,60 +50,201 @@
     }
     .brand { display: flex; align-items: center; gap: 12px; }
     .mark {
-      width: 36px; height: 36px; border-radius: 999px;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(43, 107, 79, 0.12); color: var(--green);
-      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(43, 107, 79, 0.12);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
-    .mini, .eyebrow, .pill {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    .mini, .eyebrow, .fact-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-    .mini, .eyebrow { color: var(--muted); }
     .nav, .subnav {
-      display: flex; flex-wrap: wrap; gap: 14px;
-      font-size: 13px; font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
     }
-    .subnav { margin-bottom: 12px; padding: 12px 16px; }
-    .subnav a.active, .nav a.active { color: var(--green); }
-    .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); align-items: start; }
-    .hero-card {
+    .nav a.active,
+    .subnav a.active { color: var(--green); }
+    .subnav {
+      margin-bottom: 12px;
+      padding: 12px 16px;
+    }
+    .hero-layout {
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.8fr);
+      align-items: start;
+    }
+    .hero-main {
       padding: 24px;
-      background: linear-gradient(180deg, rgba(240, 228, 177, 0.74) 0%, rgba(255,255,255,0.72) 100%);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 248, 215, 0.94) 0%, rgba(255,255,255,0.76) 100%);
       border: 1px solid rgba(122, 107, 38, 0.18);
-      border-radius: 22px;
+    }
+    .hero-actions,
+    .chip-row,
+    .signal-row,
+    .bullet-list,
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     h1, h2, h3, p { margin: 0; }
-    h1 { margin-top: 8px; font-size: clamp(2rem, 3.2vw, 3rem); line-height: 1.04; }
-    h2 { font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.08; }
-    h3 { font-size: 1.02rem; line-height: 1.35; }
-    p { color: var(--muted); line-height: 1.65; }
-    .pill {
-      display: inline-flex; align-items: center;
-      min-height: 30px; padding: 7px 11px; border-radius: 999px;
-      background: rgba(255,255,255,0.76); color: var(--gold);
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
     }
-    .context-grid, .evidence-grid, .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .meta-list { display: grid; gap: 10px; margin-top: 14px; }
-    .meta-row {
-      padding: 12px 13px; border-radius: 14px;
-      background: rgba(255,255,255,0.7); border: 1px solid var(--line);
+    h2 {
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
-    .meta-label {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    h3 {
+      font-size: 1.02rem;
+      line-height: 1.35;
     }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .chip {
-      display: inline-flex; align-items: center; min-height: 34px; padding: 8px 12px;
-      border-radius: 999px; background: rgba(255,255,255,0.78); border: 1px solid var(--line); font-weight: 700;
+    p {
+      color: var(--muted);
+      line-height: 1.65;
     }
-    .link-card {
-      padding: 16px; border-radius: 16px; border: 1px solid var(--line);
-      background: rgba(255,255,255,0.76);
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
     }
-    .link-card a { color: var(--green); font-weight: 800; }
-    .section { margin-top: 12px; }
-    @media (max-width: 900px) {
-      .topbar, .hero-grid, .context-grid, .evidence-grid, .link-grid { grid-template-columns: 1fr; }
+    .chip, .action-link, .signal-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.82);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .signal-chip {
+      background: var(--accent-soft);
+      border-color: rgba(122, 107, 38, 0.12);
+      color: var(--accent);
+    }
+    .action-link {
+      color: white;
+      background: var(--green);
+      border-color: transparent;
+    }
+    .action-link.secondary {
+      color: var(--ink);
+      background: rgba(255,255,255,0.88);
+      border-color: var(--line);
+    }
+    .aside-panel {
+      display: grid;
+      gap: 12px;
+      position: sticky;
+      top: 14px;
+    }
+    .fact-card,
+    .mini-card {
+      padding: 14px 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(23, 48, 57, 0.06);
+      background: rgba(255,255,255,0.78);
+    }
+    .fact-value {
+      margin-top: 4px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--muted-strong, #32484d);
+      font-weight: 700;
+    }
+    .body-layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      margin-top: 12px;
+      align-items: start;
+    }
+    .main-column {
+      display: grid;
+      gap: 12px;
+    }
+    .module-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+    .module-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(23, 48, 57, 0.06);
+    }
+    .module-card strong {
+      color: var(--ink);
+    }
+    .list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .list-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(23, 48, 57, 0.06);
+    }
+    .list-card p { margin-top: 8px; }
+    .list-card a {
+      color: var(--green);
+      font-weight: 800;
+    }
+    .action-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+    .action-tile {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(23, 48, 57, 0.06);
+      background: rgba(255,255,255,0.78);
+    }
+    .action-tile p { margin-top: 8px; }
+    .action-tile a {
+      display: inline-flex;
+      margin-top: 12px;
+      color: var(--green);
+      font-weight: 800;
+    }
+    .support-note {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    @media (max-width: 980px) {
+      .topbar,
+      .hero-layout,
+      .body-layout,
+      .module-grid,
+      .action-grid {
+        grid-template-columns: 1fr;
+      }
+      .aside-panel { position: static; }
     }
   </style>
 </head>
@@ -132,126 +272,202 @@
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
 
-    <section class="surface hero-grid">
-      <div class="hero-card">
-        <div class="eyebrow">Crop detail</div>
-        <h1 class="display">Citrus</h1>
-        <p style="margin-top: 12px;">Citrus is one of the strongest crop entry points in the explorer because it connects clearly to insect pressure, export-sensitive standards, and multiple biological control routes.</p>
-        <div class="chip-row">
-          <div class="chip">False codling moth</div>
-          <div class="chip">Thrips</div>
-          <div class="chip">Red scale</div>
-          <div class="chip">Black spot</div>
+    <section class="surface hero-layout">
+      <div class="hero-main">
+        <div class="breadcrumb">
+          <a href="./index.html">Explorer</a>
+          <span>→</span>
+          <span>Crops</span>
+          <span>→</span>
+          <span>Citrus</span>
+        </div>
+        <div class="eyebrow" style="margin-top: 16px;">Crop detail</div>
+        <h1>Citrus</h1>
+        <p style="margin-top: 14px; max-width: 58ch;">Citrus is one of the clearest crop-led records in the current explorer because it ties together orchard problems, export-sensitive standards, field evidence, and visible biological routes in one place.</p>
+        <div class="signal-row" style="margin-top: 16px;">
+          <span class="signal-chip">23 visible biological options</span>
+          <span class="signal-chip">Priority HHP replacement context</span>
+          <span class="signal-chip">Export-sensitive crop</span>
+        </div>
+        <div class="chip-row" style="margin-top: 16px;">
+          <a class="chip" href="./problem-african-bollworm.html">African bollworm</a>
+          <span class="chip">False codling moth</span>
+          <span class="chip">Thrips</span>
+          <span class="chip">Red scale</span>
+          <a class="chip" href="./product-thuricide-wp.html">Thuricide WP</a>
+        </div>
+        <div class="hero-actions" style="margin-top: 18px;">
+          <a class="action-link" href="./product-catalogue.html?crop=Citrus">See linked biological products</a>
+          <a class="action-link secondary" href="./resource-library.html">Open guidance and HHP references</a>
         </div>
       </div>
-      <div class="card">
-        <div class="pill">Overview</div>
-        <div class="meta-list">
-          <div class="meta-row">
-            <div class="meta-label">Biological options shown</div>
-            <div>23 use records currently visible in the explorer.</div>
+
+      <aside class="aside-panel">
+        <div class="card">
+          <div class="eyebrow">At a glance</div>
+          <div class="fact-card" style="margin-top: 12px;">
+            <div class="fact-label">Primary question</div>
+            <div class="fact-value">Which biological routes are already visible for orchard pest and disease programmes in citrus?</div>
           </div>
-          <div class="meta-row">
-            <div class="meta-label">Why this crop matters</div>
-            <div>Citrus pulls together product choice, evidence, MRL interpretation, and export-facing standards better than most crop contexts in the current demo.</div>
+          <div class="fact-card">
+            <div class="fact-label">Top linked problems</div>
+            <div class="fact-value">False codling moth, thrips, red scale, black spot</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Why this matters</div>
+            <div class="fact-value">This crop sits at the intersection of substitution, standards compliance, and export-facing interpretation.</div>
           </div>
         </div>
-      </div>
+        <div class="card">
+          <div class="eyebrow">Quick links</div>
+          <div class="quick-links" style="margin-top: 12px;">
+            <a class="chip" href="./evidence-library.html">Evidence library</a>
+            <a class="chip" href="./standards-regulations.html">Standards layer</a>
+            <a class="chip" href="./resource-library.html">Resource library</a>
+          </div>
+          <p class="support-note">Use the deeper workspaces when you need full records rather than preview summaries.</p>
+        </div>
+      </aside>
     </section>
 
-    <section class="surface section">
-      <div class="eyebrow">Linked context</div>
-      <h2 class="display" style="margin-top: 6px;">The main crop problems and product routes around citrus.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Problems</div>
-          <h3 style="margin-top: 10px;">What shows up most often</h3>
-          <p style="margin-top: 8px;">False codling moth, thrips, red scale, and black spot are the most legible problems in the current citrus story.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Products</div>
-          <h3 style="margin-top: 10px;">What routes are visible</h3>
-          <p style="margin-top: 8px;">Semiochemical mating disruption, Bt-led insect control, and selected orchard resilience products are the clearest visible biological routes.</p>
-        </article>
-      </div>
-    </section>
+    <section class="body-layout">
+      <div class="main-column">
+        <section class="surface">
+          <div class="eyebrow">Linked context</div>
+          <h2 style="margin-top: 6px;">What citrus connects to in the explorer right now.</h2>
+          <div class="module-grid">
+            <article class="module-card">
+              <div class="fact-label">Main linked problems</div>
+              <h3 style="margin-top: 8px;">The orchard issues that shape the citrus story</h3>
+              <p>False codling moth, thrips, red scale, and black spot are the main problems currently visible around citrus. They create a mix of insect, disease, and export-risk questions.</p>
+            </article>
+            <article class="module-card">
+              <div class="fact-label">Visible biological routes</div>
+              <h3 style="margin-top: 8px;">The main response patterns currently surfaced</h3>
+              <p>Semiochemical disruption, Bt-led insect control, and orchard resilience or support products are the clearest biological routes currently attached to citrus.</p>
+            </article>
+          </div>
+        </section>
 
-    <section class="surface section">
-      <div class="eyebrow">Evidence</div>
-      <h2 class="display" style="margin-top: 6px;">Supporting records already available for this crop.</h2>
-      <div class="evidence-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Field trial</div>
-          <h3 style="margin-top: 10px;">False codling moth mating disruption — citrus</h3>
-          <p style="margin-top: 8px;">Existing evidence-library record linked to Isomate C Plus, citrus, and trap-catch / fruit-damage outcomes.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Case study</div>
-          <h3 style="margin-top: 10px;">Citrus orchard resilience programme</h3>
-          <p style="margin-top: 8px;">Operational record already in the evidence corpus connecting citrus to seasonal stress management and orchard resilience.</p>
-        </article>
-      </div>
-    </section>
+        <section class="surface">
+          <div class="eyebrow">HHP transition context</div>
+          <h2 style="margin-top: 6px;">Why citrus matters in the shift away from higher-hazard chemistry.</h2>
+          <p style="margin-top: 8px; max-width: 62ch;">This is not evidence of efficacy by itself. It is transition context: where citrus appears in wider substitution and risk-reduction work.</p>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Replacement relevance</div>
+              <h3 style="margin-top: 8px;">Citrus is a priority crop in HHP substitution mapping</h3>
+              <p>Existing resource material already frames citrus as one of the crops where replacement pathways matter because orchard programmes can still rely heavily on conventional insecticide and disease-control routines.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Where to go deeper</div>
+              <h3 style="margin-top: 8px;">Use the HHP transition resources as interpretation support</h3>
+              <p>The current corpus already includes <strong>Highly hazardous pesticides: Africa landscape overview</strong> and <strong>HHP-to-biological substitution map — priority crops</strong> to help explain where citrus sits in broader transition work.</p>
+              <p><a href="./resource-library.html">Open resource library →</a></p>
+            </article>
+          </div>
+        </section>
 
-    <section class="surface section">
-      <div class="eyebrow">Standards &amp; regulations</div>
-      <h2 class="display" style="margin-top: 6px;">Compliance context that matters for citrus decisions.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">MRLs</div>
-          <h3 style="margin-top: 10px;">Export-sensitive crop interpretation</h3>
-          <p style="margin-top: 8px;">The existing standards layer already carries MRL references and export-oriented interpretation for crops where buyer compliance matters.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Certification</div>
-          <h3 style="margin-top: 10px;">Standards that intersect with citrus use</h3>
-          <p style="margin-top: 8px;">GlobalG.A.P., organic, and export-chain standards are relevant here because citrus is one of the clearest high-compliance crop contexts in the prototype.</p>
-        </article>
-      </div>
-    </section>
+        <section class="surface">
+          <div class="eyebrow">Evidence</div>
+          <h2 style="margin-top: 6px;">Preview the strongest supporting records for citrus.</h2>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Field trial</div>
+              <h3 style="margin-top: 8px;">False codling moth mating disruption — citrus</h3>
+              <p>Existing evidence-library record tied to citrus, semiochemical control, trap-catch shifts, and fruit-damage outcomes. This is one of the cleanest proof points in the current corpus.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Operational record</div>
+              <h3 style="margin-top: 8px;">Citrus orchard resilience programme</h3>
+              <p>Shows how the citrus story is not only about direct intervention. The wider record already connects orchard stress management and resilience to biological use in practice.</p>
+              <p><a href="./evidence-library.html">Open full evidence workspace →</a></p>
+            </article>
+          </div>
+        </section>
 
-    <section class="surface section">
-      <div class="eyebrow">Resources &amp; interpretation</div>
-      <h2 class="display" style="margin-top: 6px;">Guidance and reference material behind the crop view.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Resource</div>
-          <h3 style="margin-top: 10px;">Reading MRL requirements for export-sensitive crops</h3>
-          <p style="margin-top: 8px;">Already present in the resource library as a guidance piece linking export crops to standards and compliance interpretation.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Resource</div>
-          <h3 style="margin-top: 10px;">Export standards that intersect with citrus biological use</h3>
-          <p style="margin-top: 8px;">Existing resource-library entry that helps connect crop context, standards, and product interpretation.</p>
-        </article>
-      </div>
-    </section>
+        <section class="surface">
+          <div class="eyebrow">Standards &amp; regulations</div>
+          <h2 style="margin-top: 6px;">The compliance context that changes how citrus records are read.</h2>
+          <div class="module-grid">
+            <article class="module-card">
+              <div class="fact-label">Export interpretation</div>
+              <h3 style="margin-top: 8px;">MRL and buyer-standard context matters here</h3>
+              <p>Citrus is one of the clearest places where export requirements, buyer standards, and residue interpretation shape how operators compare biological routes.</p>
+            </article>
+            <article class="module-card">
+              <div class="fact-label">Regulatory context</div>
+              <h3 style="margin-top: 8px;">Registration and standards still sit behind the crop view</h3>
+              <p>The standards layer helps explain what is registered, what is permitted, and what still needs careful interpretation in export-facing programmes.</p>
+            </article>
+          </div>
+        </section>
 
-    <section class="surface section">
-      <div class="eyebrow">Deep-dive actions</div>
-      <h2 class="display" style="margin-top: 6px;">Open the full workspaces when you need more depth.</h2>
-      <div class="link-grid" style="margin-top: 16px;">
-        <article class="link-card">
-          <h3>Products for citrus</h3>
-          <p style="margin-top: 8px;">Jump back into the full product workspace filtered around citrus.</p>
-          <p style="margin-top: 12px;"><a href="./product-catalogue.html?crop=Citrus">Open product catalogue →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Full evidence workspace</h3>
-          <p style="margin-top: 8px;">Browse the wider evidence corpus beyond the two highlighted records above.</p>
-          <p style="margin-top: 12px;"><a href="./evidence-library.html">Open evidence library →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Standards & regulations</h3>
-          <p style="margin-top: 8px;">Review MRL and standards context in the full compliance workspace.</p>
-          <p style="margin-top: 12px;"><a href="./standards-regulations.html">Open standards layer →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Resources & interpretation</h3>
-          <p style="margin-top: 8px;">Open the broader guidance and interpretation corpus for citrus-adjacent questions.</p>
-          <p style="margin-top: 12px;"><a href="./resource-library.html">Open resource library →</a></p>
-        </article>
+        <section class="surface">
+          <div class="eyebrow">Resources &amp; interpretation</div>
+          <h2 style="margin-top: 6px;">The guidance layer behind the citrus record.</h2>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Guide</div>
+              <h3 style="margin-top: 8px;">Reading MRL requirements for export-sensitive crops</h3>
+              <p>This helps explain how to interpret a crop record like citrus when standards and market requirements matter as much as the visible product list.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Bundle</div>
+              <h3 style="margin-top: 8px;">Citrus biological use interpretation bundle</h3>
+              <p>Brings together crop context, linked evidence, and standards framing so the citrus story reads as a decision aid rather than a raw catalogue extract.</p>
+              <p><a href="./resource-library.html">Open resource library →</a></p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">Deep-dive destinations</div>
+          <h2 style="margin-top: 6px;">Open the full workspaces when you need to move beyond the preview.</h2>
+          <div class="action-grid">
+            <article class="action-tile">
+              <h3>Linked products</h3>
+              <p>Open the full product workspace filtered around citrus use contexts.</p>
+              <a href="./product-catalogue.html?crop=Citrus">Open product catalogue →</a>
+            </article>
+            <article class="action-tile">
+              <h3>Registration and compliance</h3>
+              <p>Move from crop story into the registration and standards layers when market readiness matters.</p>
+              <a href="./standards-regulations.html">Open standards layer →</a>
+            </article>
+            <article class="action-tile">
+              <h3>Evidence corpus</h3>
+              <p>Review the wider record set supporting citrus-related claims and use patterns.</p>
+              <a href="./evidence-library.html">Open evidence library →</a>
+            </article>
+            <article class="action-tile">
+              <h3>HHP transition references</h3>
+              <p>Use the HHP and interpretation resources when the conversation is about replacement and risk reduction rather than crop browsing alone.</p>
+              <a href="./resource-library.html">Open resource library →</a>
+            </article>
+          </div>
+        </section>
       </div>
+
+      <aside class="main-column">
+        <section class="surface">
+          <div class="eyebrow">Quick facts</div>
+          <div class="list">
+            <div class="mini-card">
+              <div class="fact-label">Visible biological options</div>
+              <div class="fact-value">23 use records currently surfaced in the explorer.</div>
+            </div>
+            <div class="mini-card">
+              <div class="fact-label">Linked orchard route</div>
+              <div class="fact-value">Semiochemical mating disruption is one of the clearest citrus-specific stories.</div>
+            </div>
+            <div class="mini-card">
+              <div class="fact-label">Transition signal</div>
+              <div class="fact-value">Citrus shows strong relevance for HHP replacement and standards-aware product comparison.</div>
+            </div>
+          </div>
+        </section>
+      </aside>
     </section>
   </main>
 </body>

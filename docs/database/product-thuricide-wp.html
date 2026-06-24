@@ -6,52 +6,95 @@
   <title>ABA Biologicals Explorer | Thuricide WP</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #173039;
       --muted: #5c6f73;
       --line: rgba(23, 48, 57, 0.1);
       --surface: rgba(255, 252, 246, 0.92);
+      --paper: #f4efe5;
+      --accent: #2b6b4f;
+      --accent-soft: rgba(220, 238, 224, 0.62);
       --green: #2b6b4f;
-      --green-soft: rgba(220, 238, 224, 0.62);
       --shadow: 0 18px 34px -28px rgba(20, 32, 34, 0.28);
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; color: var(--ink); background: radial-gradient(circle at top left, rgba(99, 154, 108, 0.12), transparent 24%), linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%); }
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(43, 107, 79, 0.12), transparent 22%),
+        linear-gradient(180deg, var(--paper) 0%, #fbf8f2 48%, #f2f4ed 100%);
+    }
     a { color: inherit; text-decoration: none; }
-    .display { font-family: "Source Serif 4", Georgia, serif; }
-    .shell { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 32px; }
-    .surface, .card { background: rgba(255, 252, 246, 0.92); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); backdrop-filter: blur(14px); }
+    .shell { width: min(1220px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 36px; }
+    .surface, .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
     .surface { padding: 18px; }
     .card { padding: 18px; }
-    .topbar, .hero-grid, .context-grid, .evidence-grid, .link-grid { display: grid; gap: 14px; }
+    .topbar, .hero-layout, .body-layout, .module-grid, .action-grid {
+      display: grid;
+      gap: 14px;
+    }
     .topbar { grid-template-columns: 1fr auto; align-items: center; margin-bottom: 12px; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .mark { width: 36px; height: 36px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(43, 107, 79, 0.12); color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
-    .mini, .eyebrow, .pill { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-    .mini, .eyebrow { color: var(--muted); }
+    .mark {
+      width: 36px; height: 36px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(43, 107, 79, 0.12); color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .mini, .eyebrow, .fact-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
     .nav, .subnav { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; font-weight: 700; }
+    .nav a.active, .subnav a.active { color: var(--green); }
     .subnav { margin-bottom: 12px; padding: 12px 16px; }
-    .subnav a.active, .nav a.active { color: var(--green); }
-    .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); align-items: start; }
-    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(220, 238, 224, 0.74) 0%, rgba(255,255,255,0.72) 100%); border: 1px solid rgba(43, 107, 79, 0.18); border-radius: 22px; }
+    .hero-layout { grid-template-columns: minmax(0, 1.35fr) minmax(270px, 0.82fr); align-items: start; }
+    .hero-main {
+      padding: 24px; border-radius: 24px;
+      background: linear-gradient(180deg, rgba(232, 244, 236, 0.94) 0%, rgba(255,255,255,0.76) 100%);
+      border: 1px solid rgba(43, 107, 79, 0.18);
+    }
+    .hero-actions, .chip-row, .signal-row, .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
     h1, h2, h3, p { margin: 0; }
-    h1 { margin-top: 8px; font-size: clamp(2rem, 3.2vw, 3rem); line-height: 1.04; }
-    h2 { font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.08; }
+    h1 { margin-top: 8px; font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: 0.98; letter-spacing: -0.04em; }
+    h2 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.08; letter-spacing: -0.03em; }
     h3 { font-size: 1.02rem; line-height: 1.35; }
     p { color: var(--muted); line-height: 1.65; }
-    .pill { display: inline-flex; align-items: center; min-height: 30px; padding: 7px 11px; border-radius: 999px; background: rgba(255,255,255,0.76); color: var(--green); }
-    .context-grid, .evidence-grid, .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .meta-list { display: grid; gap: 10px; margin-top: 14px; }
-    .meta-row { padding: 12px 13px; border-radius: 14px; background: rgba(255,255,255,0.7); border: 1px solid var(--line); }
-    .meta-label { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .chip { display: inline-flex; align-items: center; min-height: 34px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.78); border: 1px solid var(--line); font-weight: 700; }
-    .link-card { padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.76); }
-    .link-card a { color: var(--green); font-weight: 800; }
-    .section { margin-top: 12px; }
-    @media (max-width: 900px) { .topbar, .hero-grid, .context-grid, .evidence-grid, .link-grid { grid-template-columns: 1fr; } }
+    .breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--muted); }
+    .chip, .action-link, .signal-chip {
+      display: inline-flex; align-items: center; min-height: 34px; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.82); font-weight: 700; font-size: 13px;
+    }
+    .signal-chip { background: var(--accent-soft); border-color: rgba(43, 107, 79, 0.12); color: var(--accent); }
+    .action-link { color: white; background: var(--green); border-color: transparent; }
+    .action-link.secondary { color: var(--ink); background: rgba(255,255,255,0.88); border-color: var(--line); }
+    .aside-panel { display: grid; gap: 12px; position: sticky; top: 14px; }
+    .fact-card, .mini-card {
+      padding: 14px 15px; border-radius: 16px; border: 1px solid rgba(23, 48, 57, 0.06); background: rgba(255,255,255,0.78);
+    }
+    .fact-value { margin-top: 4px; font-size: 15px; line-height: 1.5; color: #32484d; font-weight: 700; }
+    .body-layout { grid-template-columns: minmax(0, 1.15fr) minmax(270px, 0.86fr); margin-top: 12px; align-items: start; }
+    .main-column { display: grid; gap: 12px; }
+    .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 14px; }
+    .module-card, .list-card, .action-tile {
+      padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.8); border: 1px solid rgba(23, 48, 57, 0.06);
+    }
+    .list, .action-grid { display: grid; gap: 12px; margin-top: 14px; }
+    .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .list-card p, .action-tile p { margin-top: 8px; }
+    .list-card a, .action-tile a { color: var(--green); font-weight: 800; }
+    .support-note { margin-top: 8px; font-size: 14px; color: var(--muted); }
+    @media (max-width: 980px) {
+      .topbar, .hero-layout, .body-layout, .module-grid, .action-grid { grid-template-columns: 1fr; }
+      .aside-panel { position: static; }
+    }
   </style>
 </head>
 <body>
@@ -76,121 +119,202 @@
       <a class="active" href="./index.html">Explorer</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
-    <section class="surface hero-grid">
-      <div class="hero-card">
-        <div class="eyebrow">Product detail</div>
-        <h1 class="display">Thuricide WP</h1>
-        <p style="margin-top: 12px;">Thuricide WP is one of the strongest product-led entry points in the prototype because it links clearly to African bollworm control, multiple crop contexts, and supporting Bt evidence.</p>
-        <div class="chip-row">
-          <div class="chip">Biopesticide</div>
-          <div class="chip">Bt</div>
-          <div class="chip">African bollworm</div>
-          <div class="chip">Citrus and vegetables</div>
+
+    <section class="surface hero-layout">
+      <div class="hero-main">
+        <div class="breadcrumb">
+          <a href="./index.html">Explorer</a>
+          <span>→</span>
+          <span>Biologicals</span>
+          <span>→</span>
+          <span>Thuricide WP</span>
+        </div>
+        <div class="eyebrow" style="margin-top: 16px;">Product detail</div>
+        <h1>Thuricide WP</h1>
+        <p style="margin-top: 14px; max-width: 58ch;">Thuricide WP is one of the strongest product-led records in the prototype because it clearly shows what the product is, where it is used, what it helps control, and how it contributes to lower-risk transition work.</p>
+        <div class="signal-row" style="margin-top: 16px;">
+          <span class="signal-chip">Biopesticide</span>
+          <span class="signal-chip">Bt product</span>
+          <span class="signal-chip">HHP substitution pathway visible</span>
+        </div>
+        <div class="chip-row" style="margin-top: 16px;">
+          <a class="chip" href="./problem-african-bollworm.html">African bollworm</a>
+          <a class="chip" href="./crop-citrus.html">Citrus</a>
+          <span class="chip">Cruciferae</span>
+          <span class="chip">Lucerne</span>
+          <span class="chip">Diamond back moth</span>
+        </div>
+        <div class="hero-actions" style="margin-top: 18px;">
+          <a class="action-link" href="./product-catalogue.html?q=Thuricide%20WP">Compare in product catalogue</a>
+          <a class="action-link secondary" href="./evidence-library.html">Open supporting evidence</a>
         </div>
       </div>
-      <div class="card">
-        <div class="pill">Overview</div>
-        <div class="meta-list">
-          <div class="meta-row">
-            <div class="meta-label">Active</div>
-            <div>Bacillus thuringiensis var. kurstaki</div>
+
+      <aside class="aside-panel">
+        <div class="card">
+          <div class="eyebrow">At a glance</div>
+          <div class="fact-card" style="margin-top: 12px;">
+            <div class="fact-label">Active</div>
+            <div class="fact-value">Bacillus thuringiensis var. kurstaki</div>
           </div>
-          <div class="meta-row">
-            <div class="meta-label">Why this product matters</div>
-            <div>It is one of the clearest product records for showing how crop fit, problem fit, evidence, and export-facing interpretation can sit together in one result view.</div>
+          <div class="fact-card">
+            <div class="fact-label">Product family</div>
+            <div class="fact-value">Biopesticide used mainly in caterpillar-control contexts.</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Why this matters</div>
+            <div class="fact-value">This is one of the clearest product records for showing fit, proof, compliance context, and substitution relevance together.</div>
           </div>
         </div>
-      </div>
+        <div class="card">
+          <div class="eyebrow">Quick links</div>
+          <div class="quick-links" style="margin-top: 12px;">
+            <a class="chip" href="./product-catalogue.html?q=Thuricide%20WP">Product catalogue</a>
+            <a class="chip" href="./resource-library.html">Guidance and HHP references</a>
+            <a class="chip" href="./standards-regulations.html">Standards layer</a>
+          </div>
+          <p class="support-note">Use this page as the fast product summary, then move into the deeper workspaces for the full record set.</p>
+        </div>
+      </aside>
     </section>
-    <section class="surface section">
-      <div class="eyebrow">Linked context</div>
-      <h2 class="display" style="margin-top: 6px;">Where this product fits and what it helps with.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Crops</div>
-          <h3 style="margin-top: 10px;">Visible crop contexts</h3>
-          <p style="margin-top: 8px;">Citrus, cruciferae, lucerne, ornamentals, and related vegetable contexts currently make this product legible in the prototype.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Problems</div>
-          <h3 style="margin-top: 10px;">Key problem links</h3>
-          <p style="margin-top: 8px;">African bollworm, caterpillars, and diamond back moth are the strongest visible problem links in the current data.</p>
-        </article>
+
+    <section class="body-layout">
+      <div class="main-column">
+        <section class="surface">
+          <div class="eyebrow">Linked context</div>
+          <h2 style="margin-top: 6px;">Where Thuricide WP fits and what it is most clearly used for.</h2>
+          <div class="module-grid">
+            <article class="module-card">
+              <div class="fact-label">Linked crops</div>
+              <h3 style="margin-top: 8px;">The clearest use contexts in the current explorer</h3>
+              <p>Citrus, cruciferae, lucerne, ornamentals, and related vegetable contexts make this product easy to understand across different programme types.</p>
+            </article>
+            <article class="module-card">
+              <div class="fact-label">Linked problems</div>
+              <h3 style="margin-top: 8px;">The main issues it is associated with</h3>
+              <p>African bollworm, caterpillars, and diamond back moth are the strongest visible problem links currently attached to Thuricide WP.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">HHP transition context</div>
+          <h2 style="margin-top: 6px;">How this product contributes to lower-risk replacement pathways.</h2>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Replacement role</div>
+              <h3 style="margin-top: 8px;">A product that makes the substitution story concrete</h3>
+              <p>Thuricide WP is useful in the demo because it helps translate a general HHP transition narrative into a specific product-level example that people can recognise and discuss.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Where to go deeper</div>
+              <h3 style="margin-top: 8px;">Use the HHP and crop-priority references to frame the product</h3>
+              <p>The current resource corpus already carries the broader HHP landscape overview and the crop-priority substitution mapping that help explain where products like Thuricide WP matter.</p>
+              <p><a href="./resource-library.html">Open resource library →</a></p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">Evidence</div>
+          <h2 style="margin-top: 6px;">The main records that help validate this product view.</h2>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Operational record</div>
+              <h3 style="margin-top: 8px;">Bollworm management — vegetable producers cooperative</h3>
+              <p>This is one of the clearest records for showing Thuricide WP in a real-world use context rather than as an isolated product line in a register.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Technical note</div>
+              <h3 style="margin-top: 8px;">Transitioning from pyrethroid-led to Bt-led programmes</h3>
+              <p>This record is especially useful because it bridges evidence and transition language, helping the product detail page feel grounded rather than promotional.</p>
+              <p><a href="./evidence-library.html">Open evidence workspace →</a></p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">Standards &amp; regulations</div>
+          <h2 style="margin-top: 6px;">The compliance context behind this product.</h2>
+          <div class="module-grid">
+            <article class="module-card">
+              <div class="fact-label">MRL interpretation</div>
+              <h3 style="margin-top: 8px;">Microbial actives still need clear explanation</h3>
+              <p>The standards layer helps explain how buyers and export-sensitive programmes read a microbial product even when the chemistry story is comparatively favourable.</p>
+            </article>
+            <article class="module-card">
+              <div class="fact-label">Registration context</div>
+              <h3 style="margin-top: 8px;">Product legitimacy still sits behind the detail view</h3>
+              <p>The product story is stronger when it is paired with a clear account of registration status, standards interpretation, and market-facing compliance context.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">Resources &amp; interpretation</div>
+          <h2 style="margin-top: 6px;">The guidance layer behind the product record.</h2>
+          <div class="list">
+            <article class="list-card">
+              <div class="fact-label">Bundle</div>
+              <h3 style="margin-top: 8px;">Field-evidence bundle for bollworm and DBM</h3>
+              <p>This makes the product easier to understand in context, especially when the user wants to compare use cases rather than simply read the label data.</p>
+            </article>
+            <article class="list-card">
+              <div class="fact-label">Orientation guide</div>
+              <h3 style="margin-top: 8px;">How ABA groups biological products</h3>
+              <p>Useful for readers who need quick category context before comparing Thuricide WP with other visible biologicals in the broader explorer.</p>
+              <p><a href="./resource-library.html">Open resource library →</a></p>
+            </article>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="eyebrow">Deep-dive destinations</div>
+          <h2 style="margin-top: 6px;">Open the full workspaces when you want to move beyond the summary.</h2>
+          <div class="action-grid">
+            <article class="action-tile">
+              <h3>Compare similar products</h3>
+              <p>Return to the full product workspace to compare Thuricide WP against other visible options.</p>
+              <a href="./product-catalogue.html?q=Thuricide%20WP">Open product catalogue →</a>
+            </article>
+            <article class="action-tile">
+              <h3>Review proof</h3>
+              <p>Open the broader evidence corpus supporting the product and its linked use programmes.</p>
+              <a href="./evidence-library.html">Open evidence library →</a>
+            </article>
+            <article class="action-tile">
+              <h3>Check compliance context</h3>
+              <p>Move into the full standards workspace for microbial actives and export-facing interpretation.</p>
+              <a href="./standards-regulations.html">Open standards layer →</a>
+            </article>
+            <article class="action-tile">
+              <h3>Use HHP references</h3>
+              <p>Open the guidance corpus when the product conversation becomes a replacement or risk-reduction conversation.</p>
+              <a href="./resource-library.html">Open resource library →</a>
+            </article>
+          </div>
+        </section>
       </div>
-    </section>
-    <section class="surface section">
-      <div class="eyebrow">Evidence</div>
-      <h2 class="display" style="margin-top: 6px;">Supporting records already available for this product.</h2>
-      <div class="evidence-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Case study</div>
-          <h3 style="margin-top: 10px;">Bollworm management — vegetable producers cooperative</h3>
-          <p style="margin-top: 8px;">Existing evidence-library record directly linked to Thuricide WP in coordinated multi-grower vegetable use.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Technical note</div>
-          <h3 style="margin-top: 10px;">Transitioning from pyrethroid-led to Bt-led programmes</h3>
-          <p style="margin-top: 8px;">Existing evidence-library record linking Thuricide WP and DiPel DF to practical decision-making for bollworm control.</p>
-        </article>
-      </div>
-    </section>
-    <section class="surface section">
-      <div class="eyebrow">Standards &amp; regulations</div>
-      <h2 class="display" style="margin-top: 6px;">Compliance context that matters for Thuricide WP.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">MRLs</div>
-          <h3 style="margin-top: 10px;">EU MRL exemptions for microbial actives</h3>
-          <p style="margin-top: 8px;">The standards layer already includes Bt-related MRL interpretation, especially where export-oriented producers need clarity.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Export relevance</div>
-          <h3 style="margin-top: 10px;">Why this product needs standards context</h3>
-          <p style="margin-top: 8px;">Even a familiar Bt product still benefits from explicit residue and buyer-interpretation context when used on export-sensitive crops.</p>
-        </article>
-      </div>
-    </section>
-    <section class="surface section">
-      <div class="eyebrow">Resources &amp; interpretation</div>
-      <h2 class="display" style="margin-top: 6px;">Guidance and reference material behind this product view.</h2>
-      <div class="context-grid" style="margin-top: 16px;">
-        <article class="card">
-          <div class="meta-label">Resource</div>
-          <h3 style="margin-top: 10px;">Field-evidence bundle for bollworm and DBM</h3>
-          <p style="margin-top: 8px;">Existing resource-library item already connecting Thuricide WP, Florbac WG, DiPel DF, and core problem contexts.</p>
-        </article>
-        <article class="card">
-          <div class="meta-label">Resource</div>
-          <h3 style="margin-top: 10px;">How ABA groups biological products</h3>
-          <p style="margin-top: 8px;">Category guide already in the resource corpus that helps orient readers around where Thuricide WP sits in the broader explorer model.</p>
-        </article>
-      </div>
-    </section>
-    <section class="surface section">
-      <div class="eyebrow">Deep-dive actions</div>
-      <h2 class="display" style="margin-top: 6px;">Open the full workspaces when you need more depth.</h2>
-      <div class="link-grid" style="margin-top: 16px;">
-        <article class="link-card">
-          <h3>Full product workspace</h3>
-          <p style="margin-top: 8px;">Jump back into the full product catalogue to compare Thuricide WP against similar products.</p>
-          <p style="margin-top: 12px;"><a href="./product-catalogue.html">Open product catalogue →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Full evidence workspace</h3>
-          <p style="margin-top: 8px;">Browse the broader evidence corpus supporting Bt and related programmes.</p>
-          <p style="margin-top: 12px;"><a href="./evidence-library.html">Open evidence library →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Standards & regulations</h3>
-          <p style="margin-top: 8px;">Review the full compliance and MRL workspace for microbial actives and export-facing use.</p>
-          <p style="margin-top: 12px;"><a href="./standards-regulations.html">Open standards layer →</a></p>
-        </article>
-        <article class="link-card">
-          <h3>Resources & interpretation</h3>
-          <p style="margin-top: 8px;">Open the guidance corpus for category framing and linked product interpretation.</p>
-          <p style="margin-top: 12px;"><a href="./resource-library.html">Open resource library →</a></p>
-        </article>
-      </div>
+
+      <aside class="main-column">
+        <section class="surface">
+          <div class="eyebrow">Quick facts</div>
+          <div class="list">
+            <div class="mini-card">
+              <div class="fact-label">Product family</div>
+              <div class="fact-value">Bt-based biopesticide for caterpillar-control contexts.</div>
+            </div>
+            <div class="mini-card">
+              <div class="fact-label">Strongest linked problem</div>
+              <div class="fact-value">African bollworm is the clearest single problem anchor for the product story.</div>
+            </div>
+            <div class="mini-card">
+              <div class="fact-label">Transition signal</div>
+              <div class="fact-value">This product is one of the easiest examples of how a biological can support substitution away from higher-hazard chemistry.</div>
+            </div>
+          </div>
+        </section>
+      </aside>
     </section>
   </main>
 </body>
