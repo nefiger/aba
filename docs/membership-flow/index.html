@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
+      --page: oklch(0.972 0.012 92);
+      --page-deep: oklch(0.942 0.02 92);
       --ink: oklch(0.26 0.04 204);
       --muted: oklch(0.5 0.025 198);
       --surface: oklch(0.988 0.004 95 / 0.9);
@@ -26,6 +28,7 @@
       --space-lg: 24px;
       --space-xl: 32px;
       --space-2xl: 48px;
+      --space-3xl: 72px;
       --radius-lg: 20px;
       --radius-xl: 28px;
       --radius-pill: 999px;
@@ -39,9 +42,9 @@
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.15), transparent 24%),
-        radial-gradient(circle at top right, rgba(213, 186, 112, 0.12), transparent 22%),
-        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
+        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
+        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
     }
 
     a {
@@ -52,7 +55,7 @@
     .shell {
       width: min(1220px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 14px 0 28px;
+      padding: var(--space-md) 0 var(--space-2xl);
     }
 
     .surface {
@@ -77,6 +80,7 @@
       display: flex;
       align-items: center;
       gap: var(--space-sm);
+      min-width: 0;
     }
 
     .mark {
@@ -115,6 +119,12 @@
       color: var(--muted);
       line-height: 1.66;
       font-size: 15px;
+    }
+
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
+      max-width: 42ch;
     }
 
     .nav-wrap {
@@ -178,9 +188,24 @@
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -24% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(94, 148, 112, 0.18) 0%, rgba(94, 148, 112, 0.08) 42%, transparent 70%);
+      pointer-events: none;
+      filter: blur(8px);
     }
 
     .hero-grid,
@@ -198,6 +223,8 @@
       grid-template-columns: 1fr;
       align-items: start;
       gap: 18px;
+      position: relative;
+      z-index: 1;
     }
 
     .compare-grid {
@@ -239,7 +266,6 @@
     h1 {
       margin-top: 14px;
       font-size: clamp(2.2rem, 4vw, 4rem);
-      white-space: nowrap;
     }
 
     h2 {
@@ -449,7 +475,7 @@
         <div class="mark">ABA</div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
-          <span>Membership</span>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
       <div class="nav-wrap">
@@ -458,8 +484,9 @@
           <a href="../site/about.html">About</a>
           <a class="active" href="./index.html">Membership</a>
           <a href="../database/index.html">Biologicals Explorer</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
         </nav>
-        <a class="nav-cta" href="#routes">Choose a route</a>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
       </div>
     </header>
 

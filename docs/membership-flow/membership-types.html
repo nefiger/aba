@@ -28,9 +28,9 @@
     }
     a { color: inherit; text-decoration: none; }
     .shell {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1220px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 14px 0 28px;
+      padding: 14px 0 40px;
     }
     .surface {
       background: var(--surface);
@@ -41,10 +41,13 @@
     }
     .topbar, .section { padding: 18px; margin-top: 12px; }
     .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-copy { display: grid; gap: 2px; }
+    .brand-copy strong { font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+    .brand-copy span { font-size: 13px; line-height: 1.35; color: var(--muted); max-width: 42ch; }
     .mark {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -63,36 +66,37 @@
       text-transform: uppercase;
       color: var(--green-deep);
     }
-    .nav { display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; margin-left: auto; }
+    .nav { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
     .nav a { font-size: 14px; font-weight: 700; }
     .nav a.active { color: var(--green-deep); }
+    .nav-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 16px; border-radius: 999px; background: var(--green-deep); color: #f7f7f2; font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
     h1, h2, h3, p { margin: 0; }
     h1 {
       margin-top: 12px;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 12ch;
+      font-size: clamp(2.05rem, 3.4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
     }
     h2 {
-      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
     }
     h3 {
       font-size: 1.25rem;
       line-height: 1.08;
       letter-spacing: -0.03em;
     }
-    p, li { color: var(--muted); font-size: 15px; line-height: 1.66; }
+    p, li { color: var(--muted); font-size: 14px; line-height: 1.58; }
     .hero-grid, .compare-grid { display: grid; gap: 16px; }
     .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr); align-items: start; }
     .compare-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .card {
       border: 1px solid rgba(73, 95, 82, 0.12);
-      border-radius: 22px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.72);
-      padding: 18px;
+      padding: 16px;
       display: grid;
       gap: 12px;
     }
@@ -115,7 +119,6 @@
     .button.primary { background: var(--green-deep); color: #f7f7f2; }
     @media (max-width: 960px) {
       .hero-grid, .compare-grid { grid-template-columns: 1fr; }
-      h1 { max-width: none; }
     }
   </style>
 </head>
@@ -124,17 +127,21 @@
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
-        <div>
-          <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Detailed route comparison</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
-      <nav class="nav">
-        <a href="../site/index.html">Home</a>
-        <a href="../site/about.html">About</a>
-        <a class="active" href="./index.html">Membership</a>
-        <a href="../database/index.html">Biologicals Explorer</a>
-      </nav>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a class="active" href="./index.html">Membership</a>
+          <a href="../database/index.html">Biologicals Explorer</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
+        </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
+      </div>
     </header>
 
     <section class="surface section">
