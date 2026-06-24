@@ -185,6 +185,29 @@
       border-color: rgba(43, 107, 79, 0.18);
       color: var(--green);
     }
+    .return-bar {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .return-bar.is-visible { display: flex; }
+    .return-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
     .section {
       margin-top: 12px;
@@ -406,56 +429,6 @@
       width: 16px;
       height: 16px;
       object-fit: contain;
-    }
-
-    .tooltip-anchor {
-      position: relative;
-    }
-
-    .tooltip-anchor::before,
-    .tooltip-anchor::after {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 140ms ease, transform 140ms ease;
-      z-index: 12;
-    }
-
-    .tooltip-anchor::before {
-      content: "";
-      left: 18px;
-      bottom: calc(100% + 2px);
-      transform: translate(0, 4px);
-      border: 6px solid transparent;
-      border-top-color: rgba(23, 48, 57, 0.92);
-    }
-
-    .tooltip-anchor::after {
-      content: attr(data-tooltip);
-      left: 0;
-      bottom: calc(100% + 12px);
-      transform: translate(0, 4px);
-      min-width: 180px;
-      max-width: 240px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(23, 48, 57, 0.94);
-      color: #f7f4ee;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 600;
-      text-transform: none;
-      text-align: left;
-      box-shadow: 0 14px 30px -20px rgba(0,0,0,0.45);
-      white-space: normal;
-    }
-
-    .tooltip-anchor:hover::before,
-    .tooltip-anchor:hover::after,
-    .tooltip-anchor:focus-visible::before,
-    .tooltip-anchor:focus-visible::after {
-      opacity: 1;
-      transform: translate(0, 0);
     }
 
     .results-head {
@@ -791,6 +764,27 @@
       color: var(--muted-strong);
     }
 
+    .legend-note-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .legend-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(23, 48, 57, 0.05);
+      color: var(--muted-strong);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     .meaning-strip strong {
       color: var(--card-accent, var(--green));
     }
@@ -952,21 +946,25 @@
       <a href="./index.html">Explorer</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
+    <nav class="surface return-bar" data-return-bar aria-label="Return navigation">
+      <a class="return-link" data-return-link href="./index.html">Back to previous view</a>
+    </nav>
 
     <section class="surface section">
       <div class="results-head">
         <div>
           <div class="eyebrow">Product catalogue</div>
-          <h2 style="margin-top: 6px;">Browse visible biological products.</h2>
+          <h2 style="margin-top: 6px;">Browse biological products.</h2>
           <div class="active-legend" :style="'--accent:' + activeCategoryTheme.accent + '; --accent-soft:' + activeCategoryTheme.soft">
             <div class="legend-cluster">
-              <div class="legend-symbol tooltip-anchor" x-html="iconSvg(activeCategoryTheme.symbol)" :data-tooltip="activeCategoryTheme.tooltip" :aria-label="activeCategoryTheme.tooltip"></div>
+              <div class="legend-symbol" x-html="iconSvg(activeCategoryTheme.symbol)" aria-hidden="true"></div>
               <div>
-                <div class="meta-label">Current lens</div>
-                <div style="margin-top: 4px; font-weight: 800;" x-text="activeCategoryTheme.title"></div>
+                <div style="font-weight: 800;" x-text="activeCategoryTheme.title"></div>
               </div>
             </div>
-            <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
+            <div>
+              <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -977,11 +975,10 @@
             type="button"
             class="category-chip"
             :class="{ active: activeCategory === category.id }"
-            :title="category.copy"
             @click="setCategoryFilter(category.id)"
             :style="'color:' + category.accent + '; background:' + category.soft">
             <span class="chip-content">
-              <span class="chip-symbol tooltip-anchor" x-html="iconSvg(category.symbol)" :data-tooltip="category.tooltip" :aria-label="category.tooltip"></span>
+              <span class="chip-symbol" x-html="iconSvg(category.symbol)" aria-hidden="true"></span>
               <span x-text="category.label"></span>
             </span>
           </button>
@@ -1038,13 +1035,12 @@
         <template x-for="product in filteredProducts" :key="product.title">
           <article class="card" :style="'--card-accent:' + categoryTheme(product.categoryId).accent + '; --card-soft:' + categoryTheme(product.categoryId).soft">
             <div class="card-top">
-              <button type="button" class="card-icon icon-filter-button tooltip-anchor" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :data-tooltip="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
+              <button type="button" class="card-icon icon-filter-button" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :title="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
               <div class="badge" :class="product.badgeTone" :title="productBadgeTitle(product)" x-text="displayProductBadge(product)"></div>
             </div>
 
             <div class="card-context" style="margin-top: 12px;">
               <button type="button" class="category-label category-filter-button" @click="setCategoryFilter(product.categoryId)" x-text="product.category"></button>
-              <span class="info-dot tooltip-anchor" tabindex="0" data-tooltip="This category tag identifies which product family the record belongs to, so readers can compare like with like." aria-label="This category tag identifies which product family the record belongs to, so readers can compare like with like.">i</span>
             </div>
             <h3 style="margin-top: 10px;" x-text="product.title"></h3>
 
@@ -1057,7 +1053,7 @@
             <div class="model-strip">
               <template x-for="(model, index) in product.models" :key="model.label + index">
                 <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
+                  <div class="model-node" :title="modelDescription(model)">
                     <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
                     <span x-text="modelLabel(model)"></span>
                   </div>
@@ -1068,7 +1064,7 @@
 
             <div class="crop-chip-row" x-show="extractCropLinks(product).length">
               <template x-for="crop in extractCropLinks(product)" :key="crop.label">
-                <button type="button" class="crop-chip tooltip-anchor" :class="{ 'is-active': activeCrop === crop.label }" :data-tooltip="crop.tooltip" :aria-label="crop.tooltip" @click="setCropFilter(crop.label)">
+                <button type="button" class="crop-chip" :class="{ 'is-active': activeCrop === crop.label }" :title="crop.tooltip" @click="setCropFilter(crop.label)">
                   <span x-html="crop.icon"></span>
                   <span x-text="crop.label"></span>
                 </button>
@@ -1242,10 +1238,10 @@
         fitText(product) {
           return String(product.fit || '')
             .replace(/where a behavioural control route is visible in the source file/gi, 'using a behavioural control approach')
-            .replace(/visible in the source file/gi, 'visible in the current data')
-            .replace(/visible in the register/gi, 'visible in the current data')
-            .replace(/remedy source file/gi, 'current data')
-            .replace(/source file/gi, 'current data');
+            .replace(/visible in the source file/gi, 'visible here')
+            .replace(/visible in the register/gi, 'visible here')
+            .replace(/remedy source file/gi, 'catalogue')
+            .replace(/source file/gi, 'catalogue');
         },
         modelLabel(model) {
           const label = model.label || '';
@@ -1300,11 +1296,11 @@
         activeCrop: "all",
         searchQuery: "",
         categories: [
-          { id: "all", label: "All products", symbol: "◌", tooltip: "Whole-catalogue symbol: compare multiple product families together.", accent: "#41565b", soft: "rgba(233, 236, 236, 0.92)", title: "Whole catalogue", copy: "Use this to compare the full visible landscape across control, support, and inoculation categories.", summaryLead: "Visible fit:" },
-          { id: "biopesticide", label: "Biopesticides", symbol: "✳", tooltip: "Biopesticide symbol: products primarily framed through biological control of pests or diseases.", accent: "#2b6b4f", soft: "rgba(220, 238, 224, 0.86)", title: "Biological control products", copy: "This lens foregrounds the products most legible to general audiences because the control story is easier to grasp quickly.", summaryLead: "Control fit:" },
-          { id: "semiochemical", label: "Semiochemicals", symbol: "≈", tooltip: "Semiochemical symbol: products that work through behavioural signalling or disruption rather than direct kill action.", accent: "#1f7a79", soft: "rgba(214, 240, 239, 0.88)", title: "Behavioural control products", copy: "This lens separates behavioural-control products from direct-input products so the catalogue feels smarter and easier to learn.", summaryLead: "Behavioural fit:" },
-          { id: "biofertiliser", label: "Biofertilisers", symbol: "✦", tooltip: "Biofertiliser symbol: products framed around nutrient support, vitality, and plant or soil performance.", accent: "#8a6a1f", soft: "rgba(247, 233, 196, 0.9)", title: "Nutrient and vitality support", copy: "This lens highlights the support-side records so they do not get visually swallowed by pest-control products.", summaryLead: "Support fit:" },
-          { id: "inoculant", label: "Inoculants", symbol: "⊕", tooltip: "Inoculant symbol: products focused on root-zone, microbial, or legume-support relationships.", accent: "#6c6678", soft: "rgba(228, 226, 236, 0.9)", title: "Root-zone and legume support", copy: "This lens keeps the narrower but strategically important inoculant records visible and understandable.", summaryLead: "Root-zone fit:" }
+          { id: "all", label: "All products", symbol: "◌", tooltip: "Whole-catalogue symbol: compare multiple product families together.", accent: "#41565b", soft: "rgba(233, 236, 236, 0.92)", title: "Whole catalogue", copy: "Compare control, support, and inoculation products in one browsing view.", summaryLead: "Visible fit:" },
+          { id: "biopesticide", label: "Biopesticides", symbol: "✳", tooltip: "Biopesticide symbol: products primarily framed through biological control of pests or diseases.", accent: "#2b6b4f", soft: "rgba(220, 238, 224, 0.86)", title: "Biological control products", copy: "Products used mainly for insect, disease, or pest control.", summaryLead: "Control fit:" },
+          { id: "semiochemical", label: "Semiochemicals", symbol: "≈", tooltip: "Semiochemical symbol: products that work through behavioural signalling or disruption rather than direct kill action.", accent: "#1f7a79", soft: "rgba(214, 240, 239, 0.88)", title: "Behavioural control products", copy: "Products built around behavioural signalling, attraction, or disruption.", summaryLead: "Behavioural fit:" },
+          { id: "biofertiliser", label: "Biofertilisers", symbol: "✦", tooltip: "Biofertiliser symbol: products framed around nutrient support, vitality, and plant or soil performance.", accent: "#8a6a1f", soft: "rgba(247, 233, 196, 0.9)", title: "Nutrient and vitality support", copy: "Products used for plant nutrition, soil health, or crop vitality support.", summaryLead: "Support fit:" },
+          { id: "inoculant", label: "Inoculants", symbol: "⊕", tooltip: "Inoculant symbol: products focused on root-zone, microbial, or legume-support relationships.", accent: "#6c6678", soft: "rgba(228, 226, 236, 0.9)", title: "Root-zone and legume support", copy: "Products focused on root-zone microbial support and legume relationships.", summaryLead: "Root-zone fit:" }
         ],
         filtersByView: {
           named: ["All categories", "All crops", "All evidence levels"],
@@ -1424,7 +1420,7 @@
             badge: "Registered",
             badgeTone: "amber",
             title: "DiPel DF",
-            fit: "Broadest visible biological pest-control footprint in the current remedy source file",
+            fit: "Broadest biological pest-control footprint in the catalogue",
             models: [
               { symbol: "B", label: "Product", description: "Primary object: the product itself." },
               { symbol: "C", label: "Crops", description: "Wide spread of crop contexts around the product." },
@@ -1664,7 +1660,7 @@
               { symbol: "S", label: "Soil", description: "Soil or vitality layer the input is linked to." },
               { symbol: "U", label: "Use", description: "Use context explaining the support story." }
             ],
-            relationship: "Read this as Input → Soil vitality → Use context: the relationship chain explains why this belongs in the knowledge base even without a pest story.",
+            relationship: "Read this as Input → Soil vitality → Use context: the relationship chain explains why this belongs here even without a pest story.",
             meta: [
               { label: "Company", value: "Wonder" },
               { label: "Description", value: "Carbon for soil vitality with vermicompost-led nutrient support" },
@@ -1952,6 +1948,16 @@
         }
       };
     }
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const returnTo = params.get('returnTo');
+      const returnBar = document.querySelector('[data-return-bar]');
+      const returnLink = document.querySelector('[data-return-link]');
+      if (returnTo && returnBar && returnLink) {
+        returnBar.classList.add('is-visible');
+        returnLink.setAttribute('href', returnTo);
+      }
+    }());
   </script>
 </body>
 </html>

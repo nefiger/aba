@@ -177,6 +177,29 @@
       border-color: rgba(43, 107, 79, 0.18);
       color: var(--green);
     }
+    .return-bar {
+      margin-top: 12px;
+      padding: 10px 14px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .return-bar.is-visible { display: flex; }
+    .return-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
     .section {
       margin-top: 12px;
@@ -509,12 +532,16 @@
       <a href="./index.html">Explorer</a>
       <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
+    <nav class="surface return-bar" data-return-bar aria-label="Return navigation">
+      <a class="return-link" data-return-link href="./index.html">Back to previous view</a>
+    </nav>
 
     <section class="surface section">
       <div class="results-head">
         <div>
           <div class="eyebrow">Evidence library</div>
           <h2 style="margin-top: 6px;">Browse supporting records by type and relevance.</h2>
+          <p style="margin-top: 8px; max-width: 60ch;">Use this workspace for proof and supporting records. Keep HHP transition questions in the resource library and compliance questions in standards.</p>
         </div>
       </div>
 
@@ -606,7 +633,7 @@
         filtersByView: {
           trial: ["All evidence types", "All crops", "All products"],
           reference: ["All note types", "All categories", "All crops"],
-          expert: ["All contributor types", "All pressures", "All crops"]
+          expert: ["All contributor types", "All problem contexts", "All crops"]
         },
         records: [
           {
@@ -616,7 +643,7 @@
             badge: "Applied",
             badgeTone: "green",
             title: "Maize foliar pest-control field trial",
-            linked: "TrichoShield WP, maize, fall armyworm pressure",
+            linked: "TrichoShield WP, maize, fall armyworm problem",
             meta: [
               { label: "Location", value: "Free State" },
               { label: "Focus", value: "Foliar pest control under field conditions" },
@@ -653,7 +680,7 @@
             icon: "N",
             badge: "Reference",
             badgeTone: "slate",
-            title: "How to read biological category claims",
+            title: "Interpreting biological category claims",
             linked: "Product categories, use context, and interpretation language",
             meta: [
               { label: "Audience", value: "Public and member readers" },
@@ -714,7 +741,7 @@
             linked: "Trichoderma T-22 WP, tomatoes, Fusarium wilt, Pythium",
             meta: [
               { label: "Location", value: "Western Cape" },
-              { label: "Focus", value: "Seedling survival rate and root health under disease pressure" },
+              { label: "Focus", value: "Seedling survival rate and root health under disease stress" },
               { label: "Related product", value: "Trichoderma T-22 WP" },
               { label: "Crop", value: "Tomatoes" }
             ],
@@ -980,6 +1007,16 @@
         }
       };
     }
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const returnTo = params.get('returnTo');
+      const returnBar = document.querySelector('[data-return-bar]');
+      const returnLink = document.querySelector('[data-return-link]');
+      if (returnTo && returnBar && returnLink) {
+        returnBar.classList.add('is-visible');
+        returnLink.setAttribute('href', returnTo);
+      }
+    }());
   </script>
 </body>
 </html>

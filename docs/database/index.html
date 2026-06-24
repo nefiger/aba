@@ -411,57 +411,6 @@
       height: 28px;
     }
 
-    .tooltip-anchor {
-      position: relative;
-    }
-
-    .tooltip-anchor::before,
-    .tooltip-anchor::after {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 140ms ease, transform 140ms ease;
-      z-index: 12;
-    }
-
-    .tooltip-anchor::before {
-      content: "";
-      left: 18px;
-      bottom: calc(100% + 2px);
-      transform: translate(0, 4px);
-      border: 6px solid transparent;
-      border-top-color: rgba(23, 48, 57, 0.92);
-    }
-
-    .tooltip-anchor::after {
-      content: attr(data-tooltip);
-      left: 0;
-      bottom: calc(100% + 12px);
-      transform: translate(0, 4px);
-      min-width: 180px;
-      max-width: 240px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(23, 48, 57, 0.94);
-      color: #f7f4ee;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      text-transform: none;
-      text-align: left;
-      box-shadow: 0 14px 30px -20px rgba(0,0,0,0.45);
-      white-space: normal;
-    }
-
-    .tooltip-anchor:hover::before,
-    .tooltip-anchor:hover::after,
-    .tooltip-anchor:focus-visible::before,
-    .tooltip-anchor:focus-visible::after {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-
     .path-number {
       font-size: 11px;
       font-weight: 800;
@@ -487,22 +436,100 @@
       pointer-events: none;
     }
 
+    .results-head {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .results-head-copy p {
+      max-width: 58ch;
+    }
+
+    .legend-panel {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid rgba(23, 48, 57, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 16px 26px -24px rgba(23, 48, 57, 0.28);
+    }
+
+    .legend-panel h3 {
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .legend-item {
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(244, 248, 246, 0.95);
+      border: 1px solid rgba(23, 48, 57, 0.06);
+    }
+
+    .legend-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .legend-value {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--muted-strong);
+    }
+
+    .legend-footnote {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted-strong);
+    }
+
+    .card {
+      --card-accent: var(--green);
+      --card-soft: var(--green-soft);
+      position: relative;
+      overflow: visible;
+      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      padding: 18px;
+    }
+
+    .card.is-featured {
+      cursor: pointer;
+    }
+
+    .card.is-featured:hover,
+    .card.is-featured:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 36px -26px rgba(23, 48, 57, 0.36);
+      outline: none;
+    }
+
+    .card.is-featured:focus-visible {
+      border-color: color-mix(in srgb, var(--card-accent) 38%, white);
+    }
+
+    .card::after {
+      background: linear-gradient(90deg, var(--card-accent) 0%, color-mix(in srgb, var(--card-accent) 35%, white) 100%);
+    }
+
     .card-top {
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      align-items: start;
-    }
-    .card-title-link {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 160ms ease;
-    }
-    .card-title-link:hover,
-    .card-title-link:focus-visible {
-      border-color: currentColor;
-      outline: none;
+      align-items: flex-start;
     }
 
     .entity-icon {
@@ -532,6 +559,22 @@
       gap: 8px;
     }
 
+    button.badge {
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    button.badge:hover,
+    button.badge:focus-visible {
+      outline: none;
+      border-color: rgba(23, 48, 57, 0.12);
+      transform: translateY(-1px);
+    }
+
+    button.badge.is-active {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--card-soft) 75%, white);
+    }
+
     .badge::before {
       content: "";
       width: 7px;
@@ -546,29 +589,10 @@
     .badge.green { background: var(--green-soft); color: var(--green); }
     .badge.slate { background: #eceef0; color: #59656b; }
 
-    .card {
-      --card-accent: var(--green);
-      --card-soft: var(--green-soft);
-      position: relative;
-      overflow: visible;
-      box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
-    }
-
-    .card::after {
-      background: linear-gradient(90deg, var(--card-accent) 0%, color-mix(in srgb, var(--card-accent) 35%, white) 100%);
-    }
-
-    .card-context {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
     .context-pill,
     .key-chip,
-    .legend-chip {
+    .legend-chip,
+    .support-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -588,39 +612,39 @@
       color: var(--card-accent, var(--teal));
     }
 
-    .info-dot {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(23, 48, 57, 0.08);
+    .support-chip {
+      background: rgba(23, 48, 57, 0.06);
       color: var(--muted-strong);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: help;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .meta {
+    .card-summary {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.58;
+      color: var(--muted-strong);
+    }
+
+    .card-context-grid {
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       margin-top: 16px;
     }
 
-    .meta-row {
+    .context-panel {
       display: grid;
       gap: 4px;
       padding: 11px 12px;
       border-radius: 14px;
       background: rgba(244, 248, 246, 0.92);
+      border: 1px solid rgba(23, 48, 57, 0.05);
     }
 
-    .meta.compact-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 16px;
-    }
-
+    .context-label,
     .meta-label {
       font-size: 12px;
       color: var(--muted);
@@ -628,55 +652,52 @@
       letter-spacing: 0.06em;
     }
 
-    .crop-line {
-      margin-top: 14px;
-      padding: 12px 12px;
-      border: 1px solid rgba(43, 107, 79, 0.12);
-      border-radius: 14px;
-      background: rgba(238, 246, 239, 0.94);
+    .context-value {
+      font-size: 14px;
+      line-height: 1.48;
+      color: var(--muted-strong);
     }
 
-    .crop-line span {
-      color: var(--muted);
-      font-weight: 600;
+    .card-support-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(23, 48, 57, 0.08);
     }
 
-    .crop-chip-row {
+    .support-cluster {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      margin-top: 10px;
     }
 
-    .crop-chip {
+    .support-metric {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      min-height: 32px;
-      padding: 7px 10px;
+      gap: 6px;
+      min-height: 34px;
+      padding: 8px 11px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(23, 48, 57, 0.04);
       color: var(--ink);
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.02em;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: transform 140ms ease, box-shadow 140ms ease;
     }
 
-    .crop-chip:hover,
-    .crop-chip:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 8px 18px rgba(23, 48, 57, 0.08);
-      outline: none;
+    .support-metric strong {
+      font-size: 14px;
     }
 
-    .crop-chip svg {
-      width: 16px;
-      height: 16px;
-      stroke: var(--card-accent, var(--green));
+    .support-metric svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
       fill: none;
       stroke-width: 1.8;
       stroke-linecap: round;
@@ -684,168 +705,27 @@
       flex-shrink: 0;
     }
 
-    .mini-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(23, 48, 57, 0.08);
-    }
-
-    .mini-metrics > div {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(23, 48, 57, 0.04);
-    }
-
-    .mini-metric-value {
-      font-size: 1.25rem;
-      line-height: 1.05;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .mini-metric-label {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
     .card-cta {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(23, 48, 57, 0.06);
-    }
-
-    .card-cta-link {
       display: inline-flex;
       align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 48, 57, 0.1);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--card-accent, var(--green));
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--card-accent, var(--green));
-      text-decoration: none;
-      transition: opacity 140ms ease;
-    }
-
-    .card-cta-link:hover {
-      opacity: 0.75;
-    }
-
-    .active-legend {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.86);
-    }
-
-    .legend-cluster {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .legend-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 10px;
-      background: var(--accent-soft, rgba(31, 122, 121, 0.12));
-      color: var(--accent, var(--teal));
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .legend-copy {
-      max-width: 46ch;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--muted-strong);
-    }
-
-    .meaning-strip {
-      margin-top: 12px;
-      padding: 11px 12px;
-      border-radius: 14px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 74%, white);
-      color: var(--muted-strong);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .meaning-strip strong {
-      color: var(--card-accent, var(--green));
-    }
-
-    .model-strip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px dashed rgba(23, 48, 57, 0.14);
-    }
-
-    .model-node {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 30px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--card-soft, var(--green-soft)) 78%, white);
-      color: var(--card-accent, var(--green));
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
     }
 
-    .model-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      color: inherit;
-    }
-
-    .model-arrow {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .relationship-note {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted-strong);
-    }
-
-    .pressure-card {
-      padding: 16px;
-    }
-
-    .pressure-card .card-top {
-      align-items: center;
+    .card-cta:hover,
+    .card-cta:focus-visible {
+      outline: none;
+      border-color: color-mix(in srgb, var(--card-accent) 34%, white);
+      background: color-mix(in srgb, var(--card-soft) 60%, white);
     }
 
     /* ── hero path entry cards ── */
@@ -957,20 +837,13 @@
       line-height: 1.5;
     }
 
-    .section-note {
-      margin-top: 12px;
-      max-width: 72ch;
-      font-size: 14px;
-      color: var(--muted-strong);
-    }
-
     @media (max-width: 980px) {
       .path-entry-grid,
-      .intro-band,
       .filter-grid,
       .card-grid,
       .results-head,
-      .mini-metrics {
+      .legend-grid,
+      .card-context-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1006,7 +879,7 @@
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
         <h1>Explore</h1>
-        <p style="margin-top: 8px; font-size: 15px;">ABA maintains a shared knowledge layer for the sector — products, crop contexts, pest and disease problems, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
+        <p style="margin-top: 8px; font-size: 15px;">Start with a crop, a pest or disease, or a biological product. The deeper evidence, guidance, standards, and transition context sit underneath the records you open.</p>
       </div>
 
       <div class="path-entry-grid">
@@ -1015,9 +888,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'crops' }"
           style="--path-accent: #7a6b26; --path-soft-ring: rgba(240,228,177,0.5)"
-          @click="activeId = 'crops'"
+          @click="setActiveMode('crops')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'crops'" @keydown.space.prevent="activeId = 'crops'">
+          @keydown.enter="setActiveMode('crops')" @keydown.space.prevent="setActiveMode('crops')">
           <div class="path-visual" style="background: linear-gradient(180deg, #fdf4d4 0%, #f5e48c 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #7a6b26">
@@ -1039,9 +912,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'problems' }"
           style="--path-accent: #b05b37; --path-soft-ring: rgba(246,219,203,0.5)"
-          @click="activeId = 'problems'"
+          @click="setActiveMode('problems')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'problems'" @keydown.space.prevent="activeId = 'problems'">
+          @keydown.enter="setActiveMode('problems')" @keydown.space.prevent="setActiveMode('problems')">
           <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #b05b37">
@@ -1067,9 +940,9 @@
         <article class="path-entry-card"
           :class="{ active: activeId === 'products' }"
           style="--path-accent: #2b6b4f; --path-soft-ring: rgba(220,238,224,0.5)"
-          @click="activeId = 'products'"
+          @click="setActiveMode('products')"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'products'" @keydown.space.prevent="activeId = 'products'">
+          @keydown.enter="setActiveMode('products')" @keydown.space.prevent="setActiveMode('products')">
           <div class="path-visual" style="background: linear-gradient(180deg, rgba(220,238,224,0.2) 0%, rgba(220,238,224,0.5) 100%)">
             <div class="path-emblem">
               <div class="path-emblem-icon" style="color: #2b6b4f">
@@ -1092,7 +965,7 @@
 
     <section class="surface result-shell" :style="'--accent:' + active.accent + '; --accent-soft:' + active.soft">
       <div class="results-head">
-        <div>
+        <div class="results-head-copy">
           <div class="eyebrow" x-text="active.label"></div>
           <h2 style="margin-top: 6px;" x-text="active.heading"></h2>
           <p style="margin-top: 8px; max-width: none;" x-text="active.description"></p>
@@ -1100,8 +973,10 @@
       </div>
 
       <div class="filter-grid">
-        <select class="select">
-          <option x-text="active.filters[0]"></option>
+        <select class="select" x-model="primaryFilter" @change="applyPrimaryFilter()">
+          <template x-for="option in primaryFilterOptions()" :key="option.value">
+            <option :value="option.value" x-text="option.label"></option>
+          </template>
         </select>
         <select class="select">
           <option x-text="active.filters[1]"></option>
@@ -1112,84 +987,60 @@
       </div>
 
       <div class="card-grid">
-        <template x-for="card in active.cards" :key="card.title">
-          <article class="card" :class="{ 'pressure-card': activeId === 'problems' }" :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)">
+        <template x-for="card in filteredCards" :key="card.title">
+          <article
+            class="card"
+            :class="{ 'is-featured': isFeaturedCard(card) }"
+            :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)"
+            :role="isFeaturedCard(card) ? 'link' : undefined"
+            :tabindex="isFeaturedCard(card) ? '0' : undefined"
+            @click="openCard(card, $event)"
+            @keydown.enter.prevent="openCard(card, $event)"
+            @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
-              <div class="entity-icon tooltip-anchor" x-html="recordIcon(card)" :data-tooltip="cardIconTooltip(card)" :aria-label="cardIconTooltip(card)"></div>
-              <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
+              <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
+              <button
+                type="button"
+                class="badge"
+                :class="[card.badgeTone, { 'is-active': primaryFilter === displayBadge(card) }]"
+                :title="badgeTitle(card)"
+                @click.stop="togglePrimaryFilter(displayBadge(card))"
+                x-text="displayBadge(card)"></button>
             </div>
+            <h3 style="margin-top: 12px; font-size: 1.15rem;" x-text="card.title"></h3>
 
-            <h3 style="margin-top: 14px; font-size: 1.05rem;">
-              <template x-if="isFeaturedCard(card)">
-                <a class="card-title-link" :href="cardHref(card)" x-text="card.title"></a>
-              </template>
-              <template x-if="!isFeaturedCard(card)">
-                <span x-text="card.title"></span>
-              </template>
-            </h3>
+            <p class="card-summary" x-text="cardSummary(card)"></p>
 
-            <div class="model-strip">
-              <template x-for="(model, index) in card.models" :key="model.label + index">
-                <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
-                    <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
-                    <span x-text="modelLabel(model)"></span>
-                  </div>
-                  <span class="model-arrow" x-show="index < card.models.length - 1">→</span>
-                </template>
-              </template>
-            </div>
-
-            <div class="crop-line" x-show="card.crops">
-              <span>Linked crops</span>
-              <div class="crop-chip-row">
-                <template x-for="crop in cropChips(card.crops)" :key="crop.label">
-                  <a class="crop-chip tooltip-anchor" :href="catalogueHref(crop.label)" :data-tooltip="crop.tooltip" :aria-label="crop.tooltip">
-                    <span x-html="crop.icon"></span>
-                    <span x-text="crop.label"></span>
-                  </a>
-                </template>
+            <div class="card-context-grid">
+              <div class="context-panel">
+                <div class="context-label" x-text="primaryContextLabel(card)"></div>
+                <div class="context-value" x-text="primaryContextValue(card)"></div>
+              </div>
+              <div class="context-panel">
+                <div class="context-label" x-text="secondaryContextLabel(card)"></div>
+                <div class="context-value" x-text="secondaryContextValue(card)"></div>
               </div>
             </div>
 
-            <div class="meta" :class="{ 'compact-grid': activeId === 'problems' }" style="margin-top: 14px;">
-              <template x-for="item in card.meta" :key="item.label">
-                <div class="meta-row" :title="metaLabel(item) + ': ' + item.value">
-                  <div class="meta-label" x-text="metaLabel(item)"></div>
-                  <div x-text="item.value"></div>
+            <div class="card-support-row">
+              <div class="support-cluster">
+                <div class="support-metric">
+                  <strong x-text="supportMetricValue(card)"></strong>
+                  <span x-text="supportMetricLabel(card)"></span>
                 </div>
-              </template>
-            </div>
-
-            <div class="mini-metrics">
-              <div>
-                <div class="mini-metric-value" x-text="card.leftMetric"></div>
-                <div class="mini-metric-label" x-text="metricLabel(card.leftLabel)"></div>
+                <div class="support-metric" x-show="hhpInsight(card)">
+                  <span x-html="hhpIconSvg()" aria-hidden="true"></span>
+                  <strong>HHP</strong>
+                  <span x-text="hhpLabel(card)"></span>
+                </div>
               </div>
-              <div>
-                <div class="mini-metric-value" x-text="card.rightMetric"></div>
-                <div class="mini-metric-label" x-text="metricLabel(card.rightLabel)"></div>
-              </div>
+              <a
+                class="card-cta"
+                x-show="!isFeaturedCard(card)"
+                :href="withReturnTo(cardHref(card))"
+                @click.stop
+                x-text="defaultOpenLabel()"></a>
             </div>
-
-            <div class="card-cta">
-              <template x-if="activeId === 'crops'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-              <template x-if="activeId === 'problems'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-              <template x-if="activeId === 'products'">
-                <a class="card-cta-link" :href="cardHref(card)">
-                  <span x-text="cardCtaLabel(card)"></span> →
-                </a>
-              </template>
-            </div>
-            <p class="section-note" x-show="isFeaturedCard(card)" style="margin-top: 10px;">Includes linked evidence, standards, and resource context.</p>
           </article>
         </template>
       </div>
@@ -1213,13 +1064,13 @@
             </article>
             <article class="path-card">
               <h3 style="font-size: 1.05rem;">Resource library</h3>
-              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and interpretation material that help explain what a result means.</p>
+              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and HHP transition references that help explain what a result means in wider change work.</p>
               <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library →</a></p>
             </article>
             <article class="path-card">
-              <h3 style="font-size: 1.05rem;">Regulatory signals</h3>
-              <p style="margin-top: 8px;">Country context, recurring patterns, and signs of movement across the African biologicals registration landscape.</p>
-              <p style="margin-top: 12px;"><a href="./regulatory-signals.html" style="color: var(--green); font-weight: 800;">Open regulatory signals →</a></p>
+              <h3 style="font-size: 1.05rem;">Registration tracker</h3>
+              <p style="margin-top: 8px;">Move from discovery into the registration view when the conversation is about readiness, market access, and advocacy value.</p>
+              <p style="margin-top: 12px;"><a href="../../registration-tracker/public-dashboard/index.html" style="color: var(--green); font-weight: 800;">Open registration tracker →</a></p>
             </article>
           </div>
         </div>
@@ -1252,6 +1103,9 @@
         },
         assetIcon(path) {
           return `<img src="${path}" alt="" aria-hidden="true">`;
+        },
+        hhpIconSvg() {
+          return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8 21 19.5H3L12 3.8Z"/><circle cx="12" cy="10.2" r="2.1"/><path d="M9.4 15.1c.6-1.1 1.5-1.7 2.6-1.7s2 .6 2.6 1.7"/><path d="M8 17.8h3.1"/><path d="M12.9 17.8H16"/></svg>';
         },
         problemIcon(name) {
           const key = String(name || '').toLowerCase();
@@ -1392,6 +1246,11 @@
         catalogueHref(crop) {
           return `./product-catalogue.html?crop=${encodeURIComponent(crop)}`;
         },
+        openCard(card, event) {
+          if (!this.isFeaturedCard(card)) return;
+          if (event?.target?.closest('a, button')) return;
+          window.location.href = this.withReturnTo(this.cardHref(card));
+        },
         featuredDetails: {
           crops: {
             Citrus: './crop-citrus.html'
@@ -1415,15 +1274,175 @@
           if (this.activeId === 'problems') {
             return `./product-catalogue.html?problem=${encodeURIComponent(card.title)}`;
           }
-          return './product-catalogue.html';
+          return `./product-catalogue.html?q=${encodeURIComponent(card.title)}`;
         },
-        cardCtaLabel(card) {
-          if (this.isFeaturedCard(card)) {
-            return 'Open detail view';
-          }
+        withReturnTo(url) {
+          const joiner = url.includes('?') ? '&' : '?';
+          return `${url}${joiner}returnTo=${encodeURIComponent(`${window.location.pathname}${window.location.search}`)}`;
+        },
+        defaultOpenLabel() {
           if (this.activeId === 'crops') return 'See linked products';
           if (this.activeId === 'problems') return 'See biological options';
           return 'Open full product view';
+        },
+        primaryFilter: '__all__',
+        primaryFilterOptions() {
+          return [
+            { value: '__all__', label: this.active.filters[0] },
+            ...this.availablePrimaryFilters.map((label) => ({ value: label, label }))
+          ];
+        },
+        togglePrimaryFilter(value) {
+          this.primaryFilter = this.primaryFilter === value ? '__all__' : value;
+        },
+        applyPrimaryFilter() {
+          if (!this.primaryFilter) this.primaryFilter = '__all__';
+        },
+        setActiveMode(id) {
+          this.activeId = id;
+          this.primaryFilter = '__all__';
+        },
+        get availablePrimaryFilters() {
+          return [...new Set(this.active.cards.map((card) => this.displayBadge(card)).filter(Boolean))];
+        },
+        get filteredCards() {
+          if (this.primaryFilter === '__all__') return this.active.cards;
+          return this.active.cards.filter((card) => this.displayBadge(card) === this.primaryFilter);
+        },
+        cardCount(card, label) {
+          return (card.meta || []).find((item) => item.label === label)?.value || '';
+        },
+        cleanCount(value) {
+          return String(value || '').replace(/\s*use records?/i, '').trim();
+        },
+        supportMetricValue(card) {
+          if (this.activeId === 'products') return card.leftMetric;
+          return this.cleanCount(this.cardCount(card, 'Visible biological uses'));
+        },
+        supportMetricLabel(card) {
+          if (this.activeId === 'products') return 'source records';
+          return 'linked options';
+        },
+        hhpInsight(card) {
+          const map = {
+            crops: {
+              Citrus: "Priority crop for HHP replacement mapping in orchard systems.",
+              Tomatoes: "High replacement relevance where insect and blight programmes still rely on higher-risk chemistry.",
+              Potatoes: "Transition relevance visible in disease-heavy programmes with limited biological substitutes.",
+              Brassicas: "Strong substitution story around lepidopteran control.",
+              Grapes: "Risk-reduction context visible in export-sensitive spray programmes."
+            },
+            problems: {
+              "African bollworm": "Strong substitution pathway where Bt-led options can displace higher-risk insecticide programmes.",
+              Thrips: "Partial replacement story where biological options exist but coverage is uneven.",
+              Aphids: "Transition need is clear, but linked biological options remain thin.",
+              "Diamond back moth": "Priority HHP transition context in high-intensity vegetable programmes."
+            },
+            products: {
+              "Thuricide WP": "Useful in HHP transition programmes where Bt replaces higher-risk caterpillar chemistry.",
+              "DiPel DF": "Useful in HHP transition programmes where Bt replaces higher-risk caterpillar chemistry.",
+              "Florbac WG": "Visible replacement pathway in vegetable pest-control programmes.",
+              "Isomate C Plus": "Supports lower-risk transition by reducing reliance on conventional insecticide use."
+            }
+          };
+          return map[this.activeId]?.[card.title] || "";
+        },
+        hhpLabel(card) {
+          if (!this.hhpInsight(card)) return "";
+          if (/strong|priority/i.test(this.hhpInsight(card))) return "Priority replacement context";
+          if (/partial|uneven/i.test(this.hhpInsight(card))) return "Substitution pathway visible";
+          return "HHP transition relevance";
+        },
+        cardSummary(card) {
+          const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
+          if (this.activeId === 'crops') {
+            const problems = this.shortList(this.cardCount(card, 'Top visible pressures'));
+            if (problems && biologicalUses) {
+              return `Linked problems include ${problems}. ${biologicalUses} biological options linked.`;
+            }
+            if (problems) return `Linked problems include ${problems}.`;
+            if (biologicalUses) return `${biologicalUses} biological options linked.`;
+            return '';
+          }
+          if (this.activeId === 'problems') {
+            const crops = this.shortList(card.crops);
+            if (crops && biologicalUses) {
+              return `Linked crops include ${crops}. ${biologicalUses} biological options linked.`;
+            }
+            if (crops) return `Linked crops include ${crops}.`;
+            if (biologicalUses) return `${biologicalUses} biological options linked.`;
+            return '';
+          }
+          return this.productCardSummary(card);
+        },
+        productCardSummary(card) {
+          const category = this.cardCount(card, 'Category');
+          const linkedCrops = this.cardCount(card, 'Linked crops');
+          const cropSummary = !/use context/i.test(linkedCrops) ? this.shortList(linkedCrops) : '';
+          const linkCount = this.productLinkCount(card);
+
+          if (category && cropSummary && linkCount) {
+            return `${category} linked to ${cropSummary}. ${linkCount}.`;
+          }
+          if (category && cropSummary) {
+            return `${category} linked to ${cropSummary}.`;
+          }
+          if (category && linkCount) {
+            return `${category}. ${linkCount}.`;
+          }
+          if (cropSummary && linkCount) {
+            return `Linked to ${cropSummary}. ${linkCount}.`;
+          }
+          return category ? `${category}.` : '';
+        },
+        productLinkCount(card) {
+          const rawCount = String(card.rightMetric || '').trim();
+          const rawLabel = String(card.rightLabel || '').trim().toLowerCase();
+          if (!rawCount || !rawLabel) return '';
+          if (rawLabel === 'problem') return `${rawCount} linked problem`;
+          if (rawLabel === 'problems') return `${rawCount} linked problems`;
+          if (rawLabel === 'crop') return `${rawCount} linked crop`;
+          if (rawLabel === 'crops') return `${rawCount} linked crops`;
+          return `${rawCount} linked ${rawLabel}`;
+        },
+        shortList(value, limit = 4) {
+          const items = String(value || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean);
+          if (!items.length) return '';
+          if (items.length <= 1) return items[0];
+          if (items.length === 2) return `${items[0]} and ${items[1]}`;
+          const trimmed = items.slice(0, limit);
+          if (trimmed.length === 1) return trimmed[0];
+          if (trimmed.length === 2) return `${trimmed[0]} and ${trimmed[1]}`;
+          return `${trimmed.slice(0, -1).join(', ')}, and ${trimmed[trimmed.length - 1]}`;
+        },
+        fitSummary(card) {
+          const fit = String(card.fit || '').replace(/\.$/, '');
+          return fit.charAt(0).toUpperCase() + fit.slice(1);
+        },
+        primaryContextLabel(card) {
+          if (this.activeId === 'crops') return 'Linked problems';
+          if (this.activeId === 'problems') return 'Linked crops';
+          return 'Linked crops';
+        },
+        primaryContextValue(card) {
+          if (this.activeId === 'crops') return this.cardCount(card, 'Top visible pressures') || '';
+          if (this.activeId === 'problems') return card.crops || '';
+          return this.cardCount(card, 'Linked crops') || this.cardCount(card, 'Category') || '';
+        },
+        secondaryContextLabel(card) {
+          if (this.activeId === 'crops') return 'Biological options';
+          if (this.activeId === 'problems') return 'Biological options';
+          return 'Active';
+        },
+        secondaryContextValue(card) {
+          const uses = this.cardCount(card, 'Visible biological uses');
+          if (this.activeId === 'crops' || this.activeId === 'problems') {
+            return uses || '';
+          }
+          return this.cardCount(card, 'Active') || this.cardCount(card, 'Category') || '';
         },
         displayBadge(card) {
           if (this.activeId === 'problems') {
@@ -1441,7 +1460,7 @@
             return 'Crop view: start with this crop, then see the main problems and biological options around it.';
           }
           if (this.activeId === 'problems') {
-            return 'Problem view: start with this pest or disease, then see affected crops and visible biological options.';
+            return 'Problem view: start with this pest or disease, then see affected crops and linked biological options.';
           }
           if (this.activeId === 'products') {
             return 'Product view: start with this biological product, then see where it fits and what it is used for.';
@@ -1464,7 +1483,7 @@
         modelDescription(model) {
           const label = model.label || '';
           if (this.activeId === 'problems' && label === 'Signal') {
-            return 'How much biological coverage is visible around this problem in the current source set.';
+            return 'How much biological coverage is visible around this problem.';
           }
           return String(model.description || '')
             .replace(/pest or disease pressures/gi, 'pests and diseases')
@@ -1507,7 +1526,7 @@
             step: "01",
             summary: "Start with the crop or production context you work in.",
             heading: "Browse by crop.",
-            description: "See where biological activity is already visible around each crop, and which pests and diseases appear most often.",
+            description: "See which biological options are already linked to each crop, and which pests and diseases appear most often.",
             placeholder: "Search crops by name, region, production system, or problem...",
             filters: ["All categories", "All regions", "All problem mixes"],
             cards: [
@@ -1565,11 +1584,11 @@
                 accent: "#8f5a33",
                 soft: "rgba(244, 218, 203, 0.72)",
                 title: "Apples",
-                guide: "a fruit-production context where disease, orchard pressure, and biological options can be read together.",
+                guide: "a fruit-production context where disease, orchard problems, and biological options can be read together.",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: a fruit-production context." },
-                  { symbol: "P", label: "Pests", description: "Visible pest and disease pressure patterns in the orchard story." },
-                  { symbol: "B", label: "Biologicals", description: "Biological records that may respond to that orchard pressure mix." }
+                  { symbol: "P", label: "Pests", description: "Visible pest and disease problem patterns in the orchard story." },
+                  { symbol: "B", label: "Biologicals", description: "Biological records that may respond to that orchard problem mix." }
                 ],
                 meta: [
                   { label: "Top visible pressures", value: "Scab, codling moth, powdery mildew, oriental fruit moth" },
@@ -1588,11 +1607,11 @@
                 accent: "#5d7a2a",
                 soft: "rgba(226, 240, 198, 0.72)",
                 title: "Potatoes",
-                guide: "a crop area where the current records already show a practical, problem-led knowledge base forming.",
+                guide: "a crop area where the linked product and problem story is already easy to follow.",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: the crop being grown." },
-                  { symbol: "D", label: "Diseases", description: "Disease-heavy pressure picture inside this crop system." },
-                  { symbol: "B", label: "Biologicals", description: "Visible biological response points connected to that crop-pressure context." }
+                  { symbol: "D", label: "Diseases", description: "Disease-heavy problem picture inside this crop system." },
+                  { symbol: "B", label: "Biologicals", description: "Visible biological response points connected to that crop-problem context." }
                 ],
                 meta: [
                   { label: "Top visible pressures", value: "Early blight, late blight, tuber moth, nematodes" },
@@ -1614,8 +1633,8 @@
                 guide: "a horticulture context that links well to both pest and disease interpretations for broader audiences.",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: a horticulture crop context." },
-                  { symbol: "P", label: "Pests", description: "Problem pressures connected to the crop and its use cases." },
-                  { symbol: "B", label: "Biologicals", description: "Visible biological routes linked to those crop and pressure patterns." }
+                  { symbol: "P", label: "Pests", description: "Problem patterns connected to the crop and its use cases." },
+                  { symbol: "B", label: "Biologicals", description: "Visible biological routes linked to those crop and problem patterns." }
                 ],
                 meta: [
                   { label: "Top visible pressures", value: "African bollworm, early blight, late blight, whitefly" },
@@ -1705,7 +1724,7 @@
                 crops: "avocados",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: avocado orchard context." },
-                  { symbol: "D", label: "Diseases", description: "Disease-heavy pressure picture, particularly root rot and anthracnose." },
+                  { symbol: "D", label: "Diseases", description: "Disease-heavy problem picture, particularly root rot and anthracnose." },
                   { symbol: "B", label: "Biologicals", description: "Biological use visible particularly in disease suppression." }
                 ],
                 meta: [
@@ -1728,8 +1747,8 @@
                 crops: "brassicas",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: brassica vegetable crop context." },
-                  { symbol: "P", label: "Pests", description: "High lepidopteran pest pressure is the defining feature of this context." },
-                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the most visible biological entry point." }
+                  { symbol: "P", label: "Pests", description: "High lepidopteran pest activity is the defining feature of this context." },
+                  { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the clearest biological entry point." }
                 ],
                 meta: [
                   { label: "Top visible pressures", value: "Diamond back moth, African bollworm, club root, aphids" },
@@ -1751,7 +1770,7 @@
                 crops: "peppers",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: pepper/capsicum production context." },
-                  { symbol: "P", label: "Pests", description: "Sucking pest and whitefly pressure is prominent in this crop." },
+                  { symbol: "P", label: "Pests", description: "Sucking pests and whitefly activity are prominent in this crop." },
                   { symbol: "B", label: "Biologicals", description: "Entomopathogenic fungi and Bt products are key biological options." }
                 ],
                 meta: [
@@ -1796,7 +1815,7 @@
                 crops: "mango",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: mango orchard context." },
-                  { symbol: "P", label: "Pests", description: "Fruit fly and scale are the dominant pest pressures." },
+                  { symbol: "P", label: "Pests", description: "Fruit fly and scale are the dominant linked pests." },
                   { symbol: "B", label: "Biologicals", description: "Semiochemical attract-and-kill routes are the main biological option." }
                 ],
                 meta: [
@@ -1819,7 +1838,7 @@
                 crops: "pears",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: pear orchard context." },
-                  { symbol: "P", label: "Pests", description: "Codling moth and oriental fruit moth are key pressure patterns." },
+                  { symbol: "P", label: "Pests", description: "Codling moth and oriental fruit moth are the key linked pest patterns." },
                   { symbol: "B", label: "Biologicals", description: "Mating disruption semiochemicals are the primary biological route." }
                 ],
                 meta: [
@@ -1842,7 +1861,7 @@
                 crops: "strawberries",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: strawberry soft-fruit context." },
-                  { symbol: "P", label: "Pests", description: "Spider mite and botrytis are the defining pressure combination." },
+                  { symbol: "P", label: "Pests", description: "Spider mite and botrytis are the defining linked-problem combination." },
                   { symbol: "B", label: "Biologicals", description: "Fungal biopesticides and biocontrol agents have visible presence." }
                 ],
                 meta: [
@@ -1865,7 +1884,7 @@
                 crops: "onions",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: allium crop context." },
-                  { symbol: "D", label: "Diseases", description: "Fungal disease pressure is the primary concern in this context." },
+                  { symbol: "D", label: "Diseases", description: "Fungal disease activity is the primary concern in this context." },
                   { symbol: "B", label: "Biologicals", description: "Trichoderma-based biocontrol has visible presence in disease management." }
                 ],
                 meta: [
@@ -1887,7 +1906,7 @@
                 title: "Sugarcane",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: sugarcane production context." },
-                  { symbol: "P", label: "Pests", description: "Stem borer and aphid pressure dominate." },
+                  { symbol: "P", label: "Pests", description: "Stem borer and aphid activity dominate." },
                   { symbol: "B", label: "Biologicals", description: "Entomopathogenic fungi and parasitoids are the main biological routes." }
                 ],
                 meta: [
@@ -1909,7 +1928,7 @@
                 title: "Macadamia",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: macadamia nut orchard context." },
-                  { symbol: "P", label: "Pests", description: "False codling moth and stink bug are the dominant pest pressures." },
+                  { symbol: "P", label: "Pests", description: "False codling moth and stink bug are the dominant linked pests." },
                   { symbol: "B", label: "Biologicals", description: "Semiochemical and entomopathogenic options have some visibility." }
                 ],
                 meta: [
@@ -1953,7 +1972,7 @@
                 title: "Cotton",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: cotton field-crop context." },
-                  { symbol: "P", label: "Pests", description: "Bollworm and aphid pressure are the most visible in the current data." },
+                  { symbol: "P", label: "Pests", description: "Bollworm and aphid activity are the most visible in this crop context." },
                   { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the primary biological option in this context." }
                 ],
                 meta: [
@@ -1997,7 +2016,7 @@
                 title: "Cut flowers",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: cut flower production (roses, proteas, carnations)." },
-                  { symbol: "P", label: "Pests", description: "Botrytis, thrips, and spider mites are the defining pressure combination." },
+                  { symbol: "P", label: "Pests", description: "Botrytis, thrips, and spider mites are the defining linked-problem combination." },
                   { symbol: "B", label: "Biologicals", description: "Predatory mites, fungal biocontrol, and entomopathogenic options are visible." }
                 ],
                 meta: [
@@ -2023,7 +2042,7 @@
             step: "02",
             summary: "Start with a pest or disease you need to address.",
             heading: "Browse by pest or disease.",
-            description: "Explore the pest and disease profiles that appear most often in the current remedy register, then see where biological products are visibly present.",
+            description: "Explore the pest and disease profiles that appear most often, then see which biological options are already linked.",
             placeholder: "Search pests or diseases by name, crop, or taxonomic group...",
             filters: ["All problem types", "All crop groups", "All biological coverage"],
             cards: [
@@ -2035,15 +2054,15 @@
                 accent: "#bb553f",
                 soft: "rgba(248, 216, 208, 0.8)",
                 title: "African bollworm",
-                guide: "a widely shared problem where the current source set already shows meaningful biological options across many crop contexts.",
+                guide: "a widely shared problem where meaningful biological options appear across many crop contexts.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the pest or disease problem under review." },
-                  { symbol: "C", label: "Crops", description: "Crop contexts where this pressure appears visibly in the source set." },
-                  { symbol: "B", label: "Biologicals", description: "Visible biological use rows attached to that pressure across crop contexts." }
+                  { symbol: "C", label: "Crops", description: "Crop contexts where this problem is already linked." },
+                  { symbol: "B", label: "Biologicals", description: "Visible biological use rows attached to this problem across crop contexts." }
                 ],
                 crops: "Tomatoes, apples, peaches, pears",
                 meta: [
-                  { label: "Visible across", value: "97 crops in current data" },
+                  { label: "Visible across", value: "97 crop contexts" },
                   { label: "Visible biological uses", value: "61 use records" }
                 ],
                 leftMetric: "1,447",
@@ -2067,7 +2086,7 @@
                 ],
                 crops: "Grapes, apples, wheat, mangoes",
                 meta: [
-                  { label: "Visible across", value: "90 crops in current data" },
+                  { label: "Visible across", value: "90 crop contexts" },
                   { label: "Visible biological uses", value: "18 use records" }
                 ],
                 leftMetric: "795",
@@ -2085,13 +2104,13 @@
                 title: "Thrips",
                 guide: "an insect problem that helps show where biological options are visible without implying the picture is complete.",
                 models: [
-                  { symbol: "P", label: "Pressure", description: "Primary object: a pest pressure." },
+                  { symbol: "P", label: "Pressure", description: "Primary object: a pest problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the pest appears." },
                   { symbol: "S", label: "Coverage", description: "How much biological coverage is currently visible around this problem." }
                 ],
                 crops: "Citrus, flowers, tomatoes, onions",
                 meta: [
-                  { label: "Visible across", value: "82 crops in current data" },
+                  { label: "Visible across", value: "82 crop contexts" },
                   { label: "Visible biological uses", value: "19 use records" }
                 ],
                 leftMetric: "610",
@@ -2115,7 +2134,7 @@
                 ],
                 crops: "Potatoes, tomatoes, groundnuts, citrus",
                 meta: [
-                  { label: "Visible across", value: "61 crops in current data" },
+                  { label: "Visible across", value: "61 crop contexts" },
                   { label: "Visible biological uses", value: "3 use records" }
                 ],
                 leftMetric: "456",
@@ -2131,7 +2150,7 @@
                 accent: "#6d6a62",
                 soft: "rgba(232, 230, 225, 0.84)",
                 title: "Rust",
-                guide: "a disease problem where the current knowledge base is still thin, which helps set realistic expectations.",
+                guide: "a disease problem where linked biological options are still limited, which helps set realistic expectations.",
                 models: [
                   { symbol: "D", label: "Disease", description: "Primary object: the disease problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the disease appears in the register." },
@@ -2139,7 +2158,7 @@
                 ],
                 crops: "Groundnuts, beans, maize, sweetcorn",
                 meta: [
-                  { label: "Visible across", value: "52 crops in current data" },
+                  { label: "Visible across", value: "52 crop contexts" },
                   { label: "Visible biological uses", value: "1 use record" }
                 ],
                 leftMetric: "449",
@@ -2155,15 +2174,15 @@
                 accent: "#5b6268",
                 soft: "rgba(229, 234, 236, 0.82)",
                 title: "Aphids",
-                guide: "a useful comparison case where the current explorer still lacks meaningful linked biological options.",
+                guide: "a useful comparison case where meaningful linked biological options are still thin.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the named problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the problem is common." },
-                  { symbol: "S", label: "Coverage", description: "Whether the current source set shows meaningful biological coverage for this problem yet." }
+                  { symbol: "S", label: "Coverage", description: "Whether meaningful biological coverage is visible for this problem yet." }
                 ],
                 crops: "Citrus, potatoes, ornamentals, cruciferae",
                 meta: [
-                  { label: "Visible across", value: "107 crops in current data" },
+                  { label: "Visible across", value: "107 crop contexts" },
                   { label: "Visible biological uses", value: "7 use records" }
                 ],
                 leftMetric: "1,021",
@@ -2180,13 +2199,13 @@
                 soft: "rgba(245, 218, 206, 0.8)",
                 title: "Fall armyworm",
                 models: [
-                  { symbol: "P", label: "Pressure", description: "Primary object: the invasive pest pressure." },
-                  { symbol: "C", label: "Crops", description: "Crop contexts where this pressure appears." },
-                  { symbol: "B", label: "Biologicals", description: "Biological use rows linked to this pressure." }
+                  { symbol: "P", label: "Pressure", description: "Primary object: the invasive pest problem." },
+                  { symbol: "C", label: "Crops", description: "Crop contexts where this problem appears." },
+                  { symbol: "B", label: "Biologicals", description: "Biological use rows linked to this problem." }
                 ],
                 crops: "Maize, sorghum, wheat, sugarcane",
                 meta: [
-                  { label: "Visible across", value: "43 crops in current data" },
+                  { label: "Visible across", value: "43 crop contexts" },
                   { label: "Visible biological uses", value: "14 use records" }
                 ],
                 leftMetric: "823",
@@ -2204,12 +2223,12 @@
                 title: "Whitefly",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the pest under review." },
-                  { symbol: "C", label: "Crops", description: "Crop contexts where whitefly pressure is recorded." },
+                  { symbol: "C", label: "Crops", description: "Crop contexts where whitefly is recorded." },
                   { symbol: "B", label: "Biologicals", description: "Entomopathogenic and parasitoid routes visible in the data." }
                 ],
                 crops: "Tomatoes, peppers, cucurbits, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "74 crops in current data" },
+                  { label: "Visible across", value: "74 crop contexts" },
                   { label: "Visible biological uses", value: "11 use records" }
                 ],
                 leftMetric: "612",
@@ -2232,7 +2251,7 @@
                 ],
                 crops: "Strawberries, grapes, tomatoes, cut flowers",
                 meta: [
-                  { label: "Visible across", value: "55 crops in current data" },
+                  { label: "Visible across", value: "55 crop contexts" },
                   { label: "Visible biological uses", value: "9 use records" }
                 ],
                 leftMetric: "487",
@@ -2255,7 +2274,7 @@
                 ],
                 crops: "Citrus, peppers, macadamia, avocados",
                 meta: [
-                  { label: "Visible across", value: "31 crops in current data" },
+                  { label: "Visible across", value: "31 crop contexts" },
                   { label: "Visible biological uses", value: "6 use records" }
                 ],
                 leftMetric: "311",
@@ -2278,7 +2297,7 @@
                 ],
                 crops: "Avocados, macadamia, peppers, potatoes",
                 meta: [
-                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible across", value: "29 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "284",
@@ -2301,7 +2320,7 @@
                 ],
                 crops: "Strawberries, tomatoes, citrus, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "46 crops in current data" },
+                  { label: "Visible across", value: "46 crop contexts" },
                   { label: "Visible biological uses", value: "4 use records" }
                 ],
                 leftMetric: "376",
@@ -2324,7 +2343,7 @@
                 ],
                 crops: "Grapes, avocados, citrus, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible across", value: "38 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "342",
@@ -2347,7 +2366,7 @@
                 ],
                 crops: "Brassicas, cabbage, broccoli, cauliflower",
                 meta: [
-                  { label: "Visible across", value: "18 crops in current data" },
+                  { label: "Visible across", value: "18 crop contexts" },
                   { label: "Visible biological uses", value: "16 use records" }
                 ],
                 leftMetric: "384",
@@ -2370,7 +2389,7 @@
                 ],
                 crops: "Tomatoes, peppers, cucurbits, onions",
                 meta: [
-                  { label: "Visible across", value: "44 crops in current data" },
+                  { label: "Visible across", value: "44 crop contexts" },
                   { label: "Visible biological uses", value: "8 use records" }
                 ],
                 leftMetric: "412",
@@ -2393,7 +2412,7 @@
                 ],
                 crops: "Maize, sorghum, wheat",
                 meta: [
-                  { label: "Visible across", value: "12 crops in current data" },
+                  { label: "Visible across", value: "12 crop contexts" },
                   { label: "Visible biological uses", value: "3 use records" }
                 ],
                 leftMetric: "287",
@@ -2416,7 +2435,7 @@
                 ],
                 crops: "Citrus, avocados, macadamia, grapes",
                 meta: [
-                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible across", value: "29 crop contexts" },
                   { label: "Visible biological uses", value: "4 use records" }
                 ],
                 leftMetric: "253",
@@ -2439,7 +2458,7 @@
                 ],
                 crops: "Citrus, peaches, mango, avocados",
                 meta: [
-                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible across", value: "38 crop contexts" },
                   { label: "Visible biological uses", value: "9 use records" }
                 ],
                 leftMetric: "378",
@@ -2462,7 +2481,7 @@
                 ],
                 crops: "Tomatoes, maize, brassicas, potatoes",
                 meta: [
-                  { label: "Visible across", value: "33 crops in current data" },
+                  { label: "Visible across", value: "33 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "219",
@@ -2484,9 +2503,9 @@
             step: "03",
             summary: "Start with a biological product category or named option.",
             heading: "Browse biologicals.",
-            description: "Explore real biological records from the current source files, including biopesticides, inoculants, and semiochemical products.",
+            description: "Explore biological product records, including biopesticides, inoculants, and semiochemical products.",
             placeholder: "Search biological products by name, category, crop, or use...",
-            filters: ["All categories", "All crops", "All visibility levels"],
+            filters: ["All categories", "All crops", "All use profiles"],
             cards: [
               {
                 icon: "B",
@@ -2496,7 +2515,7 @@
                 accent: "#2b6b4f",
                 soft: "rgba(220, 238, 224, 0.8)",
                 title: "Thuricide WP",
-                guide: "a recognisable biological control product with enough crop and pressure spread to anchor the catalogue visually.",
+                guide: "a recognisable biological control product with enough crop and problem spread to anchor the catalogue visually.",
                 models: [
                   { symbol: "B", label: "Product", description: "Primary object: the biological product itself." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the product appears to fit." },
@@ -2619,7 +2638,7 @@
                 guide: "a behavioural-control example that helps the product language feel richer and more conceptually complete.",
                 models: [
                   { symbol: "B", label: "Product", description: "Primary object: the semiochemical product." },
-                  { symbol: "P", label: "Pressure", description: "Behavioural-control target pressure." },
+                  { symbol: "P", label: "Pressure", description: "Behavioural-control target problem." },
                   { symbol: "U", label: "Use", description: "Use context showing how the product operates in practice." }
                 ],
                 meta: [
@@ -2631,118 +2650,6 @@
                 leftLabel: "Use row",
                 rightMetric: "1",
                 rightLabel: "Problem"
-              }
-            ]
-          },
-          {
-            id: "evidence",
-            label: "Evidence",
-            summary: "See trials, case studies, and technical reference material.",
-            heading: "Browse evidence and reference material.",
-            description: "Use this layer once you want proof points, field records, and technical context behind a product or problem.",
-            placeholder: "Search trials, case studies, and reference records...",
-            filters: ["All evidence types", "All categories", "All crops"],
-            cards: [
-              {
-                icon: "E",
-                badge: "Field trial",
-                badgeTone: "green",
-                title: "Maize foliar pest control trial",
-                meta: [
-                  { label: "Location", value: "Free State" },
-                  { label: "Related products", value: "4 listed biological options" },
-                  { label: "Focus", value: "Efficacy under field conditions" }
-                ],
-                leftMetric: "3",
-                leftLabel: "Seasons",
-                rightMetric: "4",
-                rightLabel: "Records reviewed"
-              },
-              {
-                icon: "E",
-                badge: "Case study",
-                badgeTone: "amber",
-                title: "Citrus orchard resilience programme",
-                meta: [
-                  { label: "Location", value: "Eastern Cape" },
-                  { label: "Related products", value: "Biostimulants and inoculants" },
-                  { label: "Focus", value: "Root health and plant performance" }
-                ],
-                leftMetric: "6",
-                leftLabel: "Contributors",
-                rightMetric: "7",
-                rightLabel: "Records linked"
-              },
-              {
-                icon: "E",
-                badge: "Technical note",
-                badgeTone: "slate",
-                title: "Reading biological category claims",
-                meta: [
-                  { label: "Type", value: "Reference note" },
-                  { label: "Audience", value: "Public and member readers" },
-                  { label: "Focus", value: "Definitions, category language, and use context" }
-                ],
-                leftMetric: "12",
-                leftLabel: "Linked records",
-                rightMetric: "5",
-                rightLabel: "Related categories"
-              }
-            ]
-          },
-          {
-            id: "signals",
-            label: "Sector signals",
-            summary: "See country visibility and wider landscape signals.",
-            heading: "Browse sector and country signals.",
-            description: "Use this layer for broader public signals about visibility, comparison, and where activity is becoming legible.",
-            placeholder: "Search countries, categories, or product signals...",
-            filters: ["All countries", "All categories", "All visibility levels"],
-            cards: [
-              {
-                icon: "R",
-                badge: "High visibility",
-                badgeTone: "green",
-                title: "South Africa",
-                meta: [
-                  { label: "Visible categories", value: "Biopesticides, biostimulants, inoculants" },
-                  { label: "Public visibility", value: "Most complete currently visible landscape" },
-                  { label: "Focus", value: "Registration and market visibility" }
-                ],
-                leftMetric: "54",
-                leftLabel: "Biologicals visible",
-                rightMetric: "21",
-                rightLabel: "Evidence links"
-              },
-              {
-                icon: "R",
-                badge: "Developing",
-                badgeTone: "amber",
-                title: "Kenya",
-                meta: [
-                  { label: "Visible categories", value: "Biopesticides, biostimulants" },
-                  { label: "Public visibility", value: "Growing visibility by crop and problem" },
-                  { label: "Focus", value: "Category and crop-linked relevance" }
-                ],
-                leftMetric: "27",
-                leftLabel: "Biologicals visible",
-                rightMetric: "12",
-                rightLabel: "Evidence links"
-              },
-              {
-                icon: "R",
-                badge: "Early visibility",
-                badgeTone: "slate",
-                title: "Regional comparison",
-                meta: [
-                  { label: "Visible categories", value: "Cross-country comparative view" },
-                  { label: "Public visibility", value: "Useful for broad pattern recognition" },
-                  { label: "Focus", value: "Visibility and emerging contrasts" }
-                ],
-                leftMetric: "5",
-                leftLabel: "Countries in view",
-                rightMetric: "9",
-                rightLabel: "Category comparisons"
               }
             ]
           }
