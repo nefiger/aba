@@ -678,21 +678,6 @@
       font-size: 14px;
     }
 
-    .card-launch {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      background: rgba(255, 255, 255, 0.84);
-      color: var(--card-accent, var(--green));
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-    }
-
     .card-cta {
       display: inline-flex;
       align-items: center;
@@ -714,25 +699,6 @@
       outline: none;
       border-color: color-mix(in srgb, var(--card-accent) 34%, white);
       background: color-mix(in srgb, var(--card-soft) 60%, white);
-    }
-
-    .result-card-feature {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      color: var(--card-accent, var(--green));
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-    }
-
-    .result-card-feature::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: currentColor;
     }
 
     /* ── hero path entry cards ── */
@@ -1004,14 +970,8 @@
             @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
               <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
-              <div style="display: flex; align-items: flex-start; gap: 10px;">
-                <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
-                <span class="card-launch" aria-hidden="true" x-show="isFeaturedCard(card)">→</span>
-              </div>
+              <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
             </div>
-
-            <div class="result-card-feature" x-show="isFeaturedCard(card)">Includes evidence, standards, resources, and HHP transition context</div>
-
             <h3 style="margin-top: 12px; font-size: 1.15rem;" x-text="card.title"></h3>
 
             <p class="card-summary" x-text="cardSummary(card)"></p>
@@ -2565,118 +2525,6 @@
                 leftLabel: "Use row",
                 rightMetric: "1",
                 rightLabel: "Problem"
-              }
-            ]
-          },
-          {
-            id: "evidence",
-            label: "Evidence",
-            summary: "See trials, case studies, and technical reference material.",
-            heading: "Browse evidence and reference material.",
-            description: "Use this layer once you want proof points, field records, and technical context behind a product or problem.",
-            placeholder: "Search trials, case studies, and reference records...",
-            filters: ["All evidence types", "All categories", "All crops"],
-            cards: [
-              {
-                icon: "E",
-                badge: "Field trial",
-                badgeTone: "green",
-                title: "Maize foliar pest control trial",
-                meta: [
-                  { label: "Location", value: "Free State" },
-                  { label: "Related products", value: "4 listed biological options" },
-                  { label: "Focus", value: "Efficacy under field conditions" }
-                ],
-                leftMetric: "3",
-                leftLabel: "Seasons",
-                rightMetric: "4",
-                rightLabel: "Records reviewed"
-              },
-              {
-                icon: "E",
-                badge: "Case study",
-                badgeTone: "amber",
-                title: "Citrus orchard resilience programme",
-                meta: [
-                  { label: "Location", value: "Eastern Cape" },
-                  { label: "Related products", value: "Biostimulants and inoculants" },
-                  { label: "Focus", value: "Root health and plant performance" }
-                ],
-                leftMetric: "6",
-                leftLabel: "Contributors",
-                rightMetric: "7",
-                rightLabel: "Records linked"
-              },
-              {
-                icon: "E",
-                badge: "Technical note",
-                badgeTone: "slate",
-                title: "Reading biological category claims",
-                meta: [
-                  { label: "Type", value: "Reference note" },
-                  { label: "Audience", value: "Public and member readers" },
-                  { label: "Focus", value: "Definitions, category language, and use context" }
-                ],
-                leftMetric: "12",
-                leftLabel: "Linked records",
-                rightMetric: "5",
-                rightLabel: "Related categories"
-              }
-            ]
-          },
-          {
-            id: "signals",
-            label: "Sector signals",
-            summary: "See country visibility and wider landscape signals.",
-            heading: "Browse sector and country signals.",
-            description: "Use this layer for broader public signals about visibility, comparison, and where activity is becoming legible.",
-            placeholder: "Search countries, categories, or product signals...",
-            filters: ["All countries", "All categories", "All visibility levels"],
-            cards: [
-              {
-                icon: "R",
-                badge: "High visibility",
-                badgeTone: "green",
-                title: "South Africa",
-                meta: [
-                  { label: "Visible categories", value: "Biopesticides, biostimulants, inoculants" },
-                  { label: "Public visibility", value: "Most complete currently visible landscape" },
-                  { label: "Focus", value: "Registration and market visibility" }
-                ],
-                leftMetric: "54",
-                leftLabel: "Biologicals visible",
-                rightMetric: "21",
-                rightLabel: "Evidence links"
-              },
-              {
-                icon: "R",
-                badge: "Developing",
-                badgeTone: "amber",
-                title: "Kenya",
-                meta: [
-                  { label: "Visible categories", value: "Biopesticides, biostimulants" },
-                  { label: "Public visibility", value: "Growing visibility by crop and problem" },
-                  { label: "Focus", value: "Category and crop-linked relevance" }
-                ],
-                leftMetric: "27",
-                leftLabel: "Biologicals visible",
-                rightMetric: "12",
-                rightLabel: "Evidence links"
-              },
-              {
-                icon: "R",
-                badge: "Early visibility",
-                badgeTone: "slate",
-                title: "Regional comparison",
-                meta: [
-                  { label: "Visible categories", value: "Cross-country comparative view" },
-                  { label: "Public visibility", value: "Useful for broad pattern recognition" },
-                  { label: "Focus", value: "Visibility and emerging contrasts" }
-                ],
-                leftMetric: "5",
-                leftLabel: "Countries in view",
-                rightMetric: "9",
-                rightLabel: "Category comparisons"
               }
             ]
           }
