@@ -928,7 +928,7 @@
       <div class="results-head">
         <div>
           <div class="eyebrow">Product catalogue</div>
-          <h2 style="margin-top: 6px;">Browse visible biological products.</h2>
+          <h2 style="margin-top: 6px;">Browse biological products.</h2>
           <div class="active-legend" :style="'--accent:' + activeCategoryTheme.accent + '; --accent-soft:' + activeCategoryTheme.soft">
             <div class="legend-cluster">
               <div class="legend-symbol" x-html="iconSvg(activeCategoryTheme.symbol)" aria-hidden="true"></div>
@@ -1214,10 +1214,10 @@
         fitText(product) {
           return String(product.fit || '')
             .replace(/where a behavioural control route is visible in the source file/gi, 'using a behavioural control approach')
-            .replace(/visible in the source file/gi, 'visible in the current data')
-            .replace(/visible in the register/gi, 'visible in the current data')
-            .replace(/remedy source file/gi, 'current data')
-            .replace(/source file/gi, 'current data');
+            .replace(/visible in the source file/gi, 'visible here')
+            .replace(/visible in the register/gi, 'visible here')
+            .replace(/remedy source file/gi, 'catalogue')
+            .replace(/source file/gi, 'catalogue');
         },
         modelLabel(model) {
           const label = model.label || '';
@@ -1396,7 +1396,7 @@
             badge: "Registered",
             badgeTone: "amber",
             title: "DiPel DF",
-            fit: "Broadest visible biological pest-control footprint in the current remedy source file",
+            fit: "Broadest visible biological pest-control footprint in the catalogue",
             models: [
               { symbol: "B", label: "Product", description: "Primary object: the product itself." },
               { symbol: "C", label: "Crops", description: "Wide spread of crop contexts around the product." },

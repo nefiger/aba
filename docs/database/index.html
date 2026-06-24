@@ -1289,10 +1289,10 @@
         cardSummary(card) {
           const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
           if (this.activeId === 'crops') {
-            return `${card.title} is a clear crop entry point with linked problems, visible biological routes, and supporting material ready to open. ${biologicalUses ? `${biologicalUses} options are currently surfaced.` : ''}`.trim();
+            return `${card.title} is a clear crop entry point with linked problems, visible biological routes, and deeper supporting material. ${biologicalUses ? `${biologicalUses} options are shown here.` : ''}`.trim();
           }
           if (this.activeId === 'problems') {
-            return `${card.title} is a useful problem-led view because the affected crops and biological options can be compared quickly. ${biologicalUses ? `${biologicalUses} options are currently surfaced.` : ''}`.trim();
+            return `${card.title} is a useful problem-led view because the affected crops and biological options can be compared quickly. ${biologicalUses ? `${biologicalUses} options are shown here.` : ''}`.trim();
           }
           const category = (card.meta || []).find((item) => item.label === 'Category')?.value || card.category || 'Biological product';
           return `${card.title} is a ${String(category).toLowerCase()} record showing where this biological fits, what it addresses, and why it matters in transition conversations.`;
@@ -1335,7 +1335,7 @@
             return 'Crop view: start with this crop, then see the main problems and biological options around it.';
           }
           if (this.activeId === 'problems') {
-            return 'Problem view: start with this pest or disease, then see affected crops and visible biological options.';
+            return 'Problem view: start with this pest or disease, then see affected crops and linked biological options.';
           }
           if (this.activeId === 'products') {
             return 'Product view: start with this biological product, then see where it fits and what it is used for.';
@@ -1358,7 +1358,7 @@
         modelDescription(model) {
           const label = model.label || '';
           if (this.activeId === 'problems' && label === 'Signal') {
-            return 'How much biological coverage is visible around this problem in the current source set.';
+            return 'How much biological coverage is visible around this problem.';
           }
           return String(model.description || '')
             .replace(/pest or disease pressures/gi, 'pests and diseases')
@@ -1847,7 +1847,7 @@
                 title: "Cotton",
                 models: [
                   { symbol: "C", label: "Crop", description: "Primary object: cotton field-crop context." },
-                  { symbol: "P", label: "Pests", description: "Bollworm and aphid activity are the most visible in the current data." },
+                  { symbol: "P", label: "Pests", description: "Bollworm and aphid activity are the most visible in this crop context." },
                   { symbol: "B", label: "Biologicals", description: "Bt biopesticides are the primary biological option in this context." }
                 ],
                 meta: [
@@ -1929,7 +1929,7 @@
                 accent: "#bb553f",
                 soft: "rgba(248, 216, 208, 0.8)",
                 title: "African bollworm",
-                guide: "a widely shared problem where the current source set already shows meaningful biological options across many crop contexts.",
+                guide: "a widely shared problem where meaningful biological options appear across many crop contexts.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the pest or disease problem under review." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where this problem appears visibly in the source set." },
@@ -1937,7 +1937,7 @@
                 ],
                 crops: "Tomatoes, apples, peaches, pears",
                 meta: [
-                  { label: "Visible across", value: "97 crops in current data" },
+                  { label: "Visible across", value: "97 crop contexts" },
                   { label: "Visible biological uses", value: "61 use records" }
                 ],
                 leftMetric: "1,447",
@@ -1961,7 +1961,7 @@
                 ],
                 crops: "Grapes, apples, wheat, mangoes",
                 meta: [
-                  { label: "Visible across", value: "90 crops in current data" },
+                  { label: "Visible across", value: "90 crop contexts" },
                   { label: "Visible biological uses", value: "18 use records" }
                 ],
                 leftMetric: "795",
@@ -1985,7 +1985,7 @@
                 ],
                 crops: "Citrus, flowers, tomatoes, onions",
                 meta: [
-                  { label: "Visible across", value: "82 crops in current data" },
+                  { label: "Visible across", value: "82 crop contexts" },
                   { label: "Visible biological uses", value: "19 use records" }
                 ],
                 leftMetric: "610",
@@ -2009,7 +2009,7 @@
                 ],
                 crops: "Potatoes, tomatoes, groundnuts, citrus",
                 meta: [
-                  { label: "Visible across", value: "61 crops in current data" },
+                  { label: "Visible across", value: "61 crop contexts" },
                   { label: "Visible biological uses", value: "3 use records" }
                 ],
                 leftMetric: "456",
@@ -2033,7 +2033,7 @@
                 ],
                 crops: "Groundnuts, beans, maize, sweetcorn",
                 meta: [
-                  { label: "Visible across", value: "52 crops in current data" },
+                  { label: "Visible across", value: "52 crop contexts" },
                   { label: "Visible biological uses", value: "1 use record" }
                 ],
                 leftMetric: "449",
@@ -2049,15 +2049,15 @@
                 accent: "#5b6268",
                 soft: "rgba(229, 234, 236, 0.82)",
                 title: "Aphids",
-                guide: "a useful comparison case where the current explorer still lacks meaningful linked biological options.",
+                guide: "a useful comparison case where meaningful linked biological options are still thin.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the named problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the problem is common." },
-                  { symbol: "S", label: "Coverage", description: "Whether the current source set shows meaningful biological coverage for this problem yet." }
+                  { symbol: "S", label: "Coverage", description: "Whether meaningful biological coverage is visible for this problem yet." }
                 ],
                 crops: "Citrus, potatoes, ornamentals, cruciferae",
                 meta: [
-                  { label: "Visible across", value: "107 crops in current data" },
+                  { label: "Visible across", value: "107 crop contexts" },
                   { label: "Visible biological uses", value: "7 use records" }
                 ],
                 leftMetric: "1,021",
@@ -2080,7 +2080,7 @@
                 ],
                 crops: "Maize, sorghum, wheat, sugarcane",
                 meta: [
-                  { label: "Visible across", value: "43 crops in current data" },
+                  { label: "Visible across", value: "43 crop contexts" },
                   { label: "Visible biological uses", value: "14 use records" }
                 ],
                 leftMetric: "823",
@@ -2103,7 +2103,7 @@
                 ],
                 crops: "Tomatoes, peppers, cucurbits, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "74 crops in current data" },
+                  { label: "Visible across", value: "74 crop contexts" },
                   { label: "Visible biological uses", value: "11 use records" }
                 ],
                 leftMetric: "612",
@@ -2126,7 +2126,7 @@
                 ],
                 crops: "Strawberries, grapes, tomatoes, cut flowers",
                 meta: [
-                  { label: "Visible across", value: "55 crops in current data" },
+                  { label: "Visible across", value: "55 crop contexts" },
                   { label: "Visible biological uses", value: "9 use records" }
                 ],
                 leftMetric: "487",
@@ -2149,7 +2149,7 @@
                 ],
                 crops: "Citrus, peppers, macadamia, avocados",
                 meta: [
-                  { label: "Visible across", value: "31 crops in current data" },
+                  { label: "Visible across", value: "31 crop contexts" },
                   { label: "Visible biological uses", value: "6 use records" }
                 ],
                 leftMetric: "311",
@@ -2172,7 +2172,7 @@
                 ],
                 crops: "Avocados, macadamia, peppers, potatoes",
                 meta: [
-                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible across", value: "29 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "284",
@@ -2195,7 +2195,7 @@
                 ],
                 crops: "Strawberries, tomatoes, citrus, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "46 crops in current data" },
+                  { label: "Visible across", value: "46 crop contexts" },
                   { label: "Visible biological uses", value: "4 use records" }
                 ],
                 leftMetric: "376",
@@ -2218,7 +2218,7 @@
                 ],
                 crops: "Grapes, avocados, citrus, ornamentals",
                 meta: [
-                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible across", value: "38 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "342",
@@ -2241,7 +2241,7 @@
                 ],
                 crops: "Brassicas, cabbage, broccoli, cauliflower",
                 meta: [
-                  { label: "Visible across", value: "18 crops in current data" },
+                  { label: "Visible across", value: "18 crop contexts" },
                   { label: "Visible biological uses", value: "16 use records" }
                 ],
                 leftMetric: "384",
@@ -2264,7 +2264,7 @@
                 ],
                 crops: "Tomatoes, peppers, cucurbits, onions",
                 meta: [
-                  { label: "Visible across", value: "44 crops in current data" },
+                  { label: "Visible across", value: "44 crop contexts" },
                   { label: "Visible biological uses", value: "8 use records" }
                 ],
                 leftMetric: "412",
@@ -2287,7 +2287,7 @@
                 ],
                 crops: "Maize, sorghum, wheat",
                 meta: [
-                  { label: "Visible across", value: "12 crops in current data" },
+                  { label: "Visible across", value: "12 crop contexts" },
                   { label: "Visible biological uses", value: "3 use records" }
                 ],
                 leftMetric: "287",
@@ -2310,7 +2310,7 @@
                 ],
                 crops: "Citrus, avocados, macadamia, grapes",
                 meta: [
-                  { label: "Visible across", value: "29 crops in current data" },
+                  { label: "Visible across", value: "29 crop contexts" },
                   { label: "Visible biological uses", value: "4 use records" }
                 ],
                 leftMetric: "253",
@@ -2333,7 +2333,7 @@
                 ],
                 crops: "Citrus, peaches, mango, avocados",
                 meta: [
-                  { label: "Visible across", value: "38 crops in current data" },
+                  { label: "Visible across", value: "38 crop contexts" },
                   { label: "Visible biological uses", value: "9 use records" }
                 ],
                 leftMetric: "378",
@@ -2356,7 +2356,7 @@
                 ],
                 crops: "Tomatoes, maize, brassicas, potatoes",
                 meta: [
-                  { label: "Visible across", value: "33 crops in current data" },
+                  { label: "Visible across", value: "33 crop contexts" },
                   { label: "Visible biological uses", value: "5 use records" }
                 ],
                 leftMetric: "219",
@@ -2378,7 +2378,7 @@
             step: "03",
             summary: "Start with a biological product category or named option.",
             heading: "Browse biologicals.",
-            description: "Explore real biological records from the current source files, including biopesticides, inoculants, and semiochemical products.",
+            description: "Explore biological product records, including biopesticides, inoculants, and semiochemical products.",
             placeholder: "Search biological products by name, category, crop, or use...",
             filters: ["All categories", "All crops", "All visibility levels"],
             cards: [
