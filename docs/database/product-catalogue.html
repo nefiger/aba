@@ -950,11 +950,7 @@
 
     <nav class="surface subnav" aria-label="Biologicals explorer pages">
       <a href="./index.html">Explorer</a>
-      <a class="active" href="./product-catalogue.html">Products</a>
-      <a href="./evidence-library.html">Evidence</a>
-      <a href="../../registration-tracker/public-dashboard/index.html">Signal dashboard</a>
-      <a href="./resource-library.html">Resources</a>
-      <a href="./standards-regulations.html">Standards</a>
+      <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
 
     <section class="surface section">
@@ -1042,8 +1038,8 @@
         <template x-for="product in filteredProducts" :key="product.title">
           <article class="card" :style="'--card-accent:' + categoryTheme(product.categoryId).accent + '; --card-soft:' + categoryTheme(product.categoryId).soft">
             <div class="card-top">
-              <button type="button" class="card-icon icon-filter-button tooltip-anchor" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :data-tooltip="'Filter to ' + product.category + ' records'" :aria-label="'Filter to ' + product.category + ' records'"></button>
-              <div class="badge" :class="product.badgeTone" :title="'Status tag: ' + product.badge" x-text="product.badge"></div>
+              <button type="button" class="card-icon icon-filter-button tooltip-anchor" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :data-tooltip="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
+              <div class="badge" :class="product.badgeTone" :title="productBadgeTitle(product)" x-text="displayProductBadge(product)"></div>
             </div>
 
             <div class="card-context" style="margin-top: 12px;">
@@ -1053,17 +1049,17 @@
             <h3 style="margin-top: 10px;" x-text="product.title"></h3>
 
             <div class="summary-strip">
-              <strong x-text="categoryTheme(product.categoryId).summaryLead"></strong>
+              <strong x-text="summaryLead(product)"></strong>
               <span style="margin-left: 6px;"> </span>
-              <span x-text="product.fit" style="color: var(--ink); font-weight: 700;"></span>
+              <span x-text="fitText(product)" style="color: var(--ink); font-weight: 700;"></span>
             </div>
 
             <div class="model-strip">
               <template x-for="(model, index) in product.models" :key="model.label + index">
                 <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="model.description" :aria-label="model.description">
+                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
                     <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
-                    <span x-text="model.label"></span>
+                    <span x-text="modelLabel(model)"></span>
                   </div>
                   <span class="model-arrow" x-show="index < product.models.length - 1">→</span>
                 </template>
@@ -1081,8 +1077,8 @@
 
             <div class="card-meta">
               <template x-for="item in product.meta" :key="item.label">
-                <div :title="item.label + ': ' + item.value">
-                  <div class="meta-label" x-text="item.label"></div>
+                <div :title="metaLabel(item) + ': ' + item.value">
+                  <div class="meta-label" x-text="metaLabel(item)"></div>
                   <div class="meta-value" x-text="item.value"></div>
                 </div>
               </template>
@@ -1091,11 +1087,11 @@
             <div class="card-metrics">
               <div>
                 <div class="metric-value" x-text="product.leftMetric"></div>
-                <div class="metric-label" x-text="product.leftLabel"></div>
+                <div class="metric-label" x-text="metricLabel(product.leftLabel)"></div>
               </div>
               <div>
                 <div class="metric-value" x-text="product.rightMetric"></div>
-                <div class="metric-label" x-text="product.rightLabel"></div>
+                <div class="metric-label" x-text="metricLabel(product.rightLabel)"></div>
               </div>
             </div>
           </article>
@@ -1213,12 +1209,74 @@
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           const crop = params.get('crop');
+          const problem = params.get('problem');
           const pressure = params.get('pressure');
           const search = params.get('q');
           if (category && this.categories.some((item) => item.id === category)) this.activeCategory = category;
           if (crop) this.activeCrop = crop;
-          if (pressure) this.searchQuery = pressure;
+          if (problem) this.searchQuery = problem;
+          if (!problem && pressure) this.searchQuery = pressure;
           if (search) this.searchQuery = search;
+        },
+        displayProductBadge(product) {
+          if (product.badge !== 'Registered') return product.badge;
+          const problemLinks = (product.meta || []).find((item) => item.label === 'Pressure links')?.value?.toLowerCase() || '';
+          if (/mildew|blight|wilt|fung|bacterial|disease|rhizoctonia|pythium/.test(problemLinks)) return 'Disease control';
+          return 'Insect control';
+        },
+        productIconTooltip(product) {
+          return `Filter to ${product.category} records`;
+        },
+        productBadgeTitle(product) {
+          return `Context tag: ${this.displayProductBadge(product)}`;
+        },
+        summaryLead(product) {
+          const leads = {
+            biopesticide: 'Best for:',
+            semiochemical: 'Works through:',
+            inoculant: 'Supports:',
+            biofertiliser: 'Helps with:'
+          };
+          return leads[product.categoryId] || 'Best for:';
+        },
+        fitText(product) {
+          return String(product.fit || '')
+            .replace(/where a behavioural control route is visible in the source file/gi, 'using a behavioural control approach')
+            .replace(/visible in the source file/gi, 'visible in the current data')
+            .replace(/visible in the register/gi, 'visible in the current data')
+            .replace(/remedy source file/gi, 'current data')
+            .replace(/source file/gi, 'current data');
+        },
+        modelLabel(model) {
+          const label = model.label || '';
+          if (label === 'Pressure') return 'Problem';
+          if (label === 'Pressures') return 'Problems';
+          return label;
+        },
+        modelDescription(model) {
+          return String(model.description || '')
+            .replace(/pest or disease pressures/gi, 'pests and diseases')
+            .replace(/target pressure/gi, 'target problem')
+            .replace(/pressure set/gi, 'problem set')
+            .replace(/pressure/g, 'problem')
+            .replace(/Pressures/g, 'Problems')
+            .replace(/Pressure/g, 'Problem');
+        },
+        metaLabel(item) {
+          const label = item.label || '';
+          if (label === 'Pressure links') return 'Key problems';
+          return label;
+        },
+        metricLabel(label) {
+          if (label === 'Use rows') return 'Source records';
+          if (label === 'Use row') return 'Source record';
+          if (label === 'Crops shown') return 'Crops linked';
+          if (label === 'Crop shown') return 'Crop linked';
+          if (label === 'Source row') return 'Source record';
+          if (label === 'Organic flag') return 'Organic';
+          if (label === 'Problems') return 'Problem links';
+          if (label === 'Problem') return 'Problem link';
+          return label;
         },
         syncUrl() {
           const params = new URLSearchParams();

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA Biologicals Explorer | African Bollworm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #173039;
+      --muted: #5c6f73;
+      --line: rgba(23, 48, 57, 0.1);
+      --surface: rgba(255, 252, 246, 0.92);
+      --paper: #f4efe5;
+      --green: #2b6b4f;
+      --accent: #b05b37;
+      --accent-soft: rgba(246, 219, 203, 0.62);
+      --shadow: 0 18px 34px -28px rgba(20, 32, 34, 0.28);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; color: var(--ink); background: radial-gradient(circle at top left, rgba(99, 154, 108, 0.12), transparent 24%), linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%); }
+    a { color: inherit; text-decoration: none; }
+    .display { font-family: "Source Serif 4", Georgia, serif; }
+    .shell { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 14px 0 32px; }
+    .surface, .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); backdrop-filter: blur(14px); }
+    .surface { padding: 18px; }
+    .card { padding: 18px; }
+    .topbar, .hero-grid, .context-grid, .evidence-grid, .link-grid { display: grid; gap: 14px; }
+    .topbar { grid-template-columns: 1fr auto; align-items: center; margin-bottom: 12px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .mark { width: 36px; height: 36px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(43, 107, 79, 0.12); color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+    .mini, .eyebrow, .pill { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+    .mini, .eyebrow { color: var(--muted); }
+    .nav, .subnav { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; font-weight: 700; }
+    .subnav { margin-bottom: 12px; padding: 12px 16px; }
+    .subnav a.active, .nav a.active { color: var(--green); }
+    .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); align-items: start; }
+    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(246, 219, 203, 0.74) 0%, rgba(255,255,255,0.72) 100%); border: 1px solid rgba(176, 91, 55, 0.18); border-radius: 22px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { margin-top: 8px; font-size: clamp(2rem, 3.2vw, 3rem); line-height: 1.04; }
+    h2 { font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.08; }
+    h3 { font-size: 1.02rem; line-height: 1.35; }
+    p { color: var(--muted); line-height: 1.65; }
+    .pill { display: inline-flex; align-items: center; min-height: 30px; padding: 7px 11px; border-radius: 999px; background: rgba(255,255,255,0.76); color: var(--accent); }
+    .context-grid, .evidence-grid, .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .meta-list { display: grid; gap: 10px; margin-top: 14px; }
+    .meta-row { padding: 12px 13px; border-radius: 14px; background: rgba(255,255,255,0.7); border: 1px solid var(--line); }
+    .meta-label { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .chip { display: inline-flex; align-items: center; min-height: 34px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.78); border: 1px solid var(--line); font-weight: 700; }
+    .link-card { padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.76); }
+    .link-card a { color: var(--green); font-weight: 800; }
+    .section { margin-top: 12px; }
+    @media (max-width: 900px) { .topbar, .hero-grid, .context-grid, .evidence-grid, .link-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div>
+          <div class="mini">African Biologicals Alliance</div>
+          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Biologicals explorer</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="../site/index.html">Home</a>
+        <a href="../site/about.html">About</a>
+        <a href="../membership-flow/index.html">Membership</a>
+        <a class="active" href="./index.html">Biologicals Explorer</a>
+        <a href="../site/workspace.html">Workspace</a>
+      </nav>
+    </header>
+    <nav class="surface subnav" aria-label="Biologicals explorer pages">
+      <a class="active" href="./index.html">Explorer</a>
+      <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
+    </nav>
+    <section class="surface hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">Problem detail</div>
+        <h1 class="display">African bollworm</h1>
+        <p style="margin-top: 12px;">African bollworm is one of the clearest problem-led entry points in the explorer because it links across vegetables, orchard crops, and a recognisable set of Bt-led biological options.</p>
+        <div class="chip-row">
+          <div class="chip">Tomatoes</div>
+          <div class="chip">Brassicas</div>
+          <div class="chip">Peppers</div>
+          <div class="chip">Bt products</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="pill">Overview</div>
+        <div class="meta-list">
+          <div class="meta-row">
+            <div class="meta-label">Biological options shown</div>
+            <div>61 visible use records currently linked to this problem profile in the explorer.</div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-label">Why this problem matters</div>
+            <div>It makes the relationship between crop context, insect-control products, field evidence, and export-facing residue questions easy to demonstrate in one thread.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="surface section">
+      <div class="eyebrow">Linked context</div>
+      <h2 class="display" style="margin-top: 6px;">Where the problem shows up and what routes are visible.</h2>
+      <div class="context-grid" style="margin-top: 16px;">
+        <article class="card">
+          <div class="meta-label">Crops</div>
+          <h3 style="margin-top: 10px;">Most legible crop contexts</h3>
+          <p style="margin-top: 8px;">Tomatoes, brassicas, peppers, and orchard crops make this problem easy to read across multiple production settings.</p>
+        </article>
+        <article class="card">
+          <div class="meta-label">Products</div>
+          <h3 style="margin-top: 10px;">Main biological options</h3>
+          <p style="margin-top: 8px;">Thuricide WP, DiPel DF, and Florbac WG are the clearest product routes already represented in the current explorer data.</p>
+        </article>
+      </div>
+    </section>
+    <section class="surface section">
+      <div class="eyebrow">Evidence</div>
+      <h2 class="display" style="margin-top: 6px;">Supporting records already available for this problem.</h2>
+      <div class="evidence-grid" style="margin-top: 16px;">
+        <article class="card">
+          <div class="meta-label">Field trial</div>
+          <h3 style="margin-top: 10px;">DiPel DF bollworm control on brassicas</h3>
+          <p style="margin-top: 8px;">Existing field-trial record linked to DiPel DF, African bollworm, and brassica performance.</p>
+        </article>
+        <article class="card">
+          <div class="meta-label">Case study</div>
+          <h3 style="margin-top: 10px;">Bollworm management — vegetable producers cooperative</h3>
+          <p style="margin-top: 8px;">Existing operational record tied to Thuricide WP, Florbac WG, and multi-grower vegetable programmes.</p>
+        </article>
+      </div>
+    </section>
+    <section class="surface section">
+      <div class="eyebrow">Standards &amp; regulations</div>
+      <h2 class="display" style="margin-top: 6px;">Compliance context that matters to bollworm control choices.</h2>
+      <div class="context-grid" style="margin-top: 16px;">
+        <article class="card">
+          <div class="meta-label">MRLs</div>
+          <h3 style="margin-top: 10px;">Bt and microbial residue interpretation</h3>
+          <p style="margin-top: 8px;">The existing standards layer already carries EU / export-facing MRL interpretation for microbial actives used in bollworm-control contexts.</p>
+        </article>
+        <article class="card">
+          <div class="meta-label">Export sensitivity</div>
+          <h3 style="margin-top: 10px;">Why standards still matter here</h3>
+          <p style="margin-top: 8px;">Even where residues are low-risk or exempt, the prototype still needs to show how export-sensitive crop programmes interpret those decisions.</p>
+        </article>
+      </div>
+    </section>
+    <section class="surface section">
+      <div class="eyebrow">Resources &amp; interpretation</div>
+      <h2 class="display" style="margin-top: 6px;">Guidance and reference material behind this problem view.</h2>
+      <div class="context-grid" style="margin-top: 16px;">
+        <article class="card">
+          <div class="meta-label">Resource</div>
+          <h3 style="margin-top: 10px;">Field-evidence bundle for bollworm and DBM</h3>
+          <p style="margin-top: 8px;">Already present in the resource library as a linked bundle around Thuricide WP, Florbac WG, DiPel DF, and high-value vegetable contexts.</p>
+        </article>
+        <article class="card">
+          <div class="meta-label">Resource</div>
+          <h3 style="margin-top: 10px;">EU MRL exemptions for microbial actives</h3>
+          <p style="margin-top: 8px;">Existing standards-adjacent resource that helps explain how Bt and similar actives are interpreted in export settings.</p>
+        </article>
+      </div>
+    </section>
+    <section class="surface section">
+      <div class="eyebrow">Deep-dive actions</div>
+      <h2 class="display" style="margin-top: 6px;">Open the full workspaces when you need more depth.</h2>
+      <div class="link-grid" style="margin-top: 16px;">
+        <article class="link-card">
+          <h3>Biological options for this problem</h3>
+          <p style="margin-top: 8px;">Jump to the full product workspace with the current problem preloaded.</p>
+          <p style="margin-top: 12px;"><a href="./product-catalogue.html?problem=African%20bollworm">Open product catalogue →</a></p>
+        </article>
+        <article class="link-card">
+          <h3>Full evidence workspace</h3>
+          <p style="margin-top: 8px;">Browse the wider evidence corpus beyond the highlighted trial and case study.</p>
+          <p style="margin-top: 12px;"><a href="./evidence-library.html">Open evidence library →</a></p>
+        </article>
+        <article class="link-card">
+          <h3>Standards & regulations</h3>
+          <p style="margin-top: 8px;">Review the full compliance and MRL workspace for microbial actives and export-facing decisions.</p>
+          <p style="margin-top: 12px;"><a href="./standards-regulations.html">Open standards layer →</a></p>
+        </article>
+        <article class="link-card">
+          <h3>Resources & interpretation</h3>
+          <p style="margin-top: 8px;">Open the broader guidance layer for related problem bundles and interpretation notes.</p>
+          <p style="margin-top: 12px;"><a href="./resource-library.html">Open resource library →</a></p>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

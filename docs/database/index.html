@@ -493,6 +493,17 @@
       gap: 12px;
       align-items: start;
     }
+    .card-title-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 160ms ease;
+    }
+    .card-title-link:hover,
+    .card-title-link:focus-visible {
+      border-color: currentColor;
+      outline: none;
+    }
 
     .entity-icon {
       width: 52px;
@@ -884,26 +895,47 @@
 
     .path-visual {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       height: 160px;
-      padding: 16px 20px 0;
+      padding: 20px;
       overflow: hidden;
     }
 
-    .path-visual img {
-      display: block;
-      max-height: 144px;
-      max-width: 144px;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      object-position: bottom;
+    .path-emblem {
+      width: min(168px, 100%);
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(23, 48, 57, 0.08);
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .path-emblem-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: inset 0 0 0 1px rgba(23, 48, 57, 0.08);
+    }
+
+    .path-emblem-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
     }
 
     .path-visual svg.path-illus {
-      max-height: 144px;
-      max-width: 160px;
       width: 100%;
       height: auto;
     }
@@ -923,19 +955,6 @@
       margin-top: 6px;
       font-size: 14px;
       line-height: 1.5;
-    }
-
-    .path-stat {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 12px;
-      min-height: 28px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
 
     .section-note {
@@ -968,10 +987,6 @@
         </div>
       </div>
       <div class="topbar-right">
-        <div class="micro-stats" aria-label="Explorer coverage">
-          <div class="micro-stat"><strong>22</strong><span>Crop contexts</span></div>
-          <div class="micro-stat"><strong>20</strong><span>Pressure patterns</span></div>
-        </div>
         <nav class="nav">
           <a href="../site/index.html">Home</a>
           <a href="../site/about.html">About</a>
@@ -984,18 +999,14 @@
 
     <nav class="surface subnav" aria-label="Biologicals explorer pages">
       <a class="active" href="./index.html">Explorer</a>
-      <a href="./product-catalogue.html">Products</a>
-      <a href="./evidence-library.html">Evidence</a>
-      <a href="../../registration-tracker/public-dashboard/index.html">Signal dashboard</a>
-      <a href="./resource-library.html">Resources</a>
-      <a href="./standards-regulations.html">Standards</a>
+      <a href="../../registration-tracker/public-dashboard/index.html">Registration tracker</a>
     </nav>
 
     <section class="surface hero-section">
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
-        <h1>Explore the biologicals knowledge base.</h1>
-        <p style="margin-top: 8px; font-size: 15px;">ABA maintains a shared knowledge layer for the sector — products, crop contexts, pest and disease pressures, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
+        <h1>Explore</h1>
+        <p style="margin-top: 8px; font-size: 15px;">ABA maintains a shared knowledge layer for the sector — products, crop contexts, pest and disease problems, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
       </div>
 
       <div class="path-entry-grid">
@@ -1008,58 +1019,47 @@
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="activeId = 'crops'" @keydown.space.prevent="activeId = 'crops'">
           <div class="path-visual" style="background: linear-gradient(180deg, #fdf4d4 0%, #f5e48c 100%)">
-            <img src="./assets/bioicons/maize.svg" alt="Maize crop illustration">
+            <div class="path-emblem">
+              <div class="path-emblem-icon" style="color: #7a6b26">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 20c0-5.5 2.2-9.7 6.7-12.8"/>
+                  <path d="M12 20c0-4.8-2-8.4-6.2-10.9"/>
+                  <path d="M12 20V8"/>
+                </svg>
+              </div>
+            </div>
           </div>
           <div class="path-body">
             <h2 style="color: #5a4d1a">Crops</h2>
             <p>Browse biological activity by production context — citrus, maize, potatoes, grapes, and more.</p>
-            <div class="path-stat" style="background: rgba(240,228,177,0.7); color: #7a6b26">22 crop contexts</div>
           </div>
         </article>
 
         <!-- Pests & Diseases -->
         <article class="path-entry-card"
-          :class="{ active: activeId === 'pressures' }"
+          :class="{ active: activeId === 'problems' }"
           style="--path-accent: #b05b37; --path-soft-ring: rgba(246,219,203,0.5)"
-          @click="activeId = 'pressures'"
+          @click="activeId = 'problems'"
           role="button" tabindex="0" aria-pressed="false"
-          @keydown.enter="activeId = 'pressures'" @keydown.space.prevent="activeId = 'pressures'">
+          @keydown.enter="activeId = 'problems'" @keydown.space.prevent="activeId = 'problems'">
           <div class="path-visual" style="background: linear-gradient(180deg, #fce8db 0%, #f5c9ac 100%)">
-            <svg class="path-illus" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Leaf -->
-              <path d="M18 108 Q22 72 52 50 Q82 28 118 30 Q96 62 68 82 Q46 98 22 108 Z" fill="#6aaa5e"/>
-              <path d="M22 107 Q44 82 68 64 Q92 46 114 32" stroke="#4a8844" stroke-width="1.5" fill="none"/>
-              <!-- Leaf bite notches (pest damage) -->
-              <path d="M68 83 Q74 75 80 80 Q86 72 92 76" stroke="#fce8db" stroke-width="7" fill="none" stroke-linecap="round"/>
-              <!-- Caterpillar — elongated segments, diagonal across leaf -->
-              <ellipse cx="44" cy="94" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-30 44 94)"/>
-              <ellipse cx="57" cy="87" rx="11" ry="7.5" fill="#d6af2c" transform="rotate(-28 57 87)"/>
-              <ellipse cx="71" cy="80" rx="11.5" ry="7.5" fill="#c9a228" transform="rotate(-25 71 80)"/>
-              <ellipse cx="85" cy="73" rx="11.5" ry="7.5" fill="#d6af2c" transform="rotate(-22 85 73)"/>
-              <ellipse cx="99" cy="66" rx="11" ry="7.5" fill="#c9a228" transform="rotate(-20 99 66)"/>
-              <ellipse cx="112" cy="59" rx="10" ry="7.5" fill="#b89022" transform="rotate(-18 112 59)"/>
-              <!-- Head -->
-              <circle cx="124" cy="53" r="10" fill="#6e4f14"/>
-              <!-- Eye — small, realistic -->
-              <circle cx="129" cy="48" r="3.5" fill="#1a1204"/>
-              <circle cx="130.2" cy="47" r="1.1" fill="rgba(255,255,255,0.6)"/>
-              <!-- Mandibles hint -->
-              <path d="M118 57 Q122 62 127 59" stroke="#4a3208" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <!-- Dorsal stripe -->
-              <path d="M46 91 Q59 84 73 77 Q87 70 101 63 Q111 57 120 51" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <!-- Prolegs -->
-              <path d="M60 92 L56 102" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M74 85 L70 95" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M88 78 L85 88" stroke="#8a6a10" stroke-width="2.5" stroke-linecap="round"/>
-              <!-- True legs (smaller, near head) -->
-              <path d="M102 69 L101 78" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
-              <path d="M114 62 L114 70" stroke="#8a6a10" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            <div class="path-emblem">
+              <div class="path-emblem-icon" style="color: #b05b37">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 8.5 6.5 6"/>
+                  <path d="m15 8.5 2.5-2.5"/>
+                  <path d="M8.5 12H5"/>
+                  <path d="M19 12h-3.5"/>
+                  <path d="M9 15.5 6.5 18"/>
+                  <path d="m15 15.5 2.5 2.5"/>
+                  <path d="M12 7c2.8 0 5 2.1 5 4.8 0 3.9-2.2 6.2-5 6.2s-5-2.3-5-6.2C7 9.1 9.2 7 12 7Z"/>
+                </svg>
+              </div>
+            </div>
           </div>
           <div class="path-body">
             <h2 style="color: #8a3e20">Pests &amp; Diseases</h2>
             <p>Start with the problem — bollworm, thrips, powdery mildew, rust, and more.</p>
-            <div class="path-stat" style="background: rgba(246,219,203,0.7); color: #b05b37">20 pressure patterns</div>
           </div>
         </article>
 
@@ -1071,31 +1071,19 @@
           role="button" tabindex="0" aria-pressed="false"
           @keydown.enter="activeId = 'products'" @keydown.space.prevent="activeId = 'products'">
           <div class="path-visual" style="background: linear-gradient(180deg, rgba(220,238,224,0.2) 0%, rgba(220,238,224,0.5) 100%)">
-            <svg class="path-illus" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Stopper -->
-              <rect x="38" y="10" width="44" height="13" rx="5" fill="#2b6b4f"/>
-              <!-- Neck -->
-              <rect x="42" y="22" width="36" height="44" rx="4" fill="#e4f5ec" stroke="#2b6b4f" stroke-width="2.2"/>
-              <!-- Flask shoulder + body -->
-              <path d="M42 65 L18 108 Q16 122 60 122 Q104 122 102 108 L78 65 Z" fill="#d2eedf" stroke="#2b6b4f" stroke-width="2.2"/>
-              <!-- Liquid fill -->
-              <path d="M22 103 Q60 97 98 103 L97 114 Q60 122 23 114 Z" fill="#9fd4b8" opacity="0.75"/>
-              <!-- Microorganism elements -->
-              <circle cx="44" cy="86" r="7" fill="#2b6b4f" opacity="0.42"/>
-              <circle cx="66" cy="78" r="5.5" fill="#2b6b4f" opacity="0.38"/>
-              <circle cx="57" cy="96" r="4.5" fill="#2b6b4f" opacity="0.52"/>
-              <ellipse cx="80" cy="89" rx="9" ry="4.5" fill="#1f7a50" opacity="0.32" transform="rotate(-28 80 89)"/>
-              <circle cx="72" cy="102" r="3.5" fill="#2b6b4f" opacity="0.4"/>
-              <!-- Neck shine -->
-              <path d="M48 28 Q52 22 55 28" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <!-- Body shine -->
-              <path d="M26 90 Q32 80 36 90" stroke="rgba(255,255,255,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
-            </svg>
+            <div class="path-emblem">
+              <div class="path-emblem-icon" style="color: #2b6b4f">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 4h4"/>
+                  <path d="M9 4h6v3l3.5 5.2a4.7 4.7 0 0 1-3.9 7.3H9.4a4.7 4.7 0 0 1-3.9-7.3L9 7V4Z"/>
+                  <path d="M8.5 12h7"/>
+                </svg>
+              </div>
+            </div>
           </div>
           <div class="path-body">
             <h2 style="color: #1e4f39">Biologicals</h2>
-            <p>Browse registered products — biopesticides, inoculants, semiochemicals, and more.</p>
-            <div class="path-stat" style="background: rgba(220,238,224,0.7); color: #2b6b4f">23 products in catalogue</div>
+            <p>Browse biological products — biopesticides, inoculants, semiochemicals, and more.</p>
           </div>
         </article>
 
@@ -1125,20 +1113,27 @@
 
       <div class="card-grid">
         <template x-for="card in active.cards" :key="card.title">
-          <article class="card" :class="{ 'pressure-card': activeId === 'pressures' }" :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)">
+          <article class="card" :class="{ 'pressure-card': activeId === 'problems' }" :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)">
             <div class="card-top">
-              <div class="entity-icon tooltip-anchor" x-html="recordIcon(card)" :data-tooltip="card.iconTooltip" :aria-label="card.iconTooltip"></div>
-              <div class="badge" :class="card.badgeTone" :title="'Signal state: ' + card.badge" x-text="card.badge"></div>
+              <div class="entity-icon tooltip-anchor" x-html="recordIcon(card)" :data-tooltip="cardIconTooltip(card)" :aria-label="cardIconTooltip(card)"></div>
+              <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
             </div>
 
-            <h3 style="margin-top: 14px; font-size: 1.05rem;" x-text="card.title"></h3>
+            <h3 style="margin-top: 14px; font-size: 1.05rem;">
+              <template x-if="isFeaturedCard(card)">
+                <a class="card-title-link" :href="cardHref(card)" x-text="card.title"></a>
+              </template>
+              <template x-if="!isFeaturedCard(card)">
+                <span x-text="card.title"></span>
+              </template>
+            </h3>
 
             <div class="model-strip">
               <template x-for="(model, index) in card.models" :key="model.label + index">
                 <template>
-                  <div class="model-node tooltip-anchor" :data-tooltip="model.description" :aria-label="model.description">
+                  <div class="model-node tooltip-anchor" :data-tooltip="modelDescription(model)" :aria-label="modelDescription(model)">
                     <span class="model-symbol" x-html="iconSvg(model.symbol)"></span>
-                    <span x-text="model.label"></span>
+                    <span x-text="modelLabel(model)"></span>
                   </div>
                   <span class="model-arrow" x-show="index < card.models.length - 1">→</span>
                 </template>
@@ -1157,10 +1152,10 @@
               </div>
             </div>
 
-            <div class="meta" :class="{ 'compact-grid': activeId === 'pressures' }" style="margin-top: 14px;">
+            <div class="meta" :class="{ 'compact-grid': activeId === 'problems' }" style="margin-top: 14px;">
               <template x-for="item in card.meta" :key="item.label">
-                <div class="meta-row" :title="item.label + ': ' + item.value">
-                  <div class="meta-label" x-text="item.label"></div>
+                <div class="meta-row" :title="metaLabel(item) + ': ' + item.value">
+                  <div class="meta-label" x-text="metaLabel(item)"></div>
                   <div x-text="item.value"></div>
                 </div>
               </template>
@@ -1169,31 +1164,32 @@
             <div class="mini-metrics">
               <div>
                 <div class="mini-metric-value" x-text="card.leftMetric"></div>
-                <div class="mini-metric-label" x-text="card.leftLabel"></div>
+                <div class="mini-metric-label" x-text="metricLabel(card.leftLabel)"></div>
               </div>
               <div>
                 <div class="mini-metric-value" x-text="card.rightMetric"></div>
-                <div class="mini-metric-label" x-text="card.rightLabel"></div>
+                <div class="mini-metric-label" x-text="metricLabel(card.rightLabel)"></div>
               </div>
             </div>
 
             <div class="card-cta">
               <template x-if="activeId === 'crops'">
-                <a class="card-cta-link" :href="'./product-catalogue.html?crop=' + encodeURIComponent(card.title)">
-                  Browse products for <span x-text="card.title"></span> →
+                <a class="card-cta-link" :href="cardHref(card)">
+                  <span x-text="cardCtaLabel(card)"></span> →
                 </a>
               </template>
-              <template x-if="activeId === 'pressures'">
-                <a class="card-cta-link" :href="'./product-catalogue.html?pressure=' + encodeURIComponent(card.title)">
-                  Find biological solutions →
+              <template x-if="activeId === 'problems'">
+                <a class="card-cta-link" :href="cardHref(card)">
+                  <span x-text="cardCtaLabel(card)"></span> →
                 </a>
               </template>
               <template x-if="activeId === 'products'">
-                <a class="card-cta-link" href="./product-catalogue.html">
-                  View in full catalogue →
+                <a class="card-cta-link" :href="cardHref(card)">
+                  <span x-text="cardCtaLabel(card)"></span> →
                 </a>
               </template>
             </div>
+            <p class="section-note" x-show="isFeaturedCard(card)" style="margin-top: 10px;">Includes linked evidence, standards, and resource context.</p>
           </article>
         </template>
       </div>
@@ -1202,22 +1198,22 @@
     <section class="surface section">
       <div class="path-grid">
         <div>
-          <div class="eyebrow">Go deeper</div>
-          <h2 style="margin-top: 6px;">Evidence, standards, source material, and sector signals.</h2>
+          <div class="eyebrow">Supporting Layers</div>
+          <h2 style="margin-top: 6px;">Use these deeper workspaces when you need more than the explorer summary.</h2>
           <div class="path-primary-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
             <article class="path-card">
               <h3 style="font-size: 1.05rem;">Evidence library</h3>
-              <p style="margin-top: 8px;">Field trials, case studies, and technical reference material behind the product and pressure records.</p>
+              <p style="margin-top: 8px;">Field trials, case studies, and technical reference material that can support a crop, problem, or product view.</p>
               <p style="margin-top: 12px;"><a href="./evidence-library.html" style="color: var(--green); font-weight: 800;">Open evidence library →</a></p>
             </article>
             <article class="path-card">
               <h3 style="font-size: 1.05rem;">Standards &amp; regulations</h3>
-              <p style="margin-top: 8px;">MRL references, certification standards, and jurisdiction comparison for market access and compliance.</p>
+              <p style="margin-top: 8px;">MRL references, certification standards, and jurisdiction comparison when compliance matters to the result in front of you.</p>
               <p style="margin-top: 12px;"><a href="./standards-regulations.html" style="color: var(--green); font-weight: 800;">Open standards layer →</a></p>
             </article>
             <article class="path-card">
               <h3 style="font-size: 1.05rem;">Resource library</h3>
-              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and linked research for anyone who needs more than a browse card.</p>
+              <p style="margin-top: 8px;">Guidance notes, legislation summaries, and interpretation material that help explain what a result means.</p>
               <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library →</a></p>
             </article>
             <article class="path-card">
@@ -1257,7 +1253,7 @@
         assetIcon(path) {
           return `<img src="${path}" alt="" aria-hidden="true">`;
         },
-        pressureIcon(name) {
+        problemIcon(name) {
           const key = String(name || '').toLowerCase();
           if (key.includes('aphid')) {
             return this.assetIcon('./assets/bioicons/aphid.svg');
@@ -1310,7 +1306,7 @@
           if (this.activeId === 'crops') {
             return this.cropIcon(card.title);
           }
-          return this.pressureIcon(card.title);
+          return this.problemIcon(card.title);
         },
         cropIcon(name) {
           const key = name.toLowerCase();
@@ -1396,6 +1392,107 @@
         catalogueHref(crop) {
           return `./product-catalogue.html?crop=${encodeURIComponent(crop)}`;
         },
+        featuredDetails: {
+          crops: {
+            Citrus: './crop-citrus.html'
+          },
+          problems: {
+            'African bollworm': './problem-african-bollworm.html'
+          },
+          products: {
+            'Thuricide WP': './product-thuricide-wp.html'
+          }
+        },
+        isFeaturedCard(card) {
+          return Boolean(this.featuredDetails[this.activeId]?.[card.title]);
+        },
+        cardHref(card) {
+          const featured = this.featuredDetails[this.activeId]?.[card.title];
+          if (featured) return featured;
+          if (this.activeId === 'crops') {
+            return `./product-catalogue.html?crop=${encodeURIComponent(card.title)}`;
+          }
+          if (this.activeId === 'problems') {
+            return `./product-catalogue.html?problem=${encodeURIComponent(card.title)}`;
+          }
+          return './product-catalogue.html';
+        },
+        cardCtaLabel(card) {
+          if (this.isFeaturedCard(card)) {
+            return 'Open detail view';
+          }
+          if (this.activeId === 'crops') return 'See linked products';
+          if (this.activeId === 'problems') return 'See biological options';
+          return 'Open full product view';
+        },
+        displayBadge(card) {
+          if (this.activeId === 'problems') {
+            return this.modelLabel(card.models?.[0] || { label: '' }) === 'Disease' ? 'Disease focus' : 'Pest focus';
+          }
+          if (this.activeId === 'products' && card.badge === 'Registered') {
+            const problemLinks = (card.meta || []).find((item) => item.label === 'Pressure links')?.value?.toLowerCase() || '';
+            if (/mildew|blight|wilt|fung|bacterial|disease/.test(problemLinks)) return 'Disease control';
+            return 'Insect control';
+          }
+          return card.badge;
+        },
+        cardIconTooltip(card) {
+          if (this.activeId === 'crops') {
+            return 'Crop view: start with this crop, then see the main problems and biological options around it.';
+          }
+          if (this.activeId === 'problems') {
+            return 'Problem view: start with this pest or disease, then see affected crops and visible biological options.';
+          }
+          if (this.activeId === 'products') {
+            return 'Product view: start with this biological product, then see where it fits and what it is used for.';
+          }
+          return card.iconTooltip || '';
+        },
+        badgeTitle(card) {
+          if (this.activeId === 'problems') {
+            return `Problem type: ${this.displayBadge(card)}`;
+          }
+          return `Context tag: ${this.displayBadge(card)}`;
+        },
+        modelLabel(model) {
+          const label = model.label || '';
+          if (label === 'Pressure') return 'Problem';
+          if (label === 'Pressures') return 'Problems';
+          if (this.activeId === 'problems' && label === 'Signal') return 'Coverage';
+          return label;
+        },
+        modelDescription(model) {
+          const label = model.label || '';
+          if (this.activeId === 'problems' && label === 'Signal') {
+            return 'How much biological coverage is visible around this problem in the current source set.';
+          }
+          return String(model.description || '')
+            .replace(/pest or disease pressures/gi, 'pests and diseases')
+            .replace(/pressure patterns/gi, 'problem patterns')
+            .replace(/pressure picture/gi, 'problem picture')
+            .replace(/pressure set/gi, 'problem set')
+            .replace(/pressure mix/gi, 'problem mix')
+            .replace(/pressure context/gi, 'problem context')
+            .replace(/pressure/g, 'problem')
+            .replace(/Pressures/g, 'Problems')
+            .replace(/Pressure/g, 'Problem');
+        },
+        metaLabel(item) {
+          const label = item.label || '';
+          if (label === 'Top visible pressures') return 'Main visible problems';
+          if (label === 'Pressure links') return 'Key problems';
+          if (label === 'Visible biological uses') return 'Biological options shown';
+          if (this.activeId === 'problems' && label === 'Visible across') return 'Seen across';
+          return label;
+        },
+        metricLabel(label) {
+          if (label === 'Use rows') return 'Source records';
+          if (label === 'Use row') return 'Source record';
+          if (label === 'Crops') return 'Crop links';
+          if (label === 'Problems') return 'Problem links';
+          if (label === 'Problem') return 'Problem link';
+          return label;
+        },
         activeId: "crops",
         modes: [
           {
@@ -1403,16 +1500,16 @@
             label: "Crops",
             symbol: "◎",
             symbolTitle: "Crop lens",
-            symbolTooltip: "Crop lens: start with the production context, then read outward into pressures, biological fit, and visible depth.",
+            symbolTooltip: "Crop view: start with the production context, then see the main crop problems and biological options around it.",
             accent: "#7a6b26",
             soft: "rgba(240, 228, 177, 0.62)",
 
             step: "01",
             summary: "Start with the crop or production context you work in.",
             heading: "Browse by crop.",
-            description: "See where biological activity is already visible around each crop, and which problems appear most often.",
-            placeholder: "Search crops by name, region, production system, or pressure...",
-            filters: ["All categories", "All regions", "All signal levels"],
+            description: "See where biological activity is already visible around each crop, and which pests and diseases appear most often.",
+            placeholder: "Search crops by name, region, production system, or problem...",
+            filters: ["All categories", "All regions", "All problem mixes"],
             cards: [
               {
                 icon: "C",
@@ -1915,30 +2012,30 @@
             ]
           },
           {
-            id: "pressures",
+            id: "problems",
             label: "Pests & diseases",
             symbol: "△",
-            symbolTitle: "Pressure lens",
-            symbolTooltip: "Pressure lens: start with the problem itself, then read where it appears across crops and where biological visibility is strong or weak.",
+            symbolTitle: "Problem view",
+            symbolTooltip: "Problem view: start with a pest or disease, then see where it appears and which biological options are visible.",
             accent: "#b05b37",
             soft: "rgba(246, 219, 203, 0.74)",
 
             step: "02",
-            summary: "Start with a pest or disease pressure you need to address.",
-            heading: "Browse pest and disease pressures.",
-            description: "Explore the pressure patterns that appear most often in the current remedy register, then see where biological products are visibly present.",
+            summary: "Start with a pest or disease you need to address.",
+            heading: "Browse by pest or disease.",
+            description: "Explore the pest and disease profiles that appear most often in the current remedy register, then see where biological products are visibly present.",
             placeholder: "Search pests or diseases by name, crop, or taxonomic group...",
-            filters: ["All applications", "All groups", "All levels"],
+            filters: ["All problem types", "All crop groups", "All biological coverage"],
             cards: [
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "High pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Widely linked",
                 badgeTone: "red",
                 accent: "#bb553f",
                 soft: "rgba(248, 216, 208, 0.8)",
                 title: "African bollworm",
-                guide: "a widely shared pressure where the current source set already shows meaningful biological presence across many crop contexts.",
+                guide: "a widely shared problem where the current source set already shows meaningful biological options across many crop contexts.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the pest or disease problem under review." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where this pressure appears visibly in the source set." },
@@ -1956,8 +2053,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#a26b2b",
                 soft: "rgba(247, 232, 195, 0.78)",
@@ -1980,17 +2077,17 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#a86b33",
                 soft: "rgba(245, 227, 199, 0.76)",
                 title: "Thrips",
-                guide: "an insect pressure that helps show where visibility exists without implying the category is complete or settled.",
+                guide: "an insect problem that helps show where biological options are visible without implying the picture is complete.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: a pest pressure." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the pest appears." },
-                  { symbol: "S", label: "Signal", description: "Current strength of biological visibility around this pressure." }
+                  { symbol: "S", label: "Coverage", description: "How much biological coverage is currently visible around this problem." }
                 ],
                 crops: "Citrus, flowers, tomatoes, onions",
                 meta: [
@@ -2004,17 +2101,17 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Watch",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Needs more evidence",
                 badgeTone: "amber",
                 accent: "#8f7333",
                 soft: "rgba(242, 234, 206, 0.78)",
                 title: "Nematodes",
-                guide: "a problem area where limited biological signal becomes part of the story, not something to hide.",
+                guide: "a problem area where the linked biological options are still thin, which is important to show plainly.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the problem under review." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the problem appears." },
-                  { symbol: "S", label: "Signal", description: "Visible strength or thinness of the biological picture around the problem." }
+                  { symbol: "S", label: "Coverage", description: "How much biological coverage is currently visible around this problem." }
                 ],
                 crops: "Potatoes, tomatoes, groundnuts, citrus",
                 meta: [
@@ -2028,17 +2125,17 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Low biological signal",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Early evidence",
                 badgeTone: "slate",
                 accent: "#6d6a62",
                 soft: "rgba(232, 230, 225, 0.84)",
                 title: "Rust",
-                guide: "a pressure where the current knowledge base is visibly thin, which helps set realistic expectations.",
+                guide: "a disease problem where the current knowledge base is still thin, which helps set realistic expectations.",
                 models: [
                   { symbol: "D", label: "Disease", description: "Primary object: the disease problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the disease appears in the register." },
-                  { symbol: "S", label: "Signal", description: "Current visibility of a biological knowledge layer around the disease." }
+                  { symbol: "S", label: "Coverage", description: "How much biological coverage is currently visible around this disease." }
                 ],
                 crops: "Groundnuts, beans, maize, sweetcorn",
                 meta: [
@@ -2052,17 +2149,17 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "No visible biological rows yet",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "No linked options yet",
                 badgeTone: "slate",
                 accent: "#5b6268",
                 soft: "rgba(229, 234, 236, 0.82)",
                 title: "Aphids",
-                guide: "a useful comparison case where the absence of biological rows is itself informative for the prototype story.",
+                guide: "a useful comparison case where the current explorer still lacks meaningful linked biological options.",
                 models: [
                   { symbol: "P", label: "Pressure", description: "Primary object: the named problem." },
                   { symbol: "C", label: "Crops", description: "Crop contexts where the problem is common." },
-                  { symbol: "S", label: "Signal", description: "Absence or presence of current biological visibility around the problem." }
+                  { symbol: "S", label: "Coverage", description: "Whether the current source set shows meaningful biological coverage for this problem yet." }
                 ],
                 crops: "Citrus, potatoes, ornamentals, cruciferae",
                 meta: [
@@ -2076,8 +2173,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "High pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Widely linked",
                 badgeTone: "red",
                 accent: "#9a4b2a",
                 soft: "rgba(245, 218, 206, 0.8)",
@@ -2099,8 +2196,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#3a6a7a",
                 soft: "rgba(207, 232, 238, 0.78)",
@@ -2122,8 +2219,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#5a3a7a",
                 soft: "rgba(222, 212, 240, 0.78)",
@@ -2145,8 +2242,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Watch",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Needs more evidence",
                 badgeTone: "amber",
                 accent: "#7a5a2a",
                 soft: "rgba(241, 228, 197, 0.76)",
@@ -2168,8 +2265,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#4a6a3a",
                 soft: "rgba(215, 234, 207, 0.78)",
@@ -2191,8 +2288,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Watch",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Needs more evidence",
                 badgeTone: "amber",
                 accent: "#6a5a3a",
                 soft: "rgba(234, 228, 206, 0.76)",
@@ -2214,8 +2311,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem rather than a crop or product.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#5a3a2a",
                 soft: "rgba(228, 214, 207, 0.78)",
@@ -2237,8 +2334,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "High pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Widely linked",
                 badgeTone: "red",
                 accent: "#7a4a2a",
                 soft: "rgba(241, 218, 206, 0.8)",
@@ -2260,8 +2357,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#5a3a7a",
                 soft: "rgba(222, 212, 240, 0.78)",
@@ -2283,8 +2380,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#3a5a3a",
                 soft: "rgba(208, 228, 207, 0.78)",
@@ -2306,8 +2403,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "Watch",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Needs more evidence",
                 badgeTone: "amber",
                 accent: "#6a5a2a",
                 soft: "rgba(230, 224, 197, 0.76)",
@@ -2329,8 +2426,8 @@
               },
               {
                 icon: "○",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "Medium pressure",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Established link",
                 badgeTone: "amber",
                 accent: "#8a4a2a",
                 soft: "rgba(244, 215, 204, 0.8)",
@@ -2352,8 +2449,8 @@
               },
               {
                 icon: "◐",
-                iconTooltip: "Pressure symbol: this card is anchored in a named pest or disease problem.",
-                badge: "Watch",
+                iconTooltip: "Problem view: this card starts from a named pest or disease, then shows linked crops and biological options.",
+                badge: "Needs more evidence",
                 badgeTone: "amber",
                 accent: "#4a5a2a",
                 soft: "rgba(214, 222, 197, 0.76)",
@@ -2380,7 +2477,7 @@
             label: "Biologicals",
             symbol: "✳",
             symbolTitle: "Product lens",
-            symbolTooltip: "Product lens: start with a product or category, then read which crops, pressures, and use contexts it connects to.",
+            symbolTooltip: "Product view: start with a product or category, then see which crops, problems, and use contexts it connects to.",
             accent: "#2b6b4f",
             soft: "rgba(220, 238, 224, 0.8)",
 
@@ -2389,7 +2486,7 @@
             heading: "Browse biologicals.",
             description: "Explore real biological records from the current source files, including biopesticides, inoculants, and semiochemical products.",
             placeholder: "Search biological products by name, category, crop, or use...",
-            filters: ["All categories", "All crops", "All signal levels"],
+            filters: ["All categories", "All crops", "All visibility levels"],
             cards: [
               {
                 icon: "B",
@@ -2542,7 +2639,7 @@
             label: "Evidence",
             summary: "See trials, case studies, and technical reference material.",
             heading: "Browse evidence and reference material.",
-            description: "Use this layer once you want proof points, field records, and technical context behind a product or pressure.",
+            description: "Use this layer once you want proof points, field records, and technical context behind a product or problem.",
             placeholder: "Search trials, case studies, and reference records...",
             filters: ["All evidence types", "All categories", "All crops"],
             cards: [
@@ -2600,7 +2697,7 @@
             heading: "Browse sector and country signals.",
             description: "Use this layer for broader public signals about visibility, comparison, and where activity is becoming legible.",
             placeholder: "Search countries, categories, or product signals...",
-            filters: ["All countries", "All categories", "All signal levels"],
+            filters: ["All countries", "All categories", "All visibility levels"],
             cards: [
               {
                 icon: "R",
@@ -2609,7 +2706,7 @@
                 title: "South Africa",
                 meta: [
                   { label: "Visible categories", value: "Biopesticides, biostimulants, inoculants" },
-                  { label: "Public signal", value: "Most complete currently visible landscape" },
+                  { label: "Public visibility", value: "Most complete currently visible landscape" },
                   { label: "Focus", value: "Registration and market visibility" }
                 ],
                 leftMetric: "54",
@@ -2624,7 +2721,7 @@
                 title: "Kenya",
                 meta: [
                   { label: "Visible categories", value: "Biopesticides, biostimulants" },
-                  { label: "Public signal", value: "Growing visibility by crop and pressure" },
+                  { label: "Public visibility", value: "Growing visibility by crop and problem" },
                   { label: "Focus", value: "Category and crop-linked relevance" }
                 ],
                 leftMetric: "27",
@@ -2634,12 +2731,12 @@
               },
               {
                 icon: "R",
-                badge: "Early signal",
+                badge: "Early visibility",
                 badgeTone: "slate",
                 title: "Regional comparison",
                 meta: [
                   { label: "Visible categories", value: "Cross-country comparative view" },
-                  { label: "Public signal", value: "Useful for broad pattern recognition" },
+                  { label: "Public visibility", value: "Useful for broad pattern recognition" },
                   { label: "Focus", value: "Visibility and emerging contrasts" }
                 ],
                 leftMetric: "5",
@@ -2650,7 +2747,7 @@
             ]
           }
         ],
-        primaryIds: ["crops", "pressures", "products"],
+        primaryIds: ["crops", "problems", "products"],
         get primaryModes() {
           return this.modes.filter((mode) => this.primaryIds.includes(mode.id));
         },
