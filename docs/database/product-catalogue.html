@@ -959,8 +959,7 @@
             <div class="legend-cluster">
               <div class="legend-symbol" x-html="iconSvg(activeCategoryTheme.symbol)" aria-hidden="true"></div>
               <div>
-                <div class="meta-label">Current lens</div>
-                <div style="margin-top: 4px; font-weight: 800;" x-text="activeCategoryTheme.title"></div>
+                <div style="font-weight: 800;" x-text="activeCategoryTheme.title"></div>
               </div>
             </div>
             <div>
@@ -976,7 +975,6 @@
             type="button"
             class="category-chip"
             :class="{ active: activeCategory === category.id }"
-            :title="category.copy"
             @click="setCategoryFilter(category.id)"
             :style="'color:' + category.accent + '; background:' + category.soft">
             <span class="chip-content">
@@ -1298,11 +1296,11 @@
         activeCrop: "all",
         searchQuery: "",
         categories: [
-          { id: "all", label: "All products", symbol: "◌", tooltip: "Whole-catalogue symbol: compare multiple product families together.", accent: "#41565b", soft: "rgba(233, 236, 236, 0.92)", title: "Whole catalogue", copy: "Use this to compare the full visible landscape across control, support, and inoculation categories.", summaryLead: "Visible fit:" },
-          { id: "biopesticide", label: "Biopesticides", symbol: "✳", tooltip: "Biopesticide symbol: products primarily framed through biological control of pests or diseases.", accent: "#2b6b4f", soft: "rgba(220, 238, 224, 0.86)", title: "Biological control products", copy: "This lens foregrounds the products most legible to general audiences because the control story is easier to grasp quickly.", summaryLead: "Control fit:" },
-          { id: "semiochemical", label: "Semiochemicals", symbol: "≈", tooltip: "Semiochemical symbol: products that work through behavioural signalling or disruption rather than direct kill action.", accent: "#1f7a79", soft: "rgba(214, 240, 239, 0.88)", title: "Behavioural control products", copy: "This lens separates behavioural-control products from direct-input products so the catalogue feels smarter and easier to learn.", summaryLead: "Behavioural fit:" },
-          { id: "biofertiliser", label: "Biofertilisers", symbol: "✦", tooltip: "Biofertiliser symbol: products framed around nutrient support, vitality, and plant or soil performance.", accent: "#8a6a1f", soft: "rgba(247, 233, 196, 0.9)", title: "Nutrient and vitality support", copy: "This lens highlights the support-side records so they do not get visually swallowed by pest-control products.", summaryLead: "Support fit:" },
-          { id: "inoculant", label: "Inoculants", symbol: "⊕", tooltip: "Inoculant symbol: products focused on root-zone, microbial, or legume-support relationships.", accent: "#6c6678", soft: "rgba(228, 226, 236, 0.9)", title: "Root-zone and legume support", copy: "This lens keeps the narrower but strategically important inoculant records visible and understandable.", summaryLead: "Root-zone fit:" }
+          { id: "all", label: "All products", symbol: "◌", tooltip: "Whole-catalogue symbol: compare multiple product families together.", accent: "#41565b", soft: "rgba(233, 236, 236, 0.92)", title: "Whole catalogue", copy: "Compare control, support, and inoculation products in one browsing view.", summaryLead: "Visible fit:" },
+          { id: "biopesticide", label: "Biopesticides", symbol: "✳", tooltip: "Biopesticide symbol: products primarily framed through biological control of pests or diseases.", accent: "#2b6b4f", soft: "rgba(220, 238, 224, 0.86)", title: "Biological control products", copy: "Products used mainly for insect, disease, or pest control.", summaryLead: "Control fit:" },
+          { id: "semiochemical", label: "Semiochemicals", symbol: "≈", tooltip: "Semiochemical symbol: products that work through behavioural signalling or disruption rather than direct kill action.", accent: "#1f7a79", soft: "rgba(214, 240, 239, 0.88)", title: "Behavioural control products", copy: "Products built around behavioural signalling, attraction, or disruption.", summaryLead: "Behavioural fit:" },
+          { id: "biofertiliser", label: "Biofertilisers", symbol: "✦", tooltip: "Biofertiliser symbol: products framed around nutrient support, vitality, and plant or soil performance.", accent: "#8a6a1f", soft: "rgba(247, 233, 196, 0.9)", title: "Nutrient and vitality support", copy: "Products used for plant nutrition, soil health, or crop vitality support.", summaryLead: "Support fit:" },
+          { id: "inoculant", label: "Inoculants", symbol: "⊕", tooltip: "Inoculant symbol: products focused on root-zone, microbial, or legume-support relationships.", accent: "#6c6678", soft: "rgba(228, 226, 236, 0.9)", title: "Root-zone and legume support", copy: "Products focused on root-zone microbial support and legume relationships.", summaryLead: "Root-zone fit:" }
         ],
         filtersByView: {
           named: ["All categories", "All crops", "All evidence levels"],
