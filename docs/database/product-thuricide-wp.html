@@ -61,7 +61,16 @@
       background: linear-gradient(180deg, rgba(232, 244, 236, 0.94) 0%, rgba(255,255,255,0.76) 100%);
       border: 1px solid rgba(43, 107, 79, 0.18);
     }
-    .hero-actions, .chip-row, .signal-row, .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-actions, .hero-summary-grid, .chip-row, .signal-row, .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+      gap: 10px;
+    }
+    .hero-summary-card {
+      padding: 14px; border-radius: 16px; border: 1px solid rgba(23, 48, 57, 0.06); background: rgba(255,255,255,0.72);
+    }
     h1, h2, h3, p { margin: 0; }
     h1 { margin-top: 8px; font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: 0.98; letter-spacing: -0.04em; }
     h2 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.08; letter-spacing: -0.03em; }
@@ -92,7 +101,7 @@
     .list-card a, .action-tile a { color: var(--green); font-weight: 800; }
     .support-note { margin-top: 8px; font-size: 14px; color: var(--muted); }
     @media (max-width: 980px) {
-      .topbar, .hero-layout, .body-layout, .module-grid, .action-grid { grid-template-columns: 1fr; }
+      .topbar, .hero-layout, .hero-summary-grid, .body-layout, .module-grid, .action-grid { grid-template-columns: 1fr; }
       .aside-panel { position: static; }
     }
   </style>
@@ -132,6 +141,20 @@
         <div class="eyebrow" style="margin-top: 16px;">Product detail</div>
         <h1>Thuricide WP</h1>
         <p style="margin-top: 14px; max-width: 58ch;">Thuricide WP is one of the strongest product-led records in the prototype because it clearly shows what the product is, where it is used, what it helps control, and how it contributes to lower-risk transition work.</p>
+        <div class="hero-summary-grid">
+          <div class="hero-summary-card">
+            <div class="fact-label">Product type</div>
+            <div class="fact-value">A Bt-based biopesticide record with enough linked context to behave like a real catalogue detail page.</div>
+          </div>
+          <div class="hero-summary-card">
+            <div class="fact-label">Main use context</div>
+            <div class="fact-value">Linked crops, linked problems, and the supporting proof and standards context behind the listing.</div>
+          </div>
+          <div class="hero-summary-card">
+            <div class="fact-label">Why this product matters</div>
+            <div class="fact-value">This is the clearest single example of a biological product supporting a lower-risk replacement story.</div>
+          </div>
+        </div>
         <div class="signal-row" style="margin-top: 16px;">
           <span class="signal-chip">Biopesticide</span>
           <span class="signal-chip">Bt product</span>
@@ -152,28 +175,21 @@
 
       <aside class="aside-panel">
         <div class="card">
-          <div class="eyebrow">At a glance</div>
+          <div class="eyebrow">Open next</div>
+          <div class="quick-links" style="margin-top: 12px;">
+            <a class="chip" href="./product-catalogue.html?q=Thuricide%20WP">Product workspace</a>
+            <a class="chip" href="./evidence-library.html">Evidence</a>
+            <a class="chip" href="./standards-regulations.html">Standards</a>
+            <a class="chip" href="./resource-library.html">Guidance and HHP</a>
+          </div>
+          <p class="support-note">Use this page as the fast product-detail layer before moving into the broader catalogue and support workspaces.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Quick fact</div>
           <div class="fact-card" style="margin-top: 12px;">
             <div class="fact-label">Active</div>
             <div class="fact-value">Bacillus thuringiensis var. kurstaki</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Product family</div>
-            <div class="fact-value">Biopesticide used mainly in caterpillar-control contexts.</div>
-          </div>
-          <div class="fact-card">
-            <div class="fact-label">Why this matters</div>
-            <div class="fact-value">This is one of the clearest product records for showing fit, proof, compliance context, and substitution relevance together.</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Quick links</div>
-          <div class="quick-links" style="margin-top: 12px;">
-            <a class="chip" href="./product-catalogue.html?q=Thuricide%20WP">Product catalogue</a>
-            <a class="chip" href="./resource-library.html">Guidance and HHP references</a>
-            <a class="chip" href="./standards-regulations.html">Standards layer</a>
-          </div>
-          <p class="support-note">Use this page as the fast product summary, then move into the deeper workspaces for the full record set.</p>
         </div>
       </aside>
     </section>
@@ -309,7 +325,7 @@
               <div class="fact-value">African bollworm is the clearest single problem anchor for the product story.</div>
             </div>
             <div class="mini-card">
-              <div class="fact-label">Transition signal</div>
+              <div class="fact-label">Transition role</div>
               <div class="fact-value">This product is one of the easiest examples of how a biological can support substitution away from higher-hazard chemistry.</div>
             </div>
           </div>

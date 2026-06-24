@@ -408,56 +408,6 @@
       object-fit: contain;
     }
 
-    .tooltip-anchor {
-      position: relative;
-    }
-
-    .tooltip-anchor::before,
-    .tooltip-anchor::after {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 140ms ease, transform 140ms ease;
-      z-index: 12;
-    }
-
-    .tooltip-anchor::before {
-      content: "";
-      left: 18px;
-      bottom: calc(100% + 2px);
-      transform: translate(0, 4px);
-      border: 6px solid transparent;
-      border-top-color: rgba(23, 48, 57, 0.92);
-    }
-
-    .tooltip-anchor::after {
-      content: attr(data-tooltip);
-      left: 0;
-      bottom: calc(100% + 12px);
-      transform: translate(0, 4px);
-      min-width: 180px;
-      max-width: 240px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(23, 48, 57, 0.94);
-      color: #f7f4ee;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 600;
-      text-transform: none;
-      text-align: left;
-      box-shadow: 0 14px 30px -20px rgba(0,0,0,0.45);
-      white-space: normal;
-    }
-
-    .tooltip-anchor:hover::before,
-    .tooltip-anchor:hover::after,
-    .tooltip-anchor:focus-visible::before,
-    .tooltip-anchor:focus-visible::after {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-
     .results-head {
       margin-bottom: 12px;
     }
@@ -989,11 +939,6 @@
             </div>
             <div>
               <div class="legend-copy" x-text="activeCategoryTheme.copy"></div>
-              <div class="legend-note-row">
-                <span class="legend-note">Icon = product family</span>
-                <span class="legend-note">Category tag = comparable group</span>
-                <span class="legend-note">Crop chips = linked contexts</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1066,7 +1011,7 @@
         <template x-for="product in filteredProducts" :key="product.title">
           <article class="card" :style="'--card-accent:' + categoryTheme(product.categoryId).accent + '; --card-soft:' + categoryTheme(product.categoryId).soft">
             <div class="card-top">
-              <button type="button" class="card-icon icon-filter-button tooltip-anchor" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :data-tooltip="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
+              <button type="button" class="card-icon icon-filter-button" @click="setCategoryFilter(product.categoryId)" x-html="iconSvg(categoryTheme(product.categoryId).symbol)" :title="productIconTooltip(product)" :aria-label="productIconTooltip(product)"></button>
               <div class="badge" :class="product.badgeTone" :title="productBadgeTitle(product)" x-text="displayProductBadge(product)"></div>
             </div>
 

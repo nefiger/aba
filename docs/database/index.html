@@ -437,7 +437,7 @@
     }
 
     .results-head {
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.9fr);
+      grid-template-columns: minmax(0, 1fr);
       align-items: start;
       position: relative;
       z-index: 1;
@@ -502,19 +502,22 @@
       position: relative;
       overflow: visible;
       box-shadow: 0 18px 32px -28px rgba(23, 48, 57, 0.32);
-      cursor: pointer;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
       padding: 18px;
     }
 
-    .card:hover,
-    .card:focus-visible {
+    .card.is-featured {
+      cursor: pointer;
+    }
+
+    .card.is-featured:hover,
+    .card.is-featured:focus-visible {
       transform: translateY(-3px);
       box-shadow: 0 24px 36px -26px rgba(23, 48, 57, 0.36);
       outline: none;
     }
 
-    .card:focus-visible {
+    .card.is-featured:focus-visible {
       border-color: color-mix(in srgb, var(--card-accent) 38%, white);
     }
 
@@ -526,7 +529,7 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .entity-icon {
@@ -675,12 +678,42 @@
       font-size: 14px;
     }
 
-    .support-link {
+    .card-launch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 48, 57, 0.08);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--card-accent, var(--green));
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 48, 57, 0.1);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--card-accent, var(--green));
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--card-accent, var(--green));
+      letter-spacing: 0.03em;
       text-transform: uppercase;
+    }
+
+    .card-cta:hover,
+    .card-cta:focus-visible {
+      outline: none;
+      border-color: color-mix(in srgb, var(--card-accent) 34%, white);
+      background: color-mix(in srgb, var(--card-soft) 60%, white);
     }
 
     .result-card-feature {
@@ -853,7 +886,7 @@
       <div class="hero-intro">
         <div class="eyebrow">Biologicals Explorer</div>
         <h1>Explore</h1>
-        <p style="margin-top: 8px; font-size: 15px;">ABA brings together products, crop contexts, pest and disease problems, evidence records, and regulatory standards. Start with the lens that fits your question.</p>
+        <p style="margin-top: 8px; font-size: 15px;">Start with a crop, a pest or disease, or a biological product. The deeper evidence, guidance, standards, and transition context sit underneath the records you open.</p>
       </div>
 
       <div class="path-entry-grid">
@@ -944,21 +977,6 @@
           <h2 style="margin-top: 6px;" x-text="active.heading"></h2>
           <p style="margin-top: 8px; max-width: none;" x-text="active.description"></p>
         </div>
-        <aside class="legend-panel">
-          <div>
-            <div class="eyebrow">Legend</div>
-            <h3 style="margin-top: 6px;" x-text="legendTitle()"></h3>
-          </div>
-          <div class="legend-grid">
-            <template x-for="item in legendItems()" :key="item.label">
-              <div class="legend-item">
-                <div class="legend-kicker" x-text="item.label"></div>
-                <div class="legend-value" x-text="item.value"></div>
-              </div>
-            </template>
-          </div>
-          <p class="legend-footnote" x-text="legendNote()"></p>
-        </aside>
       </div>
 
       <div class="filter-grid">
@@ -977,15 +995,19 @@
         <template x-for="card in active.cards" :key="card.title">
           <article
             class="card"
+            :class="{ 'is-featured': isFeaturedCard(card) }"
             :style="'--card-accent:' + (card.accent || active.accent) + '; --card-soft:' + (card.soft || active.soft)"
-            role="link"
-            tabindex="0"
+            :role="isFeaturedCard(card) ? 'link' : undefined"
+            :tabindex="isFeaturedCard(card) ? '0' : undefined"
             @click="openCard(card, $event)"
             @keydown.enter.prevent="openCard(card, $event)"
             @keydown.space.prevent="openCard(card, $event)">
             <div class="card-top">
               <div class="entity-icon" x-html="recordIcon(card)" aria-hidden="true"></div>
-              <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <div class="badge" :class="card.badgeTone" :title="badgeTitle(card)" x-text="displayBadge(card)"></div>
+                <span class="card-launch" aria-hidden="true" x-show="isFeaturedCard(card)">→</span>
+              </div>
             </div>
 
             <div class="result-card-feature" x-show="isFeaturedCard(card)">Includes evidence, standards, resources, and HHP transition context</div>
@@ -1016,7 +1038,12 @@
                   <span x-text="hhpLabel(card)"></span>
                 </div>
               </div>
-              <div class="support-link" x-text="isFeaturedCard(card) ? 'Open detail page' : defaultOpenLabel()"></div>
+              <a
+                class="card-cta"
+                x-show="!isFeaturedCard(card)"
+                :href="cardHref(card)"
+                @click.stop
+                x-text="defaultOpenLabel()"></a>
             </div>
           </article>
         </template>
@@ -1045,9 +1072,9 @@
               <p style="margin-top: 12px;"><a href="./resource-library.html" style="color: var(--green); font-weight: 800;">Open resource library →</a></p>
             </article>
             <article class="path-card">
-              <h3 style="font-size: 1.05rem;">Regulatory signals</h3>
-              <p style="margin-top: 8px;">Country context, recurring patterns, and signs of movement across the African biologicals registration landscape.</p>
-              <p style="margin-top: 12px;"><a href="./regulatory-signals.html" style="color: var(--green); font-weight: 800;">Open regulatory signals →</a></p>
+              <h3 style="font-size: 1.05rem;">Registration tracker</h3>
+              <p style="margin-top: 8px;">Move from discovery into the registration view when the conversation is about readiness, market access, and advocacy value.</p>
+              <p style="margin-top: 12px;"><a href="../../registration-tracker/public-dashboard/index.html" style="color: var(--green); font-weight: 800;">Open registration tracker →</a></p>
             </article>
           </div>
         </div>
@@ -1221,6 +1248,7 @@
           return `./product-catalogue.html?crop=${encodeURIComponent(crop)}`;
         },
         openCard(card, event) {
+          if (!this.isFeaturedCard(card)) return;
           if (event?.target?.closest('a, button')) return;
           window.location.href = this.cardHref(card);
         },
@@ -1250,9 +1278,9 @@
           return `./product-catalogue.html?q=${encodeURIComponent(card.title)}`;
         },
         defaultOpenLabel() {
-          if (this.activeId === 'crops') return 'Open linked products';
-          if (this.activeId === 'problems') return 'Open biological options';
-          return 'Open product view';
+          if (this.activeId === 'crops') return 'See linked products';
+          if (this.activeId === 'problems') return 'See biological options';
+          return 'Open full product view';
         },
         cardCount(card, label) {
           return (card.meta || []).find((item) => item.label === label)?.value || '';
@@ -1301,13 +1329,13 @@
         cardSummary(card) {
           const biologicalUses = this.cleanCount(this.cardCount(card, 'Visible biological uses'));
           if (this.activeId === 'crops') {
-            return `${card.title} is a strong crop entry point because the linked problems and visible biological options are already legible in the current explorer. ${biologicalUses ? `${biologicalUses} visible options are currently surfaced here.` : ''}`.trim();
+            return `${card.title} is a clear crop entry point with linked problems, visible biological routes, and supporting material ready to open. ${biologicalUses ? `${biologicalUses} options are currently surfaced.` : ''}`.trim();
           }
           if (this.activeId === 'problems') {
-            return `${card.title} is useful as a problem-led view because it connects clearly to affected crops and biological routes that people can compare quickly. ${biologicalUses ? `${biologicalUses} visible options are currently surfaced here.` : ''}`.trim();
+            return `${card.title} is a useful problem-led view because the affected crops and biological options can be compared quickly. ${biologicalUses ? `${biologicalUses} options are currently surfaced.` : ''}`.trim();
           }
           const category = (card.meta || []).find((item) => item.label === 'Category')?.value || card.category || 'Biological product';
-          return `${card.title} is a ${String(category).toLowerCase()} record that helps explain where this biological fits, what it addresses, and how it may support a lower-risk transition.`;
+          return `${card.title} is a ${String(category).toLowerCase()} record showing where this biological fits, what it addresses, and why it matters in transition conversations.`;
         },
         primaryContextLabel(card) {
           if (this.activeId === 'crops') return 'Linked problems';
@@ -1330,38 +1358,6 @@
             return uses || 'Visible options are still being refined.';
           }
           return String(card.fit || '').replace(/\.$/, '');
-        },
-        legendTitle() {
-          if (this.activeId === 'crops') return 'How to read the crop results';
-          if (this.activeId === 'problems') return 'How to read the problem results';
-          return 'How to read the biological product results';
-        },
-        legendItems() {
-          if (this.activeId === 'crops') {
-            return [
-              { label: 'Icon', value: 'The record starts from a crop context.' },
-              { label: 'Type tag', value: 'Shows the production grouping, such as orchards or field crops.' },
-              { label: 'Linked problems', value: 'The main pests or diseases that anchor the crop story.' },
-              { label: 'HHP relevance', value: 'Appears only where the crop has a visible substitution or risk-reduction story.' }
-            ];
-          }
-          if (this.activeId === 'problems') {
-            return [
-              { label: 'Icon', value: 'The record starts from a pest or disease problem.' },
-              { label: 'Type tag', value: 'Shows whether the result is read mainly as a pest or disease case.' },
-              { label: 'Linked crops', value: 'The crop contexts most clearly affected by the problem.' },
-              { label: 'HHP relevance', value: 'Marks problems where lower-risk replacement pathways are part of the story.' }
-            ];
-          }
-          return [
-            { label: 'Icon', value: 'The record starts from a biological product.' },
-            { label: 'Type tag', value: 'Shows the main product family or control context.' },
-            { label: 'Key problems', value: 'The main use cases or linked problem contexts.' },
-            { label: 'HHP relevance', value: 'Marks products that visibly support substitution away from high-hazard conventional chemistry.' }
-          ];
-        },
-        legendNote() {
-          return 'Tooltips are now reserved for true micro-interactions. The main card structure should be understandable without hover.';
         },
         displayBadge(card) {
           if (this.activeId === 'problems') {

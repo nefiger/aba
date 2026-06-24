@@ -61,7 +61,16 @@
       background: linear-gradient(180deg, rgba(252, 230, 217, 0.94) 0%, rgba(255,255,255,0.76) 100%);
       border: 1px solid rgba(176, 91, 55, 0.18);
     }
-    .hero-actions, .chip-row, .signal-row, .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-actions, .hero-summary-grid, .chip-row, .signal-row, .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+      gap: 10px;
+    }
+    .hero-summary-card {
+      padding: 14px; border-radius: 16px; border: 1px solid rgba(23, 48, 57, 0.06); background: rgba(255,255,255,0.72);
+    }
     h1, h2, h3, p { margin: 0; }
     h1 { margin-top: 8px; font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: 0.98; letter-spacing: -0.04em; }
     h2 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.08; letter-spacing: -0.03em; }
@@ -92,7 +101,7 @@
     .list-card a, .action-tile a { color: var(--green); font-weight: 800; }
     .support-note { margin-top: 8px; font-size: 14px; color: var(--muted); }
     @media (max-width: 980px) {
-      .topbar, .hero-layout, .body-layout, .module-grid, .action-grid { grid-template-columns: 1fr; }
+      .topbar, .hero-layout, .hero-summary-grid, .body-layout, .module-grid, .action-grid { grid-template-columns: 1fr; }
       .aside-panel { position: static; }
     }
   </style>
@@ -132,6 +141,20 @@
         <div class="eyebrow" style="margin-top: 16px;">Problem detail</div>
         <h1>African bollworm</h1>
         <p style="margin-top: 14px; max-width: 58ch;">African bollworm is one of the clearest problem-led records in the explorer because it connects multiple crop contexts, familiar Bt-led biological options, and a visible transition story away from higher-risk conventional insect control.</p>
+        <div class="hero-summary-grid">
+          <div class="hero-summary-card">
+            <div class="fact-label">Record type</div>
+            <div class="fact-value">A problem-led record connecting one pest to several crop systems and biological options.</div>
+          </div>
+          <div class="hero-summary-card">
+            <div class="fact-label">Main linked context</div>
+            <div class="fact-value">Affected crops, Bt-led options, and the substitution story that makes this easy to explain.</div>
+          </div>
+          <div class="hero-summary-card">
+            <div class="fact-label">Why this problem matters</div>
+            <div class="fact-value">This page shows the most legible route from a familiar pest problem into biological comparison.</div>
+          </div>
+        </div>
         <div class="signal-row" style="margin-top: 16px;">
           <span class="signal-chip">61 visible biological options</span>
           <span class="signal-chip">Strong substitution pathway visible</span>
@@ -152,28 +175,21 @@
 
       <aside class="aside-panel">
         <div class="card">
-          <div class="eyebrow">At a glance</div>
-          <div class="fact-card" style="margin-top: 12px;">
-            <div class="fact-label">Primary question</div>
-            <div class="fact-value">Which crops and biological options are most clearly connected to African bollworm in the current explorer?</div>
+          <div class="eyebrow">Open next</div>
+          <div class="quick-links" style="margin-top: 12px;">
+            <a class="chip" href="./product-catalogue.html?problem=African%20bollworm">Biological options</a>
+            <a class="chip" href="./evidence-library.html">Evidence</a>
+            <a class="chip" href="./standards-regulations.html">Standards</a>
+            <a class="chip" href="./resource-library.html">Guidance and HHP</a>
           </div>
-          <div class="fact-card">
+          <p class="support-note">This page is the summary layer. Use the linked workspaces for wider comparison, proof, and transition detail.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Quick fact</div>
+          <div class="fact-card" style="margin-top: 12px;">
             <div class="fact-label">Most visible option type</div>
             <div class="fact-value">Bt-led biopesticides are the strongest current route.</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Why this matters</div>
-            <div class="fact-value">This problem is easy to explain to a broad audience and makes the replacement story legible quickly.</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="eyebrow">Quick links</div>
-          <div class="quick-links" style="margin-top: 12px;">
-            <a class="chip" href="./product-catalogue.html?problem=African%20bollworm">Product options</a>
-            <a class="chip" href="./resource-library.html">HHP and guidance</a>
-            <a class="chip" href="./standards-regulations.html">Standards layer</a>
-          </div>
-          <p class="support-note">This page is the summary layer. Use the linked workspaces for deeper comparison and policy context.</p>
         </div>
       </aside>
     </section>
@@ -309,7 +325,7 @@
               <div class="fact-value">Bt-led biological control is the clearest response pattern currently visible.</div>
             </div>
             <div class="mini-card">
-              <div class="fact-label">Transition signal</div>
+              <div class="fact-label">Transition role</div>
               <div class="fact-value">This is one of the strongest problem-led HHP replacement stories in the current prototype.</div>
             </div>
           </div>
