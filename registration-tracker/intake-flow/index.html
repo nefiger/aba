@@ -3,35 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Intake Flow | ABA Registration Tracker</title>
+    <title>Add Product Data | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
-    <div class="prototype-shell">
+    <div class="prototype-shell public-tracker-shell">
       <header class="topbar">
         <div class="brand-block">
           <div class="brand-mark">ABA</div>
           <div>
-            <p class="product-kicker">Biological Inputs</p>
-            <p class="product-title">Registration Tracker</p>
+            <p class="product-kicker">African Biologicals Alliance</p>
+            <p class="product-title">Registration tracker</p>
           </div>
         </div>
-        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
+        <a class="home-slot" href="../../docs/registration-tracker/index.html">Back to tracker overview</a>
       </header>
-      <nav class="prototype-nav" aria-label="Prototype areas">
-        <a href="../index.html">Combined</a>
-        <a href="../intake-flow/index.html" aria-current="page">Intake</a>
-        <a href="../company-dashboard/index.html">Company Dashboard</a>
-        <a href="../public-dashboard/index.html">Public Dashboard</a>
-        <a href="../admin-operator-review/index.html">Admin Review</a>
-        <a href="../registrar-list/index.html">Registrar Export</a>
+      <nav class="tracker-public-nav" aria-label="Registration tracker sections">
+        <a href="../../docs/registration-tracker/index.html">Tracker overview</a>
+        <a href="../intake-flow/index.html" aria-current="page">Add product data</a>
+        <a href="../public-dashboard/index.html">Sector signals</a>
+        <a href="../company-dashboard/index.html">Company workspace</a>
       </nav>
 
       <main class="page">
         <section class="page-header">
           <div>
-            <h1>Submission intake flow</h1>
-            <p>Interactive low-fidelity capture flow for fictional company representatives. Selections update the visible state summary and conditional fields.</p>
+            <div class="knowledge-eyebrow">Product registration record</div>
+            <h1>Add a biological product registration record</h1>
+            <p>Share the structured detail ABA needs to understand where a biological product sits in the registration journey, what is blocking progress, and what consent applies to future use.</p>
           </div>
           <span class="role-badge">Public submission: authorised representatives only</span>
         </section>
@@ -98,7 +97,7 @@
             <span class="status-chip">4 Application status</span>
             <span class="status-chip">5 Proof + consent</span>
             <span class="status-chip">6 Save/submit</span>
-            <div class="callout">This prototype stores selections in page state only. No backend write happens here.</div>
+            <div class="callout">The form shows the intended capture path. Submitted records should enter ABA review before they support member follow-up or aggregate public signals.</div>
           </aside>
 
           <div class="stack">
@@ -111,7 +110,7 @@
                 <div class="field"><label for="membership">Self-reported ABA relationship</label><select id="membership" class="control-select"><option>Full member</option><option>Associate</option><option>Observer</option><option>Non-member</option><option>Not sure / pending</option></select></div>
                 <div class="field"><label for="contactName">Contact person</label><input id="contactName" class="control" value="Fictional Contact"></div>
                 <div class="field"><label for="contactEmail">Email for return link</label><input id="contactEmail" class="control" type="email" value="contact@example.invalid"></div>
-                <div class="field full"><label>POPIA/privacy notice</label><div class="textarea-box">ABA uses this information for internal review, anonymised sector evidence, and consented registrar engagement. This is not legal or regulatory advice.</div></div>
+                <div class="field full"><label>POPIA/privacy notice</label><div class="textarea-box">ABA uses this information for internal review, anonymised sector evidence, and consented regulatory engagement. This is not legal or regulatory advice.</div></div>
               </div>
             </section>
 
@@ -125,7 +124,7 @@
                 <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Group 3 fertilizer</option><option>Agricultural remedy</option><option>Not sure</option></select></div>
                 <div class="field act36-field"><label for="classificationCode">Classification code</label><select id="classificationCode" class="control-select"><option>M</option><option>L</option><option>K</option><option>Unknown</option></select></div>
                 <div class="field full" id="nonAct36Note"><label>Conditional regime note</label><div class="textarea-box">Act 36 legal pathway and M/L/K classification are hidden unless Agriculture / Act 36 is selected.</div></div>
-                <div class="field full"><label>Knowledge Hub connection</label><div class="textarea-box">Functional category aligns with the Product Catalogue; reviewed status patterns can later support public Regulatory Signals.</div></div>
+                <div class="field full"><label>Downstream use</label><div class="textarea-box">Functional category, application country, and reviewed status can later support public aggregate signals without exposing private company detail.</div></div>
               </div>
             </section>
 
@@ -151,7 +150,7 @@
                 <label class="checkbox-item"><input id="proofAttached" type="checkbox"> <span>Proof of submission attached</span></label>
                 <div class="field full"><label for="proofDescription">Proof description</label><input id="proofDescription" class="control" value="Receipt or registrar email placeholder"></div>
                 <div class="callout" id="proofNote">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
-                <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence library concept</a>
+                <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence context</a>
               </div>
               <div class="panel stack">
                 <h2>Visibility and consent</h2>
@@ -170,7 +169,7 @@
                   <button class="action-button secondary" type="button" id="saveDraft">Save draft and email return link</button>
                   <button class="action-button primary" type="button" id="submitReview">Submit for ABA review</button>
                 </div>
-                <p class="note">Buttons update prototype state only. A production version would call the CRM or tracker API.</p>
+                <p class="note">In this demo, buttons update the page summary so the review path is visible. A live version would save the record for ABA review.</p>
               </div>
               <div class="panel stack">
                 <h2>Current captured variables</h2>
@@ -180,7 +179,7 @@
           </div>
         </section>
 
-        <p class="footer-note">Disposable prototype. Fictional data only. Shared rules come from context-and-decisions-v1.md.</p>
+        <p class="footer-note">Demo form with fictional defaults. No live submission is created from this page.</p>
       </main>
     </div>
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Company Dashboard | ABA Registration Tracker</title>
+    <title>Company Workspace | ABA Registration Tracker</title>
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
@@ -11,24 +11,22 @@
       <header class="topbar">
         <div class="brand-block">
           <div class="brand-mark">ABA</div>
-          <div><p class="product-kicker">Biological Inputs</p><p class="product-title">Registration Tracker</p></div>
+          <div><p class="product-kicker">African Biologicals Alliance</p><p class="product-title">Registration tracker</p></div>
         </div>
         <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
       </header>
-      <nav class="prototype-nav" aria-label="Prototype areas">
-        <a href="../index.html">Combined</a>
-        <a href="../intake-flow/index.html">Intake</a>
-        <a href="../company-dashboard/index.html" aria-current="page">Company Dashboard</a>
-        <a href="../public-dashboard/index.html">Public Dashboard</a>
-        <a href="../admin-operator-review/index.html">Admin Review</a>
-        <a href="../registrar-list/index.html">Registrar Export</a>
+      <nav class="tracker-public-nav" aria-label="Registration tracker sections">
+        <a href="../../docs/registration-tracker/index.html">Tracker overview</a>
+        <a href="../intake-flow/index.html">Add product data</a>
+        <a href="../public-dashboard/index.html">Sector signals</a>
+        <a href="../company-dashboard/index.html" aria-current="page">Company workspace</a>
       </nav>
 
       <main class="page">
         <section class="page-header">
           <div>
             <h1>Member company workspace</h1>
-            <p>Private view of a fictional company's own pipeline, review states, wait-time benchmarks, and registrar packet readiness. Select a record or filter to update the charts.</p>
+            <p>Private member view of your company's own registration records, open actions, wait-time benchmarks, and evidence readiness. Select a record or filter to focus the workspace.</p>
           </div>
           <span class="role-badge">Company member workspace</span>
         </section>
@@ -36,20 +34,20 @@
         <section class="grid three">
           <div class="panel ok"><h2>Workspace gate</h2><p>Member login or invited workspace access required. Intake return links do not unlock this area.</p></div>
           <div class="panel"><h2>Company</h2><p><strong>Example Bio Inputs (Pty) Ltd</strong><br>Verified ABA relationship: Full member, active<br>Records visible: own company only<br>Data refreshed: 2026-06-22 14:40</p></div>
-          <div class="panel warn"><h2>Knowledge Hub boundary</h2><p>Company records stay private here. Reviewed aggregate patterns may later support public Regulatory Signals and Evidence Library context.</p></div>
+          <div class="panel warn"><h2>Private workspace boundary</h2><p>Company records stay private here. Only reviewed, anonymised patterns may later support public Regulatory Signals and Evidence Library context.</p></div>
         </section>
 
         <section class="panel" style="margin-top: 16px;">
           <div class="dashboard-toolbar">
             <div>
-              <h2>Dashboard summary</h2>
-              <p class="note">Fictional member records. Filters update the lane counts, benchmark, readiness chart, and selected-record detail.</p>
+              <h2>Workspace summary</h2>
+              <p class="note">Illustrative member records. Filters update the lane counts, benchmark, readiness chart, and selected-record detail.</p>
             </div>
-            <div class="segmented-control" aria-label="Dashboard record filter">
+            <div class="segmented-control" aria-label="Company workspace record filter">
               <button type="button" data-filter="all" aria-pressed="true">All</button>
               <button type="button" data-filter="open" aria-pressed="false">Open</button>
               <button type="button" data-filter="action" aria-pressed="false">Needs action</button>
-              <button type="button" data-filter="packet" aria-pressed="false">Packet candidates</button>
+              <button type="button" data-filter="packet" aria-pressed="false">Evidence candidates</button>
             </div>
           </div>
 
@@ -57,7 +55,7 @@
             <div class="metric"><span>Visible records</span><span class="metric-value" id="metricRecords">4</span><p class="note">Filtered company records</p></div>
             <div class="metric"><span>With registrar</span><span class="metric-value" id="metricRegistrar">2</span><p class="note">Current regulator-facing work</p></div>
             <div class="metric"><span>Needs action</span><span class="metric-value" id="metricAction">1</span><p class="note">Clarification or blocker</p></div>
-            <div class="metric"><span>Packet ready</span><span class="metric-value" id="metricReady">1</span><p class="note">After operator review</p></div>
+            <div class="metric"><span>Evidence ready</span><span class="metric-value" id="metricReady">1</span><p class="note">After ABA review</p></div>
           </div>
         </section>
 
@@ -79,8 +77,8 @@
           </article>
 
           <article class="chart-card">
-            <h3>Registrar readiness</h3>
-            <svg class="chart-svg" id="readinessDonut" viewBox="0 0 220 210" role="img" aria-label="Registrar packet readiness"></svg>
+            <h3>Evidence readiness</h3>
+            <svg class="chart-svg" id="readinessDonut" viewBox="0 0 220 210" role="img" aria-label="Evidence readiness"></svg>
             <div class="readiness-list" id="readinessList"></div>
           </article>
         </section>
@@ -96,7 +94,7 @@
             <div class="state-summary" id="selectedRecord"></div>
           </div>
           <div class="panel">
-            <h2>Registrar packet readiness</h2>
+            <h2>Evidence readiness</h2>
             <table>
               <thead><tr><th>Record</th><th>Status</th><th>Blocker</th></tr></thead>
               <tbody id="readinessTable"></tbody>
@@ -105,11 +103,11 @@
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
-          <div class="panel warn"><h2>Needs clarification</h2><p id="clarificationText">ABA needs a proof file or reference-unavailable reason before blocked records can be accepted for packet review.</p></div>
-          <div class="panel ok"><h2>Included in ABA registrar packet</h2><p id="packetText">Visible only for consented, reviewed, operator-approved member records. Packet version and sent date appear here once available.</p></div>
+          <div class="panel warn"><h2>Needs clarification</h2><p id="clarificationText">ABA needs a proof file or reference-unavailable reason before blocked records can be accepted for evidence use.</p></div>
+          <div class="panel ok"><h2>Evidence candidate status</h2><p id="packetText">Visible only for consented, reviewed, ABA-approved member records. Evidence version and use date appear here once available.</p></div>
         </section>
 
-        <p class="footer-note">Disposable prototype. Fictional data only. Shared rules come from context-and-decisions-v1.md.</p>
+        <p class="footer-note">Illustrative member workspace data only. Private company records are visible only inside this workspace.</p>
       </main>
     </div>
 
@@ -117,7 +115,7 @@
       const records = [
         {
           id: "soil-blend",
-          product: "Fictional Microbial Soil Blend",
+          product: "Example Microbial Soil Blend",
           applicationCountry: "South Africa",
           verifiedMemberType: "Full member, active",
           knowledgeHubLinkType: "Product catalogue",
@@ -128,7 +126,7 @@
           review: "Accepted tracker record",
           waitMonths: 9,
           sectorMedian: 14,
-          packet: "Ready candidate",
+          packet: "Evidence-ready candidate",
           blocker: "None",
           bottleneckTheme: "Regulator delay",
           ready: true,
@@ -137,7 +135,7 @@
         },
         {
           id: "bio-control",
-          product: "Fictional Bio-Control Spray",
+          product: "Example Bio-Control Spray",
           applicationCountry: "South Africa",
           verifiedMemberType: "Full member, active",
           knowledgeHubLinkType: "Evidence library",
@@ -157,7 +155,7 @@
         },
         {
           id: "seed-coat",
-          product: "Fictional Seed Coat",
+          product: "Example Seed Coat",
           applicationCountry: "Kenya",
           verifiedMemberType: "Full member, active",
           knowledgeHubLinkType: "Product catalogue",
@@ -177,7 +175,7 @@
         },
         {
           id: "compost",
-          product: "Fictional Compost Inoculant",
+          product: "Example Compost Inoculant",
           applicationCountry: "South Africa",
           verifiedMemberType: "Full member, active",
           knowledgeHubLinkType: "Regulatory signals",
@@ -362,9 +360,9 @@
         renderSelected(items);
         renderReadinessTable(items);
         const actionCount = items.filter((record) => record.needsAction).length;
-        setText("clarificationText", actionCount ? `${actionCount} filtered record needs clarification before it can be accepted for packet review.` : "No filtered records currently need clarification.");
+        setText("clarificationText", actionCount ? `${actionCount} filtered record needs clarification before it can be accepted for evidence use.` : "No filtered records currently need clarification.");
         const readyCount = items.filter((record) => record.ready).length;
-        setText("packetText", readyCount ? `${readyCount} filtered record is a registrar packet candidate after operator review.` : "No filtered records are currently ready for packet inclusion.");
+        setText("packetText", readyCount ? `${readyCount} filtered record is an evidence candidate after ABA review.` : "No filtered records are currently ready for evidence use.");
         document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
       }
 
