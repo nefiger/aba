@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Registration Tracker | Meeting Brief</title>
+  <title>ABA Registration Tracker | Product Registration Visibility</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
@@ -166,6 +166,7 @@
 
     .hero-grid,
     .value-grid,
+    .route-grid,
     .lifecycle-grid,
     .benefit-grid,
     .record-grid,
@@ -181,6 +182,7 @@
     }
 
     .value-grid,
+    .route-grid,
     .trust-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -282,9 +284,43 @@
 
     .panel,
     .card,
+    .route-card,
     .record-card,
     .trust-card {
       padding: 16px;
+    }
+
+    .route-card {
+      display: grid;
+      gap: 12px;
+      min-height: 100%;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .route-card.product {
+      background: linear-gradient(180deg, rgba(231, 240, 232, 0.96), rgba(255, 255, 255, 0.74));
+    }
+
+    .route-card.workspace {
+      background: linear-gradient(180deg, rgba(241, 234, 219, 0.98), rgba(255, 255, 255, 0.74));
+    }
+
+    .route-card.signals {
+      background: linear-gradient(180deg, rgba(63, 109, 169, 0.12), rgba(255, 255, 255, 0.74));
+    }
+
+    .route-meta {
+      display: grid;
+      gap: 8px;
+    }
+
+    .route-meta strong {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .tone { background: var(--sand); }
@@ -483,15 +519,15 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Registration tracker meeting brief</div>
-          <h1 class="display">A trusted picture of the registrations members have lodged with the Registrar's office.</h1>
+          <div class="eyebrow">Registration tracker</div>
+          <h1 class="display">Track product registrations and help build the sector evidence base.</h1>
           <p class="lede">
-            The registration tracker gives ABA a detailed, reviewed view of member product and application records. From that record-level picture, ABA can support members, advocate with the Registrar's office, and publish anonymised sector signals without exposing private company detail.
+            Add a biological product record, see where applications are moving or stuck, and help ABA turn scattered registration journeys into trusted evidence for better sector advocacy.
           </p>
           <div class="actions">
-            <a class="button primary" href="../../registration-tracker/index.html">Open combined walkthrough</a>
-            <a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Start at intake</a>
+            <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add a product record</a>
             <a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
+            <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a>
           </div>
         </div>
         <aside class="panel tone">
@@ -507,11 +543,76 @@
       </div>
     </section>
 
+    <section class="surface section" id="routes">
+      <div>
+        <div class="eyebrow">Three ways to use the tracker</div>
+        <h2 class="display" style="margin-top: 6px;">Start with the action that matches your registration problem.</h2>
+      </div>
+      <div class="route-grid" style="margin-top: 12px;">
+        <article class="route-card product">
+          <div class="mini">Submit a product</div>
+          <h3>Add a product registration record.</h3>
+          <p>Share where a biological product sits in the registration journey, what has been lodged, and what is blocking progress.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Product owners, regulatory leads, founders, distributors, or operators with an active or historic registration record.</p>
+            </div>
+            <div>
+              <strong>Creates</strong>
+              <p>A structured registration record that ABA can review, protect, and use with the right consent.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add product data</a>
+          </div>
+        </article>
+
+        <article class="route-card workspace">
+          <div class="mini">Track your registrations</div>
+          <h3>See your company registration picture.</h3>
+          <p>Review product status, evidence readiness, bottlenecks, next actions, and which records may need clarification before ABA can act.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Companies managing several submissions or trying to make their registration pipeline easier to coordinate.</p>
+            </div>
+            <div>
+              <strong>Creates</strong>
+              <p>A private workspace for cleaner internal visibility and member-specific support.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
+          </div>
+        </article>
+
+        <article class="route-card signals">
+          <div class="mini">Read sector signals</div>
+          <h3>See the wider registration landscape.</h3>
+          <p>Explore anonymised patterns across country visibility, recurring bottlenecks, category activity, and where biological coverage is forming or absent.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Sector participants who want to understand registration conditions beyond a single company or product.</p>
+            </div>
+            <div>
+              <strong>Creates</strong>
+              <p>Public-safe intelligence that can support advocacy, prioritisation, and better conversations with regulators.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="surface section">
       <div class="stack">
         <div>
           <div class="eyebrow">Why ABA needs the picture</div>
-          <h2 class="display" style="margin-top: 6px;">The tracker makes registration reality visible enough to act on.</h2>
+          <h2 class="display" style="margin-top: 6px;">The tracker turns registration pain into evidence ABA can act on.</h2>
         </div>
         <div class="value-grid">
           <article class="card">
