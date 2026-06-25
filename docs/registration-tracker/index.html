@@ -170,8 +170,7 @@
     .lifecycle-grid,
     .benefit-grid,
     .record-grid,
-    .trust-grid,
-    .demo-grid {
+    .trust-grid {
       display: grid;
       gap: 12px;
     }
@@ -198,10 +197,6 @@
     .record-grid {
       grid-template-columns: 0.95fr 1.05fr;
       align-items: start;
-    }
-
-    .demo-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     h1,
@@ -275,8 +270,7 @@
     .card,
     .lifecycle-step,
     .record-card,
-    .trust-card,
-    .demo-link {
+    .trust-card {
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--white);
@@ -438,44 +432,6 @@
       line-height: 1.25;
     }
 
-    .demo-link {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.72);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .demo-link span:first-child {
-      display: grid;
-      gap: 4px;
-    }
-
-    .demo-link small {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .demo-link span:last-child {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: 16px 0;
-    }
-
     @media (max-width: 980px) {
       .hero-grid,
       .value-grid,
@@ -483,7 +439,6 @@
       .benefit-grid,
       .record-grid,
       .trust-grid,
-      .demo-grid,
       .metric-row {
         grid-template-columns: 1fr;
       }
