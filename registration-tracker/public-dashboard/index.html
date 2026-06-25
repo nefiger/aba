@@ -11,29 +11,25 @@
   </head>
   <body>
     <div class="prototype-shell public-dashboard-shell">
-      <header class="topbar site-topbar">
+      <header class="topbar public-site-topbar">
         <div class="brand-block">
           <div class="brand-mark">ABA</div>
           <div>
             <p class="product-kicker">African Biologicals Alliance</p>
-            <p class="product-title">Registration tracker</p>
+            <p class="product-title">Collective voice. Regulatory visibility. Better conditions for African biologicals.</p>
           </div>
         </div>
-        <nav class="site-links" aria-label="ABA site">
-          <a href="../../docs/site/index.html">Home</a>
-          <a href="../../docs/site/about.html">About</a>
-          <a href="../../docs/membership-flow/index.html">Membership</a>
-          <a href="../../docs/database/index.html">Knowledge Hub</a>
-          <a href="../../docs/site/workspace.html">Workspace</a>
-        </nav>
+        <div class="nav-wrap">
+          <nav class="nav" aria-label="ABA site">
+            <a href="../../docs/site/index.html">Home</a>
+            <a href="../../docs/site/about.html">About</a>
+            <a href="../../docs/membership-flow/index.html">Membership</a>
+            <a href="../../docs/database/index.html">Biologicals Explorer</a>
+            <a class="active" href="../../docs/registration-tracker/index.html">Track Registrations</a>
+          </nav>
+          <a class="nav-cta" href="../../docs/membership-flow/index.html">Join ABA</a>
+        </div>
       </header>
-
-      <nav class="tracker-public-nav" aria-label="Registration tracker sections">
-        <a href="../../docs/registration-tracker/index.html">Tracker overview</a>
-        <a href="../intake-flow/index.html">Add product data</a>
-        <a href="../public-dashboard/index.html" aria-current="page">Sector signals</a>
-        <a href="../company-dashboard/index.html">Company workspace</a>
-      </nav>
 
       <main class="page">
         <section class="page-header">
@@ -46,25 +42,14 @@
             <div class="knowledge-chip">Reviewed aggregate data</div>
             <p>Submitted records enter ABA review before they contribute to public metrics. Small-cell suppression keeps individual contributors protected.</p>
           </div>
-          <nav class="knowledge-subnav" aria-label="Related biologicals resources">
-            <a href="../../docs/database/index.html">Knowledge hub</a>
-            <a href="../../docs/database/product-catalogue.html">Product catalogue</a>
-            <a href="../../docs/database/regulatory-signals.html">Regulatory signals</a>
-            <a href="../../docs/database/evidence-library.html">Evidence library</a>
-          </nav>
         </section>
 
         <section class="panel muted">
           <div class="dashboard-toolbar">
             <div>
-              <h2>Filter reviewed sector signals</h2>
+              <h2>Reviewed sector signals</h2>
               <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity. Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
               <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa while the wider continental picture develops.</p>
-            </div>
-            <div class="segmented-control" aria-label="Registration sector signals filter">
-              <button type="button" data-public-filter="all" aria-pressed="true">All reviewed</button>
-              <button type="button" data-public-filter="member" aria-pressed="false">ABA member</button>
-              <button type="button" data-public-filter="nonmember" aria-pressed="false">Non-member</button>
             </div>
           </div>
         </section>
@@ -150,13 +135,8 @@
             </div>
           </div>
           <div class="panel">
-            <h2>Explore related context</h2>
-            <p>Use the surrounding biologicals resources to compare these registration signals with product records, regulatory context, and evidence references.</p>
-            <div class="toggle-row" style="margin-top: 12px;">
-              <a class="action-button secondary" href="../../docs/database/product-catalogue.html">Product Catalogue</a>
-              <a class="action-button secondary" href="../../docs/database/regulatory-signals.html">Regulatory Signals</a>
-              <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence Library</a>
-            </div>
+            <h2>How this fits the broader ABA story</h2>
+            <p>These public signals sit alongside the membership path and the biologicals knowledge layer, but the registration picture itself now lives here rather than across multiple overlapping pages.</p>
           </div>
         </section>
 
@@ -312,10 +292,8 @@
         }
       };
 
-      let activeFilter = "all";
-
       function activeData() {
-        return datasets[activeFilter];
+        return datasets.all;
       }
 
       function setText(id, text) {
@@ -440,17 +418,7 @@
         renderSuppression(data);
         renderSummary(data);
         setText("trendCaption", `${data.label}: reviewed backlog trend over the last six months.`);
-        document.querySelectorAll("[data-public-filter]").forEach((button) => {
-          button.setAttribute("aria-pressed", String(button.dataset.publicFilter === activeFilter));
-        });
       }
-
-      document.querySelectorAll("[data-public-filter]").forEach((button) => {
-        button.addEventListener("click", () => {
-          activeFilter = button.dataset.publicFilter;
-          render();
-        });
-      });
 
       render();
     </script>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&family=Domine:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap");
 
 :root {
   --bg: #f5f2ea;
@@ -321,6 +321,88 @@ button {
 .public-tracker-shell .panel h2,
 .public-dashboard-shell .metric-value {
   font-family: "Public Sans", system-ui, sans-serif;
+}
+
+.public-site-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 14px 18px;
+}
+
+.public-site-topbar .brand-block {
+  gap: 12px;
+}
+
+.public-site-topbar .brand-mark {
+  border-color: transparent;
+  background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.public-site-topbar .product-kicker {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.public-site-topbar .product-title {
+  margin-top: 2px;
+  font-family: "Public Sans", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--muted);
+  max-width: 42ch;
+}
+
+.public-site-topbar .nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.public-site-topbar .nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.public-site-topbar .nav a {
+  font-size: 14px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--ink) 82%, white);
+  text-decoration: none;
+}
+
+.public-site-topbar .nav a.active,
+.public-site-topbar .nav a:hover {
+  color: var(--green-deep);
+}
+
+.public-site-topbar .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--green-deep);
+  color: #f7f7f2;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .prototype-nav {
@@ -1207,6 +1289,15 @@ th {
 
   .public-dashboard-shell .knowledge-context-card {
     width: 100%;
+  }
+
+  .public-site-topbar .nav-wrap {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .public-site-topbar .nav {
+    gap: 14px 18px;
   }
 
   .page-header h1 {

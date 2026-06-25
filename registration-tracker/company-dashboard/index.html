@@ -4,23 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Company Workspace | ABA Registration Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
   </head>
   <body>
-    <div class="prototype-shell">
-      <header class="topbar">
+    <div class="prototype-shell public-tracker-shell">
+      <header class="topbar public-site-topbar">
         <div class="brand-block">
           <div class="brand-mark">ABA</div>
-          <div><p class="product-kicker">African Biologicals Alliance</p><p class="product-title">Registration tracker</p></div>
+          <div><p class="product-kicker">African Biologicals Alliance</p><p class="product-title">Collective voice. Regulatory visibility. Better conditions for African biologicals.</p></div>
         </div>
-        <a class="home-slot" href="../../docs/site/index.html">Back to ABA site</a>
+        <div class="nav-wrap">
+          <nav class="nav" aria-label="ABA site">
+            <a href="../../docs/site/index.html">Home</a>
+            <a href="../../docs/site/about.html">About</a>
+            <a href="../../docs/membership-flow/index.html">Membership</a>
+            <a href="../../docs/database/index.html">Biologicals Explorer</a>
+            <a class="active" href="../../docs/registration-tracker/index.html">Track Registrations</a>
+          </nav>
+          <a class="nav-cta" href="../../docs/membership-flow/index.html">Join ABA</a>
+        </div>
       </header>
-      <nav class="tracker-public-nav" aria-label="Registration tracker sections">
-        <a href="../../docs/registration-tracker/index.html">Tracker overview</a>
-        <a href="../intake-flow/index.html">Add product data</a>
-        <a href="../public-dashboard/index.html">Sector signals</a>
-        <a href="../company-dashboard/index.html" aria-current="page">Company workspace</a>
-      </nav>
 
       <main class="page">
         <section class="page-header">
