@@ -6,8 +6,344 @@
     <title>ABA Sector Signals | Registration Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+    <style>
+      .public-dashboard-shell {
+        color: #173039;
+      }
+
+      .public-site-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .public-dashboard-shell .product-title {
+        font-family: "Public Sans", system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: #173039;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .nav a.active,
+      .nav a:hover {
+        color: #2b6b4f;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: #214f3c;
+        color: #f7f7f2;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .page {
+        width: min(1240px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      .hero-shell {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top right, rgba(87, 140, 105, 0.14), transparent 32%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+      }
+
+      .hero-shell::after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -22% auto;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(94, 148, 112, 0.16) 0%, rgba(94, 148, 112, 0.06) 46%, transparent 72%);
+        pointer-events: none;
+      }
+
+      .page-header {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 18px;
+      }
+
+      .knowledge-eyebrow,
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(23, 48, 57, 0.08);
+        background: rgba(255, 255, 255, 0.76);
+        color: #2b6b4f;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .page-header h1 {
+        margin-top: 18px;
+        font-size: clamp(2.6rem, 5vw, 4.35rem);
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+      }
+
+      .page-header p {
+        margin-top: 18px;
+        max-width: 62ch;
+        color: #5c6f73;
+        font-size: 17px;
+        line-height: 1.72;
+      }
+
+      .hero-stat-grid,
+      .context-grid,
+      .advocacy-grid,
+      .cta-actions {
+        display: grid;
+        gap: 12px;
+      }
+
+      .hero-stat-grid,
+      .context-grid,
+      .advocacy-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .hero-stat {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 48, 57, 0.08);
+      }
+
+      .hero-stat strong {
+        display: block;
+        color: #173039;
+        font-size: 1.35rem;
+        font-weight: 800;
+      }
+
+      .hero-stat span {
+        display: block;
+        margin-top: 6px;
+        color: #5c6f73;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .knowledge-context-card,
+      .context-card,
+      .support-card,
+      .cta-band {
+        border-radius: 20px;
+      }
+
+      .knowledge-context-card {
+        padding: 18px;
+      }
+
+      .knowledge-chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 11px;
+        border-radius: 999px;
+        background: rgba(43, 107, 79, 0.12);
+        color: #2b6b4f;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .knowledge-context-card p {
+        margin-top: 14px;
+      }
+
+      .context-card {
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(46, 58, 46, 0.08);
+        box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+      }
+
+      .context-card h3 {
+        margin-top: 10px;
+        font-size: 1.05rem;
+        line-height: 1.35;
+      }
+
+      .context-card p {
+        margin-top: 10px;
+      }
+
+      .context-card strong {
+        color: #173039;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: end;
+        flex-wrap: wrap;
+      }
+
+      .section-heading p,
+      .section-heading .note {
+        max-width: 72ch;
+      }
+
+      .metric-grid {
+        margin-top: 16px;
+      }
+
+      .metric {
+        min-height: 100%;
+      }
+
+      .metric-value {
+        display: block;
+      }
+
+      .support-card {
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(46, 58, 46, 0.08);
+      }
+
+      .support-card strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .support-card span {
+        display: block;
+        margin-top: 8px;
+        color: #5c6f73;
+        font-size: 14px;
+        line-height: 1.58;
+      }
+
+      .cta-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        padding: 22px;
+        background:
+          radial-gradient(circle at top right, rgba(87, 140, 105, 0.14), transparent 34%),
+          rgba(255, 252, 246, 0.92);
+        border: 1px solid rgba(46, 58, 46, 0.08);
+        box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
+      }
+
+      .cta-band p {
+        margin-top: 10px;
+      }
+
+      .cta-actions {
+        grid-template-columns: repeat(2, max-content);
+        justify-content: end;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .button-link.primary {
+        background: #214f3c;
+        color: #f7f7f2;
+      }
+
+      .button-link.secondary {
+        border: 1px solid rgba(46, 58, 46, 0.16);
+        background: rgba(255, 255, 255, 0.78);
+        color: #173039;
+      }
+
+      .footer-note {
+        margin: 18px 0 0;
+        text-align: center;
+      }
+
+      @media (max-width: 960px) {
+        .page-header,
+        .grid.two,
+        .cta-band {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-actions {
+          grid-template-columns: 1fr;
+          justify-content: stretch;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .hero-stat-grid,
+        .context-grid,
+        .advocacy-grid,
+        .metric-grid,
+        .chart-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          gap: 14px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="prototype-shell public-dashboard-shell">
@@ -32,33 +368,78 @@
       </header>
 
       <main class="page">
-        <section class="page-header">
+        <section class="page-header panel hero-shell">
           <div>
             <div class="knowledge-eyebrow">Sector signals</div>
             <h1>Registration sector signals</h1>
-            <p>Explore anonymised patterns across country visibility, recurring bottlenecks, category activity, and biological product registration progress without exposing company or product-level submissions.</p>
+            <p>This page shows anonymised, public-safe registration patterns drawn from reviewed submissions. No company-level or product-level private records are exposed.</p>
+            <div class="hero-stat-grid" aria-label="Sector signal highlights">
+              <div class="hero-stat">
+                <strong>All reviewed submissions</strong>
+                <span>Public metrics are based only on records reviewed before publication.</span>
+              </div>
+              <div class="hero-stat">
+                <strong>Small-cell protection</strong>
+                <span>Counts below the anonymisation threshold are hidden to protect contributors.</span>
+              </div>
+            </div>
           </div>
-          <div class="knowledge-context-card">
-            <div class="knowledge-chip">Reviewed aggregate data</div>
-            <p>Submitted records enter ABA review before they contribute to public metrics. Small-cell suppression keeps individual contributors protected.</p>
+          <aside class="knowledge-context-card panel muted">
+            <div class="knowledge-chip">Public boundary</div>
+            <p>These are currently visible signals rather than a complete market picture. ABA can accept product-registration input from across Africa while current operating activity is centered in South Africa.</p>
+            <p class="note">Reviewed submissions contribute to aggregate intelligence only after ABA checks structure, removes direct identifiers, and applies suppression rules.</p>
+          </aside>
+        </section>
+
+        <section class="panel" style="margin-top: 16px;">
+          <div class="section-heading">
+            <div>
+              <div class="section-label">Sector context</div>
+              <h2 style="margin-top: 14px;">What the current signal picture is showing</h2>
+              <p>These concise context blocks bring together the strongest public-facing sector patterns without creating a second destination for overlapping registration intelligence.</p>
+            </div>
+            <p class="note">Use these signals as directional evidence: they show what is currently visible in reviewed submissions, not the full market.</p>
+          </div>
+          <div class="context-grid">
+            <article class="context-card">
+              <div class="section-label">Country visibility</div>
+              <h3>South Africa leads the visible signal base, with additional activity emerging elsewhere.</h3>
+              <p>Reviewed records are strongest in South Africa, while Kenya and a smaller set of other markets indicate where broader continental visibility is starting to form.</p>
+            </article>
+            <article class="context-card">
+              <div class="section-label">Recurring bottlenecks</div>
+              <h3>Delay, proof gaps, and classification uncertainty remain the clearest friction points.</h3>
+              <p>Repeated bottleneck themes show where advocacy and registrar engagement can focus first, especially when open applications remain in process for long periods.</p>
+            </article>
+            <article class="context-card">
+              <div class="section-label">Category activity</div>
+              <h3>Biofertilisers and biopesticides are generating the strongest reviewed activity.</h3>
+              <p>The current signal base suggests where participation is most active now, while lighter activity in other categories may reflect either early-stage formation or still-limited visibility.</p>
+            </article>
+            <article class="context-card">
+              <div class="section-label">Coverage forming or absent</div>
+              <h3>Some pathways are beginning to show useful patterns, while others still remain too thin to read safely.</h3>
+              <p>Where counts are low, ABA suppresses detail rather than over-claiming visibility. That helps show where coverage is forming and where more contribution is still needed.</p>
+            </article>
           </div>
         </section>
 
-        <section class="panel muted">
-          <div class="dashboard-toolbar">
+        <section class="panel muted" style="margin-top: 16px;">
+          <div class="section-heading">
             <div>
-              <h2>Reviewed sector signals</h2>
-              <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity. Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
-              <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa while the wider continental picture develops.</p>
+              <div class="section-label">Reviewed aggregate metrics</div>
+              <h2 style="margin-top: 14px;">All reviewed signals at a glance</h2>
+              <p class="note">Only reviewed aggregate data is shown here. No member or non-member segmentation appears on the public page.</p>
             </div>
+            <p class="note">Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
           </div>
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
-          <div class="metric"><span>Open applications over threshold</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed records only.</p></div>
-          <div class="metric"><span>Median wait time</span><span class="metric-value" id="metricMedian">14 mo</span><p class="note">Current open applications.</p></div>
+          <div class="metric"><span>Open applications over threshold</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed open records only.</p></div>
+          <div class="metric"><span>Median wait time</span><span class="metric-value" id="metricMedian">14 mo</span><p class="note">Current reviewed open applications.</p></div>
           <div class="metric"><span>Longest open duration</span><span class="metric-value" id="metricWorst">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
-          <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">51.8</span><p class="note">Sum of open durations.</p></div>
+          <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">51.8</span><p class="note">Sum of reviewed open durations.</p></div>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
@@ -70,7 +451,7 @@
           <article class="chart-card">
             <h3>Reviewed open-record trend</h3>
             <svg class="chart-svg wide-chart" id="trendChart" viewBox="0 0 520 260" role="img" aria-label="Reviewed open-record trend over time"></svg>
-            <p class="note" id="trendCaption">Trend shows reviewed backlog records only; future pipeline is charted separately.</p>
+            <p class="note" id="trendCaption">All reviewed submissions: reviewed backlog trend over the last six months.</p>
           </article>
         </section>
 
@@ -85,8 +466,8 @@
           </article>
           <article class="chart-card">
             <h3>Pre-submission pipeline signal</h3>
-            <svg class="chart-svg" id="pipelineChart" viewBox="0 0 360 220" role="img" aria-label="Future pipeline separate from backlog"></svg>
-            <p class="note">Pre-submission products are tracked separately and do not count as registrar backlog.</p>
+            <svg class="chart-svg" id="pipelineChart" viewBox="0 0 360 220" role="img" aria-label="Pre-submission pipeline signal"></svg>
+            <p class="note">Pre-submission products are shown separately and do not count as registrar backlog.</p>
           </article>
         </section>
 
@@ -99,7 +480,7 @@
           <article class="chart-card">
             <h3>Recurring bottleneck themes</h3>
             <svg class="chart-svg wide-chart" id="bottleneckChart" viewBox="0 0 520 260" role="img" aria-label="Recurring bottleneck themes"></svg>
-            <p class="note">Themes are assigned during ABA operator review, not raw intake.</p>
+            <p class="note">Themes are assigned during ABA review rather than taken from raw public submissions.</p>
           </article>
         </section>
 
@@ -110,33 +491,37 @@
             <div class="suppression-grid" id="suppressionGrid" style="margin-top: 12px;"></div>
           </div>
           <div class="panel">
-            <h2>Aggregate evidence activity</h2>
-            <div class="mini-kpi-row">
-              <div class="metric"><span>Packets prepared</span><span class="metric-value" id="packetCount">3</span></div>
-              <div class="metric"><span>Applications represented</span><span class="metric-value" id="packetApps">29</span></div>
-              <div class="metric"><span>Most recent period</span><span class="metric-value" id="packetPeriod">Q2</span></div>
-            </div>
+            <h2>How to read these signals</h2>
+            <div class="state-summary" id="publicSummary"></div>
           </div>
         </section>
 
-        <section class="panel" style="margin-top: 16px;">
-          <h2>How to read these signals</h2>
-          <div class="state-summary" id="publicSummary"></div>
-        </section>
-
-        <section class="grid two" style="margin-top: 16px;">
-          <div class="panel ok">
-            <h2>What these signals support</h2>
-            <div class="support-grid">
-              <div class="support-card"><strong>Advocacy evidence</strong><span>How many applications are delayed, where, and for how long.</span></div>
-              <div class="support-card"><strong>Registrar engagement</strong><span>Reviewed patterns can support more focused conversations.</span></div>
-              <div class="support-card"><strong>Participation value</strong><span>Structured submissions strengthen the evidence base ABA can use on behalf of the sector.</span></div>
-              <div class="support-card"><strong>Country readiness</strong><span>Country signals help identify where future chapter or network activity may matter.</span></div>
+        <section class="panel ok" style="margin-top: 16px;">
+          <div class="section-heading">
+            <div>
+              <div class="section-label">Advocacy use</div>
+              <h2 style="margin-top: 14px;">What these signals support</h2>
+              <p>Public sector signals help turn reviewed registration experience into clearer evidence for action without exposing private submissions.</p>
             </div>
           </div>
-          <div class="panel">
-            <h2>How this fits the broader ABA story</h2>
-            <p>These public signals sit alongside the membership path and the biologicals knowledge layer, but the registration picture itself now lives here rather than across multiple overlapping pages.</p>
+          <div class="advocacy-grid">
+            <div class="support-card"><strong>Advocacy evidence</strong><span>Aggregate waits, thresholds, and bottlenecks help show where registration pressure is accumulating.</span></div>
+            <div class="support-card"><strong>Registrar engagement</strong><span>Reviewed patterns help frame sharper conversations around delay, category treatment, and pathway clarity.</span></div>
+            <div class="support-card"><strong>Sector coordination</strong><span>Shared signals make it easier for contributors and sector partners to understand recurring pain points together.</span></div>
+            <div class="support-card"><strong>Country readiness</strong><span>Country-level visibility helps identify where stronger registration support and future coordination may matter most.</span></div>
+            <div class="support-card"><strong>Better conditions for African biologicals</strong><span>Longer-term signal building supports a more credible case for practical, enabling regulatory conditions.</span></div>
+          </div>
+        </section>
+
+        <section class="cta-band" style="margin-top: 16px;">
+          <div>
+            <div class="section-label">Contribute</div>
+            <h2 style="margin-top: 14px;">Strengthen the public evidence base</h2>
+            <p>Contribute structured product-registration data to improve the visibility of sector bottlenecks, country patterns, and regulatory readiness signals over time.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="button-link primary" href="../intake-flow/index.html">Add product data</a>
+            <a class="button-link secondary" href="../../docs/registration-tracker/index.html">Back to registration tracker overview</a>
           </div>
         </section>
 
@@ -145,156 +530,53 @@
     </div>
 
     <script>
-      const datasets = {
-        all: {
-          label: "All reviewed submissions",
-          refreshedAt: "2026-06-22 14:45",
-          oldestSubmissionAt: "2024-04-20 10:12",
-          newestSubmissionAt: "2026-06-22 14:28",
-          backlog: 37,
-          median: 14,
-          worst: 42,
-          years: 51.8,
-          pathway: [
-            ["Group 3 fertilizer", 18],
-            ["Agricultural remedy", 12],
-            ["Not sure", 2, true],
-            ["Other", 5]
-          ],
-          category: [
-            ["Biofertiliser", 17],
-            ["Biopesticide", 13],
-            ["Biostimulant", 7]
-          ],
-          country: [
-            ["South Africa", 26],
-            ["Kenya", 6],
-            ["Nigeria", 3, true],
-            ["Ghana", 2, true]
-          ],
-          bottlenecks: [
-            ["Regulator delay", 16],
-            ["Proof missing", 7],
-            ["Reference issue", 6],
-            ["Classification ambiguity", 5],
-            ["Consent missing", 3, true]
-          ],
-          regime: [
-            ["Agriculture / Act 36", 29],
-            ["Water treatment", 5],
-            ["Other", 3, true]
-          ],
-          trend: [22, 25, 27, 31, 34, 37],
-          pipeline: 24,
-          packets: { count: 3, apps: 29, period: "Q2" },
-          suppression: [
-            ["Public-health pest + non-member", "Suppressed", true],
-            ["Water treatment + member", "5 records", false],
-            ["Other regime + non-member", "Suppressed", true],
-            ["Agriculture / Act 36", "29 records", false]
-          ]
-        },
-        member: {
-          label: "ABA member submissions",
-          refreshedAt: "2026-06-22 14:45",
-          oldestSubmissionAt: "2024-04-20 10:12",
-          newestSubmissionAt: "2026-06-22 14:28",
-          backlog: 25,
-          median: 13,
-          worst: 36,
-          years: 34.2,
-          pathway: [
-            ["Group 3 fertilizer", 13],
-            ["Agricultural remedy", 8],
-            ["Not sure", 1, true],
-            ["Other", 4]
-          ],
-          category: [
-            ["Biofertiliser", 12],
-            ["Biopesticide", 8],
-            ["Biostimulant", 5]
-          ],
-          country: [
-            ["South Africa", 19],
-            ["Kenya", 4],
-            ["Nigeria", 1, true],
-            ["Ghana", 1, true]
-          ],
-          bottlenecks: [
-            ["Regulator delay", 11],
-            ["Proof missing", 5],
-            ["Reference issue", 4],
-            ["Classification ambiguity", 3, true],
-            ["Consent missing", 2, true]
-          ],
-          regime: [
-            ["Agriculture / Act 36", 20],
-            ["Water treatment", 4],
-            ["Other", 1, true]
-          ],
-          trend: [16, 17, 19, 21, 23, 25],
-          pipeline: 18,
-          packets: { count: 3, apps: 23, period: "Q2" },
-          suppression: [
-            ["Other regime + member", "Suppressed", true],
-            ["Water treatment + member", "4 records", false],
-            ["Act 36 + member", "20 records", false],
-            ["Not sure pathway", "Suppressed", true]
-          ]
-        },
-        nonmember: {
-          label: "Non-member submissions",
-          refreshedAt: "2026-06-22 14:45",
-          oldestSubmissionAt: "2025-02-03 09:30",
-          newestSubmissionAt: "2026-06-21 11:06",
-          backlog: 12,
-          median: 17,
-          worst: 42,
-          years: 17.6,
-          pathway: [
-            ["Group 3 fertilizer", 5],
-            ["Agricultural remedy", 4],
-            ["Not sure", 1, true],
-            ["Other", 2, true]
-          ],
-          category: [
-            ["Biofertiliser", 5],
-            ["Biopesticide", 5],
-            ["Biostimulant", 2, true]
-          ],
-          country: [
-            ["South Africa", 7],
-            ["Kenya", 2, true],
-            ["Nigeria", 2, true],
-            ["Ghana", 1, true]
-          ],
-          bottlenecks: [
-            ["Regulator delay", 5],
-            ["Proof missing", 2, true],
-            ["Reference issue", 2, true],
-            ["Membership not verified", 2, true],
-            ["Other", 1, true]
-          ],
-          regime: [
-            ["Agriculture / Act 36", 9],
-            ["Water treatment", 1, true],
-            ["Other", 2, true]
-          ],
-          trend: [6, 8, 8, 10, 11, 12],
-          pipeline: 6,
-          packets: { count: 0, apps: 6, period: "Review" },
-          suppression: [
-            ["Water treatment + non-member", "Suppressed", true],
-            ["Other regime + non-member", "Suppressed", true],
-            ["Biostimulant + non-member", "Suppressed", true],
-            ["Act 36 + non-member", "9 records", false]
-          ]
-        }
+      const sectorSignals = {
+        label: "All reviewed submissions",
+        refreshedAt: "2026-06-22 14:45",
+        oldestSubmissionAt: "2024-04-20 10:12",
+        newestSubmissionAt: "2026-06-22 14:28",
+        backlog: 37,
+        median: 14,
+        worst: 42,
+        years: 51.8,
+        pathway: [
+          ["Group 3 fertilizer", 18],
+          ["Agricultural remedy", 12],
+          ["Not sure", 2, true],
+          ["Other", 5]
+        ],
+        category: [
+          ["Biofertiliser", 17],
+          ["Biopesticide", 13],
+          ["Biostimulant", 7]
+        ],
+        country: [
+          ["South Africa", 26],
+          ["Kenya", 6],
+          ["Nigeria", 3, true],
+          ["Ghana", 2, true]
+        ],
+        bottlenecks: [
+          ["Regulator delay", 16],
+          ["Proof missing", 7],
+          ["Reference issue", 6],
+          ["Classification ambiguity", 5],
+          ["Consent missing", 3, true]
+        ],
+        regime: [
+          ["Agriculture / Act 36", 29],
+          ["Water treatment", 5],
+          ["Other", 3, true]
+        ],
+        trend: [22, 25, 27, 31, 34, 37],
+        pipeline: 24,
+        suppression: [
+          ["Public-health pest + low count", "Suppressed", true],
+          ["Water treatment + reviewed count", "5 records", false],
+          ["Other regime + low count", "Suppressed", true],
+          ["Agriculture / Act 36", "29 records", false]
+        ]
       };
-
-      function activeData() {
-        return datasets.all;
-      }
 
       function setText(id, text) {
         document.getElementById(id).textContent = text;
@@ -380,15 +662,14 @@
 
       function renderSummary(data) {
         const rows = [
-          ["Filter", data.label],
+          ["Signal basis", data.label],
           ["Data refreshed", data.refreshedAt],
           ["Reviewed submissions received", `${data.oldestSubmissionAt} to ${data.newestSubmissionAt}`],
-          ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
-          ["Geographic truth", "Africa-wide signals accepted; current operations centered in South Africa."],
-          ["Privacy", "Small cells suppressed before publication."],
+          ["Evidence base", "Reviewed submissions only; raw submissions are excluded from the public view."],
+          ["Geographic truth", "Africa-wide signals are welcome; current operating activity is centered in South Africa."],
+          ["Privacy", "Small cells are suppressed before publication."],
           ["Signal definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
-          ["Related context", "Product, regulatory, and evidence resources help place the aggregate registration picture in context."],
-          ["Evidence activity", `${data.packets.count} aggregate packets prepared, ${data.packets.apps} applications represented.`]
+          ["Reading caution", "These are currently visible signals rather than a complete market picture."]
         ];
         document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
           <div class="state-row">
@@ -399,14 +680,11 @@
       }
 
       function render() {
-        const data = activeData();
+        const data = sectorSignals;
         setText("metricBacklog", data.backlog);
         setText("metricMedian", `${data.median} mo`);
         setText("metricWorst", `${data.worst} mo`);
         setText("metricYears", data.years);
-        setText("packetCount", data.packets.count);
-        setText("packetApps", data.packets.apps);
-        setText("packetPeriod", data.packets.period);
         setText("dataRefreshed", data.refreshedAt);
         barChart("pathwayChart", data.pathway);
         renderTrend(data);
