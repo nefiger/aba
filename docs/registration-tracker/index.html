@@ -60,11 +60,11 @@
     }
 
     .topbar {
-      padding: 12px 16px;
+      padding: 14px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
@@ -75,8 +75,8 @@
     }
 
     .mark {
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
@@ -87,6 +87,25 @@
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 42ch;
     }
 
     .mini,
@@ -102,15 +121,42 @@
 
     .eyebrow { color: var(--green); }
 
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .nav {
       display: flex;
-      gap: 14px;
+      align-items: center;
+      gap: 24px;
       flex-wrap: wrap;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .nav a.active { color: var(--green); }
+    .nav a.active,
+    .nav a:hover {
+      color: var(--green);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--green-deep);
+      color: #f7f7f2;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     .hero,
     .section {
@@ -417,18 +463,21 @@
     <header class="surface topbar">
       <div class="brand">
         <div class="mark">ABA</div>
-        <div>
-          <div class="mini">African Biologicals Alliance</div>
-          <div style="margin-top: 2px; font-size: 13px; color: var(--muted);">Registration tracker meeting brief</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
-      <nav class="nav" aria-label="Demo navigation">
-        <a href="../index.html">Demo Hub</a>
-        <a href="../site/index.html">ABA Site</a>
-        <a href="../membership-flow/index.html">Membership</a>
-        <a href="../database/index.html">Biologicals Explorer</a>
-        <a class="active" href="./index.html">Tracker</a>
-      </nav>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="../site/index.html">Home</a>
+          <a href="../site/about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a href="../database/index.html">Biologicals Explorer</a>
+          <a class="active" href="./index.html">Track Registrations</a>
+        </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
+      </div>
     </header>
 
     <section class="surface hero">
