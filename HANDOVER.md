@@ -1,6 +1,6 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-06-24
+Last updated: 2026-06-25
 
 ---
 
@@ -11,6 +11,21 @@ The prototype is in good shape as a connected demo suite. Two PRs are currently 
 - **[PR #7](https://github.com/nefiger/aba/pull/7)** `fix/remove-catalogue-evidence-hero-sections` — removes the large intro/shortcut-card blocks from product-catalogue.html and evidence-library.html. Awaiting review.
 
 Branch `feature/data-expansion-ux` (PR #6) has been merged into main.
+
+### Registration tracker linked-page polish
+
+Branch `codex/registration-linked-pages-polish` has completed the first two slices of the downstream registration-tracker page cleanup:
+
+- public-linked tracker screens now use a contained tracker nav: Tracker overview, Add product data, Sector signals, Company workspace
+- `Combined`, `Admin Review`, and `Registrar Export` are no longer exposed from the three pages linked by `docs/registration-tracker/index.html`
+- `registration-tracker/intake-flow/index.html` now reads as a public product-record submission surface instead of a low-fidelity internal flow
+- browser checks passed for the intake page at desktop and mobile widths, with no horizontal overflow
+
+Remaining slices for the next session:
+
+- Slice 3: align `registration-tracker/public-dashboard/index.html` with the landing-page "Sector signals" promise, remove disposable/demo framing, and reduce hierarchy confusion without making canonical label changes
+- Slice 4: polish `registration-tracker/company-dashboard/index.html` as a member-facing company workspace, reduce internal/admin phrasing, and preserve the private/member boundary
+- After visual review, discuss canonical labels before touching Knowledge Hub / Biologicals Explorer / Product Catalogue / Regulatory Signals naming
 
 ---
 

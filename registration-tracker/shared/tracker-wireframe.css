@@ -174,11 +174,20 @@ button {
   font-family: "Public Sans", system-ui, sans-serif;
 }
 
+.public-tracker-shell {
+  font-family: "Public Sans", system-ui, sans-serif;
+}
+
 .public-dashboard-shell .topbar,
 .public-dashboard-shell .page-header,
 .public-dashboard-shell .panel,
 .public-dashboard-shell .metric,
-.public-dashboard-shell .chart-card {
+.public-dashboard-shell .chart-card,
+.public-tracker-shell .topbar,
+.public-tracker-shell .page-header,
+.public-tracker-shell .panel,
+.public-tracker-shell .metric,
+.public-tracker-shell .context-card {
   background: var(--panel);
   border-color: rgba(46, 58, 46, 0.08);
   box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
@@ -230,7 +239,13 @@ button {
   padding: 22px;
 }
 
-.public-dashboard-shell .page-header h1 {
+.public-tracker-shell .page-header {
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.public-dashboard-shell .page-header h1,
+.public-tracker-shell .page-header h1 {
   margin-top: 16px;
   font-family: "Public Sans", system-ui, sans-serif;
   font-size: clamp(2.6rem, 5vw, 4.4rem);
@@ -239,7 +254,8 @@ button {
   letter-spacing: 0;
 }
 
-.public-dashboard-shell .page-header p {
+.public-dashboard-shell .page-header p,
+.public-tracker-shell .page-header p {
   margin-top: 18px;
   max-width: 64ch;
   font-size: 16px;
@@ -302,6 +318,7 @@ button {
 }
 
 .public-dashboard-shell .panel h2,
+.public-tracker-shell .panel h2,
 .public-dashboard-shell .metric-value {
   font-family: "Public Sans", system-ui, sans-serif;
 }
@@ -338,6 +355,44 @@ button {
 }
 
 .prototype-nav a[aria-current="page"] {
+  border-color: rgba(47, 122, 86, 0.22);
+  background: var(--green);
+  color: #ffffff;
+}
+
+.tracker-public-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: min(1240px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 252, 246, 0.68);
+  box-shadow: var(--shadow-small);
+  backdrop-filter: blur(12px);
+}
+
+.tracker-public-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.tracker-public-nav a:hover {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.tracker-public-nav a[aria-current="page"] {
   border-color: rgba(47, 122, 86, 0.22);
   background: var(--green);
   color: #ffffff;
@@ -1133,6 +1188,7 @@ th {
 
   .topbar,
   .prototype-nav,
+  .tracker-public-nav,
   .page {
     width: min(100% - 24px, 720px);
   }
