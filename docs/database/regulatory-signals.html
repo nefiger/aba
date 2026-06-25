@@ -1,569 +1,62 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Regulatory Context | Biologicals Explorer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --surface: rgba(255, 252, 246, 0.9);
-      --line: rgba(23, 48, 57, 0.1);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --amber: #c49a18;
-      --amber-soft: #fef6d8;
-      --amber-mid: rgba(205,176,92,0.22);
-      --red: #d94a4a;
-      --red-soft: #fde4e4;
-      --slate-soft: #eceef0;
-      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Public Sans", system-ui, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(99,154,108,0.12), transparent 24%),
-        radial-gradient(circle at top right, rgba(205,176,92,0.1), transparent 22%),
-        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .shell {
-      width: min(1220px, calc(100vw - 32px));
-      margin: 0 auto;
-      padding: 14px 0 40px;
-    }
-
-    .surface {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 8px 24px -18px rgba(20,32,34,0.22);
-    }
-
-    .topbar {
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-copy { display: grid; gap: 2px; }
-    .brand-copy strong { font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
-    .brand-copy span { font-size: 13px; line-height: 1.35; color: var(--muted); max-width: 42ch; }
-
-    .mark {
-      width: 42px; height: 42px; border-radius: 999px;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06)); color: var(--green);
-      font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase;
-    }
-
-    .mini, .eyebrow {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
-    }
-    .mini { color: var(--muted); }
-    .eyebrow { color: var(--amber); }
-
-    .nav-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; margin-left: auto; }
-    .nav {
-      display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; font-weight: 700; align-items: center;
-    }
-    .nav a.active { color: var(--green); }
-    .nav-cta {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 42px; padding: 0 16px; border-radius: 999px;
-      background: var(--green); color: #f7f7f2; font-size: 12px; font-weight: 900;
-      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
-    }
-
-    .subnav {
-      margin-top: 12px; padding: 10px 14px;
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    }
-
-    .subnav a {
-      display: inline-flex; align-items: center; min-height: 36px;
-      padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px;
-      background: rgba(255,255,255,0.76); font-size: 12px; font-weight: 800;
-      letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
-    }
-
-    .subnav a.active {
-      background: var(--green-soft);
-      border-color: rgba(43,107,79,0.18);
-      color: var(--green);
-    }
-
-    h1, h2, h3, p { margin: 0; }
-
-    h1 {
-      font-size: clamp(1.85rem, 2.8vw, 2.7rem);
-      line-height: 1.02; letter-spacing: -0.04em; font-weight: 800;
-    }
-
-    h2 {
-      font-size: clamp(1.3rem, 1.9vw, 1.8rem);
-      line-height: 1.08; letter-spacing: -0.03em; font-weight: 800;
-    }
-
-    h3 { font-size: 1.05rem; line-height: 1.3; font-weight: 800; }
-
-    p { color: var(--muted); font-size: 15px; line-height: 1.62; }
-
-    .section { margin-top: 12px; padding: 18px; }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-      gap: 14px;
-      align-items: start;
-    }
-
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .metric-card {
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--amber-mid);
-      border: 1px solid rgba(205,176,92,0.2);
-    }
-
-    .metric-card strong {
-      display: block;
-      font-size: 1.75rem;
-      font-weight: 800;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .metric-card p {
-      margin-top: 6px;
-      font-size: 13px;
-    }
-
-    .country-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .country-card {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.82);
-      box-shadow: 0 8px 24px -18px rgba(20,32,34,0.22);
-    }
-
-    .country-header {
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .country-name { font-size: 1.05rem; font-weight: 800; }
-
-    .signal-bar {
-      height: 4px;
-      border-radius: 0;
-      background: rgba(23,48,57,0.07);
-    }
-    .signal-bar-fill { height: 100%; border-radius: 0; }
-
-    .country-body { padding: 14px 16px 16px; }
-
-    .country-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .country-stat {
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(23,48,57,0.04);
-    }
-
-    .country-stat strong {
-      display: block;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .country-stat span {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .tag {
-      display: inline-flex; align-items: center;
-      min-height: 26px; padding: 4px 10px; border-radius: 999px;
-      font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
-    }
-
-    .tag-green { background: var(--green-soft); color: var(--green); }
-    .tag-amber { background: var(--amber-soft); color: #8d6400; }
-    .tag-slate { background: var(--slate-soft); color: #59656b; }
-    .tag-red { background: var(--red-soft); color: var(--red); }
-
-    .tag::before {
-      content: ""; width: 6px; height: 6px; border-radius: 999px;
-      background: currentColor; opacity: 0.75; margin-right: 6px;
-    }
-
-    .pattern-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .cta-band {
-      margin-top: 12px; padding: 18px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 18px; flex-wrap: wrap;
-    }
-
-    .cta-button {
-      display: inline-flex; align-items: center; gap: 8px;
-      min-height: 48px; padding: 12px 22px; border-radius: 14px;
-      background: var(--green); color: white;
-      font-size: 14px; font-weight: 800; letter-spacing: 0.02em;
-      transition: opacity 150ms;
-    }
-    .cta-button:hover { opacity: 0.88; }
-
-    .cta-secondary {
-      background: rgba(255,255,255,0.82); color: var(--ink);
-      border: 1px solid var(--line);
-    }
-
-    @media (max-width: 860px) {
-      .hero-grid, .metrics-grid, .country-row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <main class="shell">
-
-    <header class="surface topbar">
-      <div class="brand">
-        <div class="mark">ABA</div>
-        <div class="brand-copy">
-          <strong>African Biologicals Alliance</strong>
-          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
-        </div>
-      </div>
-      <div class="nav-wrap">
-        <nav class="nav">
-          <a href="../site/index.html">Home</a>
-          <a href="../site/about.html">About</a>
-          <a href="../membership-flow/index.html">Membership</a>
-          <a class="active" href="./index.html">Biologicals Explorer</a>
-          <a href="../registration-tracker/index.html">Track Registrations</a>
-        </nav>
-        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
-      </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="surface section">
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Explorer context</div>
-          <h1 style="margin-top: 8px;">Use this page as background context, not as the main signals destination.</h1>
-          <p style="margin-top: 14px; max-width: 62ch;">
-            The live public registration picture now sits in Sector Signals inside the registration tracker. This page supports that story with slower-moving contextual notes drawn from the broader biologicals explorer.
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
-            <a class="tag tag-amber" href="../../registration-tracker/public-dashboard/index.html">Open sector signals</a>
-          </div>
-        </div>
-        <div class="card" style="border-left: 3px solid var(--amber);">
-          <div class="eyebrow">What this page is for</div>
-          <ul style="margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.7;">
-            <li>Reference context for patterns discussed in Sector Signals</li>
-            <li>Country-level visibility snapshots from the explorer layer</li>
-            <li>Longer-horizon bottlenecks and movement notes</li>
-            <li>A supporting view, not a second public dashboard</li>
-          </ul>
-          <p style="margin-top: 12px; font-size: 12px;">Keep the main registration narrative on the tracker. Use this page only when extra market context helps the story.</p>
-        </div>
-      </div>
-
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <strong>38</strong>
-          <p>biological product records with a visible registration status across source countries</p>
-        </div>
-        <div class="metric-card">
-          <strong>6</strong>
-          <p>African markets with at least one linked biological product record</p>
-        </div>
-        <div class="metric-card">
-          <strong>9</strong>
-          <p>recurring bottleneck patterns identified and grouped for cross-country comparison</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Country signals -->
-    <section class="surface section">
-      <div class="eyebrow">Country visibility</div>
-      <h2 style="margin-top: 6px;">Where biological registration activity is currently visible.</h2>
-      <p style="margin-top: 8px; max-width: 66ch;">Each country view reflects what is publicly traceable today, so visibility here should be read as a record picture rather than a complete market picture.</p>
-
-      <div class="country-grid">
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">South Africa</div>
-              <div style="margin-top: 4px;"><span class="tag tag-green">Most complete</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">54</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 92%; background: var(--green);"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">The clearest visible picture in this set. Biopesticides, biostimulants, and inoculants all have traceable records, with the AEMREG pathway visible for multiple products.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>21</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>3</strong><span>Product categories</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides · Biostimulants · Inoculants</div>
-          </div>
-        </div>
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">Kenya</div>
-              <div style="margin-top: 4px;"><span class="tag tag-amber">Growing visibility</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">27</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 58%; background: var(--amber);"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">Biopesticide activity visible across horticulture and field-crop contexts. PCPB registration pathway identifiable. Biostimulant records emerging but thinner than SA.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>12</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>2</strong><span>Product categories</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides · Biostimulants</div>
-          </div>
-        </div>
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">Nigeria</div>
-              <div style="margin-top: 4px;"><span class="tag tag-amber">Early visibility</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">11</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 28%; background: var(--amber);"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">NAFDAC pathway present but few products with completed biologicals dossiers currently traceable. Visibility likely to grow as regional interest increases.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>4</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>1</strong><span>Product category</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides</div>
-          </div>
-        </div>
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">Ghana</div>
-              <div style="margin-top: 4px;"><span class="tag tag-slate">Thin visibility</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">6</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 16%; background: #aab5b8;"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">An EPA registration framework exists, but biologicals-specific records remain sparse in the public set. Limited visibility here may reflect access to records as much as market reality.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>2</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>1</strong><span>Product category</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides</div>
-          </div>
-        </div>
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">Ethiopia</div>
-              <div style="margin-top: 4px;"><span class="tag tag-slate">Thin visibility</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">4</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 10%; background: #aab5b8;"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">Coffee and horticulture create some biological-use visibility, but registration-level records remain limited. The ministry pathway is not yet well represented in the public set.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>2</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>1</strong><span>Product category</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides</div>
-          </div>
-        </div>
-
-        <div class="country-card">
-          <div class="country-header">
-            <div>
-              <div class="country-name">Tanzania</div>
-              <div style="margin-top: 4px;"><span class="tag tag-slate">Emerging</span></div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 1.4rem; font-weight: 800; color: var(--ink);">5</div>
-              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">biologicals visible</div>
-            </div>
-          </div>
-          <div class="signal-bar"><div class="signal-bar-fill" style="width: 12%; background: #aab5b8;"></div></div>
-          <div class="country-body">
-            <p style="font-size: 14px;">TPRI registration pathway identifiable. Coffee, maize, and horticulture crop contexts have some biological use records but catalogue depth remains limited.</p>
-            <div class="country-row">
-              <div class="country-stat"><strong>3</strong><span>Evidence links</span></div>
-              <div class="country-stat"><strong>1</strong><span>Product category</span></div>
-            </div>
-            <div style="margin-top: 10px; font-size: 13px; color: var(--muted);">Key categories: Biopesticides</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Recurring patterns -->
-    <section class="surface section">
-      <div class="eyebrow">Recurring patterns</div>
-      <h2 style="margin-top: 6px;">Bottlenecks and movements that appear across markets.</h2>
-      <p style="margin-top: 8px; max-width: 66ch;">These are patterns that emerge from reading multiple country records together — not from any single source.</p>
-
-      <div class="pattern-grid">
-
-        <div class="card">
-          <span class="tag tag-red" style="margin-bottom: 12px; display: inline-flex;">Frequent bottleneck</span>
-          <h3>Dossier equivalence gaps</h3>
-          <p style="margin-top: 8px;">Most markets require full chemistry-equivalent dossiers for biological products, even where mode of action and risk profile differ significantly. This appears repeatedly as a primary delay source.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-red" style="margin-bottom: 12px; display: inline-flex;">Frequent bottleneck</span>
-          <h3>Data exclusivity barriers for SMEs</h3>
-          <p style="margin-top: 8px;">Smaller biological producers face disproportionate data-generation burdens without access to mutual recognition frameworks that larger registrants can leverage.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-amber" style="margin-bottom: 12px; display: inline-flex;">Watch pattern</span>
-          <h3>Category definition ambiguity</h3>
-          <p style="margin-top: 8px;">Biostimulants are regulated as fertilisers in some markets and pesticides in others. This inconsistency creates registration uncertainty even for products with clear efficacy profiles.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-amber" style="margin-bottom: 12px; display: inline-flex;">Watch pattern</span>
-          <h3>Shelf-life and formulation standards</h3>
-          <p style="margin-top: 8px;">Microbial product shelf-life requirements often reflect chemical pesticide norms. Cold-chain and viability standards are not consistently defined for live-organism products.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-green" style="margin-bottom: 12px; display: inline-flex;">Positive movement</span>
-          <h3>Mutual recognition interest growing</h3>
-          <p style="margin-top: 8px;">Several markets have signalled openness to regional registration harmonisation. COMESA and ECOWAS frameworks are beginning to reference biological-specific pathways in draft revisions.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-green" style="margin-bottom: 12px; display: inline-flex;">Positive movement</span>
-          <h3>Inoculant pathways becoming clearer</h3>
-          <p style="margin-top: 8px;">Rhizobium and mycorrhizal products are gaining clearer regulatory classification in South Africa and Kenya, which may create a reference pathway for other markets to follow.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-slate" style="margin-bottom: 12px; display: inline-flex;">Data gap</span>
-          <h3>Semiochemical registration largely invisible</h3>
-          <p style="margin-top: 8px;">Pheromone and attractant products appear in very few country-level records. It is unclear whether this reflects limited use or limited registration pathway awareness.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-slate" style="margin-bottom: 12px; display: inline-flex;">Data gap</span>
-          <h3>West Africa largely unmapped</h3>
-          <p style="margin-top: 8px;">Despite significant crop production in Nigeria, Côte d'Ivoire, and Senegal, biologicals registration records from these markets are sparse in current publicly accessible sources.</p>
-        </div>
-
-        <div class="card">
-          <span class="tag tag-amber" style="margin-bottom: 12px; display: inline-flex;">Watch pattern</span>
-          <h3>Trial data localisation requirements</h3>
-          <p style="margin-top: 8px;">Multiple markets require local trial data for registration, even for products registered elsewhere on the continent. This creates duplication costs without proportionate risk reduction.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CTA to registration tracker -->
-    <section class="surface cta-band">
-      <div>
-        <div class="eyebrow">Primary destination</div>
-        <h2 style="margin-top: 6px;">Go to Sector Signals for the main public registration story.</h2>
-        <p style="margin-top: 8px; max-width: 58ch;">Sector Signals is now the clearer public destination for aggregate patterns, while this page remains supporting explorer context.</p>
-      </div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-        <a class="cta-button" href="../../registration-tracker/public-dashboard/index.html">Open sector signals →</a>
-        <a class="cta-button cta-secondary" href="./index.html">Back to explorer</a>
-      </div>
-    </section>
-
-  </main>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting to ABA Sector Signals</title>
+    <meta http-equiv="refresh" content="0; url=../../registration-tracker/public-dashboard/index.html">
+    <link rel="canonical" href="../../registration-tracker/public-dashboard/index.html">
+    <script>
+      window.location.replace("../../registration-tracker/public-dashboard/index.html");
+    </script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: "Public Sans", system-ui, sans-serif;
+        background: linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
+        color: #173039;
+      }
+
+      main {
+        width: min(560px, 100%);
+        padding: 24px;
+        border: 1px solid rgba(23, 48, 57, 0.12);
+        border-radius: 22px;
+        background: rgba(255, 252, 246, 0.92);
+        box-shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
+        text-align: center;
+      }
+
+      h1,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      p {
+        margin-top: 12px;
+        line-height: 1.6;
+        color: #5c6f73;
+      }
+
+      a {
+        color: #214f3c;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>ABA Sector Signals has moved.</h1>
+      <p>You are being redirected to the canonical public Sector Signals page.</p>
+      <p><a href="../../registration-tracker/public-dashboard/index.html">Open the canonical page</a></p>
+    </main>
+  </body>
 </html>
