@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ABA Registration Signals Dashboard</title>
+    <title>ABA Sector Signals | Registration Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
           <div class="brand-mark">ABA</div>
           <div>
             <p class="product-kicker">African Biologicals Alliance</p>
-            <p class="product-title">Knowledge hub</p>
+            <p class="product-title">Registration tracker</p>
           </div>
         </div>
         <nav class="site-links" aria-label="ABA site">
@@ -38,15 +38,15 @@
       <main class="page">
         <section class="page-header">
           <div>
-            <div class="knowledge-eyebrow">Registration signals</div>
-            <h1>Registration signals dashboard</h1>
-            <p>Anonymised advocacy view based on reviewed submissions only. Filters update the aggregate metrics while suppression rules protect contributor identity.</p>
+            <div class="knowledge-eyebrow">Sector signals</div>
+            <h1>Registration sector signals</h1>
+            <p>Explore anonymised patterns across country visibility, recurring bottlenecks, category activity, and biological product registration progress without exposing company or product-level submissions.</p>
           </div>
           <div class="knowledge-context-card">
-            <div class="knowledge-chip">Reviewed signals</div>
-            <p>This view adds a deeper, dashboard-style signal layer to the Knowledge Hub without exposing company or product-level submissions.</p>
+            <div class="knowledge-chip">Reviewed aggregate data</div>
+            <p>Submitted records enter ABA review before they contribute to public metrics. Small-cell suppression keeps individual contributors protected.</p>
           </div>
-          <nav class="knowledge-subnav" aria-label="Knowledge Hub sections">
+          <nav class="knowledge-subnav" aria-label="Related biologicals resources">
             <a href="../../docs/database/index.html">Knowledge hub</a>
             <a href="../../docs/database/product-catalogue.html">Product catalogue</a>
             <a href="../../docs/database/regulatory-signals.html">Regulatory signals</a>
@@ -57,11 +57,11 @@
         <section class="panel muted">
           <div class="dashboard-toolbar">
             <div>
-              <h2>Reviewed submissions filter</h2>
+              <h2>Filter reviewed sector signals</h2>
               <p class="note">Public metrics are based on submissions reviewed by ABA and aggregated to protect contributor identity. Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
-              <p class="note">Geographic truth: ABA can receive Africa-wide registration signals, while current operating activity is centered in South Africa.</p>
+              <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa while the wider continental picture develops.</p>
             </div>
-            <div class="segmented-control" aria-label="Registration signals dashboard filter">
+            <div class="segmented-control" aria-label="Registration sector signals filter">
               <button type="button" data-public-filter="all" aria-pressed="true">All reviewed</button>
               <button type="button" data-public-filter="member" aria-pressed="false">ABA member</button>
               <button type="button" data-public-filter="nonmember" aria-pressed="false">Non-member</button>
@@ -70,36 +70,36 @@
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
-          <div class="metric"><span>Applications in backlog</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed, open, over threshold.</p></div>
+          <div class="metric"><span>Open applications over threshold</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed records only.</p></div>
           <div class="metric"><span>Median wait time</span><span class="metric-value" id="metricMedian">14 mo</span><p class="note">Current open applications.</p></div>
-          <div class="metric"><span>Worst wait time</span><span class="metric-value" id="metricWorst">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
+          <div class="metric"><span>Longest open duration</span><span class="metric-value" id="metricWorst">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
           <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">51.8</span><p class="note">Sum of open durations.</p></div>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
           <article class="chart-card">
-            <h3>Backlog by legal pathway</h3>
-            <svg class="chart-svg wide-chart" id="pathwayChart" viewBox="0 0 520 260" role="img" aria-label="Backlog by legal pathway"></svg>
+            <h3>Open records by legal pathway</h3>
+            <svg class="chart-svg wide-chart" id="pathwayChart" viewBox="0 0 520 260" role="img" aria-label="Open records by legal pathway"></svg>
             <p class="note">Small cells are suppressed rather than shown as exact counts.</p>
           </article>
           <article class="chart-card">
-            <h3>Backlog trend over time</h3>
-            <svg class="chart-svg wide-chart" id="trendChart" viewBox="0 0 520 260" role="img" aria-label="Reviewed backlog trend over time"></svg>
+            <h3>Reviewed open-record trend</h3>
+            <svg class="chart-svg wide-chart" id="trendChart" viewBox="0 0 520 260" role="img" aria-label="Reviewed open-record trend over time"></svg>
             <p class="note" id="trendCaption">Trend shows reviewed backlog records only; future pipeline is charted separately.</p>
           </article>
         </section>
 
         <section class="chart-grid" style="margin-top: 16px;">
           <article class="chart-card">
-            <h3>Functional category</h3>
-            <svg class="chart-svg" id="categoryChart" viewBox="0 0 360 220" role="img" aria-label="Backlog by functional category"></svg>
+            <h3>Product category signal</h3>
+            <svg class="chart-svg" id="categoryChart" viewBox="0 0 360 220" role="img" aria-label="Product category signal"></svg>
           </article>
           <article class="chart-card">
             <h3>Governing regime</h3>
-            <svg class="chart-svg" id="regimeChart" viewBox="0 0 360 220" role="img" aria-label="Backlog by governing regime"></svg>
+            <svg class="chart-svg" id="regimeChart" viewBox="0 0 360 220" role="img" aria-label="Reviewed records by governing regime"></svg>
           </article>
           <article class="chart-card">
-            <h3>Future pipeline signal</h3>
+            <h3>Pre-submission pipeline signal</h3>
             <svg class="chart-svg" id="pipelineChart" viewBox="0 0 360 220" role="img" aria-label="Future pipeline separate from backlog"></svg>
             <p class="note">Pre-submission products are tracked separately and do not count as registrar backlog.</p>
           </article>
@@ -120,12 +120,12 @@
 
         <section class="grid two" style="margin-top: 16px;">
           <div class="panel warn">
-            <h2>Small-cell suppression</h2>
+            <h2>Contributor protection</h2>
             <p>Cells below the anonymisation threshold are hidden so a single company or product cannot be inferred.</p>
             <div class="suppression-grid" id="suppressionGrid" style="margin-top: 12px;"></div>
           </div>
           <div class="panel">
-            <h2>Aggregate evidence packet activity</h2>
+            <h2>Aggregate evidence activity</h2>
             <div class="mini-kpi-row">
               <div class="metric"><span>Packets prepared</span><span class="metric-value" id="packetCount">3</span></div>
               <div class="metric"><span>Applications represented</span><span class="metric-value" id="packetApps">29</span></div>
@@ -135,23 +135,23 @@
         </section>
 
         <section class="panel" style="margin-top: 16px;">
-          <h2>Public narrative summary</h2>
+          <h2>How to read these signals</h2>
           <div class="state-summary" id="publicSummary"></div>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
           <div class="panel ok">
-            <h2>What this evidence supports</h2>
+            <h2>What these signals support</h2>
             <div class="support-grid">
               <div class="support-card"><strong>Advocacy evidence</strong><span>How many applications are delayed, where, and for how long.</span></div>
               <div class="support-card"><strong>Registrar engagement</strong><span>Reviewed patterns can support more focused conversations.</span></div>
-              <div class="support-card"><strong>Member value</strong><span>Members see why structured participation strengthens ABA's evidence base.</span></div>
+              <div class="support-card"><strong>Participation value</strong><span>Structured submissions strengthen the evidence base ABA can use on behalf of the sector.</span></div>
               <div class="support-card"><strong>Country readiness</strong><span>Country signals help identify where future chapter or network activity may matter.</span></div>
             </div>
           </div>
           <div class="panel">
-            <h2>Knowledge Hub boundary</h2>
-            <p>The tracker is the deeper reviewed-evidence layer. The Knowledge Hub's Regulatory Signals page should remain a lighter public context layer that points to patterns without duplicating operator or company workflows.</p>
+            <h2>Explore related context</h2>
+            <p>Use the surrounding biologicals resources to compare these registration signals with product records, regulatory context, and evidence references.</p>
             <div class="toggle-row" style="margin-top: 12px;">
               <a class="action-button secondary" href="../../docs/database/product-catalogue.html">Product Catalogue</a>
               <a class="action-button secondary" href="../../docs/database/regulatory-signals.html">Regulatory Signals</a>
@@ -160,7 +160,7 @@
           </div>
         </section>
 
-        <p class="footer-note">Disposable prototype. Fictional aggregate data only. No company, product, proof, or reference details appear publicly.</p>
+        <p class="footer-note">Illustrative aggregate data only. No company, product, proof, or reference details appear publicly.</p>
       </main>
     </div>
 
@@ -408,9 +408,9 @@
           ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
           ["Geographic truth", "Africa-wide signals accepted; current operations centered in South Africa."],
           ["Privacy", "Small cells suppressed before publication."],
-          ["Backlog definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
-          ["Knowledge Hub boundary", "Tracker evidence feeds deeper pattern logic; Regulatory Signals remains the lighter public context surface."],
-          ["Packet activity", `${data.packets.count} packets prepared, ${data.packets.apps} applications represented.`]
+          ["Signal definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
+          ["Related context", "Product, regulatory, and evidence resources help place the aggregate registration picture in context."],
+          ["Evidence activity", `${data.packets.count} aggregate packets prepared, ${data.packets.apps} applications represented.`]
         ];
         document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
           <div class="state-row">

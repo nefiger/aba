@@ -1201,6 +1201,14 @@ th {
     padding: 20px;
   }
 
+  .public-dashboard-shell .page-header {
+    grid-template-columns: 1fr;
+  }
+
+  .public-dashboard-shell .knowledge-context-card {
+    width: 100%;
+  }
+
   .page-header h1 {
     font-size: 31px;
   }
