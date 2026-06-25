@@ -187,7 +187,7 @@
     }
 
     .lifecycle-grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .benefit-grid {
@@ -478,24 +478,23 @@
       <div class="hero-grid">
         <div>
           <div class="eyebrow">Registration tracker</div>
-          <h1 class="display">Track product registrations and help build the sector evidence base.</h1>
+          <h1 class="display">Share registration journeys and help build the sector evidence base.</h1>
           <p class="lede">
-            Add a biological product record, see where applications are moving or stuck, and help ABA turn scattered registration journeys into trusted evidence for better sector advocacy.
+            Add a biological product record, explore where applications are moving or stuck, and help ABA turn scattered registration journeys into trusted evidence for better sector advocacy.
           </p>
           <div class="actions">
             <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add a product record</a>
-            <a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
             <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a>
           </div>
         </div>
         <aside class="panel tone">
-          <div class="mini">Presenter framing</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">The feature is the registration picture, not just the dashboard.</p>
-          <p style="margin-top: 8px;">Each submitted record helps ABA understand what members have lodged, where applications stand, what is blocking progress, and what can be used for member-specific or sector-wide advocacy.</p>
+          <div class="mini">Why contribute</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">The tracker is useful because many individual registration stories become one clearer sector picture.</p>
+          <p style="margin-top: 8px;">Each submitted record helps ABA understand where biological products are in the registration journey, what is delaying progress, and which patterns can support better industry dialogue.</p>
           <div class="metric-row">
-            <div class="metric"><strong>1</strong><span>trusted record layer</span></div>
-            <div class="metric"><strong>2</strong><span>advocacy modes</span></div>
-            <div class="metric"><strong>5</strong><span>connected tracker views</span></div>
+            <div class="metric"><strong>1</strong><span>submitted product record</span></div>
+            <div class="metric"><strong>3</strong><span>core signals to compare</span></div>
+            <div class="metric"><strong>More</strong><span>evidence as records grow</span></div>
           </div>
         </aside>
       </div>
@@ -503,8 +502,8 @@
 
     <section class="surface section" id="routes">
       <div>
-        <div class="eyebrow">Three ways to use the tracker</div>
-        <h2 class="display" style="margin-top: 6px;">Start with the action that matches your registration problem.</h2>
+        <div class="eyebrow">Use the tracker</div>
+        <h2 class="display" style="margin-top: 6px;">Contribute a record, read the signals, or see how members get more support.</h2>
       </div>
       <div class="route-grid" style="margin-top: 12px;">
         <article class="route-card product">
@@ -526,28 +525,9 @@
           </div>
         </article>
 
-        <article class="route-card workspace">
-          <div class="mini">Track your registrations</div>
-          <h3>See your company registration picture.</h3>
-          <p>Review product status, evidence readiness, bottlenecks, next actions, and which records may need clarification before ABA can act.</p>
-          <div class="route-meta">
-            <div>
-              <strong>Best for</strong>
-              <p>Companies managing several submissions or trying to make their registration pipeline easier to coordinate.</p>
-            </div>
-            <div>
-              <strong>Creates</strong>
-              <p>A private workspace for cleaner team visibility and member-specific support.</p>
-            </div>
-          </div>
-          <div class="actions">
-            <a class="button primary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
-          </div>
-        </article>
-
         <article class="route-card signals">
-          <div class="mini">Read sector signals</div>
-          <h3>See the wider registration landscape.</h3>
+          <div class="mini">Explore sector signals</div>
+          <h3>See what the wider landscape can reveal.</h3>
           <p>Explore anonymised patterns across country visibility, recurring bottlenecks, category activity, and where biological coverage is forming or absent.</p>
           <div class="route-meta">
             <div>
@@ -563,6 +543,25 @@
             <a class="button primary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a>
           </div>
         </article>
+
+        <article class="route-card workspace">
+          <div class="mini">Member value</div>
+          <h3>Members get a clearer company workspace.</h3>
+          <p>ABA members can use submitted records to follow their own registration picture, identify next actions, and support registrant follow-up with ABA.</p>
+          <div class="route-meta">
+            <div>
+              <strong>Best for</strong>
+              <p>Companies managing several submissions or trying to make their registration pipeline easier to coordinate.</p>
+            </div>
+            <div>
+              <strong>Member support</strong>
+              <p>A private workspace can help members review product status, evidence readiness, bottlenecks, and follow-up needs.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -570,73 +569,58 @@
       <div class="stack">
         <div>
           <div class="eyebrow">Why ABA needs the picture</div>
-          <h2 class="display" style="margin-top: 6px;">The tracker turns registration pain into evidence ABA can act on.</h2>
+          <h2 class="display" style="margin-top: 6px;">The tracker turns registration pain into patterns ABA can act on.</h2>
         </div>
         <div class="value-grid">
           <article class="card">
-            <span class="chip green">ABA intelligence</span>
-            <h3 style="margin-top: 10px;">A detailed view of member registrations.</h3>
-            <p>ABA can see which product/application records members have lodged, where they sit, and which themes are emerging across the member base.</p>
+            <span class="chip green">Country context</span>
+            <h3 style="margin-top: 10px;">Where activity and blockage are visible.</h3>
+            <p>Country-level grouping helps ABA see where records are concentrated, where visibility is thin, and where future coordination may be needed.</p>
           </article>
           <article class="card">
-            <span class="chip gold">Member service</span>
-            <h3 style="margin-top: 10px;">A practical reason to contribute data.</h3>
-            <p>Members get a clearer private view of their own registration pipeline, blockers, readiness, and case-support opportunities.</p>
+            <span class="chip gold">Time in stage</span>
+            <h3 style="margin-top: 10px;">How long delays are lasting.</h3>
+            <p>Measuring time in stage turns delay from anecdote into a comparable signal that can support more credible sector conversations.</p>
           </article>
           <article class="card">
-            <span class="chip">Sector evidence</span>
-            <h3 style="margin-top: 10px;">A missing evidence base for biologicals.</h3>
-            <p>Anonymised patterns can become industry-wide signals about backlog, timelines, bottlenecks, and categories without revealing company records.</p>
+            <span class="chip">Recurring bottlenecks</span>
+            <h3 style="margin-top: 10px;">Which issues keep appearing.</h3>
+            <p>Common themes such as categorisation uncertainty, submission friction, response delays, or duplicated trial requirements can be clustered into repeat patterns.</p>
           </article>
         </div>
         <article class="panel tone">
-          <div class="mini">Normalization layer</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">The value comes from making records comparable.</p>
-          <p style="margin-top: 8px;">ABA should group trusted records by country, registration stage, biological category, bottleneck theme, and time stuck. That middle layer turns member cases into sector intelligence without losing the case-level detail needed for member support.</p>
-        </article>
-        <article class="panel">
-          <div class="mini">Geographic truth</div>
-          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">South Africa is active now, but the tracker should be built for an Africa-wide picture.</p>
-          <p style="margin-top: 8px;">The first useful registration intelligence may come from South African member records, while the same record structure can later reveal country-level demand, bottlenecks, and chapter readiness across the continent.</p>
+          <div class="mini">Africa-wide picture</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">South Africa is active now, but the record structure is built for a broader African registration picture.</p>
+          <p style="margin-top: 8px;">Early intelligence may come from South African records first. As more contributors add product journeys, the same structure can reveal country-level demand, bottlenecks, and chapter readiness across the continent.</p>
         </article>
       </div>
     </section>
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">Registration record lifecycle</div>
-        <h2 class="display" style="margin-top: 6px;">One lodged application becomes a trusted record, then supports the right outputs.</h2>
+        <div class="eyebrow">After submission</div>
+        <h2 class="display" style="margin-top: 6px;">What happens after you submit.</h2>
       </div>
       <div class="lifecycle-grid" style="margin-top: 12px;" aria-label="Registration record lifecycle">
         <article class="lifecycle-step">
           <span class="step-number">1</span>
-          <h3>Lodged application</h3>
-          <p>A member has a product/application registration lodged with the Registrar's office.</p>
+          <h3>Submit a product record</h3>
+          <p>You share the product, registration stage, lodged date, bottleneck, proof status, and consent permissions that ABA needs to understand the journey.</p>
         </article>
         <article class="lifecycle-step">
           <span class="step-number">2</span>
-          <h3>Structured record</h3>
-          <p>ABA captures the status, reference, category, evidence, bottleneck, consent, and next action.</p>
+          <h3>ABA reviews the detail</h3>
+          <p>ABA checks proof, duplicates, membership relationship, clarification needs, consent, and data quality before the record is used beyond intake.</p>
         </article>
         <article class="lifecycle-step">
           <span class="step-number">3</span>
-          <h3>ABA review</h3>
-          <p>Operators check proof, membership relationship, duplicates, consent, and data quality.</p>
-        </article>
-        <article class="lifecycle-step">
-          <span class="step-number">4</span>
-          <h3>Trusted record</h3>
-          <p>The reviewed record becomes part of ABA's controlled registration picture.</p>
-        </article>
-        <article class="lifecycle-step">
-          <span class="step-number">5</span>
-          <h3>Useful outputs</h3>
-          <p>Trusted records can support member dashboards, Registrar advocacy, ABA review workflows, and public aggregate signals.</p>
+          <h3>Trusted outputs emerge</h3>
+          <p>Reviewed records can support member follow-up, private company workspaces, ABA review workflows, and public aggregate signals.</p>
         </article>
       </div>
       <div class="actions">
         <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add product data</a>
-        <a class="button secondary" href="../../registration-tracker/admin-operator-review/index.html">See review process</a>
+        <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a>
       </div>
     </section>
 
@@ -645,7 +629,7 @@
         <div>
           <div class="eyebrow">What a record contains</div>
           <h2 class="display" style="margin-top: 6px;">Enough detail to support action, not an open-ended data grab.</h2>
-          <p class="lede">Every field in the record is there for a reason — structured to support review, status tracking, consent management, and eventual use in member-specific or aggregate outputs.</p>
+          <p class="lede">The record captures the minimum structured detail needed to understand registration status, compare bottlenecks, manage consent, and support useful outputs.</p>
         </div>
         <article class="record-card">
           <h3>Example registration record fields</h3>
@@ -667,57 +651,27 @@
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">What the tracker makes legible</div>
-        <h2 class="display" style="margin-top: 6px;">Trusted records reveal patterns that individual registration stories cannot show alone.</h2>
+        <div class="eyebrow">Who benefits from trusted records</div>
+        <h2 class="display" style="margin-top: 6px;">The same reviewed record layer supports submitters, members, and the wider sector.</h2>
       </div>
       <div class="value-grid" style="margin-top: 12px;">
         <article class="card">
-          <span class="chip">Country picture</span>
-          <h3 style="margin-top: 10px;">Where activity and blockage are showing up.</h3>
-          <p>Country-level grouping helps ABA see where member records are concentrated and where future coordination may be needed.</p>
+          <span class="chip green">Submitters</span>
+          <h3 style="margin-top: 10px;">A structured way to make registration pain visible.</h3>
+          <p>Product owners and regulatory teams can contribute active or historic registration journeys so the sector picture is not built on anecdote alone.</p>
+          <div class="actions"><a class="button secondary" href="../../registration-tracker/intake-flow/index.html">Add product data</a></div>
         </article>
         <article class="card">
-          <span class="chip gold">Time stuck</span>
-          <h3 style="margin-top: 10px;">How long delays are lasting.</h3>
-          <p>Measuring time in stage turns delay from anecdote into a comparable signal that can support more credible conversations.</p>
-        </article>
-        <article class="card">
-          <span class="chip green">Recurring bottlenecks</span>
-          <h3 style="margin-top: 10px;">Which issues keep appearing.</h3>
-          <p>Common themes such as categorisation uncertainty, submission friction, or response delays can be clustered into repeat patterns.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
-      <div>
-        <div class="eyebrow">Who benefits from trusted records</div>
-        <h2 class="display" style="margin-top: 6px;">The same reviewed record layer supports different levels of service and evidence.</h2>
-      </div>
-      <div class="benefit-grid" style="margin-top: 12px;">
-        <article class="card">
-          <span class="chip green">Members</span>
-          <h3 style="margin-top: 10px;">Private visibility and case support.</h3>
-          <p>Members can track their own registration picture and receive member-specific Registrar-office advocacy where they have submitted and consented to records.</p>
+          <span class="chip gold">ABA members</span>
+          <h3 style="margin-top: 10px;">Follow-up support and a company workspace.</h3>
+          <p>Members can use submitted records to track their own registration picture, clarify next actions, and support registrant follow-up with ABA.</p>
           <div class="actions"><a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">View company workspace</a></div>
         </article>
         <article class="card">
-          <span class="chip gold">ABA operators</span>
-          <h3 style="margin-top: 10px;">A source of truth for review.</h3>
-          <p>Staff manage verification, duplicates, consent, clarification needs, and readiness before records are used beyond intake.</p>
-          <div class="actions"><a class="button secondary" href="../../registration-tracker/admin-operator-review/index.html">See review process</a></div>
-        </article>
-        <article class="card">
-          <span class="chip">Public and industry</span>
+          <span class="chip">Wider sector</span>
           <h3 style="margin-top: 10px;">Anonymised sector signals.</h3>
-          <p>Non-members may benefit from aggregate intelligence and sector-wide advocacy, but not private tracking or case-specific support.</p>
+          <p>Public-safe, aggregate views can reveal country visibility, bottleneck patterns, and category activity without exposing private company submissions.</p>
           <div class="actions"><a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">View sector signals</a></div>
-        </article>
-        <article class="card">
-          <span class="chip">Registrar advocacy</span>
-          <h3 style="margin-top: 10px;">A key member-service output.</h3>
-          <p>Reviewed member records can support controlled lists or packets when ABA advocates with the Registrar's office on members' behalf.</p>
-          <div class="actions"><a class="button secondary" href="../../registration-tracker/registrar-list/index.html">View registrar packet</a></div>
         </article>
       </div>
     </section>
@@ -726,16 +680,16 @@
       <div>
         <div class="eyebrow">Trust boundaries</div>
         <h2 class="display" style="margin-top: 6px;">The tracker works because raw detail is reviewed before it is used.</h2>
-        <p class="lede">ABA can build stronger evidence without making private company submissions public.</p>
+        <p class="lede">ABA can build stronger evidence without making private company submissions public or using records outside the permissions attached to them.</p>
       </div>
       <div class="trust-grid" style="margin-top: 12px;">
         <article class="trust-card">
           <strong>Raw intake stays controlled.</strong>
-          <p>Submitted records enter ABA review first. They do not automatically feed public dashboards, member workspaces, or Registrar packets.</p>
+          <p>Submitted records enter ABA review first. They do not automatically feed public dashboards or member workspaces.</p>
         </article>
         <article class="trust-card">
           <strong>Consent separates uses.</strong>
-          <p>Internal review, public aggregate use, and named Registrar-facing support should remain separate permission decisions.</p>
+          <p>Internal review, member follow-up, and public aggregate use should remain separate permission decisions.</p>
         </article>
         <article class="trust-card">
           <strong>Public evidence is aggregate.</strong>
@@ -748,13 +702,11 @@
       <div>
         <div class="eyebrow">Next step</div>
         <h2 class="display" style="margin-top: 6px;">Contribute to the registration picture.</h2>
-        <p class="lede">Start with a product record, review your company workspace, or read the aggregate signals ABA can use for sector-wide advocacy.</p>
+        <p class="lede">Start with a product record, or explore the aggregate signals that show why more submissions make the registration picture stronger.</p>
       </div>
       <div class="actions">
         <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add product data</a>
-        <a class="button secondary" href="../../registration-tracker/company-dashboard/index.html">Company workspace</a>
         <a class="button secondary" href="../../registration-tracker/public-dashboard/index.html">Sector signals</a>
-        <a class="button secondary" href="../../registration-tracker/registrar-list/index.html">Registrar advocacy view</a>
       </div>
     </footer>
   </main>
