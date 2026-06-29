@@ -281,7 +281,11 @@
               <p><strong style="color: var(--ink);">Interest areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Engagement interests:</strong> <span x-text="form.observer_interests.length ? form.observer_interests.join(', ') : 'Not provided yet'"></span></p>
             </div>
-            <div class="success" style="margin-top: 12px;">Demo preview only. In production, this would create a membership application record for review.</div>
+            <div class="stack" style="margin-top: 12px;">
+              <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
+              <p><strong style="color: var(--ink);">Next ABA state:</strong> Under review, more information required, approved, or declined.</p>
+              <div class="success">Demo preview only. In production, this would create a membership application record for review.</div>
+            </div>
           </div>
       </form>
     </section>
