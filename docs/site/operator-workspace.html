@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Operator Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #173039;
+      --muted: #5c6f73;
+      --paper: #f7f4ed;
+      --surface: rgba(255, 252, 246, 0.88);
+      --line: rgba(23, 48, 57, 0.1);
+      --green: #2b6b4f;
+      --green-deep: #214f3c;
+      --green-soft: #e7f0e8;
+      --sand: #f1eadb;
+      --blue-soft: rgba(63, 109, 169, 0.12);
+      --gold-soft: rgba(169, 121, 36, 0.14);
+      --shadow: 0 16px 32px -28px rgba(20, 32, 34, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(99, 154, 108, 0.16), transparent 24%),
+        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1220px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 14px 0 40px;
+    }
+
+    .surface {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar,
+    .hero,
+    .section {
+      padding: 18px;
+      margin-top: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 44ch;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a.active { color: var(--green); }
+
+    .nav-cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-cta,
+    .button.primary {
+      background: var(--green-deep);
+      color: #f7f7f2;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .mini {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { color: var(--green); }
+    .mini { color: var(--muted); }
+
+    .hero-grid,
+    .grid,
+    .metric-grid,
+    .gateway-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: start;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .gateway-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      font-size: 1.02rem;
+      line-height: 1.35;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .panel,
+    .card,
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.66);
+      padding: 15px;
+    }
+
+    .tone { background: var(--sand); }
+    .blue { background: var(--blue-soft); }
+    .gold { background: var(--gold-soft); }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .list,
+    .compact-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compact-list li {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-top: 4px;
+    }
+
+    .state {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .state-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .state-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .state-key {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .state-value {
+      color: var(--ink);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid,
+      .metric-grid,
+      .gateway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .state-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Operator workspace for membership review, registration review, intelligence handling, and release-readiness control.</span>
+        </div>
+      </div>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="./index.html">Home</a>
+          <a href="./about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a href="../database/index.html">Biologicals Explorer</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
+          <a class="active" href="./operator-workspace.html">Workspace</a>
+        </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
+      </div>
+    </header>
+
+    <section class="surface hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">ABA operator workspace</div>
+          <h1>Review what comes in, decide what moves forward, and keep the system aligned.</h1>
+          <p style="margin-top: 10px; max-width: 66ch;">This prototype surface shows how membership applications, registration submissions, public aggregate decisions, and registrar/export preparation connect. It is the ABA-facing control layer behind the public site, member flow, and tracker.</p>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/admin-operator-review/index.html">Open tracker review workspace</a>
+            <a class="button secondary" href="../../registration-tracker/registrar-list/index.html">Open registrar export workspace</a>
+          </div>
+        </div>
+        <aside class="panel tone">
+          <div class="mini">Operator rules</div>
+          <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Public surfaces may create signals and applications. Only reviewed records move into trusted intelligence, member follow-up, or registrar packets.</p>
+        </aside>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric">
+          <span class="mini">Membership applications</span>
+          <strong>12</strong>
+          <p>Across Full, Associate, and Observer routes.</p>
+        </article>
+        <article class="metric">
+          <span class="mini">Open registration reviews</span>
+          <strong>8</strong>
+          <p>Records waiting for proof, clarification, or inclusion decisions.</p>
+        </article>
+        <article class="metric">
+          <span class="mini">Company workspaces</span>
+          <strong>4</strong>
+          <p>Verified member relationships with active record visibility.</p>
+        </article>
+        <article class="metric">
+          <span class="mini">Export-ready records</span>
+          <strong>2</strong>
+          <p>Reviewed, consented, operator-approved records ready for packet handling.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="eyebrow">Receiving surfaces</div>
+      <h2 style="margin-top: 6px;">Every public action needs an internal home.</h2>
+      <div class="gateway-grid">
+        <article class="card">
+          <div class="mini">Membership review</div>
+          <h3 style="margin-top: 8px;">Membership application queue</h3>
+          <p style="margin-top: 8px;">ABA reviews fit, independence, contribution type, country relevance, and next-step readiness before approving membership.</p>
+          <div class="actions">
+            <a class="button secondary" href="../membership-flow/apply-full.html">View Full route</a>
+            <a class="button secondary" href="../membership-flow/membership-types.html">Compare routes</a>
+          </div>
+        </article>
+        <article class="card blue">
+          <div class="mini">Tracker review</div>
+          <h3 style="margin-top: 8px;">Registration submission queue</h3>
+          <p style="margin-top: 8px;">ABA verifies proof, references, consent, duplicates, and visibility decisions before records become trusted signals.</p>
+          <div class="actions">
+            <a class="button primary" href="../../registration-tracker/admin-operator-review/index.html">Open tracker queue</a>
+          </div>
+        </article>
+        <article class="card gold">
+          <div class="mini">Export and engagement</div>
+          <h3 style="margin-top: 8px;">Registrar/export preparation</h3>
+          <p style="margin-top: 8px;">Only reviewed, consented, selected records move into named regulator engagement or preserved packet snapshots.</p>
+          <div class="actions">
+            <a class="button secondary" href="../../registration-tracker/registrar-list/index.html">Open export packet</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="grid">
+        <article class="panel">
+          <div class="eyebrow">Membership state model</div>
+          <h2 style="margin-top: 6px;">Application and member states</h2>
+          <div class="state">
+            <div class="state-row">
+              <div class="state-key">Application</div>
+              <div class="state-value">Draft → Submitted → Under review → More information required → Approved or declined</div>
+            </div>
+            <div class="state-row">
+              <div class="state-key">Member</div>
+              <div class="state-value">Pending activation → Active → Inactive or lapsed</div>
+            </div>
+            <div class="state-row">
+              <div class="state-key">Full route handoff</div>
+              <div class="state-value">If the applicant has registered or pending products, the next action is the registration tracker intake flow.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="eyebrow">Tracker state model</div>
+          <h2 style="margin-top: 6px;">Registration record states</h2>
+          <div class="state">
+            <div class="state-row">
+              <div class="state-key">Capture</div>
+              <div class="state-value">Draft → Submitted for review → Accepted tracker record or needs clarification</div>
+            </div>
+            <div class="state-row">
+              <div class="state-key">Visibility</div>
+              <div class="state-value">Public aggregate only after review. Company-private detail stays inside the member workspace. Export uses a narrower reviewed subset.</div>
+            </div>
+            <div class="state-row">
+              <div class="state-key">Operator control</div>
+              <div class="state-value">Public aggregate decision, packet eligibility, and operator inclusion are tracked separately.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="grid">
+        <article class="panel">
+          <div class="eyebrow">System notes</div>
+          <h2 style="margin-top: 6px;">What the prototype is demonstrating</h2>
+          <ul class="compact-list" style="margin-top: 12px;">
+            <li>The public site is the invitation and framing layer.</li>
+            <li>Membership is a reviewable relationship, not an instant checkout.</li>
+            <li>Registration intake is open to authorised submitters, including non-members.</li>
+            <li>Member company workspaces show only company-scoped records and next actions.</li>
+            <li>ABA operators convert raw submissions into trusted intelligence and packet decisions.</li>
+          </ul>
+        </article>
+
+        <article class="panel tone">
+          <div class="eyebrow">Release snapshot</div>
+          <h2 style="margin-top: 6px;">Readiness for the canonical spec tag</h2>
+          <p style="margin-top: 10px;">Before tagging a release, the team should confirm that the public site, membership flow, tracker views, and requirements notes all tell the same story and reflect the same states.</p>
+          <div class="actions">
+            <a class="button secondary" href="../requirements/aba-prototype-system-model.md">System model note</a>
+            <a class="button secondary" href="../requirements/aba-release-snapshot-readiness.md">Release readiness note</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+

@@ -1,6 +1,6 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-06-25
+Last updated: 2026-06-29
 
 ---
 
@@ -11,6 +11,32 @@ The prototype is in good shape as a connected demo suite. Two PRs are currently 
 - **[PR #7](https://github.com/nefiger/aba/pull/7)** `fix/remove-catalogue-evidence-hero-sections` — removes the large intro/shortcut-card blocks from product-catalogue.html and evidence-library.html. Awaiting review.
 
 Branch `feature/data-expansion-ux` (PR #6) has been merged into main.
+
+The latest prototype-as-spec pass added a stronger public-page consistency layer and new supporting requirements notes:
+
+- `docs/requirements/aba-prototype-system-model.md`
+- `docs/requirements/aba-release-snapshot-readiness.md`
+- `docs/requirements/aba-prototype-foundation-and-design-system-notes.md`
+- `docs/requirements/aba-prototype-consistency-checklist.md`
+- `docs/requirements/aba-content-taxonomy-and-semantic-visual-language.md`
+- `docs/requirements/aba-visual-language-conventions.md`
+
+Public and role-based prototype updates now include:
+
+- stronger membership post-submit and handoff states
+- a clearer workspace gateway plus integrated operator workspace
+- tracker landing-page framing that better connects public site, member workspace, and operator/export handling
+- richer secondary public pages for `Technical Network` and `Updates`
+- wider nav consistency across the public ABA site
+
+The founding-members demo happened on 2026-06-25. Follow-up notes from both the demo and the internal debrief are now captured in:
+
+- `docs/requirements/aba-founding-members-demo-and-debrief-notes.md`
+
+That note is now the best source for:
+- what the group reacted to positively
+- what shifted from "demo" into real product-spec thinking
+- the July sequencing around copy, intake, governance, and first-cohort testing
 
 ### Registration tracker linked-page polish
 
@@ -26,6 +52,7 @@ Remaining slices for the next session:
 - Slice 3: align `registration-tracker/public-dashboard/index.html` with the landing-page "Sector signals" promise, remove disposable/demo framing, and reduce hierarchy confusion without making canonical label changes
 - Slice 4: polish `registration-tracker/company-dashboard/index.html` as a member-facing company workspace, reduce internal/admin phrasing, and preserve the private/member boundary
 - After visual review, discuss canonical labels before touching Knowledge Hub / Biologicals Explorer / Product Catalogue / Regulatory Signals naming
+- Continue the consistency pass across remaining secondary/public pages and any tracker-linked pages that still feel older or thinner than the newer shell
 
 ---
 
@@ -56,6 +83,23 @@ Full session notes: `docs/requirements/biologicals-explorer-data-expansion-ux-no
 ---
 
 ## What's still open
+
+### Prototype-as-spec and visual consistency
+
+- The public site now has clearer shared-shell conventions, but some deeper pages still need a second-pass visual and IA review
+- `registration-tracker/public-dashboard/index.html` remains the most obvious candidate for a stronger semantic signals treatment
+- `registration-tracker/company-dashboard/index.html` should continue moving from "demo page" language toward a credible member workspace feel
+- Visual assets, imagery, and iconography still need a more intentional pass once the page architecture settles further
+- A full design system is still intentionally deferred; the current requirement is disciplined consistency, not component-library implementation
+
+### July follow-through after the founding-members demo
+
+- Copy still needs an owner pass and cleanup before the next share-out
+- The first realistic target is now a combined membership-plus-product-intake flow for testing
+- Anoushka feedback on intake fields should inform the next form/data-model pass
+- Admin/backend and member-workspace thinking now needs to move from implied to explicit
+- Governance setup should run in parallel with product work rather than being deferred
+- The database / explorer remains valuable, but is not the immediate launch gate
 
 ### Data
 - Product catalogue is still at 23 products — doesn't fully reflect the 22 crop / 20 pest surface yet. Good candidates to add: more Trichoderma and Bt product variants, semiochemical examples, inoculant lines for sugarcane and soy

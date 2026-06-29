@@ -473,7 +473,23 @@
               <p><strong style="color: var(--ink);">Biological categories:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Market countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
             </div>
-            <div class="success" style="margin-top: 12px;">Demo preview only. In production, this would create a membership application record for review.</div>
+          <div class="stack" style="margin-top: 12px;">
+            <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
+            <p><strong style="color: var(--ink);">Next ABA state:</strong> Under review, more information required, approved, or declined.</p>
+            <p><strong style="color: var(--ink);">Payment handling:</strong> No instant checkout. Any fee handling follows manual ABA review and follow-up.</p>
+            <template x-if="form.registration_support === 'Yes'">
+              <div class="success">
+                Next step in the prototype: continue into product-registration intake so ABA can receive the related product record as part of the broader member journey.
+              </div>
+            </template>
+            <div class="actions" x-show="form.registration_support === 'Yes'" x-cloak>
+              <a class="button secondary" href="../registration-tracker/index.html">Open tracker overview</a>
+              <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Continue to product intake</a>
+            </div>
+            <template x-if="form.registration_support !== 'Yes'">
+              <div class="success">Demo preview only. In production, this would create a membership application record for review.</div>
+            </template>
+          </div>
           </div>
       </form>
     </section>

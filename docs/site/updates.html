@@ -3,78 +3,415 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA | Updates</title>
+  <title>African Biologicals Alliance | Updates</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: oklch(0.23 0.03 215);
-      --muted: oklch(0.49 0.028 205);
-      --paper: oklch(0.985 0.008 98);
-      --green-deep: oklch(0.4 0.09 150);
-      --green-soft: oklch(0.95 0.04 145);
+      --page: oklch(0.972 0.012 92);
+      --page-deep: oklch(0.942 0.02 92);
+      --surface: oklch(0.988 0.004 95 / 0.88);
+      --surface-strong: oklch(0.985 0.007 96);
+      --line: oklch(0.87 0.018 165);
+      --ink: oklch(0.26 0.04 204);
+      --muted: oklch(0.5 0.025 198);
+      --green: oklch(0.48 0.09 156);
+      --green-deep: oklch(0.36 0.074 158);
+      --green-soft: oklch(0.93 0.028 150);
+      --sand: oklch(0.94 0.026 83);
+      --teal-soft: oklch(0.93 0.02 194);
+      --gold-soft: oklch(0.95 0.03 95);
+      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
     }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(114, 180, 115, 0.16), transparent 24%),
-        radial-gradient(circle at top right, rgba(205, 176, 92, 0.1), transparent 22%),
-        linear-gradient(180deg, #f5f2ea 0%, #fcfaf5 52%, #f4f6ef 100%);
+        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
+        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
+        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
     }
-    .font-display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
-    .shell { width: min(1220px, calc(100vw - 32px)); margin: 0 auto; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1220px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: var(--space-md) 0 var(--space-2xl);
+    }
+
     .surface {
-      background: rgba(255, 252, 246, 0.88);
-      border: 1px solid rgba(46, 58, 46, 0.08);
-      box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
-      backdrop-filter: blur(16px);
+      background: var(--surface);
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
-    .eyebrow {
-      letter-spacing: 0.18em;
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: 14px 18px;
+      margin-bottom: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-width: 0;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
+      color: var(--green-deep);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong,
+    .eyebrow,
+    .section-label,
+    .mini {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 700;
+      color: color-mix(in oklab, var(--ink) 82%, white);
+      white-space: nowrap;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      color: var(--green-deep);
+    }
+
+    .nav-cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-cta,
+    .button.primary {
+      background: var(--green-deep);
+      color: #f7f7f2;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(73, 95, 82, 0.14);
+      color: var(--ink);
+    }
+
+    .hero,
+    .section {
+      margin-top: var(--space-sm);
+      padding: clamp(24px, 4vw, 40px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+    }
+
+    .hero-grid,
+    .stream-grid,
+    .expect-grid,
+    .route-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      align-items: start;
+    }
+
+    .stream-grid,
+    .expect-grid,
+    .route-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: var(--space-lg);
+      font-size: clamp(2.4rem, 4.4vw, 4.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
       font-weight: 800;
+    }
+
+    h3 {
+      font-size: 1.04rem;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 15px;
+    }
+
+    .eyebrow,
+    .section-label {
+      color: var(--green-deep);
+    }
+
+    .hero-copy {
+      margin-top: var(--space-lg);
+      max-width: 64ch;
+      font-size: 1.08rem;
+    }
+
+    .panel,
+    .card {
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 18px;
+    }
+
+    .tone {
+      background: linear-gradient(180deg, rgba(241, 234, 219, 0.82), rgba(255, 255, 255, 0.68));
+    }
+
+    .teal {
+      background: linear-gradient(180deg, rgba(232, 244, 244, 0.92), rgba(255, 255, 255, 0.72));
+    }
+
+    .gold {
+      background: linear-gradient(180deg, rgba(252, 244, 220, 0.9), rgba(255, 255, 255, 0.72));
+    }
+
+    .actions {
+      margin-top: var(--space-xl);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini {
       color: var(--muted);
     }
-    a { text-decoration: none; }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .stream-grid,
+      .expect-grid,
+      .route-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
-<body class="antialiased">
-  <header class="shell pt-3 sm:pt-5">
-    <div class="surface rounded-[22px] px-4 py-3 sm:px-5">
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center gap-4">
-          <div class="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[linear-gradient(135deg,rgba(87,140,105,0.18),rgba(87,140,105,0.06))] text-[11px] font-black uppercase tracking-[0.16em] text-[color:var(--green-deep)]">ABA</div>
-          <div>
-            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[color:var(--muted)]">African Biologicals Alliance</p>
-            <p class="mt-1 text-sm text-[color:var(--muted)]">Coordination, visibility, and participation across Africa</p>
-          </div>
-        </div>
-        <div class="flex flex-wrap items-center justify-end gap-4">
-          <nav class="flex flex-wrap gap-x-[18px] gap-y-2 text-[14px] font-semibold text-[color:var(--ink)]">
-            <a href="./index.html" class="hover:text-[color:var(--green-deep)]">Home</a>
-            <a href="./about.html" class="hover:text-[color:var(--green-deep)]">About</a>
-            <a href="../membership-flow/index.html" class="hover:text-[color:var(--green-deep)]">Membership</a>
-            <a href="../database/index.html" class="hover:text-[color:var(--green-deep)]">Biologicals Explorer</a>
-            <a href="../registration-tracker/index.html" class="hover:text-[color:var(--green-deep)]">Track Registrations</a>
-          </nav>
-          <a href="../membership-flow/index.html" class="inline-flex min-h-[42px] items-center justify-center rounded-full bg-[color:var(--green-deep)] px-4 text-[12px] font-black uppercase tracking-[0.08em] text-[#f7f7f2]">Join ABA</a>
+<body>
+  <main class="shell">
+    <header class="surface topbar">
+      <div class="brand">
+        <div class="mark">ABA</div>
+        <div class="brand-copy">
+          <strong>African Biologicals Alliance</strong>
+          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
         </div>
       </div>
-    </div>
-  </header>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="./index.html">Home</a>
+          <a href="./about.html">About</a>
+          <a href="../membership-flow/index.html">Membership</a>
+          <a href="../database/index.html">Biologicals Explorer</a>
+          <a href="../registration-tracker/index.html">Track Registrations</a>
+          <a href="./workspace.html">Workspace</a>
+        </nav>
+        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
+      </div>
+    </header>
 
-  <main class="shell pb-10 pt-4 sm:pb-14 sm:pt-5">
-    <section class="surface rounded-[28px] px-5 py-6 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
-      <p class="eyebrow">Updates</p>
-      <h1 class="font-display mt-4 text-[clamp(1.9rem,2.8vw,2.7rem)] leading-[1.06] tracking-[-0.035em]">Stay connected to ABA news and developments.</h1>
-      <p class="mt-4 max-w-3xl text-[1.04rem] leading-7 text-[color:var(--muted)] sm:text-[1.12rem]">
-        Follow announcements, sector updates, and future opportunities to stay engaged with the work of the African Biologicals Alliance.
-      </p>
+    <section class="surface hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Updates</div>
+          <h1>Stay connected to sector progress, alliance activity, and what ABA is learning.</h1>
+          <p class="hero-copy">
+            Not everyone is ready to become a member or submit registration data immediately. ABA still needs a way to keep people close to the work, build confidence, and grow a more informed ecosystem over time. Updates are the public continuity layer for that relationship.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="../membership-flow/index.html">Stay Informed</a>
+            <a class="button secondary" href="../database/index.html">Browse the Explorer</a>
+          </div>
+        </div>
+        <aside class="panel tone">
+          <div class="section-label">Why this matters</div>
+          <p style="margin-top: 10px; color: var(--ink); font-weight: 700;">Engagement should not depend on being in the system already.</p>
+          <p style="margin-top: 8px;">Updates give ABA a public-safe way to show momentum, explain why participation matters, and keep future members, contributors, and partners warm.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="section-label">What this stream should carry</div>
+      <div class="stream-grid" style="margin-top: 16px;">
+        <article class="card teal">
+          <div class="mini">Alliance activity</div>
+          <h3 style="margin-top: 8px;">ABA progress and participation opportunities</h3>
+          <p style="margin-top: 8px;">Announcements about membership onboarding, working sessions, public showcases, and opportunities to take part in the alliance.</p>
+        </article>
+        <article class="card gold">
+          <div class="mini">Sector intelligence</div>
+          <h3 style="margin-top: 8px;">Public-safe signals from the tracker and wider market</h3>
+          <p style="margin-top: 8px;">Aggregate bottlenecks, timing patterns, and evidence themes that help explain where the biologicals sector needs support.</p>
+        </article>
+        <article class="card tone">
+          <div class="mini">Knowledge and education</div>
+          <h3 style="margin-top: 8px;">Explorer additions and practical biologicals context</h3>
+          <p style="margin-top: 8px;">New product, evidence, crop, and standards content that makes the site more useful to the wider ecosystem.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="section-label">What a subscriber should expect</div>
+      <div class="expect-grid" style="margin-top: 16px;">
+        <article class="card">
+          <h3>Clear relevance</h3>
+          <p style="margin-top: 8px;">Updates should explain why a development matters to the sector, not just report that something happened.</p>
+        </article>
+        <article class="card">
+          <h3>Trusted boundaries</h3>
+          <p style="margin-top: 8px;">The update stream can reference public signals and sector trends, but it should not expose private company submission detail.</p>
+        </article>
+        <article class="card">
+          <h3>Useful next steps</h3>
+          <p style="margin-top: 8px;">Each update category should make it easy to move into membership, submission, knowledge browsing, or future technical-network participation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="section-label">How this connects to the wider site</div>
+      <div class="route-grid" style="margin-top: 16px;">
+        <article class="card">
+          <div class="mini">Membership path</div>
+          <h3 style="margin-top: 8px;">Ready for deeper participation</h3>
+          <p style="margin-top: 8px;">Updates can nurture organisations until they are ready to join ABA as members or applicants.</p>
+        </article>
+        <article class="card">
+          <div class="mini">Tracker path</div>
+          <h3 style="margin-top: 8px;">Ready to contribute registration intelligence</h3>
+          <p style="margin-top: 8px;">Signals and stories from the tracker can help explain the value of structured submission and private company workspace participation.</p>
+        </article>
+        <article class="card">
+          <div class="mini">Explorer path</div>
+          <h3 style="margin-top: 8px;">Ready to learn or validate</h3>
+          <p style="margin-top: 8px;">Knowledge updates keep the public site useful even for visitors who are not entering a formal workflow yet.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section">
+      <div class="panel">
+        <div class="section-label">Prototype implication</div>
+        <ul class="list" style="margin-top: 12px;">
+          <li>This page establishes the updates area as a real site surface rather than a placeholder.</li>
+          <li>The capture flow itself can remain light for now, but the information architecture and public role should be clear.</li>
+          <li>The final accepted prototype should make “stay informed” feel like a purposeful path, not a leftover newsletter link.</li>
+        </ul>
+      </div>
     </section>
   </main>
 </body>

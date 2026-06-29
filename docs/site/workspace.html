@@ -258,6 +258,7 @@
           <a href="../membership-flow/index.html">Membership</a>
           <a href="../database/index.html">Biologicals Explorer</a>
           <a href="../registration-tracker/index.html">Track Registrations</a>
+          <a class="active" href="./workspace.html">Workspace</a>
         </nav>
         <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
       </div>
@@ -268,22 +269,30 @@
         <div>
           <div class="eyebrow">Workspace</div>
           <h1 class="display">Choose a demo workspace role.</h1>
-          <p style="margin-top: 10px; max-width: 62ch;">This is a prototype role gateway for the meeting. It is not a real login; it simply routes to the member, ABA review, registrar, and meeting-brief views.</p>
+          <p style="margin-top: 10px; max-width: 62ch;">This is the prototype role gateway for the deeper system views. It is not a live login, but it shows how member, operator, and export-facing surfaces sit behind the public ABA story.</p>
         </div>
         <aside class="panel tone">
           <div class="mini">Access model</div>
           <p style="margin-top: 8px; color: var(--ink); font-weight: 700;">Public visitors see aggregate signals. Workspaces show the deeper record views.</p>
-          <p style="margin-top: 8px;">Use this page to keep internal tools out of ordinary public navigation while still making the demo easy to present.</p>
+          <p style="margin-top: 8px;">Use this page to keep internal tools out of ordinary public navigation while still making the prototype act like one connected system.</p>
         </aside>
       </div>
     </section>
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">Registration tracker</div>
-        <h2 class="display" style="margin-top: 6px;">Open the view that matches the role in the story.</h2>
+        <div class="eyebrow">System workspaces</div>
+        <h2 class="display" style="margin-top: 6px;">Open the view that matches the role in the system.</h2>
       </div>
       <div class="gateway-grid" style="margin-top: 12px;">
+        <article class="card">
+          <div class="mini">ABA operator</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Integrated operator workspace</h3>
+          <p style="margin-top: 8px;">Shows how membership review, tracker review, public aggregate decisions, and export preparation connect.</p>
+          <div class="actions">
+            <a class="button primary" href="./operator-workspace.html">Open operator workspace</a>
+          </div>
+        </article>
         <article class="card">
           <div class="mini">Member company</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Company workspace</h3>
@@ -293,9 +302,9 @@
           </div>
         </article>
         <article class="card">
-          <div class="mini">ABA operator</div>
-          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Operator review</h3>
-          <p style="margin-top: 8px;">Shows how ABA reviews submitted records before they become trusted intelligence.</p>
+          <div class="mini">Tracker review</div>
+          <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Operator review queue</h3>
+          <p style="margin-top: 8px;">Shows how ABA reviews submitted product records before they become trusted intelligence.</p>
           <div class="actions">
             <a class="button secondary" href="../../registration-tracker/admin-operator-review/index.html">Open review view</a>
           </div>
@@ -311,7 +320,7 @@
         <article class="card">
           <div class="mini">Meeting brief</div>
           <h3 style="margin-top: 8px; color: var(--ink); font-size: 18px;">Tracker presentation</h3>
-          <p style="margin-top: 8px;">Opens the full presenter brief for explaining the registration tracker flow.</p>
+          <p style="margin-top: 8px;">Opens the full presenter brief for explaining the registration tracker flow, states, and boundaries.</p>
           <div class="actions">
             <a class="button secondary" href="../registration-tracker/index.html">Open tracker brief</a>
           </div>
