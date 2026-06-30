@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Pending Activation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="pending-activation">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Finance</div>
+              <h1 class="page-title">Pending Activation</h1>
+              <p class="page-subtitle">Activation is handled as a finance and status gate after membership approval.</p>
+            </div>
+            <div class="action-row">
+              <button class="button">Send reminders</button>
+              <button class="button primary">Confirm payment</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Activation queue</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">3 blocked or waiting</span>
+              <span class="summary-chip">2 invoice actions due</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Organisation</th>
+                  <th>Approved type</th>
+                  <th>Invoice state</th>
+                  <th>Payment state</th>
+                  <th>Activation state</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="activation-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const invoiceStates = ["Draft", "Unsent", "Sent", "Blocked"];
+    const paymentStates = ["Awaiting invoice", "Proof pending", "Paid", "Not started"];
+    const activationStates = ["Blocked", "Ready after proof", "Activate now", "Waiting on review completion"];
+
+    document.getElementById("activation-rows").innerHTML = data.pending_activation.map((item) => `
+      <tr>
+        <td><strong>${item.organisation}</strong></td>
+        <td>${ui.select(["manufacturer_small", "agronomist", "funder"], item.approved_type)}</td>
+        <td>${ui.select(invoiceStates, item.invoice_state)}</td>
+        <td>${ui.select(paymentStates, item.payment_state)}</td>
+        <td>${ui.select(activationStates, item.activation_state)}</td>
+        <td>
+          <div class="inline-actions">
+            <button class="table-button primary">Activate</button>
+            <button class="table-button">Invoice</button>
+          </div>
+        </td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

@@ -23,6 +23,8 @@ The presentation currently needs to cover:
   internal demo material; not the public homepage
 - `docs/site/`
   main ABA site / umbrella story / public homepage
+- `docs/membership-ops/`
+  membership operations workspace
 - `registration-tracker/`
   Lyle's workspace at the repo root; do not reorganize it unless explicitly asked
 - `docs/membership-flow/`
@@ -69,7 +71,9 @@ Read these when working on related surfaces:
 - Optimize for clarity, demo flow, and believable product logic over backend completeness.
 - Keep each major artifact in its own folder and avoid flattening new pages back into `docs/`.
 - Treat `docs/site/index.html` as the real public homepage.
+- Treat operational prototype sections like `docs/membership-ops/` as separate workspaces launched from the root `/aba/` directory, not as subsections of the public site.
 - Treat `docs/index.html` as internal working/demo material unless explicitly told otherwise.
+- Every prototype surface should read as the real product for its intended audience. Do not leave meta narration, repo explanation, prototype framing, or internal instructional copy visible inside the UI unless the user explicitly asks for that treatment.
 - Preserve the core ABA framing:
   Africa-wide participation, South Africa currently active, registration tracker as a member-value and advocacy engine.
 - If you add new pages for a workspace, keep relative links stable from that folder back to the hub.

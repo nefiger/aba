@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Invoices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="invoices">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Finance</div>
+              <h1 class="page-title">Invoices</h1>
+              <p class="page-subtitle">Membership fee records, invoice state, and payment follow-up.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Invoice records</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">2 need follow-up</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice</th>
+                  <th>Organisation</th>
+                  <th>Fee object</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Due date</th>
+                  <th>Payment state</th>
+                </tr>
+              </thead>
+              <tbody id="invoice-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const invoiceStates = ["Draft", "Sent", "Overdue"];
+    const paymentStates = ["Awaiting send", "Proof pending", "Unpaid", "Paid"];
+
+    document.getElementById("invoice-rows").innerHTML = data.invoices.map((item) => `
+      <tr>
+        <td><strong>${item.invoice_id}</strong></td>
+        <td>${item.organisation}</td>
+        <td><input class="field" value="${item.fee_object}" aria-label="${item.invoice_id} fee object"></td>
+        <td><input class="field" value="${item.amount}" aria-label="${item.invoice_id} amount"></td>
+        <td>${ui.select(invoiceStates, item.status)}</td>
+        <td><input class="field" value="${item.due_date}" aria-label="${item.invoice_id} due date"></td>
+        <td>${ui.select(paymentStates, item.payment_state)}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

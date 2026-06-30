@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Chapters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="chapters">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Chapters</div>
+              <h1 class="page-title">Chapters</h1>
+              <p class="page-subtitle">Stub module for future chapter administration and roster logic.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel stub-panel">
+          <div class="stub-grid">
+            <div>
+              <h2 class="table-title">Module role</h2>
+              <p class="stub-note">This stub reserves space for chapter settings, roster management, and future chapter-readiness views once chapter objects are fully modelled.</p>
+            </div>
+            <div class="table-wrap">
+              <table class="stub-table">
+                <thead>
+                  <tr>
+                    <th>Chapter</th>
+                    <th>Status</th>
+                    <th>Members</th>
+                  </tr>
+                </thead>
+                <tbody id="chapter-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script>
+    document.getElementById("chapter-rows").innerHTML = window.ABA_ADMIN_DATA.chapters.map((item) => `
+      <tr>
+        <td><strong>${item.chapter}</strong></td>
+        <td>${item.status}</td>
+        <td>${item.members}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

@@ -19,6 +19,8 @@ This repo currently holds the working materials for the ABA founding-members pre
   - root launcher for the main workspaces
 - `docs/site/`
   - the main ABA site prototype
+- `docs/membership-ops/`
+  - standalone membership operations prototype
 - `docs/membership-flow/`
   - membership types and application flow
 - `docs/database/`
@@ -48,6 +50,7 @@ That means:
 ## Current Working Model
 
 - `docs/site/` is the public-facing umbrella surface
+- `docs/membership-ops/` is a separate operational prototype section launched from the root ABA directory, not a subsection of the public site
 - `docs/membership-flow/` and `docs/database/` are supporting destinations inside that broader ABA story
 - `registration-tracker/` remains a separate workspace and should not be duplicated elsewhere in the repo
 - `docs/index.html` is internal working material, not the public homepage

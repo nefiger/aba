@@ -36,6 +36,7 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 Public and role-based prototype updates now include:
 
 - stronger membership post-submit and handoff states
+- a dedicated internal `Membership Operations` prototype section for review, type assignment, dues, and activation logic
 - internal/system views separated more clearly from public primary navigation
 - tracker landing-page framing that better connects public site, member workspace, and operator/export handling
 - richer secondary public pages for `Technical Network` and `Updates`
@@ -95,6 +96,29 @@ The prototype implementation approach should now assume:
   `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
 - captured the first-pass membership type taxonomy and policy direction in:
   `docs/requirements/aba-membership-type-policy.md`
+- added `docs/membership-ops/index.html` as the first internal demo surface that makes the membership queue, category/type approval, invoicing, and activation states visible in the prototype itself
+- moved that surface out of `docs/site/` and into its own launcher-accessible section so the public site remains a public narrative shell
+- redesigned that surface away from explanatory content blocks and toward a desktop-first operator admin: sidebar navigation, application review grid, policy table, member detail panel, and activation/billing queue
+- then split membership operations into a true overview entry point plus separate work-surface pages:
+  `docs/membership-ops/queue.html`
+  `docs/membership-ops/membership-types.html`
+  `docs/membership-ops/activation.html`
+- added `docs/requirements/aba-admin-ia-and-module-plan.md` to reset the admin around modules and canonical records rather than continuing page-by-page screen improvisation
+- rebuilt `docs/membership-ops/` around a shared admin shell, a canonical mock-data layer, datagrid-first pages, and explicit stub modules:
+  `docs/membership-ops/assets/admin.css`
+  `docs/membership-ops/assets/admin-shell.js`
+  `docs/membership-ops/assets/admin-data.js`
+  `docs/membership-ops/assets/admin-render.js`
+  `docs/membership-ops/index.html`
+  `docs/membership-ops/queue.html`
+  `docs/membership-ops/members.html`
+  `docs/membership-ops/membership-types.html`
+  `docs/membership-ops/activation.html`
+  `docs/membership-ops/invoices.html`
+  `docs/membership-ops/renewals.html`
+  `docs/membership-ops/chapters.html`
+  `docs/membership-ops/registration-intelligence.html`
+  `docs/membership-ops/contacts-network.html`
 - clarified that the next spec-first tranche should lock:
   - canonical CRM-style records
   - membership relationship semantics
@@ -207,6 +231,7 @@ The prototype implementation approach should now assume:
 | `docs/database/evidence-library.html` | Evidence records library |
 | `docs/site/index.html` | Public homepage |
 | `docs/site/about.html` | About ABA |
+| `docs/membership-ops/index.html` | Internal membership review, dues, and activation prototype |
 | `docs/site/assets/africa-map-freevectormaps.png` | Sourced Africa-map asset currently used on About |
 | `docs/membership-flow/index.html` | Membership application flow |
 | `docs/registration-tracker/index.html` | Registration tracker presenter page |
@@ -221,6 +246,7 @@ The prototype implementation approach should now assume:
 - The user reviews and merges PRs, then deletes branches. Always check PR/branch state before pushing to an existing branch — do not assume a branch is still open.
 - New work goes on a fresh branch; never push directly to main.
 - Internal session notes go in `docs/requirements/` as `<topic>-notes.md`.
+- Distinct operational prototype sections should launch from the root ABA directory rather than being absorbed into `docs/site/`.
 - This `HANDOVER.md` should be updated at the end of each session.
 - Other agents working in this repo should also treat this file as the default shared continuity log and leave updates here unless there is a strong reason to capture something only elsewhere.
 - This applies to tracker-adjacent workspaces too, including Lyle-linked work, so cross-agent context does not drift.

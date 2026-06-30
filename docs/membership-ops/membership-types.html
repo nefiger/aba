@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Membership Types & Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="types">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Membership</div>
+              <h1 class="page-title">Types & Policy</h1>
+              <p class="page-subtitle">Managed policy objects for category, fee, privileges, and form availability.</p>
+            </div>
+            <div class="action-row">
+              <button class="button">Reorder</button>
+              <button class="button primary">Create type</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Membership type records</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">4 active policy records</span>
+              <span class="summary-chip">1 restricted route</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type code</th>
+                  <th>Category</th>
+                  <th>Annual fee</th>
+                  <th>Billing cycle</th>
+                  <th>Privileges</th>
+                  <th>Availability</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="type-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const categoryOptions = ["Full member", "Technical partner", "Observer"];
+    const cycleOptions = ["Annual", "Policy defined"];
+    const availabilityOptions = ["Public forms", "Invite and review", "Board approved only"];
+    const statusOptions = ["Active", "Restricted", "Retired"];
+
+    document.getElementById("type-rows").innerHTML = data.membership_types.map((item) => `
+      <tr>
+        <td><input class="field" value="${item.code}" aria-label="${item.code} code"></td>
+        <td>${ui.select(categoryOptions, item.category)}</td>
+        <td><input class="field" value="${item.annual_fee}" aria-label="${item.code} annual fee"></td>
+        <td>${ui.select(cycleOptions, item.billing_cycle)}</td>
+        <td><input class="field" value="${item.privileges}" aria-label="${item.code} privileges"></td>
+        <td>${ui.select(availabilityOptions, item.availability)}</td>
+        <td>${ui.select(statusOptions, item.status)}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

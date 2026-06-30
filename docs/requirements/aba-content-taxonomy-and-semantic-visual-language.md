@@ -312,6 +312,9 @@ Signal through:
 - state emphasis
 - records + decisions side by side
 - stronger distinction between reviewed and unreviewed material
+- queue-first layout where the primary surface is a working grid rather than a narrative page
+- in-place actions as the default interaction model
+- expanded side panels or secondary views only when the operator needs more context before acting
 
 ### Intelligence / dashboards
 
@@ -379,6 +382,12 @@ The current ecosystem suggests a layered IA model:
 - export views
 
 The semantic visual language should reinforce this layering.
+
+For operator/admin surfaces specifically:
+- level 1 should be queue or grid visibility
+- level 2 should be record detail and clarification context
+- level 3 should be policy/settings tables
+- operators should not need to leave the queue for routine actions such as assign, approve, request clarification, send invoice, activate, edit, retire, or reclassify
 
 ## 14. What to do next in design terms
 

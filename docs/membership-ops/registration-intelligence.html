@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Registration Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="intelligence">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Registration Intelligence</div>
+              <h1 class="page-title">Registration Intelligence</h1>
+              <p class="page-subtitle">Stub module for future regulatory signals, submissions, and bottleneck tracking.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel stub-panel">
+          <div class="stub-grid">
+            <div>
+              <h2 class="table-title">Module role</h2>
+              <p class="stub-note">This stub holds the future internal view over submission volume, country clustering, and bottleneck patterns coming from tracker data.</p>
+            </div>
+            <div class="table-wrap">
+              <table class="stub-table">
+                <thead>
+                  <tr>
+                    <th>Country</th>
+                    <th>Submissions</th>
+                    <th>Bottleneck</th>
+                  </tr>
+                </thead>
+                <tbody id="intelligence-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script>
+    document.getElementById("intelligence-rows").innerHTML = window.ABA_ADMIN_DATA.intelligence.map((item) => `
+      <tr>
+        <td><strong>${item.country}</strong></td>
+        <td>${item.submissions}</td>
+        <td>${item.bottleneck}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>
