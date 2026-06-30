@@ -30,6 +30,8 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
 - `docs/requirements/aba-email-derived-task-list.md`
 - `docs/requirements/aba-active-now-checklist.md`
+- `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
+- `docs/requirements/aba-membership-type-policy.md`
 
 Public and role-based prototype updates now include:
 
@@ -57,6 +59,16 @@ The newer email-derived note and task list are now the best source for:
 - the explicit post-meeting action sequence
 - the practical work items around founder testing, regulator engagement, cohort building, and advisory-network development
 
+The new membership/admin/CRM gap-pass note is now the best source for:
+- where the current prototype is already acting like a systems spec
+- what is still ambiguous in the operational data model
+- the next ordered backlog for turning the prototype into a safer implementation contract
+
+The membership-type policy note is now the best source for:
+- the current canonical membership taxonomy
+- how categories, annual dues, privileges, and admin-management should be modeled
+- the distinction between applied and approved membership type
+
 ---
 
 ## What was completed in the last session
@@ -70,6 +82,20 @@ The newer email-derived note and task list are now the best source for:
 - created a condensed current-focus checklist in:
   `docs/requirements/aba-active-now-checklist.md`
 - updated `HANDOVER.md` to connect those notes back into session continuity
+
+### Membership/admin/CRM spec pass
+
+- audited the current prototype and requirements notes as a systems contract rather than only a public-site prototype
+- captured the main domain-model gaps in:
+  `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
+- captured the first-pass membership type taxonomy and policy direction in:
+  `docs/requirements/aba-membership-type-policy.md`
+- clarified that the next spec-first tranche should lock:
+  - canonical CRM-style records
+  - membership relationship semantics
+  - operator review/case behavior
+  - field-level visibility and consent rules
+  - membership-to-submission linkage
 
 ### Public-site correction and review
 
@@ -122,6 +148,14 @@ The newer email-derived note and task list are now the best source for:
 - Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
 - A full design system is still intentionally deferred; the current requirement is disciplined consistency and reusable conventions, not component-library implementation
 
+### Prototype-as-spec data-model work
+
+- The repo now needs a more explicit canonical data spine for membership, admin, CRM-style records, and operator workflow
+- The biggest remaining gap is not route structure, but operational modeling:
+  people, organisations, relationships, applications, submissions, review cases, consents, and downstream outputs
+- `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
+- The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
+
 ### Sequencing constraint
 
 - Continue with the non-tracker ABA surfaces first:
@@ -136,6 +170,7 @@ The newer email-derived note and task list are now the best source for:
 - Admin/backend and member-workspace thinking still needs to move from implied to explicit in notes, even while tracker implementation work is paused
 - Governance setup should continue in parallel with product work rather than being deferred
 - The database / explorer remains valuable, but is not the immediate launch gate
+- Membership/admin/CRM clarification is now part of the immediate prototype-spec work, not just a later implementation concern
 
 ### Founder and regulator preparation
 

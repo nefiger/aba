@@ -1,6 +1,6 @@
 # ABA Prototype System Model
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 Purpose:
 - define the product behavior behind the current ABA prototype
@@ -123,7 +123,15 @@ Fields shown or implied:
 - phone
 - role_title
 - organisation_link
+- acquisition_channel
+- relationship_stage
 - authorisation_status for tracker submission where relevant
+
+Notes:
+- every individual in the system should resolve to a `Person` record
+- a person may hold multiple roles at once:
+  applicant, member contact, tracker submitter, subscriber, technical-network participant
+- if a tracker submitter is new to the system, a new `Person` record should be created as a prospect with a clear `acquisition_channel` link to `registration_tracker`
 
 ### MembershipApplication
 
@@ -133,7 +141,10 @@ Fields shown or implied:
 - applicant_shape
 - applicant_person
 - organization_link
-- membership_type
+- applied_membership_category
+- applied_membership_type
+- approved_membership_category
+- approved_membership_type
 - primary_country
 - sector_roles
 - activity_areas
@@ -143,6 +154,8 @@ Fields shown or implied:
 - consent flags
 - source_notes
 - operator_notes
+- operator_decision_reason
+- invoicing_required flag
 
 Status model:
 - draft
@@ -152,23 +165,72 @@ Status model:
 - approved
 - declined
 
+Rules:
+- `MembershipApplication` is separate from `RegistrationSubmission`
+- approval does not make the member active by itself
+- an application may be approved into a different membership type from the one originally applied for
+- `applied_membership_category`, `applied_membership_type`, `approved_membership_category`, and `approved_membership_type` must remain separate fields
+
+### MembershipType
+
+Represents a defined ABA membership category and the policy attached to it.
+
+Fields shown or implied:
+- membership_category_code
+- membership_type_code
+- public_label
+- membership_category
+- annual_dues_amount
+- billing_cycle
+- privileges_summary
+- voting_rights flag where relevant
+- workspace_access_scope
+- tracker_support_scope where relevant
+- review_requirements_summary
+- is_active
+- display_order
+
+Rules:
+- membership types are distinct and should not be flattened into a single generic member class
+- different membership types may have different dues, approval logic, and privileges
+- ABA needs an internal way to create and manage membership types, categories, and fee policies
+
+Reference note:
+- see `docs/requirements/aba-membership-type-policy.md` for the current canonical first-pass taxonomy and policy direction
+
 ### Member
 
 Represents an approved ABA membership relationship.
 
 Fields shown or implied:
+- membership_category
 - organization_link or individual_link
 - membership_type
 - membership_status
 - verified_relationship_label
 - country_scope
 - member_visibility_scope
+- application_link
+- approved_at
+- activated_at
+- annual_dues_amount
+- dues_cycle
+- invoice_status
+- payment_status
+- renewal_due_on
+- privileges_summary
 
 Status model:
 - pending_activation
 - active
 - inactive
 - lapsed
+
+Rules:
+- successful applicants must be invoiced and pay member dues before becoming `active`
+- annual dues are typically charged yearly and may vary by membership type
+- `pending_activation` covers approved members who are not yet active because invoicing, payment, or onboarding is incomplete
+- `lapsed` should be used where renewal or dues obligations were not maintained
 
 ### Product
 
@@ -201,6 +263,9 @@ Fields shown or implied:
 - bottleneck_theme
 - public_aggregate_consent
 - named_registrar_consent
+- acquisition_channel
+- prospect_person_link where relevant
+- prospect_organization_link where relevant
 
 Status model:
 - draft
@@ -220,6 +285,26 @@ Fields shown or implied:
 - stage_started_at
 - approximate_date flag
 - notes
+
+### ContactSubscription
+
+Represents a general stay-informed, newsletter, or updates relationship.
+
+Fields shown or implied:
+- person_link
+- organization_link where relevant
+- subscription_type
+- source_channel
+- advocacy_contact_ok flag
+- fundraising_contact_ok flag
+- recruitment_contact_ok flag
+- newsletter_consent
+- active_status
+
+Rules:
+- this is separate from membership and tracker records
+- newsletter or stay-informed contacts should still resolve to the same person/contact spine
+- these contacts may later support recruiting, fundraising, advocacy, or broader relationship-building
 
 ### Country
 
@@ -276,7 +361,16 @@ Fields shown or implied:
    - `more_information_required`
    - `approved`
    - `declined`
-6. If approved, a `Member` relationship can be activated.
+6. If approved, a `Member` relationship is created in a pending activation state.
+7. Member is invoiced according to the approved membership type and annual dues rules.
+8. Member becomes `active` only after dues/payment requirements are satisfied.
+
+### Stay informed / newsletter flow
+
+1. Visitor signs up for updates through a public stay-informed entry point.
+2. A `Person` record is created or matched.
+3. A `ContactSubscription` record is created with clear source attribution.
+4. ABA may later use this contact base for newsletter, advocacy, recruitment, convening, or fundraising follow-up according to captured permissions.
 
 ### Full membership with product-registration relevance
 
@@ -290,9 +384,10 @@ Fields shown or implied:
 
 1. Authorised representative opens tracker intake.
 2. They pass the authorisation gate.
-3. A `RegistrationSubmission` record is created for review.
-4. ABA operator reviews, clarifies, includes, or excludes.
-5. Public aggregates and export packet logic depend on operator decisions and consent.
+3. If person or organisation does not already exist, the system creates prospect records with clear source attribution to the tracker.
+4. A `RegistrationSubmission` record is created for review.
+5. ABA operator reviews, clarifies, includes, or excludes.
+6. Public aggregates and export packet logic depend on operator decisions and consent.
 
 ### Member company workspace flow
 
@@ -349,6 +444,7 @@ May include:
 - next actions
 - status detail
 - evidence readiness
+- member dues and subscription status where relevant
 
 Must not include:
 - other companies' records
@@ -379,6 +475,8 @@ The prototype should continue to visibly demonstrate:
 - membership application states
 - review and follow-up states
 - member activation states
+- invoice, payment, or annual subscription gating before active status
+- general stay-informed capture as a purposeful route, not an afterthought
 - tracker record states
 - export eligibility states
 - public vs private boundaries
