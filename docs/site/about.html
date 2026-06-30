@@ -172,7 +172,7 @@
     }
     .lede {
       margin-top: 10px;
-      max-width: 74ch;
+      max-width: 82ch;
     }
     .panel,
     .card {
@@ -211,11 +211,11 @@
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 500px;
-      padding: 28px 38px 32px;
+      min-height: 0;
+      padding: 30px 38px 24px;
       background:
-        radial-gradient(circle at 82% 62%, rgba(95, 125, 110, 0.06), transparent 28%),
-        linear-gradient(135deg, rgba(255, 253, 248, 0.94), rgba(248, 244, 235, 0.88));
+        radial-gradient(circle at 84% 58%, rgba(95, 125, 110, 0.08), transparent 30%),
+        linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(248, 244, 235, 0.9));
     }
     .hero > * {
       position: relative;
@@ -224,10 +224,10 @@
     .hero-copy-block { max-width: none; }
     .footprint-art {
       position: absolute;
-      right: -24px;
-      top: 86px;
-      width: min(33vw, 480px);
-      height: min(33vw, 480px);
+      right: -18px;
+      bottom: -58px;
+      width: min(31vw, 430px);
+      height: min(31vw, 430px);
       pointer-events: none;
       z-index: 0;
     }
@@ -238,13 +238,13 @@
       object-position: center;
       display: block;
       mix-blend-mode: multiply;
-      opacity: 0.09;
-      filter: saturate(0.45) contrast(0.9);
+      opacity: 0.08;
+      filter: saturate(0.35) contrast(0.92);
     }
     .footprint-marker {
       position: absolute;
       left: 46%;
-      bottom: 12%;
+      bottom: 11.6%;
       width: 12px;
       height: 12px;
       border-radius: 999px;
@@ -253,42 +253,28 @@
       border: 2px solid rgba(247, 244, 237, 0.9);
     }
     .footprint-band {
-      margin-top: 108px;
+      margin-top: 42px;
       display: grid;
-      grid-template-columns: 240px minmax(0, 1fr);
-      gap: 18px;
-      align-items: start;
+      gap: 10px;
+      max-width: 72ch;
       padding: 18px 0 0;
       border-top: 1px solid rgba(23, 48, 57, 0.08);
     }
     .footprint-kicker {
       display: grid;
-      gap: 8px;
+      gap: 10px;
     }
     .footprint-kicker .mini {
       color: color-mix(in oklab, var(--muted) 90%, white);
-    }
-    .footprint-panel {
-      display: grid;
-      gap: 12px;
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(241, 234, 219, 0.72), rgba(241, 234, 219, 0.62));
-      border: 1px solid rgba(23, 48, 57, 0.08);
-      backdrop-filter: blur(8px);
-    }
-    .footprint-panel .mini {
-      color: color-mix(in oklab, var(--muted) 92%, white);
-    }
-    .footprint-panel p {
-      font-size: 14px;
-      line-height: 1.62;
     }
     .footprint-emphasis {
       color: var(--ink);
       font-weight: 700;
       line-height: 1.5;
       font-size: 15px;
+    }
+    .footprint-support {
+      max-width: 64ch;
     }
     .footprint-credit {
       font-size: 11px;
@@ -342,18 +328,15 @@
         padding: 24px 22px 28px;
       }
       .footprint-art {
-        right: -26px;
+        right: -42px;
         top: auto;
-        bottom: 86px;
-        width: min(58vw, 280px);
-        height: min(58vw, 280px);
+        bottom: -18px;
+        width: min(70vw, 340px);
+        height: min(70vw, 340px);
       }
       .footprint-band {
-        grid-template-columns: 1fr;
-        margin-top: 84px;
-      }
-      .footprint-panel {
-        width: 100%;
+        margin-top: 46px;
+        max-width: none;
       }
     }
   </style>
@@ -375,7 +358,6 @@
           <a href="../membership-flow/index.html">Membership</a>
           <a href="../database/index.html">Biologicals Explorer</a>
           <a href="../registration-tracker/index.html">Track Registrations</a>
-          <a href="./workspace.html">Workspace</a>
         </nav>
         <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
       </div>
@@ -394,10 +376,7 @@
               <div class="mini">Building from South Africa</div>
               <p class="footprint-emphasis">South Africa is the current operating base, while the alliance is designed to support participation and sector relationship-building across the continent.</p>
             </div>
-            <aside class="footprint-panel" aria-label="Building from South Africa">
-              <p class="footprint-emphasis">ABA is anchored in South Africa — where the regulatory framework, market activity, and founding membership are currently concentrated.</p>
-              <p>The model is designed to extend across Africa as participation grows. South Africa is the starting point, not the ceiling.</p>
-            </aside>
+            <p class="footprint-support">ABA is anchored in South Africa, where the regulatory framework, market activity, and founding membership are currently concentrated. The model is designed to extend across Africa as participation grows.</p>
           </div>
         </div>
         <div class="footprint-art" aria-hidden="true">
@@ -504,28 +483,6 @@
             <h3>Membership that fits different roles</h3>
           </div>
           <p style="margin-top: 8px;">Industry members, technical contributors, and institutional stakeholders each have a route into ABA. Structure is designed to be proportionate to role — not a single flat membership for everyone.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="surface section">
-      <div>
-        <div class="eyebrow">System architecture</div>
-        <h2 class="display" style="margin-top: 6px;">ABA is not one page. It is one coordinated system.</h2>
-        <p style="margin-top: 8px; max-width: 66ch;">The public site explains the proposition. Membership establishes the relationship. The registration tracker structures private contribution and public-safe signals. The Biologicals Explorer makes the knowledge layer visible. Internal workspaces hold the review and decision logic that makes the whole model credible.</p>
-      </div>
-      <div class="detail-grid" style="margin-top: 12px;">
-        <article class="card">
-          <h3>Public site</h3>
-          <p style="margin-top: 8px;">Routes visitors into the right path and makes ABA legible as an alliance, not only a tool.</p>
-        </article>
-        <article class="card">
-          <h3>Membership and intake</h3>
-          <p style="margin-top: 8px;">Captures who is participating, what role they want to play, and when product-registration support should be carried forward.</p>
-        </article>
-        <article class="card">
-          <h3>Operator and export workspaces</h3>
-          <p style="margin-top: 8px;">Show where records are reviewed, where public signals are shaped, and how controlled outward-facing engagement is prepared.</p>
         </article>
       </div>
     </section>
