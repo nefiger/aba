@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Membership Applications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="applications">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Membership</div>
+              <h1 class="page-title">Applications</h1>
+              <p class="page-subtitle">Review, assign, clarify, and approve membership applications in one datagrid.</p>
+            </div>
+            <div class="action-row">
+              <button class="button">Bulk assign</button>
+              <button class="button">Send clarification</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Application queue</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">12 in queue</span>
+              <span class="summary-chip">5 under review</span>
+              <span class="summary-chip">2 need clarification</span>
+            </div>
+          </div>
+
+          <div class="datagrid-shell">
+            <div class="filters-block">
+              <div class="filters-grid">
+                <input class="field" type="search" placeholder="Search applicant, organisation, country, or type" aria-label="Search applications">
+                <select class="select" aria-label="Route">
+                  <option>All routes</option>
+                  <option selected>Full member</option>
+                  <option>Technical partner</option>
+                  <option>Observer</option>
+                </select>
+                <select class="select" aria-label="Status">
+                  <option selected>All statuses</option>
+                  <option>Under review</option>
+                  <option>More information required</option>
+                  <option>Approved</option>
+                </select>
+                <select class="select" aria-label="Country">
+                  <option selected>All countries</option>
+                  <option>South Africa</option>
+                  <option>Kenya</option>
+                </select>
+                <select class="select" aria-label="Owner">
+                  <option selected>All owners</option>
+                  <option>Jen M.</option>
+                  <option>Anna D.</option>
+                  <option>Unassigned</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Applicant</th>
+                    <th>Applied type</th>
+                    <th>Suggested type</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="application-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const owners = ["Jen M.", "Anna D.", "Unassigned"];
+
+    document.getElementById("application-rows").innerHTML = data.applications.map((item) => `
+      <tr>
+        <td>
+          <div class="record-name">
+            <strong>${item.organisation}</strong>
+            <div class="record-meta">${item.description}</div>
+            <div class="record-meta">${item.notes[0]}</div>
+          </div>
+        </td>
+        <td>${ui.chip(item.applied_type, item.status_tone)}</td>
+        <td>${ui.select(["manufacturer_small", "agronomist", "funder"], item.suggested_type)}</td>
+        <td>${ui.status(item.status, item.status_tone)}</td>
+        <td>${ui.select(owners, item.owner)}</td>
+        <td>
+          <div class="inline-actions">
+            <button class="table-button primary">Approve</button>
+            <button class="table-button soft">Clarify</button>
+            <button class="table-button ghost">Reclassify</button>
+          </div>
+        </td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

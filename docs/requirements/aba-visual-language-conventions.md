@@ -35,6 +35,12 @@ All core ABA prototype pages should share these baseline traits:
 
 This shared shell is what holds the prototype together.
 
+Boundary rule:
+- `docs/site/` is for the public ABA site shell
+- separate operational sections should not be introduced as if they were ordinary public-site subsections
+- when a surface becomes its own operational prototype, launch it from the root ABA directory instead
+- coherence between public and admin/workflow surfaces should still be preserved where sensible through shared brand atmosphere, typography, shell treatment, and action language
+
 ## 3. Page-family conventions
 
 ### Public narrative pages
@@ -53,6 +59,7 @@ Use:
 Avoid:
 - internal workflow language in the hero
 - dashboard-style density as the main first impression
+- narration that explains the prototype, repo, or design exercise instead of speaking in the product's own voice
 
 ### Pathway pages
 
@@ -93,6 +100,7 @@ Avoid:
 
 Examples:
 - `docs/site/operator-workspace.html`
+- `docs/membership-ops/index.html`
 - tracker operator and registrar views
 
 Use:
@@ -100,10 +108,18 @@ Use:
 - explicit state labels
 - record/action/decision separation
 - lower-noise backgrounds inside content modules
+- a separate workspace identity when the page is no longer part of the public-site reading flow
+- table and queue surfaces as the primary working area
+- in-place actions inside rows or immediate adjacent detail panels by default
+- visible family resemblance to the public ABA product through shared brand shell, background atmosphere, mark, type, and button language where that does not reduce operator clarity
 
 Avoid:
 - public-storytelling tone where procedural clarity is needed
 - making private and public information look equivalent
+- meta labels such as `prototype`, `demo`, `internal note`, `why this page exists`, or launcher-oriented instructions inside the product UI
+- pushing routine operator actions into separate pages when the same decision can be made safely in context
+- drifting into a separate SaaS visual identity that feels unrelated to the public ABA system
+- overview or helper copy that describes the screen itself instead of helping the operator complete work
 
 ## 4. Hierarchy rules
 

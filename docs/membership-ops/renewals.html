@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Renewals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="renewals">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Finance</div>
+              <h1 class="page-title">Renewals</h1>
+              <p class="page-subtitle">Renewal due dates, lapsed relationships, and forward renewal tracking.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Renewal tracking</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">4 renewals due</span>
+              <span class="summary-chip">1 lapsed relationship</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Organisation</th>
+                  <th>Membership type</th>
+                  <th>Renewal due</th>
+                  <th>Renewal state</th>
+                  <th>Dues state</th>
+                </tr>
+              </thead>
+              <tbody id="renewal-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const renewalStates = ["Healthy", "Due soon", "Lapsed"];
+    const duesStates = ["Paid", "Invoice drafted", "Overdue"];
+
+    document.getElementById("renewal-rows").innerHTML = data.renewals.map((item) => `
+      <tr>
+        <td><strong>${item.organisation}</strong></td>
+        <td>${ui.select(["manufacturer_small", "manufacturer_large", "funder"], item.membership_type)}</td>
+        <td><input class="field" value="${item.renewal_due}" aria-label="${item.organisation} renewal due"></td>
+        <td>${ui.select(renewalStates, item.renewal_state)}</td>
+        <td>${ui.select(duesStates, item.dues_state)}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

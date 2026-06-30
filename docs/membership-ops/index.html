@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="dashboard">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Dashboard</div>
+              <h1 class="page-title">Membership operations</h1>
+              <p class="page-subtitle">Current workload, exceptions, and movement across membership and finance.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid">
+          <div class="panel panel-stack">
+            <div class="table-head">
+              <div>
+                <h2 class="table-title">Attention now</h2>
+                <p class="table-meta">The dashboard routes attention through exceptions, not duplicated navigation.</p>
+              </div>
+            </div>
+            <ul class="priority-list" id="priority-list"></ul>
+          </div>
+
+          <div class="panel panel-stack">
+            <div class="table-head">
+              <div>
+                <h2 class="table-title">Recent activity</h2>
+                <p class="table-meta">Latest operational movement across review and finance.</p>
+              </div>
+            </div>
+            <ul class="activity-list" id="activity-list"></ul>
+          </div>
+        </section>
+
+        <section class="metrics-grid" id="metrics-grid"></section>
+
+        <section class="split-card-grid">
+          <div class="panel dashboard-table">
+            <div class="table-head">
+              <div>
+                <div class="eyebrow">Applications</div>
+                <h2 class="table-title">Queue pressure</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Organisation</th>
+                    <th>Applied type</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-application-rows"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel dashboard-table">
+            <div class="table-head">
+              <div>
+                <div class="eyebrow">Finance</div>
+                <h2 class="table-title">Activation exceptions</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Organisation</th>
+                    <th>Invoice</th>
+                    <th>Payment</th>
+                    <th>Activation</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-finance-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+
+    const metricConfig = [
+      ["Applications in review", data.summary.applications_in_review, "Membership queue"],
+      ["Needs clarification", data.summary.needs_clarification, "Waiting on applicant response"],
+      ["Pending activation", data.summary.pending_activation, "Approved, not yet active"],
+      ["Overdue invoices", data.summary.overdue_invoices, "Finance exceptions"],
+      ["Renewals due", data.summary.renewals_due, "Next 30 days"],
+      ["Active member types", data.summary.active_member_types, "Policy records live"],
+    ];
+
+    document.getElementById("metrics-grid").innerHTML = metricConfig.map(([label, value, meta]) => `
+      <article class="metric-card">
+        <div class="mini">${label}</div>
+        <strong>${value}</strong>
+        <div class="record-meta">${meta}</div>
+      </article>
+    `).join("");
+
+    document.getElementById("priority-list").innerHTML = data.alerts.map((item) => `
+      <li>
+        <div class="mini">${item.label}</div>
+        <strong>${item.title}</strong>
+        <div class="record-meta">${item.detail}</div>
+      </li>
+    `).join("");
+
+    document.getElementById("activity-list").innerHTML = data.activity.map((item) => `
+      <li>
+        <div class="mini">${item.time}</div>
+        <strong>${item.title}</strong>
+        <div class="record-meta">${item.detail}</div>
+      </li>
+    `).join("");
+
+    document.getElementById("dashboard-application-rows").innerHTML = data.applications.slice(0, 3).map((item) => `
+      <tr>
+        <td>
+          <div class="record-name">
+            <strong>${item.organisation}</strong>
+            <div class="record-meta">${item.description}</div>
+          </div>
+        </td>
+        <td>${ui.chip(item.applied_type, item.status_tone)}</td>
+        <td>${ui.status(item.status, item.status_tone)}</td>
+        <td>${item.owner}</td>
+      </tr>
+    `).join("");
+
+    document.getElementById("dashboard-finance-rows").innerHTML = data.pending_activation.map((item) => `
+      <tr>
+        <td><strong>${item.organisation}</strong></td>
+        <td>${ui.status(item.invoice_state, item.invoice_tone)}</td>
+        <td>${ui.status(item.payment_state, item.payment_tone)}</td>
+        <td>${ui.status(item.activation_state, item.activation_tone)}</td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

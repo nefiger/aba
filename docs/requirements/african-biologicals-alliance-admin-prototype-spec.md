@@ -4,6 +4,11 @@ This document defines the first-pass admin/backend prototype scope for ABA.
 
 This is a concept and interface spec, not a full systems implementation plan.
 
+Implementation approach for this prototype phase:
+- no real database is required
+- admin views should be driven by shared mock data and realistic example records
+- the goal is to demonstrate model, workflow, and visibility logic rather than persistence or heavy CRUD
+
 ## 1. Purpose
 
 The admin prototype should give ABA an internal home for:
@@ -13,6 +18,7 @@ The admin prototype should give ABA an internal home for:
 - identifying where people or products appear stuck
 
 The admin must stay lightweight for now. It does not need deep workflow automation or complex chapter handoff behavior yet.
+It also does not need a real backend or database layer for this prototype tranche.
 
 ## 2. Core Admin Jobs
 
@@ -72,6 +78,7 @@ Recommended top-level admin navigation:
 3. Membership Leads
 4. Technical Network
 5. Contacts / Subscribers
+6. Membership Types
 
 Optional future section:
 - Countries
@@ -242,9 +249,55 @@ Maintain visibility into general communications growth without overcomplicating 
 - recent signups
 - by country if captured
 
+This section should also support later relationship use beyond simple newsletter counting, including:
+- recruiting future members
+- advocacy or campaign outreach
+- fundraising follow-up
+- convening and event communication
+
 This section can stay simple in the first prototype.
 
-## 12. Geographic Framing Inside Admin
+## 12. Membership Types Section
+
+### Purpose
+
+Give ABA an internal place to manage the membership types that power public applications and approved member relationships.
+
+### Recommended content
+
+- membership type list
+- type category
+- annual dues amount
+- billing cadence
+- privileges summary
+- active/inactive status
+
+### Useful columns
+
+- membership type name
+- category
+- annual dues
+- billing cycle
+- current privileges summary
+- active status
+
+### Required actions
+
+- create membership type
+- edit membership type
+- retire or deactivate membership type
+- reorder or group visible types where useful
+
+### Rules
+
+- membership types should be managed policy objects, not only hard-coded form labels
+- public application forms should only show active, approved membership types
+- historical applications and approved members should preserve the applied or approved type from the time of decision, even if fees change later
+
+Reference note:
+- see `docs/requirements/aba-membership-type-policy.md`
+
+## 13. Geographic Framing Inside Admin
 
 The admin should support the same underlying product truth as the public site:
 - Africa-wide participation is welcome
@@ -255,7 +308,7 @@ The admin should make this visible by:
 - allowing users to inspect South Africa separately from the broader continental picture
 - surfacing wider-Africa interest as future-ready signal, not noise
 
-## 13. Visual Style Direction
+## 14. Visual Style Direction
 
 The admin does not need to mimic the public site exactly, but it should feel related.
 
@@ -271,7 +324,7 @@ Suggested design direction:
 - blue used more strongly in the registration intelligence area
 - charts should prioritize readability over decoration
 
-## 14. Charting Guidance
+## 15. Charting Guidance
 
 The prototype may use static or semi-static charts.
 
@@ -284,7 +337,7 @@ Do not overcomplicate:
 - no need for advanced drilldowns yet
 - no need for dense BI-style dashboards
 
-## 15. Responsive Expectations
+## 16. Responsive Expectations
 
 Primary use case:
 - desktop and laptop
@@ -295,7 +348,7 @@ Tablet support:
 Mobile:
 - not the priority for the admin prototype, but it should remain usable at a basic level
 
-## 16. Non-Goals For This Phase
+## 17. Non-Goals For This Phase
 
 Do not over-spec:
 - workflow automation
@@ -305,7 +358,7 @@ Do not over-spec:
 - chapter handoff orchestration
 - heavy CRM or case management logic
 
-## 17. Relationship To Other Deliverables
+## 18. Relationship To Other Deliverables
 
 This admin prototype should align with:
 - the 4 public website flows

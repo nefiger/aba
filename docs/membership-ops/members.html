@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>African Biologicals Alliance | Members</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/admin.css">
+</head>
+<body data-admin-page="members">
+  <main class="admin-shell">
+    <div class="admin-app">
+      <aside data-admin-sidebar></aside>
+      <div class="admin-main">
+        <section class="panel">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <div class="eyebrow">Membership</div>
+              <h1 class="page-title">Members</h1>
+              <p class="page-subtitle">Approved and managed membership relationships, including dues and renewal visibility.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel datagrid-panel">
+          <div class="table-head">
+            <div>
+              <h2 class="table-title">Relationship directory</h2>
+            </div>
+            <div class="summary-row">
+              <span class="summary-chip">2 pending activation</span>
+              <span class="summary-chip">1 lapsed</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Organisation</th>
+                  <th>Membership type</th>
+                  <th>Relationship status</th>
+                  <th>Dues state</th>
+                  <th>Chapter</th>
+                  <th>Renewal</th>
+                </tr>
+              </thead>
+              <tbody id="member-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/admin-shell.js"></script>
+  <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
+  <script>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const relationshipStates = ["Active", "Pending activation", "Inactive", "Lapsed"];
+    const duesStates = ["Paid", "Proof pending", "Invoice not sent", "Overdue"];
+    const chapters = ["South Africa", "East Africa (stub)", "West Africa (stub)"];
+
+    document.getElementById("member-rows").innerHTML = data.members.map((item) => `
+      <tr>
+        <td><strong>${item.organisation}</strong></td>
+        <td>${ui.select(["manufacturer_small", "manufacturer_large", "agronomist", "funder"], item.membership_type)}</td>
+        <td>${ui.select(relationshipStates, item.relationship_status)}</td>
+        <td>${ui.select(duesStates, item.dues_state)}</td>
+        <td>${ui.select(chapters, item.chapter)}</td>
+        <td><input class="field" value="${item.renewal}" aria-label="${item.organisation} renewal"></td>
+      </tr>
+    `).join("");
+  </script>
+</body>
+</html>

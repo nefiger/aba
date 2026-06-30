@@ -30,10 +30,13 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
 - `docs/requirements/aba-email-derived-task-list.md`
 - `docs/requirements/aba-active-now-checklist.md`
+- `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
+- `docs/requirements/aba-membership-type-policy.md`
 
 Public and role-based prototype updates now include:
 
 - stronger membership post-submit and handoff states
+- a dedicated internal `Membership Operations` prototype section for review, type assignment, dues, and activation logic
 - internal/system views separated more clearly from public primary navigation
 - tracker landing-page framing that better connects public site, member workspace, and operator/export handling
 - richer secondary public pages for `Technical Network` and `Updates`
@@ -57,6 +60,21 @@ The newer email-derived note and task list are now the best source for:
 - the explicit post-meeting action sequence
 - the practical work items around founder testing, regulator engagement, cohort building, and advisory-network development
 
+The new membership/admin/CRM gap-pass note is now the best source for:
+- where the current prototype is already acting like a systems spec
+- what is still ambiguous in the operational data model
+- the next ordered backlog for turning the prototype into a safer implementation contract
+
+The membership-type policy note is now the best source for:
+- the current canonical membership taxonomy
+- how categories, annual dues, privileges, and admin-management should be modeled
+- the distinction between applied and approved membership type
+
+The prototype implementation approach should now assume:
+- no real database for this tranche
+- one canonical mock data layer reused across public forms, membership/admin views, and scenario screens
+- realistic fake records and stateful demos rather than persistent backend behavior
+
 ---
 
 ## What was completed in the last session
@@ -70,6 +88,43 @@ The newer email-derived note and task list are now the best source for:
 - created a condensed current-focus checklist in:
   `docs/requirements/aba-active-now-checklist.md`
 - updated `HANDOVER.md` to connect those notes back into session continuity
+
+### Membership/admin/CRM spec pass
+
+- audited the current prototype and requirements notes as a systems contract rather than only a public-site prototype
+- captured the main domain-model gaps in:
+  `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
+- captured the first-pass membership type taxonomy and policy direction in:
+  `docs/requirements/aba-membership-type-policy.md`
+- added `docs/membership-ops/index.html` as the first internal demo surface that makes the membership queue, category/type approval, invoicing, and activation states visible in the prototype itself
+- moved that surface out of `docs/site/` and into its own launcher-accessible section so the public site remains a public narrative shell
+- redesigned that surface away from explanatory content blocks and toward a desktop-first operator admin: sidebar navigation, application review grid, policy table, member detail panel, and activation/billing queue
+- then split membership operations into a true overview entry point plus separate work-surface pages:
+  `docs/membership-ops/queue.html`
+  `docs/membership-ops/membership-types.html`
+  `docs/membership-ops/activation.html`
+- added `docs/requirements/aba-admin-ia-and-module-plan.md` to reset the admin around modules and canonical records rather than continuing page-by-page screen improvisation
+- rebuilt `docs/membership-ops/` around a shared admin shell, a canonical mock-data layer, datagrid-first pages, and explicit stub modules:
+  `docs/membership-ops/assets/admin.css`
+  `docs/membership-ops/assets/admin-shell.js`
+  `docs/membership-ops/assets/admin-data.js`
+  `docs/membership-ops/assets/admin-render.js`
+  `docs/membership-ops/index.html`
+  `docs/membership-ops/queue.html`
+  `docs/membership-ops/members.html`
+  `docs/membership-ops/membership-types.html`
+  `docs/membership-ops/activation.html`
+  `docs/membership-ops/invoices.html`
+  `docs/membership-ops/renewals.html`
+  `docs/membership-ops/chapters.html`
+  `docs/membership-ops/registration-intelligence.html`
+  `docs/membership-ops/contacts-network.html`
+- clarified that the next spec-first tranche should lock:
+  - canonical CRM-style records
+  - membership relationship semantics
+  - operator review/case behavior
+  - field-level visibility and consent rules
+  - membership-to-submission linkage
 
 ### Public-site correction and review
 
@@ -122,6 +177,16 @@ The newer email-derived note and task list are now the best source for:
 - Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
 - A full design system is still intentionally deferred; the current requirement is disciplined consistency and reusable conventions, not component-library implementation
 
+### Prototype-as-spec data-model work
+
+- The repo now needs a more explicit canonical data spine for membership, admin, CRM-style records, and operator workflow
+- The biggest remaining gap is not route structure, but operational modeling:
+  people, organisations, relationships, applications, submissions, review cases, consents, and downstream outputs
+- `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
+- The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
+- Prototype implementation should stay mock-data-first:
+  one canonical in-repo data layer, no real database, no fake backend complexity unless the user explicitly asks for it
+
 ### Sequencing constraint
 
 - Continue with the non-tracker ABA surfaces first:
@@ -136,6 +201,7 @@ The newer email-derived note and task list are now the best source for:
 - Admin/backend and member-workspace thinking still needs to move from implied to explicit in notes, even while tracker implementation work is paused
 - Governance setup should continue in parallel with product work rather than being deferred
 - The database / explorer remains valuable, but is not the immediate launch gate
+- Membership/admin/CRM clarification is now part of the immediate prototype-spec work, not just a later implementation concern
 
 ### Founder and regulator preparation
 
@@ -165,6 +231,7 @@ The newer email-derived note and task list are now the best source for:
 | `docs/database/evidence-library.html` | Evidence records library |
 | `docs/site/index.html` | Public homepage |
 | `docs/site/about.html` | About ABA |
+| `docs/membership-ops/index.html` | Internal membership review, dues, and activation prototype |
 | `docs/site/assets/africa-map-freevectormaps.png` | Sourced Africa-map asset currently used on About |
 | `docs/membership-flow/index.html` | Membership application flow |
 | `docs/registration-tracker/index.html` | Registration tracker presenter page |
@@ -179,6 +246,8 @@ The newer email-derived note and task list are now the best source for:
 - The user reviews and merges PRs, then deletes branches. Always check PR/branch state before pushing to an existing branch — do not assume a branch is still open.
 - New work goes on a fresh branch; never push directly to main.
 - Internal session notes go in `docs/requirements/` as `<topic>-notes.md`.
+- Distinct operational prototype sections should launch from the root ABA directory rather than being absorbed into `docs/site/`.
 - This `HANDOVER.md` should be updated at the end of each session.
 - Other agents working in this repo should also treat this file as the default shared continuity log and leave updates here unless there is a strong reason to capture something only elsewhere.
 - This applies to tracker-adjacent workspaces too, including Lyle-linked work, so cross-agent context does not drift.
+- Unless explicitly asked otherwise, prototype implementation work should use curated static reference data plus realistic fake records instead of building a real database or persistence layer.
