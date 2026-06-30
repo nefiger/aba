@@ -1,6 +1,6 @@
 # ABA Visual Language Conventions
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 Purpose:
 - turn the content taxonomy and design-principles thinking into practical conventions for the prototype
@@ -221,7 +221,6 @@ Current semantic symbols now in use:
   do not improvise continent outlines freehand in-page
 
 These should not be remixed casually into unrelated meanings.
-
 ## 10. Immediate application in this tranche
 
 For the current prototype iteration, these conventions should drive:

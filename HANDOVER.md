@@ -29,6 +29,7 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-visual-language-conventions.md`
 - `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
 - `docs/requirements/aba-email-derived-task-list.md`
+- `docs/requirements/aba-active-now-checklist.md`
 
 Public and role-based prototype updates now include:
 
@@ -46,7 +47,7 @@ The founding-members demo happened on 2026-06-25. Follow-up notes from both the 
 - `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
 - `docs/requirements/aba-email-derived-task-list.md`
 
-That note is now the best source for:
+The founding-members note is now the best source for:
 - what the group reacted to positively
 - what shifted from "demo" into real product-spec thinking
 - the July sequencing around copy, intake, governance, and first-cohort testing
@@ -66,6 +67,8 @@ The newer email-derived note and task list are now the best source for:
   `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
 - extracted a practical repo worklist into:
   `docs/requirements/aba-email-derived-task-list.md`
+- created a condensed current-focus checklist in:
+  `docs/requirements/aba-active-now-checklist.md`
 - updated `HANDOVER.md` to connect those notes back into session continuity
 
 ### Public-site correction and review
@@ -144,6 +147,12 @@ The newer email-derived note and task list are now the best source for:
   second-cohort identification
   advisory-network build-out
 
+### Data
+
+- Product catalogue is still at 23 products — it does not yet fully reflect the 22 crop / 20 pest surface
+- Good candidates to add: more Trichoderma and Bt product variants, semiochemical examples, inoculant lines for sugarcane and soy
+- Some new crops such as sugarcane, macadamia, and cut flowers still have no matching products visible in the catalogue
+
 ---
 
 ## Key files to know
@@ -167,9 +176,9 @@ The newer email-derived note and task list are now the best source for:
 
 ## Workflow notes
 
-- The user reviews and merges PRs, then deletes branches. Always check PR/branch state with `gh pr list` before pushing to an existing branch — don't assume a branch is still open.
+- The user reviews and merges PRs, then deletes branches. Always check PR/branch state before pushing to an existing branch — do not assume a branch is still open.
 - New work goes on a fresh branch; never push directly to main.
 - Internal session notes go in `docs/requirements/` as `<topic>-notes.md`.
-- This HANDOVER.md should be updated at the end of each session.
+- This `HANDOVER.md` should be updated at the end of each session.
 - Other agents working in this repo should also treat this file as the default shared continuity log and leave updates here unless there is a strong reason to capture something only elsewhere.
 - This applies to tracker-adjacent workspaces too, including Lyle-linked work, so cross-agent context does not drift.
