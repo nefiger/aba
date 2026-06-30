@@ -1,16 +1,23 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 ---
 
 ## Current state
 
-The prototype is in good shape as a connected demo suite. Two PRs are currently in flight:
+The prototype is now in a more explicit page-by-page review and refinement phase.
 
-- **[PR #7](https://github.com/nefiger/aba/pull/7)** `fix/remove-catalogue-evidence-hero-sections` — removes the large intro/shortcut-card blocks from product-catalogue.html and evidence-library.html. Awaiting review.
+The current priority is not broad new feature spread. It is:
+- tightening the public ABA surfaces so they read coherently
+- making the semantic visual language more intentional
+- keeping repo notes aligned with what the prototype is actually trying to become
 
-Branch `feature/data-expansion-ux` (PR #6) has been merged into main.
+Tracker-heavy work is currently parked unless it is needed to explain ABA's product model in notes.
+
+Current sequencing decision:
+- Jen and Codex work through the rest of the ABA prototype first
+- registration-tracker work is only revisited later if Lyle is still not back in action by that stage
 
 The latest prototype-as-spec pass added a stronger public-page consistency layer and new supporting requirements notes:
 
@@ -20,65 +27,88 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-prototype-consistency-checklist.md`
 - `docs/requirements/aba-content-taxonomy-and-semantic-visual-language.md`
 - `docs/requirements/aba-visual-language-conventions.md`
+- `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
+- `docs/requirements/aba-email-derived-task-list.md`
+- `docs/requirements/aba-active-now-checklist.md`
 
 Public and role-based prototype updates now include:
 
 - stronger membership post-submit and handoff states
-- a clearer workspace gateway plus integrated operator workspace
+- internal/system views separated more clearly from public primary navigation
 - tracker landing-page framing that better connects public site, member workspace, and operator/export handling
 - richer secondary public pages for `Technical Network` and `Updates`
-- wider nav consistency across the public ABA site
+- a stronger first pass at semantic route distinctions on the homepage:
+  `Alliance`, `Intelligence`, and `Knowledge`
+- an active page-by-page visual review of `docs/site/about.html`, including sourced Africa-map treatment and sharper content hierarchy decisions
 
 The founding-members demo happened on 2026-06-25. Follow-up notes from both the demo and the internal debrief are now captured in:
 
 - `docs/requirements/aba-founding-members-demo-and-debrief-notes.md`
+- `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
+- `docs/requirements/aba-email-derived-task-list.md`
 
-That note is now the best source for:
+The founding-members note is now the best source for:
 - what the group reacted to positively
 - what shifted from "demo" into real product-spec thinking
 - the July sequencing around copy, intake, governance, and first-cohort testing
 
-### Registration tracker linked-page polish
-
-Branch `codex/registration-linked-pages-polish` has completed the first two slices of the downstream registration-tracker page cleanup:
-
-- public-linked tracker screens now use a contained tracker nav: Tracker overview, Add product data, Sector signals, Company workspace
-- `Combined`, `Admin Review`, and `Registrar Export` are no longer exposed from the three pages linked by `docs/registration-tracker/index.html`
-- `registration-tracker/intake-flow/index.html` now reads as a public product-record submission surface instead of a low-fidelity internal flow
-- browser checks passed for the intake page at desktop and mobile widths, with no horizontal overflow
-
-Remaining slices for the next session:
-
-- Slice 3: align `registration-tracker/public-dashboard/index.html` with the landing-page "Sector signals" promise, remove disposable/demo framing, and reduce hierarchy confusion without making canonical label changes
-- Slice 4: polish `registration-tracker/company-dashboard/index.html` as a member-facing company workspace, reduce internal/admin phrasing, and preserve the private/member boundary
-- After visual review, discuss canonical labels before touching Knowledge Hub / Biologicals Explorer / Product Catalogue / Regulatory Signals naming
-- Continue the consistency pass across remaining secondary/public pages and any tracker-linked pages that still feel older or thinner than the newer shell
+The newer email-derived note and task list are now the best source for:
+- how Anna is currently narrating ABA's role and value to founders
+- the explicit post-meeting action sequence
+- the practical work items around founder testing, regulator engagement, cohort building, and advisory-network development
 
 ---
 
 ## What was completed in the last session
 
-### Biologicals Explorer data expansion
-- Crops: 6 → 22 contexts (added sugarcane, macadamia, cucurbits, cotton, blueberries, cut flowers, and more)
-- Pests: 6 → 20 patterns (added fall armyworm, fruit fly, botrytis, Fusarium wilt, scale insects, cutworm, diamondback moth, and more)
-- New SVG icons (all CC-BY licensed via bioicons.com): strawberry, cabbage, pear, pepper, eggplant, fruit-fly, corn, green-beans, kiwi, lemon, raspberry
+### Internal documentation capture
 
-### UX cross-links
-Every explorer card now has a contextual CTA:
-- Crop cards → "Browse products for [Crop] →" links to `product-catalogue.html?crop=X`
-- Pest cards → "Find biological solutions →" links to `product-catalogue.html?pressure=X`
-- Product catalogue reads `?pressure=` and `?crop=` URL params on init to pre-filter
+- captured Anna's post-meeting email into:
+  `docs/requirements/aba-update-strategy-next-steps-email-notes.md`
+- extracted a practical repo worklist into:
+  `docs/requirements/aba-email-derived-task-list.md`
+- created a condensed current-focus checklist in:
+  `docs/requirements/aba-active-now-checklist.md`
+- updated `HANDOVER.md` to connect those notes back into session continuity
 
-### Bug fixes
-- Evidence library shortcut cards were setting `activeView` but `filteredRecords` filters on `activeType` — now unified, shortcuts actually filter
-- `cropIcon()` and `pressureIcon()` functions extended to cover all new crops/pests
+### Public-site correction and review
 
-### Copy and cleanup
-- "Knowledge Hub" renamed "Biologicals Explorer" site-wide (12 files)
-- All public-facing pages reviewed: removed internal editorial bleed, rewrote value propositions and storytelling across site, about, membership, registration tracker, standards, resource library pages
-- Hero sections removed from product catalogue and evidence library (pending PR #7)
+- removed `Workspace` from the public primary navigation where it had been wrongly standardised
+- clarified that workspace/operator views are internal prototype utilities rather than first-class public destinations
+- continued the consistency pass across:
+  `docs/site/index.html`
+  `docs/site/about.html`
+  `docs/site/technical-network.html`
+  `docs/site/updates.html`
+  `docs/membership-flow/index.html`
+  `docs/membership-flow/membership-types.html`
+  `docs/database/index.html`
 
-Full session notes: `docs/requirements/biologicals-explorer-data-expansion-ux-notes.md`
+### Semantic visual language work
+
+- homepage now distinguishes the main routes more intentionally as:
+  `Alliance`, `Intelligence`, and `Knowledge`
+- button treatment across the main public landing pages moved away from pill/lozenge styling toward more explicit button forms
+- `docs/requirements/aba-visual-language-conventions.md` now reflects:
+  - no `Workspace` in the public nav vocabulary
+  - button-shape guidance
+  - the current semantic route labels and color logic
+  - the rule that symbolic visuals should be reused intentionally or documented clearly
+
+### About-page refinement
+
+- `docs/site/about.html` is the main active testbed for deeper visual review
+- added icon-with-title treatment for the five ABA capability blocks
+- removed the earlier system-architecture narration block entirely
+- replaced fabricated continent graphics with a sourced Africa map asset:
+  `docs/site/assets/africa-map-freevectormaps.png`
+- moved map accreditation into the footer note area of the page
+
+### Asset-sourcing correction
+
+- an earlier improvised Africa shape was a mistake and has been removed from the final page direction
+- the repo now uses the sourced Free Vector Maps asset instead of a made-up SVG
+- the visual-language note now explicitly warns against improvising continent outlines in-page
 
 ---
 
@@ -86,32 +116,42 @@ Full session notes: `docs/requirements/biologicals-explorer-data-expansion-ux-no
 
 ### Prototype-as-spec and visual consistency
 
-- The public site now has clearer shared-shell conventions, but some deeper pages still need a second-pass visual and IA review
-- `registration-tracker/public-dashboard/index.html` remains the most obvious candidate for a stronger semantic signals treatment
-- `registration-tracker/company-dashboard/index.html` should continue moving from "demo page" language toward a credible member workspace feel
-- Visual assets, imagery, and iconography still need a more intentional pass once the page architecture settles further
-- A full design system is still intentionally deferred; the current requirement is disciplined consistency, not component-library implementation
+- The public site now has clearer shared-shell conventions, but the semantic visual language is still only partially implemented
+- `docs/site/about.html` still needs visual tuning around the sourced Africa-map treatment, marker placement, and how the illustration integrates with text
+- `docs/site/index.html`, `docs/membership-flow/index.html`, and `docs/database/index.html` still need deeper page-specific design passes rather than only consistency edits
+- Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
+- A full design system is still intentionally deferred; the current requirement is disciplined consistency and reusable conventions, not component-library implementation
+
+### Sequencing constraint
+
+- Continue with the non-tracker ABA surfaces first:
+  public site, membership flow, Explorer, supporting notes, and wider prototype coherence
+- Only resume tracker-focused implementation or polish later if Lyle is still unavailable at that point
 
 ### July follow-through after the founding-members demo
 
-- Copy still needs an owner pass and cleanup before the next share-out
-- The first realistic target is now a combined membership-plus-product-intake flow for testing
+- Copy still needs an owner pass and cleanup before wider sharing
+- The first realistic target remains a believable combined membership-plus-product-intake flow for testing
 - Anoushka feedback on intake fields should inform the next form/data-model pass
-- Admin/backend and member-workspace thinking now needs to move from implied to explicit
-- Governance setup should run in parallel with product work rather than being deferred
+- Admin/backend and member-workspace thinking still needs to move from implied to explicit in notes, even while tracker implementation work is paused
+- Governance setup should continue in parallel with product work rather than being deferred
 - The database / explorer remains valuable, but is not the immediate launch gate
 
+### Founder and regulator preparation
+
+- The email-derived task list still needs to be worked through for:
+  founder testing
+  dummy tracker runs with real examples
+  pending-product collection
+  regulator engagement preparation
+  second-cohort identification
+  advisory-network build-out
+
 ### Data
-- Product catalogue is still at 23 products — doesn't fully reflect the 22 crop / 20 pest surface yet. Good candidates to add: more Trichoderma and Bt product variants, semiochemical examples, inoculant lines for sugarcane and soy
-- Some new crops (sugarcane, macadamia, cut flowers) have no matching products visible in the catalogue
 
-### UX
-- No "See pests affecting this crop" cross-link from crop cards to the explorer pest view — the reverse direction (pest → products) works, crop → pest doesn't exist yet
-- No empty-state handling if a filter returns zero cards
-- Subnav "Signal Dashboard" link goes to a sparse page — needs content or should link elsewhere
-
-### Registration tracker
-- Standalone presenter page is clean; not yet integrated into the member-facing site flow
+- Product catalogue is still at 23 products — it does not yet fully reflect the 22 crop / 20 pest surface
+- Good candidates to add: more Trichoderma and Bt product variants, semiochemical examples, inoculant lines for sugarcane and soy
+- Some new crops such as sugarcane, macadamia, and cut flowers still have no matching products visible in the catalogue
 
 ---
 
@@ -125,6 +165,7 @@ Full session notes: `docs/requirements/biologicals-explorer-data-expansion-ux-no
 | `docs/database/evidence-library.html` | Evidence records library |
 | `docs/site/index.html` | Public homepage |
 | `docs/site/about.html` | About ABA |
+| `docs/site/assets/africa-map-freevectormaps.png` | Sourced Africa-map asset currently used on About |
 | `docs/membership-flow/index.html` | Membership application flow |
 | `docs/registration-tracker/index.html` | Registration tracker presenter page |
 | `docs/database/assets/bioicons/ATTRIBUTION.md` | SVG icon licence attribution |
@@ -135,7 +176,9 @@ Full session notes: `docs/requirements/biologicals-explorer-data-expansion-ux-no
 
 ## Workflow notes
 
-- The user reviews and merges PRs, then deletes branches. Always check PR/branch state with `gh pr list` before pushing to an existing branch — don't assume a branch is still open.
+- The user reviews and merges PRs, then deletes branches. Always check PR/branch state before pushing to an existing branch — do not assume a branch is still open.
 - New work goes on a fresh branch; never push directly to main.
 - Internal session notes go in `docs/requirements/` as `<topic>-notes.md`.
-- This HANDOVER.md should be updated at the end of each session.
+- This `HANDOVER.md` should be updated at the end of each session.
+- Other agents working in this repo should also treat this file as the default shared continuity log and leave updates here unless there is a strong reason to capture something only elsewhere.
+- This applies to tracker-adjacent workspaces too, including Lyle-linked work, so cross-agent context does not drift.

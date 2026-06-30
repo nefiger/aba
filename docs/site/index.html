@@ -6,7 +6,7 @@
   <title>African Biologicals Alliance | Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --page: oklch(0.972 0.012 92);
@@ -22,6 +22,10 @@
       --sand: oklch(0.94 0.026 83);
       --teal-soft: oklch(0.93 0.02 194);
       --gold-soft: oklch(0.95 0.03 95);
+      --clay-soft: oklch(0.94 0.03 58);
+      --clay-deep: oklch(0.52 0.08 46);
+      --teal-deep: oklch(0.46 0.06 202);
+      --gold-deep: oklch(0.62 0.11 88);
       --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
       --space-2xs: 4px;
       --space-xs: 8px;
@@ -153,7 +157,7 @@
       justify-content: center;
       min-height: 42px;
       padding: 0 16px;
-      border-radius: var(--radius-pill);
+      border-radius: 12px;
       background: var(--green-deep);
       color: #f7f7f2;
       font-size: 12px;
@@ -246,7 +250,7 @@
       justify-content: center;
       min-height: 48px;
       padding: 0 18px;
-      border-radius: var(--radius-pill);
+      border-radius: 12px;
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.08em;
@@ -332,6 +336,21 @@
       box-shadow: 0 14px 26px -24px rgba(23, 48, 57, 0.16);
     }
 
+    .decision-link.membership-route {
+      background: linear-gradient(180deg, rgba(250, 242, 232, 0.96), rgba(255, 250, 246, 0.88));
+      border-color: rgba(152, 106, 66, 0.16);
+    }
+
+    .decision-link.tracker-route {
+      background: linear-gradient(180deg, rgba(234, 244, 241, 0.96), rgba(249, 252, 251, 0.88));
+      border-color: rgba(73, 122, 121, 0.16);
+    }
+
+    .decision-link.explorer-route {
+      background: linear-gradient(180deg, rgba(250, 245, 226, 0.96), rgba(255, 252, 244, 0.88));
+      border-color: rgba(164, 132, 53, 0.16);
+    }
+
     .decision-num {
       width: 40px;
       height: 40px;
@@ -344,6 +363,42 @@
       font-size: 13px;
       font-weight: 900;
       letter-spacing: 0.08em;
+    }
+
+    .decision-link.membership-route .decision-num {
+      background: rgba(188, 145, 109, 0.18);
+      color: var(--clay-deep);
+    }
+
+    .decision-link.tracker-route .decision-num {
+      background: rgba(82, 146, 140, 0.16);
+      color: var(--teal-deep);
+    }
+
+    .decision-link.explorer-route .decision-num {
+      background: rgba(220, 188, 92, 0.18);
+      color: var(--gold-deep);
+    }
+
+    .route-type {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .decision-link.membership-route .route-type {
+      color: var(--clay-deep);
+    }
+
+    .decision-link.tracker-route .route-type {
+      color: var(--teal-deep);
+    }
+
+    .decision-link.explorer-route .route-type {
+      color: var(--gold-deep);
     }
 
     .decision-link strong,
@@ -512,11 +567,32 @@
     }
 
     .path-head span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: color-mix(in oklab, var(--green-deep) 84%, white);
+    }
+
+    .path-card.membership .path-head span {
+      background: rgba(188, 145, 109, 0.14);
+      color: var(--clay-deep);
+    }
+
+    .path-card.registration .path-head span {
+      background: rgba(82, 146, 140, 0.14);
+      color: var(--teal-deep);
+    }
+
+    .path-card.biologicals .path-head span {
+      background: rgba(220, 188, 92, 0.16);
+      color: var(--gold-deep);
     }
 
     .path-head strong {
@@ -562,6 +638,26 @@
       flex-wrap: wrap;
       gap: 10px;
       padding-top: 8px;
+    }
+
+    .path-outcome {
+      display: grid;
+      gap: 6px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(73, 95, 82, 0.12);
+    }
+
+    .path-outcome label {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--ink) 66%, white);
+    }
+
+    .path-outcome p {
+      font-size: 14px;
+      line-height: 1.58;
     }
 
     .link-chip {
@@ -610,6 +706,18 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--green-deep);
+    }
+
+    .pillar-row:nth-child(1) .pillar-tag {
+      color: var(--clay-deep);
+    }
+
+    .pillar-row:nth-child(2) .pillar-tag {
+      color: var(--teal-deep);
+    }
+
+    .pillar-row:nth-child(3) .pillar-tag {
+      color: var(--gold-deep);
     }
 
     .linkage-panel {
@@ -836,23 +944,26 @@
             <h2>Choose the route that matches your reason for arriving.</h2>
           </header>
           <div class="decision-list">
-            <a class="decision-link" href="../membership-flow/index.html">
+            <a class="decision-link membership-route" href="../membership-flow/index.html">
               <span class="decision-num">01</span>
               <div>
+                <span class="route-type">Alliance</span>
                 <strong>Join ABA</strong>
                 <p>For organisations that want representation, influence, legitimacy, and a stronger collective presence.</p>
               </div>
             </a>
-            <a class="decision-link" href="../registration-tracker/index.html">
+            <a class="decision-link tracker-route" href="../registration-tracker/index.html">
               <span class="decision-num">02</span>
               <div>
+                <span class="route-type">Intelligence</span>
                 <strong>Track Product Registrations</strong>
                 <p>For people with active registration pain who want clearer visibility into product pathways, delays, and bottlenecks.</p>
               </div>
             </a>
-            <a class="decision-link" href="../database/index.html">
+            <a class="decision-link explorer-route" href="../database/index.html">
               <span class="decision-num">03</span>
               <div>
+                <span class="route-type">Knowledge</span>
                 <strong>Explore Biologicals</strong>
                 <p>For people looking for structured product, evidence, crop, pest, and regulatory knowledge.</p>
               </div>
@@ -909,7 +1020,7 @@
         <div class="paths-grid">
           <article class="path-card membership">
             <div class="path-head">
-              <span></span>
+              <span>Alliance participation</span>
               <strong>Become a Member</strong>
             </div>
             <p class="path-kicker">For organisations that want a voice, legitimacy, information, and coordinated influence.</p>
@@ -923,6 +1034,10 @@
                 <p>Representation, structured participation, stronger collective presence, and a recognised body advocating for local biologicals.</p>
               </div>
             </div>
+            <div class="path-outcome">
+              <label>Primary outcome</label>
+              <p>An ABA relationship with review, activation, and where relevant, a handoff into product-registration support.</p>
+            </div>
             <div class="path-actions">
               <a class="button primary" href="../membership-flow/index.html">Join ABA</a>
             </div>
@@ -930,7 +1045,7 @@
 
           <article class="path-card registration">
             <div class="path-head">
-              <span></span>
+              <span>Sector intelligence</span>
               <strong>Product Registration Tracker</strong>
             </div>
             <p class="path-kicker">Share a product-registration record so ABA can build a clearer picture of delays, bottlenecks, and where collective evidence can support better regulatory engagement.</p>
@@ -944,6 +1059,10 @@
                 <p>Stronger signals around progress, delays, and bottlenecks, creating evidence that can support better regulatory engagement.</p>
               </div>
             </div>
+            <div class="path-outcome">
+              <label>Primary outcome</label>
+              <p>A reviewed registration submission that can become company follow-up, public aggregate signal, or controlled export material.</p>
+            </div>
             <div class="path-actions">
               <a class="button primary" href="../registration-tracker/index.html">Track Product Registrations</a>
             </div>
@@ -951,7 +1070,7 @@
 
           <article class="path-card biologicals">
             <div class="path-head">
-              <span></span>
+              <span>Public knowledge</span>
               <strong>Explore Biologicals</strong>
             </div>
             <p class="path-kicker">A growing biologicals knowledge hub for people who need product, evidence, crop, pest, and regulatory context in one public-facing place.</p>
@@ -964,6 +1083,10 @@
                 <label>What it offers</label>
                 <p>A structured knowledge layer that makes the biologicals landscape more visible, comparable, and easier to use.</p>
               </div>
+            </div>
+            <div class="path-outcome">
+              <label>Primary outcome</label>
+              <p>A credible public reference layer that supports learning, comparison, and trust without needing private system access.</p>
             </div>
             <div class="path-actions">
               <a class="button primary" href="../database/index.html">Explore Biologicals</a>

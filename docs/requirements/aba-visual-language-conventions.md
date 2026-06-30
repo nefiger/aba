@@ -1,6 +1,6 @@
 # ABA Visual Language Conventions
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 Purpose:
 - turn the content taxonomy and design-principles thinking into practical conventions for the prototype
@@ -29,9 +29,9 @@ All core ABA prototype pages should share these baseline traits:
   warm sand base, light green natural tint, restrained gold support
 - same rounded translucent surface treatment for primary page sections
 - same CTA language model:
-  primary filled pill for the main action, secondary outlined pill for supporting movement
+  primary filled button for the main action, secondary outlined button for supporting movement
 - same nav vocabulary:
-  `Home`, `About`, `Membership`, `Biologicals Explorer`, `Track Registrations`, `Workspace`
+  `Home`, `About`, `Membership`, `Biologicals Explorer`, `Track Registrations`
 
 This shared shell is what holds the prototype together.
 
@@ -67,6 +67,7 @@ Use:
 - numbered or clearly named pathways
 - explicit role boundaries
 - direct CTA hierarchy
+- distinct semantic route cues when pathways represent different kinds of value
 
 Avoid:
 - long abstract introductions without a clear next move
@@ -140,14 +141,18 @@ Do not use color only decoratively when a clearer semantic role is available.
 
 Use a stable action pattern:
 
-- primary pill button:
+- primary button:
   the main next step on the page
-- secondary pill button:
+- secondary button:
   adjacent exploration or supporting workflow
 - route cards:
   should imply movement and choice
 - workspace links:
   should signal deeper/private/system views rather than ordinary public reading
+
+Button shape rule:
+- action controls should read as buttons, not capsules or lozenges
+- use a modest corner radius rather than full-pill treatment unless the control is intentionally tag-like
 
 If everything is styled like a primary CTA, nothing is primary.
 
@@ -200,6 +205,22 @@ When visual assets are added, prefer:
 - restrained diagrams
 - meaningful symbols over generic stock abstractions
 
+When a symbolic treatment is introduced on one page, it becomes a candidate system convention and should either:
+- be reused elsewhere for the same meaning, or
+- be documented here as page-specific and not reused
+
+Current semantic symbols now in use:
+- `Alliance`:
+  warm clay accent for participation, membership, and institutional belonging
+- `Intelligence`:
+  teal accent for tracking, signals, and interpreted evidence
+- `Knowledge`:
+  gold accent for public reference, exploration, and structured learning
+- Africa footprint marker:
+  use only when backed by a sourced, recognisable Africa silhouette or approved asset
+  do not improvise continent outlines freehand in-page
+
+These should not be remixed casually into unrelated meanings.
 ## 10. Immediate application in this tranche
 
 For the current prototype iteration, these conventions should drive:
