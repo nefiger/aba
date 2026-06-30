@@ -69,6 +69,11 @@ The membership-type policy note is now the best source for:
 - how categories, annual dues, privileges, and admin-management should be modeled
 - the distinction between applied and approved membership type
 
+The prototype implementation approach should now assume:
+- no real database for this tranche
+- one canonical mock data layer reused across public forms, membership/admin views, and scenario screens
+- realistic fake records and stateful demos rather than persistent backend behavior
+
 ---
 
 ## What was completed in the last session
@@ -155,6 +160,8 @@ The membership-type policy note is now the best source for:
   people, organisations, relationships, applications, submissions, review cases, consents, and downstream outputs
 - `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
 - The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
+- Prototype implementation should stay mock-data-first:
+  one canonical in-repo data layer, no real database, no fake backend complexity unless the user explicitly asks for it
 
 ### Sequencing constraint
 
@@ -217,3 +224,4 @@ The membership-type policy note is now the best source for:
 - This `HANDOVER.md` should be updated at the end of each session.
 - Other agents working in this repo should also treat this file as the default shared continuity log and leave updates here unless there is a strong reason to capture something only elsewhere.
 - This applies to tracker-adjacent workspaces too, including Lyle-linked work, so cross-agent context does not drift.
+- Unless explicitly asked otherwise, prototype implementation work should use curated static reference data plus realistic fake records instead of building a real database or persistence layer.

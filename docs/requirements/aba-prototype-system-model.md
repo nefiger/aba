@@ -26,6 +26,12 @@ The prototype also needs to lock 4 structural UI decisions because it is acting 
 - the visual asset direction needed for a complete snapshot
 - the reusable UI patterns that later become a design system
 
+Prototype implementation approach for this tranche:
+- do not build a real database-backed system
+- use one canonical mock data layer for membership policy, fake records, and scenario states
+- let multiple prototype surfaces read from that shared data layer so the system behaves coherently
+- use stateful demos and curated examples rather than persistence, auth, or real CRUD
+
 ## 2. Core roles
 
 ### Public visitor
@@ -482,3 +488,19 @@ The prototype should continue to visibly demonstrate:
 - public vs private boundaries
 
 These visible states are part of the spec and should not be hidden behind purely narrative documentation.
+
+## 7. Prototype delivery rule
+
+For this ABA tranche, the prototype should behave like a spec-driven front end over a future system model, without becoming a real application backend.
+
+Preferred implementation pattern:
+- static reference data for membership categories, types, privileges, fee-display rules, and status models
+- realistic fake records for applications, members, prospects, tracker-origin contacts, and subscribers
+- curated scenario views for admin and operator flows
+- shared mock data across public forms and internal prototype surfaces
+
+Avoid by default:
+- real database work
+- real persistence
+- overbuilt backend architecture
+- fake complexity that does not improve the demo or the spec

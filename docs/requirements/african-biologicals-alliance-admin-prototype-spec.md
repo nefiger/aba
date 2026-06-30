@@ -4,6 +4,11 @@ This document defines the first-pass admin/backend prototype scope for ABA.
 
 This is a concept and interface spec, not a full systems implementation plan.
 
+Implementation approach for this prototype phase:
+- no real database is required
+- admin views should be driven by shared mock data and realistic example records
+- the goal is to demonstrate model, workflow, and visibility logic rather than persistence or heavy CRUD
+
 ## 1. Purpose
 
 The admin prototype should give ABA an internal home for:
@@ -13,6 +18,7 @@ The admin prototype should give ABA an internal home for:
 - identifying where people or products appear stuck
 
 The admin must stay lightweight for now. It does not need deep workflow automation or complex chapter handoff behavior yet.
+It also does not need a real backend or database layer for this prototype tranche.
 
 ## 2. Core Admin Jobs
 
