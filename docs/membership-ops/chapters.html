@@ -17,31 +17,43 @@
         <section class="panel">
           <div class="page-head">
             <div class="page-head-copy">
-              <div class="eyebrow">Chapters</div>
+              <div class="eyebrow">Settings</div>
               <h1 class="page-title">Chapters</h1>
-              <p class="page-subtitle">Stub module for future chapter administration and roster logic.</p>
+              <p class="page-subtitle">Reference records for chapter scope, cadence, readiness, and named leads.</p>
+            </div>
+            <div class="action-row">
+              <button class="button">Reorder</button>
+              <button class="button primary">Create chapter</button>
             </div>
           </div>
         </section>
 
-        <section class="panel stub-panel">
-          <div class="stub-grid">
+        <section class="panel datagrid-panel">
+          <div class="table-head">
             <div>
-              <h2 class="table-title">Module role</h2>
-              <p class="stub-note">This stub reserves space for chapter settings, roster management, and future chapter-readiness views once chapter objects are fully modelled.</p>
+              <h2 class="table-title">Chapter records</h2>
             </div>
-            <div class="table-wrap">
-              <table class="stub-table">
-                <thead>
-                  <tr>
-                    <th>Chapter</th>
-                    <th>Status</th>
-                    <th>Members</th>
-                  </tr>
-                </thead>
-                <tbody id="chapter-rows"></tbody>
-              </table>
+            <div class="summary-row">
+              <span class="summary-chip">1 active chapter</span>
+              <span class="summary-chip">1 planned chapter</span>
             </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Chapter</th>
+                  <th>Scope</th>
+                  <th>Status</th>
+                  <th>Lead</th>
+                  <th>Cadence</th>
+                  <th>Members</th>
+                  <th>Readiness</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="chapter-rows"></tbody>
+            </table>
           </div>
         </section>
       </div>
@@ -50,12 +62,25 @@
 
   <script src="./assets/admin-shell.js"></script>
   <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
   <script>
-    document.getElementById("chapter-rows").innerHTML = window.ABA_ADMIN_DATA.chapters.map((item) => `
-      <tr>
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const chapterTone = {
+      "Active pilot": "good",
+      Planned: "waiting",
+    };
+
+    document.getElementById("chapter-rows").innerHTML = data.chapters.map((item) => `
+      <tr class="settings-row">
         <td><strong>${item.chapter}</strong></td>
-        <td>${item.status}</td>
-        <td>${item.members}</td>
+        <td>${ui.value(item.scope)}</td>
+        <td>${ui.status(item.status, chapterTone[item.status])}</td>
+        <td>${ui.value(item.lead)}</td>
+        <td>${ui.value(item.cadence)}</td>
+        <td>${ui.value(String(item.members))}</td>
+        <td>${ui.value(item.readiness)}</td>
+        <td class="settings-actions">${ui.iconButton("edit", "Edit chapter", "review")}</td>
       </tr>
     `).join("");
   </script>

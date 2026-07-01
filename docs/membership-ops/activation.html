@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>African Biologicals Alliance | Pending Activation</title>
+  <title>African Biologicals Alliance | Member Finance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,12 +18,8 @@
           <div class="page-head">
             <div class="page-head-copy">
               <div class="eyebrow">Finance</div>
-              <h1 class="page-title">Pending Activation</h1>
-              <p class="page-subtitle">Activation is handled as a finance and status gate after membership approval.</p>
-            </div>
-            <div class="action-row">
-              <button class="button">Send reminders</button>
-              <button class="button primary">Confirm payment</button>
+              <h1 class="page-title">Member Finance</h1>
+              <p class="page-subtitle">Dues, invoice progress, payment review, and finance clearance.</p>
             </div>
           </div>
         </section>
@@ -31,10 +27,10 @@
         <section class="panel datagrid-panel">
           <div class="table-head">
             <div>
-              <h2 class="table-title">Activation queue</h2>
+              <h2 class="table-title">Finance clearance</h2>
             </div>
             <div class="summary-row">
-              <span class="summary-chip">3 blocked or waiting</span>
+              <span class="summary-chip">3 finance records need action</span>
               <span class="summary-chip">2 invoice actions due</span>
             </div>
           </div>
@@ -46,7 +42,7 @@
                   <th>Approved type</th>
                   <th>Invoice state</th>
                   <th>Payment state</th>
-                  <th>Activation state</th>
+                  <th>Finance status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -64,21 +60,37 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const invoiceStates = ["Draft", "Unsent", "Sent", "Blocked"];
-    const paymentStates = ["Awaiting invoice", "Proof pending", "Paid", "Not started"];
-    const activationStates = ["Blocked", "Ready after proof", "Activate now", "Waiting on review completion"];
+    const invoiceTone = {
+      Draft: "waiting",
+      "Not issued": "alert",
+      Issued: "good",
+      Blocked: "alert",
+    };
+    const paymentTone = {
+      "Not due": "waiting",
+      "Payment review": "review",
+      Paid: "good",
+      "Not started": "alert",
+    };
+    const financeTone = {
+      "Invoice to issue": "alert",
+      "Awaiting proof": "waiting",
+      "Fee setup blocked": "alert",
+      Clear: "good",
+    };
 
     document.getElementById("activation-rows").innerHTML = data.pending_activation.map((item) => `
       <tr>
         <td><strong>${item.organisation}</strong></td>
-        <td>${ui.select(["manufacturer_small", "agronomist", "funder"], item.approved_type)}</td>
-        <td>${ui.select(invoiceStates, item.invoice_state)}</td>
-        <td>${ui.select(paymentStates, item.payment_state)}</td>
-        <td>${ui.select(activationStates, item.activation_state)}</td>
+        <td>${ui.value(item.approved_type).replace('class="value-button"', 'class="value-button is-mono"')}</td>
+        <td>${ui.status(item.invoice_state, invoiceTone[item.invoice_state])}</td>
+        <td>${ui.status(item.payment_state, paymentTone[item.payment_state])}</td>
+        <td>${ui.status(item.finance_status, financeTone[item.finance_status])}</td>
         <td>
           <div class="inline-actions">
-            <button class="table-button primary">Activate</button>
-            <button class="table-button">Invoice</button>
+            ${ui.iconButton("invoice", "Issue invoice", "review")}
+            ${ui.iconButton("approve", "Record payment", "good")}
+            ${ui.iconButton("edit", "Open finance record", "review")}
           </div>
         </td>
       </tr>

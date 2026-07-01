@@ -34,6 +34,8 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-membership-type-policy.md`
 - `docs/requirements/aba-public-capture-journeys-and-record-model.md`
 - `docs/requirements/aba-public-capture-field-map.md`
+- `docs/requirements/aba-admin-surface-taxonomy.md`
+- `docs/requirements/aba-admin-pause-and-public-data-capture-shift.md`
 
 Public and role-based prototype updates now include:
 
@@ -88,6 +90,15 @@ Current public-capture sequencing clarification:
 - resolve the non-tracker membership-side routes first
 - keep tracker redesign parked for now
 - retain tracker notes only where the broader system model needs continuity and handoff rules
+The admin-surface taxonomy note is now the best source for:
+- which admin pages are queues versus managed records versus reference data versus observational surfaces
+- when inline editing is appropriate
+- when a value should instead open a governed process
+
+The admin-pause note is now the best source for:
+- why further admin-page refinement is paused for now
+- which unresolved field and attribute questions still make more admin specificity premature
+- why the next focus should shift to public/frontend data capture
 
 The prototype implementation approach should now assume:
 - no real database for this tranche
@@ -144,6 +155,12 @@ The prototype implementation approach should now assume:
 - captured the current route-by-route public field inventory in:
   `docs/requirements/aba-public-capture-field-map.md`
   so the next tranche can compare actual prototype fields against the intended journeys and canonical records before touching form UX
+- captured the next-pass interaction contract in:
+  `docs/requirements/aba-admin-surface-taxonomy.md`
+  so later refinement can classify each admin page before deciding its interaction pattern
+- captured the deliberate pause/shift decision in:
+  `docs/requirements/aba-admin-pause-and-public-data-capture-shift.md`
+  so the current admin work is treated as retained groundwork while the next focus moves to public capture and field modeling
 - clarified that the next spec-first tranche should lock:
   - canonical CRM-style records
   - membership relationship semantics
@@ -211,6 +228,7 @@ The prototype implementation approach should now assume:
   `docs/requirements/aba-public-capture-journeys-and-record-model.md`
 - The immediate companion note for actual current-field inventory is now:
   `docs/requirements/aba-public-capture-field-map.md`
+- Admin refinement is intentionally paused here until more of the public-side capture fields and member-class attributes are surfaced
 - `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
 - The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
 - Prototype implementation should stay mock-data-first:
@@ -220,6 +238,8 @@ The prototype implementation approach should now assume:
 
 - Continue with the non-tracker ABA surfaces first:
   public site, membership flow, capture/data-model work, supporting notes, and wider prototype coherence
+- Continue next with the public/frontend capture side first:
+  public site, membership flow, intake/data-capture shape, supporting notes, and wider prototype coherence
 - Only resume tracker-focused implementation or polish later if Lyle is still unavailable at that point
 
 ### July follow-through after the founding-members demo

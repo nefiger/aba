@@ -39,11 +39,13 @@
               <thead>
                 <tr>
                   <th>Organisation</th>
-                  <th>Membership type</th>
-                  <th>Relationship status</th>
-                  <th>Dues state</th>
+                  <th>Plan</th>
+                  <th>Member state</th>
+                  <th>Billing state</th>
                   <th>Chapter</th>
-                  <th>Renewal</th>
+                  <th>Renewal state</th>
+                  <th>Renewal date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="member-rows"></tbody>
@@ -60,18 +62,34 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const relationshipStates = ["Active", "Pending activation", "Inactive", "Lapsed"];
-    const duesStates = ["Paid", "Proof pending", "Invoice not sent", "Overdue"];
-    const chapters = ["South Africa", "East Africa (stub)", "West Africa (stub)"];
+    const memberTone = {
+      Approved: "review",
+      Active: "good",
+      Suspended: "waiting",
+      Lapsed: "alert",
+    };
+    const billingTone = {
+      "Not billed": "alert",
+      "Payment review": "review",
+      Settled: "good",
+      Overdue: "alert",
+    };
+    const renewalTone = {
+      Current: "good",
+      "Due soon": "waiting",
+      Lapsed: "alert",
+    };
 
     document.getElementById("member-rows").innerHTML = data.members.map((item) => `
       <tr>
         <td><strong>${item.organisation}</strong></td>
-        <td>${ui.select(["manufacturer_small", "manufacturer_large", "agronomist", "funder"], item.membership_type)}</td>
-        <td>${ui.select(relationshipStates, item.relationship_status)}</td>
-        <td>${ui.select(duesStates, item.dues_state)}</td>
-        <td>${ui.select(chapters, item.chapter)}</td>
-        <td><input class="field" value="${item.renewal}" aria-label="${item.organisation} renewal"></td>
+        <td>${ui.value(item.membership_type).replace('class="value-button"', 'class="value-button is-mono"')}</td>
+        <td>${ui.status(item.relationship_status, memberTone[item.relationship_status])}</td>
+        <td>${ui.status(item.billing_state, billingTone[item.billing_state])}</td>
+        <td>${ui.value(item.chapter)}</td>
+        <td>${ui.status(item.renewal_state, renewalTone[item.renewal_state])}</td>
+        <td>${ui.value(item.renewal)}</td>
+        <td class="settings-actions">${ui.iconButton("edit", "Edit member", "review")}</td>
       </tr>
     `).join("");
   </script>

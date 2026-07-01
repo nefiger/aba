@@ -19,23 +19,48 @@
             <div class="page-head-copy">
               <div class="eyebrow">Registration Intelligence</div>
               <h1 class="page-title">Registration Intelligence</h1>
-              <p class="page-subtitle">Stub module for future regulatory signals, submissions, and bottleneck tracking.</p>
+              <p class="page-subtitle">Submission volume, bottlenecks, and where dossier work is at risk.</p>
             </div>
           </div>
         </section>
 
-        <section class="panel stub-panel">
-          <div class="stub-grid">
-            <div>
-              <h2 class="table-title">Module role</h2>
-              <p class="stub-note">This stub holds the future internal view over submission volume, country clustering, and bottleneck patterns coming from tracker data.</p>
+        <section class="insight-grid">
+          <div class="panel dashboard-table">
+            <div class="table-head">
+              <div>
+                <div class="eyebrow">Signals</div>
+                <h2 class="table-title">Current pressure</h2>
+              </div>
+            </div>
+            <div class="insight-stack">
+              <article class="insight-card">
+                <div class="mini">Submissions in motion</div>
+                <strong>25</strong>
+                <div class="managed-note">Across current country review lanes.</div>
+              </article>
+              <article class="insight-card">
+                <div class="mini">At-risk dossiers</div>
+                <strong>6</strong>
+                <div class="managed-note">Need operator intervention before progressing.</div>
+              </article>
+            </div>
+          </div>
+
+          <div class="panel dashboard-table">
+            <div class="table-head">
+              <div>
+                <div class="eyebrow">Bottlenecks</div>
+                <h2 class="table-title">Country patterns</h2>
+              </div>
             </div>
             <div class="table-wrap">
-              <table class="stub-table">
+              <table>
                 <thead>
                   <tr>
                     <th>Country</th>
                     <th>Submissions</th>
+                    <th>Stage</th>
+                    <th>At risk</th>
                     <th>Bottleneck</th>
                   </tr>
                 </thead>
@@ -50,12 +75,27 @@
 
   <script src="./assets/admin-shell.js"></script>
   <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
   <script>
-    document.getElementById("intelligence-rows").innerHTML = window.ABA_ADMIN_DATA.intelligence.map((item) => `
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const stageTone = {
+      "Pre-submission": "waiting",
+      "Authority review": "review",
+    };
+
+    document.getElementById("intelligence-rows").innerHTML = data.intelligence.map((item) => `
       <tr>
         <td><strong>${item.country}</strong></td>
         <td>${item.submissions}</td>
-        <td>${item.bottleneck}</td>
+        <td>${ui.status(item.stage, stageTone[item.stage])}</td>
+        <td>${item.at_risk}</td>
+        <td>
+          <div class="record-name">
+            <strong>${item.bottleneck}</strong>
+            <div class="managed-note">${item.latest_signal}</div>
+          </div>
+        </td>
       </tr>
     `).join("");
   </script>

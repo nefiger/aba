@@ -19,30 +19,8 @@
             <div class="page-head-copy">
               <div class="eyebrow">Dashboard</div>
               <h1 class="page-title">Membership operations</h1>
-              <p class="page-subtitle">Current workload, exceptions, and movement across membership and finance.</p>
+              <p class="page-subtitle">Workload, exceptions, and finance status.</p>
             </div>
-          </div>
-        </section>
-
-        <section class="dashboard-grid">
-          <div class="panel panel-stack">
-            <div class="table-head">
-              <div>
-                <h2 class="table-title">Attention now</h2>
-                <p class="table-meta">The dashboard routes attention through exceptions, not duplicated navigation.</p>
-              </div>
-            </div>
-            <ul class="priority-list" id="priority-list"></ul>
-          </div>
-
-          <div class="panel panel-stack">
-            <div class="table-head">
-              <div>
-                <h2 class="table-title">Recent activity</h2>
-                <p class="table-meta">Latest operational movement across review and finance.</p>
-              </div>
-            </div>
-            <ul class="activity-list" id="activity-list"></ul>
           </div>
         </section>
 
@@ -75,7 +53,7 @@
             <div class="table-head">
               <div>
                 <div class="eyebrow">Finance</div>
-                <h2 class="table-title">Activation exceptions</h2>
+                <h2 class="table-title">Finance exceptions</h2>
               </div>
             </div>
             <div class="table-wrap">
@@ -85,7 +63,7 @@
                     <th>Organisation</th>
                     <th>Invoice</th>
                     <th>Payment</th>
-                    <th>Activation</th>
+                    <th>Finance</th>
                   </tr>
                 </thead>
                 <tbody id="dashboard-finance-rows"></tbody>
@@ -107,9 +85,9 @@
     const metricConfig = [
       ["Applications in review", data.summary.applications_in_review, "Membership queue"],
       ["Needs clarification", data.summary.needs_clarification, "Waiting on applicant response"],
-      ["Pending activation", data.summary.pending_activation, "Approved, not yet active"],
+      ["Not yet active", data.summary.pending_activation, "Approved, awaiting clearance"],
       ["Overdue invoices", data.summary.overdue_invoices, "Finance exceptions"],
-      ["Renewals due", data.summary.renewals_due, "Next 30 days"],
+      ["Subscriptions due", data.summary.renewals_due, "Next 30 days"],
       ["Active member types", data.summary.active_member_types, "Policy records live"],
     ];
 
@@ -120,23 +98,6 @@
         <div class="record-meta">${meta}</div>
       </article>
     `).join("");
-
-    document.getElementById("priority-list").innerHTML = data.alerts.map((item) => `
-      <li>
-        <div class="mini">${item.label}</div>
-        <strong>${item.title}</strong>
-        <div class="record-meta">${item.detail}</div>
-      </li>
-    `).join("");
-
-    document.getElementById("activity-list").innerHTML = data.activity.map((item) => `
-      <li>
-        <div class="mini">${item.time}</div>
-        <strong>${item.title}</strong>
-        <div class="record-meta">${item.detail}</div>
-      </li>
-    `).join("");
-
     document.getElementById("dashboard-application-rows").innerHTML = data.applications.slice(0, 3).map((item) => `
       <tr>
         <td>
@@ -145,7 +106,7 @@
             <div class="record-meta">${item.description}</div>
           </div>
         </td>
-        <td>${ui.chip(item.applied_type, item.status_tone)}</td>
+        <td>${ui.chip(item.applied_category || item.applied_type, item.status_tone)}</td>
         <td>${ui.status(item.status, item.status_tone)}</td>
         <td>${item.owner}</td>
       </tr>
@@ -156,7 +117,7 @@
         <td><strong>${item.organisation}</strong></td>
         <td>${ui.status(item.invoice_state, item.invoice_tone)}</td>
         <td>${ui.status(item.payment_state, item.payment_tone)}</td>
-        <td>${ui.status(item.activation_state, item.activation_tone)}</td>
+        <td>${ui.status(item.finance_status, item.finance_tone)}</td>
       </tr>
     `).join("");
   </script>
