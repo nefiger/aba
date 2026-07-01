@@ -32,8 +32,8 @@ body {
 }
 
 .mark {
-  width: 112px !important;
-  height: 68px !important;
+  width: 136px !important;
+  height: 82px !important;
   border-radius: 0 !important;
   background: transparent !important;
   overflow: hidden !important;
@@ -235,22 +235,22 @@ body {
 }
 
 .brand-copy strong {
-  font-size: 11px !important;
+  font-size: 12px !important;
   font-weight: 900 !important;
-  letter-spacing: 0.13em !important;
-  line-height: 1.05 !important;
+  letter-spacing: 0.16em !important;
+  line-height: 1.08 !important;
 }
 
 .brand-copy span {
-  font-size: 11px !important;
-  line-height: 1.32 !important;
-  max-width: 34ch !important;
+  font-size: 13px !important;
+  line-height: 1.34 !important;
+  max-width: 38ch !important;
 }
 
 @media (max-width: 760px) {
   .mark {
-    width: 94px !important;
-    height: 56px !important;
+    width: 112px !important;
+    height: 68px !important;
   }
 
   .topbar {
