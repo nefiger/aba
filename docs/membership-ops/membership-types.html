@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>African Biologicals Alliance | Membership Types & Policy</title>
+  <title>African Biologicals Alliance | Membership Rules</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,13 +17,13 @@
         <section class="panel">
           <div class="page-head">
             <div class="page-head-copy">
-              <div class="eyebrow">Membership</div>
-              <h1 class="page-title">Types & Policy</h1>
-              <p class="page-subtitle">Managed policy objects for category, fee, privileges, and form availability.</p>
+              <div class="eyebrow">Settings</div>
+              <h1 class="page-title">Membership Rules</h1>
+              <p class="page-subtitle">Reference data for categories, types, fees, billing, and route availability.</p>
             </div>
             <div class="action-row">
               <button class="button">Reorder</button>
-              <button class="button primary">Create type</button>
+              <button class="button primary">Create rule</button>
             </div>
           </div>
         </section>
@@ -31,7 +31,7 @@
         <section class="panel datagrid-panel">
           <div class="table-head">
             <div>
-              <h2 class="table-title">Membership type records</h2>
+              <h2 class="table-title">Membership rule records</h2>
             </div>
             <div class="summary-row">
               <span class="summary-chip">4 active policy records</span>
@@ -49,6 +49,7 @@
                   <th>Privileges</th>
                   <th>Availability</th>
                   <th>Status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="type-rows"></tbody>
@@ -65,20 +66,22 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const categoryOptions = ["Full member", "Technical partner", "Observer"];
-    const cycleOptions = ["Annual", "Policy defined"];
-    const availabilityOptions = ["Public forms", "Invite and review", "Board approved only"];
-    const statusOptions = ["Active", "Restricted", "Retired"];
+    const statusTone = {
+      Active: "good",
+      Restricted: "waiting",
+      Retired: "alert",
+    };
 
     document.getElementById("type-rows").innerHTML = data.membership_types.map((item) => `
-      <tr>
-        <td><input class="field" value="${item.code}" aria-label="${item.code} code"></td>
-        <td>${ui.select(categoryOptions, item.category)}</td>
-        <td><input class="field" value="${item.annual_fee}" aria-label="${item.code} annual fee"></td>
-        <td>${ui.select(cycleOptions, item.billing_cycle)}</td>
-        <td><input class="field" value="${item.privileges}" aria-label="${item.code} privileges"></td>
-        <td>${ui.select(availabilityOptions, item.availability)}</td>
-        <td>${ui.select(statusOptions, item.status)}</td>
+      <tr class="settings-row">
+        <td>${ui.value(item.code).replace('class="value-button"', 'class="value-button is-mono"')}</td>
+        <td>${ui.value(item.category)}</td>
+        <td>${ui.value(item.annual_fee)}</td>
+        <td>${ui.value(item.billing_cycle)}</td>
+        <td>${ui.value(item.privileges).replace('class="value-button"', 'class="value-button is-truncate"')}</td>
+        <td>${ui.value(item.availability).replace('class="value-button"', 'class="value-button is-truncate"')}</td>
+        <td>${ui.status(item.status, statusTone[item.status])}</td>
+        <td class="settings-actions">${ui.iconButton("edit", "Edit rule", "review")}</td>
       </tr>
     `).join("");
   </script>

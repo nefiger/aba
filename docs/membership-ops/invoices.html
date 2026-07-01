@@ -44,6 +44,7 @@
                   <th>Status</th>
                   <th>Due date</th>
                   <th>Payment state</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="invoice-rows"></tbody>
@@ -60,18 +61,28 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const invoiceStates = ["Draft", "Sent", "Overdue"];
-    const paymentStates = ["Awaiting send", "Proof pending", "Unpaid", "Paid"];
+    const invoiceTone = {
+      Draft: "waiting",
+      Issued: "good",
+      Overdue: "alert",
+    };
+    const paymentTone = {
+      "Not due": "waiting",
+      "Payment review": "review",
+      Overdue: "alert",
+      Paid: "good",
+    };
 
     document.getElementById("invoice-rows").innerHTML = data.invoices.map((item) => `
       <tr>
         <td><strong>${item.invoice_id}</strong></td>
         <td>${item.organisation}</td>
-        <td><input class="field" value="${item.fee_object}" aria-label="${item.invoice_id} fee object"></td>
-        <td><input class="field" value="${item.amount}" aria-label="${item.invoice_id} amount"></td>
-        <td>${ui.select(invoiceStates, item.status)}</td>
-        <td><input class="field" value="${item.due_date}" aria-label="${item.invoice_id} due date"></td>
-        <td>${ui.select(paymentStates, item.payment_state)}</td>
+        <td>${ui.value(item.fee_object).replace('class="value-button"', 'class="value-button is-truncate"')}</td>
+        <td>${ui.value(item.amount)}</td>
+        <td>${ui.status(item.status, invoiceTone[item.status])}</td>
+        <td>${ui.value(item.due_date)}</td>
+        <td>${ui.status(item.payment_state, paymentTone[item.payment_state])}</td>
+        <td class="settings-actions">${ui.iconButton("edit", "Open invoice", "review")}</td>
       </tr>
     `).join("");
   </script>

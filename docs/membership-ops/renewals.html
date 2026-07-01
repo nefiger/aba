@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>African Biologicals Alliance | Renewals</title>
+  <title>African Biologicals Alliance | Subscriptions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,8 +18,8 @@
           <div class="page-head">
             <div class="page-head-copy">
               <div class="eyebrow">Finance</div>
-              <h1 class="page-title">Renewals</h1>
-              <p class="page-subtitle">Renewal due dates, lapsed relationships, and forward renewal tracking.</p>
+              <h1 class="page-title">Subscriptions</h1>
+              <p class="page-subtitle">Recurring membership billing, next charge timing, and subscription collection state.</p>
             </div>
           </div>
         </section>
@@ -27,11 +27,11 @@
         <section class="panel datagrid-panel">
           <div class="table-head">
             <div>
-              <h2 class="table-title">Renewal tracking</h2>
+              <h2 class="table-title">Subscription management</h2>
             </div>
             <div class="summary-row">
-              <span class="summary-chip">4 renewals due</span>
-              <span class="summary-chip">1 lapsed relationship</span>
+              <span class="summary-chip">1 due soon</span>
+              <span class="summary-chip">1 lapsed subscription</span>
             </div>
           </div>
           <div class="table-wrap">
@@ -39,10 +39,13 @@
               <thead>
                 <tr>
                   <th>Organisation</th>
-                  <th>Membership type</th>
-                  <th>Renewal due</th>
-                  <th>Renewal state</th>
-                  <th>Dues state</th>
+                  <th>Plan</th>
+                  <th>Billing cycle</th>
+                  <th>Next charge</th>
+                  <th>Subscription state</th>
+                  <th>Collection state</th>
+                  <th>Process</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="renewal-rows"></tbody>
@@ -59,16 +62,35 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const renewalStates = ["Healthy", "Due soon", "Lapsed"];
-    const duesStates = ["Paid", "Invoice drafted", "Overdue"];
+    const toneForSubscription = {
+      Active: "good",
+      "Due soon": "waiting",
+      "On hold": "review",
+      Lapsed: "alert",
+    };
+    const toneForCollection = {
+      Settled: "good",
+      "Invoice queued": "waiting",
+      "Payment review": "review",
+      Overdue: "alert",
+    };
+    const processForState = {
+      Active: "View subscription",
+      "Due soon": "Prepare renewal",
+      "On hold": "Review hold",
+      Lapsed: "Restart subscription",
+    };
 
     document.getElementById("renewal-rows").innerHTML = data.renewals.map((item) => `
       <tr>
         <td><strong>${item.organisation}</strong></td>
-        <td>${ui.select(["manufacturer_small", "manufacturer_large", "funder"], item.membership_type)}</td>
-        <td><input class="field" value="${item.renewal_due}" aria-label="${item.organisation} renewal due"></td>
-        <td>${ui.select(renewalStates, item.renewal_state)}</td>
-        <td>${ui.select(duesStates, item.dues_state)}</td>
+        <td>${ui.value(item.membership_type).replace('class="value-button"', 'class="value-button is-mono"')}</td>
+        <td>${ui.value(item.billing_cycle)}</td>
+        <td>${ui.value(item.next_charge)}</td>
+        <td>${ui.status(item.subscription_state, toneForSubscription[item.subscription_state])}</td>
+        <td>${ui.status(item.collection_state, toneForCollection[item.collection_state])}</td>
+        <td>${processForState[item.subscription_state]}</td>
+        <td class="settings-actions">${ui.iconButton("edit", processForState[item.subscription_state], "review")}</td>
       </tr>
     `).join("");
   </script>

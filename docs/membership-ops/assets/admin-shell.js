@@ -2,7 +2,7 @@ const NAV_GROUPS = [
   {
     label: "Overview",
     items: [
-      { id: "dashboard", href: "./index.html", title: "Dashboard", subtitle: "Admin home" },
+      { id: "dashboard", href: "./index.html", title: "Dashboard", subtitle: "Overview" },
     ],
   },
   {
@@ -10,33 +10,38 @@ const NAV_GROUPS = [
     items: [
       { id: "applications", href: "./queue.html", title: "Applications", subtitle: "Review queue" },
       { id: "members", href: "./members.html", title: "Members", subtitle: "Relationship directory" },
-      { id: "types", href: "./membership-types.html", title: "Types & Policy", subtitle: "Membership rules" },
     ],
   },
   {
     label: "Finance",
     items: [
-      { id: "pending-activation", href: "./activation.html", title: "Pending Activation", subtitle: "Activation gate" },
+      { id: "pending-activation", href: "./activation.html", title: "Member Finance", subtitle: "Dues and billing" },
       { id: "invoices", href: "./invoices.html", title: "Invoices", subtitle: "Fee records" },
-      { id: "renewals", href: "./renewals.html", title: "Renewals", subtitle: "Lapsed and due" },
+      { id: "renewals", href: "./renewals.html", title: "Subscriptions", subtitle: "Billing lifecycle" },
+    ],
+  },
+  {
+    label: "Settings",
+    items: [
+      { id: "types", href: "./membership-types.html", title: "Membership Rules", subtitle: "Reference data" },
     ],
   },
   {
     label: "Chapters",
     items: [
-      { id: "chapters", href: "./chapters.html", title: "Chapters", subtitle: "Stub module" },
+      { id: "chapters", href: "./chapters.html", title: "Chapters", subtitle: "Chapter records" },
     ],
   },
   {
     label: "Registration Intelligence",
     items: [
-      { id: "intelligence", href: "./registration-intelligence.html", title: "Registration Intelligence", subtitle: "Stub module" },
+      { id: "intelligence", href: "./registration-intelligence.html", title: "Registration Intelligence", subtitle: "Signals and bottlenecks" },
     ],
   },
   {
     label: "Contacts & Network",
     items: [
-      { id: "network", href: "./contacts-network.html", title: "Contacts & Network", subtitle: "Stub module" },
+      { id: "network", href: "./contacts-network.html", title: "Contacts & Network", subtitle: "Relationship records" },
     ],
   },
 ];

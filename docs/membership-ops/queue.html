@@ -19,7 +19,7 @@
             <div class="page-head-copy">
               <div class="eyebrow">Membership</div>
               <h1 class="page-title">Applications</h1>
-              <p class="page-subtitle">Review, assign, clarify, and approve membership applications in one datagrid.</p>
+              <p class="page-subtitle">Application queue</p>
             </div>
             <div class="action-row">
               <button class="button">Bulk assign</button>
@@ -75,8 +75,8 @@
                 <thead>
                   <tr>
                     <th>Applicant</th>
-                    <th>Applied type</th>
-                    <th>Suggested type</th>
+                    <th>Category</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Owner</th>
                     <th>Actions</th>
@@ -97,26 +97,43 @@
   <script>
     const data = window.ABA_ADMIN_DATA;
     const ui = window.ABA_ADMIN_RENDER;
-    const owners = ["Jen M.", "Anna D.", "Unassigned"];
+    const ownerOptions = [
+      { short: "JM", full: "Jen M." },
+      { short: "AD", full: "Anna D." },
+      { short: "UA", full: "Unassigned" },
+    ];
+    const typeOptions = [
+      { short: "Mfr small", full: "manufacturer_small" },
+      { short: "Agronomist", full: "agronomist" },
+      { short: "Funder", full: "funder" },
+    ];
+    const compactOwnerOptions = ownerOptions.map((item) => item.short);
+    const ownerShortByFull = Object.fromEntries(ownerOptions.map((item) => [item.full, item.short]));
+    const typeShortByFull = Object.fromEntries(typeOptions.map((item) => [item.full, item.short]));
 
     document.getElementById("application-rows").innerHTML = data.applications.map((item) => `
       <tr>
-        <td>
+        <td class="queue-applicant">
           <div class="record-name">
             <strong>${item.organisation}</strong>
             <div class="record-meta">${item.description}</div>
             <div class="record-meta">${item.notes[0]}</div>
           </div>
         </td>
-        <td>${ui.chip(item.applied_type, item.status_tone)}</td>
-        <td>${ui.select(["manufacturer_small", "agronomist", "funder"], item.suggested_type)}</td>
-        <td>${ui.status(item.status, item.status_tone)}</td>
-        <td>${ui.select(owners, item.owner)}</td>
-        <td>
+        <td class="queue-category">${ui.chip(item.applied_category, item.status_tone)}</td>
+        <td class="queue-type">
+          <div class="taxonomy-stack">
+            <div class="taxonomy-label">${item.applied_type}</div>
+            ${ui.select(typeOptions.map((option) => option.short), typeShortByFull[item.suggested_type], "select compact-select")}
+          </div>
+        </td>
+        <td class="queue-status">${ui.statusDot(item.status, item.status_tone)}</td>
+        <td class="queue-owner">${ui.select(compactOwnerOptions, ownerShortByFull[item.owner], "select compact-select")}</td>
+        <td class="queue-actions">
           <div class="inline-actions">
-            <button class="table-button primary">Approve</button>
-            <button class="table-button soft">Clarify</button>
-            <button class="table-button ghost">Reclassify</button>
+            ${ui.iconButton("approve", "Approve application", "good")}
+            ${ui.iconButton("info", "Request information", "review")}
+            ${ui.iconButton("route", "Change type", "waiting")}
           </div>
         </td>
       </tr>
