@@ -266,10 +266,113 @@ select {
   background: transparent;
 }
 
+.icon-button {
+  position: relative;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.icon-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-button:hover {
+  background: var(--surface-strong);
+  border-color: var(--line-strong);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.icon-button.good {
+  color: var(--green);
+}
+
+.icon-button.alert {
+  color: var(--rose);
+}
+
+.icon-button.review {
+  color: var(--blue);
+}
+
+.icon-button[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(23, 48, 57, 0.94);
+  color: #f8f7f1;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 10;
+}
+
+.icon-button[data-tooltip]:hover::after,
+.icon-button[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .field,
 .select {
   padding: 0 12px;
   font-size: 14px;
+}
+
+.value-button {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.value-button:hover {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: var(--line);
+}
+
+.value-button.is-mono {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.value-button.is-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.compact-select {
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 30px 0 10px;
+  font-size: 13px;
 }
 
 .field {
@@ -487,11 +590,153 @@ tbody tr:hover {
   color: var(--rose);
 }
 
+.status-dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.status-dot.waiting {
+  background: var(--gold);
+}
+
+.status-dot.review {
+  background: var(--blue);
+}
+
+.status-dot.good {
+  background: var(--green);
+}
+
+.status-dot.alert {
+  background: var(--rose);
+}
+
+.status-dot[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(23, 48, 57, 0.94);
+  color: #f8f7f1;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 10;
+}
+
+.status-dot[data-tooltip]:hover::after,
+.status-dot[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .inline-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  flex-wrap: nowrap;
+  gap: 6px;
   align-items: center;
+}
+
+.queue-applicant {
+  min-width: 320px;
+}
+
+.queue-category,
+.queue-type,
+.queue-status,
+.queue-owner,
+.queue-actions {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.queue-category {
+  width: 140px;
+}
+
+.queue-type {
+  width: 156px;
+}
+
+.queue-status {
+  width: 64px;
+  text-align: center;
+}
+
+.queue-owner {
+  width: 86px;
+}
+
+.queue-actions {
+  width: 128px;
+}
+
+.taxonomy-stack {
+  display: grid;
+  gap: 4px;
+}
+
+.taxonomy-label {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.settings-row {
+  vertical-align: middle;
+}
+
+.settings-actions {
+  width: 52px;
+  text-align: right;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: var(--space-4);
+}
+
+.insight-stack {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.insight-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.74);
+  display: grid;
+  gap: 8px;
+}
+
+.insight-card strong {
+  font-size: 1.7rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.managed-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1180px) {
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stub-grid {
