@@ -132,69 +132,19 @@
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Route and type</div>
-                <h2>Observer route</h2>
-                <p>Confirm the observer category and the institutional or stakeholder type this application represents.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-              <div class="field-grid">
-                <div class="field">
-                  <label>Membership category</label>
-                  <input type="text" value="Observer" readonly>
-                </div>
-                <div class="field">
-                  <label>Applied observer type</label>
-                  <select x-model="form.applied_membership_type">
-                    <option value="">Select observer type</option>
-                    <option>Government agency</option>
-                    <option>Development partner</option>
-                    <option>Funder</option>
-                    <option>International partner</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
-                <div class="section-label">Applicant shape</div>
-                <h2>Organisation or individual?</h2>
-                <p>Choose who the membership would represent.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-            <div class="choice-grid">
-              <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Applying as an organisation</label>
-              <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Applying as an individual</label>
-            </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
                 <div class="section-label">Applicant basics</div>
                 <h2>Applicant and contact details</h2>
-                <p>Contact details and the type of institution or stakeholder applying.</p>
+                <p>Capture the institution and the primary person ABA should work with.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
             <div class="form-body">
             <div class="field-grid">
-              <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
-                <label>Organisation or institution name</label>
+              <div class="field">
+                <label>Institution name</label>
                 <input x-model="form.org_name" type="text" placeholder="Institution name">
               </div>
-              <div class="field" x-show="form.applicant_shape === 'Individual'" x-cloak>
-                <label>Applicant name</label>
-                <input x-model="form.individual_name" type="text" placeholder="Full name">
-              </div>
-              <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
+              <div class="field">
                 <label>Primary contact</label>
                 <input x-model="form.contact_name" type="text" placeholder="Full name">
               </div>
@@ -320,24 +270,41 @@
           </details>
 
           <div class="button-row">
-            <button class="button primary" type="submit">Preview application</button>
+            <button class="button primary" type="submit">Submit application</button>
             <a class="button secondary" href="./index.html">Back to membership</a>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
-            <div class="mini">Application preview</div>
+            <div class="mini">Submission received</div>
+            <h3 style="margin-top: 6px;">Observer application received.</h3>
             <div class="stack" style="margin-top: 10px;">
-              <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
-              <p><strong style="color: var(--ink);">Applied observer type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Institution:</strong> <span x-text="form.org_name || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Primary contact:</strong> <span x-text="form.contact_name || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Institution type:</strong> <span x-text="form.observer_institution || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Mandate area:</strong> <span x-text="form.mandate_area || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Operating scope:</strong> <span x-text="form.operating_scope || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Interest areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Engagement interests:</strong> <span x-text="form.observer_interests.length ? form.observer_interests.join(', ') : 'Not provided yet'"></span></p>
             </div>
             <div class="stack" style="margin-top: 12px;">
-              <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
-              <p><strong style="color: var(--ink);">Next ABA state:</strong> Under review, more information required, approved, or declined.</p>
-              <div class="success">Demo preview only. In production, this would create a membership application record for review.</div>
+              <div class="success">
+                ABA has logged an institutional observer application and will review the mandate, engagement intent, and best follow-up path.
+              </div>
+              <div class="field-grid">
+                <div class="field">
+                  <label>Current state</label>
+                  <p>Submitted for institutional review</p>
+                </div>
+                <div class="field">
+                  <label>Next ABA state</label>
+                  <p>Stakeholder fit review</p>
+                </div>
+                <div class="field">
+                  <label>Likely follow-up</label>
+                  <p>Briefing, relationship follow-up, or partnership conversation</p>
+                </div>
+                <div class="field">
+                  <label>Membership outcome</label>
+                  <p>Observer relationship, not commercial member activation</p>
+                </div>
+              </div>
             </div>
           </div>
       </form>
@@ -350,11 +317,9 @@
         submitted: false,
         form: {
           application_route: "observer",
-          applicant_shape: "Organisation",
           applied_membership_category: "observer",
           applied_membership_type: "",
           org_name: "",
-          individual_name: "",
           contact_name: "",
           email: "",
           phone: "",

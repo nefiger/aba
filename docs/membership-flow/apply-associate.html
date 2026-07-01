@@ -132,61 +132,21 @@
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Route and type</div>
-                <h2>Technical partner route</h2>
-                <p>Confirm the specialist route and the main technical-partner type this application should follow.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-              <div class="field-grid">
-                <div class="field">
-                  <label>Membership category</label>
-                  <input type="text" value="Technical partner" readonly>
-                </div>
-                <div class="field">
-                  <label>Applied technical-partner type</label>
-                  <select x-model="form.applied_membership_type">
-                    <option value="">Select technical-partner type</option>
-                    <option>Consultant</option>
-                    <option>Agronomist</option>
-                    <option>Researcher</option>
-                    <option>Regulatory specialist</option>
-                    <option>Service provider</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
-                <div class="section-label">Applicant shape</div>
-                <h2>Organisation or individual?</h2>
-                <p>Choose who the membership would represent.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-            <div class="choice-grid">
-              <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Applying as an organisation</label>
-              <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Applying as an individual</label>
-            </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
                 <div class="section-label">Applicant basics</div>
                 <h2>Applicant and contact details</h2>
-                <p>Contact details and the main role this applicant plays in the sector.</p>
+                <p>Contact details for the specialist or organisation applying to join the network.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
             <div class="form-body">
             <div class="field-grid">
+              <div class="field full">
+                <label>Applying as</label>
+                <div class="choice-grid" style="margin-top: 8px;">
+                  <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Organisation</label>
+                  <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Individual</label>
+                </div>
+              </div>
               <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
                 <label>Organisation name</label>
                 <input x-model="form.org_name" type="text" placeholder="Organisation name">
@@ -220,8 +180,8 @@
                 </select>
               </div>
               <div class="field">
-                <label>Primary role or title</label>
-                <input x-model="form.role_title" type="text" placeholder="Research lead, consultant, trials specialist...">
+                <label>Current position or function</label>
+                <input x-model="form.role_title" type="text" placeholder="Research lead, consultant, programme manager...">
               </div>
             </div>
             </div>
@@ -230,15 +190,15 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Capabilities and network fit</div>
-                <h2>Capabilities and sector fit</h2>
-                <p>Show the capabilities, focus areas, and ways this specialist or organisation could contribute to the network.</p>
+                <div class="section-label">Expertise and contribution</div>
+                <h2>Expertise and contribution</h2>
+                <p>Describe the work you do, the biologicals areas you know, and how you could contribute.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
             <div class="form-body">
             <div class="field full">
-              <label>Primary capability areas</label>
+              <label>Areas of expertise</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
                 <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
@@ -268,41 +228,13 @@
               </div>
             </div>
             <div class="field full">
-              <label>Available contribution modes</label>
+              <label>How you could contribute</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Advisory support" x-model="form.contribution_modes"> Advisory support</label>
                 <label class="choice"><input type="checkbox" value="Technical review" x-model="form.contribution_modes"> Technical review</label>
                 <label class="choice"><input type="checkbox" value="Field or implementation support" x-model="form.contribution_modes"> Field or implementation support</label>
                 <label class="choice"><input type="checkbox" value="Training or convenings" x-model="form.contribution_modes"> Training or convenings</label>
               </div>
-            </div>
-            <div class="field">
-              <label>Engagement model</label>
-              <select x-model="form.engagement_model">
-                <option value="">Select model</option>
-                <option>Independent specialist</option>
-                <option>Organisation-based service provider</option>
-                <option>Research or academic institution</option>
-                <option>Implementation or field partner</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Network visibility preference</label>
-              <select x-model="form.discoverability_preference">
-                <option value="">Select preference</option>
-                <option>Be discoverable for future collaboration</option>
-                <option>Invite me to relevant ABA work only</option>
-                <option>Keep me informed but not publicly discoverable</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Technical-network interest</label>
-              <select x-model="form.technical_network_interest">
-                <option value="">Select interest</option>
-                <option>Join the network</option>
-                <option>Join and advise where relevant</option>
-                <option>Still exploring fit</option>
-              </select>
             </div>
             <div class="field full">
               <label>Contribution notes</label>
@@ -335,24 +267,40 @@
           </details>
 
           <div class="button-row">
-            <button class="button primary" type="submit">Preview application</button>
+            <button class="button primary" type="submit">Submit application</button>
             <a class="button secondary" href="./index.html">Back to membership</a>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
-            <div class="mini">Application preview</div>
+            <div class="mini">Submission received</div>
+            <h3 style="margin-top: 6px;">Technical-network application received.</h3>
             <div class="stack" style="margin-top: 10px;">
-              <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
-              <p><strong style="color: var(--ink);">Applied partner type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Applicant:</strong> <span x-text="(form.applicant_shape === 'Individual' ? form.individual_name : form.org_name) || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Expertise:</strong> <span x-text="form.associate_expertise.length ? form.associate_expertise.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Engagement model:</strong> <span x-text="form.engagement_model || 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Biologicals focus:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Contribution modes:</strong> <span x-text="form.contribution_modes.length ? form.contribution_modes.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Biologicals focus:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
             </div>
             <div class="stack" style="margin-top: 12px;">
-              <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
-              <p><strong style="color: var(--ink);">Next ABA state:</strong> Under review, more information required, approved, or declined.</p>
-              <div class="success">Demo preview only. In production, this would create a membership application record for review.</div>
+              <div class="success">
+                ABA has logged a technical-network application and will review fit, capabilities, and preferred contribution mode.
+              </div>
+              <div class="field-grid">
+                <div class="field">
+                  <label>Current state</label>
+                  <p>Submitted for network review</p>
+                </div>
+                <div class="field">
+                  <label>Next ABA state</label>
+                  <p>Capability and fit review</p>
+                </div>
+                <div class="field">
+                  <label>Likely follow-up</label>
+                  <p>Clarify contribution areas or invite into a relevant workstream</p>
+                </div>
+                <div class="field">
+                  <label>Membership outcome</label>
+                  <p>Technical-partner review, not commercial member activation</p>
+                </div>
+              </div>
             </div>
           </div>
       </form>
@@ -379,9 +327,6 @@
           activity_areas: [],
           market_countries: [],
           contribution_modes: [],
-          engagement_model: "",
-          discoverability_preference: "",
-          technical_network_interest: "",
           contribution_notes: "",
           aggregate_consent: false,
           followup_consent: false,

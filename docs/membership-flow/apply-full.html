@@ -242,52 +242,6 @@
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Route and type</div>
-                <h2>Membership route</h2>
-                <p>Confirm the category and the member type this application should be reviewed against.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-              <div class="field-grid">
-                <div class="field">
-                  <label for="membership_category">Membership category</label>
-                  <input id="membership_category" type="text" value="Full member" readonly>
-                </div>
-                <div class="field">
-                  <label for="applied_membership_type">Applied member type</label>
-                  <select id="applied_membership_type" x-model="form.applied_membership_type">
-                    <option value="">Select member type</option>
-                    <option>Student</option>
-                    <option>Individual member</option>
-                    <option>Manufacturer (small)</option>
-                    <option>Manufacturer (commercial)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
-                <div class="section-label">Applicant shape</div>
-                <h2>Organisation or individual?</h2>
-                <p>Choose who the membership would represent.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="form-body">
-              <div class="choice-grid">
-                <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Applying as an organisation</label>
-                <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Applying as an individual</label>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
                 <div class="section-label">Applicant basics</div>
                 <h2>Applicant and contact details</h2>
                 <p>Contact and market-stage details for the applicant and primary contact.</p>
@@ -296,6 +250,13 @@
             </summary>
             <div class="form-body">
               <div class="field-grid">
+              <div class="field full">
+                <label>Applying as</label>
+                <div class="choice-grid" style="margin-top: 8px;">
+                  <label class="choice"><input type="radio" value="Organisation" x-model="form.applicant_shape"> Organisation</label>
+                  <label class="choice"><input type="radio" value="Individual" x-model="form.applicant_shape"> Individual</label>
+                </div>
+              </div>
               <div class="field" x-show="form.applicant_shape !== 'Individual'" x-cloak>
                 <label for="org_name">Organisation name</label>
                 <input id="org_name" x-model="form.org_name" type="text" placeholder="Organisation name">
@@ -370,15 +331,6 @@
               </div>
             </div>
             <div class="field full">
-              <label>Product relationship</label>
-              <div class="choice-grid" style="margin-top: 8px;">
-                <label class="choice"><input type="checkbox" value="Owns biological products" x-model="form.full_product_roles"> Owns biological products</label>
-                <label class="choice"><input type="checkbox" value="Manufactures biological products" x-model="form.full_product_roles"> Manufactures biological products</label>
-                <label class="choice"><input type="checkbox" value="Imports biological products" x-model="form.full_product_roles"> Imports biological products</label>
-                <label class="choice"><input type="checkbox" value="Distributes biological products" x-model="form.full_product_roles"> Distributes biological products</label>
-              </div>
-            </div>
-            <div class="field full">
               <label>Biological product categories</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Biofertilisers" x-model="form.activity_areas"> Biofertilisers</label>
@@ -401,7 +353,7 @@
             </summary>
             <div class="form-body">
             <div class="field full">
-              <label>Do you currently have products needing registration or market-access support?</label>
+              <label>Do you currently need registration or market-access support?</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="radio" value="Yes" x-model="form.has_products_support_need"> Yes</label>
                 <label class="choice"><input type="radio" value="No" x-model="form.has_products_support_need"> No</label>
@@ -420,14 +372,6 @@
               </div>
             </div>
             <div class="field">
-              <label>Registration support interest</label>
-              <div class="choice-grid" style="margin-top: 8px;">
-                <label class="choice"><input type="radio" value="Yes" x-model="form.registration_support"> Yes</label>
-                <label class="choice"><input type="radio" value="Not yet" x-model="form.registration_support"> Not yet</label>
-                <label class="choice"><input type="radio" value="Not sure" x-model="form.registration_support"> Not sure</label>
-              </div>
-            </div>
-            <div class="field">
               <label for="product_notes">Product or market notes</label>
               <textarea id="product_notes" x-model="form.product_notes" placeholder="Tell ABA about current products, product pipeline, or market focus."></textarea>
             </div>
@@ -437,9 +381,9 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Review readiness</div>
-                <h2>Eligibility signals</h2>
-                <p>Capture the minimum signals ABA needs now. Detailed ownership or compliance explanation can follow during review.</p>
+                <div class="section-label">Eligibility information</div>
+                <h2>Ownership and independence</h2>
+                <p>Provide the basic membership information ABA uses to assess eligibility.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
@@ -464,9 +408,7 @@
             </div>
             <div class="choice-grid">
               <label class="choice"><input type="checkbox" x-model="form.code_of_ethics"> We are willing to subscribe to ABA's Code of Ethics and Independence requirements.</label>
-              <label class="choice"><input type="checkbox" x-model="form.review_followup_ready"> We can provide ownership, independence, or regulatory detail later if ABA requests it during review.</label>
             </div>
-            <div class="hint">Detailed ownership structure, compliance material, and supporting documents should be handled as review follow-up rather than first-capture requirements.</div>
             </div>
           </details>
 
@@ -494,36 +436,51 @@
           </details>
 
           <div class="button-row">
-            <button class="button primary" type="submit">Preview application</button>
+            <button class="button primary" type="submit">Submit application</button>
             <a class="button secondary" href="./index.html">Back to membership</a>
           </div>
           <div class="summary" x-show="submitted" x-cloak>
-            <div class="mini">Application preview</div>
+            <div class="mini">Submission received</div>
+            <h3 style="margin-top: 6px;">Full-member application received.</h3>
             <div class="stack" style="margin-top: 10px;">
-              <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
-              <p><strong style="color: var(--ink);">Applied member type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Applicant:</strong> <span x-text="(form.applicant_shape === 'Individual' ? form.individual_name : form.org_name) || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Primary country:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Products needing support:</strong> <span x-text="form.has_products_support_need || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Sector roles:</strong> <span x-text="form.org_roles.length ? form.org_roles.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Product roles:</strong> <span x-text="form.full_product_roles.length ? form.full_product_roles.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Biological categories:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
-              <p><strong style="color: var(--ink);">Market countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
             </div>
           <div class="stack" style="margin-top: 12px;">
-            <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
-            <p><strong style="color: var(--ink);">Next ABA state:</strong> Under review, more information required, approved, or declined.</p>
-            <p><strong style="color: var(--ink);">Payment handling:</strong> No instant checkout. Any fee handling follows manual ABA review and follow-up.</p>
-            <template x-if="form.registration_support === 'Yes'">
+            <div class="success">
+              ABA has created a membership application record and queued it for review.
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label>Current state</label>
+                <p>Submitted for review</p>
+              </div>
+              <div class="field">
+                <label>Next ABA state</label>
+                <p>Under review</p>
+              </div>
+              <div class="field">
+                <label>Likely follow-up</label>
+                <p>Category/type confirmation and eligibility check</p>
+              </div>
+              <div class="field">
+                <label>Payment handling</label>
+                <p>Only after approval and manual ABA follow-up</p>
+              </div>
+            </div>
+            <template x-if="form.has_products_support_need === 'Yes'">
               <div class="success">
-                Next step in the prototype: continue into product-registration intake so ABA can receive the related product record as part of the broader member journey.
+                Registration support is relevant. ABA would normally ask for the linked product-registration record as the next step after membership intake is logged.
               </div>
             </template>
-            <div class="actions" x-show="form.registration_support === 'Yes'" x-cloak>
+            <div class="actions" x-show="form.has_products_support_need === 'Yes'" x-cloak>
               <a class="button secondary" href="../registration-tracker/index.html">Open tracker overview</a>
               <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Continue to product intake</a>
             </div>
-            <template x-if="form.registration_support !== 'Yes'">
-              <div class="success">Demo preview only. In production, this would create a membership application record for review.</div>
+            <template x-if="form.has_products_support_need !== 'Yes'">
+              <div class="success">ABA would review this application first and only request additional detail if needed.</div>
             </template>
           </div>
           </div>
@@ -549,16 +506,13 @@
           registration_number: "",
           market_stage: "",
           org_roles: [],
-          full_product_roles: [],
           activity_areas: [],
           has_products_support_need: "",
           market_countries: [],
-          registration_support: "",
           product_notes: "",
           african_owned: "",
           multinational_flag: "",
           code_of_ethics: false,
-          review_followup_ready: false,
           aggregate_consent: false,
           followup_consent: false,
           newsletter_consent: false,

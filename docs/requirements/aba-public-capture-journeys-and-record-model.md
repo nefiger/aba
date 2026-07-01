@@ -93,6 +93,7 @@ Likely downstream outcomes:
 Important note:
 - this should not be treated as a second-class leftover version of full membership
 - it is its own intentional route with different capture needs and different review criteria
+- public capture should gather factual expertise and contribution data, not ask the applicant to self-classify into redundant internal types
 
 ### 3. Observer or institutional stakeholder applicant
 
@@ -106,6 +107,11 @@ Current likely examples:
 
 Primary intent:
 - observe, support, connect, or engage with ABA at an institutional level
+
+Capture-shape rule:
+- this route should be institution-first
+- it should capture the institution plus the primary contact ABA should work with
+- it should not behave like a generic person-or-organisation membership form
 
 Likely downstream outcomes:
 - `MembershipApplication`

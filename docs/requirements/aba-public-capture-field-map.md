@@ -55,15 +55,13 @@ For this tranche:
 
 ## Shared first-capture fields across membership routes
 
-These fields already behave like common intake fields and should likely remain shared:
+These fields already behave like common intake fields, though not every route uses exactly the same shape:
 
-- applicant shape
-  - organisation
-  - individual
-- organisation name
-- applicant name
+- organisation or institution name
+- applicant name where the route is person-led
 - primary contact name
 - email
+- phone
 - primary country
 - market or regional relevance
 - follow-up consent
@@ -75,6 +73,33 @@ These fields imply shared canonical records:
 - `Person`
 - optional `Organization`
 - `MembershipApplication`
+
+## Public capture rule for route-specific forms
+
+When a person is already on a route-specific page such as:
+- `apply-full.html`
+- `apply-associate.html`
+- `apply-observer.html`
+
+the form should not ask them to restate:
+- the route they already chose
+- a category already determined by page context
+- a type that is already better expressed through richer fields on that same form
+
+Examples:
+- observer should use `institution type`, not a second observer-type dropdown
+- technical partner should use role, capability, and contribution fields rather than a generic partner-type selector
+- full member should use commercial profile and product/review fields rather than a premature self-classification dropdown
+
+Additional shape rules now established:
+- observer is an institution-first capture path
+- technical network should collect expertise, focus, geography, and contribution intent rather than abstract network-fit metadata
+- full-member capture should prefer factual commercial, product, and eligibility inputs over duplicated support or product-classification fields
+
+System note:
+- `application_route`, `applied_membership_category`, and `applied_membership_type` still matter in the internal model
+- but they do not all need to be directly chosen by the public applicant
+- some should be inferred from route context and some confirmed during review
 
 ## Route-by-route field inventory
 
@@ -106,30 +131,20 @@ Source:
   - product owner
   - small local producer
   - other commercial participant
-- product relationship
-  - owns products
-  - manufactures products
-  - imports products
-  - distributes products
 - biological product categories
   - biofertilisers
   - biopesticides
   - biostimulants
   - other biological category
+- whether the applicant currently needs registration or market-access support
 - countries where market access or registration matters
-- registration support interest
-  - yes
-  - not yet
-  - not sure
 - product notes
 
 #### Independence and eligibility
 
 - majority African-owned and controlled
 - controlled by multinational agrochemical corporation
-- ownership notes
 - willing to subscribe to code of ethics and independence requirements
-- able to speak to regulatory compliance or product status
 
 #### Permissions
 
@@ -146,12 +161,13 @@ Source:
 
 ### Main gaps or issues
 
-- no explicit field for applied membership category or applied membership type
-  - the page implies `Full member` but does not make the type explicit
-- no clear split between category and type
-  - for example small manufacturer vs larger commercial manufacturer is still inferred rather than captured cleanly
-- registration-support interest is present, but there is no structured handoff field to indicate whether a tracker follow-up should be created
-- ownership and independence fields are useful, but some of that detail may belong partly in review rather than pure public capture
+- full-member subtype still needs cleaner downstream modeling
+  - the page should not force the applicant to pick a system-facing type too early
+  - but ABA still needs enough structured detail to distinguish, for example, smaller local manufacturers from larger commercial applicants during review
+- the current role list may still need refinement so category, company role, and membership type do not blur together
+- registration-support handoff is still UI-light
+  - the route now asks one clear support question
+  - but the later tracker-linkage behavior still needs a better explicit model
 - no explicit consent for linking membership application to later registration records
 
 ### Likely canonical record implications
@@ -177,6 +193,7 @@ Current implementation source:
 - applicant name
 - primary contact
 - email
+- phone
 - country
 - primary role or title
 
@@ -212,16 +229,9 @@ Current implementation source:
 ### Main gaps or issues
 
 - route naming is outdated relative to the current policy note
-- there is no explicit technical-network field even though that is the real public promise
-- no structured service-capability layer beyond broad expertise tags
-- no structured willingness-to-support fields
-  - advisory
-  - review
-  - field support
-  - regulatory support
-  - training
-- no visibility preference for whether someone wants to be discoverable, invited, or simply connected
-- no explicit split between person-first and organisation-first specialist relationships
+- the route is now cleaner as factual capture, but it still needs a stronger downstream model for matching and follow-up
+- capability tags and contribution modes may still need curation once the technical-network operating model is clearer
+- no explicit visibility or directory-publishing rule has been designed yet
 
 ### Likely canonical record implications
 
@@ -240,11 +250,10 @@ Source:
 
 #### Applicant basics
 
-- applicant shape
-- organisation or institution name
-- applicant name
+- institution name
 - primary contact
 - email
+- phone
 - country
 - institution type
   - funder or donor
@@ -279,13 +288,13 @@ Source:
 
 - separates institutional stakeholders from commercial applicants
 - captures organisation type and engagement intent
+- is now explicitly institution-first rather than pretending to be a generic member form
 - already feels closer to a stakeholder relationship than a commercial member review
 
 ### Main gaps or issues
 
 - no explicit field for whether this is truly a membership relationship or a lighter stakeholder class
 - no structured policy, programme, or funding intent fields
-- no explicit organisation mandate or area-of-work summary
 - fewer consent options than the full-member and technical routes
 - no structured path for linking an institutional observer to future chapter, programme, or partnership work
 
@@ -401,17 +410,19 @@ This suggests the prototype should standardise a common public-intake spine arou
 
 ## Cross-route gaps against the journey model
 
-## 1. Category and type are still not captured cleanly
+## 1. Category and type need cleaner capture rules
 
-The current forms still rely too much on page choice and prose to imply:
-- category
-- applied type
-- review intent
-
-The system model will need explicit fields for:
+The system model still needs explicit fields for:
 - `applied_membership_category`
 - `applied_membership_type`
 - `application_route`
+
+But the public forms should not always expose those as direct dropdowns.
+
+The cleaner rule is:
+- route-specific pages can supply category and route context
+- richer public fields can signal likely type
+- review can confirm or revise the internal type before approval
 
 ## 2. Relationship continuity is not yet modeled explicitly
 

@@ -1,6 +1,6 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ---
 
@@ -100,6 +100,12 @@ The admin-pause note is now the best source for:
 - which unresolved field and attribute questions still make more admin specificity premature
 - why the next focus should shift to public/frontend data capture
 
+Latest form-shape decisions now locked:
+- route-specific public forms should not ask applicants to restate route/category/type decisions already carried by page context
+- technical-network capture should collect expertise and contribution facts rather than abstract self-classification or network-fit metadata
+- observer is now an institution-first route that captures the institution and primary contact, not a shared person/organisation form variant
+- full-member capture has been reduced to factual commercial, support, and eligibility inputs and should not drift back into duplicated review logic
+
 The prototype implementation approach should now assume:
 - no real database for this tranche
 - one canonical mock data layer reused across public forms, membership/admin views, and scenario screens
@@ -181,6 +187,13 @@ The prototype implementation approach should now assume:
   `docs/membership-flow/membership-types.html`
   `docs/database/index.html`
 
+### Membership capture refinement
+
+- tightened `docs/membership-flow/apply-full.html` so it no longer asks applicants to repeat route-derived or duplicated support/product classifications
+- tightened `docs/membership-flow/apply-associate.html` so the technical-network route captures expertise, biologicals focus, geography, and contribution rather than redundant type/fit metadata
+- tightened `docs/membership-flow/apply-observer.html` into an institution-first capture path with `Institution name` plus `Primary contact`
+- updated `docs/requirements/aba-public-capture-field-map.md` and `docs/requirements/aba-public-capture-journeys-and-record-model.md` to reflect those route-shape decisions explicitly
+
 ### Semantic visual language work
 
 - homepage now distinguishes the main routes more intentionally as:
@@ -228,6 +241,10 @@ The prototype implementation approach should now assume:
   `docs/requirements/aba-public-capture-journeys-and-record-model.md`
 - The immediate companion note for actual current-field inventory is now:
   `docs/requirements/aba-public-capture-field-map.md`
+- Those two notes should now be treated as the canonical source for:
+  - when public forms should infer route/category from context
+  - where public capture stops and review-time classification begins
+  - why observer is institution-first and technical network is expertise-first
 - Admin refinement is intentionally paused here until more of the public-side capture fields and member-class attributes are surfaced
 - `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
 - The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
