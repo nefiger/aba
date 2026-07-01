@@ -235,16 +235,18 @@ body {
 }
 
 .brand-copy strong {
-  font-size: 12px !important;
+  font-size: 13px !important;
   font-weight: 900 !important;
   letter-spacing: 0.16em !important;
   line-height: 1.08 !important;
+  color: var(--ink) !important;
 }
 
 .brand-copy span {
   font-size: 13px !important;
   line-height: 1.34 !important;
   max-width: 38ch !important;
+  color: color-mix(in oklab, var(--ink) 72%, white) !important;
 }
 
 @media (max-width: 760px) {

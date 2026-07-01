@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <section class="site-footer__block">
           <div class="site-footer__eyebrow">African Biologicals Alliance</div>
           <div class="site-footer__title">Collective voice for African biologicals.</div>
-          <p>Collective voice, regulatory visibility, and stronger market conditions for African biologicals.</p>
+          <p>Strengthening Africa's biologicals sector through voice, visibility, and market access.</p>
           <p>South Africa is the current operating base, while participation and intelligence are Africa-wide.</p>
         </section>
         <nav class="site-footer__block site-footer__nav" aria-label="Explore ABA">
