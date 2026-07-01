@@ -81,20 +81,20 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-md);
-      padding: 14px 18px;
+      padding: 16px 24px;
       margin-bottom: var(--space-sm);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-md);
       min-width: 0;
     }
 
     .mark {
-      width: 74px;
-      height: 48px;
+      width: 86px;
+      height: 56px;
       border-radius: 0;
       display: inline-flex;
       align-items: center;
@@ -113,21 +113,21 @@
 
     .brand-copy {
       display: grid;
-      gap: 2px;
+      gap: 4px;
     }
 
     .brand-copy strong {
-      font-size: 12px;
+      font-size: clamp(0.88rem, 0.82rem + 0.24vw, 1rem);
       font-weight: 900;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
     .brand-copy span {
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+      line-height: 1.42;
       color: var(--muted);
-      max-width: 42ch;
+      max-width: 34ch;
     }
 
     .nav-wrap {
@@ -141,13 +141,14 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: var(--space-lg);
+      gap: 20px;
       flex-wrap: wrap;
     }
 
     .nav a {
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 0.98rem;
+      font-weight: 650;
+      line-height: 1;
       color: color-mix(in oklab, var(--ink) 82%, white);
     }
 
@@ -160,14 +161,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 16px;
+      min-height: 48px;
+      padding: 0 18px;
       border-radius: 12px;
       background: var(--green-deep);
       color: #f7f7f2;
-      font-size: 12px;
+      font-size: 0.82rem;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
@@ -197,9 +198,14 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-      gap: clamp(22px, 3vw, 36px);
-      align-items: start;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: clamp(26px, 3.2vw, 42px);
+      align-items: center;
+    }
+
+    .hero-main {
+      display: grid;
+      gap: 0;
     }
 
     .eyebrow {
@@ -226,27 +232,28 @@
     }
 
     h1 {
-      margin-top: 14px;
+      margin-top: 16px;
       max-width: none;
-      font-size: clamp(2.2rem, 4.1vw, 3.65rem);
-      line-height: 0.98;
+      font-size: clamp(2.6rem, 4.7vw, 4.85rem);
+      line-height: 0.94;
       letter-spacing: -0.045em;
       font-weight: 900;
+      max-width: 10.5ch;
     }
 
     .hero-copy {
-      margin-top: 14px;
-      max-width: none;
-      font-size: clamp(1.05rem, 1.5vw, 1.28rem);
-      line-height: 1.66;
+      margin-top: 18px;
+      max-width: 41ch;
+      font-size: clamp(1.06rem, 1rem + 0.38vw, 1.28rem);
+      line-height: 1.72;
       color: var(--muted);
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px 12px;
+      margin-top: 24px;
     }
 
     .button {
@@ -256,9 +263,9 @@
       min-height: 48px;
       padding: 0 18px;
       border-radius: 12px;
-      font-size: 12px;
+      font-size: 0.8rem;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease, color 180ms ease;
     }
@@ -280,17 +287,17 @@
     }
 
     .hero-note {
-      margin-top: 14px;
-      max-width: none;
-      font-size: 14px;
-      line-height: 1.65;
+      margin-top: 18px;
+      max-width: 60ch;
+      font-size: 0.96rem;
+      line-height: 1.62;
       color: color-mix(in oklab, var(--muted) 88%, white);
     }
 
     .decision-panel {
       display: grid;
       gap: var(--space-md);
-      padding: 16px;
+      padding: 18px;
       border-radius: 20px;
       background: rgba(244, 240, 230, 0.74);
       border: 1px solid rgba(73, 95, 82, 0.12);
@@ -312,10 +319,11 @@
     }
 
     .decision-panel h2 {
-      font-size: clamp(1.28rem, 1.7vw, 1.55rem);
-      line-height: 1.1;
+      font-size: clamp(1.18rem, 1rem + 0.8vw, 1.7rem);
+      line-height: 1.06;
       letter-spacing: -0.04em;
       font-weight: 900;
+      max-width: 13ch;
     }
 
     .decision-list {
@@ -328,7 +336,7 @@
       grid-template-columns: 40px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      padding: 12px 13px;
+      padding: 14px;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.68);
       border: 1px solid rgba(73, 95, 82, 0.12);
@@ -395,7 +403,7 @@
     }
 
     .decision-link strong {
-      font-size: 16px;
+      font-size: 1.05rem;
       margin-bottom: 4px;
     }
 
@@ -403,8 +411,7 @@
     .decision-link p,
     .path-card p,
     .scope-card p,
-    .pillar-row p,
-    .editorial-body p {
+    .pillar-row p {
       font-size: 14px;
       line-height: 1.62;
       color: var(--muted);
@@ -417,70 +424,81 @@
 
     .editorial-grid {
       display: grid;
-      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
-      gap: clamp(22px, 3vw, 42px);
+      gap: clamp(18px, 2.5vw, 28px);
+    }
+
+    .editorial-intro {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(18px, 2.5vw, 32px);
       align-items: start;
     }
 
     .section-lead {
       display: grid;
-      gap: 10px;
-      position: sticky;
-      top: 20px;
+      gap: 12px;
     }
 
     .section-lead h2 {
       max-width: none;
-      font-size: clamp(1.5rem, 2.45vw, 2.1rem);
-      line-height: 1.04;
+      font-size: clamp(1.8rem, 2.6vw, 2.7rem);
+      line-height: 0.98;
       letter-spacing: -0.045em;
       font-weight: 900;
+      max-width: 11.5ch;
     }
 
     .section-lead p {
-      max-width: none;
-      font-size: 15px;
+      max-width: 34ch;
+      font-size: 1rem;
       line-height: 1.72;
       color: var(--muted);
     }
 
-    .editorial-body {
+    .section-summary {
       display: grid;
-      gap: var(--space-lg);
-    }
-
-    .problem-band {
-      display: grid;
-      gap: 16px;
-      padding: 18px 18px 16px;
-      border-radius: 18px;
-      background:
-        linear-gradient(135deg, rgba(238, 232, 217, 0.88), rgba(247, 244, 235, 0.72));
+      gap: 14px;
+      align-content: start;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(238, 232, 217, 0.92), rgba(247, 244, 235, 0.76));
       border: 1px solid rgba(73, 95, 82, 0.1);
     }
 
-    .problem-band strong {
-      font-size: clamp(1.3rem, 2vw, 1.75rem);
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-      max-width: none;
+    .section-summary strong {
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      max-width: 22ch;
+    }
+
+    .section-summary p {
+      max-width: 52ch;
+      font-size: 1rem;
+      line-height: 1.68;
+      color: var(--muted);
     }
 
     .problem-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
     .problem-item {
-      padding: 14px 0 0;
-      border-top: 1px solid rgba(73, 95, 82, 0.14);
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(73, 95, 82, 0.1);
     }
 
     .problem-item strong {
-      font-size: 16px;
-      line-height: 1.25;
-      margin-bottom: 6px;
+      font-size: 1.02rem;
+      line-height: 1.24;
       max-width: none;
     }
 
@@ -812,7 +830,7 @@
 
     @media (max-width: 1080px) {
       .hero-grid,
-      .editorial-grid,
+      .editorial-intro,
       .paths-intro,
       .paths-grid,
       .system-grid,
@@ -820,13 +838,13 @@
         grid-template-columns: 1fr;
       }
 
-      .section-lead {
-        position: static;
-      }
-
       .section-lead h2,
       h1 {
         max-width: none;
+      }
+
+      .problem-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -905,7 +923,8 @@
 
     <section class="surface hero">
       <div class="hero-grid">
-        <div>
+        <div class="hero-main">
+          <span class="eyebrow">Membership, intelligence, and advocacy</span>
           <h1>Biologicals in Africa need a strong foundation.</h1>
           <p class="hero-copy">
             ABA is a membership-based alliance for the independent African biologicals sector who need stronger representation, better regulatory conditions, and a more visible, credible sector. We are here to turn fragmented effort into coordinated advocacy, harmonised regulatory and registration processes, practical sector intelligence, and clear market access pathways across the continent.
@@ -922,6 +941,7 @@
 
         <aside class="decision-panel">
           <header>
+            <small>Start here</small>
             <h2>Choose the route that matches your reason for arriving.</h2>
           </header>
           <div class="decision-list">
@@ -953,32 +973,33 @@
 
     <section class="surface page-section">
       <div class="editorial-grid">
-        <div class="section-lead">
-          <h2>The sector needs more than products. It needs coordinated representation.</h2>
-          <p>ABA exists to change the conditions under which African biologicals are seen, assessed, supported, and able to compete.</p>
-        </div>
-
-        <div class="editorial-body">
-          <div class="problem-band">
+        <div class="editorial-intro">
+          <div class="section-lead">
+            <span class="section-label">Why ABA now</span>
+            <h2>The sector needs more than products. It needs coordinated representation.</h2>
+            <p>ABA exists to change the conditions under which African biologicals are seen, assessed, supported, and able to compete.</p>
+          </div>
+          <div class="section-summary">
             <strong>Independent African biologicals businesses are still navigating policy, registration, and visibility with too little coordinated support.</strong>
-            <div class="problem-grid">
-              <div class="problem-item">
-                <strong>Representation is thin.</strong>
-                <p>Individual firms are left to navigate policy and market access alone, without a recognised collective vehicle for influence.</p>
-              </div>
-              <div class="problem-item">
-                <strong>Registration journeys are opaque.</strong>
-                <p>It is hard to see shared bottlenecks, recurring delays, and where evidence can strengthen engagement with regulators.</p>
-              </div>
-              <div class="problem-item">
-                <strong>Local alternatives are harder to find.</strong>
-                <p>Products, evidence, and regulatory context remain fragmented, making credible biologicals less visible than they should be.</p>
-              </div>
-              <div class="problem-item">
-                <strong>The sector lacks a shared posture.</strong>
-                <p>ABA helps turn scattered effort into a more coherent, legitimate, and Africa-rooted presence.</p>
-              </div>
-            </div>
+            <p>ABA turns isolated regulatory effort into shared evidence, a stronger collective voice, and clearer market-access pathways for credible biologicals across the continent.</p>
+          </div>
+        </div>
+        <div class="problem-grid">
+          <div class="problem-item">
+            <strong>Representation is thin.</strong>
+            <p>Individual firms are left to navigate policy and market access alone, without a recognised collective vehicle for influence.</p>
+          </div>
+          <div class="problem-item">
+            <strong>Registration journeys are opaque.</strong>
+            <p>It is hard to see shared bottlenecks, recurring delays, and where evidence can strengthen engagement with regulators.</p>
+          </div>
+          <div class="problem-item">
+            <strong>Local alternatives are harder to find.</strong>
+            <p>Products, evidence, and regulatory context remain fragmented, making credible biologicals less visible than they should be.</p>
+          </div>
+          <div class="problem-item">
+            <strong>The sector lacks a shared posture.</strong>
+            <p>ABA helps turn scattered effort into a more coherent, legitimate, and Africa-rooted presence.</p>
           </div>
         </div>
       </div>
