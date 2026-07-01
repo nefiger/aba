@@ -120,7 +120,7 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Observer membership</div>
+          <div class="eyebrow">Observer</div>
           <h1>Apply for Observer membership.</h1>
           <p style="margin-top: 12px; max-width: 62ch;">For institutions and public-interest stakeholders that want to stay close to sector development.</p>
         </div>
@@ -129,6 +129,35 @@
 
     <section class="surface section">
       <form class="stack" @submit.prevent="submitted = true">
+          <details class="form-section" open>
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Route and type</div>
+                <h2>Observer route</h2>
+                <p>Confirm the observer category and the institutional or stakeholder type this application represents.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label>Membership category</label>
+                  <input type="text" value="Observer" readonly>
+                </div>
+                <div class="field">
+                  <label>Applied observer type</label>
+                  <select x-model="form.applied_membership_type">
+                    <option value="">Select observer type</option>
+                    <option>Government agency</option>
+                    <option>Development partner</option>
+                    <option>Funder</option>
+                    <option>International partner</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </details>
+
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
@@ -174,6 +203,10 @@
                 <input x-model="form.email" type="email" placeholder="name@example.com">
               </div>
               <div class="field">
+                <label>Phone</label>
+                <input x-model="form.phone" type="text" placeholder="+27 ...">
+              </div>
+              <div class="field">
                 <label>Country</label>
                 <select x-model="form.country">
                   <option value="">Select country</option>
@@ -205,13 +238,29 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Interest and engagement</div>
-                <h2>Interests and engagement</h2>
-                <p>Show what parts of the sector matter to you and how you want to engage with ABA.</p>
+                <div class="section-label">Mandate and engagement</div>
+                <h2>Institutional mandate and engagement</h2>
+                <p>Show what this institution is responsible for and how it wants to participate in ABA.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
             <div class="form-body">
+            <div class="field-grid">
+              <div class="field">
+                <label>Mandate or programme area</label>
+                <input x-model="form.mandate_area" type="text" placeholder="Policy, programme, funding, public-sector mandate...">
+              </div>
+              <div class="field">
+                <label>Operating scope</label>
+                <select x-model="form.operating_scope">
+                  <option value="">Select scope</option>
+                  <option>National</option>
+                  <option>Regional</option>
+                  <option>Continental</option>
+                  <option>Global with African programme focus</option>
+                </select>
+              </div>
+            </div>
             <div class="field full">
               <label>Sector interest areas</label>
               <div class="choice-grid" style="margin-top: 8px;">
@@ -222,11 +271,12 @@
               </div>
             </div>
             <div class="field full">
-              <label>How would you like to engage with ABA?</label>
+              <label>Preferred engagement modes</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Sector updates" x-model="form.observer_interests"> Receive sector updates</label>
                 <label class="choice"><input type="checkbox" value="Convenings" x-model="form.observer_interests"> Join convenings or briefings</label>
                 <label class="choice"><input type="checkbox" value="Programme or policy visibility" x-model="form.observer_interests"> Follow programme or policy signals</label>
+                <label class="choice"><input type="checkbox" value="Partnership exploration" x-model="form.observer_interests"> Explore partnership opportunities</label>
               </div>
             </div>
             <div class="field full">
@@ -241,8 +291,8 @@
               </div>
             </div>
             <div class="field full">
-              <label>Why do you want to stay connected to ABA?</label>
-              <textarea x-model="form.engagement_notes" placeholder="Tell ABA what kind of relationship, visibility, or participation you are looking for."></textarea>
+              <label>Institutional interest summary</label>
+              <textarea x-model="form.engagement_notes" placeholder="Describe the policy, programme, funding, or visibility context shaping this relationship."></textarea>
             </div>
             </div>
           </details>
@@ -277,7 +327,10 @@
             <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
+              <p><strong style="color: var(--ink);">Applied observer type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Institution type:</strong> <span x-text="form.observer_institution || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Mandate area:</strong> <span x-text="form.mandate_area || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Operating scope:</strong> <span x-text="form.operating_scope || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Interest areas:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Engagement interests:</strong> <span x-text="form.observer_interests.length ? form.observer_interests.join(', ') : 'Not provided yet'"></span></p>
             </div>
@@ -296,13 +349,19 @@
       return {
         submitted: false,
         form: {
+          application_route: "observer",
           applicant_shape: "Organisation",
+          applied_membership_category: "observer",
+          applied_membership_type: "",
           org_name: "",
           individual_name: "",
           contact_name: "",
           email: "",
+          phone: "",
           country: "",
           observer_institution: "",
+          mandate_area: "",
+          operating_scope: "",
           activity_areas: [],
           observer_interests: [],
           market_countries: [],

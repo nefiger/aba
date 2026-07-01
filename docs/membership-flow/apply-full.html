@@ -230,7 +230,7 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Full membership</div>
+          <div class="eyebrow">Full member</div>
           <h1>Apply for Full membership.</h1>
           <p style="margin-top: 12px; max-width: 62ch;">For commercial biologicals participants, including smaller local producers.</p>
         </div>
@@ -239,6 +239,35 @@
 
     <section class="surface section">
       <form class="stack" @submit.prevent="submitted = true">
+          <details class="form-section" open>
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Route and type</div>
+                <h2>Membership route</h2>
+                <p>Confirm the category and the member type this application should be reviewed against.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="membership_category">Membership category</label>
+                  <input id="membership_category" type="text" value="Full member" readonly>
+                </div>
+                <div class="field">
+                  <label for="applied_membership_type">Applied member type</label>
+                  <select id="applied_membership_type" x-model="form.applied_membership_type">
+                    <option value="">Select member type</option>
+                    <option>Student</option>
+                    <option>Individual member</option>
+                    <option>Manufacturer (small)</option>
+                    <option>Manufacturer (commercial)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </details>
+
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
@@ -372,6 +401,14 @@
             </summary>
             <div class="form-body">
             <div class="field full">
+              <label>Do you currently have products needing registration or market-access support?</label>
+              <div class="choice-grid" style="margin-top: 8px;">
+                <label class="choice"><input type="radio" value="Yes" x-model="form.has_products_support_need"> Yes</label>
+                <label class="choice"><input type="radio" value="No" x-model="form.has_products_support_need"> No</label>
+                <label class="choice"><input type="radio" value="Not sure yet" x-model="form.has_products_support_need"> Not sure yet</label>
+              </div>
+            </div>
+            <div class="field full">
               <label>Countries where market access or registration matters to you</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="South Africa" x-model="form.market_countries"> South Africa</label>
@@ -400,9 +437,9 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Eligibility and independence</div>
-                <h2>Ownership and independence</h2>
-                <p>These fields support Full membership review.</p>
+                <div class="section-label">Review readiness</div>
+                <h2>Eligibility signals</h2>
+                <p>Capture the minimum signals ABA needs now. Detailed ownership or compliance explanation can follow during review.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
@@ -425,14 +462,11 @@
                 </div>
               </div>
             </div>
-            <div class="field full">
-              <label for="ownership_notes">Ownership or independence notes</label>
-              <textarea id="ownership_notes" x-model="form.ownership_notes" placeholder="Use this if control, ownership, or group structure needs explanation."></textarea>
-            </div>
             <div class="choice-grid">
               <label class="choice"><input type="checkbox" x-model="form.code_of_ethics"> We are willing to subscribe to ABA's Code of Ethics and Independence requirements.</label>
-              <label class="choice"><input type="checkbox" x-model="form.regulatory_compliance"> We can speak to our current regulatory compliance or product status where relevant.</label>
+              <label class="choice"><input type="checkbox" x-model="form.review_followup_ready"> We can provide ownership, independence, or regulatory detail later if ABA requests it during review.</label>
             </div>
+            <div class="hint">Detailed ownership structure, compliance material, and supporting documents should be handled as review follow-up rather than first-capture requirements.</div>
             </div>
           </details>
 
@@ -467,7 +501,9 @@
             <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
+              <p><strong style="color: var(--ink);">Applied member type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Primary country:</strong> <span x-text="form.country || 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Products needing support:</strong> <span x-text="form.has_products_support_need || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Sector roles:</strong> <span x-text="form.org_roles.length ? form.org_roles.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Product roles:</strong> <span x-text="form.full_product_roles.length ? form.full_product_roles.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Biological categories:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
@@ -500,7 +536,10 @@
       return {
         submitted: false,
         form: {
+          application_route: "full_member",
           applicant_shape: "Organisation",
+          applied_membership_category: "full_member",
+          applied_membership_type: "",
           org_name: "",
           individual_name: "",
           contact_name: "",
@@ -512,14 +551,14 @@
           org_roles: [],
           full_product_roles: [],
           activity_areas: [],
+          has_products_support_need: "",
           market_countries: [],
           registration_support: "",
           product_notes: "",
           african_owned: "",
           multinational_flag: "",
-          ownership_notes: "",
           code_of_ethics: false,
-          regulatory_compliance: false,
+          review_followup_ready: false,
           aggregate_consent: false,
           followup_consent: false,
           newsletter_consent: false,
