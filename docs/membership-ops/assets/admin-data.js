@@ -256,15 +256,15 @@ window.ABA_ADMIN_DATA = {
     },
   ],
   chapters: [
-    { chapter: "South Africa", status: "Active pilot", lead: "Stub lead", members: 12, readiness: "In use for current demo" },
-    { chapter: "East Africa", status: "Stub", lead: "TBC", members: 4, readiness: "Placeholder only" },
+    { chapter: "South Africa", status: "Active pilot", lead: "Jen M.", members: 12, readiness: "Live member cohort", scope: "National chapter", cadence: "Monthly" },
+    { chapter: "East Africa", status: "Planned", lead: "TBC", members: 4, readiness: "Founding outreach", scope: "Regional chapter", cadence: "Quarterly" },
   ],
   intelligence: [
-    { country: "South Africa", submissions: 18, bottleneck: "Data completeness", stage: "Pre-submission" },
-    { country: "Kenya", submissions: 7, bottleneck: "Dossier format", stage: "Authority review" },
+    { country: "South Africa", submissions: 18, bottleneck: "Data completeness", stage: "Pre-submission", at_risk: 4, latest_signal: "Three dossiers missing efficacy evidence" },
+    { country: "Kenya", submissions: 7, bottleneck: "Dossier format", stage: "Authority review", at_risk: 2, latest_signal: "Template mismatch delaying authority handoff" },
   ],
   contacts: [
-    { name: "Ama Mensah", organisation: "West Africa Bio Collective", relationship: "Subscriber", country: "Ghana", owner: "Jen M." },
-    { name: "Palesa Mokoena", organisation: "GreenRise Biologics", relationship: "Member contact", country: "South Africa", owner: "Anna D." },
+    { name: "Ama Mensah", organisation: "West Africa Bio Collective", relationship: "Subscriber", country: "Ghana", owner: "Jen M.", next_step: "Qualify for chapter outreach" },
+    { name: "Palesa Mokoena", organisation: "GreenRise Biologics", relationship: "Member contact", country: "South Africa", owner: "Anna D.", next_step: "Update technical network profile" },
   ],
 };

@@ -19,29 +19,35 @@
             <div class="page-head-copy">
               <div class="eyebrow">Contacts & Network</div>
               <h1 class="page-title">Contacts & Network</h1>
-              <p class="page-subtitle">Contacts, subscribers, and network relationships.</p>
+              <p class="page-subtitle">Relationship records across members, subscribers, and wider technical-network contacts.</p>
             </div>
           </div>
         </section>
 
-        <section class="panel stub-panel">
-          <div class="stub-grid">
+        <section class="panel datagrid-panel">
+          <div class="table-head">
             <div>
-              <h2 class="table-title">Relationship overview</h2>
-              <p class="stub-note">Contacts, subscribers, and technical network profiles.</p>
+              <h2 class="table-title">Relationship records</h2>
             </div>
-            <div class="table-wrap">
-              <table class="stub-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Relationship</th>
-                    <th>Owner</th>
-                  </tr>
-                </thead>
-                <tbody id="contact-rows"></tbody>
-              </table>
+            <div class="summary-row">
+              <span class="summary-chip">2 active contacts</span>
             </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Organisation</th>
+                  <th>Relationship</th>
+                  <th>Country</th>
+                  <th>Owner</th>
+                  <th>Next step</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="contact-rows"></tbody>
+            </table>
           </div>
         </section>
       </div>
@@ -50,12 +56,24 @@
 
   <script src="./assets/admin-shell.js"></script>
   <script src="./assets/admin-data.js"></script>
+  <script src="./assets/admin-render.js"></script>
   <script>
-    document.getElementById("contact-rows").innerHTML = window.ABA_ADMIN_DATA.contacts.map((item) => `
+    const data = window.ABA_ADMIN_DATA;
+    const ui = window.ABA_ADMIN_RENDER;
+    const relationshipTone = {
+      Subscriber: "waiting",
+      "Member contact": "good",
+    };
+
+    document.getElementById("contact-rows").innerHTML = data.contacts.map((item) => `
       <tr>
         <td><strong>${item.name}</strong></td>
-        <td>${item.relationship}</td>
-        <td>${item.owner}</td>
+        <td>${ui.value(item.organisation)}</td>
+        <td>${ui.status(item.relationship, relationshipTone[item.relationship])}</td>
+        <td>${ui.value(item.country)}</td>
+        <td>${ui.value(item.owner)}</td>
+        <td>${item.next_step}</td>
+        <td class="settings-actions">${ui.iconButton("edit", "Open contact", "review")}</td>
       </tr>
     `).join("");
   </script>

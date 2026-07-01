@@ -701,6 +701,44 @@ tbody tr:hover {
   text-align: right;
 }
 
+.insight-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: var(--space-4);
+}
+
+.insight-stack {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.insight-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.74);
+  display: grid;
+  gap: 8px;
+}
+
+.insight-card strong {
+  font-size: 1.7rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.managed-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1180px) {
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .stub-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
