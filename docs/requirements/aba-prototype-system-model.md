@@ -1,6 +1,6 @@
 # ABA Prototype System Model
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 Purpose:
 - define the product behavior behind the current ABA prototype
@@ -25,6 +25,11 @@ The prototype also needs to lock 4 structural UI decisions because it is acting 
 - the landing page for each major module
 - the visual asset direction needed for a complete snapshot
 - the reusable UI patterns that later become a design system
+
+Current sequencing rule for the public capture tranche:
+- continue deepening the membership-side public intake model now
+- keep registration-tracker redesign parked for now
+- allow tracker references only where the membership model needs a future handoff or continuity rule
 
 Prototype implementation approach for this tranche:
 - do not build a real database-backed system
@@ -176,6 +181,93 @@ Rules:
 - approval does not make the member active by itself
 - an application may be approved into a different membership type from the one originally applied for
 - `applied_membership_category`, `applied_membership_type`, `approved_membership_category`, and `approved_membership_type` must remain separate fields
+
+### Membership public-intake spine
+
+For the current non-tracker tranche, the public membership forms should be treated as one shared intake model with route-specific extensions.
+
+#### Shared first-capture fields
+
+These fields should be common across `Full member`, `Technical partner`, and `Observer` routes:
+
+- application_route
+- applicant_shape
+- applicant_person_name
+- organization_name where relevant
+- primary_contact_name where relevant
+- email
+- phone where relevant
+- primary_country
+- regional_scope or market_scope
+- follow_up_consent
+- newsletter_consent
+- source_channel
+
+#### Full member extension
+
+Adds fields such as:
+
+- applied_membership_category = `full_member`
+- applied_membership_type
+- sector_roles
+- product_relationship
+- market_stage
+- activity_areas
+- market_countries
+- registration_support_interest
+- independence_signals
+- ownership_or_group_notes
+
+Rules:
+- this route may capture that registration support is relevant
+- it should not become the tracker form itself
+- future tracker handoff should be a linked next step, not a mixed single form
+
+#### Technical partner extension
+
+Adds fields such as:
+
+- applied_membership_category = `technical_partner`
+- applied_membership_type
+- role_title
+- expertise_areas
+- capability_areas
+- countries_of_operation
+- contribution_modes
+- discoverability_preference
+- contribution_notes
+
+Rules:
+- this route is the intentional public technical-network path
+- current prototype wording may still say `Associate`, but the system label should be `Technical partner`
+- this route should optimize for capability and contribution matching, not commercial product ownership
+
+#### Observer extension
+
+Adds fields such as:
+
+- applied_membership_category = `observer`
+- applied_membership_type
+- institution_type
+- interest_areas
+- engagement_modes
+- mandate_regions
+- engagement_notes
+
+Rules:
+- this route should optimize for stakeholder or institutional relationship capture
+- it should not inherit commercial-member assumptions by default
+
+#### Out of scope for this immediate tranche
+
+The following should remain documented, but not drive the next public-form redesign pass:
+
+- tracker-specific product fields
+- tracker-specific status history fields
+- regulator/export packet fields
+
+The only tracker-adjacent membership-side concern that remains in scope now is:
+- whether a full-member applicant signals likely future registration-support follow-up
 
 ### MembershipType
 
@@ -359,7 +451,7 @@ Fields shown or implied:
 ### Public membership flow
 
 1. Visitor chooses membership route.
-2. Visitor submits Full, Associate, or Observer membership application.
+2. Visitor submits Full member, Technical partner, or Observer membership application.
 3. A `MembershipApplication` record is created.
 4. ABA operator reviews application.
 5. Application moves to:
@@ -385,6 +477,10 @@ Fields shown or implied:
 3. If product-registration relevance is present, the next step is the tracker intake flow.
 4. Membership review and tracker intake remain linked but distinct.
 5. Operator can see both the membership context and the tracker submission context.
+
+Current sequencing note:
+- this linkage should stay in the system model
+- the tracker form itself is not the current redesign focus
 
 ### Non-member registration tracker flow
 
@@ -486,6 +582,13 @@ The prototype should continue to visibly demonstrate:
 - tracker record states
 - export eligibility states
 - public vs private boundaries
+
+For the immediate non-tracker capture tranche, the highest-priority visible states are:
+- membership route choice
+- application submission state
+- review and clarification state
+- approval versus pending activation
+- dues or subscription gating before active membership
 
 These visible states are part of the spec and should not be hidden behind purely narrative documentation.
 

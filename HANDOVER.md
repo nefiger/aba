@@ -32,6 +32,8 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-active-now-checklist.md`
 - `docs/requirements/aba-membership-admin-crm-spec-gap-pass.md`
 - `docs/requirements/aba-membership-type-policy.md`
+- `docs/requirements/aba-public-capture-journeys-and-record-model.md`
+- `docs/requirements/aba-public-capture-field-map.md`
 
 Public and role-based prototype updates now include:
 
@@ -69,6 +71,23 @@ The membership-type policy note is now the best source for:
 - the current canonical membership taxonomy
 - how categories, annual dues, privileges, and admin-management should be modeled
 - the distinction between applied and approved membership type
+
+The public-capture journeys note is now the best source for:
+- the different public-side users and entry routes already implied by the prototype
+- what each journey is trying to achieve
+- what canonical records each route should create
+- why route-specific field modeling needs to be clarified before more capture UI work
+
+The public-capture field-map note is now the best source for:
+- the actual fields currently being captured on each membership and tracker route
+- where route naming has drifted from the canonical taxonomy
+- what is shared across routes versus route-specific
+- what still needs to move from page-level form design into the canonical system model
+
+Current public-capture sequencing clarification:
+- resolve the non-tracker membership-side routes first
+- keep tracker redesign parked for now
+- retain tracker notes only where the broader system model needs continuity and handoff rules
 
 The prototype implementation approach should now assume:
 - no real database for this tranche
@@ -119,6 +138,12 @@ The prototype implementation approach should now assume:
   `docs/membership-ops/chapters.html`
   `docs/membership-ops/registration-intelligence.html`
   `docs/membership-ops/contacts-network.html`
+- captured the first-pass public-side journey map in:
+  `docs/requirements/aba-public-capture-journeys-and-record-model.md`
+  so the next tranche can lock user routes, captured fields, and record creation before redesigning forms
+- captured the current route-by-route public field inventory in:
+  `docs/requirements/aba-public-capture-field-map.md`
+  so the next tranche can compare actual prototype fields against the intended journeys and canonical records before touching form UX
 - clarified that the next spec-first tranche should lock:
   - canonical CRM-style records
   - membership relationship semantics
@@ -182,6 +207,10 @@ The prototype implementation approach should now assume:
 - The repo now needs a more explicit canonical data spine for membership, admin, CRM-style records, and operator workflow
 - The biggest remaining gap is not route structure, but operational modeling:
   people, organisations, relationships, applications, submissions, review cases, consents, and downstream outputs
+- The immediate public-side starting note for this is now:
+  `docs/requirements/aba-public-capture-journeys-and-record-model.md`
+- The immediate companion note for actual current-field inventory is now:
+  `docs/requirements/aba-public-capture-field-map.md`
 - `docs/requirements/aba-prototype-system-model.md` should be the next main note to deepen using the new gap-pass note as input
 - The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
 - Prototype implementation should stay mock-data-first:
@@ -190,7 +219,7 @@ The prototype implementation approach should now assume:
 ### Sequencing constraint
 
 - Continue with the non-tracker ABA surfaces first:
-  public site, membership flow, Explorer, supporting notes, and wider prototype coherence
+  public site, membership flow, capture/data-model work, supporting notes, and wider prototype coherence
 - Only resume tracker-focused implementation or polish later if Lyle is still unavailable at that point
 
 ### July follow-through after the founding-members demo

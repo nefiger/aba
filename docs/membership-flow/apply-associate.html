@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Apply for ABA Associate Membership</title>
+  <title>Apply for ABA Technical Partner Membership</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -95,7 +95,7 @@
     }
   </style>
 </head>
-<body x-data="associateMembershipApp()">
+<body x-data="technicalPartnerMembershipApp()">
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
@@ -120,15 +120,45 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Associate membership</div>
-          <h1>Apply for Associate membership.</h1>
-          <p style="margin-top: 12px; max-width: 62ch;">For researchers, service providers, consultants, and other ecosystem contributors.</p>
+          <div class="eyebrow">Technical partner</div>
+          <h1>Join the technical network.</h1>
+          <p style="margin-top: 12px; max-width: 62ch;">For researchers, service providers, consultants, and other specialist contributors strengthening the biologicals sector.</p>
         </div>
       </div>
     </section>
 
     <section class="surface section">
       <form class="stack" @submit.prevent="submitted = true">
+          <details class="form-section" open>
+            <summary class="summary-row">
+              <div class="section-head">
+                <div class="section-label">Route and type</div>
+                <h2>Technical partner route</h2>
+                <p>Confirm the specialist route and the main technical-partner type this application should follow.</p>
+              </div>
+              <span class="summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="form-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label>Membership category</label>
+                  <input type="text" value="Technical partner" readonly>
+                </div>
+                <div class="field">
+                  <label>Applied technical-partner type</label>
+                  <select x-model="form.applied_membership_type">
+                    <option value="">Select technical-partner type</option>
+                    <option>Consultant</option>
+                    <option>Agronomist</option>
+                    <option>Researcher</option>
+                    <option>Regulatory specialist</option>
+                    <option>Service provider</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </details>
+
           <details class="form-section" open>
             <summary class="summary-row">
               <div class="section-head">
@@ -174,6 +204,10 @@
                 <input x-model="form.email" type="email" placeholder="name@example.com">
               </div>
               <div class="field">
+                <label>Phone</label>
+                <input x-model="form.phone" type="text" placeholder="+27 ...">
+              </div>
+              <div class="field">
                 <label>Country</label>
                 <select x-model="form.country">
                   <option value="">Select country</option>
@@ -196,15 +230,15 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <div class="section-label">Expertise and focus</div>
-                <h2>Expertise and biologicals focus</h2>
-                <p>Show the technical or enabling strengths ABA should understand during review.</p>
+                <div class="section-label">Capabilities and network fit</div>
+                <h2>Capabilities and sector fit</h2>
+                <p>Show the capabilities, focus areas, and ways this specialist or organisation could contribute to the network.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true"></span>
             </summary>
             <div class="form-body">
             <div class="field full">
-              <label>Expertise areas</label>
+              <label>Primary capability areas</label>
               <div class="choice-grid" style="margin-top: 8px;">
                 <label class="choice"><input type="checkbox" value="Research or trials" x-model="form.associate_expertise"> Research or trials</label>
                 <label class="choice"><input type="checkbox" value="Regulatory support" x-model="form.associate_expertise"> Regulatory support</label>
@@ -234,7 +268,44 @@
               </div>
             </div>
             <div class="field full">
-              <label>How do you want to contribute to ABA?</label>
+              <label>Available contribution modes</label>
+              <div class="choice-grid" style="margin-top: 8px;">
+                <label class="choice"><input type="checkbox" value="Advisory support" x-model="form.contribution_modes"> Advisory support</label>
+                <label class="choice"><input type="checkbox" value="Technical review" x-model="form.contribution_modes"> Technical review</label>
+                <label class="choice"><input type="checkbox" value="Field or implementation support" x-model="form.contribution_modes"> Field or implementation support</label>
+                <label class="choice"><input type="checkbox" value="Training or convenings" x-model="form.contribution_modes"> Training or convenings</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Engagement model</label>
+              <select x-model="form.engagement_model">
+                <option value="">Select model</option>
+                <option>Independent specialist</option>
+                <option>Organisation-based service provider</option>
+                <option>Research or academic institution</option>
+                <option>Implementation or field partner</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Network visibility preference</label>
+              <select x-model="form.discoverability_preference">
+                <option value="">Select preference</option>
+                <option>Be discoverable for future collaboration</option>
+                <option>Invite me to relevant ABA work only</option>
+                <option>Keep me informed but not publicly discoverable</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Technical-network interest</label>
+              <select x-model="form.technical_network_interest">
+                <option value="">Select interest</option>
+                <option>Join the network</option>
+                <option>Join and advise where relevant</option>
+                <option>Still exploring fit</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>Contribution notes</label>
               <textarea x-model="form.contribution_notes" placeholder="Describe the technical, advisory, or enabling role you want to play."></textarea>
             </div>
             </div>
@@ -271,9 +342,12 @@
             <div class="mini">Application preview</div>
             <div class="stack" style="margin-top: 10px;">
               <p><strong style="color: var(--ink);">Applicant shape:</strong> <span x-text="form.applicant_shape || 'Not selected yet'"></span></p>
+              <p><strong style="color: var(--ink);">Applied partner type:</strong> <span x-text="form.applied_membership_type || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Expertise:</strong> <span x-text="form.associate_expertise.length ? form.associate_expertise.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Engagement model:</strong> <span x-text="form.engagement_model || 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Biologicals focus:</strong> <span x-text="form.activity_areas.length ? form.activity_areas.join(', ') : 'Not provided yet'"></span></p>
               <p><strong style="color: var(--ink);">Countries:</strong> <span x-text="form.market_countries.length ? form.market_countries.join(', ') : 'Not provided yet'"></span></p>
+              <p><strong style="color: var(--ink);">Contribution modes:</strong> <span x-text="form.contribution_modes.length ? form.contribution_modes.join(', ') : 'Not provided yet'"></span></p>
             </div>
             <div class="stack" style="margin-top: 12px;">
               <p><strong style="color: var(--ink);">Submission state:</strong> Application received and queued for ABA review.</p>
@@ -286,20 +360,28 @@
   </main>
 
   <script>
-    function associateMembershipApp() {
+    function technicalPartnerMembershipApp() {
       return {
         submitted: false,
         form: {
+          application_route: "technical_partner",
           applicant_shape: "Organisation",
+          applied_membership_category: "technical_partner",
+          applied_membership_type: "",
           org_name: "",
           individual_name: "",
           contact_name: "",
           email: "",
+          phone: "",
           country: "",
           role_title: "",
           associate_expertise: [],
           activity_areas: [],
           market_countries: [],
+          contribution_modes: [],
+          engagement_model: "",
+          discoverability_preference: "",
+          technical_network_interest: "",
           contribution_notes: "",
           aggregate_consent: false,
           followup_consent: false,
