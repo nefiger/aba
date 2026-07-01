@@ -32,7 +32,7 @@
     a { color: inherit; text-decoration: none; }
     .display { font-family: "Public Sans", system-ui, sans-serif; font-weight: 800; }
     .shell {
-      width: min(1220px, calc(100vw - 32px));
+      width: min(1320px, calc(100vw - 32px));
       margin: 0 auto;
       padding: 14px 0 40px;
     }
@@ -74,18 +74,21 @@
       max-width: 42ch;
     }
     .mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
+      width: 74px;
+      height: 48px;
+      border-radius: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      background: transparent;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
     .mini,
     .eyebrow {
@@ -151,13 +154,13 @@
     }
     h1, h2, h3, p { margin: 0; }
     h1 {
-      margin-top: 8px;
-      font-size: clamp(1.9rem, 2.8vw, 2.7rem);
-      line-height: 1.06;
+      margin-top: 6px;
+      font-size: clamp(1.75rem, 2.4vw, 2.35rem);
+      line-height: 1.08;
       letter-spacing: -0.035em;
     }
     h2 {
-      font-size: clamp(1.32rem, 1.9vw, 1.8rem);
+      font-size: clamp(1.22rem, 1.7vw, 1.55rem);
       line-height: 1.1;
       letter-spacing: -0.03em;
     }
@@ -172,7 +175,7 @@
     }
     .lede {
       margin-top: 10px;
-      max-width: 82ch;
+      max-width: none;
     }
     .panel,
     .card {
@@ -241,22 +244,11 @@
       opacity: 0.08;
       filter: saturate(0.35) contrast(0.92);
     }
-    .footprint-marker {
-      position: absolute;
-      left: 46%;
-      bottom: 11.6%;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--green);
-      box-shadow: 0 0 0 6px rgba(43, 107, 79, 0.12);
-      border: 2px solid rgba(247, 244, 237, 0.9);
-    }
     .footprint-band {
       margin-top: 42px;
       display: grid;
       gap: 10px;
-      max-width: 72ch;
+      max-width: none;
       padding: 18px 0 0;
       border-top: 1px solid rgba(23, 48, 57, 0.08);
     }
@@ -274,7 +266,7 @@
       font-size: 15px;
     }
     .footprint-support {
-      max-width: 64ch;
+      max-width: none;
     }
     .footprint-credit {
       font-size: 11px;
@@ -345,10 +337,10 @@
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
-        <div class="mark">ABA</div>
+        <div class="mark"><img src="./assets/aba-logo-new.png" alt="African Biologicals Alliance logo"></div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
-          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
+          <span>Collective voice, regulatory visibility, and stronger market conditions for African biologicals.</span>
         </div>
       </div>
       <div class="nav-wrap">
@@ -366,7 +358,6 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div class="hero-copy-block">
-          <div class="eyebrow">About ABA</div>
           <h1 class="display">The biologicals sector in Africa needs an independent African Alliance.</h1>
           <p class="lede">
             Biological crop protection and biostimulants are growing across Africa — but the sector is fragmented, its voice is thin, and the regulatory environment was not designed with it in mind. ABA is the alliance that changes that: a membership body, a knowledge resource, and a trusted intermediary between what members know and what the sector needs to say.
@@ -381,7 +372,6 @@
         </div>
         <div class="footprint-art" aria-hidden="true">
           <img src="./assets/africa-map-freevectormaps.png" alt="">
-          <span class="footprint-marker" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -389,15 +379,15 @@
     <section class="surface section">
       <div class="card-grid">
         <article class="card">
-          <div class="eyebrow">The problem</div>
+          <h3>The problem</h3>
           <p style="margin-top: 10px;">Companies working in biologicals are navigating registration pathways, market access questions, and credibility challenges without a shared structure to draw on. Each company carries the full weight alone.</p>
         </article>
         <article class="card">
-          <div class="eyebrow">What ABA provides</div>
+          <h3>What ABA provides</h3>
           <p style="margin-top: 10px;">Membership, shared knowledge, structured registration intelligence, and a trusted review layer that turns what members know into what the sector can credibly say — without exposing private company detail.</p>
         </article>
         <article class="card">
-          <div class="eyebrow">The ambition</div>
+          <h3>The ambition</h3>
           <p style="margin-top: 10px;">A biologicals sector in Africa that is well-represented, easier to navigate, and taken seriously by the regulatory and policy environments it operates within.</p>
         </article>
       </div>
@@ -405,7 +395,6 @@
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">How ABA helps</div>
         <h2 class="display" style="margin-top: 6px;">Five things ABA does that the sector currently lacks.</h2>
       </div>
       <div class="detail-grid" style="margin-top: 12px;">
@@ -489,9 +478,8 @@
 
     <section class="surface section">
       <div>
-        <div class="eyebrow">Get involved</div>
         <h2 class="display" style="margin-top: 6px;">There are three useful next steps.</h2>
-        <p style="margin-top: 8px; max-width: 64ch;">Membership is how you participate. The tracker shows how ABA turns submissions into advocacy intelligence. The Biologicals Explorer shows the shared knowledge layer in practice.</p>
+        <p style="margin-top: 8px;">Membership is how you participate. The tracker shows how ABA turns submissions into advocacy intelligence. The Biologicals Explorer shows the shared knowledge layer in practice.</p>
       </div>
       <div class="actions">
         <a class="button primary" href="../membership-flow/index.html">Explore membership options</a>

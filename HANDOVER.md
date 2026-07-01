@@ -36,6 +36,7 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-public-capture-field-map.md`
 - `docs/requirements/aba-admin-surface-taxonomy.md`
 - `docs/requirements/aba-admin-pause-and-public-data-capture-shift.md`
+- `docs/requirements/aba-public-brand-and-footer-spec.md`
 
 Public and role-based prototype updates now include:
 
@@ -105,6 +106,12 @@ Latest form-shape decisions now locked:
 - technical-network capture should collect expertise and contribution facts rather than abstract self-classification or network-fit metadata
 - observer is now an institution-first route that captures the institution and primary contact, not a shared person/organisation form variant
 - full-member capture has been reduced to factual commercial, support, and eligibility inputs and should not drift back into duplicated review logic
+
+Latest public-shell decision now locked:
+- public ABA pages should use one consistent logo placement, organisation name, and tagline
+- public pages should end with one shared footer pattern rather than ad hoc CTA footers
+- governance and data surfaces are now part of the public information architecture through:
+  `docs/site/governance-and-data.html`
 
 The prototype implementation approach should now assume:
 - no real database for this tranche

@@ -25,6 +25,8 @@ All core ABA prototype pages should share these baseline traits:
 
 - `Public Sans` as the default family
 - same ABA mark, brand line, and topbar structure
+- same public tagline:
+  `Collective voice, regulatory visibility, and stronger market conditions for African biologicals.`
 - same background atmosphere:
   warm sand base, light green natural tint, restrained gold support
 - same rounded translucent surface treatment for primary page sections
@@ -32,6 +34,8 @@ All core ABA prototype pages should share these baseline traits:
   primary filled button for the main action, secondary outlined button for supporting movement
 - same nav vocabulary:
   `Home`, `About`, `Membership`, `Biologicals Explorer`, `Track Registrations`
+- same footer family on public-facing pages:
+  one shared footer pattern with brand context, public navigation, and governance/data links
 
 This shared shell is what holds the prototype together.
 
@@ -60,6 +64,11 @@ Avoid:
 - internal workflow language in the hero
 - dashboard-style density as the main first impression
 - narration that explains the prototype, repo, or design exercise instead of speaking in the product's own voice
+
+Public footer rule:
+- public-facing pages should end with the shared ABA footer rather than page-specific CTA footers
+- the footer should not repeat large hero-style calls to action already resolved in the page body or top navigation
+- the footer should carry governance and trust surfaces as part of the normal product shell
 
 ### Pathway pages
 
@@ -192,6 +201,14 @@ State language should be explicit and reusable:
 
 Do not rely on ambient copy alone to explain privacy or readiness.
 
+Public governance minimum:
+- every public capture route should be able to point to:
+  `Privacy & POPIA`
+  `Terms of use`
+  `Member terms`
+  `Data and consent`
+- these do not need final legal drafting in the prototype, but they must exist as designed product surfaces and be reflected in navigation/footer structure
+
 ## 8. Typography conventions
 
 Typography should do more of the semantic work.
@@ -242,6 +259,7 @@ These should not be remixed casually into unrelated meanings.
 For the current prototype iteration, these conventions should drive:
 
 - shared nav and page-shell consistency across ABA public pages
+- shared logo placement, brand line, tagline, and footer treatment across ABA public pages
 - stronger, distinct landing-page treatment for Membership, Tracker, Explorer, and secondary public routes
 - clearer separation between narrative, path, knowledge, and workflow surfaces
 - more intentional CTA hierarchy and role signaling

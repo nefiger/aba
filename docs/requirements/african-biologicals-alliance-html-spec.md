@@ -161,6 +161,16 @@ Recommended semantic structure:
 </div>
 ```
 
+Footer requirement update:
+- the footer is now a required shared public shell element, not a page-specific afterthought
+- it should carry:
+  - ABA brand context
+  - stable links to the main public destinations
+  - governance/data links:
+    `Privacy & POPIA`, `Terms of use`, `Member terms`, `Data and consent`
+- it should not be replaced by a page-specific CTA banner on ordinary public pages
+- the public IA now requires a governance/data destination that these links resolve to
+
 ## 6. Visual Direction
 
 Preserve the existing tone from the original prototype:

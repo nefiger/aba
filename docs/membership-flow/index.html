@@ -21,6 +21,9 @@
       --sand-soft: oklch(0.95 0.024 82);
       --teal-soft: oklch(0.935 0.022 194);
       --gold-soft: oklch(0.96 0.028 95);
+      --clay-deep: #c96739;
+      --teal-deep: #0e4a72;
+      --gold-deep: #c68c29;
       --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
       --space-xs: 8px;
       --space-sm: 12px;
@@ -41,10 +44,7 @@
       min-height: 100vh;
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
-        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
-        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
+      background: #f5f0e3;
     }
 
     a {
@@ -53,7 +53,7 @@
     }
 
     .shell {
-      width: min(1220px, calc(100vw - 32px));
+      width: min(1320px, calc(100vw - 32px));
       margin: 0 auto;
       padding: var(--space-md) 0 var(--space-2xl);
     }
@@ -84,18 +84,22 @@
     }
 
     .mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+      width: 74px;
+      height: 48px;
+      border-radius: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
-      color: var(--green-deep);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      background: transparent;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .brand-copy {
@@ -190,22 +194,7 @@
     .hero {
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -12% -24% auto;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle, rgba(94, 148, 112, 0.18) 0%, rgba(94, 148, 112, 0.08) 42%, transparent 70%);
-      pointer-events: none;
-      filter: blur(8px);
+      background: rgba(255, 251, 244, 0.92);
     }
 
     .hero-grid,
@@ -259,18 +248,18 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.02;
-      color: var(--ink);
-      text-wrap: balance;
+      color: var(--teal-deep);
+      text-wrap: auto;
     }
 
     h1 {
-      margin-top: 14px;
-      font-size: clamp(2.2rem, 4vw, 4rem);
+      margin-top: 10px;
+      font-size: clamp(1.95rem, 3vw, 3rem);
     }
 
     h2 {
-      margin-top: 10px;
-      font-size: clamp(1.8rem, 2.5vw, 2.45rem);
+      margin-top: 6px;
+      font-size: clamp(1.45rem, 1.8vw, 1.82rem);
     }
 
     h3 {
@@ -279,10 +268,16 @@
     }
 
     .lede {
-      margin-top: 18px;
+      margin-top: 14px;
       max-width: none;
       font-size: 17px;
-      line-height: 1.74;
+      line-height: 1.66;
+    }
+
+    .hero-copy,
+    .section > h2,
+    .section > p {
+      max-width: none;
     }
 
     .hero-actions,
@@ -290,33 +285,37 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 20px;
+      margin-top: 16px;
     }
 
     .panel,
     .card,
     .route-card {
       border: 1px solid rgba(73, 95, 82, 0.12);
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.7);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
     }
 
     .panel,
     .card {
-      padding: 18px;
+      padding: 16px;
     }
 
     .route-card {
       display: grid;
       gap: 14px;
-      padding: 22px;
+      padding: 18px;
       min-height: 100%;
     }
 
-    .route-card.full { background: linear-gradient(180deg, rgba(244, 235, 219, 0.98), rgba(255, 249, 240, 0.84)); }
-    .route-card.associate { background: linear-gradient(180deg, rgba(227, 240, 236, 0.98), rgba(247, 251, 250, 0.84)); }
-    .route-card.observer { background: linear-gradient(180deg, rgba(247, 240, 216, 0.98), rgba(255, 251, 241, 0.84)); }
+    .route-card.full { background: rgba(243, 223, 210, 0.72); }
+    .route-card.associate { background: rgba(230, 237, 215, 0.76); }
+    .route-card.observer { background: rgba(250, 237, 191, 0.78); }
+
+    .route-card.full h3 { color: var(--clay-deep); }
+    .route-card.associate h3 { color: var(--teal-deep); }
+    .route-card.observer h3 { color: var(--gold-deep); }
 
     .route-card .mini {
       color: color-mix(in oklab, var(--green-deep) 84%, white);
@@ -400,7 +399,7 @@
     .callout {
       padding: 18px;
       border-radius: 24px;
-      background: linear-gradient(135deg, rgba(238, 232, 217, 0.86), rgba(247, 244, 235, 0.74));
+      background: rgba(241, 234, 219, 0.82);
       border: 1px solid rgba(73, 95, 82, 0.1);
     }
 
@@ -444,7 +443,7 @@
 
     @media (max-width: 760px) {
       .shell {
-        width: min(100vw - 20px, 1220px);
+        width: min(100vw - 20px, 1320px);
       }
 
       h1 {
@@ -472,10 +471,10 @@
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
-        <div class="mark">ABA</div>
+        <div class="mark"><img src="../site/assets/aba-logo-new.png" alt="African Biologicals Alliance logo"></div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
-          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
+          <span>Collective voice, regulatory visibility, and stronger market conditions for African biologicals.</span>
         </div>
       </div>
       <div class="nav-wrap">
@@ -493,7 +492,6 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Membership</div>
           <h1>Join ABA for a stronger biologicals sector in Africa.</h1>
           <p class="lede">ABA membership gives the biologicals supplychain and stakeholders across Africa stronger representation, better regulatory visibility, and a more credible operating environment for local biologicals.</p>
           <div class="hero-actions">
@@ -505,7 +503,6 @@
     </section>
 
     <section class="surface section">
-      <div class="section-label">Member value</div>
       <h2>Why join ABA.</h2>
       <div class="value-grid" style="margin-top: 18px;">
         <article class="card">
@@ -532,9 +529,8 @@
     </section>
 
     <section class="surface section" id="routes">
-      <div class="section-label">Membership Routes</div>
       <h2>Choose the membership that fits your role.</h2>
-      <p style="margin-top: 10px; max-width: 62ch;">Each route below explains who it is for, which member types it contains, and how the application connects to review and approval.</p>
+      <p style="margin-top: 10px;">Each route below explains who it is for, which member types it contains, and how the application connects to review and approval.</p>
       <div class="path-grid" style="margin-top: 18px;">
         <article class="route-card full">
           <div class="mini">Full member</div>
@@ -608,7 +604,6 @@
     </section>
 
     <section class="surface section">
-      <div class="section-label">Membership Fees</div>
       <h2>Membership fees</h2>
       <article class="callout" style="margin-top: 18px;">
         <ul class="compact-list" style="margin-top: 12px;">
@@ -622,7 +617,6 @@
     </section>
 
     <section class="surface section">
-      <div class="section-label">Related route</div>
       <h2>Not ready to apply for membership, but need registration visibility now?</h2>
       <article class="callout" style="margin-top: 18px;">
         <p>The tracker also supports authorised non-member product submissions. Membership and registration tracking are connected, but they are not the same route.</p>
@@ -633,7 +627,6 @@
     </section>
 
     <section class="surface section" id="process">
-      <div class="section-label">Application process</div>
       <h2>How application works.</h2>
       <div class="process-grid" style="margin-top: 18px;">
         <article class="card process-step">
@@ -668,7 +661,6 @@
     </section>
 
     <section class="surface section">
-      <div class="section-label">Application states</div>
       <h2>What happens after you apply.</h2>
       <div class="process-grid" style="margin-top: 18px;">
         <article class="card process-step">
@@ -702,17 +694,6 @@
       </div>
     </section>
 
-    <footer class="surface section">
-      <div>
-        <div class="section-label">Next step</div>
-        <p>Choose your membership and continue to the relevant application form.</p>
-      </div>
-      <div class="actions" style="margin-top: 0;">
-        <a class="button primary" href="./apply-full.html">Full member</a>
-        <a class="button secondary" href="./apply-associate.html">Technical partner</a>
-        <a class="button secondary" href="./apply-observer.html">Observer</a>
-      </div>
-    </footer>
   </main>
 </body>
 </html>

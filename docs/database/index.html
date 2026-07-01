@@ -60,7 +60,7 @@
     button, input, select { font: inherit; }
 
     .shell {
-      width: min(1220px, calc(100vw - 32px));
+      width: min(1320px, calc(100vw - 32px));
       margin: 0 auto;
       padding: var(--space-md) 0 var(--space-2xl);
     }
@@ -227,7 +227,7 @@
     }
 
     .hero-grid {
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
       align-items: start;
     }
 
@@ -254,9 +254,10 @@
     }
 
     .intro-band {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 18px;
+      grid-template-columns: 1fr;
+      margin-top: 0;
       align-items: start;
+      align-self: stretch;
     }
 
     .reading-key {
@@ -270,15 +271,15 @@
 
     h1 {
       margin-top: 8px;
-      font-size: clamp(1.7rem, 2vw, 2.25rem);
-      line-height: 1.04;
+      font-size: clamp(1.65rem, 2vw, 2.1rem);
+      line-height: 1.06;
       letter-spacing: -0.035em;
       font-weight: 800;
     }
 
     h2 {
-      font-size: clamp(1.3rem, 2vw, 1.85rem);
-      line-height: 1.1;
+      font-size: clamp(1.24rem, 1.7vw, 1.6rem);
+      line-height: 1.12;
       letter-spacing: -0.03em;
       font-weight: 800;
     }
@@ -301,9 +302,9 @@
     .path-card,
     .support-card {
       border: 1px solid rgba(73, 95, 82, 0.12);
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
     }
 
     .panel,
@@ -311,7 +312,17 @@
     .search-shell,
     .path-card,
     .support-card {
-      padding: 18px;
+      padding: 16px;
+    }
+
+    .support-card {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .support-card p {
+      font-size: 15px;
+      line-height: 1.56;
     }
 
     .search-shell {
@@ -552,21 +563,21 @@
     }
 
     .results-head-copy p {
-      max-width: 58ch;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
       font-size: 16px;
-      line-height: 1.7;
+      line-height: 1.62;
     }
 
     .results-head-copy h2 {
-      font-size: clamp(2rem, 2.8vw, 2.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.55rem, 2.1vw, 2.05rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
     }
 
     .results-head-copy {
-      text-align: center;
+      text-align: left;
     }
 
     .legend-panel {
@@ -982,24 +993,31 @@
     /* ── hero path entry cards ── */
     .hero-section {
       margin-top: var(--space-sm);
-      padding: clamp(24px, 4vw, 44px);
+      padding: clamp(24px, 4vw, 40px);
       background: rgba(255, 255, 255, 0.9);
     }
 
     .hero-intro {
       display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 18px 24px;
+      align-items: start;
+      margin: 0 0 24px;
+    }
+
+    .hero-copy {
+      display: grid;
       gap: 8px;
-      text-align: center;
-      max-width: 60ch;
-      margin: 0 auto 24px;
+      align-content: start;
+      text-align: left;
+      max-width: 56rem;
     }
 
     .hero-intro p {
-      max-width: 62ch;
+      max-width: 44rem;
       font-size: 17px;
-      line-height: 1.7;
-      margin-left: auto;
-      margin-right: auto;
+      line-height: 1.6;
+      margin: 0;
     }
 
     .path-entry-grid {
@@ -1011,16 +1029,16 @@
     .path-entry-card {
       cursor: pointer;
       border: 1px solid rgba(73, 95, 82, 0.12);
-      border-radius: 26px;
-      padding: 22px;
+      border-radius: 18px;
+      padding: 18px;
       display: grid;
       align-content: start;
       gap: 14px;
       min-height: 100%;
       overflow: visible;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.84);
       transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 14px 28px -24px rgba(23, 48, 57, 0.26);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62), 0 12px 24px -24px rgba(23, 48, 57, 0.2);
       position: relative;
     }
 
@@ -1102,6 +1120,7 @@
     }
 
     @media (max-width: 980px) {
+      .hero-intro,
       .path-entry-grid,
       .filter-grid,
       .card-grid,
@@ -1129,6 +1148,10 @@
         padding: 14px;
       }
 
+      .hero-intro {
+        gap: 14px;
+      }
+
       .nav-wrap {
         justify-content: flex-start;
       }
@@ -1138,7 +1161,7 @@
       }
 
       .hero-intro h1 {
-        font-size: clamp(2.2rem, 11vw, 3.35rem);
+        font-size: clamp(1.9rem, 8.4vw, 2.7rem);
       }
     }
   </style>
@@ -1150,7 +1173,7 @@
         <div class="mark">ABA</div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
-          <span>Collective voice, regulatory visibility, and stronger conditions for African biologicals.</span>
+          <span>Collective voice, regulatory visibility, and stronger market conditions for African biologicals.</span>
         </div>
       </div>
       <div class="nav-wrap">
@@ -1167,16 +1190,17 @@
 
     <section class="surface hero-section">
       <div class="hero-intro">
-        <div class="eyebrow">Biologicals Explorer</div>
-        <h1 style="margin-top: 8px;">Explore products, evidence, crop context, and regulatory signals in one public knowledge layer.</h1>
-        <p style="margin-top: 8px; font-size: 15px;">Start with a crop, a pest or disease, or a biological product. The deeper evidence, guidance, standards, and transition context sit underneath the records you open, while the registration tracker remains the place to move from discovery into market-access visibility.</p>
+        <div class="hero-copy">
+          <h1 style="margin-top: 8px;">Explore products, evidence, crop context, and regulatory signals in one public knowledge layer.</h1>
+          <p style="margin-top: 8px; font-size: 15px;">Start with a crop, a pest or disease, or a biological product. The deeper evidence, guidance, standards, and transition context sit underneath the records you open, while the registration tracker remains the place to move from discovery into market-access visibility.</p>
+        </div>
         <div class="intro-band">
           <article class="support-card">
-            <div class="section-label">Who it is for</div>
+            <h2 style="font-size: 1.1rem; margin-top: 0;">Who it is for</h2>
             <p style="margin-top: 8px;">Farmers, agronomists, buyers, researchers, advisors, and sector participants who need structured biologicals knowledge before acting.</p>
           </article>
           <article class="support-card">
-            <div class="section-label">How it connects</div>
+            <h2 style="font-size: 1.1rem; margin-top: 0;">How it connects</h2>
             <p style="margin-top: 8px;">Use the Explorer for public product and evidence context, then move into Membership or Track Registrations when the need becomes representation, support, or regulatory engagement.</p>
           </article>
         </div>
@@ -1204,16 +1228,10 @@
           </div>
           <div class="path-body">
             <div class="path-head">
-              <span>Start with</span>
               <strong>Crops</strong>
             </div>
             <p class="path-kicker">Browse biological activity by production context.</p>
-            <div class="path-meta">
-              <div class="meta-row">
-                <label>Includes</label>
-                <p>citrus, maize, potatoes, grapes, and more.</p>
-              </div>
-            </div>
+            <p>Includes citrus, maize, potatoes, grapes, and more.</p>
             <div class="path-actions">
               <span class="route-link">Browse by crop</span>
             </div>
@@ -1244,16 +1262,10 @@
           </div>
           <div class="path-body">
             <div class="path-head">
-              <span>Start with</span>
               <strong>Pests &amp; Diseases</strong>
             </div>
             <p class="path-kicker">Start with the problem.</p>
-            <div class="path-meta">
-              <div class="meta-row">
-                <label>Includes</label>
-                <p>bollworm, thrips, powdery mildew, rust, and more.</p>
-              </div>
-            </div>
+            <p>Includes bollworm, thrips, powdery mildew, rust, and more.</p>
             <div class="path-actions">
               <span class="route-link">Browse by problem</span>
             </div>
@@ -1280,16 +1292,10 @@
           </div>
           <div class="path-body">
             <div class="path-head">
-              <span>Start with</span>
               <strong>Biologicals</strong>
             </div>
             <p class="path-kicker">Browse biological products.</p>
-            <div class="path-meta">
-              <div class="meta-row">
-                <label>Includes</label>
-                <p>biopesticides, inoculants, semiochemicals, and more.</p>
-              </div>
-            </div>
+            <p>Includes biopesticides, inoculants, semiochemicals, and more.</p>
             <div class="path-actions">
               <span class="route-link">Browse by product</span>
             </div>
@@ -1384,7 +1390,6 @@
     <section class="surface section">
       <div class="path-grid">
         <div>
-          <div class="eyebrow">Supporting Layers</div>
           <h2 style="margin-top: 6px;">Use these deeper workspaces when you need more than the explorer summary.</h2>
           <div class="path-primary-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
             <article class="path-card">
