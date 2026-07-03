@@ -169,8 +169,12 @@
       gap: 16px;
       align-items: start;
     }
+    .summary-row > .section-head {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
     .summary-toggle {
-      flex: none;
+      flex: 0 0 auto;
       min-width: 28px;
       min-height: 28px;
       border-radius: 999px;
@@ -181,6 +185,9 @@
       font-size: 18px;
       color: var(--green);
       background: white;
+    }
+    .choice {
+      min-width: 0;
     }
     details.form-section[open] .summary-toggle::before {
       content: "-";

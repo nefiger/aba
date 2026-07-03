@@ -392,6 +392,15 @@
       cursor: pointer;
     }
 
+    .source-toggle span:first-child {
+      min-width: 0;
+    }
+
+    .source-toggle span:last-child {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
     .source-list {
       display: grid;
       gap: 10px;
@@ -442,6 +451,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      white-space: nowrap;
     }
 
     .badge.green { background: var(--green-soft); color: var(--green); }

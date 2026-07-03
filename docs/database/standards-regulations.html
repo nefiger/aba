@@ -300,7 +300,9 @@
     }
 
     .tab-row {
-      grid-template-columns: repeat(2, max-content);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       margin-top: 18px;
     }
 
@@ -315,6 +317,7 @@
       letter-spacing: 0.04em;
       cursor: pointer;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .tab-button.active {
@@ -421,6 +424,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      white-space: nowrap;
     }
 
     .badge.green { background: var(--green-soft); color: var(--green); }

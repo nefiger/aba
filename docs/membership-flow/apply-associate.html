@@ -85,10 +85,12 @@
     details.form-section > summary { list-style: none; cursor: pointer; }
     details.form-section > summary::-webkit-details-marker { display: none; }
     .summary-row { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+    .summary-row > .section-head { min-width: 0; flex: 1 1 auto; }
     .summary-toggle {
-      flex: none; min-width: 28px; min-height: 28px; border-radius: 999px; border: 1px solid var(--line);
+      flex: 0 0 auto; min-width: 28px; min-height: 28px; border-radius: 999px; border: 1px solid var(--line);
       display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: var(--green); background: white;
     }
+    .choice { min-width: 0; }
     details.form-section[open] .summary-toggle::before { content: "-"; }
     details.form-section:not([open]) .summary-toggle::before { content: "+"; }
     .form-body { display: grid; gap: 12px; margin-top: 12px; }

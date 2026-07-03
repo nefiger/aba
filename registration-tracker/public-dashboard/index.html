@@ -228,6 +228,11 @@
         flex-wrap: wrap;
       }
 
+      .section-heading > :first-child {
+        min-width: 0;
+        flex: 1 1 auto;
+      }
+
       .section-heading p,
       .section-heading .note {
         max-width: 72ch;
@@ -282,8 +287,10 @@
       }
 
       .cta-actions {
-        grid-template-columns: repeat(2, max-content);
-        justify-content: end;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
       }
 
       .button-link {
@@ -299,6 +306,7 @@
         text-decoration: none;
         text-transform: uppercase;
         white-space: nowrap;
+        flex: 0 0 auto;
       }
 
       .button-link.primary {
@@ -325,8 +333,7 @@
         }
 
         .cta-actions {
-          grid-template-columns: 1fr;
-          justify-content: stretch;
+          justify-content: flex-start;
         }
       }
 

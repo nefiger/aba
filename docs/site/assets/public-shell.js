@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  document.querySelectorAll(".nav-wrap > .nav-cta").forEach((cta) => {
+    const label = cta.textContent?.trim().toLowerCase();
+    const href = cta.getAttribute("href") || "";
+    if (label === "join aba" || href.includes("membership-flow")) {
+      cta.remove();
+    }
+  });
+
   const main = document.querySelector("main.shell");
   if (!main) return;
 

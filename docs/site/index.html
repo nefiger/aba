@@ -175,7 +175,7 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(24px, 4vw, 44px);
+      padding: clamp(22px, 3vw, 34px);
       background:
         radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
@@ -198,20 +198,36 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-      gap: clamp(26px, 3.2vw, 42px);
-      align-items: center;
+      grid-template-columns: minmax(0, 1.42fr) minmax(420px, 0.98fr);
+      gap: clamp(24px, 2.2vw, 30px);
+      align-items: start;
     }
 
     .hero-main {
       display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .hero-intro,
+    .hero-support {
+      display: grid;
+      align-content: start;
+    }
+
+    .hero-intro {
       gap: 0;
+    }
+
+    .hero-support {
+      gap: 16px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      justify-self: start;
       min-height: 32px;
       padding: 0 12px;
       border-radius: var(--radius-pill);
@@ -234,18 +250,16 @@
     h1 {
       margin-top: 16px;
       max-width: none;
-      font-size: clamp(2.6rem, 4.7vw, 4.85rem);
-      line-height: 0.94;
+      font-size: clamp(2.2rem, 3.2vw, 3.5rem);
+      line-height: 0.96;
       letter-spacing: -0.045em;
       font-weight: 900;
-      max-width: 10.5ch;
     }
 
     .hero-copy {
-      margin-top: 18px;
-      max-width: 41ch;
-      font-size: clamp(1.06rem, 1rem + 0.38vw, 1.28rem);
-      line-height: 1.72;
+      max-width: none;
+      font-size: clamp(1rem, 0.96rem + 0.14vw, 1.04rem);
+      line-height: 1.5;
       color: var(--muted);
     }
 
@@ -253,7 +267,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px 12px;
-      margin-top: 24px;
+      align-items: center;
     }
 
     .button {
@@ -286,18 +300,38 @@
       color: var(--ink);
     }
 
-    .hero-note {
-      margin-top: 18px;
-      max-width: 60ch;
-      font-size: 0.96rem;
-      line-height: 1.62;
-      color: color-mix(in oklab, var(--muted) 88%, white);
+    .hero-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-highlight {
+      display: grid;
+      gap: 5px;
+      padding: 12px 12px 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(73, 95, 82, 0.1);
+    }
+
+    .hero-highlight strong {
+      font-size: 0.94rem;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .hero-highlight span {
+      font-size: 0.84rem;
+      line-height: 1.42;
+      color: var(--muted);
     }
 
     .decision-panel {
       display: grid;
-      gap: var(--space-md);
-      padding: 18px;
+      gap: 14px;
+      padding: 16px;
       border-radius: 20px;
       background: rgba(244, 240, 230, 0.74);
       border: 1px solid rgba(73, 95, 82, 0.12);
@@ -319,16 +353,16 @@
     }
 
     .decision-panel h2 {
-      font-size: clamp(1.18rem, 1rem + 0.8vw, 1.7rem);
+      font-size: clamp(1.05rem, 0.96rem + 0.34vw, 1.28rem);
       line-height: 1.06;
       letter-spacing: -0.04em;
       font-weight: 900;
-      max-width: 13ch;
+      max-width: none;
     }
 
     .decision-list {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .decision-link {
@@ -336,7 +370,7 @@
       grid-template-columns: 40px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      padding: 14px;
+      padding: 12px;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.68);
       border: 1px solid rgba(73, 95, 82, 0.12);
@@ -403,8 +437,8 @@
     }
 
     .decision-link strong {
-      font-size: 1.05rem;
-      margin-bottom: 4px;
+      font-size: 0.96rem;
+      margin-bottom: 3px;
     }
 
     .decision-link span,
@@ -412,8 +446,8 @@
     .path-card p,
     .scope-card p,
     .pillar-row p {
-      font-size: 14px;
-      line-height: 1.62;
+      font-size: 13px;
+      line-height: 1.46;
       color: var(--muted);
     }
 
@@ -429,8 +463,8 @@
 
     .editorial-intro {
       display: grid;
-      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
-      gap: clamp(18px, 2.5vw, 32px);
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.08fr);
+      gap: clamp(20px, 2.2vw, 30px);
       align-items: start;
     }
 
@@ -441,17 +475,16 @@
 
     .section-lead h2 {
       max-width: none;
-      font-size: clamp(1.8rem, 2.6vw, 2.7rem);
-      line-height: 0.98;
+      font-size: clamp(1.7rem, 2.15vw, 2.35rem);
+      line-height: 1.02;
       letter-spacing: -0.045em;
       font-weight: 900;
-      max-width: 11.5ch;
     }
 
     .section-lead p {
-      max-width: 34ch;
+      max-width: none;
       font-size: 1rem;
-      line-height: 1.72;
+      line-height: 1.58;
       color: var(--muted);
     }
 
@@ -466,16 +499,16 @@
     }
 
     .section-summary strong {
-      font-size: clamp(1.45rem, 2vw, 2rem);
-      line-height: 1.06;
+      font-size: clamp(1.34rem, 1.7vw, 1.7rem);
+      line-height: 1.12;
       letter-spacing: -0.04em;
-      max-width: 22ch;
+      max-width: none;
     }
 
     .section-summary p {
-      max-width: 52ch;
+      max-width: none;
       font-size: 1rem;
-      line-height: 1.68;
+      line-height: 1.56;
       color: var(--muted);
     }
 
@@ -516,7 +549,7 @@
 
     .paths-intro {
       display: grid;
-      grid-template-columns: minmax(280px, 1fr) minmax(360px, 1fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
       gap: 18px;
       align-items: end;
     }
@@ -527,16 +560,16 @@
 
     .paths-intro h2 {
       max-width: none;
-      font-size: clamp(1.45rem, 2vw, 1.95rem);
-      line-height: 1.06;
+      font-size: clamp(1.38rem, 1.7vw, 1.72rem);
+      line-height: 1.1;
       letter-spacing: -0.04em;
       font-weight: 900;
       margin-top: 10px;
     }
 
     .paths-intro p {
-      font-size: 15px;
-      line-height: 1.62;
+      font-size: 14px;
+      line-height: 1.5;
       color: var(--muted);
     }
 
@@ -598,15 +631,15 @@
     }
 
     .path-head strong {
-      font-size: 24px;
-      line-height: 1.02;
+      font-size: 1.3rem;
+      line-height: 1.1;
       letter-spacing: -0.04em;
     }
 
     .path-kicker {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      line-height: 1.5;
+      line-height: 1.42;
       color: color-mix(in oklab, var(--ink) 86%, white);
     }
 
@@ -674,6 +707,7 @@
       font-weight: 900;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .system-grid {
@@ -843,6 +877,10 @@
         max-width: none;
       }
 
+      .hero-highlights {
+        grid-template-columns: 1fr;
+      }
+
       .problem-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -875,6 +913,14 @@
 
       h1 {
         font-size: clamp(1.95rem, 8.8vw, 2.7rem);
+      }
+
+      .hero-support {
+        gap: 12px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
       }
 
       .problem-grid {
@@ -924,19 +970,34 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div class="hero-main">
-          <span class="eyebrow">Membership, intelligence, and advocacy</span>
-          <h1>Biologicals in Africa need a strong foundation.</h1>
-          <p class="hero-copy">
-            ABA is a membership-based alliance for the independent African biologicals sector who need stronger representation, better regulatory conditions, and a more visible, credible sector. We are here to turn fragmented effort into coordinated advocacy, harmonised regulatory and registration processes, practical sector intelligence, and clear market access pathways across the continent.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="../membership-flow/index.html">Join ABA</a>
-            <a class="button secondary" href="../registration-tracker/index.html">Track Product Registrations</a>
-            <a class="button secondary" href="../database/index.html">Explore Biologicals</a>
+          <div class="hero-intro">
+            <span class="eyebrow">Membership, intelligence, and advocacy</span>
+            <h1>Biologicals in Africa need a stronger collective base.</h1>
           </div>
-          <p class="hero-note">
-            Active in South Africa now, with Africa-wide participation, product-registration contribution, and sector relationship building in view.
-          </p>
+          <div class="hero-support">
+            <p class="hero-copy">
+              ABA helps independent African biologicals businesses build collective representation, clearer regulatory visibility, and a more credible path into market access.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="../membership-flow/index.html">Join ABA</a>
+              <a class="button secondary" href="../registration-tracker/index.html">Track Product Registrations</a>
+              <a class="button secondary" href="../database/index.html">Explore Biologicals</a>
+            </div>
+            <div class="hero-highlights">
+              <div class="hero-highlight">
+                <strong>South Africa active now</strong>
+                <span>Start with the current operating context and live registration pain.</span>
+              </div>
+              <div class="hero-highlight">
+                <strong>Africa-wide participation</strong>
+                <span>Build toward broader contribution, coordination, and sector legitimacy.</span>
+              </div>
+              <div class="hero-highlight">
+                <strong>One connected system</strong>
+                <span>Membership, registration tracking, and biologicals knowledge work together.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <aside class="decision-panel">
