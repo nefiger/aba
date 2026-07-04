@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Biological Transition">
+<title>Biological Transition</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<rect x="42" y="68" width="19" height="104" rx="3" fill="#253B44" opacity="1"/>
+<rect x="69" y="68" width="19" height="104" rx="3" fill="#253B44" opacity="1"/>
+<rect x="96" y="68" width="19" height="104" rx="3" fill="#253B44" opacity="1"/><circle cx="116" cy="82" r="2.8" fill="#556B3A" opacity="1.00"/>
+<circle cx="128" cy="82" r="2.65" fill="#556B3A" opacity="0.92"/>
+<circle cx="140" cy="82" r="2.5" fill="#556B3A" opacity="0.84"/>
+<circle cx="152" cy="82" r="2.3499999999999996" fill="#556B3A" opacity="0.76"/>
+<circle cx="164" cy="82" r="2.1999999999999997" fill="#556B3A" opacity="0.68"/>
+<circle cx="116" cy="94" r="2.8" fill="#556B3A" opacity="0.98"/>
+<circle cx="128" cy="94" r="2.65" fill="#556B3A" opacity="0.90"/>
+<circle cx="140" cy="94" r="2.5" fill="#556B3A" opacity="0.82"/>
+<circle cx="152" cy="94" r="2.3499999999999996" fill="#556B3A" opacity="0.74"/>
+<circle cx="164" cy="94" r="2.1999999999999997" fill="#556B3A" opacity="0.66"/>
+<circle cx="116" cy="106" r="2.8" fill="#556B3A" opacity="0.96"/>
+<circle cx="128" cy="106" r="2.65" fill="#556B3A" opacity="0.88"/>
+<circle cx="140" cy="106" r="2.5" fill="#556B3A" opacity="0.80"/>
+<circle cx="152" cy="106" r="2.3499999999999996" fill="#556B3A" opacity="0.72"/>
+<circle cx="164" cy="106" r="2.1999999999999997" fill="#556B3A" opacity="0.64"/>
+<circle cx="116" cy="118" r="2.8" fill="#556B3A" opacity="0.94"/>
+<circle cx="128" cy="118" r="2.65" fill="#556B3A" opacity="0.86"/>
+<circle cx="140" cy="118" r="2.5" fill="#556B3A" opacity="0.78"/>
+<circle cx="152" cy="118" r="2.3499999999999996" fill="#556B3A" opacity="0.70"/>
+<circle cx="164" cy="118" r="2.1999999999999997" fill="#556B3A" opacity="0.62"/>
+<circle cx="116" cy="130" r="2.8" fill="#556B3A" opacity="0.92"/>
+<circle cx="128" cy="130" r="2.65" fill="#556B3A" opacity="0.84"/>
+<circle cx="140" cy="130" r="2.5" fill="#556B3A" opacity="0.76"/>
+<circle cx="152" cy="130" r="2.3499999999999996" fill="#556B3A" opacity="0.68"/>
+<circle cx="164" cy="130" r="2.1999999999999997" fill="#556B3A" opacity="0.60"/>
+<circle cx="116" cy="142" r="2.8" fill="#556B3A" opacity="0.90"/>
+<circle cx="128" cy="142" r="2.65" fill="#556B3A" opacity="0.82"/>
+<circle cx="140" cy="142" r="2.5" fill="#556B3A" opacity="0.74"/>
+<circle cx="152" cy="142" r="2.3499999999999996" fill="#556B3A" opacity="0.66"/>
+<circle cx="164" cy="142" r="2.1999999999999997" fill="#556B3A" opacity="0.58"/><path class="s no sw2" d="M116 156 C 156 114, 208 120, 210 106" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M124 153 C 161 116, 211 125, 210 120" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M132 150 C 166 118, 214 130, 210 134" stroke="#C38A2E" opacity="1"/>
+<path class="s no sw2" d="M140 147 C 171 120, 217 135, 210 148" stroke="#B54A28" opacity="1"/><path class="s no sw2" d="M94 174 C120 136,150 115,208 98" stroke="#1E3A34"/>
+</svg>

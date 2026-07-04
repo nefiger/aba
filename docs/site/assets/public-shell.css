@@ -37,8 +37,8 @@ body {
 }
 
 .mark {
-  width: 86px !important;
-  height: 56px !important;
+  width: 252px !important;
+  height: 72px !important;
   border-radius: 0 !important;
   background: transparent !important;
   overflow: hidden !important;
@@ -214,6 +214,11 @@ body {
 }
 
 @media (max-width: 900px) {
+  .mark {
+    width: 208px !important;
+    height: 60px !important;
+  }
+
   .site-footer__grid {
     grid-template-columns: 1fr;
   }
@@ -258,6 +263,63 @@ body {
   line-height: 1.32 !important;
   max-width: none !important;
   color: color-mix(in oklab, var(--ink) 72%, white) !important;
+}
+
+.symbol-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 18px;
+  background: rgba(255, 251, 244, 0.92);
+  border: 1px solid rgba(23, 48, 57, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.symbol-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.symbol-badge--sm {
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+}
+
+.symbol-badge--md {
+  width: 54px;
+  height: 54px;
+  padding: 10px;
+}
+
+.symbol-badge--lg {
+  width: 66px;
+  height: 66px;
+  padding: 12px;
+}
+
+.symbol-badge--soft {
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.symbol-inline-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.symbol-inline-head > * {
+  min-width: 0;
+}
+
+.icon-lockup img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-wrap {

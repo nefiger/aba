@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Growth">
+<title>Growth</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<path class="s no sw" d="M44 196 C 86 136, 144 134, 212 132" stroke="#253B44" opacity="1"/>
+<path class="s no sw" d="M52 210 C 94 141, 152 136, 212 140" stroke="#556B3A" opacity="1"/>
+<path class="s no sw" d="M60 224 C 102 146, 160 138, 212 148" stroke="#C38A2E" opacity="1"/>
+<path class="s no sw" d="M68 238 C 110 151, 168 140, 212 156" stroke="#B54A28" opacity="1"/><path class="s no sw2" d="M78 142 C102 114,134 96,180 82" stroke="#1E3A34"/><circle class="s" cx="84" cy="140" r="5" fill="#F2EDE3" stroke="#C38A2E" stroke-width="4"/><circle class="s" cx="118" cy="114" r="5" fill="#F2EDE3" stroke="#C38A2E" stroke-width="4"/><circle class="s" cx="152" cy="96" r="5" fill="#F2EDE3" stroke="#C38A2E" stroke-width="4"/><circle class="s" cx="182" cy="82" r="5" fill="#F2EDE3" stroke="#C38A2E" stroke-width="4"/><path class="s no sw3" d="M182 82 C190 94,198 100,210 104" stroke="#556B3A"/>
+</svg>

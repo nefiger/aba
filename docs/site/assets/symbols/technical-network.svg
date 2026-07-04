@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Technical Network">
+<title>Technical Network</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<path class="s no sw3" d="M62 82 C 81.0 72, 81.0 78, 100 68" stroke="#1E3A34"/><path class="s no sw3" d="M100 68 C 123.0 58, 123.0 98, 146 88" stroke="#1E3A34"/><path class="s no sw3" d="M146 88 C 163.0 78, 163.0 134, 180 124" stroke="#1E3A34"/><path class="s no sw3" d="M180 124 C 153.0 114, 153.0 152, 126 142" stroke="#1E3A34"/><path class="s no sw3" d="M126 142 C 104.0 132, 104.0 142, 82 132" stroke="#1E3A34"/><path class="s no sw3" d="M82 132 C 72.0 122, 72.0 92, 62 82" stroke="#1E3A34"/><circle class="s" cx="62" cy="82" r="6" fill="#F2EDE3" stroke="#253B44" stroke-width="4"/><circle class="s" cx="100" cy="68" r="6" fill="#F2EDE3" stroke="#556B3A" stroke-width="4"/><circle class="s" cx="146" cy="88" r="6" fill="#F2EDE3" stroke="#253B44" stroke-width="4"/><circle class="s" cx="180" cy="124" r="6" fill="#F2EDE3" stroke="#556B3A" stroke-width="4"/><circle class="s" cx="126" cy="142" r="6" fill="#F2EDE3" stroke="#253B44" stroke-width="4"/><circle class="s" cx="82" cy="132" r="6" fill="#F2EDE3" stroke="#556B3A" stroke-width="4"/><path class="s no sw" d="M64 192 C 106 162, 164 160, 192 158" stroke="#253B44" opacity="1"/>
+<path class="s no sw" d="M72 206 C 114 167, 172 162, 192 166" stroke="#556B3A" opacity="1"/>
+<path class="s no sw" d="M80 220 C 122 172, 180 164, 192 174" stroke="#C38A2E" opacity="1"/>
+<path class="s no sw" d="M88 234 C 130 177, 188 166, 192 182" stroke="#B54A28" opacity="1"/>
+</svg>

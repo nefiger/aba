@@ -83,19 +83,22 @@
     }
 
     .mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+      width: 74px;
+      height: 48px;
+      border-radius: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(87, 140, 105, 0.18), rgba(87, 140, 105, 0.06));
-      color: var(--green-deep);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      background: transparent;
       flex: 0 0 auto;
+      overflow: hidden;
+    }
+
+    .mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .brand-copy {
@@ -305,7 +308,7 @@
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
-        <div class="mark">ABA</div>
+        <div class="mark"><img src="./assets/aba-route1-horizontal.png" alt="African Biologicals Alliance logo"></div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
           <span>Strengthening Africa's biologicals sector through voice, visibility, and market access.</span>
@@ -336,6 +339,11 @@
           </div>
         </div>
         <aside class="panel tone">
+          <div class="symbol-inline-head" style="margin-bottom: 14px;">
+            <span class="symbol-badge symbol-badge--lg" aria-hidden="true">
+              <img src="./assets/symbols/updates-stay-informed.svg" alt="">
+            </span>
+          </div>
           <h2 style="font-size: 1.2rem; margin-top: 0; color: var(--ink);">Engagement should not depend on being in the system already.</h2>
           <p style="margin-top: 8px;">Updates give ABA a public-safe way to show momentum, explain why participation matters, and keep future members, contributors, and partners warm.</p>
         </aside>
@@ -346,14 +354,29 @@
       <h2>What this stream should carry.</h2>
       <div class="stream-grid" style="margin-top: 16px;">
         <article class="card teal">
+          <div class="symbol-inline-head" style="margin-bottom: 12px;">
+            <span class="symbol-badge symbol-badge--md symbol-badge--soft" aria-hidden="true">
+              <img src="./assets/symbols/membership-join-aba.svg" alt="">
+            </span>
+          </div>
           <h3>ABA progress and participation opportunities</h3>
           <p style="margin-top: 8px;">Announcements about membership onboarding, working sessions, public showcases, and opportunities to take part in the alliance.</p>
         </article>
         <article class="card gold">
+          <div class="symbol-inline-head" style="margin-bottom: 12px;">
+            <span class="symbol-badge symbol-badge--md symbol-badge--soft" aria-hidden="true">
+              <img src="./assets/symbols/visibility.svg" alt="">
+            </span>
+          </div>
           <h3>Public-safe signals from the tracker and wider market</h3>
           <p style="margin-top: 8px;">Aggregate bottlenecks, timing patterns, and evidence themes that help explain where the biologicals sector needs support.</p>
         </article>
         <article class="card tone">
+          <div class="symbol-inline-head" style="margin-bottom: 12px;">
+            <span class="symbol-badge symbol-badge--md symbol-badge--soft" aria-hidden="true">
+              <img src="./assets/symbols/evidence-knowledge.svg" alt="">
+            </span>
+          </div>
           <h3>Explorer additions and practical biologicals context</h3>
           <p style="margin-top: 8px;">New product, evidence, crop, and standards content that makes the site more useful to the wider ecosystem.</p>
         </article>

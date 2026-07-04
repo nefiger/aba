@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Membership / Join ABA">
+<title>Membership / Join ABA</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<circle cx="64" cy="86" r="8" fill="#253B44" opacity="0.95"/><circle cx="98" cy="76" r="8" fill="#556B3A" opacity="0.95"/><circle cx="132" cy="86" r="8" fill="#C38A2E" opacity="0.95"/><circle cx="82" cy="120" r="8" fill="#B54A28" opacity="0.95"/><circle cx="116" cy="112" r="8" fill="#253B44" opacity="0.95"/><circle cx="150" cy="118" r="8" fill="#556B3A" opacity="0.95"/><path class="s no sw2" d="M64 86 C88 104,105 111,116 112 C129 111,141 112,150 118" stroke="#1E3A34"/><path class="s" d="M48 160 C83 136, 135 134, 180 160 L180 183 L48 183 Z" fill="#F2EDE3" stroke="#1E3A34" stroke-width="6"/><path class="s no sw2" d="M60 187 C 100 145, 152 151, 172 137" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M68 184 C 105 147, 155 156, 172 151" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M76 181 C 110 149, 158 161, 172 165" stroke="#C38A2E" opacity="1"/>
+</svg>

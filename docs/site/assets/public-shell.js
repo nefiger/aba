@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!inSite && !inMembership && !inDatabase) return;
 
   const rel = {
-    logo: inSite ? "./assets/aba-logo-new.png" : "../site/assets/aba-logo-new.png",
+    logo: inSite ? "./assets/aba-route1-compact.png" : "../site/assets/aba-route1-compact.png",
     home: inSite ? "./index.html" : "../site/index.html",
     about: inSite ? "./about.html" : "../site/about.html",
     membership: inMembership ? "./index.html" : "../membership-flow/index.html",

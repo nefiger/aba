@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Updates / Stay Informed">
+<title>Updates / Stay Informed</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<path class="s no sw" d="M52 144 C80 104,108 104,134 144 C158 180,184 180,208 144" stroke="#556B3A"/><path class="s no sw3" d="M52 116 C82 76,118 78,148 116 C170 144,190 144,208 116" stroke="#C38A2E"/><path class="s no sw2" d="M54 172 H202" stroke="#253B44"/><rect x="62" y="153" width="8" height="15" rx="4" fill="#1E3A34"/><rect x="86" y="138" width="8" height="30" rx="4" fill="#1E3A34"/><rect x="110" y="123" width="8" height="45" rx="4" fill="#1E3A34"/><rect x="134" y="153" width="8" height="15" rx="4" fill="#1E3A34"/><rect x="158" y="138" width="8" height="30" rx="4" fill="#1E3A34"/><rect x="182" y="123" width="8" height="45" rx="4" fill="#1E3A34"/>
+</svg>

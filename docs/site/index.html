@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>African Biologicals Alliance | Home</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -11,24 +12,24 @@
   <script defer src="./assets/public-shell.js"></script>
   <style>
     :root {
-      --page: oklch(0.972 0.012 92);
-      --page-deep: oklch(0.942 0.02 92);
-      --surface: oklch(0.988 0.004 95 / 0.88);
-      --surface-strong: oklch(0.985 0.007 96);
-      --line: oklch(0.87 0.018 165);
-      --ink: oklch(0.26 0.04 204);
-      --muted: oklch(0.5 0.025 198);
-      --green: oklch(0.48 0.09 156);
-      --green-deep: oklch(0.36 0.074 158);
-      --green-soft: oklch(0.93 0.028 150);
-      --sand: oklch(0.94 0.026 83);
-      --teal-soft: oklch(0.93 0.02 194);
-      --gold-soft: oklch(0.95 0.03 95);
-      --clay-soft: oklch(0.94 0.03 58);
-      --clay-deep: oklch(0.52 0.08 46);
-      --teal-deep: oklch(0.46 0.06 202);
-      --gold-deep: oklch(0.62 0.11 88);
-      --shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.32);
+      --page: #f3eee1;
+      --page-deep: #ebe3d3;
+      --surface: rgba(251, 247, 239, 0.9);
+      --surface-strong: rgba(255, 252, 246, 0.94);
+      --line: rgba(35, 59, 68, 0.12);
+      --ink: #203b44;
+      --muted: rgba(32, 59, 68, 0.74);
+      --green: #5a6b3a;
+      --green-deep: #15322f;
+      --green-soft: rgba(90, 107, 58, 0.12);
+      --sand: #f3f1e8;
+      --teal-soft: rgba(35, 59, 68, 0.08);
+      --gold-soft: rgba(200, 155, 44, 0.12);
+      --clay-soft: rgba(178, 74, 50, 0.1);
+      --clay-deep: #b24a32;
+      --teal-deep: #235344;
+      --gold-deep: #c89b2c;
+      --shadow: 0 26px 54px -42px rgba(21, 50, 47, 0.28);
       --space-2xs: 4px;
       --space-xs: 8px;
       --space-sm: 12px;
@@ -52,9 +53,10 @@
       font-family: "Public Sans", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 12% 0%, rgba(88, 140, 104, 0.15), transparent 28%),
-        radial-gradient(circle at 100% 12%, rgba(201, 176, 109, 0.12), transparent 26%),
-        linear-gradient(180deg, #f5f1e8 0%, #faf7f0 38%, #f2f4ec 100%);
+        radial-gradient(circle at 14% 0%, rgba(21, 50, 47, 0.14), transparent 24%),
+        radial-gradient(circle at 100% 12%, rgba(200, 155, 44, 0.16), transparent 28%),
+        radial-gradient(circle at 84% 84%, rgba(178, 74, 50, 0.08), transparent 24%),
+        linear-gradient(180deg, #f6f1e7 0%, #fbf8f1 40%, #f1ede2 100%);
     }
 
     a {
@@ -77,24 +79,44 @@
     }
 
     .topbar {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-md);
-      padding: 16px 24px;
+      gap: clamp(18px, 2vw, 34px);
+      padding: 22px 30px 20px;
       margin-bottom: var(--space-sm);
+      background:
+        linear-gradient(180deg, rgba(253, 250, 244, 0.98), rgba(248, 243, 233, 0.96));
+    }
+
+    .topbar::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 6px;
+      background:
+        linear-gradient(
+          90deg,
+          var(--teal-deep) 0 32%,
+          var(--green) 32% 63%,
+          var(--gold-deep) 63% 82%,
+          var(--clay-deep) 82% 100%
+        );
+      opacity: 0.84;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-md);
+      gap: clamp(20px, 2vw, 32px);
       min-width: 0;
+      flex: 1 1 auto;
     }
 
     .mark {
-      width: 86px;
-      height: 56px;
+      width: 252px;
+      height: 72px;
       border-radius: 0;
       display: inline-flex;
       align-items: center;
@@ -113,19 +135,21 @@
 
     .brand-copy {
       display: grid;
-      gap: 4px;
+      gap: 8px;
+      padding-block: 4px;
     }
 
     .brand-copy strong {
-      font-size: clamp(0.88rem, 0.82rem + 0.24vw, 1rem);
+      font-size: clamp(0.72rem, 0.68rem + 0.18vw, 0.82rem);
       font-weight: 900;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--green-deep);
     }
 
     .brand-copy span {
-      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-      line-height: 1.42;
+      font-size: clamp(0.92rem, 0.88rem + 0.18vw, 1.02rem);
+      line-height: 1.5;
       color: var(--muted);
       max-width: 34ch;
     }
@@ -136,6 +160,7 @@
       gap: var(--space-md);
       flex-wrap: wrap;
       justify-content: flex-end;
+      padding-top: 6px;
     }
 
     .nav {
@@ -146,15 +171,36 @@
     }
 
     .nav a {
+      position: relative;
       font-size: 0.98rem;
-      font-weight: 650;
+      font-weight: 750;
       line-height: 1;
-      color: color-mix(in oklab, var(--ink) 82%, white);
+      color: color-mix(in oklab, var(--ink) 84%, white);
+      padding-bottom: 12px;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--teal-deep), var(--gold-deep));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
     }
 
     .nav a.active,
     .nav a:hover {
       color: var(--green-deep);
+    }
+
+    .nav a.active::after,
+    .nav a:hover::after {
+      transform: scaleX(1);
     }
 
     .nav-cta {
@@ -175,23 +221,47 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(22px, 3vw, 34px);
+      padding: clamp(28px, 3.2vw, 40px);
       background:
-        radial-gradient(circle at top right, rgba(86, 138, 105, 0.14), transparent 28%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+        radial-gradient(circle at 16% 18%, rgba(243, 241, 232, 0.72), transparent 22%),
+        radial-gradient(circle at top right, rgba(90, 107, 58, 0.22), transparent 30%),
+        linear-gradient(135deg, rgba(255, 253, 249, 0.94), rgba(244, 236, 220, 0.92));
+      border-color: rgba(21, 50, 47, 0.12);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 18px 28px;
+      width: min(44vw, 560px);
+      height: 150px;
+      border-radius: 150px 150px 0 0;
+      background:
+        url("./assets/aba-route1-field-mark.png") left bottom / contain no-repeat;
+      opacity: 0.18;
+      pointer-events: none;
+      filter: blur(0.2px);
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      inset: auto -12% -24% auto;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
+      inset: auto -6% -18% auto;
+      width: 460px;
+      height: 260px;
+      border-radius: 220px 220px 0 0;
       background:
-        radial-gradient(circle, rgba(94, 148, 112, 0.2) 0%, rgba(94, 148, 112, 0.08) 42%, transparent 70%);
+        linear-gradient(180deg, rgba(21, 50, 47, 0.14), rgba(21, 50, 47, 0)),
+        repeating-linear-gradient(
+          -15deg,
+          rgba(21, 50, 47, 0.94) 0 16px,
+          rgba(90, 107, 58, 0.94) 16px 34px,
+          rgba(200, 155, 44, 0.9) 34px 52px,
+          rgba(178, 74, 50, 0.88) 52px 70px
+        );
       pointer-events: none;
-      filter: blur(8px);
+      opacity: 0.4;
+      filter: blur(1px);
     }
 
     .hero-grid {
@@ -204,9 +274,25 @@
     }
 
     .hero-main {
+      position: relative;
       display: grid;
-      gap: 16px;
+      gap: 22px;
       align-content: start;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      inset: 42px auto auto -20px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 38% 38%, rgba(255, 255, 255, 0.18), transparent 36%),
+        linear-gradient(180deg, rgba(32, 59, 68, 0.06), rgba(32, 59, 68, 0));
+      outline: 1px solid rgba(32, 59, 68, 0.08);
+      opacity: 0.5;
+      pointer-events: none;
     }
 
     .hero-intro,
@@ -216,11 +302,11 @@
     }
 
     .hero-intro {
-      gap: 0;
+      gap: 10px;
     }
 
     .hero-support {
-      gap: 16px;
+      gap: 18px;
     }
 
     .eyebrow {
@@ -231,8 +317,8 @@
       min-height: 32px;
       padding: 0 12px;
       border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(73, 95, 82, 0.12);
+      background: rgba(21, 50, 47, 0.08);
+      border: 1px solid rgba(21, 50, 47, 0.12);
       color: var(--green-deep);
       font-size: 11px;
       font-weight: 900;
@@ -251,16 +337,17 @@
       margin-top: 16px;
       max-width: none;
       font-size: clamp(2.2rem, 3.2vw, 3.5rem);
-      line-height: 0.96;
+      line-height: 0.94;
       letter-spacing: -0.045em;
       font-weight: 900;
     }
 
     .hero-copy {
       max-width: none;
-      font-size: clamp(1rem, 0.96rem + 0.14vw, 1.04rem);
-      line-height: 1.5;
+      font-size: clamp(1.02rem, 0.96rem + 0.24vw, 1.14rem);
+      line-height: 1.6;
       color: var(--muted);
+      max-width: 58ch;
     }
 
     .hero-actions {
@@ -295,24 +382,94 @@
     }
 
     .button.secondary {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(73, 95, 82, 0.16);
+      background: rgba(255, 251, 244, 0.86);
+      border: 1px solid rgba(32, 59, 68, 0.12);
       color: var(--ink);
+    }
+
+    .hero-ribbon {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, rgba(246, 241, 232, 0.94), rgba(252, 249, 242, 0.88));
+      border: 1px solid rgba(32, 59, 68, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-ribbon::after {
+      content: "";
+      position: absolute;
+      inset: auto -18% -54px auto;
+      width: 220px;
+      height: 120px;
+      border-radius: 120px 120px 0 0;
+      background:
+        url("./assets/aba-route1-field-mark.png") center / contain no-repeat;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .hero-ribbon-item {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 4px;
+      align-content: start;
+    }
+
+    .hero-ribbon-item label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--ink) 68%, white);
+    }
+
+    .hero-ribbon-item strong {
+      font-size: 1rem;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-ribbon-item p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
     }
 
     .hero-highlights {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
     }
 
     .hero-highlight {
       display: grid;
-      gap: 5px;
-      padding: 12px 12px 13px;
+      gap: 6px;
+      padding: 14px 14px 16px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(73, 95, 82, 0.1);
+      border: 1px solid rgba(21, 50, 47, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-highlight-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-highlight::before {
+      content: "";
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.24;
     }
 
     .hero-highlight strong {
@@ -328,14 +485,46 @@
       color: var(--muted);
     }
 
+    .hero-highlight.voice {
+      background: rgba(244, 235, 228, 0.82);
+      color: var(--clay-deep);
+    }
+
+    .hero-highlight.transition {
+      background: rgba(235, 240, 228, 0.84);
+      color: var(--green);
+    }
+
+    .hero-highlight.signal {
+      background: rgba(247, 241, 219, 0.86);
+      color: var(--gold-deep);
+    }
+
     .decision-panel {
+      position: relative;
       display: grid;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 20px;
-      background: rgba(244, 240, 230, 0.74);
-      border: 1px solid rgba(73, 95, 82, 0.12);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
+      gap: 18px;
+      padding: 18px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.18), transparent 28%),
+        linear-gradient(180deg, rgba(24, 51, 47, 0.97), rgba(31, 63, 55, 0.94));
+      border: 1px solid rgba(21, 50, 47, 0.2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .decision-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -16% auto;
+      width: 280px;
+      height: 160px;
+      border-radius: 160px 160px 0 0;
+      background:
+        url("./assets/aba-route1-field-mark.png") center / contain no-repeat;
+      opacity: 0.32;
+      pointer-events: none;
     }
 
     .decision-panel header {
@@ -352,6 +541,11 @@
       color: var(--green-deep);
     }
 
+    .decision-panel small,
+    .decision-panel h2 {
+      color: #f6efe2;
+    }
+
     .decision-panel h2 {
       font-size: clamp(1.05rem, 0.96rem + 0.34vw, 1.28rem);
       line-height: 1.06;
@@ -362,7 +556,9 @@
 
     .decision-list {
       display: grid;
-      gap: 10px;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .decision-link {
@@ -370,10 +566,10 @@
       grid-template-columns: 40px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.68);
-      border: 1px solid rgba(73, 95, 82, 0.12);
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255, 252, 246, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
     }
 
@@ -384,18 +580,18 @@
     }
 
     .decision-link.membership-route {
-      background: linear-gradient(180deg, rgba(250, 242, 232, 0.96), rgba(255, 250, 246, 0.88));
-      border-color: rgba(152, 106, 66, 0.16);
+      background: linear-gradient(180deg, rgba(247, 239, 231, 0.98), rgba(255, 250, 246, 0.94));
+      border-color: rgba(178, 74, 50, 0.12);
     }
 
     .decision-link.tracker-route {
-      background: linear-gradient(180deg, rgba(234, 244, 241, 0.96), rgba(249, 252, 251, 0.88));
-      border-color: rgba(73, 122, 121, 0.16);
+      background: linear-gradient(180deg, rgba(236, 241, 230, 0.98), rgba(249, 252, 246, 0.94));
+      border-color: rgba(90, 107, 58, 0.16);
     }
 
     .decision-link.explorer-route {
-      background: linear-gradient(180deg, rgba(250, 245, 226, 0.96), rgba(255, 252, 244, 0.88));
-      border-color: rgba(164, 132, 53, 0.16);
+      background: linear-gradient(180deg, rgba(249, 242, 219, 0.98), rgba(255, 251, 242, 0.94));
+      border-color: rgba(200, 155, 44, 0.18);
     }
 
     .decision-num {
@@ -441,6 +637,17 @@
       margin-bottom: 3px;
     }
 
+    .decision-copy {
+      display: grid;
+      gap: 8px;
+    }
+
+    .decision-copy-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .decision-link span,
     .decision-link p,
     .path-card p,
@@ -453,7 +660,7 @@
 
     .page-section {
       margin-top: var(--space-sm);
-      padding: clamp(22px, 4vw, 36px);
+      padding: clamp(28px, 4vw, 42px);
     }
 
     .editorial-grid {
@@ -470,7 +677,7 @@
 
     .section-lead {
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
 
     .section-lead h2 {
@@ -489,13 +696,30 @@
     }
 
     .section-summary {
+      position: relative;
       display: grid;
-      gap: 14px;
+      gap: 16px;
       align-content: start;
-      padding: 20px 22px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(238, 232, 217, 0.92), rgba(247, 244, 235, 0.76));
-      border: 1px solid rgba(73, 95, 82, 0.1);
+      padding: 26px 24px 28px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.18), transparent 30%),
+        linear-gradient(160deg, rgba(22, 49, 46, 0.98), rgba(42, 70, 58, 0.94));
+      border: 1px solid rgba(21, 50, 47, 0.08);
+      overflow: hidden;
+    }
+
+    .section-summary::after {
+      content: "";
+      position: absolute;
+      inset: auto -14% -28% auto;
+      width: 320px;
+      height: 180px;
+      border-radius: 180px 180px 0 0;
+      background:
+        url("./assets/aba-route1-field-mark.png") center / contain no-repeat;
+      pointer-events: none;
+      opacity: 0.34;
     }
 
     .section-summary strong {
@@ -503,13 +727,14 @@
       line-height: 1.12;
       letter-spacing: -0.04em;
       max-width: none;
+      color: #f5efe2;
     }
 
     .section-summary p {
       max-width: none;
       font-size: 1rem;
       line-height: 1.56;
-      color: var(--muted);
+      color: rgba(245, 239, 226, 0.8);
     }
 
     .problem-grid {
@@ -521,12 +746,36 @@
     .problem-item {
       display: grid;
       align-content: start;
-      gap: 8px;
+      gap: 10px;
       min-height: 100%;
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.56);
-      border: 1px solid rgba(73, 95, 82, 0.1);
+      padding: 18px 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 251, 244, 0.74);
+      border: 1px solid rgba(21, 50, 47, 0.08);
+    }
+
+    .problem-item:nth-child(1) {
+      background: rgba(243, 234, 227, 0.88);
+    }
+
+    .problem-item:nth-child(2) {
+      background: rgba(235, 240, 228, 0.88);
+    }
+
+    .problem-item:nth-child(3) {
+      background: rgba(247, 241, 219, 0.9);
+    }
+
+    .problem-item:nth-child(4) {
+      background: rgba(234, 239, 236, 0.9);
+    }
+
+    .problem-item::before {
+      content: "";
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(32, 59, 68, 0.24);
     }
 
     .problem-item strong {
@@ -578,27 +827,52 @@
       align-content: start;
       gap: 14px;
       min-height: 100%;
-      padding: 18px;
-      border-radius: 18px;
+      padding: 22px 20px;
+      border-radius: 24px;
       border: 1px solid rgba(73, 95, 82, 0.12);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      position: relative;
+      overflow: hidden;
     }
 
     .path-card.membership {
-      background: linear-gradient(180deg, rgba(244, 235, 219, 0.98), rgba(255, 249, 240, 0.82));
+      background: linear-gradient(180deg, rgba(247, 239, 231, 0.98), rgba(255, 249, 242, 0.86));
     }
 
     .path-card.registration {
-      background: linear-gradient(180deg, rgba(227, 240, 236, 0.98), rgba(247, 251, 250, 0.82));
+      background: linear-gradient(180deg, rgba(236, 241, 230, 0.98), rgba(249, 252, 246, 0.86));
     }
 
     .path-card.biologicals {
-      background: linear-gradient(180deg, rgba(247, 240, 216, 0.98), rgba(255, 251, 241, 0.84));
+      background: linear-gradient(180deg, rgba(249, 242, 219, 0.98), rgba(255, 251, 242, 0.88));
+    }
+
+    .path-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -14% -18% auto;
+      width: 200px;
+      height: 110px;
+      border-radius: 110px 110px 0 0;
+      background:
+        repeating-linear-gradient(
+          -12deg,
+          rgba(255, 255, 255, 0.18) 0 10px,
+          rgba(32, 59, 68, 0.14) 10px 20px
+        );
+      opacity: 0.4;
+      pointer-events: none;
     }
 
     .path-head {
       display: grid;
       gap: 8px;
+    }
+
+    .path-head-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .path-head span {
@@ -724,7 +998,7 @@
 
     .pillar-row {
       display: grid;
-      grid-template-columns: 94px minmax(0, 1fr);
+      grid-template-columns: 122px minmax(0, 1fr);
       gap: 16px;
       align-items: start;
       padding: 16px 0;
@@ -744,6 +1018,17 @@
       color: var(--green-deep);
     }
 
+    .pillar-side {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+    }
+
+    .pillar-content {
+      display: grid;
+      gap: 6px;
+    }
+
     .pillar-row:nth-child(1) .pillar-tag {
       color: var(--clay-deep);
     }
@@ -757,13 +1042,16 @@
     }
 
     .linkage-panel {
+      position: relative;
       display: grid;
-      gap: 10px;
-      padding: 16px;
-      border-radius: 18px;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 26px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(243, 247, 240, 0.68));
-      border: 1px solid rgba(73, 95, 82, 0.12);
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.16), transparent 28%),
+        linear-gradient(180deg, rgba(253, 250, 243, 0.92), rgba(241, 236, 226, 0.84));
+      border: 1px solid rgba(21, 50, 47, 0.1);
+      overflow: hidden;
     }
 
     .linkage-panel h3 {
@@ -794,9 +1082,9 @@
       grid-template-columns: 34px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      padding: 12px;
+      padding: 14px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.84);
       border: 1px solid rgba(73, 95, 82, 0.1);
     }
 
@@ -818,11 +1106,11 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
       margin-top: var(--space-sm);
-      padding: 18px;
-      border-radius: 24px;
+      padding: 22px;
+      border-radius: 28px;
       background:
-        linear-gradient(90deg, rgba(255, 250, 241, 0.82), rgba(242, 245, 236, 0.82));
-      border: 1px solid rgba(73, 95, 82, 0.1);
+        linear-gradient(90deg, rgba(255, 249, 239, 0.94), rgba(241, 236, 224, 0.94));
+      border: 1px solid rgba(21, 50, 47, 0.08);
     }
 
     .scope-card {
@@ -911,6 +1199,10 @@
         gap: 12px 16px;
       }
 
+      .hero-ribbon {
+        grid-template-columns: 1fr;
+      }
+
       h1 {
         font-size: clamp(1.95rem, 8.8vw, 2.7rem);
       }
@@ -949,10 +1241,10 @@
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
-        <div class="mark"><img src="./assets/aba-logo-new.png" alt="African Biologicals Alliance logo"></div>
+        <div class="mark"><img src="./assets/aba-route1-horizontal.png" alt="African Biologicals Alliance logo"></div>
         <div class="brand-copy">
-          <strong>African Biologicals Alliance</strong>
-          <span>Strengthening Africa's biologicals sector through voice, visibility, and market access.</span>
+          <strong>Collective voice. Biological transition. African-led growth.</strong>
+          <span>Membership, registration intelligence, and biologicals knowledge for a stronger agricultural transition.</span>
         </div>
       </div>
       <div class="nav-wrap">
@@ -971,30 +1263,57 @@
       <div class="hero-grid">
         <div class="hero-main">
           <div class="hero-intro">
-            <span class="eyebrow">Membership, intelligence, and advocacy</span>
-            <h1>Biologicals in Africa need a stronger collective base.</h1>
+            <span class="eyebrow">African biologicals alliance</span>
+            <h1>A stronger institutional base for biologicals across Africa.</h1>
           </div>
           <div class="hero-support">
             <p class="hero-copy">
-              ABA helps independent African biologicals businesses build collective representation, clearer regulatory visibility, and a more credible path into market access.
+              ABA helps independent African biologicals businesses build collective representation, clearer regulatory visibility, and a more credible path from local production to market access.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="../membership-flow/index.html">Join ABA</a>
               <a class="button secondary" href="../registration-tracker/index.html">Track Product Registrations</a>
               <a class="button secondary" href="../database/index.html">Explore Biologicals</a>
             </div>
+            <div class="hero-ribbon">
+              <div class="hero-ribbon-item">
+                <label>Continental horizon</label>
+                <strong>Participation, relationship-building, and sector intelligence can come from across Africa.</strong>
+                <p>ABA is building for a continental biologicals story, not a narrow national audience.</p>
+              </div>
+              <div class="hero-ribbon-item">
+                <label>Operating base</label>
+                <strong>Immediate regulatory traction starts from South Africa, where the pressure is already live.</strong>
+                <p>The current base gives ABA a real starting point while keeping the wider alliance proposition intact.</p>
+              </div>
+            </div>
             <div class="hero-highlights">
-              <div class="hero-highlight">
-                <strong>South Africa active now</strong>
-                <span>Start with the current operating context and live registration pain.</span>
+              <div class="hero-highlight voice">
+                <div class="hero-highlight-head">
+                  <span class="symbol-badge symbol-badge--sm symbol-badge--soft" aria-hidden="true">
+                    <img src="./assets/symbols/institutional-voice.svg" alt="">
+                  </span>
+                  <strong>Institutional voice</strong>
+                </div>
+                <span>Bring independent African biologicals into policy, market, and regulatory discussions with more weight.</span>
               </div>
-              <div class="hero-highlight">
-                <strong>Africa-wide participation</strong>
-                <span>Build toward broader contribution, coordination, and sector legitimacy.</span>
+              <div class="hero-highlight transition">
+                <div class="hero-highlight-head">
+                  <span class="symbol-badge symbol-badge--sm symbol-badge--soft" aria-hidden="true">
+                    <img src="./assets/symbols/biological-transition.svg" alt="">
+                  </span>
+                  <strong>Biological transition</strong>
+                </div>
+                <span>Frame biologicals as a serious agricultural pathway, not a fragmented niche.</span>
               </div>
-              <div class="hero-highlight">
-                <strong>One connected system</strong>
-                <span>Membership, registration tracking, and biologicals knowledge work together.</span>
+              <div class="hero-highlight signal">
+                <div class="hero-highlight-head">
+                  <span class="symbol-badge symbol-badge--sm symbol-badge--soft" aria-hidden="true">
+                    <img src="./assets/symbols/shared-signal.svg" alt="">
+                  </span>
+                  <strong>Shared signal</strong>
+                </div>
+                <span>Membership, registration tracking, and structured knowledge reinforce one another.</span>
               </div>
             </div>
           </div>
@@ -1008,22 +1327,37 @@
           <div class="decision-list">
             <a class="decision-link membership-route" href="../membership-flow/index.html">
               <span class="decision-num">01</span>
-              <div>
-                <strong>Join ABA</strong>
+              <div class="decision-copy">
+                <div class="decision-copy-head">
+                  <span class="symbol-badge symbol-badge--sm" aria-hidden="true">
+                    <img src="./assets/symbols/membership-join-aba.svg" alt="">
+                  </span>
+                  <strong>Join ABA</strong>
+                </div>
                 <p>For organisations that want representation, influence, legitimacy, and a stronger collective presence.</p>
               </div>
             </a>
             <a class="decision-link tracker-route" href="../registration-tracker/index.html">
               <span class="decision-num">02</span>
-              <div>
-                <strong>Track Product Registrations</strong>
+              <div class="decision-copy">
+                <div class="decision-copy-head">
+                  <span class="symbol-badge symbol-badge--sm" aria-hidden="true">
+                    <img src="./assets/symbols/registration-tracker.svg" alt="">
+                  </span>
+                  <strong>Track Product Registrations</strong>
+                </div>
                 <p>For people with active registration pain who want clearer visibility into product pathways, delays, and bottlenecks.</p>
               </div>
             </a>
             <a class="decision-link explorer-route" href="../database/index.html">
               <span class="decision-num">03</span>
-              <div>
-                <strong>Explore Biologicals</strong>
+              <div class="decision-copy">
+                <div class="decision-copy-head">
+                  <span class="symbol-badge symbol-badge--sm" aria-hidden="true">
+                    <img src="./assets/symbols/biologicals-explorer.svg" alt="">
+                  </span>
+                  <strong>Explore Biologicals</strong>
+                </div>
                 <p>For people looking for structured product, evidence, crop, pest, and regulatory knowledge.</p>
               </div>
             </a>
@@ -1078,7 +1412,12 @@
         <div class="paths-grid">
           <article class="path-card membership">
             <div class="path-head">
-              <strong>Become a Member</strong>
+              <div class="path-head-top">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/membership-join-aba.svg" alt="">
+                </span>
+                <strong>Become a Member</strong>
+              </div>
             </div>
             <p class="path-kicker">For organisations that want a voice, legitimacy, information, and coordinated influence.</p>
             <p>Manufacturers, distributors, formulators, and aligned sector actors can use membership to build representation, structured participation, and a stronger collective presence.</p>
@@ -1090,7 +1429,12 @@
 
           <article class="path-card registration">
             <div class="path-head">
-              <strong>Product Registration Tracker</strong>
+              <div class="path-head-top">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/registration-tracker.svg" alt="">
+                </span>
+                <strong>Product Registration Tracker</strong>
+              </div>
             </div>
             <p class="path-kicker">Share a product-registration record so ABA can build a clearer picture of delays, bottlenecks, and where collective evidence can support better regulatory engagement.</p>
             <p>Product owners, regulatory leads, and operators can use it to turn individual registration experiences into a clearer sector picture.</p>
@@ -1102,7 +1446,12 @@
 
           <article class="path-card biologicals">
             <div class="path-head">
-              <strong>Explore Biologicals</strong>
+              <div class="path-head-top">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/biologicals-explorer.svg" alt="">
+                </span>
+                <strong>Explore Biologicals</strong>
+              </div>
             </div>
             <p class="path-kicker">A growing biologicals knowledge hub for people who need product, evidence, crop, pest, and regulatory context in one public-facing place.</p>
             <p>Farmers, agronomists, researchers, advisors, buyers, and sector participants can use it when they need credible information before acting.</p>
@@ -1121,29 +1470,49 @@
           <h2 class="system-headline">A viable environment for local biologicals to thrive.</h2>
           <div class="pillar-list" style="margin-top: 22px;">
             <div class="pillar-row">
-              <div class="pillar-tag">Advocacy</div>
-              <div>
+              <div class="pillar-side">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/advocacy.svg" alt="">
+                </span>
+                <div class="pillar-tag">Advocacy</div>
+              </div>
+              <div class="pillar-content">
                 <strong>Bring independent African biologicals voices into policy and sector discussions with more weight.</strong>
                 <p>ABA creates a stronger point of contact for regulators, departments, and sector counterparts than any one company can carry alone.</p>
               </div>
             </div>
             <div class="pillar-row">
-              <div class="pillar-tag">Visibility</div>
-              <div>
+              <div class="pillar-side">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/visibility.svg" alt="">
+                </span>
+                <div class="pillar-tag">Visibility</div>
+              </div>
+              <div class="pillar-content">
                 <strong>Turn fragmented registration journeys into clearer signals and better evidence.</strong>
                 <p>Shared product-registration records can help reveal recurring patterns, practical bottlenecks, and where advocacy can be better targeted.</p>
               </div>
             </div>
             <div class="pillar-row">
-              <div class="pillar-tag">Credibility</div>
-              <div>
+              <div class="pillar-side">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/credibility.svg" alt="">
+                </span>
+                <div class="pillar-tag">Credibility</div>
+              </div>
+              <div class="pillar-content">
                 <strong>Make products, evidence, and regulatory context easier to find and understand.</strong>
                 <p>Biologicals should be easier to browse, compare, and trust when the surrounding knowledge layer is structured well.</p>
               </div>
             </div>
             <div class="pillar-row">
-              <div class="pillar-tag">Growth</div>
-              <div>
+              <div class="pillar-side">
+                <span class="symbol-badge symbol-badge--md" aria-hidden="true">
+                  <img src="./assets/symbols/growth.svg" alt="">
+                </span>
+                <div class="pillar-tag">Growth</div>
+              </div>
+              <div class="pillar-content">
                 <strong>Build from South Africa while creating the conditions for wider African chapter relationships.</strong>
                 <p>ABA is designed to support a bigger continental story, without pretending that operations are already everywhere at once.</p>
               </div>

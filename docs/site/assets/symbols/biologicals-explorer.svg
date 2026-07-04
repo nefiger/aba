@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Biologicals Explorer">
+<title>Biologicals Explorer</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<path class="s no sw" d="M42 186 C 84 132, 142 130, 208 128" stroke="#253B44" opacity="1"/>
+<path class="s no sw" d="M50 200 C 92 137, 150 132, 208 136" stroke="#556B3A" opacity="1"/>
+<path class="s no sw" d="M58 214 C 100 142, 158 134, 208 144" stroke="#C38A2E" opacity="1"/>
+<path class="s no sw" d="M66 228 C 108 147, 166 136, 208 152" stroke="#B54A28" opacity="1"/><path class="s no sw2" d="M78 174 C103 128, 139 104, 190 83" stroke="#1E3A34"/><path class="s" d="M177 76 L207 67 L195 96 L188 84 Z" fill="#C38A2E" stroke="#1E3A34" stroke-width="5"/><circle cx="62" cy="82" r="2.6" fill="#556B3A" opacity="1.00"/>
+<circle cx="74" cy="82" r="2.45" fill="#556B3A" opacity="0.92"/>
+<circle cx="86" cy="82" r="2.3000000000000003" fill="#556B3A" opacity="0.84"/>
+<circle cx="98" cy="82" r="2.1500000000000004" fill="#556B3A" opacity="0.76"/>
+<circle cx="110" cy="82" r="2.0" fill="#556B3A" opacity="0.68"/>
+<circle cx="62" cy="94" r="2.6" fill="#556B3A" opacity="0.98"/>
+<circle cx="74" cy="94" r="2.45" fill="#556B3A" opacity="0.90"/>
+<circle cx="86" cy="94" r="2.3000000000000003" fill="#556B3A" opacity="0.82"/>
+<circle cx="98" cy="94" r="2.1500000000000004" fill="#556B3A" opacity="0.74"/>
+<circle cx="110" cy="94" r="2.0" fill="#556B3A" opacity="0.66"/>
+<circle cx="62" cy="106" r="2.6" fill="#556B3A" opacity="0.96"/>
+<circle cx="74" cy="106" r="2.45" fill="#556B3A" opacity="0.88"/>
+<circle cx="86" cy="106" r="2.3000000000000003" fill="#556B3A" opacity="0.80"/>
+<circle cx="98" cy="106" r="2.1500000000000004" fill="#556B3A" opacity="0.72"/>
+<circle cx="110" cy="106" r="2.0" fill="#556B3A" opacity="0.64"/>
+</svg>

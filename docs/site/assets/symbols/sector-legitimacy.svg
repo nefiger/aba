@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <title>ABA refined symbol</title>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M114 382 H398" stroke="#1E3A34" stroke-width="24"/>
+    <path d="M146 332 H366" stroke="#253B44" stroke-width="18"/>
+    <path d="M184 286 H328" stroke="#556B3A" stroke-width="15"/>
+    <path d="M222 242 H290" stroke="#C38A2E" stroke-width="13"/>
+    <path d="M154 196 C196 164 234 150 276 154 C314 158 342 176 366 204" stroke="#1E3A34" stroke-width="18"/>
+    <path d="M188 224 C224 202 256 194 288 200 C316 205 338 220 356 242" stroke="#556B3A" stroke-width="10"/>
+    <path d="M256 128 V242" stroke="#B54A28" stroke-width="12"/>
+    <path d="M214 128 H298" stroke="#B54A28" stroke-width="12"/>
+    <circle cx="256" cy="128" r="12" fill="#C38A2E"/>
+    <path d="M174 382 C212 356 232 348 256 348 C280 348 300 356 338 382" stroke="#F2EDE3" stroke-width="10" opacity="0.95"/>
+    
+  </g>
+</svg>

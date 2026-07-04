@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ABA symbol: Shared Signal">
+<title>Shared Signal</title>
+<style>
+    .s{stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .no{fill:none}.sw{stroke-width:7}.sw2{stroke-width:5}.sw3{stroke-width:3.5}
+    .soft{opacity:.18}.mid{opacity:.62}.thin{stroke-width:2.7}
+    </style>
+<path class="s no sw2" d="M48 78 C84 78,105 100,128 128" stroke="#253B44"/><path class="s no sw2" d="M48 106 C84 106,105 112,128 128" stroke="#556B3A"/><path class="s no sw2" d="M48 134 C84 134,105 124,128 128" stroke="#C38A2E"/><path class="s no sw2" d="M48 162 C84 162,105 136,128 128" stroke="#B54A28"/><path class="s no sw" d="M128 128 C154 138,176 150,210 150" stroke="#1E3A34"/><path class="s no sw2" d="M126 182 C 166 140, 218 146, 206 132" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M134 179 C 171 142, 221 151, 206 146" stroke="#556B3A" opacity="1"/>
+<path class="s no sw2" d="M142 176 C 176 144, 224 156, 206 160" stroke="#C38A2E" opacity="1"/>
+</svg>

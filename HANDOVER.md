@@ -1,6 +1,6 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-01
+Last updated: 2026-07-04
 
 ---
 
@@ -37,6 +37,7 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-admin-surface-taxonomy.md`
 - `docs/requirements/aba-admin-pause-and-public-data-capture-shift.md`
 - `docs/requirements/aba-public-brand-and-footer-spec.md`
+- `docs/requirements/aba-symbol-family-implementation-notes.md`
 
 Public and role-based prototype updates now include:
 
@@ -47,7 +48,25 @@ Public and role-based prototype updates now include:
 - richer secondary public pages for `Technical Network` and `Updates`
 - a stronger first pass at semantic route distinctions on the homepage:
   `Alliance`, `Intelligence`, and `Knowledge`
+- a first implemented ABA symbol family across the public site, using:
+  - route-entry symbols
+  - corrected homepage/system symbols
+  - secondary-page support symbols
 - an active page-by-page visual review of `docs/site/about.html`, including sourced Africa-map treatment and sharper content hierarchy decisions
+
+Important current status on that symbol-family implementation:
+
+- the assets are now wired into the repo and deployed across several public pages
+- however, the current execution is not accepted as a visual direction
+- the user explicitly disliked:
+  - the tiny symbol treatment
+  - the white rounded badge/blob backgrounds
+  - the insufficient scale and presence of the symbols
+  - the fact that the family still does not appear broadly enough across the site
+  - the random-feeling cropped route-1 field-mark fragments used as decorative backgrounds
+- this tranche should therefore be treated as:
+  - a placement and asset-integration checkpoint
+  - not a finished or approved visual-system pass
 
 The founding-members demo happened on 2026-06-25. Follow-up notes from both the demo and the internal debrief are now captured in:
 
@@ -234,6 +253,12 @@ The prototype implementation approach should now assume:
 ### Prototype-as-spec and visual consistency
 
 - The public site now has clearer shared-shell conventions, but the semantic visual language is still only partially implemented
+- The current symbol-family deployment should be revised before being treated as the preferred visual pattern
+- The next pass should:
+  - remove or greatly reduce tiny white-badge symbol treatments
+  - enlarge symbol presence in key homepage and public-page sections
+  - use the family more consistently across the wider site
+  - replace arbitrary cropped route-1 decorative fragments with more intentional brand-asset composition
 - `docs/site/about.html` still needs visual tuning around the sourced Africa-map treatment, marker placement, and how the illustration integrates with text
 - `docs/site/index.html`, `docs/membership-flow/index.html`, and `docs/database/index.html` still need deeper page-specific design passes rather than only consistency edits
 - Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
