@@ -1,8 +1,6 @@
-# Registration Tracker Wireframe Workspace
+# Registration Tracker Workspace
 
-This folder contains exploratory planning material and low-fidelity wireframe work for the ABA Biological Inputs Registration Tracker.
-
-The tracker is being designed as a product area that can stand alone during prototyping, but should eventually unify with the main ABA website and the custom CRM work.
+This folder contains planning material, domain-grounding work, and low-fidelity wireframes for the ABA registration tracker — a tool that follows how registrations of biological and alternative *agricultural* inputs (microbial inoculants, biostimulants, biofertilisers, plant extracts, biological crop-protection products) move through the South African registrar's process under Act 36 of 1947. "Biological" here refers only to the natural origin of these crop inputs. The tracker does not try to resolve the regulatory ambiguity these products sit in — it tracks registration status per company and aggregates submissions into a sector-wide picture of the registrar's backlog. It is designed to stand alone during prototyping but should eventually unify with the main ABA website and the custom CRM work.
 
 ## Important Principle
 
@@ -14,7 +12,7 @@ When the final ABA website / CRM architecture is ready, the implementation shoul
 
 ## Durable Artifacts
 
-The durable artifacts are the markdown planning files:
+The durable artifacts are the markdown planning and domain-grounding files:
 
 - shared context and decisions
 - folder-level briefs
@@ -23,6 +21,9 @@ The durable artifacts are the markdown planning files:
 - data model decisions
 - consent, membership, review, and export logic
 - visual alignment principles
+- registrar-requirements domain grounding and extraction work
+
+This workspace holds both the disposable wireframes and this durable domain-grounding / extraction work — it is not wireframes alone.
 
 ## Disposable Artifacts
 

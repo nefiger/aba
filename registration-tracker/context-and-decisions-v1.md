@@ -1,5 +1,18 @@
 # Registration Tracker Context And Decisions V1
 
+## Purpose And Scope
+
+The registration tracker follows how registrations of biological and alternative *agricultural* inputs — microbial inoculants, plant biostimulants, biofertilisers, plant extracts, and biological crop-protection products — move through the South African registrar's process under Act 36 of 1947. "Biological" refers only to the natural origin of these crop inputs.
+
+The regulatory framework for these products is unsettled and hard to navigate: the forms and guideline criteria exist, but in practice many of these inputs end up registered under one category when they arguably belong under another, and registration is slow. **The tracker does not try to fix that.** It does not adjudicate categories or reengineer the registrar's process. Its job is narrower and factual — to track what is actually happening:
+
+- **Per-company pipeline** — a company logs its products and the status of each registration submission and sees its own pipeline (this private view is also the participation incentive).
+- **Sector-wide picture** — submissions are aggregated into an anonymised, sector-level view of how registration is behaving: where time is lost, by application type and stage. This serves both the named evidence-for-the-registrar purpose and the anonymised advocacy purpose.
+
+Together these form a combined ("married") view into the registrar's office — one that serves the companies submitting and is useful to the registrar's own work. The tracker references what a submission requires (dossier readiness, application type, stage) without reproducing the registrar's forms field-by-field.
+
+*("Married view" is a working interpretation still to be confirmed — see the open questions in the context summary.)*
+
 ## Project Context
 
 The `registration-tracker` work is being developed separately from the main ABA website and biological database work, but the outputs are expected to come together into one coherent ABA digital product.
@@ -29,8 +42,8 @@ The tracker work is organised into five product areas:
 - `intake-flow`
 - `company-dashboard`
 - `public-dashboard`
-- `registrar-list`
 - `admin-operator-review`
+- `registrar-list`
 
 Each product area should eventually receive its own focused brief and low-fidelity HTML wireframe.
 
@@ -39,8 +52,8 @@ Suggested files:
 - `intake-flow/intake-flow-brief-v1.md`
 - `company-dashboard/company-dashboard-brief-v1.md`
 - `public-dashboard/public-dashboard-brief-v1.md`
-- `registrar-list/registrar-list-brief-v1.md`
 - `admin-operator-review/admin-operator-review-brief-v1.md`
+- `registrar-list/registrar-list-brief-v1.md`
 
 The original `starting-prompt-v1.md` should remain as the first master wireframe prompt.
 
@@ -365,6 +378,8 @@ The interface should guide users one application at a time, with options to:
 
 ## Product Axes And Regime Logic
 
+**Provisional — pending verification.** The specifics below are the team's current best guess and have **not** yet been reconciled against what the registrar actually requires; the registrar-requirements extraction + specialist review will confirm or correct them. Treat them as reconcilable, not settled. Known items to reconcile: the M / L / K classification code vs the registrar's apparent B / K / L / M registration-number classes; and the team status list vs the official stages (verification → scientific screening → evaluation → decision → appeal).
+
 Functional category should be global and always visible.
 
 Suggested values:
@@ -378,12 +393,16 @@ Country and governing regime should always be visible.
 
 Legal pathway and classification code should be conditional, especially for South African Act 36 records.
 
-For South Africa, the prototype should support:
+For South Africa, the active, fully-modelled regime is:
 
 - Agriculture / Act 36
-- public-health pest control
-- water treatment
-- other
+
+The following are **not** modelled in the current tracker — they sit under a different legal regime and are treated as future scope:
+
+- public-health pest control — *future / different legal regime — not modelled in the current tracker*
+- water treatment — *future / different legal regime — not modelled in the current tracker*
+
+`other` is retained only as a lightweight, awareness-only capture: a way to see how many submissions fall outside Act 36. It feeds sector insights and internal submission-type statistics only — it does **not** drive the member (company) dashboard and is **not** eligible for the registrar list.
 
 Under Agriculture / Act 36, show:
 
@@ -455,6 +474,8 @@ Starter values:
 Company and registrar views may show record-level blockers. Public dashboard views should show only aggregate bottleneck themes after review and suppression.
 
 ## Status List
+
+**Provisional — pending verification.** The specifics below are the team's current best guess and have **not** yet been reconciled against what the registrar actually requires; the registrar-requirements extraction + specialist review will confirm or correct them. Treat them as reconcilable, not settled. Known items to reconcile: the M / L / K classification code vs the registrar's apparent B / K / L / M registration-number classes; and the team status list vs the official stages (verification → scientific screening → evaluation → decision → appeal).
 
 Starter controlled statuses:
 
