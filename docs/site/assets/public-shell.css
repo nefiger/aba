@@ -16,6 +16,7 @@ body {
 }
 
 .topbar {
+  position: relative !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -25,15 +26,31 @@ body {
   margin-left: calc(50% - 50vw) !important;
   margin-right: calc(50% - 50vw) !important;
   margin-bottom: 16px !important;
-  padding-top: 16px !important;
+  padding-top: 22px !important;
   padding-bottom: 16px !important;
   padding-left: max(24px, calc((100vw - 1320px) / 2 + 24px)) !important;
   padding-right: max(24px, calc((100vw - 1320px) / 2 + 24px)) !important;
   border-left: 0 !important;
   border-right: 0 !important;
   border-radius: 0 !important;
-  background: #fbf7ee !important;
+  background: linear-gradient(180deg, rgba(253, 250, 244, 0.98), rgba(248, 243, 233, 0.96)) !important;
   overflow: hidden !important;
+}
+
+.topbar::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 0 auto !important;
+  height: 6px !important;
+  background:
+    linear-gradient(
+      90deg,
+      #253b44 0 32%,
+      #5a6b3a 32% 63%,
+      #c89b2c 63% 82%,
+      #b24a32 82% 100%
+    ) !important;
+  opacity: 0.84 !important;
 }
 
 .mark {
@@ -82,7 +99,6 @@ body {
   box-shadow: none !important;
 }
 
-.decision-panel,
 .panel,
 .card,
 .route-card,
@@ -123,6 +139,112 @@ body {
 
 .scope-strip {
   background: rgba(248, 244, 236, 0.86) !important;
+}
+
+.decision-panel {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(24, 51, 47, 0.97), rgba(31, 63, 55, 0.94)) !important;
+}
+
+.decision-panel header {
+  gap: 10px !important;
+}
+
+.decision-panel small {
+  color: rgba(246, 239, 226, 0.74) !important;
+}
+
+.decision-panel h2 {
+  color: #f6efe2 !important;
+  font-size: clamp(1.12rem, 1rem + 0.48vw, 1.42rem) !important;
+  line-height: 1.08 !important;
+}
+
+.decision-link {
+  padding: 16px !important;
+  gap: 14px !important;
+}
+
+.decision-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.decision-link p {
+  color: rgba(32, 59, 68, 0.86) !important;
+}
+
+.paths-intro {
+  grid-template-columns: 1fr !important;
+  gap: 10px !important;
+}
+
+.paths-intro p {
+  max-width: none !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.path-card {
+  gap: 16px !important;
+  padding: 26px 24px 24px !important;
+}
+
+.path-body {
+  max-width: none !important;
+}
+
+.path-card.membership {
+  background: linear-gradient(180deg, rgba(246, 229, 219, 0.98), rgba(255, 247, 240, 0.92)) !important;
+  border-color: rgba(178, 74, 50, 0.14) !important;
+}
+
+.path-card.registration {
+  background: linear-gradient(180deg, rgba(226, 235, 219, 0.98), rgba(244, 249, 239, 0.92)) !important;
+  border-color: rgba(90, 107, 58, 0.18) !important;
+}
+
+.path-card.biologicals {
+  background: linear-gradient(180deg, rgba(250, 236, 188, 0.98), rgba(255, 249, 230, 0.92)) !important;
+  border-color: rgba(200, 155, 44, 0.2) !important;
+}
+
+.problem-item {
+  padding: 20px 20px 22px !important;
+  border-color: rgba(23, 48, 57, 0.08) !important;
+}
+
+.problem-item:nth-child(1) {
+  background: rgba(241, 228, 220, 0.96) !important;
+}
+
+.problem-item:nth-child(2) {
+  background: rgba(225, 234, 219, 0.96) !important;
+}
+
+.problem-item:nth-child(3) {
+  background: rgba(249, 240, 205, 0.96) !important;
+}
+
+.problem-item:nth-child(4) {
+  background: rgba(228, 234, 230, 0.96) !important;
+}
+
+.problem-item::before {
+  background: rgba(32, 59, 68, 0.22) !important;
+}
+
+.problem-item strong {
+  font-size: 1.12rem !important;
+  line-height: 1.16 !important;
+  letter-spacing: -0.028em !important;
+}
+
+.problem-item p {
+  color: rgba(32, 59, 68, 0.9) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.38 !important;
 }
 
 .path-visual,
@@ -236,33 +358,34 @@ body {
 .brand {
   align-items: center !important;
   overflow: hidden !important;
-  gap: 16px !important;
+  gap: clamp(20px, 2vw, 32px) !important;
   min-width: 0 !important;
-  flex: 0 1 auto !important;
+  flex: 1 1 auto !important;
 }
 
 .brand-copy {
   display: grid !important;
-  gap: 4px !important;
+  gap: 8px !important;
   padding-top: 0 !important;
+  padding-block: 4px !important;
   align-self: center !important;
   min-width: 0 !important;
 }
 
 .brand-copy strong {
-  font-size: clamp(0.88rem, 0.82rem + 0.24vw, 1rem) !important;
+  font-size: clamp(0.72rem, 0.68rem + 0.18vw, 0.82rem) !important;
   font-weight: 900 !important;
-  letter-spacing: 0.14em !important;
+  letter-spacing: 0.16em !important;
   line-height: 1.08 !important;
-  color: var(--ink) !important;
+  color: var(--green-deep) !important;
   text-transform: uppercase !important;
 }
 
 .brand-copy span {
-  font-size: clamp(0.9rem, 0.88rem + 0.12vw, 1rem) !important;
-  line-height: 1.32 !important;
-  max-width: none !important;
-  color: color-mix(in oklab, var(--ink) 72%, white) !important;
+  font-size: clamp(0.92rem, 0.88rem + 0.18vw, 1.02rem) !important;
+  line-height: 1.5 !important;
+  max-width: 34ch !important;
+  color: var(--muted) !important;
 }
 
 .symbol-badge {
@@ -270,10 +393,10 @@ body {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  border-radius: 18px;
-  background: rgba(255, 251, 244, 0.92);
-  border: 1px solid rgba(23, 48, 57, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .symbol-badge img {
@@ -290,25 +413,25 @@ body {
 }
 
 .symbol-badge--md {
-  width: 54px;
-  height: 54px;
-  padding: 10px;
+  width: 62px;
+  height: 62px;
+  padding: 0;
 }
 
 .symbol-badge--lg {
-  width: 66px;
-  height: 66px;
-  padding: 12px;
+  width: 80px;
+  height: 80px;
+  padding: 0;
 }
 
 .symbol-badge--soft {
-  background: rgba(255, 255, 255, 0.58);
+  background: transparent;
 }
 
 .symbol-inline-head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .symbol-inline-head > * {
@@ -330,12 +453,13 @@ body {
   flex: 1 1 auto !important;
   flex-wrap: nowrap !important;
   min-width: 0 !important;
+  padding-top: 6px !important;
 }
 
 .nav {
   display: flex !important;
   align-items: center !important;
-  gap: 18px !important;
+  gap: 20px !important;
   flex: 0 1 auto !important;
   flex-wrap: nowrap !important;
   margin-left: auto !important;
@@ -343,23 +467,47 @@ body {
 }
 
 .nav a {
-  font-size: 0.94rem !important;
-  font-weight: 650 !important;
+  position: relative !important;
+  font-size: 0.98rem !important;
+  font-weight: 750 !important;
   line-height: 1 !important;
-  color: color-mix(in oklab, var(--ink) 82%, white) !important;
+  color: color-mix(in oklab, var(--ink) 84%, white) !important;
   white-space: nowrap !important;
+  padding-bottom: 12px !important;
+}
+
+.nav a::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #253b44, #c89b2c) !important;
+  opacity: 0 !important;
+  transform: scaleX(0.35) !important;
+  transform-origin: center !important;
+  transition: opacity 140ms ease, transform 140ms ease !important;
 }
 
 .nav a.active,
 .nav a:hover,
 .nav a:focus-visible {
-  color: var(--green-deep) !important;
+  color: #173039 !important;
+}
+
+.nav a.active::after,
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  opacity: 1 !important;
+  transform: scaleX(1) !important;
 }
 
 .nav-cta {
   min-height: 48px !important;
-  padding: 0 18px !important;
-  border-radius: 12px !important;
+  padding: 0 20px !important;
+  border-radius: 14px !important;
   font-size: 0.82rem !important;
   font-weight: 900 !important;
   letter-spacing: 0.1em !important;
@@ -372,6 +520,7 @@ body {
 @media (max-width: 760px) {
   .topbar {
     flex-wrap: wrap !important;
+    gap: 14px !important;
   }
 
   .mark {
@@ -389,7 +538,7 @@ body {
   .nav-wrap {
     flex: 1 1 100% !important;
     flex-wrap: wrap !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
   }
 
   .nav {

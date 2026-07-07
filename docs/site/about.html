@@ -139,7 +139,6 @@
       padding: 20px;
     }
     .hero-grid,
-    .card-grid,
     .detail-grid {
       display: grid;
       gap: 12px;
@@ -148,11 +147,8 @@
       grid-template-columns: 1fr;
       align-items: stretch;
     }
-    .card-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
     .detail-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(12, minmax(0, 1fr));
     }
     h1, h2, h3, p { margin: 0; }
     h1 {
@@ -182,11 +178,100 @@
     .panel,
     .card {
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.66);
-      padding: 15px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 20px;
     }
-    .tone { background: var(--sand); }
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      padding: 8px 4px;
+    }
+    .summary-surface {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.16), transparent 26%),
+        linear-gradient(180deg, rgba(24, 51, 47, 0.98), rgba(33, 72, 63, 0.95));
+      border-color: rgba(244, 235, 219, 0.12);
+    }
+    .summary-lead {
+      display: grid;
+      gap: 10px;
+      padding: 4px 4px 18px;
+      border-bottom: 1px solid rgba(244, 235, 219, 0.12);
+      margin-bottom: 16px;
+    }
+    .summary-surface .summary-lead .mini {
+      color: rgba(244, 235, 219, 0.72);
+    }
+    .summary-surface .summary-lead h2 {
+      color: #f5efe2;
+      font-size: clamp(1.5rem, 1.42rem + 0.9vw, 2.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+    .summary-item {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      padding: 6px 20px 10px;
+      position: relative;
+    }
+    .summary-item:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: rgba(23, 48, 57, 0.1);
+    }
+    .summary-item .mini {
+      color: color-mix(in oklab, var(--muted) 88%, white);
+    }
+    .summary-surface .summary-item .mini {
+      color: rgba(244, 235, 219, 0.68);
+    }
+    .summary-kicker {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .summary-kicker b {
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: rgba(32, 59, 68, 0.18);
+      font-weight: 900;
+    }
+    .summary-surface .summary-kicker b {
+      color: rgba(244, 235, 219, 0.18);
+    }
+    .summary-item h3 {
+      font-size: clamp(1.25rem, 1.35vw, 1.55rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+    }
+    .summary-surface .summary-item h3 {
+      color: #f5efe2;
+    }
+    .summary-item p {
+      font-size: 1.02rem;
+      line-height: 1.62;
+    }
+    .summary-surface .summary-item p {
+      color: rgba(240, 235, 226, 0.84);
+    }
+    .summary-surface .summary-item:not(:first-child)::before {
+      background: rgba(244, 235, 219, 0.12);
+    }
+    .tone {
+      background:
+        linear-gradient(180deg, rgba(244, 235, 219, 0.92), rgba(255, 250, 240, 0.84));
+      border-color: rgba(143, 123, 72, 0.14);
+    }
     .actions {
       margin-top: 14px;
       display: flex;
@@ -288,34 +373,116 @@
     }
     .icon-card {
       display: grid;
-      gap: 10px;
+      gap: 16px;
+      align-content: start;
+      padding: 24px;
+      min-height: 100%;
     }
     .icon-title {
       display: grid;
-      grid-template-columns: 46px minmax(0, 1fr);
-      gap: 12px;
-      align-items: center;
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
     }
     .icon-lockup {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: rgba(43, 107, 79, 0.12);
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(255, 253, 248, 0.9);
+      border: 1px solid rgba(23, 48, 57, 0.08);
       color: var(--green);
     }
+    .icon-lockup img,
     .icon-lockup svg {
-      width: 24px;
-      height: 24px;
+      width: 42px;
+      height: 42px;
       display: block;
+      object-fit: contain;
+    }
+
+    .icon-copy {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .icon-copy h3 {
+      font-size: clamp(1.22rem, 1.28vw, 1.5rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+    }
+
+    .card-grid .card:nth-child(1) {
+      background: rgba(241, 228, 220, 0.92);
+    }
+
+    .card-grid .card:nth-child(2) {
+      background: rgba(228, 236, 218, 0.92);
+    }
+
+    .card-grid .card:nth-child(3) {
+      background: rgba(249, 239, 205, 0.94);
+    }
+
+    .detail-grid .card:nth-child(odd) {
+      background: rgba(255, 252, 247, 0.82);
+    }
+
+    .detail-grid .card:nth-child(even) {
+      background: rgba(247, 244, 235, 0.84);
+    }
+
+    .detail-grid .card:nth-child(1),
+    .detail-grid .card:nth-child(2),
+    .detail-grid .card:nth-child(3) {
+      grid-column: span 4;
+    }
+
+    .detail-grid .card:nth-child(4),
+    .detail-grid .card:nth-child(5) {
+      grid-column: span 6;
+    }
+
+    .detail-grid .card:nth-child(1) .icon-lockup {
+      background: rgba(239, 231, 224, 0.96);
+    }
+
+    .detail-grid .card:nth-child(2) .icon-lockup {
+      background: rgba(226, 235, 219, 0.96);
+    }
+
+    .detail-grid .card:nth-child(3) .icon-lockup {
+      background: rgba(244, 230, 221, 0.96);
+    }
+
+    .detail-grid .card:nth-child(4) .icon-lockup {
+      background: rgba(248, 239, 204, 0.96);
+    }
+
+    .detail-grid .card:nth-child(5) .icon-lockup {
+      background: rgba(236, 230, 221, 0.96);
     }
     @media (max-width: 900px) {
       .hero-grid,
-      .card-grid,
       .detail-grid {
         grid-template-columns: 1fr;
+      }
+      .summary-strip {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .summary-item {
+        padding: 0;
+      }
+      .summary-item:not(:first-child)::before {
+        inset: auto 0 auto 0;
+        top: -7px;
+        bottom: auto;
+        width: auto;
+        height: 1px;
       }
       .hero {
         min-height: auto;
@@ -331,6 +498,25 @@
       .footprint-band {
         margin-top: 46px;
         max-width: none;
+      }
+      .detail-grid .card:nth-child(1),
+      .detail-grid .card:nth-child(2),
+      .detail-grid .card:nth-child(3),
+      .detail-grid .card:nth-child(4),
+      .detail-grid .card:nth-child(5) {
+        grid-column: auto;
+      }
+      .icon-title {
+        grid-template-columns: 60px minmax(0, 1fr);
+      }
+      .icon-lockup {
+        width: 60px;
+        height: 60px;
+      }
+      .icon-lockup img,
+      .icon-lockup svg {
+        width: 34px;
+        height: 34px;
       }
     }
   </style>
@@ -378,19 +564,35 @@
       </div>
     </section>
 
-    <section class="surface section">
-      <div class="card-grid">
-        <article class="card">
+    <section class="surface section summary-surface">
+      <div class="summary-lead">
+        <div class="mini">Why, role, and horizon</div>
+        <h2 class="display">ABA is being built to give the sector a credible centre of gravity.</h2>
+      </div>
+      <div class="summary-strip">
+        <article class="summary-item">
+          <div class="summary-kicker">
+            <b>01</b>
+            <div class="mini">Why ABA exists</div>
+          </div>
           <h3>The problem</h3>
-          <p style="margin-top: 10px;">Companies working in biologicals are navigating registration pathways, market access questions, and credibility challenges without a shared structure to draw on. Each company carries the full weight alone.</p>
+          <p>Companies working in biologicals are navigating registration pathways, market access questions, and credibility challenges without a shared structure to draw on. Each company carries the full weight alone.</p>
         </article>
-        <article class="card">
+        <article class="summary-item">
+          <div class="summary-kicker">
+            <b>02</b>
+            <div class="mini">System role</div>
+          </div>
           <h3>What ABA provides</h3>
-          <p style="margin-top: 10px;">Membership, shared knowledge, structured registration intelligence, and a trusted review layer that turns what members know into what the sector can credibly say — without exposing private company detail.</p>
+          <p>Membership, shared knowledge, structured registration intelligence, and a trusted review layer that turns what members know into what the sector can credibly say without exposing private company detail.</p>
         </article>
-        <article class="card">
+        <article class="summary-item">
+          <div class="summary-kicker">
+            <b>03</b>
+            <div class="mini">Longer horizon</div>
+          </div>
           <h3>The ambition</h3>
-          <p style="margin-top: 10px;">A biologicals sector in Africa that is well-represented, easier to navigate, and taken seriously by the regulatory and policy environments it operates within.</p>
+          <p>A biologicals sector in Africa that is well-represented, easier to navigate, and taken seriously by the regulatory and policy environments it operates within.</p>
         </article>
       </div>
     </section>
@@ -405,45 +607,60 @@
             <div class="icon-lockup" aria-hidden="true">
               <img src="./assets/symbols/sector-legitimacy.svg" alt="">
             </div>
-            <h3>A trusted intermediary — not just a network</h3>
+            <div class="icon-copy">
+              <div class="mini">Intermediary layer</div>
+              <h3>A trusted intermediary — not just a network</h3>
+            </div>
           </div>
-          <p style="margin-top: 8px;">ABA sits between what members know privately and what the sector can say publicly. That review layer is what makes shared intelligence usable — it protects sensitive detail while making the aggregate credible.</p>
+          <p>ABA sits between what members know privately and what the sector can say publicly. That review layer is what makes shared intelligence usable — it protects sensitive detail while making the aggregate credible.</p>
         </article>
         <article class="card icon-card">
           <div class="icon-title">
             <div class="icon-lockup" aria-hidden="true">
               <img src="./assets/symbols/registration-tracker.svg" alt="">
             </div>
-            <h3>Registration support for members</h3>
+            <div class="icon-copy">
+              <div class="mini">Evidence engine</div>
+              <h3>Registration support for members</h3>
+            </div>
           </div>
-          <p style="margin-top: 8px;">Members can submit registration records to ABA. ABA structures them, tracks their status, and uses them to provide member-specific Registrar-office advocacy — the kind that requires organised, reviewed evidence.</p>
+          <p>Members can submit registration records to ABA. ABA structures them, tracks their status, and uses them to provide member-specific Registrar-office advocacy — the kind that requires organised, reviewed evidence.</p>
         </article>
         <article class="card icon-card">
           <div class="icon-title">
             <div class="icon-lockup" aria-hidden="true">
               <img src="./assets/symbols/advocacy.svg" alt="">
             </div>
-            <h3>Sector-wide advocacy grounded in data</h3>
+            <div class="icon-copy">
+              <div class="mini">Collective voice</div>
+              <h3>Sector-wide advocacy grounded in data</h3>
+            </div>
           </div>
-          <p style="margin-top: 8px;">Aggregated registration signals — delays, recurring bottlenecks, category-level patterns — give ABA something to say to regulators and policymakers that no individual company can say alone.</p>
+          <p>Aggregated registration signals — delays, recurring bottlenecks, category-level patterns — give ABA something to say to regulators and policymakers that no individual company can say alone.</p>
         </article>
         <article class="card icon-card">
           <div class="icon-title">
             <div class="icon-lockup" aria-hidden="true">
               <img src="./assets/symbols/evidence-knowledge.svg" alt="">
             </div>
-            <h3>A shared knowledge base for the category</h3>
+            <div class="icon-copy">
+              <div class="mini">Knowledge layer</div>
+              <h3>A shared knowledge base for the category</h3>
+            </div>
           </div>
-          <p style="margin-top: 8px;">The Biologicals Explorer makes products, crop contexts, evidence records, MRLs, and regulatory standards accessible in one place — structured for the people who need to use them, not just store them.</p>
+          <p>The Biologicals Explorer makes products, crop contexts, evidence records, MRLs, and regulatory standards accessible in one place — structured for the people who need to use them, not just store them.</p>
         </article>
         <article class="card icon-card">
           <div class="icon-title">
             <div class="icon-lockup" aria-hidden="true">
               <img src="./assets/symbols/membership-join-aba.svg" alt="">
             </div>
-            <h3>Membership that fits different roles</h3>
+            <div class="icon-copy">
+              <div class="mini">Participation model</div>
+              <h3>Membership that fits different roles</h3>
+            </div>
           </div>
-          <p style="margin-top: 8px;">Industry members, technical contributors, and institutional stakeholders each have a route into ABA. Structure is designed to be proportionate to role — not a single flat membership for everyone.</p>
+          <p>Industry members, technical contributors, and institutional stakeholders each have a route into ABA. Structure is designed to be proportionate to role — not a single flat membership for everyone.</p>
         </article>
       </div>
     </section>

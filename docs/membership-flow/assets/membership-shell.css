@@ -1,0 +1,537 @@
+:root {
+  --membership-bg: #f5f0e3;
+  --membership-paper: rgba(255, 251, 244, 0.97);
+  --membership-paper-soft: rgba(255, 255, 255, 0.84);
+  --membership-paper-strong: rgba(255, 253, 249, 0.98);
+  --membership-line: rgba(23, 48, 57, 0.1);
+  --membership-line-strong: rgba(23, 48, 57, 0.18);
+  --membership-ink: #173039;
+  --membership-muted: #5c6f73;
+  --membership-green: #21483f;
+  --membership-green-strong: #173b35;
+  --membership-clay: #b85d3a;
+  --membership-clay-soft: rgba(243, 223, 210, 0.82);
+  --membership-olive: #587144;
+  --membership-olive-soft: rgba(227, 236, 217, 0.88);
+  --membership-ochre: #b38724;
+  --membership-ochre-soft: rgba(249, 239, 204, 0.9);
+  --membership-shadow: 0 18px 44px -34px rgba(24, 34, 31, 0.3);
+}
+
+body {
+  background: var(--membership-bg) !important;
+  color: var(--membership-ink);
+}
+
+.shell {
+  width: min(1320px, calc(100vw - 32px));
+  padding-bottom: 52px;
+}
+
+.surface {
+  background: var(--membership-paper) !important;
+  border: 1px solid var(--membership-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.hero,
+.section {
+  margin-top: 16px !important;
+  border-radius: 34px !important;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 48px) !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.12), transparent 28%),
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 241, 232, 0.94)) !important;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto auto -28% -6%;
+  width: clamp(160px, 24vw, 320px);
+  height: clamp(160px, 24vw, 320px);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(32, 59, 53, 0.06) 0%, rgba(32, 59, 53, 0.03) 48%, transparent 72%);
+  pointer-events: none;
+}
+
+.hero-grid,
+.section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1,
+.section h2,
+.section h3 {
+  color: #203b44;
+}
+
+.hero h1 {
+  max-width: none;
+  font-size: clamp(2.6rem, 5.3vw, 4.4rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.06em !important;
+  font-weight: 900 !important;
+}
+
+.hero .eyebrow {
+  color: var(--membership-green) !important;
+}
+
+.hero p,
+.section p,
+.section li,
+.brand-copy span {
+  color: var(--membership-muted) !important;
+}
+
+.hero p {
+  font-size: 1.08rem !important;
+  line-height: 1.6 !important;
+}
+
+.nav a.active,
+.nav a:hover {
+  color: var(--membership-green) !important;
+}
+
+.nav-cta,
+.button.primary {
+  background: var(--membership-green-strong) !important;
+  color: #f7f4ec !important;
+}
+
+.button.secondary {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(23, 48, 57, 0.12) !important;
+  color: #203b44 !important;
+}
+
+.button,
+.nav-cta {
+  min-height: 46px !important;
+  border-radius: 16px !important;
+}
+
+.membership-index .hero {
+  padding-bottom: 40px !important;
+}
+
+.membership-index .hero-grid {
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.74fr) !important;
+  gap: 24px !important;
+  align-items: center !important;
+}
+
+.membership-index .hero h1 {
+  font-size: clamp(2.3rem, 4.2vw, 3.85rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.058em !important;
+}
+
+.membership-index .hero-copy {
+  max-width: none;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-right: 8px;
+}
+
+.membership-index .hero-aside {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  align-self: center;
+  padding: 20px 20px 22px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(24, 51, 47, 0.98), rgba(33, 72, 63, 0.95));
+  border: 1px solid rgba(244, 235, 219, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.membership-index .hero-aside > * {
+  margin: 0;
+}
+
+.membership-index .hero-aside .mini {
+  color: rgba(246, 239, 226, 0.82) !important;
+}
+
+.membership-index .hero-aside h2 {
+  color: #f5efe2 !important;
+  font-size: clamp(1.34rem, 1.28rem + 0.48vw, 1.82rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.membership-index .hero-aside p {
+  color: rgba(247, 242, 233, 0.92) !important;
+}
+
+.membership-index .hero-points {
+  display: grid;
+  gap: 10px;
+}
+
+.membership-index .hero-point {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(244, 235, 219, 0.15);
+}
+
+.membership-index .hero-point:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.membership-index .hero-point-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(246, 239, 226, 0.15);
+  color: #ddb556;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.membership-index .hero-point-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.membership-index .hero-point-copy strong {
+  color: #f5efe2;
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.membership-index .hero-point-copy p {
+  font-size: 0.95rem !important;
+  line-height: 1.48 !important;
+}
+
+.membership-index .hero-actions {
+  gap: 14px !important;
+}
+
+.membership-index .lede {
+  max-width: none !important;
+  font-size: 1.02rem !important;
+  line-height: 1.6 !important;
+}
+
+.membership-index .section {
+  padding: clamp(24px, 3.6vw, 38px) !important;
+}
+
+.membership-index .card,
+.membership-index .panel,
+.membership-index .route-card,
+.membership-index .callout,
+.membership-index .compact-list li {
+  background: var(--membership-paper-soft) !important;
+  border: 1px solid var(--membership-line) !important;
+  box-shadow: none !important;
+}
+
+.membership-index .card,
+.membership-index .panel {
+  padding: 20px !important;
+  border-radius: 22px !important;
+}
+
+.membership-index .value-grid .card:nth-child(1),
+.membership-index .compare-grid .card:nth-child(1) {
+  background: var(--membership-clay-soft) !important;
+}
+
+.membership-index .value-grid .card:nth-child(2),
+.membership-index .compare-grid .card:nth-child(2) {
+  background: var(--membership-olive-soft) !important;
+}
+
+.membership-index .value-grid .card:nth-child(3),
+.membership-index .compare-grid .card:nth-child(3) {
+  background: var(--membership-ochre-soft) !important;
+}
+
+.membership-index .value-grid .card:nth-child(4) {
+  background: rgba(230, 235, 231, 0.88) !important;
+}
+
+.membership-index .route-card {
+  padding: 24px !important;
+  border-radius: 24px !important;
+  gap: 16px !important;
+}
+
+.membership-index .route-card.full {
+  background: linear-gradient(180deg, rgba(245, 229, 220, 0.98), rgba(255, 247, 241, 0.94)) !important;
+}
+
+.membership-index .route-card.associate {
+  background: linear-gradient(180deg, rgba(228, 237, 219, 0.98), rgba(246, 250, 241, 0.94)) !important;
+}
+
+.membership-index .route-card.observer {
+  background: linear-gradient(180deg, rgba(249, 238, 198, 0.98), rgba(255, 250, 232, 0.94)) !important;
+}
+
+.membership-index .route-card.full h3 {
+  color: var(--membership-clay) !important;
+}
+
+.membership-index .route-card.associate h3 {
+  color: #35556d !important;
+}
+
+.membership-index .route-card.observer h3 {
+  color: var(--membership-ochre) !important;
+}
+
+.membership-index .compact-list li {
+  padding: 16px 18px !important;
+  border-radius: 18px !important;
+}
+
+.membership-index .callout {
+  background: rgba(244, 236, 220, 0.84) !important;
+  border-radius: 26px !important;
+  padding: 22px !important;
+}
+
+.membership-form .hero {
+  padding-block: clamp(26px, 3.5vw, 40px) !important;
+}
+
+.membership-form .hero-grid {
+  gap: 12px !important;
+}
+
+.membership-form .section {
+  padding: clamp(24px, 3.4vw, 34px) !important;
+}
+
+.membership-form .section > form.stack {
+  gap: 18px !important;
+}
+
+.membership-form .form-section,
+.membership-form .summary,
+.membership-form .field,
+.membership-form .choice {
+  background: var(--membership-paper-soft) !important;
+  border: 1px solid var(--membership-line) !important;
+  box-shadow: none !important;
+}
+
+.membership-form .form-section {
+  padding: 22px !important;
+  gap: 14px !important;
+  border-radius: 24px !important;
+}
+
+.membership-form .field {
+  padding: 14px !important;
+  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+}
+
+.membership-form .field label {
+  color: #456067 !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+.membership-form input,
+.membership-form select,
+.membership-form textarea {
+  border: 1px solid rgba(23, 48, 57, 0.14) !important;
+  background: rgba(255, 253, 249, 0.96) !important;
+  color: var(--membership-ink) !important;
+  border-radius: 14px !important;
+  min-height: 52px;
+  padding: 12px 14px !important;
+}
+
+.membership-form textarea {
+  min-height: 132px;
+}
+
+.membership-form .choice-grid {
+  gap: 12px !important;
+}
+
+.membership-form .choice {
+  min-height: 54px !important;
+  align-items: center !important;
+  padding: 14px 16px !important;
+  border-radius: 18px !important;
+  background: rgba(255, 253, 249, 0.94) !important;
+  color: #29434d !important;
+  font-weight: 600;
+}
+
+.membership-form .choice input {
+  accent-color: var(--membership-green);
+}
+
+.membership-form .choice:has(input:checked) {
+  border-color: rgba(33, 72, 63, 0.32) !important;
+  background: rgba(238, 244, 237, 0.98) !important;
+}
+
+@media (max-width: 1040px) {
+  .membership-index .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .membership-index .hero-aside {
+    padding: 22px;
+  }
+}
+
+.membership-form .summary-row {
+  gap: 18px !important;
+}
+
+.membership-form .summary-toggle {
+  min-width: 38px !important;
+  min-height: 38px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 253, 249, 0.96) !important;
+  border: 1px solid rgba(23, 48, 57, 0.12) !important;
+  color: var(--membership-green) !important;
+}
+
+.membership-form .section-head {
+  gap: 8px !important;
+}
+
+.membership-form .section-head h2 {
+  font-size: clamp(1.5rem, 2.1vw, 2.05rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.membership-form .section-label,
+.membership-form .eyebrow {
+  font-weight: 900 !important;
+}
+
+.membership-form .hint {
+  color: #5f7377 !important;
+  font-size: 0.92rem !important;
+}
+
+.membership-form .success,
+.membership-form .summary {
+  border-radius: 22px !important;
+}
+
+.membership-form .summary {
+  padding: 22px !important;
+}
+
+.membership-form .success {
+  background: rgba(228, 237, 219, 0.98) !important;
+  border: 1px solid rgba(88, 113, 68, 0.18) !important;
+  color: #29434d !important;
+}
+
+.membership-form.route-full {
+  --route-accent: var(--membership-clay);
+  --route-accent-soft: var(--membership-clay-soft);
+}
+
+.membership-form.route-associate {
+  --route-accent: var(--membership-olive);
+  --route-accent-soft: var(--membership-olive-soft);
+}
+
+.membership-form.route-observer {
+  --route-accent: var(--membership-ochre);
+  --route-accent-soft: var(--membership-ochre-soft);
+}
+
+.membership-form[class*="route-"] .hero {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in oklab, var(--route-accent) 18%, white), transparent 28%),
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 241, 232, 0.94)) !important;
+}
+
+.membership-form[class*="route-"] .hero .eyebrow,
+.membership-form[class*="route-"] .section-label {
+  color: var(--route-accent) !important;
+}
+
+.membership-form[class*="route-"] details.form-section[open] {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--route-accent-soft) 42%, white), rgba(255, 253, 249, 0.98)) !important;
+}
+
+.membership-form[class*="route-"] .button.primary {
+  background: var(--membership-green-strong) !important;
+}
+
+.membership-form .actions,
+.membership-form .button-row {
+  gap: 12px !important;
+}
+
+.membership-form .mark img,
+.membership-index .mark img {
+  content: normal;
+}
+
+@media (max-width: 1040px) {
+  .membership-index .value-grid,
+  .membership-index .criteria-grid,
+  .membership-index .process-grid,
+  .membership-index .fee-grid,
+  .membership-index .path-grid,
+  .membership-form .field-grid,
+  .membership-form .dual-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .shell {
+    width: min(100vw - 20px, 1320px);
+  }
+
+  .hero,
+  .section {
+    border-radius: 26px !important;
+  }
+
+  .membership-form .form-section,
+  .membership-index .route-card,
+  .membership-index .card,
+  .membership-index .panel {
+    border-radius: 20px !important;
+  }
+
+  .membership-form .choice-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -6,8 +6,9 @@
   <title>ABA Membership | Find the Right Membership Route</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../site/assets/public-shell.css">
+  <link rel="stylesheet" href="./assets/membership-shell.css">
   <script defer src="../site/assets/public-shell.js"></script>
   <style>
     :root {
@@ -290,6 +291,116 @@
       margin-top: 16px;
     }
 
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 24px 34px;
+      align-items: start;
+    }
+
+    .benefit-intro {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      padding-right: 18px;
+    }
+
+    .benefit-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(244, 235, 219, 0.9);
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      color: color-mix(in oklab, var(--muted) 84%, white);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .benefit-note::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(178, 74, 50, 0.9), rgba(200, 155, 44, 0.9));
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .benefit-item {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px 0 18px;
+      border-top: 1px solid rgba(73, 95, 82, 0.14);
+    }
+
+    .benefit-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .benefit-num {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--muted) 80%, white);
+      padding-top: 4px;
+    }
+
+    .benefit-copy {
+      display: grid;
+      gap: 8px;
+    }
+
+    .benefit-copy h3 {
+      font-size: clamp(1.18rem, 1.2vw, 1.42rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+    }
+
+    .benefit-copy p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .benefit-footer {
+      margin-top: 18px;
+      padding: 16px 18px 18px;
+      border-top: 0;
+      display: grid;
+      gap: 8px;
+      max-width: none;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.15), transparent 34%),
+        linear-gradient(180deg, rgba(24, 51, 47, 0.98), rgba(33, 72, 63, 0.94));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .benefit-footer strong {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(246, 239, 226, 0.82);
+    }
+
+    .benefit-footer p {
+      color: rgba(247, 243, 235, 0.96);
+      font-size: 1.01rem;
+      line-height: 1.55;
+    }
+
     .panel,
     .card,
     .route-card {
@@ -434,6 +545,7 @@
       .hero-grid,
       .compare-grid,
       .value-grid,
+      .benefit-grid,
       .criteria-grid,
       .path-grid,
       .process-grid,
@@ -466,14 +578,19 @@
         width: 40px;
         height: 40px;
       }
+
+      .benefit-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
     }
   </style>
 </head>
-<body>
+<body class="membership-index">
   <main class="shell">
     <header class="surface topbar">
       <div class="brand">
-        <div class="mark"><img src="../site/assets/aba-logo-new.png" alt="African Biologicals Alliance logo"></div>
+        <div class="mark"><img src="../site/assets/aba-route1-horizontal.png" alt="African Biologicals Alliance logo"></div>
         <div class="brand-copy">
           <strong>African Biologicals Alliance</strong>
           <span>Strengthening Africa's biologicals sector through voice, visibility, and market access.</span>
@@ -494,39 +611,85 @@
     <section class="surface hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Join ABA for a stronger biologicals sector in Africa.</h1>
-          <p class="lede">ABA membership gives the biologicals supplychain and stakeholders across Africa stronger representation, better regulatory visibility, and a more credible operating environment for local biologicals.</p>
+          <h1>Join ABA for a stronger African biologicals sector.</h1>
+          <p class="lede">ABA membership gives organisations across Africa stronger representation, better regulatory visibility, and a more credible operating environment for local biologicals.</p>
           <div class="hero-actions">
             <a class="button primary" href="#routes">Find your membership</a>
             <a class="button secondary" href="#process">See how application works</a>
           </div>
         </div>
+        <aside class="hero-aside" aria-label="Alliance role">
+          <div class="mini">Alliance role</div>
+          <h2>Membership gives the sector shared standing.</h2>
+          <p>It is how ABA turns participation into legitimacy, structured involvement, and practical connection to evidence and visibility.</p>
+          <div class="hero-points">
+            <article class="hero-point">
+              <div class="hero-point-num">01</div>
+              <div class="hero-point-copy">
+                <strong>Collective standing</strong>
+                <p>Membership creates a shared vehicle for representation, legitimacy, and coordinated voice.</p>
+              </div>
+            </article>
+            <article class="hero-point">
+              <div class="hero-point-num">02</div>
+              <div class="hero-point-copy">
+                <strong>Structured participation</strong>
+                <p>Different routes fit market actors, technical contributors, and observer institutions without flattening them together.</p>
+              </div>
+            </article>
+            <article class="hero-point">
+              <div class="hero-point-num">03</div>
+              <div class="hero-point-copy">
+                <strong>Practical connection</strong>
+                <p>For full members, the relationship can continue into registration support and shared intelligence where relevant.</p>
+              </div>
+            </article>
+          </div>
+        </aside>
       </div>
     </section>
 
     <section class="surface section">
-      <h2>Why join ABA.</h2>
-      <div class="value-grid" style="margin-top: 18px;">
-        <article class="card">
-          <h3>Representation and policy voice</h3>
-          <p style="margin-top: 10px;">ABA gives independent African biologicals participants a stronger shared presence in regulatory and policy spaces than any one organisation can carry alone.</p>
-        </article>
-        <article class="card">
-          <h3>Compliance and registration support</h3>
-          <p style="margin-top: 10px;">Members gain access to registration guidance, visibility into product pathways, and a more structured basis for support and advocacy.</p>
-        </article>
-        <article class="card">
-          <h3>Knowledge and capability</h3>
-          <p style="margin-top: 10px;">Training, briefings, templates, and biologicals intelligence help members make stronger decisions and strengthen their teams.</p>
-        </article>
-        <article class="card">
-          <h3>Credibility and collaboration</h3>
-          <p style="margin-top: 10px;">Membership helps create a more visible, better organised, and more credible sector with room for local producers, researchers, service providers, and aligned institutions.</p>
-        </article>
-        <article class="card">
-          <h3>Independent of BigAg players</h3>
-          <p style="margin-top: 10px;">ABA is not linked to big industry and is creating a new operating model in Africa for Africa.</p>
-        </article>
+      <div class="benefit-grid">
+        <div class="benefit-intro">
+          <span class="benefit-note">Membership value</span>
+          <h2>Why join ABA.</h2>
+          <p>Membership is not just a listing or a badge. It creates a stronger shared vehicle for influence, practical registration support, and a more credible operating environment for independent African biologicals.</p>
+          <div class="benefit-footer">
+            <strong>Operating principle</strong>
+            <p>ABA is being built as an independent African alliance, not a neutral directory and not an extension of dominant BigAg interests.</p>
+          </div>
+        </div>
+        <div class="benefit-list">
+          <article class="benefit-item">
+            <div class="benefit-num">01</div>
+            <div class="benefit-copy">
+              <h3>Representation and policy voice</h3>
+              <p>ABA gives independent African biologicals participants a stronger shared presence in regulatory and policy spaces than any one organisation can carry alone.</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <div class="benefit-num">02</div>
+            <div class="benefit-copy">
+              <h3>Compliance and registration support</h3>
+              <p>Members gain access to registration guidance, visibility into product pathways, and a more structured basis for support and advocacy.</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <div class="benefit-num">03</div>
+            <div class="benefit-copy">
+              <h3>Knowledge and capability</h3>
+              <p>Training, briefings, templates, and biologicals intelligence help members make stronger decisions and strengthen their teams.</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <div class="benefit-num">04</div>
+            <div class="benefit-copy">
+              <h3>Credibility and collaboration</h3>
+              <p>Membership helps create a more visible, better organised, and more credible sector with room for local producers, researchers, service providers, and aligned institutions.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 

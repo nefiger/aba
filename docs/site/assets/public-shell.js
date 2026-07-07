@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const rel = {
     logo: inSite ? "./assets/aba-route1-compact.png" : "../site/assets/aba-route1-compact.png",
+    logoHorizontal: inSite ? "./assets/aba-route1-horizontal.png" : "../site/assets/aba-route1-horizontal.png",
     home: inSite ? "./index.html" : "../site/index.html",
     about: inSite ? "./about.html" : "../site/about.html",
     membership: inMembership ? "./index.html" : "../membership-flow/index.html",
@@ -19,8 +20,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".mark").forEach((mark) => {
     if (!mark.querySelector("img")) {
-      mark.innerHTML = `<img src="${rel.logo}" alt="African Biologicals Alliance logo">`;
+      mark.innerHTML = `<img src="${rel.logoHorizontal}" alt="African Biologicals Alliance logo">`;
     }
+  });
+
+  document.querySelectorAll(".mark img").forEach((img) => {
+    img.setAttribute("src", rel.logoHorizontal);
+    img.setAttribute("alt", "African Biologicals Alliance logo");
+  });
+
+  document.querySelectorAll(".brand-copy").forEach((copy) => {
+    copy.innerHTML = `
+      <strong>Collective voice. Biological transition. African-led growth.</strong>
+      <span>Membership, registration intelligence, and biologicals knowledge for a stronger agricultural transition.</span>
+    `;
+  });
+
+  const activeHref = inSite
+    ? (path.endsWith("/about.html")
+        ? rel.about
+        : path.endsWith("/updates.html")
+          ? rel.updates
+          : path.endsWith("/governance-and-data.html")
+            ? rel.about
+            : rel.home)
+    : inMembership
+      ? rel.membership
+      : rel.explorer;
+
+  document.querySelectorAll(".nav a").forEach((link) => {
+    const href = link.getAttribute("href");
+    link.classList.toggle("active", href === activeHref);
   });
 
   document.querySelectorAll(".nav-wrap > .nav-cta").forEach((cta) => {
