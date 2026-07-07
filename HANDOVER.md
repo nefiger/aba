@@ -13,6 +13,11 @@ The current priority is not broad new feature spread. It is:
 - making the semantic visual language more intentional
 - keeping repo notes aligned with what the prototype is actually trying to become
 
+As of 2026-07-03, the current judgment is:
+- the public core pass across homepage, About, and membership entry surfaces is good enough for now
+- Explorer / database work remains valuable, but should stay secondary to spec and handover coherence
+- tracker work remains out of scope unless it is needed to explain the broader ABA system model in notes
+
 Tracker-heavy work is currently parked unless it is needed to explain ABA's product model in notes.
 
 Current sequencing decision:
@@ -136,6 +141,17 @@ The prototype implementation approach should now assume:
 - no real database for this tranche
 - one canonical mock data layer reused across public forms, membership/admin views, and scenario screens
 - realistic fake records and stateful demos rather than persistent backend behavior
+
+Current branch state after cleanup:
+- local worktree is back to a simple `main` checkout
+- merged local branches used for the recent ABA passes have been removed
+- merged remote branches used for those passes have also been removed
+- the only remaining remote `codex/*` branches are older reference branches:
+  `codex/branch-housekeeping-notes`
+  `codex/product-intake-public-form`
+  `codex/product-intake-public-form-notes`
+  `codex/product-intake-public-form-v3`
+- treat those remaining remote branches as historical/reference context, not as the active work line
 
 ---
 
@@ -263,6 +279,7 @@ The prototype implementation approach should now assume:
 - `docs/site/index.html`, `docs/membership-flow/index.html`, and `docs/database/index.html` still need deeper page-specific design passes rather than only consistency edits
 - Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
 - A full design system is still intentionally deferred; the current requirement is disciplined consistency and reusable conventions, not component-library implementation
+- For the next agent, do not reopen homepage / About / membership-core refinement as the immediate priority unless the user explicitly asks; those surfaces are currently considered good enough to move past
 
 ### Prototype-as-spec data-model work
 
@@ -282,6 +299,10 @@ The prototype implementation approach should now assume:
 - The prototype should not be allowed to drift into separate public-page logic and admin/workflow logic that describe different systems
 - Prototype implementation should stay mock-data-first:
   one canonical in-repo data layer, no real database, no fake backend complexity unless the user explicitly asks for it
+- If another agent picks this up, the cleanest next task is repo-note alignment and takeover clarity, not a fresh UI pass:
+  `docs/requirements/aba-prototype-system-model.md`
+  `docs/requirements/aba-visual-language-conventions.md`
+  `HANDOVER.md`
 
 ### Sequencing constraint
 
