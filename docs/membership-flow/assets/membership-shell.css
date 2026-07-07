@@ -145,6 +145,97 @@ body {
   padding-right: 8px;
 }
 
+.membership-index .hero-visual-note {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: rgba(255, 253, 248, 0.84);
+  border: 1px solid rgba(23, 48, 57, 0.1);
+}
+
+.membership-index .hero-visual-mark {
+  position: relative;
+  height: 52px;
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, rgba(32, 59, 68, 0.74), rgba(90, 107, 58, 0.82)) center / calc(100% - 52px) 8px no-repeat,
+    radial-gradient(circle at 0 50%, rgba(32, 59, 68, 0.08), transparent 72%);
+  overflow: hidden;
+}
+
+.membership-index .hero-visual-mark::before,
+.membership-index .hero-visual-mark::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 10px;
+  border-radius: 999px;
+  opacity: 0.95;
+}
+
+.membership-index .hero-visual-mark::before {
+  top: 14px;
+  background: linear-gradient(90deg, rgba(178, 74, 50, 0.88), rgba(200, 155, 44, 0.88));
+}
+
+.membership-index .hero-visual-mark::after {
+  bottom: 14px;
+  background: linear-gradient(90deg, rgba(90, 107, 58, 0.9), rgba(32, 59, 68, 0.94));
+}
+
+.membership-index .hero-visual-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.membership-index .hero-visual-copy strong {
+  color: #21483f;
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.membership-index .hero-visual-copy p {
+  color: #607377 !important;
+  font-size: 0.94rem !important;
+  line-height: 1.48 !important;
+}
+
+.membership-index .hero-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px !important;
+  align-items: stretch;
+}
+
+.membership-index .hero-action-card {
+  display: grid;
+  gap: 10px;
+  padding: 16px 16px 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(23, 48, 57, 0.1);
+  background: rgba(255, 253, 248, 0.88);
+}
+
+.membership-index .hero-action-card strong {
+  color: #203b44;
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.membership-index .hero-action-card p {
+  color: #607377 !important;
+  font-size: 0.94rem !important;
+  line-height: 1.5 !important;
+}
+
+.membership-index .hero-action-card .button {
+  justify-self: start;
+}
+
 .membership-index .hero-aside {
   display: grid;
   gap: 14px;
@@ -225,10 +316,6 @@ body {
 .membership-index .hero-point-copy p {
   font-size: 0.95rem !important;
   line-height: 1.48 !important;
-}
-
-.membership-index .hero-actions {
-  gap: 14px !important;
 }
 
 .membership-index .lede {
@@ -401,6 +488,10 @@ body {
 
 @media (max-width: 1040px) {
   .membership-index .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .membership-index .hero-actions {
     grid-template-columns: 1fr !important;
   }
 
