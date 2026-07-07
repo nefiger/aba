@@ -550,24 +550,517 @@
       color: color-mix(in oklab, var(--muted) 78%, white);
     }
 
-    .process-step {
+    .process-shell {
       display: grid;
-      grid-template-columns: 44px minmax(0, 1fr);
-      gap: 12px;
+      gap: 22px;
+    }
+
+    .process-intro {
+      display: grid;
+      gap: 10px;
+    }
+
+    .process-track {
+      display: grid;
+      gap: 22px;
+      padding: 28px 28px 30px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(200, 155, 44, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(252, 248, 239, 0.98));
+    }
+
+    .process-rail {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+      padding-right: 42px;
+    }
+
+    .process-step {
+      --accent: #5a6b3a;
+      position: relative;
+      padding-top: 96px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .process-step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50px;
+      width: calc(100% + 28px);
+      height: 3px;
+      background: color-mix(in srgb, var(--accent) 82%, #203b44 18%);
+      transform: translateY(-50%);
+    }
+
+    .process-step:last-child::before {
+      width: calc(100% + 18px);
+    }
+
+    .process-step:last-child::after {
+      content: "";
+      position: absolute;
+      right: -26px;
+      top: 50px;
+      width: 0;
+      height: 0;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-left: 18px solid #203b44;
+      transform: translateY(-50%);
+    }
+
+    .process-step.stage-3 {
+      --accent: #c89b2c;
+    }
+
+    .process-step.stage-4 {
+      --accent: #7b8e92;
+    }
+
+    .process-step-number {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--accent);
+      font-size: clamp(1.7rem, 2vw, 2.35rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .process-step-node {
+      position: absolute;
+      left: 0;
+      top: 50px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 4px solid var(--accent);
+      background: rgba(255, 253, 248, 1);
+      box-shadow: 0 0 0 6px rgba(245, 240, 227, 1);
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .process-step h3 {
+      font-size: clamp(1.12rem, 1.1vw, 1.45rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #203b44;
+    }
+
+    .process-step p {
+      margin: 0;
+      font-size: 0.99rem;
+      line-height: 1.55;
+    }
+
+    .process-note-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
       align-items: start;
     }
 
-    .process-step b {
-      width: 44px;
-      height: 44px;
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--green-soft);
-      color: var(--green-deep);
-      font-size: 13px;
+    .process-branch-note {
+      grid-column: 2 / span 1;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      padding-top: 6px;
+    }
+
+    .process-branch-note strong,
+    .process-outcome-band strong {
+      font-size: 11px;
       font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #5a6b3a;
+    }
+
+    .process-branch-graphic {
+      position: relative;
+      min-height: 72px;
+      padding-left: 78px;
+    }
+
+    .process-branch-graphic::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      width: 54px;
+      height: 40px;
+      border-right: 3px solid #203b44;
+      border-top: 3px solid #203b44;
+      border-bottom: 2px dotted rgba(90, 107, 58, 0.82);
+      border-radius: 0 26px 26px 0;
+    }
+
+    .process-branch-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #5a6b3a;
+    }
+
+    .process-branch-option::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 3px solid currentColor;
+      background: rgba(255, 253, 248, 1);
+      box-shadow: 0 0 0 4px rgba(245, 240, 227, 1);
+      flex: 0 0 auto;
+    }
+
+    .process-side-note {
+      grid-column: 3 / span 1;
+      position: relative;
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(200, 155, 44, 0.58);
+      background: rgba(255, 251, 244, 0.98);
+    }
+
+    .process-side-note::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: -18px;
+      width: 2px;
+      height: 18px;
+      background: repeating-linear-gradient(to bottom, rgba(200, 155, 44, 0.9) 0 5px, transparent 5px 10px);
+    }
+
+    .process-side-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #203b44;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .process-side-note p {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.48;
+    }
+
+    .process-outcome-area {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+      align-items: start;
+    }
+
+    .process-outcome-band {
+      grid-column: 3 / span 2;
+      display: grid;
+      gap: 14px;
+      padding: 14px 0 0;
+      position: relative;
+    }
+
+    .process-outcome-band::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: -18px;
+      width: 2px;
+      height: 18px;
+      background: repeating-linear-gradient(to bottom, rgba(200, 155, 44, 0.9) 0 5px, transparent 5px 10px);
+    }
+
+    .process-outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 24px;
+    }
+
+    .process-outcome-item {
+      position: relative;
+      padding-left: 32px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #203b44;
+    }
+
+    .process-outcome-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 20px;
+      height: 2px;
+      background: rgba(200, 155, 44, 0.92);
+      border-radius: 999px;
+    }
+
+    .process-outcome-item::after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 3px solid rgba(200, 155, 44, 0.92);
+      background: rgba(255, 253, 248, 1);
+      box-shadow: 0 0 0 3px rgba(245, 240, 227, 1);
+    }
+
+    .process-route-strip {
+      display: grid;
+      grid-template-columns: 1.15fr repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      border-radius: 22px;
+      background: rgba(255, 253, 248, 0.84);
+    }
+
+    .process-route-kicker,
+    .process-route-item strong {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #5a6b3a;
+    }
+
+    .process-route-item {
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .process-route-item p {
+      margin: 0;
+      font-size: 0.94rem;
+      line-height: 1.46;
+    }
+
+    .review-board {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .review-steps {
+      position: relative;
+      display: grid;
+      gap: 24px;
+      padding-left: 92px;
+    }
+
+    .review-steps::before {
+      content: "";
+      position: absolute;
+      left: 33px;
+      top: 24px;
+      bottom: 24px;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(90, 107, 58, 0.92), rgba(200, 155, 44, 0.88), rgba(32, 59, 68, 0.84));
+      border-radius: 999px;
+    }
+
+    .review-step {
+      --accent: #5a6b3a;
+      position: relative;
+      display: grid;
+      gap: 8px;
+      min-height: 94px;
+    }
+
+    .review-step.stage-3 {
+      --accent: #c89b2c;
+    }
+
+    .review-step.stage-4 {
+      --accent: #203b44;
+    }
+
+    .review-step-badge {
+      position: absolute;
+      left: -92px;
+      top: 2px;
+      width: 68px;
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .review-step-number {
+      color: var(--accent);
+      font-size: 1.9rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .review-step-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 4px solid var(--accent);
+      background: rgba(255, 253, 248, 1);
+      box-shadow: 0 0 0 5px rgba(245, 240, 227, 1);
+    }
+
+    .review-step strong {
+      font-size: clamp(1.16rem, 1.08vw, 1.42rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #203b44;
+    }
+
+    .review-step p {
+      margin: 0;
+      font-size: 0.99rem;
+      line-height: 1.58;
+    }
+
+    .review-outcomes-panel {
+      padding: 24px 24px 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(200, 155, 44, 0.38);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(248, 241, 227, 0.98));
+      display: grid;
+      gap: 18px;
+    }
+
+    .review-outcomes-panel strong {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8f6b15;
+    }
+
+    .review-outcomes-head {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(200, 155, 44, 0.22);
+    }
+
+    .review-outcomes-head h3 {
+      font-size: clamp(1.4rem, 1.45vw, 1.92rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      color: #203b44;
+    }
+
+    .review-outcomes-head p,
+    .review-outcomes-list li,
+    .review-outcomes-note p {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.58;
+    }
+
+    .review-outcomes-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .review-outcomes-list li {
+      position: relative;
+      padding-left: 28px;
+      color: #203b44;
+      font-weight: 700;
+    }
+
+    .review-outcomes-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.42em;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 3px solid #c89b2c;
+      box-shadow: 0 0 0 3px rgba(200, 155, 44, 0.12);
+    }
+
+    .review-outcomes-note {
+      display: grid;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(200, 155, 44, 0.22);
+    }
+
+    .tracker-bridge {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+      gap: 22px;
+      margin-top: 22px;
+      padding: 22px 24px;
+      border-radius: 26px;
+      border: 1px solid rgba(73, 95, 82, 0.12);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(200, 155, 44, 0.12), transparent 32%),
+        linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(247, 240, 226, 0.98));
+      align-items: center;
+    }
+
+    .tracker-bridge-copy {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tracker-bridge-copy strong {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #5a6b3a;
+    }
+
+    .tracker-bridge-copy h3 {
+      font-size: clamp(1.35rem, 1.5vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: #203b44;
+    }
+
+    .tracker-bridge-copy p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.62;
+    }
+
+    .tracker-bridge-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: start;
+      align-content: center;
+    }
+
+    .tracker-bridge-actions span {
+      font-size: 0.93rem;
+      line-height: 1.48;
+      color: var(--muted);
     }
 
     .callout {
@@ -631,21 +1124,89 @@
         border-radius: 22px;
       }
 
-      .process-step {
-        grid-template-columns: 1fr;
-      }
-
-      .process-step b {
-        width: 40px;
-        height: 40px;
-      }
-
       .benefit-item {
         grid-template-columns: 1fr;
         gap: 8px;
       }
 
       .benefit-anchor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-rail,
+      .process-note-row,
+      .process-outcome-area,
+      .process-route-strip {
+        grid-template-columns: 1fr;
+        padding-right: 0;
+      }
+
+      .process-track {
+        padding: 22px 20px 24px;
+      }
+
+      .process-step {
+        padding-top: 86px;
+      }
+
+      .process-step::before {
+        width: 3px;
+        height: calc(100% + 18px);
+        left: 13px;
+        top: 48px;
+        transform: none;
+      }
+
+      .process-step:last-child::before {
+        height: calc(100% - 26px);
+        width: 3px;
+      }
+
+      .process-step:last-child::after {
+        right: auto;
+        left: 6px;
+        top: auto;
+        bottom: -2px;
+        border-left: 11px solid transparent;
+        border-right: 11px solid transparent;
+        border-top: 18px solid #203b44;
+        border-bottom: 0;
+        transform: none;
+      }
+
+      .process-branch-note,
+      .process-side-note,
+      .process-outcome-band {
+        grid-column: auto;
+      }
+
+      .process-outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-branch-graphic {
+        padding-left: 0;
+        padding-top: 56px;
+      }
+
+      .process-branch-graphic::before {
+        left: 12px;
+        top: 0;
+      }
+
+      .process-side-note::before {
+        left: 18px;
+      }
+
+      .review-board {
+        grid-template-columns: 1fr;
+      }
+
+      .review-steps {
+        padding-left: 78px;
+      }
+
+      .tracker-bridge {
         grid-template-columns: 1fr;
       }
     }
@@ -863,96 +1424,143 @@
           </div>
         </article>
       </div>
-    </section>
-
-    <section class="surface section">
-      <h2>Membership fees</h2>
-      <article class="callout" style="margin-top: 18px;">
-        <ul class="compact-list" style="margin-top: 12px;">
-          <li>Student: TBC</li>
-          <li>Individual membership: TBC</li>
-          <li>Company: TBC</li>
-          <li>Technical partner: Contact us</li>
-          <li>Observer: TBC</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="surface section">
-      <h2>Not ready to apply for membership, but need registration visibility now?</h2>
-      <article class="callout" style="margin-top: 18px;">
-        <p>The tracker also supports authorised non-member product submissions. Membership and registration tracking are connected, but they are not the same route.</p>
-        <div class="actions">
-          <a class="button secondary" href="../registration-tracker/index.html">Go to the tracker</a>
+      <div class="tracker-bridge">
+        <div class="tracker-bridge-copy">
+          <strong>Separate route</strong>
+          <h3>Need registration visibility before membership is settled?</h3>
+          <p>The tracker supports authorised non-member product submissions too. Membership and registration tracking connect, but they are not the same route or the same decision.</p>
         </div>
-      </article>
+        <div class="tracker-bridge-actions">
+          <a class="button secondary" href="../registration-tracker/index.html">Go to the tracker</a>
+          <span>Use this when the immediate need is product-registration visibility rather than joining ABA first.</span>
+        </div>
+      </div>
     </section>
 
     <section class="surface section" id="process">
-      <h2>How application works.</h2>
-      <div class="process-grid" style="margin-top: 18px;">
-        <article class="card process-step">
-          <b>01</b>
-          <div>
-            <h3>Choose your membership</h3>
-            <p style="margin-top: 8px;">Start with Full member, Technical partner, or Observer based on how you participate in the sector.</p>
+      <div class="process-shell">
+        <div class="process-intro">
+          <h2>How application works.</h2>
+          <p>Choose the membership route that fits your role. The application is then captured for ABA review rather than instant sign-up.</p>
+        </div>
+        <div class="process-track">
+          <div class="process-rail" aria-label="Application process">
+            <article class="process-step stage-1">
+              <div class="process-step-number">01</div>
+              <div class="process-step-node" aria-hidden="true"></div>
+              <h3>Choose your membership</h3>
+              <p>Select Full Member, Technical Partner, or Observer based on how you participate in the sector.</p>
+            </article>
+            <article class="process-step stage-2">
+              <div class="process-step-number">02</div>
+              <div class="process-step-node" aria-hidden="true"></div>
+              <h3>Apply as an individual or organisation</h3>
+              <p>Each route supports both applicant types.</p>
+            </article>
+            <article class="process-step stage-3">
+              <div class="process-step-number">03</div>
+              <div class="process-step-node" aria-hidden="true"></div>
+              <h3>Complete the relevant form</h3>
+              <p>Share the product, market, expertise, geographic, and consent details relevant to your membership.</p>
+            </article>
+            <article class="process-step stage-4">
+              <div class="process-step-number">04</div>
+              <div class="process-step-node" aria-hidden="true"></div>
+              <h3>ABA reviews the application</h3>
+              <p>ABA checks fit, follows up where needed, and confirms the next state.</p>
+            </article>
           </div>
-        </article>
-        <article class="card process-step">
-          <b>02</b>
-          <div>
-            <h3>Apply as an individual or organisation</h3>
-            <p style="margin-top: 8px;">Each application supports both applicant shapes.</p>
+          <div class="process-note-row">
+            <aside class="process-side-note">
+              <strong>Product applicant?</strong>
+              <p>Full-member applicants with products can continue into product intake after the core application is captured.</p>
+            </aside>
           </div>
-        </article>
-        <article class="card process-step">
-          <b>03</b>
-          <div>
-            <h3>Complete the relevant form</h3>
-            <p style="margin-top: 8px;">Share the product, market, expertise, geographic, and consent details relevant to your membership. Full-membership applicants with products can move onward into product intake.</p>
-          </div>
-        </article>
-        <article class="card process-step">
-          <b>04</b>
-          <div>
-            <h3>ABA reviews the application</h3>
-            <p style="margin-top: 8px;">ABA reviews fit, follows up where needed, and confirms the next state: under review, more information required, approved, or declined.</p>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
     <section class="surface section">
-      <h2>What happens after you apply.</h2>
-      <div class="process-grid" style="margin-top: 18px;">
-        <article class="card process-step">
-          <b>01</b>
-          <div>
-            <h3>Application received</h3>
-            <p style="margin-top: 8px;">ABA captures the application as a reviewable record rather than granting instant membership.</p>
+      <div class="process-shell">
+        <div class="process-intro">
+          <h2>What happens after you apply.</h2>
+          <p>After submission, the application becomes a reviewable ABA record. Next steps are handled deliberately, with manual follow-up where needed.</p>
+        </div>
+        <div class="process-track">
+          <div class="review-board">
+            <div class="review-steps" aria-label="Post-application process">
+              <article class="review-step stage-1">
+                <div class="review-step-badge" aria-hidden="true">
+                  <div class="review-step-number">01</div>
+                  <div class="review-step-node"></div>
+                </div>
+                <strong>Application received</strong>
+                <p>ABA captures the submission as a reviewable record rather than granting instant membership.</p>
+              </article>
+              <article class="review-step stage-2">
+                <div class="review-step-badge" aria-hidden="true">
+                  <div class="review-step-number">02</div>
+                  <div class="review-step-node"></div>
+                </div>
+                <strong>Under review</strong>
+                <p>ABA reviews role fit, independence, geography, and the best next step for the relationship.</p>
+              </article>
+              <article class="review-step stage-3">
+                <div class="review-step-badge" aria-hidden="true">
+                  <div class="review-step-number">03</div>
+                  <div class="review-step-node"></div>
+                </div>
+                <strong>Next state confirmed</strong>
+                <p>ABA then confirms the right outcome instead of assuming immediate activation.</p>
+              </article>
+              <article class="review-step stage-4">
+                <div class="review-step-badge" aria-hidden="true">
+                  <div class="review-step-number">04</div>
+                  <div class="review-step-node"></div>
+                </div>
+                <strong>Manual follow-up and invoicing</strong>
+                <p>This process does not assume instant payment. Any fee handling follows approval and manual ABA follow-up.</p>
+              </article>
+            </div>
+            <aside class="review-outcomes-panel">
+              <div class="review-outcomes-head">
+                <strong>Possible next states</strong>
+                <h3>ABA confirms the right next move.</h3>
+                <p>After review, ABA may request clarification, move a full-member applicant into product intake, approve the application, hold it pending a next action, or decline it.</p>
+              </div>
+              <ul class="review-outcomes-list">
+                <li>More information required</li>
+                <li>Invited into product intake</li>
+                <li>Approved</li>
+                <li>Held pending next action</li>
+                <li>Declined</li>
+              </ul>
+              <div class="review-outcomes-note">
+                <strong>Review model</strong>
+                <p>All applications are reviewed by ABA. No instant membership is granted, and invoicing happens only after the relevant follow-up.</p>
+              </div>
+            </aside>
           </div>
-        </article>
-        <article class="card process-step">
-          <b>02</b>
-          <div>
-            <h3>Under review</h3>
-            <p style="margin-top: 8px;">ABA reviews role fit, independence, geography, and the best next step for the relationship.</p>
+          <div class="process-route-strip">
+            <div class="process-route-kicker">Membership routes</div>
+            <div class="process-route-item">
+              <strong>Full Member</strong>
+              <p>For organisations and individuals with products.</p>
+            </div>
+            <div class="process-route-item">
+              <strong>Technical Partner</strong>
+              <p>For organisations offering supporting services.</p>
+            </div>
+            <div class="process-route-item">
+              <strong>Observer</strong>
+              <p>For individuals or organisations following the sector.</p>
+            </div>
+            <div class="process-route-item">
+              <strong>Review model</strong>
+              <p>All applications are reviewed by ABA. No instant membership is granted.</p>
+            </div>
           </div>
-        </article>
-        <article class="card process-step">
-          <b>03</b>
-          <div>
-            <h3>More information or approval</h3>
-            <p style="margin-top: 8px;">Applicants may be asked for clarification, invited into product intake, approved, or held pending next action.</p>
-          </div>
-        </article>
-        <article class="card process-step">
-          <b>04</b>
-          <div>
-            <h3>Manual follow-up and invoicing</h3>
-            <p style="margin-top: 8px;">This prototype does not assume instant payment. Any fee handling follows approval and manual ABA follow-up.</p>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
