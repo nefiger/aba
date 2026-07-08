@@ -1,1 +1,6 @@
 .DS_Store
+
+# Local tool config (Claude Code) — machine-specific
+registration-tracker/.claude/
+# Consultant source corpus — copyrighted/internal; must never publish via GitHub Pages
+registration-tracker/files-shared-by-consultant/
