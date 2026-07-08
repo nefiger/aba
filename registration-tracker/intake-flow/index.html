@@ -35,8 +35,8 @@
         <section class="page-header">
           <div>
             <div class="knowledge-eyebrow">Product registration record</div>
-            <h1>Add a biological product registration record</h1>
-            <p>Share the structured detail ABA needs to understand where a biological product sits in the registration journey, what is blocking progress, and what consent applies to future use.</p>
+            <h1>Add an agricultural crop-input registration record</h1>
+            <p>Share the structured detail ABA needs to see where a crop-input registration sits in the Act 36 journey, what is blocking progress, and what consent applies to future use. This tracks the registration <em>paperwork</em> — the front door and readiness — never the dossier contents.</p>
           </div>
           <span class="role-badge">Public submission: authorised representatives only</span>
         </section>
@@ -45,14 +45,14 @@
           <div class="dashboard-toolbar">
             <div>
               <h2>Geographic truth</h2>
-              <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa, so South African Act 36 detail is shown first while other country records stay flexible.</p>
+              <p class="note">ABA can receive registration signals from across Africa. Current operating activity is centered in South Africa, so South African Act 36 detail is shown first while other country records stay flexible. <strong>Fictional placeholder data throughout.</strong></p>
             </div>
           </div>
         </section>
 
         <section class="grid two">
           <div class="panel ok stack">
-            <h2>1. Authorised submitter gate</h2>
+            <h2>1. Authorised submitter &amp; approved person</h2>
             <div class="field full">
               <label>Eligibility question</label>
               <p style="margin: 0;">Are you authorised to submit registration information for this company/product?</p>
@@ -61,9 +61,16 @@
               <button class="choice-button" type="button" data-authorised="yes" aria-pressed="false">Yes, continue</button>
               <button class="choice-button" type="button" data-authorised="no" aria-pressed="false">No, stop here</button>
             </div>
-            <div class="callout">Only responsible company representatives continue. Third-party or unauthorised reporting stops before data capture.</div>
+            <div class="form-grid" id="approvedPersonBlock">
+              <div class="field"><label for="approvedPerson">Approved person (Act 36)</label><input id="approvedPerson" class="control" value="Fictional Approved Person"></div>
+              <div class="field"><label for="approvedRole">Their role / title</label><input id="approvedRole" class="control" value="Regulatory Affairs Lead"></div>
+              <div class="field"><label for="eligibility">SA residency / registered office</label><select id="eligibility" class="control-select"><option>Resident in South Africa</option><option>Company registered office in South Africa</option><option>Neither — flag for review</option></select></div>
+              <div class="field"><label for="sacnasp">SACNASP number (optional)</label><input id="sacnasp" class="control" placeholder="e.g. 400000/00" value=""></div>
+              <div class="field"><label>Acting under letter of authority?</label><label class="checkbox-item"><input id="letterOfAuthority" type="checkbox"> <span>Yes — third-party mandate (scope + duration on file)</span></label></div>
+            </div>
+            <div class="callout">The registrar requires a nominated <strong>approved person</strong> resident in South Africa (or a company with an SA-registered office) who is accountable for the application. A third party acts only under a <strong>letter of authority</strong>. <em>Spec §5 / G13–G14.</em></div>
           </div>
-          <div class="panel danger stack" id="not-authorised-panel">
+          <div class="panel danger stack is-hidden" id="not-authorised-panel">
             <h2>Not authorised stop state</h2>
             <p>If the submitter is not authorised, the intake remains stopped and asks them to forward the link.</p>
             <div class="field full">
@@ -77,13 +84,15 @@
         <section class="grid sidebar" id="capture-flow" style="margin-top: 16px;">
           <aside class="panel muted stack">
             <h2>Flow steps</h2>
-            <span class="status-chip">1 Gate</span>
+            <span class="status-chip">1 Gate + approved person</span>
             <span class="status-chip">2 Company + contact</span>
-            <span class="status-chip">3 Product axes</span>
-            <span class="status-chip">4 Application status</span>
-            <span class="status-chip">5 Proof + consent</span>
-            <span class="status-chip">6 Save/submit</span>
-            <div class="callout">The form shows the intended capture path. Submitted records should enter ABA review before they support member follow-up or aggregate public signals.</div>
+            <span class="status-chip">3 Product + pathway</span>
+            <span class="status-chip">4 Service / application type</span>
+            <span class="status-chip">5 Status + stage</span>
+            <span class="status-chip">6 Reference + readiness</span>
+            <span class="status-chip">7 Consent</span>
+            <span class="status-chip">8 Save / submit</span>
+            <div class="callout">The form shows the intended capture path. Submitted records enter ABA review before they support member follow-up or aggregate public signals.</div>
           </aside>
 
           <div class="stack">
@@ -101,71 +110,144 @@
             </section>
 
             <section class="panel">
-              <h2>3. Product and regime</h2>
+              <h2>3. Product, regime and legal pathway</h2>
               <div class="form-grid">
                 <div class="field"><label for="productName">Product name</label><input id="productName" class="control" value="Fictional Microbial Soil Blend"></div>
-                <div class="field"><label for="functionalCategory">Functional category</label><select id="functionalCategory" class="control-select"><option>Biofertiliser</option><option>Biopesticide</option><option>Biostimulant</option><option>Not sure</option></select></div>
+                <div class="field"><label for="functionalCategory">Functional category <span class="note">(sector axis)</span></label><select id="functionalCategory" class="control-select"><option>Biofertiliser</option><option>Biopesticide</option><option>Biostimulant</option><option>Not sure</option></select></div>
+                <div class="field full"><label>Maps to registrar function</label><div class="textarea-box" id="functionMapNote">Sector category maps to the registrar's own function axis (Insecticide / Fungicide / Herbicide / Other incl. PGR, adjuvant, rodenticide). Mapping shown for review; specialist confirmation pending. <em>Spec §5.1 / G10.</em></div></div>
                 <div class="field"><label for="applicationCountry">Country for application</label><select id="applicationCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
                 <div class="field"><label for="regime">Governing regime</label><select id="regime" class="control-select"><option>Agriculture / Act 36</option><option>Public-health pest control</option><option>Water treatment</option><option>Other</option></select></div>
-                <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Group 3 fertilizer</option><option>Agricultural remedy</option><option>Not sure</option></select></div>
-                <div class="field act36-field"><label for="classificationCode">Classification code</label><select id="classificationCode" class="control-select"><option>M</option><option>L</option><option>K</option><option>Unknown</option></select></div>
-                <div class="field full" id="nonAct36Note"><label>Conditional regime note</label><div class="textarea-box">Act 36 legal pathway and M/L/K classification are hidden unless Agriculture / Act 36 is selected.</div></div>
-                <div class="field full"><label>Downstream use</label><div class="textarea-box">Functional category, application country, and reviewed status can later support public aggregate signals without exposing private company detail.</div></div>
+                <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Agricultural remedy (incl. biopesticide / inoculant / PGR)</option><option>Fertilizer (biofertiliser)</option><option>Not sure</option></select></div>
+                <div class="field act36-field"><label for="dataPath">Data path (optional)</label><select id="dataPath" class="control-select"><option>Not specified</option><option>5-batch analysis</option><option>Certificate of Analysis (no fixed purity)</option><option>Botanical Cat 1</option><option>Botanical Cat 2</option><option>Botanical Cat 3</option></select></div>
+                <div class="field full act36-field" id="biostimulantNote"><label>Biostimulant pathway note</label><div class="textarea-box">A biostimulant splits by claim: a plant-growth-regulator claim routes to <strong>agricultural remedy</strong>; a soil / nutritional input routes to <strong>fertilizer</strong>. This is ABA's documentary reading, not a confirmed fact. <em>Spec §5.2 / §8 Q2.</em></div></div>
+                <div class="field full" id="nonAct36Note"><label>Conditional regime note</label><div class="textarea-box">Act 36 legal pathway and data-path tag are hidden unless Agriculture / Act 36 is selected. The old "M / L / K classification code" picker has been removed — B/K/L/M are registrar-assigned registration-number prefixes, not an applicant choice (see step 6). <em>Spec §5.4 / G9.</em></div></div>
               </div>
             </section>
 
             <section class="panel">
-              <h2>4. Application and status log</h2>
+              <h2>4. Service / application type</h2>
+              <p class="note">Backlog and wait-time differ by type, so the type sits at the registrar's clock-granularity — keyed to the Service Request Form <code>14ARx</code> codes. The types the SRF bundles under one code (generic vs parallel/daughter) are kept separate here because their official clocks differ. <em>Spec §2.1 / G1–G4.</em></p>
               <div class="form-grid">
-                <div class="field"><label for="currentStatus">Current status</label><select id="currentStatus" class="control-select"><option>Preparing submission</option><option selected>Submitted to registrar</option><option>Acknowledged / reference issued</option><option>Under screening</option><option>Under technical review</option><option>Query / additional information requested</option><option>Response submitted</option><option>Awaiting decision</option><option>Approved / registered</option><option>Rejected / withdrawn</option><option>Unknown / not sure</option></select></div>
-                <div class="field"><label for="statusDate">Date status began</label><input id="statusDate" class="control" type="date" value="2025-09-15"></div>
-                <div class="field"><label>Approximate date?</label><label class="checkbox-item"><input id="approximateDate" type="checkbox"> <span>Yes, this date is approximate</span></label></div>
-                <div class="field"><label for="referenceStatus">Registrar reference</label><select id="referenceStatus" class="control-select"><option>Provided</option><option>Not issued</option><option>Unknown</option><option>Lost / unavailable</option></select></div>
-                <div class="field full" id="referenceNumberField"><label for="referenceNumber">Reference number</label><input id="referenceNumber" class="control" value="REF-EXAMPLE-1029"></div>
-                <div class="field full is-hidden" id="referenceReasonField"><label for="referenceReason">Reference unavailable reason</label><textarea id="referenceReason" class="control-textarea">Registrar has not issued a reference number yet.</textarea></div>
-              </div>
-              <div class="timeline" style="margin-top: 12px;">
-                <div class="timeline-item"><strong id="timelineDate">2025-09-15</strong> <span id="timelineStatus">Submitted to registrar</span></div>
-                <div class="timeline-item"><strong>Optional previous entry</strong> Preparing submission</div>
+                <div class="field"><label for="serviceType">Service type</label>
+                  <select id="serviceType" class="control-select">
+                    <optgroup label="Registration">
+                      <option value="new-molecule|14AR2|627">New molecule (new active ingredient) — 14AR2</option>
+                      <option value="new-formulation|14AR2|418">New formulation type — 14AR2</option>
+                      <option value="generic|14AR1|418" selected>Generic active ingredient — 14AR1</option>
+                      <option value="parallel|14AR1|118">Parallel registration — 14AR1</option>
+                      <option value="daughter|14AR1|118">Daughter registration — 14AR1</option>
+                      <option value="reinstatement|14AR1|118">Reinstatement of lapsed registration — 14AR1</option>
+                      <option value="new-source|—|208">New source of active ingredient</option>
+                    </optgroup>
+                    <optgroup label="Amendment">
+                      <option value="major-amendment|14AR16|418">Major amendment to formulation — 14AR16</option>
+                      <option value="minor-amendment|14AR15|118">Minor amendment to formulation — 14AR15</option>
+                      <option value="label-extension|14AR5|418">Label extension (new claims) — 14AR5</option>
+                      <option value="admin-amendment|14AR8|118">Administrative amendment — 14AR8</option>
+                      <option value="transfer|14AR9|118">Transfer / name change — 14AR9</option>
+                      <option value="new-manufacturer|14AR10|208">New / additional manufacturer or formulator — 14AR10</option>
+                      <option value="packaging|14AR14|118">Change of packaging size / material — 14AR14</option>
+                    </optgroup>
+                    <optgroup label="Renewal">
+                      <option value="renewal|14AR3|90">Renewal of registration — 14AR3</option>
+                      <option value="late-renewal|14AR3|—">Late renewal</option>
+                    </optgroup>
+                    <optgroup label="Permits &amp; certificates">
+                      <option value="import-permit|14AR6|14">Import / export permit — 14AR6</option>
+                      <option value="free-sale|14AR7|7">Free sale certificate — 14AR7</option>
+                      <option value="advert|14AR4|35">Advertisement approval — 14AR4</option>
+                    </optgroup>
+                    <optgroup label="Appeal">
+                      <option value="appeal|—|—">Appeal under section 6</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div class="field"><label>Official timeframe benchmark</label><div class="textarea-box" id="benchmarkNote">—</div></div>
+                <div class="field full is-hidden" id="renewalReminder"><label>Term &amp; renewal</label><div class="callout">An Act 36 registration is <strong>valid for three years</strong> and must be <strong>renewed before 31 May</strong>. Renewal is itself a tracked application type. <em>Spec §2.2 note / G15.</em></div></div>
               </div>
             </section>
 
-            <section class="grid two">
-              <div class="panel warn stack">
-                <h2>5. Proof upload</h2>
-                <label class="checkbox-item"><input id="proofAttached" type="checkbox"> <span>Proof of submission attached</span></label>
-                <div class="field full"><label for="proofDescription">Proof description</label><input id="proofDescription" class="control" value="Receipt or registrar email placeholder"></div>
-                <div class="callout" id="proofNote">Missing proof can continue for review, but blocks registrar packet inclusion until resolved.</div>
-                <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence context</a>
+            <section class="panel">
+              <h2>5. Application status and log</h2>
+              <div class="form-grid">
+                <div class="field"><label for="currentStatus">Current status</label><select id="currentStatus" class="control-select">
+                  <option value="Preparing submission|Pre-submission (pipeline, not backlog)">Preparing submission</option>
+                  <option value="Submitted to registrar|Received (clock starts)" selected>Submitted to registrar</option>
+                  <option value="Acknowledged / reference issued|Verification — file number issued">Acknowledged / reference issued</option>
+                  <option value="Under screening|Scientific screening">Under screening</option>
+                  <option value="Under technical review|Evaluation">Under technical review</option>
+                  <option value="Query / additional information requested|Referred back (cross-stage)">Query / additional information requested</option>
+                  <option value="Response submitted|Back to screening / evaluation">Response submitted</option>
+                  <option value="Awaiting decision|Decision">Awaiting decision</option>
+                  <option value="Approved / registered|Decision → registered (L-number issued)">Approved / registered</option>
+                  <option value="Rejected|Decision → rejected">Rejected</option>
+                  <option value="Withdrawn|Withdrawal (after evaluation = rejection, no refund)">Withdrawn</option>
+                  <option value="Under appeal|Appeal (s.6 to the Minister)">Under appeal</option>
+                  <option value="Unknown / not sure|n/a">Unknown / not sure</option>
+                </select></div>
+                <div class="field"><label>Official stage</label><div><span class="status-chip" id="stageBadge">Received</span></div></div>
+                <div class="field"><label for="statusDate">Date status began</label><input id="statusDate" class="control" type="date" value="2025-09-15"></div>
+                <div class="field"><label>Approximate date?</label><label class="checkbox-item"><input id="approximateDate" type="checkbox"> <span>Yes, this date is approximate</span></label></div>
               </div>
-              <div class="panel stack">
-                <h2>Visibility and consent</h2>
-                <div class="checkbox-list">
-                  <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review required</span></label>
-                  <label class="checkbox-item"><input id="consentPublic" type="checkbox" checked> <span>Anonymised public aggregate use</span></label>
-                  <label class="checkbox-item"><input id="consentRegistrar" type="checkbox"> <span>Named registrar packet use</span></label>
+              <div class="timeline" style="margin-top: 12px;">
+                <div class="timeline-item"><strong id="timelineDate">2025-09-15</strong> <span id="timelineStatus">Submitted to registrar</span> <span class="status-chip" id="timelineStage">Received</span></div>
+                <div class="timeline-item"><strong>Optional previous entry</strong> Preparing submission <span class="status-chip">Pre-submission</span></div>
+              </div>
+              <div class="callout" style="margin-top: 10px;">Statuses use friendly labels but map 1:1 to the five official Act 36 stages (Verification → Scientific screening → Evaluation → Decision → Appeal) plus the cross-cutting "referred back" case. <em>Spec §3 / G6.</em></div>
+            </section>
+
+            <section class="panel">
+              <h2>6. Reference and readiness</h2>
+              <p class="note">Reference comes in two stages that must not be conflated: a pre-registration <strong>file/application reference</strong>, and a post-registration <strong>L-number</strong> that exists only once a record is registered. <em>Spec §4 / G8, G9.</em></p>
+              <div class="form-grid">
+                <div class="field"><label for="referenceStatus">Application / file reference (pre-registration)</label><select id="referenceStatus" class="control-select"><option>Provided</option><option>Not issued</option><option>Unknown</option><option>Lost / unavailable</option></select></div>
+                <div class="field" id="referenceNumberField"><label for="referenceNumber">File number</label><input id="referenceNumber" class="control" value="FILE-EXAMPLE-1029"></div>
+                <div class="field full is-hidden" id="referenceReasonField"><label for="referenceReason">Reference unavailable reason</label><textarea id="referenceReason" class="control-textarea">Registrar has not issued a file number yet.</textarea></div>
+                <div class="field full"><label for="regNumber">Registration number (L-number) — post-registration, read-only</label><input id="regNumber" class="control" readonly value=""><div class="note" id="regNumberNote" style="margin-top:6px;">Not issued — no number exists before a record reaches "Approved / registered". This is a lifecycle attribute, never asked at intake. <em>Spec §5.4.</em></div></div>
+              </div>
+              <div class="grid two" style="margin-top: 12px;">
+                <div class="panel warn stack">
+                  <h3>Dossier readiness</h3>
+                  <label class="checkbox-item"><input id="dossierReady" type="checkbox"> <span>List I + List II dossier bundle ready</span></label>
+                  <div class="callout" id="dossierNote">The dossier (List I + List II + supporting studies) is captured as a single readiness flag — never field-by-field. <em>Spec §6 / G12.</em></div>
+                </div>
+                <div class="panel warn stack">
+                  <h3>Proof of payment</h3>
+                  <label class="checkbox-item"><input id="proofOfPayment" type="checkbox"> <span>Proof of payment attached</span></label>
+                  <div class="callout" id="paymentNote">Proof of payment is a distinct mandatory artifact checked at verification — separate from the dossier. Missing either can continue for review, but blocks registrar packet inclusion.</div>
+                  <a class="action-button secondary" href="../../docs/database/evidence-library.html">Evidence context</a>
                 </div>
               </div>
             </section>
 
             <section class="grid two">
+              <div class="panel stack">
+                <h2>7. Visibility and consent</h2>
+                <div class="checkbox-list">
+                  <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review required</span></label>
+                  <label class="checkbox-item"><input id="consentPublic" type="checkbox" checked> <span>Anonymised public aggregate use</span></label>
+                  <label class="checkbox-item"><input id="consentRegistrar" type="checkbox"> <span>Named registrar packet use</span></label>
+                </div>
+                <div class="callout">Named registrar packet use is opt-in. For non-members it is captured as permission, not a promise of inclusion.</div>
+              </div>
               <div class="panel ok stack">
-                <h2>6. Save and submit</h2>
+                <h2>8. Save and submit</h2>
                 <div class="toggle-row">
                   <button class="action-button secondary" type="button" id="saveDraft">Save draft and email return link</button>
                   <button class="action-button primary" type="button" id="submitReview">Submit for ABA review</button>
                 </div>
                 <p class="note">In this demo, buttons update the page summary so the review path is visible. A live version would save the record for ABA review.</p>
               </div>
-              <div class="panel stack">
-                <h2>Current captured variables</h2>
-                <div class="state-summary" id="stateSummary"></div>
-              </div>
+            </section>
+
+            <section class="panel">
+              <h2>Current captured variables</h2>
+              <div class="state-summary" id="stateSummary"></div>
             </section>
           </div>
         </section>
 
-        <p class="footer-note">Prototype capture state only. This page demonstrates the fields, consent, and review path a live ABA registration submission would follow.</p>
+        <p class="footer-note">Prototype capture state only, using fictional placeholder data. This page demonstrates the fields, staged reference, readiness flags, consent, and review path a live ABA registration submission would follow. Reconciled to <code>registrar-requirements-spec-v1.md</code>.</p>
       </main>
     </div>
 
@@ -178,31 +260,20 @@
       };
 
       const fields = [
-        "companyName",
-        "companyRole",
-        "companyCountry",
-        "membership",
-        "contactName",
-        "contactEmail",
-        "productName",
-        "functionalCategory",
-        "applicationCountry",
-        "regime",
-        "legalPathway",
-        "classificationCode",
-        "currentStatus",
-        "statusDate",
-        "referenceStatus",
-        "referenceNumber",
-        "referenceReason",
-        "proofDescription"
+        "approvedPerson", "approvedRole", "eligibility", "sacnasp",
+        "companyName", "companyRole", "companyCountry", "membership",
+        "contactName", "contactEmail",
+        "productName", "functionalCategory", "applicationCountry", "regime",
+        "legalPathway", "dataPath",
+        "serviceType",
+        "currentStatus", "statusDate",
+        "referenceStatus", "referenceNumber", "referenceReason"
       ];
 
       const checks = [
-        "approximateDate",
-        "proofAttached",
-        "consentPublic",
-        "consentRegistrar"
+        "letterOfAuthority", "approximateDate",
+        "dossierReady", "proofOfPayment",
+        "consentPublic", "consentRegistrar"
       ];
 
       function value(id) {
@@ -217,7 +288,7 @@
 
       function currentTimestamp() {
         const date = new Date();
-        const pad = (value) => String(value).padStart(2, "0");
+        const pad = (v) => String(v).padStart(2, "0");
         return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
       }
 
@@ -225,11 +296,33 @@
         document.getElementById(id).classList.toggle("is-hidden", hidden);
       }
 
+      // Service type value is "key|code|days"
+      function serviceParts() {
+        const raw = value("serviceType");
+        const [key, code, days] = raw.split("|");
+        return { key, code, days };
+      }
+
+      // Status value is "label|officialStage"
+      function statusParts() {
+        const raw = value("currentStatus");
+        const [label, stage] = raw.split("|");
+        return { label, stage };
+      }
+
+      function benchmarkText() {
+        const { code, days } = serviceParts();
+        const codeText = code && code !== "—" ? `SRF ${code}` : "no distinct SRF row";
+        if (!days || days === "—") return `${codeText} · no official benchmark timeframe tabled`;
+        return `${codeText} · official timeframe ${days} calendar days (lookup constant, not an input)`;
+      }
+
       function packetReadiness() {
         if (state.authorised !== true) return "Not eligible until authorised submitter is confirmed.";
-        if (!checked("proofAttached")) return "Blocked: proof is missing.";
+        if (!checked("dossierReady")) return "Blocked: dossier not marked ready.";
+        if (!checked("proofOfPayment")) return "Blocked: proof of payment missing.";
         if (!checked("consentRegistrar")) return "Blocked: named registrar packet consent is missing.";
-        if (value("referenceStatus") === "Provided" && !value("referenceNumber").trim()) return "Blocked: reference number is blank.";
+        if (value("referenceStatus") === "Provided" && !value("referenceNumber").trim()) return "Blocked: file number is blank.";
         if (value("referenceStatus") !== "Provided" && !value("referenceReason").trim()) return "Blocked: reference-unavailable reason is required.";
         if (value("membership") !== "Full member") return "Permission captured, but Full member status must be verified before default packet inclusion.";
         return "Potentially packet-ready after ABA operator review.";
@@ -239,42 +332,85 @@
         const isAct36 = value("regime") === "Agriculture / Act 36";
         document.querySelectorAll(".act36-field").forEach((el) => el.classList.toggle("is-hidden", !isAct36));
         setHidden("nonAct36Note", isAct36);
+        // Biostimulant note only when Act 36 + biostimulant category
+        setHidden("biostimulantNote", !(isAct36 && value("functionalCategory") === "Biostimulant"));
 
+        // Service type benchmark + renewal reminder
+        const svc = serviceParts();
+        document.getElementById("benchmarkNote").textContent = benchmarkText();
+        const isRenewal = svc.key === "renewal" || svc.key === "late-renewal";
+
+        // Status + official stage
+        const st = statusParts();
+        document.getElementById("stageBadge").textContent = st.stage;
+        document.getElementById("timelineDate").textContent = value("statusDate") || "No date set";
+        document.getElementById("timelineStatus").textContent = st.label;
+        document.getElementById("timelineStage").textContent = st.stage;
+
+        // Renewal reminder shows for renewal types OR registered records
+        const isRegistered = st.label === "Approved / registered";
+        setHidden("renewalReminder", !(isAct36 && (isRenewal || isRegistered)));
+
+        // Reference: file reference field vs reason
         const referenceProvided = value("referenceStatus") === "Provided";
         setHidden("referenceNumberField", !referenceProvided);
         setHidden("referenceReasonField", referenceProvided);
 
+        // L-number is post-registration only
+        const regInput = document.getElementById("regNumber");
+        const regNote = document.getElementById("regNumberNote");
+        if (isRegistered) {
+          if (!regInput.value) regInput.value = "L1234 (Act 36 of 1947) — fictional";
+          regNote.innerHTML = "Issued on successful registration; populated only in the registered state. <em>Spec §5.4.</em>";
+        } else {
+          regInput.value = "";
+          regNote.innerHTML = "Not issued — no number exists before a record reaches \"Approved / registered\". This is a lifecycle attribute, never asked at intake. <em>Spec §5.4.</em>";
+        }
+
+        // Gate panels
         document.getElementById("not-authorised-panel").classList.toggle("is-hidden", state.authorised !== false);
         document.getElementById("capture-flow").classList.toggle("is-hidden", state.authorised === false);
-
         document.querySelectorAll("[data-authorised]").forEach((button) => {
           const selected = (button.dataset.authorised === "yes" && state.authorised === true) || (button.dataset.authorised === "no" && state.authorised === false);
           button.setAttribute("aria-pressed", String(selected));
         });
 
-        document.getElementById("timelineDate").textContent = value("statusDate") || "No date set";
-        document.getElementById("timelineStatus").textContent = value("currentStatus");
-        document.getElementById("proofNote").textContent = checked("proofAttached")
-          ? "Proof is present for operator review. ABA still verifies it before packet inclusion."
-          : "Missing proof can continue for review, but blocks registrar packet inclusion until resolved.";
+        // Readiness notes
+        document.getElementById("dossierNote").innerHTML = checked("dossierReady")
+          ? "Dossier marked ready for operator review. ABA still verifies before packet inclusion."
+          : "The dossier (List I + List II + supporting studies) is captured as a single readiness flag — never field-by-field. <em>Spec §6 / G12.</em>";
+        document.getElementById("paymentNote").textContent = checked("proofOfPayment")
+          ? "Proof of payment present for operator review. ABA still verifies it before packet inclusion."
+          : "Proof of payment is a distinct mandatory artifact checked at verification — separate from the dossier. Missing either can continue for review, but blocks registrar packet inclusion.";
 
         const submittedAt = state.submittedAt || "Not submitted yet";
+        const eligibilityFlag = value("eligibility") === "Neither — flag for review" ? " (flagged)" : "";
 
         const rows = [
           ["Authorised", state.authorised === null ? "Not answered" : state.authorised ? "Yes" : "No"],
+          ["Approved person", `${value("approvedPerson")} — ${value("approvedRole")}`],
+          ["Eligibility", value("eligibility") + eligibilityFlag],
+          ["Letter of authority", checked("letterOfAuthority") ? "Yes" : "No"],
+          ["SACNASP", value("sacnasp") || "Not provided"],
           ["Submission timestamp", submittedAt],
           ["Draft saved", state.lastSavedAt || "Not saved yet"],
           ["Company", value("companyName")],
           ["ABA relationship", value("membership")],
           ["Product", value("productName")],
-          ["Category", value("functionalCategory")],
+          ["Functional category", value("functionalCategory")],
           ["Application country", value("applicationCountry")],
           ["Regime", value("regime")],
-          ["Act 36 fields", isAct36 ? `${value("legalPathway")} / ${value("classificationCode")}` : "Hidden for this regime"],
-          ["Status log", `${value("currentStatus")} since ${value("statusDate")}${checked("approximateDate") ? " (approx.)" : ""}`],
-          ["Reference", referenceProvided ? value("referenceNumber") : `${value("referenceStatus")}: ${value("referenceReason")}`],
-          ["Proof", checked("proofAttached") ? "Attached" : "Missing"],
-          ["Consent", `Public aggregate: ${checked("consentPublic") ? "yes" : "no"}; named packet: ${checked("consentRegistrar") ? "yes" : "no"}`]
+          ["Legal pathway", isAct36 ? value("legalPathway") : "Hidden (non-Act 36 regime)"],
+          ["Data path", isAct36 ? value("dataPath") : "Hidden (non-Act 36 regime)"],
+          ["Service type", `${svc.key} (${svc.code}${svc.days && svc.days !== "—" ? ", " + svc.days + "d" : ""})`],
+          ["Status / stage", `${st.label} → ${st.stage}, since ${value("statusDate")}${checked("approximateDate") ? " (approx.)" : ""}`],
+          ["File reference (pre)", referenceProvided ? value("referenceNumber") : `${value("referenceStatus")}: ${value("referenceReason")}`],
+          ["Registration no. (post)", isRegistered ? regInput.value : "None (pre-registration)"],
+          ["Dossier ready", checked("dossierReady") ? "Yes" : "No"],
+          ["Proof of payment", checked("proofOfPayment") ? "Attached" : "Missing"],
+          ["Consent", `Public aggregate: ${checked("consentPublic") ? "yes" : "no"}; named packet: ${checked("consentRegistrar") ? "yes" : "no"}`],
+          ["Packet readiness", packetReadiness()],
+          ["Last action", state.lastAction]
         ];
 
         document.getElementById("stateSummary").innerHTML = rows.map(([key, val]) => `

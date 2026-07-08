@@ -436,17 +436,37 @@
             <div>
               <div class="section-label">Reviewed aggregate metrics</div>
               <h2 style="margin-top: 14px;">All reviewed signals at a glance</h2>
-              <p class="note">Only reviewed aggregate data is shown here. No member or non-member segmentation appears on the public page.</p>
+              <p class="note">Every figure below is derived from reviewed records and benchmarked against the official Act 36 statutory timeframes. Waits are shown against the statutory clock, not in isolation.</p>
             </div>
             <p class="note">Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
           </div>
+          <div class="toggle-row" role="group" aria-label="Reviewed submission filter" style="margin-top: 12px;">
+            <button class="choice-button" type="button" data-filter="all" aria-pressed="true">All reviewed submissions</button>
+            <button class="choice-button" type="button" data-filter="member" aria-pressed="false">ABA member submissions</button>
+            <button class="choice-button" type="button" data-filter="non-member" aria-pressed="false">Non-member submissions</button>
+          </div>
+          <p class="note" id="filterNote" style="margin-top: 8px;">Showing all reviewed submissions. Cells below the anonymisation threshold stay suppressed after filtering.</p>
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
-          <div class="metric"><span>Open applications over threshold</span><span class="metric-value" id="metricBacklog">37</span><p class="note">Reviewed open records only.</p></div>
-          <div class="metric"><span>Median wait time</span><span class="metric-value" id="metricMedian">14 mo</span><p class="note">Current reviewed open applications.</p></div>
-          <div class="metric"><span>Longest open duration</span><span class="metric-value" id="metricWorst">42 mo</span><p class="note">Maximum reviewed open duration.</p></div>
-          <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">51.8</span><p class="note">Sum of reviewed open durations.</p></div>
+          <div class="metric"><span>Open applications</span><span class="metric-value" id="metricOpen">—</span><p class="note">Reviewed, not yet finalised.</p></div>
+          <div class="metric"><span>In backlog (over statutory timeframe)</span><span class="metric-value" id="metricBacklog">—</span><p class="note">Open past the official Act 36 clock for their type.</p></div>
+          <div class="metric"><span>Median wait</span><span class="metric-value" id="metricMedian">—</span><p class="note">Median open duration; compare per type below.</p></div>
+          <div class="metric"><span>Longest open</span><span class="metric-value" id="metricWorst">—</span><p class="note">Maximum reviewed open duration.</p></div>
+          <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">—</span><p class="note">Sum of open durations ÷ 365.</p></div>
+        </section>
+
+        <section class="grid two" style="margin-top: 16px;">
+          <article class="chart-card">
+            <h3>Where time is lost — by official stage</h3>
+            <svg class="chart-svg wide-chart" id="stageChart" viewBox="0 0 520 320" role="img" aria-label="Open reviewed records by official Act 36 stage"></svg>
+            <p class="note">Open reviewed records grouped by the five official Act 36 stages plus the cross-cutting "referred back" case. Evaluation is typically the long pole.</p>
+          </article>
+          <article class="chart-card">
+            <h3>Wait vs statutory benchmark — by service type</h3>
+            <svg class="chart-svg wide-chart" id="benchmarkChart" viewBox="0 0 520 430" role="img" aria-label="Median wait versus statutory timeframe by service type"></svg>
+            <p class="note">Bars = median open duration; dashed line = the official timeframe for that type. Red bars exceed the statutory clock.</p>
+          </article>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
@@ -489,6 +509,21 @@
             <svg class="chart-svg wide-chart" id="bottleneckChart" viewBox="0 0 520 260" role="img" aria-label="Recurring bottleneck themes"></svg>
             <p class="note">Themes are assigned during ABA review rather than taken from raw public submissions.</p>
           </article>
+        </section>
+
+        <section class="panel" style="margin-top: 16px;">
+          <div class="section-heading">
+            <div>
+              <div class="section-label">Registrar evidence packets</div>
+              <h2 style="margin-top: 14px;">Aggregate evidence-packet activity</h2>
+              <p class="note">Aggregate only — packets are prepared from consented, reviewed records. No company is named here. Fictional placeholder figures.</p>
+            </div>
+          </div>
+          <div class="metric-grid" style="margin-top: 12px;">
+            <div class="metric"><span>Registrar evidence packets prepared</span><span class="metric-value">4</span><p class="note">Across all engagement windows.</p></div>
+            <div class="metric"><span>Applications represented in submitted packets</span><span class="metric-value">29</span><p class="note">Consented, reviewed, included records.</p></div>
+            <div class="metric"><span>Most recent packet period</span><span class="metric-value">Q2 2026</span><p class="note">Latest registrar engagement window.</p></div>
+          </div>
         </section>
 
         <section class="grid two" style="margin-top: 16px;">
@@ -537,53 +572,119 @@
     </div>
 
     <script>
-      const sectorSignals = {
-        label: "All reviewed submissions",
-        refreshedAt: "2026-06-22 14:45",
-        oldestSubmissionAt: "2024-04-20 10:12",
-        newestSubmissionAt: "2026-06-22 14:28",
-        backlog: 37,
-        median: 14,
-        worst: 42,
-        years: 51.8,
-        pathway: [
-          ["Group 3 fertilizer", 18],
-          ["Agricultural remedy", 12],
-          ["Not sure", 2, true],
-          ["Other", 5]
-        ],
-        category: [
-          ["Biofertiliser", 17],
-          ["Biopesticide", 13],
-          ["Biostimulant", 7]
-        ],
-        country: [
-          ["South Africa", 26],
-          ["Kenya", 6],
-          ["Nigeria", 3, true],
-          ["Ghana", 2, true]
-        ],
-        bottlenecks: [
-          ["Regulator delay", 16],
-          ["Proof missing", 7],
-          ["Reference issue", 6],
-          ["Classification ambiguity", 5],
-          ["Consent missing", 3, true]
-        ],
-        regime: [
-          ["Agriculture / Act 36", 29],
-          ["Water treatment", 5],
-          ["Other", 3, true]
-        ],
-        trend: [22, 25, 27, 31, 34, 37],
-        pipeline: 24,
-        suppression: [
-          ["Public-health pest + low count", "Suppressed", true],
-          ["Water treatment + reviewed count", "5 records", false],
-          ["Other regime + low count", "Suppressed", true],
-          ["Agriculture / Act 36", "29 records", false]
-        ]
-      };
+      // One record-level fictional dataset. Every headline figure and breakdown is DERIVED from
+      // this — nothing is hardcoded twice, so figures cannot drift. Fields: m member/non-member,
+      // f final?, s official stage, t service-type key, p legal pathway, c category, co country,
+      // rg regime, d open days, b bottleneck theme. Benchmarks are lookup constants (below), not
+      // stored per record. All data fictional.
+      const reviewedApplications = [
+        { m:"member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:70, b:"Reference issue" },
+        { m:"member", f:false, s:"Scientific screening", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:210, b:"Regulator delay" },
+        { m:"member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:520, b:"Regulator delay" },
+        { m:"member", f:false, s:"Evaluation", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:760, b:"Regulator delay" },
+        { m:"member", f:false, s:"Evaluation", t:"new-formulation", p:"Agricultural remedy", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:610, b:"Classification ambiguity" },
+        { m:"member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:470, b:"Regulator delay" },
+        { m:"member", f:false, s:"Scientific screening", t:"parallel", p:"Agricultural remedy", c:"Biopesticide", co:"Kenya", rg:"Agriculture / Act 36", d:150, b:"Regulator delay" },
+        { m:"member", f:false, s:"Referred back", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:300, b:"Proof missing" },
+        { m:"member", f:false, s:"Evaluation", t:"new-source", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:260, b:"Regulator delay" },
+        { m:"member", f:false, s:"Verification", t:"renewal", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:40, b:"None" },
+        { m:"member", f:false, s:"Evaluation", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:540, b:"Classification ambiguity" },
+        { m:"member", f:false, s:"Decision", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:430, b:"Regulator delay" },
+        { m:"member", f:false, s:"Scientific screening", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"Kenya", rg:"Agriculture / Act 36", d:120, b:"Reference issue" },
+        { m:"member", f:true, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:395, b:"None" },
+        { m:"member", f:true, s:"Decision", t:"parallel", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:110, b:"None" },
+        { m:"member", f:false, s:"Appeal", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:820, b:"Regulator delay" },
+        { m:"member", f:false, s:"Evaluation", t:"major-amendment", p:"Agricultural remedy", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:450, b:"Classification ambiguity" },
+        { m:"member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:360, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:60, b:"Consent missing" },
+        { m:"non-member", f:false, s:"Scientific screening", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:140, b:"Membership not verified" },
+        { m:"non-member", f:false, s:"Evaluation", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:560, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Kenya", rg:"Agriculture / Act 36", d:480, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Referred back", t:"minor-amendment", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:160, b:"Proof missing" },
+        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Not sure", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:500, b:"Classification ambiguity" },
+        { m:"non-member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Nigeria", rg:"Agriculture / Act 36", d:430, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Scientific screening", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Water treatment", d:150, b:"Regulator delay" },
+        { m:"non-member", f:true, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:410, b:"None" },
+        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Ghana", rg:"Agriculture / Act 36", d:470, b:"Regulator delay" },
+        { m:"member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:55, b:"Reference issue" },
+        { m:"non-member", f:false, s:"Referred back", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:280, b:"Proof missing" },
+        { m:"member", f:false, s:"Referred back", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:230, b:"Classification ambiguity" },
+        { m:"member", f:false, s:"Evaluation", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:680, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Decision", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:500, b:"Regulator delay" }
+      ];
+
+      const PIPELINE = 24;                       // separate pre-submission list; never counted as backlog
+      const TREND = [22, 24, 26, 27, 25, 28];    // reviewed open-record count by month (explicit series)
+      const SUPPRESS_K = 4;                       // anonymisation threshold placeholder (k)
+
+      // Official statutory timeframes (calendar days) — the benchmark spine. Lookup constants.
+      const BENCHMARK = { "new-molecule":627, "new-formulation":418, "generic":418, "parallel":118, "daughter":118, "new-source":208, "major-amendment":418, "minor-amendment":118, "renewal":90 };
+      const TYPE_LABEL = { "new-molecule":"New molecule", "new-formulation":"New formulation", "generic":"Generic", "parallel":"Parallel", "daughter":"Daughter", "new-source":"New source", "major-amendment":"Major amendment", "minor-amendment":"Minor amendment", "renewal":"Renewal" };
+      const STAGE_ORDER = ["Verification", "Scientific screening", "Evaluation", "Decision", "Appeal", "Referred back"];
+
+      let activeFilter = "all";
+
+      function isAct36(r) { return r.rg === "Agriculture / Act 36"; }
+      function benchmarkOf(r) { return isAct36(r) && BENCHMARK[r.t] != null ? BENCHMARK[r.t] : null; }
+      function overBenchmark(r) { const b = benchmarkOf(r); return b != null && r.d > b; }
+      function daysToMonths(d) { return Math.round((d / 30.44) * 10) / 10; }
+      function median(nums) { if (!nums.length) return 0; const s = [...nums].sort((a, b) => a - b); const i = Math.floor(s.length / 2); return s.length % 2 ? s[i] : Math.round((s[i - 1] + s[i]) / 2); }
+
+      function filteredRecords() { return reviewedApplications.filter((r) => activeFilter === "all" || r.m === activeFilter); }
+
+      function deriveMetrics() {
+        const open = filteredRecords().filter((r) => !r.f);
+        const days = open.map((r) => r.d);
+        return {
+          open,
+          openCount: open.length,
+          backlogCount: open.filter(overBenchmark).length,
+          median: median(days),
+          worst: days.length ? Math.max(...days) : 0,
+          years: Math.round((days.reduce((a, b) => a + b, 0) / 365) * 10) / 10
+        };
+      }
+
+      // Group records by a key, ordered, with small cells (< k) flagged suppressed.
+      function groupRows(records, keyFn, order) {
+        const map = new Map();
+        records.forEach((r) => { const k = keyFn(r); map.set(k, (map.get(k) || 0) + 1); });
+        const keys = order ? order.filter((k) => map.has(k)) : [...map.keys()];
+        return keys.map((k) => (map.get(k) < SUPPRESS_K ? [k, map.get(k), true] : [k, map.get(k)]));
+      }
+
+      // Per service type: median actual open days vs the official benchmark. [label, actual, bench, count]
+      function benchmarkRows(open) {
+        const groups = {};
+        open.forEach((r) => { if (benchmarkOf(r) != null) { (groups[r.t] = groups[r.t] || []).push(r.d); } });
+        return Object.keys(groups)
+          .sort((a, b) => BENCHMARK[b] - BENCHMARK[a])
+          .map((t) => [TYPE_LABEL[t], median(groups[t]), BENCHMARK[t], groups[t].length]);
+      }
+
+      function benchmarkChart(id, rows) {
+        const shown = rows.flatMap((r) => (r[3] < SUPPRESS_K ? [] : [r[1], r[2]]));
+        const max = Math.max(1, ...shown);
+        const rowHeight = 46, chartX = 150, chartWidth = 520 - chartX - 70;
+        const body = rows.map(([label, actual, bench, count], i) => {
+          const y = 26 + i * rowHeight;
+          if (count < SUPPRESS_K) {
+            return `<text x="16" y="${y + 17}" font-size="13" fill="#66706b">${label}</text>
+              <rect x="${chartX}" y="${y}" width="54" height="22" rx="11" fill="#a97924" opacity="0.42"></rect>
+              <text x="${chartX + 62}" y="${y + 17}" font-size="12" fill="#66706b">Suppressed</text>`;
+          }
+          const aw = Math.max(8, chartWidth * actual / max);
+          const bx = chartX + chartWidth * bench / max;
+          const over = actual > bench;
+          return `<text x="16" y="${y + 17}" font-size="13" fill="#66706b">${label}</text>
+            <rect x="${chartX}" y="${y}" width="${aw}" height="22" rx="11" fill="${over ? "#b74a36" : "#2f7a56"}" opacity="0.9"></rect>
+            <text x="${chartX + aw + 8}" y="${y + 17}" font-size="12" font-weight="700" fill="#22302d">${daysToMonths(actual)} mo</text>
+            <line x1="${bx}" y1="${y - 5}" x2="${bx}" y2="${y + 27}" stroke="#22302d" stroke-width="2" stroke-dasharray="3 3"></line>`;
+        }).join("");
+        const legendY = 26 + rows.length * rowHeight + 8;
+        document.getElementById(id).innerHTML = body +
+          `<text x="16" y="${legendY}" font-size="11" fill="#66706b">Dashed line = official statutory timeframe. Red bar = median exceeds it.</text>`;
+      }
 
       function setText(id, text) {
         document.getElementById(id).textContent = text;
@@ -667,16 +768,15 @@
         `).join("");
       }
 
-      function renderSummary(data) {
+      function renderSummary(label) {
         const rows = [
-          ["Signal basis", data.label],
-          ["Data refreshed", data.refreshedAt],
-          ["Reviewed submissions received", `${data.oldestSubmissionAt} to ${data.newestSubmissionAt}`],
-          ["Evidence base", "Reviewed submissions only; raw submissions are excluded from the public view."],
-          ["Geographic truth", "Africa-wide signals are welcome; current operating activity is centered in South Africa."],
-          ["Privacy", "Small cells are suppressed before publication."],
-          ["Signal definition", "Open reviewed applications over threshold; pre-submission pipeline is separate."],
-          ["Reading caution", "These are currently visible signals rather than a complete market picture."]
+          ["Signal basis", label],
+          ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
+          ["Backlog definition", "Open reviewed records past the official Act 36 statutory timeframe for their type."],
+          ["Median wait", "Median total open duration; per-type benchmark shown above."],
+          ["Geographic truth", "Africa-wide signals welcome; current activity centered in South Africa."],
+          ["Privacy", `Cells below ${SUPPRESS_K} contributing records are suppressed after filtering.`],
+          ["Pipeline", "Pre-submission pipeline is separate and never counted as backlog."]
         ];
         document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
           <div class="state-row">
@@ -686,24 +786,44 @@
         `).join("");
       }
 
+      const FILTER_LABEL = { all: "All reviewed submissions", member: "ABA member submissions", "non-member": "Non-member submissions" };
+
       function render() {
-        const data = sectorSignals;
-        setText("metricBacklog", data.backlog);
-        setText("metricMedian", `${data.median} mo`);
-        setText("metricWorst", `${data.worst} mo`);
-        setText("metricYears", data.years);
-        setText("dataRefreshed", data.refreshedAt);
-        barChart("pathwayChart", data.pathway);
-        renderTrend(data);
-        verticalChart("categoryChart", data.category);
-        verticalChart("regimeChart", data.regime);
-        barChart("countryChart", data.country);
-        barChart("bottleneckChart", data.bottlenecks);
-        renderPipeline(data);
-        renderSuppression(data);
-        renderSummary(data);
-        setText("trendCaption", `${data.label}: reviewed backlog trend over the last six months.`);
+        const m = deriveMetrics();
+        const open = m.open;
+        setText("metricOpen", m.openCount);
+        setText("metricBacklog", m.backlogCount);
+        setText("metricMedian", `${daysToMonths(m.median)} mo`);
+        setText("metricWorst", `${daysToMonths(m.worst)} mo`);
+        setText("metricYears", m.years);
+
+        barChart("stageChart", groupRows(open, (r) => r.s, STAGE_ORDER));
+        benchmarkChart("benchmarkChart", benchmarkRows(open));
+        barChart("pathwayChart", groupRows(open, (r) => r.p));
+        verticalChart("categoryChart", groupRows(open, (r) => r.c));
+        verticalChart("regimeChart", groupRows(open, (r) => r.rg));
+        barChart("countryChart", groupRows(open, (r) => r.co));
+        barChart("bottleneckChart", groupRows(open, (r) => r.b));
+        renderPipeline({ backlog: m.backlogCount, pipeline: PIPELINE });
+        renderTrend({ trend: TREND });
+
+        const label = FILTER_LABEL[activeFilter];
+        setText("trendCaption", `${label}: reviewed open-record trend (explicit monthly series).`);
+        document.getElementById("filterNote").textContent = `Showing ${label.toLowerCase()}. Cells below the anonymisation threshold stay suppressed after filtering.`;
+
+        const cells = groupRows(open, (r) => r.co).map(([lbl, val, sup]) => [`${lbl} (reviewed)`, sup ? "Suppressed" : `${val} records`, Boolean(sup)]);
+        renderSuppression({ suppression: cells });
+
+        renderSummary(label);
       }
+
+      document.querySelectorAll("[data-filter]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeFilter = btn.dataset.filter;
+          document.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === activeFilter)));
+          render();
+        });
+      });
 
       render();
     </script>
