@@ -236,6 +236,26 @@ Reference data, defined once, read everywhere (today these constants are hardcod
 - **FunctionalCategory ↔ RegistrarFunction** — mapping *(provisional, spec §5.1)*
 - **BottleneckTheme · ABARelationshipType · Country · Regime** — controlled lists
 
+> **Scope decision (D7, initial and reversible): full union taxonomy vs. registration + renewal only.**
+> v1 ships the *whole* union taxonomy — registration, amendment, renewal, permits & certificates,
+> appeal — because a company's relationship with the registrar isn't just "get a new registration": a
+> 3-year term forces renewal (with a harsher late-renewal fee), amendments happen more often than new
+> registrations in a mature sector, and appeal was a literal gap in the old model (no status mapped to
+> it at all). Leaving any of these out understates the sector's real friction, which weakens the
+> advocacy evidence this tracker exists to build.
+>
+> **That said — this is an initial scope call, not a load-bearing architecture decision, and the cost
+> is real:** it pushes the intake service-type selector to ~25 grouped options against a "low-friction
+> open form" goal. If intake friction or scope pressure argues for a leaner v1, **the peel-back path
+> is cheap and explicit** because this table is the single source everything else reads from:
+> 1. Keep only the **Registration** family — new-molecule, new-formulation, generic, parallel,
+>    daughter, reinstatement, new-source — and the **Renewal** family — renewal, late-renewal.
+> 2. Drop amendment / permits-&-certificates / appeal entries from this table and from the intake
+>    selector's groups (`intake-form-spec-v1.md` §3, `intake-flow-brief-v2.md` Screen 4).
+> 3. Nothing else moves: the spine, sensitivity model, and derived metrics are keyed off whatever
+>    `ServiceType` rows exist, not off the count of rows — narrowing this list is a single-table edit,
+>    not a schema change.
+
 ---
 
 ## 9. Cross-cutting rules
@@ -279,6 +299,7 @@ The public/sector assets read these definitions (from `public-dashboard-brief-v2
 | D4 | Median wait definition — total open duration vs time-in-stage | Total open duration | Team |
 | D5 | Registrar packet scope — in-process only vs include registered | Deferred (operator layer) | Team |
 | D6 | Biostimulant pathway (claim-based split) | Documentary reading, flagged | Specialist |
+| D7 | Service-type breadth — full union taxonomy vs. registration+renewal only | **Chosen for v1:** full taxonomy (see §8 callout for rationale + peel-back path). Initial scope call, not architectural — revisit if intake friction becomes a problem | Team |
 
 ---
 

@@ -59,6 +59,13 @@ in what it captures.
 - Show a passive helper: functional category *maps to* the registrar's function axis (provisional).
 
 ## Section 3 — Registration / application  *(the core, one application at a time)*
+
+> **Scope note (D7, data-model-v1 §8/§11):** the selector below covers the full union taxonomy
+> (registration + amendment + renewal + permits & certificates + appeal) as an initial, reversible
+> scope call — not just new registration. If this proves too much selector for a low-friction form,
+> the peel-back to registration + renewal only is a single-table edit; see the D7 callout for the
+> exact list and rationale.
+
 | Field | Req/Opt | Type | Notes |
 |---|---|---|---|
 | Service / application type | Req | select (grouped) | SRF `14ARx`, clock-granularity (new molecule / generic / parallel / renewal / amendment / …) |

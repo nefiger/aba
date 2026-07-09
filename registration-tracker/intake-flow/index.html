@@ -106,6 +106,7 @@
             <section class="panel">
               <h2>3. Service / application type</h2>
               <p class="note">Backlog and wait-time differ by type, so the type sits at the registrar's clock-granularity — keyed to the Service Request Form <code>14ARx</code> codes. Types the SRF bundles under one code (generic vs parallel/daughter) are kept separate because their official clocks differ. <em>Spec §2.1.</em></p>
+              <div class="callout">Covering all five families (registration / amendment / renewal / permits &amp; certificates / appeal) is an <strong>initial, reversible scope call</strong> — if this selector proves too much for a low-friction form, peeling back to registration + renewal only is a single-table edit. <em>Data model §8/§11, D7.</em></div>
               <div class="form-grid">
                 <div class="field"><label for="serviceType">Service type</label>
                   <select id="serviceType" class="control-select">

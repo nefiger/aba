@@ -58,7 +58,7 @@ what V1 has, what V2 proposes, and the spec basis.
 
 | # | Field / behaviour | V1 (current) | V2 (proposed) | Cite |
 |---|---|---|---|---|
-| R1 | **Service/application type** | *absent* — no type field at all | First-class **service type** selector at clock-granularity, keyed to SRF `14ARx`. Distinguishes the types the SRF bundles under one code: generic (14AR1, 418 d) vs parallel / daughter / reinstatement (14AR1, 118 d); includes **new source of a.i.** (208 d, no SRF row) and **appeal under s.6**. Grouped by family (registration / amendment / renewal / permits & certificates / appeal) so the list is scannable. | spec §2.1, §2.2; G1, G2, G4 |
+| R1 | **Service/application type** | *absent* — no type field at all | First-class **service type** selector at clock-granularity, keyed to SRF `14ARx`. Distinguishes the types the SRF bundles under one code: generic (14AR1, 418 d) vs parallel / daughter / reinstatement (14AR1, 118 d); includes **new source of a.i.** (208 d, no SRF row) and **appeal under s.6**. Grouped by family (registration / amendment / renewal / permits & certificates / appeal) so the list is scannable. **Scope note (D7):** covering all five families is an initial, reversible scope call — see data-model-v1 §8/§11 for the peel-back path to registration+renewal only if the full list proves too much for a low-friction form. | spec §2.1, §2.2; G1, G2, G4 |
 | R2 | **Classification code (M/L/K picker)** | intake dropdown `M / L / K / Unknown` | **Removed from intake.** B/K/L/M are registrar-assigned *registration-number prefixes*, not an applicant choice; within our scope the series is always **L**. The L-number is a *post-registration* attribute tied to lifecycle status — shown read-only, populated only at `approved / registered`, absent for pipeline/in-process records. | spec §5.4, §4; G9 |
 | R3 | **Reference (single field)** | one `Registrar reference` status + number/reason | **Split into two staged fields.** (a) *Application / file reference* — the stamped page-1 acknowledgement + Registrar **file number**, assigned at submission, exists pre-registration. (b) *Registration number (L-number)* — post-registration only, per R2. | spec §4; G8 |
 | R4 | **Status list** | 11 statuses, `Rejected / withdrawn` lumped, no Appeal | Same friendly labels, but each mapped 1:1 to an **official stage** (Verification → Scientific screening → Evaluation → Decision → Appeal) shown as a badge; **Appeal** added; `rejected` and `withdrawn` split, with the note that *withdrawal after evaluation has commenced = rejection (no refund)*. | spec §3, §3.1; G6, G3, G16 |
@@ -95,7 +95,7 @@ what V1 has, what V2 proposes, and the spec basis.
 - *(removed: M/L/K classification picker — R2)*
 - Optional **data-path tag** (5-batch / CoA; botanical Cat 1/2/3). *(R10)*
 
-### Service/application type (Screen 4 — new) *(R1)*
+### Service/application type (Screen 4 — new) *(R1, scope decision D7 — see data-model-v1 §8/§11)*
 - **Service type** selector keyed to SRF `14ARx`, grouped:
   - *Registration:* new molecule (14AR2) · new formulation type (14AR2) · generic (14AR1) ·
     parallel (14AR1) · daughter (14AR1) · reinstatement of lapsed (14AR1) · new source of a.i.
