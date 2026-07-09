@@ -600,6 +600,16 @@ Possible data relationships:
 
 This relationship remains unresolved at implementation level.
 
+**Alignment with Jen's CRM (2026-07 review).** The membership-ops requirements
+(`docs/requirements/aba-public-capture-journeys-and-record-model.md` and `-field-map.md`) confirm the
+CRM's canonical records are `Person`, `Organization`, `Product`, `RegistrationSubmission`,
+`MembershipApplication`, and `MembershipRelationship` — and that the tracker is *expected to feed*
+them. Two handoff points are open with Jen and tracked as **D8** (organisation identity / continuity
+linkage — her "Journey E" matching layer; the tracker should defer to the CRM's dedupe, not build its
+own) and **D9** (where the verified registration lifecycle lives — likely the CRM `Product` record).
+**Naming caution:** the tracker's "renewal" (Act 36 3-year re-registration) is a different concept from
+the CRM's "renewals" (membership dues) — do not conflate them.
+
 ## Wireframe States To Include
 
 The v1 wireframes should include happy paths plus the most important edge states.

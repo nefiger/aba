@@ -36,8 +36,8 @@ area briefs.
 
 ## What we need from you + Anna
 
-**Nothing on the decision list right now.** All the decisions that were open for you and Anna (D1, D2,
-D4, D5) are now closed:
+**The old decision list is closed.** Everything that was open for you and Anna (D1, D2, D4, D5) is
+decided:
 
 - **D1** — the optional "approved person / eligibility / SACNASP" block: **include, optional,
   non-gating, reviewable.** (`data-model-v1.md` §6)
@@ -48,11 +48,26 @@ D4, D5) are now closed:
 - **D5** — registrar packet scope: **in-process applications only** — already-registered records are
   never packet candidates.
 
-Two remaining items (**D3** — mapping our product categories to the registrar's own function axis, and
-**D6** — the biostimulant legal pathway) are **regulatory questions, not product/design ones** — they're
-flagged in `data-model-v1.md` §11 for whoever at ABA has that domain expertise, not for you.
+**Two things I'd value your input on — not blocking, and more yours than mine** (both are really about
+how the tracker hands off to your CRM; logged as D8/D9 in `data-model-v1.md` §11):
 
-So: just read through and comment on anything that looks off — there's no open decision blocking that.
+- **D8 — linking submissions to one organisation over time.** Tracker submission is open (no login),
+  so I don't want it inventing its own company identity/dedupe — it should capture whatever key lets
+  your CRM match submissions to one `Organization` (your membership side already uses business
+  registration number + name + country). Your capture model already frames this as the "continuity /
+  Journey E" layer, so I'd rather align to it than reinvent it.
+- **D9 — where registration facts live.** The registration/L-number and grant/expiry dates are the
+  registrar's facts — self-reported now, verified later. Your `Product` record feels like the natural
+  home for the verified version. Worth confirming so the tracker captures toward that shape.
+
+Neither is urgent — I know tracker redesign is parked while you lock the membership capture model. I'm
+flagging them so the tracker aligns to your continuity model when it resumes.
+
+Two further items (**D3** — mapping our product categories to the registrar's own function axis, and
+**D6** — the biostimulant legal pathway) are **regulatory questions, not product/design ones** — flagged
+in `data-model-v1.md` §11 for whoever at ABA has that domain expertise, not for you.
+
+Otherwise: just read through and comment on anything that looks off.
 
 ---
 
