@@ -12,30 +12,42 @@ the natural origin of these crop inputs.
 **What changed in V2 (headline).** The intake flow now carries the registrar's own *service/application
 type* at clock-granularity, maps statuses onto the five official Act 36 stages, splits the pre- vs
 post-registration reference, drops the M/L/K intake picker (a category error), splits proof into
-dossier-readiness and proof-of-payment, and extends the authorisation gate with the Act 36
-approved-person / eligibility requirements. Each change is itemised in §"Reconciliation ledger" with
+dossier-readiness and proof-of-payment, **replaces the hard authorisation stop-gate with an open-access
+model plus a data-quality attestation**, and moves the Act 36 approved-person / eligibility / SACNASP
+data into an **optional, non-gating** module. Each change is itemised in §"Reconciliation ledger" with
 *current → proposed → citation*.
 
 ---
 
+**Status note.** This brief's core capture logic (Screens 1–9) is v1 — open-capture, live. Where it
+mentions **operator review, verified ABA relationship, or registrar packet**, those are
+`data-model-v1.md` §7's **deferred layer** (named, extensible, not built in v1) — forward-looking
+framing for a later layer, not current v1 gating.
+
 ## Audience
 
-Authorised company representatives responsible for submitting or updating product registration
-information for agricultural crop inputs. The nominated **approved person** (Act 36) — or a third
-party holding a **letter of authority** — is the accountable signatory.
+Anyone reaching the form from a link — ABA member or not. In practice this is typically a company
+representative reporting on their own product's registration; a responsible-attestation checkbox
+signals this without gating access. The optional applicant-accountability module lets a submitter
+additionally name the Act 36 **approved person** — or a third party holding a **letter of
+authority** — as the accountable signatory, but this is not required to submit.
 
 ## Purpose
 
 Collect company, contact, product, **service/application type**, application status, staged
-reference, readiness flags, consent and visibility information in a low-friction flow that can be
-saved and resumed by email. Intake creates raw submissions for ABA operator review; it is not the
-system of record by itself. The intake captures the *front door and readiness* — never the dossier
-contents *(spec §0, §1, §6)*.
+reference, readiness flags, consent and visibility information in a low-friction, open-access flow
+that can be saved and resumed by email. Intake creates raw submissions; it is not the system of
+record by itself. The intake captures the *front door and readiness* — never the dossier contents
+*(spec §0, §1, §6)*.
 
 ## Access / Role
 
-Public submission flow, authorised representatives only. The first screen must stop unauthorised
-users and ask them to forward the link to the responsible person.
+**Open access.** Anyone — ABA member or not — reaches the form from a link and submits; no login, no
+membership gate (data-model-v1 §1). A single **responsible-attestation** checkbox ("I'm responsible
+for, or authorised to report, this product's registration") is a **data-quality signal, not a stop
+gate** — it discourages third-party reporting but never blocks submission. *(Corrected from V1/early
+V2 drafts, which described a hard authorisation stop-gate; that contradicted the open-access model in
+`data-model-v1.md`, `intake-form-spec-v1.md`, and the resynced intake wireframe.)*
 
 ---
 
@@ -51,7 +63,7 @@ what V1 has, what V2 proposes, and the spec basis.
 | R3 | **Reference (single field)** | one `Registrar reference` status + number/reason | **Split into two staged fields.** (a) *Application / file reference* — the stamped page-1 acknowledgement + Registrar **file number**, assigned at submission, exists pre-registration. (b) *Registration number (L-number)* — post-registration only, per R2. | spec §4; G8 |
 | R4 | **Status list** | 11 statuses, `Rejected / withdrawn` lumped, no Appeal | Same friendly labels, but each mapped 1:1 to an **official stage** (Verification → Scientific screening → Evaluation → Decision → Appeal) shown as a badge; **Appeal** added; `rejected` and `withdrawn` split, with the note that *withdrawal after evaluation has commenced = rejection (no refund)*. | spec §3, §3.1; G6, G3, G16 |
 | R5 | **Proof (single flag)** | one `Proof of submission attached` checkbox | **Split into two readiness flags:** *dossier-readiness* (List I + List II + supporting studies as a single flag — never field-by-field) and *proof-of-payment attached*. Neither is the dossier itself. | spec §4, §6; G12 |
-| R6 | **Authorisation gate** | single yes/no "are you authorised?" | Extended to the Act 36 **approved-person** model: named approved person accountable for the application; **SA-residency / SA-registered-office** eligibility signal; optional **letter of authority** flag for third parties; optional **SACNASP** signatory number. | spec §5, Company/Contact model; G13, G14 |
+| R6 | **Authorisation check** | single yes/no "are you authorised?" **stop gate** | **Reframed to open access** (data-model-v1 §1): the yes/no becomes a **responsible-attestation checkbox** — data-quality signal, never blocks submission. The Act 36 **approved-person / eligibility / SACNASP / letter-of-authority** data moves into the **optional, non-gating** applicant-accountability module (data-model-v1 §6 — decision D1, closed: include, optional). | data-model-v1 §1, §6 (D1); spec §5, Company/Contact model; G13, G14 |
 | R7 | **Legal pathway** | `Group 3 fertilizer / Agricultural remedy / Not sure` | Relabelled to the load-bearing split: **Agricultural remedy** (incl. biopesticide / inoculant / PGR) vs **Fertilizer** (biofertiliser) vs **Not sure**, evidenced by the fee split. Biostimulant note: *splits by claim* (PGR claim → remedy; soil/nutritional → fertilizer) — flagged as documentary reading, not confirmed. | spec §5.2, §8 Q2; G11 |
 | R8 | **Functional category** | sector dropdown, standalone | Kept as the sector axis, but annotated as **mapping to** the registrar's own function axis (Insecticide / Fungicide / Herbicide / Other incl. PGR, adjuvant, rodenticide). Shown as a read-only "maps to registrar function" hint. | spec §5.1; G10 |
 | R9 | **3-year term / renewal** | *absent* | Surfaced where relevant: when type = **Renewal** or status = `approved / registered`, show the **3-year validity** and **renew-before-31-May** reminder. Not asked at intake for pipeline records. | spec §2.2 note; G15 |
@@ -61,12 +73,10 @@ what V1 has, what V2 proposes, and the spec basis.
 
 ## Field / status / gate list (the checkpoint artifact)
 
-### Gate & eligibility (Screen 1)
-- **Authorised to submit?** yes → continue; no → stop + forward-link state *(unchanged core gate)*.
-- **Approved person named** (accountable individual, Act 36) — name + role. *(new, R6)*
-- **Eligibility signal:** applicant resident in SA / company has SA-registered office (Act 36 records). *(new, R6)*
-- **Acting under letter of authority?** yes/no (third-party mandate, scope + duration). *(new, optional, R6)*
-- **SACNASP signatory number** (optional). *(new, optional, R6)*
+### Entry + attestation (Screen 1) — no gate *(reframed, R6)*
+- Short plain-language intro (open to anyone) + concise POPIA/privacy notice.
+- **Responsible attestation** — single checkbox: *"I'm responsible for, or authorised to report, this
+  product's registration."* Data-quality signal, **not** a stop gate — continues either way.
 
 ### Company & contact (Screen 2) — largely unchanged
 - Company name; company role (manufacturer / importer / local registration holder / distributor
@@ -122,19 +132,29 @@ what V1 has, what V2 proposes, and the spec basis.
 - **Dossier-readiness** flag (List I/II bundle ready — single flag, not contents).
 - **Proof-of-payment attached** flag.
 
-### Consent & visibility (Screen 7) — unchanged
+### Applicant accountability (Screen 7 — optional, non-gating) *(moved here, R6; data-model-v1 §6, D1)*
+- Collapsible/skippable block, one-line explainer: *"Optional — helps make the record a complete
+  Act 36 application; skip if you'd rather not."* Never blocks continuing to consent/submit.
+- **Approved person named** (accountable individual, Act 36) — name + role. *(optional)*
+- **Eligibility signal:** applicant resident in SA / company has SA-registered office (Act 36
+  records). *(optional)*
+- **Acting under letter of authority?** yes/no (third-party mandate, scope + duration). *(optional)*
+- **SACNASP signatory number** — captured as a **verified boolean**, not the raw number. *(optional)*
+
+### Consent & visibility (Screen 8) — unchanged
 - Internal ABA review (required) / anonymised public aggregate / named registrar packet (opt-in).
 
-### Save / submit (Screen 8) — unchanged
+### Save / submit (Screen 9) — unchanged
 - Save draft + email return link (saved-at only); submit for ABA review (sets `submittedAt`).
 
 ---
 
 ## Important states (v2)
 
-- Authorised user continues; not-authorised stop state.
-- **Not eligible** (no SA residency / registered office) — soft warning, record still captured but
-  flagged for operator review.
+- Open access: everyone continues; the responsible attestation is data-quality only, never a stop
+  state.
+- **Not eligible** (no SA residency / registered office, in the optional module) — soft warning,
+  record still captured but flagged for operator review; never blocks submission.
 - **L-number absent** for any pipeline/in-process record — shown as a lifecycle state, never an input.
 - Missing **dossier-readiness** or **proof-of-payment** can continue for review, but blocks registrar
   packet inclusion.
@@ -144,9 +164,10 @@ what V1 has, what V2 proposes, and the spec basis.
 
 ## Packet-readiness rule (unchanged logic, updated inputs)
 
-A record is *potentially* packet-ready after operator review only when: authorised; dossier-ready;
-proof-of-payment attached; named-registrar-packet consent given; file reference provided or an
-unavailable-reason recorded; and verified `Full member, active` (others need operator exception).
+A record is *potentially* packet-ready after operator review only when: responsible attestation
+given; dossier-ready; proof-of-payment attached; named-registrar-packet consent given; file reference
+provided or an unavailable-reason recorded; and verified `Full member, active` (others need operator
+exception).
 
 ## Data shown
 
@@ -178,5 +199,6 @@ member `company-dashboard`, anonymised `public-dashboard`, and eligible `registr
   helper text flags this.
 - **Function-axis mapping** (sector category → registrar Insecticide/Fungicide/Herbicide/Other) is a
   suggested mapping pending specialist confirmation (spec §5.1).
-- Should the **eligibility** failure be a hard stop or a soft flag? V2 proposes a *soft flag* (capture +
-  operator review) so non-SA/pipeline signals are not lost; confirm with operator team.
+- ~~Should the eligibility failure be a hard stop or a soft flag?~~ **Resolved (D1, data-model-v1 §6):**
+  the whole applicant-accountability module, including eligibility, is optional and non-gating — a
+  soft flag only, never a stop.

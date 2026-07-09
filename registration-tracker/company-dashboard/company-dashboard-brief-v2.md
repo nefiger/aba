@@ -17,6 +17,11 @@ citation*.
 
 ---
 
+**Status note.** This brief's own record display (pipeline lanes, service type, stage, wait vs
+benchmark) is v1. Where it mentions **operator review / "accepted" / "reviewed" states, verified ABA
+relationship, or registrar-packet inclusion**, those read from `data-model-v1.md` §7's **deferred
+layer** (named, extensible, not built in v1) — forward-looking framing, not current v1 behaviour.
+
 ## Audience
 
 ABA member companies and invited member workspace users monitoring their own product registration

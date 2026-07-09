@@ -36,29 +36,29 @@ area briefs.
 
 ## What we need from you + Anna
 
-Six open decisions are logged in **`data-model-v1.md` §11**. The one that matters most:
+Five open decisions remain, logged in **`data-model-v1.md` §11**: public segmentation privacy
+sign-off, the function-axis mapping, the median-wait definition, packet scope, and the biostimulant
+pathway.
 
-- **D1 — the "approved person / eligibility / SACNASP" block.** Authentic Act 36 applicant data, but
-  it's the highest-PII part of the form and not needed for the core metrics. Built as **optional and
-  non-gating** so it blocks nothing either way. The full cost/worth is in `data-model-v1.md` §6 — worth
-  a quick read before you decide include-vs-defer.
-
-The other five (D2–D6) are lighter — public segmentation privacy sign-off, the function-axis mapping,
-the median-wait definition, packet scope, and the biostimulant pathway.
+**D1 is now closed** — the "approved person / eligibility / SACNASP" block (highest-PII part of the
+form, not needed for the core metrics) is decided: **include, optional, non-gating, reviewable**. Full
+rationale in `data-model-v1.md` §6 if you want the detail; nothing further needed from you on it.
 
 ---
 
-## What is NOT done yet — and the question for you
+## What is NOT done yet
 
 The **actual HTML pages have not been rebuilt** to these docs. That was deliberate: the model needed
-agreeing first, and *how* the pages get built depends on you.
+agreeing first.
 
-**Please decide:** do you want the tracker pages **rebuilt inside your shell** (`public-shell.css`,
-your symbol family, your IA) — your domain — **or** should the standalone low-fi wireframes keep being
-updated to match these specs, for you to restyle afterwards? Once we know, we move.
+**Where the real build happens (settled):** the production build lives in the **monorepo with Malin**
+(dataman), not in this repo. This repo is **spec + front-end-look reference** — the durable data model,
+form logic, and page-feed rules Malin's build reads from, plus the low-fi wireframes as a visual
+starting point for look and feel. The earlier "rebuild in your shell vs. restyle the wireframes"
+question is moot now that the build location is settled.
 
-*(The current wireframes in this branch are being re-synced to the intake spec so the prototype and the
-docs agree — but that's throwaway reference, not production. Production/shell is your call.)*
+*(The current wireframes in this branch are re-synced to the intake spec so the prototype and the docs
+agree — throwaway reference, not production.)*
 
 ---
 

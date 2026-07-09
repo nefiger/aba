@@ -77,9 +77,9 @@ in what it captures.
 - **Status log:** first entry is created from the above; UI may allow adding earlier dated entries so
   the timeline reads as history even with one entry. Wait-time is computed from these dates.
 
-## Section 4 — Applicant accountability  ⚑ OPTIONAL MODULE — DECISION PENDING
-> **Include-vs-defer is an open decision (data model §6 / D1). Built here as optional + skippable so it
-> blocks nobody.** If dropped, remove this whole section — nothing else in the form changes.
+## Section 4 — Applicant accountability  ⚑ OPTIONAL MODULE — DECIDED: include, optional, non-gating
+> **Decision (data model §6 / D1, closed):** include, optional, skippable, non-gating — blocks nobody.
+> If a future review drops it, remove this whole section — nothing else in the form changes.
 
 | Field | Req/Opt | Type | Notes |
 |---|---|---|---|

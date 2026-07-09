@@ -79,13 +79,15 @@ stateless entry). Draft return-link lets a submitter resume/update over time.
 | Registration L-number (post) | ● | ○ | ● | ● |
 | Dossier / payment flags | ● | ○ | ● | ● |
 | Contact PII | ○ | ○ | ● | ○ |
-| Approved-person PII / SACNASP (§6) | ○ | ○ | ● | ○ |
+| Approved-person PII / SACNASP (§6) | ● own-record | ○ | ● | ○ |
 | Free-text notes | ○ | ○ | ● | ○ |
 | ABA relationship (self / verified) | ● self | ▲ | ● both | ● verified |
 
-> The optional accountability block (data model §6) is `OPERATOR`-only and feeds **nothing public**, so
-> the include-vs-defer decision has **near-zero downstream effect** on these surfaces — reinforcing why
-> it's safe to leave flagged.
+> The optional accountability block (data model §6) is `MEMBER` (own-record only — the submitting
+> company can see its own accountable-person data) and feeds **nothing public or packet-facing**, so the
+> include-vs-defer decision (now decided: include) has **near-zero downstream effect** on the other
+> surfaces. Company-dashboard-brief-v2 doesn't currently render this block in its record-detail list;
+> that's a v1 UI scope choice, not a visibility restriction — the data is allowed to be shown.
 
 ---
 

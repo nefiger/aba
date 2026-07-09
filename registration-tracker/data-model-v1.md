@@ -41,7 +41,12 @@ Three tiers govern every field:
 
 - **Provenance:** `I` intake · `O` operator (later) · `D` derived · `L` lookup · `S` system/audit
 - **Sensitivity:** `PUBLIC` aggregate-safe · `MEMBER` own-record only · `OPERATOR` internal only ·
-  `NEVER` never store in tracker (secure reference only)
+  `NEVER` never store in tracker (secure reference only). Below, these four base values are sometimes
+  combined: `A(named) / B(aggregate)` means tier A applies to the record-level value, tier B to its
+  aggregate; `A→B` means the field starts at tier A and is promoted to tier B on some event (e.g. a
+  submission is OPERATOR-only until reviewed, then MEMBER-visible); `-gate` (e.g. `MEMBER + PUBLIC-gate`)
+  marks a field that doesn't hold public data itself but controls whether *other* fields on the same
+  record may flow into PUBLIC aggregates.
 
 ---
 
@@ -70,7 +75,7 @@ Organisation → Product → Application → StatusLogEntry
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
-| submitted_at | S | OPERATOR→MEMBER | system-set on submit; **never an input**; public shows only aggregate ranges |
+| submitted_at | S | MEMBER (named) / PUBLIC (aggregate) | system-set on submit; **never an input**; visible to the submitting org from the start (context §"Submission Timestamp Rule" — operator/company/registrar views may all show it); public shows only aggregate ranges |
 | saved_at (draft) | S | OPERATOR | draft return-link save; not a submission timestamp |
 | submitter_contact_id | I | OPERATOR | FK → ContactPerson |
 | responsible_attestation | I | OPERATOR | light checkbox: "I'm responsible for this product's registration" (data quality, **not** an auth gate) |
@@ -140,46 +145,63 @@ Organisation → Product → Application → StatusLogEntry
 > **Wait-time is derived from these entries — never stored as a literal on the Application.**
 
 ### ConsentSetting  *(POPIA — kept even in "simple")*
+
+> **Sensitivity note:** these are the submitter's *own* consent choices, so the base tier is
+> **MEMBER** (own-record only), not OPERATOR — a company must be able to see what it agreed to.
+> `allow_public_aggregate` carries the additional **PUBLIC-gate** role: it doesn't become public
+> itself, it *controls whether the record's other fields* are allowed to flow into PUBLIC
+> aggregates. (Previous draft marked this whole entity OPERATOR while its own Notes column said
+> "submitter may withdraw" — a self-contradiction; corrected here.)
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
-| allow_internal_review | I | OPERATOR | default ON |
-| allow_public_aggregate | I | PUBLIC-gate | default ON — permits anonymised aggregate use |
-| allow_named_use (opt-in) | I | OPERATOR | default OFF — named/registrar-facing use; for non-members captured as *permission, not a promise* |
-| retention / deletion | I/O | OPERATOR | submitter may withdraw; record removable from aggregates + any packet |
+| allow_internal_review | I | MEMBER | default ON |
+| allow_public_aggregate | I | MEMBER + PUBLIC-gate | default ON — permits anonymised aggregate use |
+| allow_named_use (opt-in) | I | MEMBER | default OFF — named/registrar-facing use; for non-members captured as *permission, not a promise* |
+| retention / deletion | I/O | MEMBER | submitter may withdraw; record removable from aggregates + any packet |
 
 ---
 
-## 6. OPTIONAL MODULE — Applicant accountability ⚑ DECISION PENDING
+## 6. OPTIONAL MODULE — Applicant accountability ⚑ DECIDED: include, optional, non-gating
 
-> **This whole block is a leaf, not a spine.** It is applicant-*identity* data — it does **not** drive
-> the backlog metric, the stage pipeline, or any public asset. It can be included (optional, non-gating)
-> or dropped entirely with a **localized edit and near-zero ripple** into the rest of the model, the
-> form, or the downstream pages. **Decision owner: Jen + Anna (+ you).**
+> **Decision (D1, closed):** include, as **optional and non-gating**. SACNASP captured as a
+> **verified boolean**, not the raw number. **This whole block is a leaf, not a spine** — it is
+> applicant-*identity* data and does **not** drive the backlog metric, the stage pipeline, or any
+> public asset. If a future review drops it, the edit is localized and near-zero-ripple: delete this
+> §6 module and the `approved_person_id` FK — nothing else moves.
+>
+> **Note on the spec's bucketing:** `registrar-requirements-spec-v1.md` §0/§7 sorts approved-person
+> and eligibility into its **CAPTURE** bucket (G13, G14) — i.e. authentic, spec-mandated Act 36 data.
+> This model deliberately demotes that CAPTURE-bucket data to an optional leaf here, because the
+> tracker's own purpose test (backlog metric + sector view) doesn't need applicant identity to
+> function. That's a considered override, not an oversight — recorded here so a future reader doesn't
+> mistake the demotion for a gap against the spec.
 
 ### ApprovedPerson  *(PII — the most sensitive data in the form)*
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
-| name | I | NEVER-public / OPERATOR | Act 36 accountable individual (signs, consents to changes, can withdraw) |
-| sa_resident | I | OPERATOR | eligibility signal |
-| sacnasp_no (optional) | I | OPERATOR | professional credential; consider storing a **verified boolean** rather than the number |
-| letter_of_authority_ref | I | OPERATOR | when submitter ≠ registration holder (third-party mandate) |
+| name | I | MEMBER (own-record) / NEVER-public | Act 36 accountable individual (signs, consents to changes, can withdraw) |
+| sa_resident | I | MEMBER (own-record) | eligibility signal |
+| sacnasp_no (optional) | I | MEMBER (own-record) | professional credential; consider storing a **verified boolean** rather than the number |
+| letter_of_authority_ref | I | MEMBER (own-record) | when submitter ≠ registration holder (third-party mandate) |
 
 ### Eligibility (applicant standing)
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
-| sa_residency_or_office | I,L | OPERATOR | resident in SA / SA-registered office / neither (flag) |
+| sa_residency_or_office | I,L | MEMBER (own-record) | resident in SA / SA-registered office / neither (flag) |
 
-**The tradeoff (for Jen/Anna to weigh):**
+> **Sensitivity correction:** this whole module was previously tagged OPERATOR (internal-only),
+> which would hide a company's own submitted accountable-person data from its own dashboard. It's
+> the submitter's own data about their own accountable person, so the base tier is **MEMBER**
+> (own-record only) like the rest of the submitter's record — never OPERATOR-only, and never
+> public raw. `page-feed-map-v1.md`'s matrix is updated to match.
 
-| | Include (optional, non-gating) | Defer |
+**The tradeoff that was weighed:**
+
+| | Include (optional, non-gating) — **chosen** | Defer |
 |---|---|---|
 | **Worth** | Registrar-facing **credibility** (records look like properly-constituted Act 36 applications); completeness; minor analytics (local-agent routing, foreign-vs-local, SACNASP scientists) | Leaner, lower-friction open form; less PII to protect |
 | **Cost** | Extra optional fields; **highest PII/POPIA burden in the form** (approved-person name, SACNASP no.) | Records are thinner Act 36 representations; add later if registrar-facing use demands it |
-| **Lean toward it if…** | the near-term goal is **registrar-grade evidence** | the near-term goal is **open-form volume** |
-
-**Recommendation (implementable default until decided):** include as **optional, non-gating** in-form
-fields, grouped in one skippable section, with SACNASP captured as a verified boolean rather than the
-raw number. If dropped later, delete this §6 module and the `approved_person_id` FK — nothing else moves.
 
 ---
 
@@ -203,8 +225,11 @@ Reference data, defined once, read everywhere (today these constants are hardcod
 
 - **ServiceType** — `key · SRF 14ARx · official_timeframe_days · evidence_ref` (spec §2.1):
   new-molecule·14AR2·627 · new-formulation·14AR2·418 · generic·14AR1·418 · parallel·14AR1·118 ·
-  daughter·14AR1·118 · new-source·—·208 · renewal·14AR3·90 · major-amendment·14AR16·418 ·
-  minor-amendment·14AR15·118 · … (full set in spec §2.1)
+  daughter·14AR1·118 · reinstatement·14AR1·118 · new-source·—·208 · renewal·14AR3·90 ·
+  major-amendment·14AR16·418 · minor-amendment·14AR15·118 · … (full set in spec §2.1). **All four
+  types sharing SRF code `14AR1`** (generic/parallel/daughter/reinstatement) must stay listed
+  individually here — collapsing them loses the day-count split that's the entire reason for
+  union-granularity keying (spec Finding 1).
 - **StatusVocabulary** — `label → official_stage · is_terminal · is_pipeline` (spec §3.1)
 - **OfficialStage** — Verification · Scientific screening · Evaluation · Decision · Appeal (+ Referred-back)
 - **LegalPathway** — Agricultural remedy · Fertilizer · Not sure
@@ -244,12 +269,12 @@ The public/sector assets read these definitions (from `public-dashboard-brief-v2
 
 ---
 
-## 11. Open decisions register (for Jen / Anna / you)
+## 11. Decisions register (for Jen / Anna / you)
 
-| # | Decision | Default in this draft | Owner |
+| # | Decision | Status | Owner |
 |---|---|---|---|
-| D1 | Applicant-accountability module (§6) — include optional vs defer | Include, optional, non-gating; SACNASP as boolean | Jen + Anna |
-| D2 | Public member/non-member segmentation — privacy sign-off | Neutral filter with cross-tab suppression | Jen + Anna |
+| D1 | Applicant-accountability module (§6) — include optional vs defer | **Decided:** include, optional, non-gating, reviewable; SACNASP as boolean (see §6) | Closed |
+| D2 | Public member/non-member segmentation — privacy sign-off | Open — default: neutral filter with cross-tab suppression | Jen + Anna |
 | D3 | Functional-category → registrar-function mapping | Provisional table, pending specialist | Specialist |
 | D4 | Median wait definition — total open duration vs time-in-stage | Total open duration | Team |
 | D5 | Registrar packet scope — in-process only vs include registered | Deferred (operator layer) | Team |

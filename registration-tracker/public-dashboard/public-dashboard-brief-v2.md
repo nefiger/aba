@@ -19,6 +19,12 @@ Each change is itemised in the reconciliation ledger with *current → proposed 
 
 ---
 
+**Status note.** This brief's metric derivations (backlog, wait time, by-stage/type/pathway breakdowns)
+are v1 — computed from the open-capture spine. Its "reviewed records only" framing describes
+`data-model-v1.md` §7's **deferred** operator-review layer: until that layer is built, v1 aggregates
+read from the open-capture data directly, with the same suppression/anonymisation rules. The
+aggregate evidence-packet block (P8) similarly previews the deferred registrar-packet layer.
+
 ## Audience
 
 Public website visitors, sector participants, policymakers, and communications audiences who need an

@@ -16,6 +16,12 @@ counts follow the split flags. Changes are itemised in the ledger with *current 
 
 ---
 
+**Status note.** This entire product area is `data-model-v1.md` §7's **deferred layer** — the
+registrar packet/ExportPacket is named and modelled as extensible, but **not built in v1's
+open-capture model**. This brief is retained as forward-looking design for when ABA's packet-export
+tooling is built; nothing here gates or blocks the v1 intake → company-dashboard → public-dashboard
+flow.
+
 ## Audience
 
 ABA operators preparing named, verifiable evidence packets for the registrar.
