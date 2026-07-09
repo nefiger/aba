@@ -603,7 +603,7 @@
         { m:"non-member", f:false, s:"Referred back", t:"minor-amendment", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:160, b:"Proof missing" },
         { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Not sure", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:500, b:"Classification ambiguity" },
         { m:"non-member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Nigeria", rg:"Agriculture / Act 36", d:430, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Scientific screening", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Water treatment", d:150, b:"Regulator delay" },
+        { m:"non-member", f:false, s:"Scientific screening", t:null, p:"N/A (non-Act 36)", c:"Biopesticide", co:"South Africa", rg:"Water treatment", d:150, b:"Regulator delay" },
         { m:"non-member", f:true, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:410, b:"None" },
         { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Ghana", rg:"Agriculture / Act 36", d:470, b:"Regulator delay" },
         { m:"member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:55, b:"Reference issue" },
@@ -618,8 +618,8 @@
       const SUPPRESS_K = 4;                       // anonymisation threshold placeholder (k)
 
       // Official statutory timeframes (calendar days) — the benchmark spine. Lookup constants.
-      const BENCHMARK = { "new-molecule":627, "new-formulation":418, "generic":418, "parallel":118, "daughter":118, "new-source":208, "major-amendment":418, "minor-amendment":118, "renewal":90 };
-      const TYPE_LABEL = { "new-molecule":"New molecule", "new-formulation":"New formulation", "generic":"Generic", "parallel":"Parallel", "daughter":"Daughter", "new-source":"New source", "major-amendment":"Major amendment", "minor-amendment":"Minor amendment", "renewal":"Renewal" };
+      const BENCHMARK = { "new-molecule":627, "new-formulation":418, "generic":418, "parallel":118, "daughter":118, "reinstatement":118, "new-source":208, "major-amendment":418, "minor-amendment":118, "renewal":90 };
+      const TYPE_LABEL = { "new-molecule":"New molecule", "new-formulation":"New formulation", "generic":"Generic", "parallel":"Parallel", "daughter":"Daughter", "reinstatement":"Reinstatement", "new-source":"New source", "major-amendment":"Major amendment", "minor-amendment":"Minor amendment", "renewal":"Renewal" };
       const STAGE_ORDER = ["Verification", "Scientific screening", "Evaluation", "Decision", "Appeal", "Referred back"];
 
       let activeFilter = "all";
