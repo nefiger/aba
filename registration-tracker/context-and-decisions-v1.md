@@ -169,13 +169,19 @@ It should be based on reviewed/accepted data by default, not raw unreviewed inta
 
 It may include data from both ABA members and non-members, because non-member submissions can still contribute to sector intelligence.
 
-The public dashboard should allow aggregate filtering by:
+**Superseded (D2, data-model-v1 §11, closed):** this section originally called for a public
+all/member/non-member filter. That's now decided against for v1 — even suppressed, a member/non-member
+split narrows inference on small cells for no v1 requirement. The public dashboard shows all reviewed
+submissions as one pool; member/non-member stays an internal classification only. Revisit later if the
+advocacy story needs segmented public evidence.
 
-- all reviewed submissions
-- ABA member submissions
-- non-member submissions
+~~The public dashboard should allow aggregate filtering by:~~
 
-These filters must be phrased neutrally and combined with strong suppression rules to avoid revealing individual contributors.
+~~- all reviewed submissions~~
+~~- ABA member submissions~~
+~~- non-member submissions~~
+
+~~These filters must be phrased neutrally and combined with strong suppression rules to avoid revealing individual contributors.~~
 
 Pre-submission pipeline may appear as a separate future pipeline signal, but it must not be mixed into registrar backlog metrics.
 

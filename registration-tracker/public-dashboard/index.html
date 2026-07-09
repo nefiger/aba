@@ -440,12 +440,7 @@
             </div>
             <p class="note">Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
           </div>
-          <div class="toggle-row" role="group" aria-label="Reviewed submission filter" style="margin-top: 12px;">
-            <button class="choice-button" type="button" data-filter="all" aria-pressed="true">All reviewed submissions</button>
-            <button class="choice-button" type="button" data-filter="member" aria-pressed="false">ABA member submissions</button>
-            <button class="choice-button" type="button" data-filter="non-member" aria-pressed="false">Non-member submissions</button>
-          </div>
-          <p class="note" id="filterNote" style="margin-top: 8px;">Showing all reviewed submissions. Cells below the anonymisation threshold stay suppressed after filtering.</p>
+          <p class="note" id="filterNote" style="margin-top: 8px;">All reviewed submissions, shown as one pool. ABA tracks member/non-member internally, but v1 doesn't expose a public filter for it (decided against — even suppressed, a split narrows inference on small cells). Cells below the anonymisation threshold stay suppressed.</p>
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
@@ -622,15 +617,15 @@
       const TYPE_LABEL = { "new-molecule":"New molecule", "new-formulation":"New formulation", "generic":"Generic", "parallel":"Parallel", "daughter":"Daughter", "reinstatement":"Reinstatement", "new-source":"New source", "major-amendment":"Major amendment", "minor-amendment":"Minor amendment", "renewal":"Renewal" };
       const STAGE_ORDER = ["Verification", "Scientific screening", "Evaluation", "Decision", "Appeal", "Referred back"];
 
-      let activeFilter = "all";
-
       function isAct36(r) { return r.rg === "Agriculture / Act 36"; }
       function benchmarkOf(r) { return isAct36(r) && BENCHMARK[r.t] != null ? BENCHMARK[r.t] : null; }
       function overBenchmark(r) { const b = benchmarkOf(r); return b != null && r.d > b; }
       function daysToMonths(d) { return Math.round((d / 30.44) * 10) / 10; }
       function median(nums) { if (!nums.length) return 0; const s = [...nums].sort((a, b) => a - b); const i = Math.floor(s.length / 2); return s.length % 2 ? s[i] : Math.round((s[i - 1] + s[i]) / 2); }
 
-      function filteredRecords() { return reviewedApplications.filter((r) => activeFilter === "all" || r.m === activeFilter); }
+      // No public all/member/non-member filter in v1 (D2, decided) — always the full reviewed pool.
+      // `m` stays on each record as an internal classification only.
+      function filteredRecords() { return reviewedApplications; }
 
       function deriveMetrics() {
         const open = filteredRecords().filter((r) => !r.f);
@@ -768,14 +763,14 @@
         `).join("");
       }
 
-      function renderSummary(label) {
+      function renderSummary() {
         const rows = [
-          ["Signal basis", label],
+          ["Signal basis", "All reviewed submissions (no public member/non-member filter — D2, decided)"],
           ["Evidence base", "Reviewed submissions only; raw intake is excluded."],
           ["Backlog definition", "Open reviewed records past the official Act 36 statutory timeframe for their type."],
           ["Median wait", "Median total open duration; per-type benchmark shown above."],
           ["Geographic truth", "Africa-wide signals welcome; current activity centered in South Africa."],
-          ["Privacy", `Cells below ${SUPPRESS_K} contributing records are suppressed after filtering.`],
+          ["Privacy", `Cells below ${SUPPRESS_K} contributing records are suppressed.`],
           ["Pipeline", "Pre-submission pipeline is separate and never counted as backlog."]
         ];
         document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
@@ -785,8 +780,6 @@
           </div>
         `).join("");
       }
-
-      const FILTER_LABEL = { all: "All reviewed submissions", member: "ABA member submissions", "non-member": "Non-member submissions" };
 
       function render() {
         const m = deriveMetrics();
@@ -807,23 +800,13 @@
         renderPipeline({ backlog: m.backlogCount, pipeline: PIPELINE });
         renderTrend({ trend: TREND });
 
-        const label = FILTER_LABEL[activeFilter];
-        setText("trendCaption", `${label}: reviewed open-record trend (explicit monthly series).`);
-        document.getElementById("filterNote").textContent = `Showing ${label.toLowerCase()}. Cells below the anonymisation threshold stay suppressed after filtering.`;
+        setText("trendCaption", "All reviewed submissions: reviewed open-record trend (explicit monthly series).");
 
         const cells = groupRows(open, (r) => r.co).map(([lbl, val, sup]) => [`${lbl} (reviewed)`, sup ? "Suppressed" : `${val} records`, Boolean(sup)]);
         renderSuppression({ suppression: cells });
 
-        renderSummary(label);
+        renderSummary();
       }
-
-      document.querySelectorAll("[data-filter]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          activeFilter = btn.dataset.filter;
-          document.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === activeFilter)));
-          render();
-        });
-      });
 
       render();
     </script>

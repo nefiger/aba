@@ -1,7 +1,7 @@
 # Registration Tracker — Planning Handoff (for Jen)
 
 **This is the entry point.** If you're using an agent, point it at this file first — it links the three
-planning docs and lists the decisions we need from you and Anna.
+planning docs and the docs below.
 
 **Where this lives:** branch `codex/registration-tracker-governing-files`, PR #29 (unmerged, held for
 your review). All paths below are relative to the repo root.
@@ -36,13 +36,23 @@ area briefs.
 
 ## What we need from you + Anna
 
-Five open decisions remain, logged in **`data-model-v1.md` §11**: public segmentation privacy
-sign-off, the function-axis mapping, the median-wait definition, packet scope, and the biostimulant
-pathway.
+**Nothing on the decision list right now.** All the decisions that were open for you and Anna (D1, D2,
+D4, D5) are now closed:
 
-**D1 is now closed** — the "approved person / eligibility / SACNASP" block (highest-PII part of the
-form, not needed for the core metrics) is decided: **include, optional, non-gating, reviewable**. Full
-rationale in `data-model-v1.md` §6 if you want the detail; nothing further needed from you on it.
+- **D1** — the optional "approved person / eligibility / SACNASP" block: **include, optional,
+  non-gating, reviewable.** (`data-model-v1.md` §6)
+- **D2** — public dashboard member/non-member filter: **no filter in v1** — all reviewed submissions
+  shown as one pool; the split stays internal-only. Revisit later if needed.
+- **D4** — median wait time definition: **total open duration.** Easy to change later; it's a
+  calculation, not stored data.
+- **D5** — registrar packet scope: **in-process applications only** — already-registered records are
+  never packet candidates.
+
+Two remaining items (**D3** — mapping our product categories to the registrar's own function axis, and
+**D6** — the biostimulant legal pathway) are **regulatory questions, not product/design ones** — they're
+flagged in `data-model-v1.md` §11 for whoever at ABA has that domain expertise, not for you.
+
+So: just read through and comment on anything that looks off — there's no open decision blocking that.
 
 ---
 

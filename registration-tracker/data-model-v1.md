@@ -213,6 +213,8 @@ Modelled as extensible; **out of scope for the open-capture v1**:
   relationship, public/packet eligibility, operator inclusion, bottleneck theme, duplicate/clarification).
 - **Verified ABA relationship** (vs self-reported) and member-benefit branching.
 - **Registrar packet / ExportPacket** — versioned evidence batches for registrar engagement.
+  **Scope decided (D5): in-process applications only** — already-registered records are never packet
+  candidates.
 - **Attachment storage** — secure references only; never dossier/payment documents in the tracker.
 
 These attach to the spine without reshaping it.
@@ -294,11 +296,11 @@ The public/sector assets read these definitions (from `public-dashboard-brief-v2
 | # | Decision | Status | Owner |
 |---|---|---|---|
 | D1 | Applicant-accountability module (§6) — include optional vs defer | **Decided:** include, optional, non-gating, reviewable; SACNASP as boolean (see §6) | Closed |
-| D2 | Public member/non-member segmentation — privacy sign-off | Open — default: neutral filter with cross-tab suppression | Jen + Anna |
-| D3 | Functional-category → registrar-function mapping | Provisional table, pending specialist | Specialist |
-| D4 | Median wait definition — total open duration vs time-in-stage | Total open duration | Team |
-| D5 | Registrar packet scope — in-process only vs include registered | Deferred (operator layer) | Team |
-| D6 | Biostimulant pathway (claim-based split) | Documentary reading, flagged | Specialist |
+| D2 | Public member/non-member segmentation — privacy sign-off | **Decided: no public filter in v1.** All reviewed submissions shown as one pool; member/non-member stays an internal classification only, never a public control. Revisit later if the advocacy story needs it | Closed |
+| D3 | Functional-category → registrar-function mapping | Provisional table, flagged for **regulatory specialist** consultation — not a Jen/Anna decision | Specialist |
+| D4 | Median wait definition — total open duration vs time-in-stage | **Decided (revisable): total open duration.** Cheap to change later — it's a derived metric, not stored data | Closed |
+| D5 | Registrar packet scope — in-process only vs include registered | **Decided: in-process applications only.** Already-registered records are never packet candidates | Closed |
+| D6 | Biostimulant pathway (claim-based split) | Documentary reading, flagged for **regulatory specialist** consultation — not a Jen/Anna decision | Specialist |
 | D7 | Service-type breadth — full union taxonomy vs. registration+renewal only | **Chosen for v1:** full taxonomy (see §8 callout for rationale + peel-back path). Initial scope call, not architectural — revisit if intake friction becomes a problem | Team |
 
 ---

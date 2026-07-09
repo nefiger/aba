@@ -93,4 +93,5 @@ to `public-dashboard` aggregates or `registrar-list` packets if eligible.
 
 - **Wait-vs-benchmark framing** — should the member view lead with sector median, official statutory
   timeframe, or both side by side? V2 shows both; confirm the primary yardstick with the team.
-- Same **median definition** question as the public dashboard (total open duration vs time-in-stage).
+- ~~Median definition~~ **Resolved (D4, data-model-v1 §11, closed):** total open duration, same as the
+  public dashboard. Revisable later since it's a derived metric, not stored data.

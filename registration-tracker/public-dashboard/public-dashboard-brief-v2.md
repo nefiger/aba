@@ -13,9 +13,10 @@ question — *where is time lost, by application type and official stage?* That 
 figure is **derived from one record-level dataset**, not hardcoded; (2) waits are benchmarked against
 the **official statutory timeframes** (the spec's benchmark spine); (3) a new **backlog-by-official-stage**
 view; (4) a new **by-service-type vs benchmark** view; (5) the legal-pathway labels are corrected to
-**Agricultural remedy / Fertilizer**; and (6) the neutral all/member/non-member filter and the
-aggregate evidence-packet block (already in V1's section list but absent from the wireframe) are added.
-Each change is itemised in the reconciliation ledger with *current → proposed → citation*.
+**Agricultural remedy / Fertilizer**; and (6) the aggregate evidence-packet block (already in V1's
+section list but absent from the wireframe) is added. A public member/non-member filter was considered
+(D2) and **decided against for v1** — see P7. Each change is itemised in the reconciliation ledger with
+*current → proposed → citation*.
 
 ---
 
@@ -46,7 +47,7 @@ Public aggregate view. No company-, product-, proof-, or reference-level detail.
 | P4 | **By application / service type** | *absent* | New breakdown by **service type at clock-granularity** keyed to SRF `14ARx` (generic vs parallel/daughter kept separate), each shown against its benchmark. | spec §2.1; G1, G4 |
 | P5 | **Derivation / single source of truth** | headline figures hardcoded *and* duplicated in each chart array | All headline figures and breakdowns **derived from one record-level fictional dataset** of reviewed applications, so the page is auditable and figures cannot drift. | context §"Public Dashboard Metrics" ("auditably derived"); CLAUDE.md "derive, never duplicate" |
 | P6 | **Backlog threshold** | single implicit threshold behind "over threshold" | Backlog = open reviewed records whose open duration **exceeds the official benchmark for their type** (threshold is type/stage-specific, per context), not one flat cut-off. | context §"Pipeline, Backlog, And Stuck Records"; spec Finding 1 |
-| P7 | **All / member / non-member filter** | static "All reviewed submissions"; summary states no segmentation | Add the **neutral 3-way filter** (all / ABA member / non-member) as a real control, re-deriving metrics + re-applying suppression on switch. Resolves a V1 wireframe note that contradicted the context doc. | context §"Public Dashboard"; README working note (real controls) |
+| P7 | **All / member / non-member filter** | static "All reviewed submissions"; summary states no segmentation | **Decided against (D2, closed).** No public filter in v1 — all reviewed submissions shown as one pool. Even suppressed, a member/non-member split narrows inference on small cells; that's a real trust cost for no v1 requirement. Member/non-member stays an internal classification only. Revisit later if the advocacy story needs it. | data-model-v1 §11 (D2) |
 | P8 | **Aggregate evidence-packet activity** | *absent* | Add the aggregate block: **registrar evidence packets prepared**, **applications represented**, **most recent packet period** — aggregate only, never naming companies. | context §"Public Dashboard" (packet activity) |
 | P9 | **Bottleneck themes** | present, aligned to controlled list | Keep; confirm they render only post-review and after suppression (unchanged). | context §"Bottleneck Themes" |
 | P10 | **Pipeline vs backlog** | pipeline shown separately, correctly excluded from backlog | Keep unchanged; reaffirm pre-submission never enters registrar-backlog metrics. | context §"Pipeline, Backlog, And Stuck Records" |
@@ -56,12 +57,12 @@ Public aggregate view. No company-, product-, proof-, or reference-level detail.
 ## Metric catalogue & derivations (the durable spec)
 
 Every figure below is derived from the record-level dataset `reviewedApplications[]` (fictional). A
-record carries: `memberType` (member / non-member), `final` (bool), `stage` (official stage, for open
-records), `serviceType` (+ `benchmarkDays`), `pathway`, `category`, `country`, `regime`, `openDays`,
-`bottleneckTheme`. Pre-submission pipeline records are held in a **separate** list and never counted
-as backlog.
+record carries: `memberType` (member / non-member — internal classification only, never a public
+filter per D2), `final` (bool), `stage` (official stage, for open records), `serviceType` (+
+`benchmarkDays`), `pathway`, `category`, `country`, `regime`, `openDays`, `bottleneckTheme`.
+Pre-submission pipeline records are held in a **separate** list and never counted as backlog.
 
-**Filter set** `F` = records matching the active all/member/non-member filter.
+**Filter set** `F` = all reviewed records (no public all/member/non-member filter in v1 — D2).
 
 | Headline metric | Derivation |
 |---|---|
@@ -86,8 +87,7 @@ as backlog.
 
 **Suppression rule.** Any breakdown cell whose contributing record count is **below the anonymisation
 threshold** (wireframe uses `< 4` as a placeholder `k`) is rendered as *Suppressed*, not as an exact
-count — applied *after* filtering, so a member/non-member split cannot re-identify a small cell.
-Company/product/proof/reference detail never appears.
+count. Company/product/proof/reference detail never appears.
 
 ---
 
@@ -101,7 +101,6 @@ Company/product/proof/reference detail never appears.
 - Recurring bottleneck themes.
 - Pre-submission pipeline signal (separate from backlog).
 - Reviewed-open trend over time.
-- **All / member / non-member filter** (new, real control).
 - **Aggregate evidence-packet activity** (new).
 - Contributor-protection / suppression panel + "how to read these signals" summary.
 
@@ -111,7 +110,7 @@ Company/product/proof/reference detail never appears.
 - Small cells suppressed after filtering.
 - Pipeline kept separate from registrar backlog.
 - Benchmark context always attached to wait metrics (actual vs statutory).
-- Neutral filtering across all / member / non-member with suppression preserved.
+- No public all/member/non-member filter (D2, decided) — one pool of all reviewed submissions.
 
 ## Relationship to other tracker areas
 
@@ -130,13 +129,13 @@ stays private. `registrar-list` contributes only aggregate packet activity (P8).
 
 ## Open questions surfaced
 
-- **Member/non-member segmentation on a *public* page** — context asks for the neutral filter, but
-  the V1 wireframe had deliberately withheld segmentation for privacy. V2 follows context (adds it with
-  suppression); worth an explicit privacy sign-off, since even suppressed splits narrow inference.
+- ~~Member/non-member segmentation on a *public* page~~ **Resolved (D2, closed):** no public filter in
+  v1 — even suppressed, a member/non-member split narrows inference for no v1 requirement. Stays an
+  internal classification only.
 - **Backlog threshold = the official benchmark?** V2 adopts the statutory timeframe as the threshold
   (cleanest, spec-aligned). Confirm ABA wants "backlog" pinned to the statutory clock vs a softer
   internal SLA.
-- **Median wait definition** — median of *total open duration* vs *time in current stage*. V2 uses
-  total open duration; the stage view separately exposes time-per-stage. Confirm which is the headline.
+- ~~Median wait definition~~ **Resolved (D4, closed):** total open duration, revisable later since it's
+  a derived metric, not stored data.
 - **Trend** cannot be derived from point-in-time records without historical snapshots; kept as an
   explicit series pending a real snapshot pipeline.

@@ -92,8 +92,8 @@ readiness.
 
 ## Open questions surfaced
 
-- **Should a registrar packet ever include registered (L-numbered) records** as historical evidence,
-  or only in-process backlog applications? V2's fictional set is all in-process; confirm the intended
-  packet scope with the team.
+- ~~Should a registrar packet ever include registered (L-numbered) records as historical evidence?~~
+  **Resolved (D5, data-model-v1 §11/§7, closed):** no — in-process applications only. Already-registered
+  records are never packet candidates. V2's fictional set (all in-process) already matches this.
 - **Column budget** — the table is wide; if more axes are needed later, consider a detail drawer per
   record rather than more columns.
