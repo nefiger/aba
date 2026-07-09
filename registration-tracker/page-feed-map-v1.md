@@ -78,7 +78,7 @@ stateless entry). Draft return-link lets a submitter resume/update over time.
 | File reference (pre) | ● | ○ | ● | ● |
 | Registration L-number (post) | ● | ○ | ● | ● |
 | Dossier / payment flags | ● | ○ | ● | ● |
-| Contact PII | ○ | ○ | ● | ○ |
+| Contact PII | ● own-record | ○ | ● | ○ |
 | Approved-person PII / SACNASP (§6) | ● own-record | ○ | ● | ○ |
 | Free-text notes | ○ | ○ | ● | ○ |
 | ABA relationship (self / verified) | ● self | ▲ | ● both | ● verified |

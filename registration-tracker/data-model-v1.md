@@ -30,8 +30,8 @@ Three tiers govern every field:
 - **CAPTURE (rigorous, Act 36-exact):** the registration's position and shape in the process —
   service type, official stage, status dates/wait, legal pathway, functional category, file reference
   vs L-number, dossier-readiness + proof-of-payment flags. Collected in full from everyone.
-- **OPTIONAL / DECISION-PENDING:** applicant-identity (approved person, eligibility, SACNASP, letter
-  of authority). Authentic Act 36 data, but a leaf — see §6 for the flagged decision.
+- **OPTIONAL (D1 — decided, included):** applicant-identity (approved person, eligibility, SACNASP,
+  letter of authority). Authentic Act 36 data, but a leaf — included as optional, non-gating; see §6.
 - **NEVER (flag only):** dossier contents (chemistry, tox, efficacy), payment documents. We record
   readiness/attached flags; we never store the documents.
 
@@ -91,14 +91,22 @@ Organisation → Product → Application → StatusLogEntry
 | aba_relationship_self | I,L | MEMBER | **optional self-reported**: Full member / Associate / Observer / Non-member / Not sure. Not a gate. |
 
 ### ContactPerson  *(PII)*
+
+> **Sensitivity principle (same rule as §6 ApprovedPerson):** PII the submitter enters about
+> themselves or their own people is **MEMBER (own-record)** — the submitting org can see its own
+> contact details, they are **never public raw**, and the operator may use them for follow-up.
+> Previously this block was tagged OPERATOR, which inconsistently hid a company's own contact record
+> from itself while §6 ApprovedPerson (identical kind of data) was MEMBER. Corrected here so the
+> principle is applied the same way to both.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
-| id | S | OPERATOR | |
-| name | I | OPERATOR | PII |
-| email | I | OPERATOR | PII; return-link handle |
-| phone (optional) | I | OPERATOR | PII; drop unless needed |
-| role_title | I | OPERATOR | |
-| permission_to_contact | I | OPERATOR | POPIA basis for follow-up |
+| id | S | OPERATOR | internal surrogate key |
+| name | I | MEMBER (own-record) | PII; never public raw |
+| email | I | MEMBER (own-record) | PII; return-link handle; never public raw |
+| phone (optional) | I | MEMBER (own-record) | PII; drop unless needed |
+| role_title | I | MEMBER (own-record) | |
+| permission_to_contact | I | MEMBER (own-record) | POPIA basis for operator follow-up |
 
 ### Product
 | Field | Prov | Sens | Notes |
@@ -117,12 +125,12 @@ Organisation → Product → Application → StatusLogEntry
 |---|---|---|---|
 | id | S | OPERATOR | |
 | service_type | I,L | PUBLIC | FK → ServiceType (SRF `14ARx`, clock-granularity) |
-| status | I,L | MEMBER (named) / PUBLIC (aggregate) | FK → StatusVocabulary |
-| official_stage | D | PUBLIC | derived from status via StatusVocabulary |
+| status | D | MEMBER (named) / PUBLIC (aggregate) | **= latest StatusLogEntry.status** — a denormalised cache, **not** an independent field. StatusLog is the source of truth (see StatusLogEntry note below; §10 metrics are computed, never stored). FK → StatusVocabulary |
+| official_stage | D | PUBLIC | derived from latest StatusLogEntry.status via StatusVocabulary |
 | official_timeframe_days | D,L | PUBLIC | lookup from ServiceType — benchmark, not stored per record |
 | file_reference (pre) | I | MEMBER | pre-registration Registrar file no.; absent for pipeline |
 | file_reference_status | I,L | MEMBER | provided / not issued / unknown / lost *(submitter-reported)* |
-| registration_number_L (post) | O | MEMBER (mostly public record) | **nullable**; exists only once `approved / registered`; never an intake field |
+| registration_number_L (post) | O | MEMBER | **nullable**; exists only once `approved / registered`; never an intake field. Externally an L-number is gazetted public record, but inside the tracker it is **MEMBER** — it directly identifies a company + product, so putting it on the public aggregate surface would break record anonymisation. Clean call, not a hedge. |
 | dossier_ready | I | MEMBER | readiness flag only — never the dossier |
 | proof_of_payment | I | MEMBER | attached flag only — never the document |
 | granted_date | O | MEMBER | post-registration |
@@ -272,8 +280,10 @@ Reference data, defined once, read everywhere (today these constants are hardcod
   side belongs to the deferred operator layer.
 - **Audit.** `submitted_at` is system-set on submission only; draft `saved_at` must never imply a
   submission timestamp; public views expose only aggregate timestamp ranges.
-- **POPIA.** Consent + retention/deletion are first-class; approved-person/contact PII is `OPERATOR`/
-  `NEVER-public`; cross-border processing (non-SA submitters) flagged for the compliance owner.
+- **POPIA.** Consent + retention/deletion are first-class; approved-person + contact PII is
+  **`MEMBER` (own-record)** — visible to the submitting org, **never public raw**, operator-usable for
+  follow-up (aligned with §5 ContactPerson and §6 ApprovedPerson); cross-border processing (non-SA
+  submitters) flagged for the compliance owner.
 
 ---
 
