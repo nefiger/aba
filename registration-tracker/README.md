@@ -1,8 +1,6 @@
-# Registration Tracker Wireframe Workspace
+# Registration Tracker Workspace
 
-This folder contains exploratory planning material and low-fidelity wireframe work for the ABA Biological Inputs Registration Tracker.
-
-The tracker is being designed as a product area that can stand alone during prototyping, but should eventually unify with the main ABA website and the custom CRM work.
+This folder contains planning material, domain-grounding work, and low-fidelity wireframes for the ABA registration tracker — a tool that follows how registrations of biological and alternative *agricultural* inputs (microbial inoculants, biostimulants, biofertilisers, plant extracts, biological crop-protection products) move through the South African registrar's process under Act 36 of 1947. "Biological" here refers only to the natural origin of these crop inputs. The tracker does not try to resolve the regulatory ambiguity these products sit in — it tracks registration status per company and aggregates submissions into a sector-wide picture of the registrar's backlog. It is designed to stand alone during prototyping but should eventually unify with the main ABA website and the custom CRM work.
 
 ## Important Principle
 
@@ -14,7 +12,7 @@ When the final ABA website / CRM architecture is ready, the implementation shoul
 
 ## Durable Artifacts
 
-The durable artifacts are the markdown planning files:
+The durable artifacts are the markdown planning and domain-grounding files:
 
 - shared context and decisions
 - folder-level briefs
@@ -23,6 +21,9 @@ The durable artifacts are the markdown planning files:
 - data model decisions
 - consent, membership, review, and export logic
 - visual alignment principles
+- registrar-requirements domain grounding and extraction work
+
+This workspace holds both the disposable wireframes and this durable domain-grounding / extraction work — it is not wireframes alone.
 
 ## Disposable Artifacts
 
@@ -60,7 +61,7 @@ Read `starting-prompt-v1.md` for the original master prompt that launched the lo
 - Submission timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed submission is sent.
 - Draft save state can show its own saved-at time, but it must not create or imply a submission timestamp.
 - Downstream views may display `submittedAt` as read-only audit metadata. Public views should show only aggregate timestamp ranges, not identifiable submission timestamps.
-- Use ABA relationship types consistently: `Full member`, `Associate`, `Observer`, `Non-member`, and `Not sure / pending`; only verified `Full member, active` records are default registrar-packet candidates.
+- Use ABA relationship types consistently: `Full member`, `Technical partner`, `Observer`, `Non-member`, and `Not sure / pending`; only verified `Full member, active` records are default registrar export-preview candidates.
 - Track bottleneck themes as controlled review metadata so private blockers can aggregate into public evidence safely.
 - Keep the tracker deeper than the Knowledge Hub: tracker dashboards show reviewed evidence logic, while Knowledge Hub pages remain lighter public context surfaces.
 - Verify interactive behavior in the browser, not just with screenshots.

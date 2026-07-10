@@ -43,6 +43,7 @@ The latest prototype-as-spec pass added a stronger public-page consistency layer
 - `docs/requirements/aba-admin-pause-and-public-data-capture-shift.md`
 - `docs/requirements/aba-public-brand-and-footer-spec.md`
 - `docs/requirements/aba-symbol-family-implementation-notes.md`
+- `docs/requirements/aba-unified-membership-tracker-system-contract.md`
 
 Public and role-based prototype updates now include:
 
@@ -110,6 +111,13 @@ The public-capture field-map note is now the best source for:
 - where route naming has drifted from the canonical taxonomy
 - what is shared across routes versus route-specific
 - what still needs to move from page-level form design into the canonical system model
+
+The unified membership-and-tracker system-contract note is now the best source for:
+- the canonical shared record set across membership, tracker, review, consent, and company continuity
+- the journey-to-record map across public routes
+- the rule that tracker and membership stay separate entry journeys while still attaching to one shared person-organisation spine
+- the v1 list of spec-bearing prototype surfaces
+- the reconciliation rules that were used to align the tracker package during the July 2026 spec pass
 
 Current public-capture sequencing clarification:
 - resolve the non-tracker membership-side routes first

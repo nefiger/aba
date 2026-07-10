@@ -7,6 +7,10 @@ Purpose:
 - keep the data model, roles, states, and visibility rules aligned with what the prototype demonstrates
 - give the prototype a stable systems spine before any separate implementation process begins
 
+Canonical cross-reference:
+- `docs/requirements/aba-unified-membership-tracker-system-contract.md` is now the canonical cross-journey contract for shared record ownership, tracker-to-membership continuity, consent ownership, and v1 surface scope.
+- This file remains useful for the broader prototype system framing, but the unified contract should win if there is any drift on membership/tracker integration behavior.
+
 ## 1. Product modules in scope
 
 The current prototype acts as one connected system with 6 linked modules:

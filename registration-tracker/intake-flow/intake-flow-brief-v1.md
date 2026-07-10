@@ -17,7 +17,7 @@ Public submission flow, but only authorised representatives may continue. The fi
 - Authorised submitter gate.
 - POPIA/privacy and participation notice.
 - Company and contact details.
-- Self-reported ABA relationship type: Full member, Associate, Observer, Non-member, or Not sure / pending.
+- Self-reported ABA relationship type: Full member, Technical partner, Observer, Non-member, or Not sure / pending.
 - Product entry with functional category.
 - Country and governing regime.
 - Conditional Act 36 fields for South Africa agriculture records.
@@ -31,7 +31,7 @@ Public submission flow, but only authorised representatives may continue. The fi
 
 - Authorised user can continue.
 - Not-authorised stop state.
-- Missing proof can continue, but is marked as not registrar-packet ready.
+- Missing proof can continue, but is marked as not export-preview ready.
 - Registrar reference missing requires an unavailable reason.
 - Save/return link is available because registration status changes over time.
 
@@ -45,7 +45,7 @@ The intake may eventually create or update CRM-backed company, contact, product,
 
 ## Relationship To Other Tracker Areas
 
-Submitted records flow into `admin-operator-review` first. Reviewed records may later appear in the member `company-dashboard`, anonymised `public-dashboard`, and eligible `registrar-list`.
+Submitted records flow into `admin-operator-review` first. Reviewed records may later appear in the member `company-dashboard`, anonymised `public-dashboard`, and eligible `registrar-list` preview.
 
 ## Notes For Later Production Implementation
 
