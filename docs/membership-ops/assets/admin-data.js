@@ -8,7 +8,7 @@ window.ABA_ADMIN_DATA = {
     renewals_due: 4,
   },
   activity: [
-    { time: "08:42", title: "Moringa Biosciences moved to under review", detail: "Jen M. claimed the application and linked prior tracker history." },
+    { time: "08:42", title: "Sample Agri Sciences moved to approved", detail: "Jen M. linked the existing tracker history and moved the relationship into pending activation." },
     { time: "09:05", title: "Invoice sent to Dr. Kato Extension Network", detail: "Annual agronomist fee record created and payment proof requested." },
     { time: "09:34", title: "Observer policy draft updated", detail: "Board-only access and briefing rules flagged for review." },
   ],
@@ -59,8 +59,8 @@ window.ABA_ADMIN_DATA = {
     },
     {
       id: "app-004",
-      organisation: "TerraPulse Bioinputs",
-      description: "Inputs manufacturer, South Africa",
+      organisation: "Sample Agri Sciences",
+      description: "Commercial manufacturer, South Africa",
       applied_category: "Full member",
       applied_type: "Manufacturer",
       suggested_type: "manufacturer_small",
@@ -68,13 +68,13 @@ window.ABA_ADMIN_DATA = {
       status_tone: "good",
       owner: "Jen M.",
       country: "South Africa",
-      notes: ["Approved and waiting for finance clearance."],
+      notes: ["Approved and waiting for finance clearance.", "Existing tracker history should stay linked when the relationship becomes active."],
     },
   ],
   members: [
     {
       id: "mem-001",
-      organisation: "GreenRise Biologics",
+      organisation: "Example Bio Inputs (Pty) Ltd",
       membership_type: "manufacturer_small",
       relationship_status: "Active",
       relationship_tone: "good",
@@ -98,7 +98,7 @@ window.ABA_ADMIN_DATA = {
     },
     {
       id: "mem-003",
-      organisation: "Moringa Biosciences",
+      organisation: "Sample Agri Sciences",
       membership_type: "manufacturer_small",
       relationship_status: "Approved",
       relationship_tone: "review",
@@ -161,7 +161,7 @@ window.ABA_ADMIN_DATA = {
   ],
   pending_activation: [
     {
-      organisation: "TerraPulse Bioinputs",
+      organisation: "Sample Agri Sciences",
       approved_type: "manufacturer_small",
       invoice_state: "Not issued",
       invoice_tone: "alert",
@@ -204,7 +204,7 @@ window.ABA_ADMIN_DATA = {
     },
     {
       invoice_id: "INV-2026-015",
-      organisation: "TerraPulse Bioinputs",
+      organisation: "Sample Agri Sciences",
       fee_object: "Membership fee 2026/27",
       amount: "R 8 500",
       status: "Draft",

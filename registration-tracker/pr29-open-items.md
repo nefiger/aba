@@ -45,12 +45,12 @@ there beyond what's listed above.
    eligibility/SACNASP moved into the optional module (new Screen 7), matching
    `intake-form-spec-v1.md` and the intake wireframe.
 2. **All five `*-brief-v2.md`** now carry a "Status note" clarifying which parts are v1 (live) vs
-   `data-model-v1.md` §7's deferred layer (operator review, verified membership, registrar packet) —
+   `data-model-v1.md` §7's deferred layer (operator review, verified membership, registrar export preview) —
    `admin-operator-review` and `registrar-list` are deferred-layer previews in full; the other three
    are v1 with deferred-layer references called out.
 3. **`JEN-HANDOFF-v1.md`** — the "rebuild in your shell vs restyle wireframes" question is removed;
-   replaced with the settled fact that production happens in the monorepo with Malin, this repo is
-   spec + look reference.
+   replaced with the settled rule that this repo remains valid ABA prototype/spec context while later
+   production implementation may still happen elsewhere.
 4. **D1** flipped from "DECISION PENDING" to decided (include, optional, non-gating, reviewable) in
    `data-model-v1.md` §6/§11, `intake-form-spec-v1.md` §4, and the intake wireframe.
 

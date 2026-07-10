@@ -6,6 +6,11 @@ planning docs and the docs below.
 **Where this lives:** branch `codex/registration-tracker-governing-files`, PR #29 (unmerged, held for
 your review). All paths below are relative to the repo root.
 
+**ABA integration note:** for the ABA repo's cross-journey contract, also read
+`docs/requirements/aba-unified-membership-tracker-system-contract.md`.
+This tracker package remains durable source input, but that note is the canonical layer for
+membership/tracker continuity, consent ownership, and soft-launch v1 surface scope in this repo.
+
 ---
 
 ## Read these three, in order
@@ -45,8 +50,8 @@ decided:
   shown as one pool; the split stays internal-only. Revisit later if needed.
 - **D4** — median wait time definition: **total open duration.** Easy to change later; it's a
   calculation, not stored data.
-- **D5** — registrar packet scope: **in-process applications only** — already-registered records are
-  never packet candidates.
+- **D5** — registrar export-preview scope: **in-process applications only** — already-registered
+  records are never export-preview candidates.
 
 **Two things I'd value your input on — not blocking, and more yours than mine** (both are really about
 how the tracker hands off to your CRM; logged as D8/D9 in `data-model-v1.md` §11):
@@ -71,16 +76,38 @@ Otherwise: just read through and comment on anything that looks off.
 
 ---
 
+## Reconciliation status for ABA spec use
+
+This tracker package is now usable as **durable source input** for the ABA-wide system contract.
+
+What is aligned:
+- open tracker capture remains separate from membership application
+- the tracker uses reviewed aggregate release rules rather than raw-public visibility
+- export-preview logic is narrower than company-private visibility
+- dossier and proof-of-payment are treated as readiness or attached-state flags, not stored tracker documents
+- the optional approved-person block is non-gating and no longer treated as the tracker spine
+
+What remains deferred preview:
+- registrar/export-preview behavior
+- operator-review interaction depth beyond the current prototype
+- low-fi tracker wireframes as look-and-feel reference only
+
+What should still not be treated as production truth:
+- the wireframes themselves
+- any page copy that conflicts with `docs/requirements/aba-unified-membership-tracker-system-contract.md`
+- any implication that this package replaces the ABA repo as the planning/spec source of truth
+
+---
+
 ## What is NOT done yet
 
 The **actual HTML pages have not been rebuilt** to these docs. That was deliberate: the model needed
 agreeing first.
 
-**Where the real build happens (settled):** the production build lives in the **monorepo with Malin**
-(dataman), not in this repo. This repo is **spec + front-end-look reference** — the durable data model,
-form logic, and page-feed rules Malin's build reads from, plus the low-fi wireframes as a visual
-starting point for look and feel. The earlier "rebuild in your shell vs. restyle the wireframes"
-question is moot now that the build location is settled.
+**Where this fits in the ABA repo:** this tracker package should be treated here as **spec + front-end-look reference**
+for the tracker area — the durable data model, form logic, page-feed rules, and low-fi wireframes that
+the broader ABA prototype can absorb and align to. Later production implementation may still happen in a
+different build context, but this repo remains a valid planning/spec source of truth for the ABA prototype.
 
 *(The current wireframes in this branch are re-synced to the intake spec so the prototype and the docs
 agree — throwaway reference, not production.)*

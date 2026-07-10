@@ -43,7 +43,7 @@ in what it captures.
 | Company name | Req | text | never shown publicly |
 | Company country | Req | select | drives geographic aggregates |
 | Company role | Req | select | manufacturer / importer / local registration holder / distributor / other |
-| ABA relationship | Opt | select | Full member / Associate / Observer / Non-member / Not sure — **optional, self-reported, not a gate** |
+| ABA relationship | Opt | select | Full member / Technical partner / Observer / Non-member / Not sure — **optional, self-reported, not a gate** |
 
 ## Section 2 — Product
 | Field | Req/Opt | Type | Notes |
@@ -93,7 +93,7 @@ in what it captures.
 | Approved person (name) | Opt | text | Act 36 accountable individual — **most sensitive PII in the form** |
 | Their role | Opt | text | |
 | Resident in SA / SA-registered office | Opt | select | eligibility signal |
-| SACNASP number | Opt | text | consider capturing a "verified" boolean instead of the number |
+| SACNASP verification status | Opt | select | verified / not verified / unknown; do not require a raw number in v1 |
 | Acting under letter of authority? | Opt | checkbox | third-party mandate |
 
 - Present as a collapsible/skippable block with a one-line explainer: *"Optional — helps make the

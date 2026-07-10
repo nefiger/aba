@@ -3,65 +3,127 @@ document.addEventListener("DOMContentLoaded", () => {
   const inSite = path.includes("/docs/site/");
   const inMembership = path.includes("/docs/membership-flow/");
   const inDatabase = path.includes("/docs/database/");
+  const inTrackerDocs = path.includes("/docs/registration-tracker/");
+  const inTrackerWorkspace = path.includes("/registration-tracker/");
 
-  if (!inSite && !inMembership && !inDatabase) return;
+  if (!inSite && !inMembership && !inDatabase && !inTrackerDocs && !inTrackerWorkspace) return;
+
+  const nestedTrackerPage = /\/registration-tracker\/[^/]+\/index\.html$/.test(path);
+  const trackerDocsPrefix = inTrackerWorkspace
+    ? (nestedTrackerPage ? "../../docs/" : "../docs/")
+    : "";
+  const trackerSitePrefix = inTrackerWorkspace
+    ? `${trackerDocsPrefix}site/`
+    : "";
 
   const rel = {
-    logo: inSite ? "./assets/aba-route1-compact.png" : "../site/assets/aba-route1-compact.png",
-    logoHorizontal: inSite ? "./assets/aba-route1-horizontal.png" : "../site/assets/aba-route1-horizontal.png",
-    home: inSite ? "./index.html" : "../site/index.html",
-    about: inSite ? "./about.html" : "../site/about.html",
-    membership: inMembership ? "./index.html" : "../membership-flow/index.html",
-    explorer: inDatabase ? "./index.html" : "../database/index.html",
-    tracker: "../registration-tracker/index.html",
-    updates: inSite ? "./updates.html" : "../site/updates.html",
-    governance: inSite ? "./governance-and-data.html" : "../site/governance-and-data.html"
+    logo: inSite
+      ? "./assets/aba-route1-compact.png"
+      : inTrackerDocs
+        ? "../site/assets/aba-route1-compact.png"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}assets/aba-route1-compact.png`
+          : "../site/assets/aba-route1-compact.png",
+    logoHorizontal: inSite
+      ? "./assets/aba-route1-horizontal.png"
+      : inTrackerDocs
+        ? "../site/assets/aba-route1-horizontal.png"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}assets/aba-route1-horizontal.png`
+          : "../site/assets/aba-route1-horizontal.png",
+    home: inSite
+      ? "./index.html"
+      : inTrackerDocs
+        ? "../site/index.html"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}index.html`
+          : "../site/index.html",
+    about: inSite
+      ? "./about.html"
+      : inTrackerDocs
+        ? "../site/about.html"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}about.html`
+          : "../site/about.html",
+    membership: inMembership
+      ? "./index.html"
+      : inTrackerDocs
+        ? "../membership-flow/index.html"
+        : inTrackerWorkspace
+          ? `${trackerDocsPrefix}membership-flow/index.html`
+          : "../membership-flow/index.html",
+    explorer: inDatabase
+      ? "./index.html"
+      : inTrackerDocs
+        ? "../database/index.html"
+        : inTrackerWorkspace
+          ? `${trackerDocsPrefix}database/index.html`
+          : "../database/index.html",
+    tracker: inTrackerDocs
+      ? "./index.html"
+      : inTrackerWorkspace
+        ? `${trackerDocsPrefix}registration-tracker/index.html`
+        : "../registration-tracker/index.html",
+    updates: inSite
+      ? "./updates.html"
+      : inTrackerDocs
+        ? "../site/updates.html"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}updates.html`
+          : "../site/updates.html",
+    governance: inSite
+      ? "./governance-and-data.html"
+      : inTrackerDocs
+        ? "../site/governance-and-data.html"
+        : inTrackerWorkspace
+          ? `${trackerSitePrefix}governance-and-data.html`
+          : "../site/governance-and-data.html"
   };
-
-  document.querySelectorAll(".mark").forEach((mark) => {
-    if (!mark.querySelector("img")) {
-      mark.innerHTML = `<img src="${rel.logoHorizontal}" alt="African Biologicals Alliance logo">`;
-    }
-  });
-
-  document.querySelectorAll(".mark img").forEach((img) => {
-    img.setAttribute("src", rel.logoHorizontal);
-    img.setAttribute("alt", "African Biologicals Alliance logo");
-  });
-
-  document.querySelectorAll(".brand-copy").forEach((copy) => {
-    copy.innerHTML = `
-      <strong>Collective voice. Biological transition. African-led growth.</strong>
-      <span>Membership, registration intelligence, and biologicals knowledge for a stronger agricultural transition.</span>
-    `;
-  });
 
   const activeHref = inSite
     ? (path.endsWith("/about.html")
         ? rel.about
         : path.endsWith("/updates.html")
-          ? rel.updates
+          ? rel.about
           : path.endsWith("/governance-and-data.html")
             ? rel.about
-            : rel.home)
+            : path.endsWith("/technical-network.html")
+              ? rel.about
+              : path.endsWith("/workspace.html")
+                ? rel.about
+                : path.endsWith("/operator-workspace.html")
+                  ? rel.about
+                  : rel.home)
+    : inTrackerDocs || inTrackerWorkspace
+      ? rel.tracker
     : inMembership
       ? rel.membership
       : rel.explorer;
 
-  document.querySelectorAll(".nav a").forEach((link) => {
-    const href = link.getAttribute("href");
-    link.classList.toggle("active", href === activeHref);
+  document.querySelectorAll(".topbar").forEach((header) => {
+    header.innerHTML = `
+      <div class="brand">
+        <a class="mark" href="${rel.home}" aria-label="African Biologicals Alliance home">
+          <img src="${rel.logoHorizontal}" alt="African Biologicals Alliance logo">
+        </a>
+        <div class="brand-copy">
+          <strong>Collective voice. Biological transition. African-led growth.</strong>
+          <span>Membership, registration intelligence, and biologicals knowledge for a stronger agricultural transition.</span>
+        </div>
+      </div>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="${rel.home}"${activeHref === rel.home ? ' class="active"' : ""}>Home</a>
+          <a href="${rel.about}"${activeHref === rel.about ? ' class="active"' : ""}>About</a>
+          <a href="${rel.membership}"${activeHref === rel.membership ? ' class="active"' : ""}>Membership</a>
+          <a href="${rel.explorer}"${activeHref === rel.explorer ? ' class="active"' : ""}>Biologicals Explorer</a>
+          <a href="${rel.tracker}"${activeHref === rel.tracker ? ' class="active"' : ""}>Track Registrations</a>
+        </nav>
+      </div>
+    `;
   });
 
-  document.querySelectorAll(".nav-wrap > .nav-cta").forEach((cta) => {
-    const label = cta.textContent?.trim().toLowerCase();
-    const href = cta.getAttribute("href") || "";
-    if (label === "join aba" || href.includes("membership-flow")) {
-      cta.remove();
-    }
-  });
-
-  const main = document.querySelector("main.shell");
+  const main = document.querySelector("main.shell, main.page.shell, main.page, main.shell.page");
   if (!main) return;
 
   const existingFooter = main.querySelector(":scope > footer");

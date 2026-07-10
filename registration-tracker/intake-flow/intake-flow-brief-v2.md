@@ -20,7 +20,7 @@ data into an **optional, non-gating** module. Each change is itemised in §"Reco
 ---
 
 **Status note.** This brief's core capture logic (Screens 1–9) is v1 — open-capture, live. Where it
-mentions **operator review, verified ABA relationship, or registrar packet**, those are
+mentions **operator review, verified ABA relationship, or registrar export preview**, those are
 `data-model-v1.md` §7's **deferred layer** (named, extensible, not built in v1) — forward-looking
 framing for a later layer, not current v1 gating.
 
@@ -81,7 +81,7 @@ what V1 has, what V2 proposes, and the spec basis.
 ### Company & contact (Screen 2) — largely unchanged
 - Company name; company role (manufacturer / importer / local registration holder / distributor
   responsible for registration / other authorised representative); company country.
-- Self-reported ABA relationship: Full member / Associate / Observer / Non-member / Not sure–pending.
+- Self-reported ABA relationship: Full member / Technical partner / Observer / Non-member / Not sure–pending.
 - Contact person; email for return link; POPIA/privacy notice.
 
 ### Product & regime (Screen 3)
@@ -142,7 +142,7 @@ what V1 has, what V2 proposes, and the spec basis.
 - **SACNASP signatory number** — captured as a **verified boolean**, not the raw number. *(optional)*
 
 ### Consent & visibility (Screen 8) — unchanged
-- Internal ABA review (required) / anonymised public aggregate / named registrar packet (opt-in).
+- Internal ABA review (required) / anonymised public aggregate / named registrar export use (opt-in).
 
 ### Save / submit (Screen 9) — unchanged
 - Save draft + email return link (saved-at only); submit for ABA review (sets `submittedAt`).
@@ -157,15 +157,15 @@ what V1 has, what V2 proposes, and the spec basis.
   record still captured but flagged for operator review; never blocks submission.
 - **L-number absent** for any pipeline/in-process record — shown as a lifecycle state, never an input.
 - Missing **dossier-readiness** or **proof-of-payment** can continue for review, but blocks registrar
-  packet inclusion.
+  export-preview inclusion.
 - Application/file reference missing requires an unavailable-reason.
 - Renewal/registered records surface the **3-year term / renew-before-31-May** reminder.
 - Save/return link available (longitudinal process).
 
 ## Packet-readiness rule (unchanged logic, updated inputs)
 
-A record is *potentially* packet-ready after operator review only when: responsible attestation
-given; dossier-ready; proof-of-payment attached; named-registrar-packet consent given; file reference
+A record is *potentially* export-preview ready after operator review only when: responsible attestation
+given; dossier-ready; proof-of-payment attached; named-registrar-export consent given; file reference
 provided or an unavailable-reason recorded; and verified `Full member, active` (others need operator
 exception).
 
@@ -178,7 +178,7 @@ Status Log model *(spec §1; context §"Product And Application Model")*.
 ## Relationship to other tracker areas
 
 Submitted records flow into `admin-operator-review` first; reviewed records may later appear in the
-member `company-dashboard`, anonymised `public-dashboard`, and eligible `registrar-list`.
+member `company-dashboard`, anonymised `public-dashboard`, and eligible `registrar-list` preview.
 
 ## Notes for later production implementation
 

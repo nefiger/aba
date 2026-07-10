@@ -7,6 +7,10 @@ Purpose:
 - identify what is already well specified versus what is still ambiguous
 - create an ordered backlog for the next spec-first tranche
 
+Follow-on note:
+- `docs/requirements/aba-unified-membership-tracker-system-contract.md` is the next-pass consolidation of the membership and tracker spine described as a gap in this note.
+- Read this file as the diagnostic/background pass, and the unified contract as the current canonical direction for shared records, review objects, consent ownership, and continuity rules.
+
 Primary source surfaces reviewed:
 - `docs/requirements/aba-prototype-system-model.md`
 - `docs/requirements/african-biologicals-alliance-product-requirements.md`

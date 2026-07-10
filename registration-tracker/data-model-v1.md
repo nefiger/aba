@@ -88,7 +88,7 @@ Organisation → Product → Application → StatusLogEntry
 | name | I | MEMBER | identifying + commercially sensitive; never public raw |
 | country | I | PUBLIC | aggregate-safe |
 | company_role | I,L | MEMBER | manufacturer / importer / local registration holder / distributor / other |
-| aba_relationship_self | I,L | MEMBER | **optional self-reported**: Full member / Associate / Observer / Non-member / Not sure. Not a gate. |
+| aba_relationship_self | I,L | MEMBER | **optional self-reported**: Full member / Technical partner / Observer / Non-member / Not sure. Not a gate. |
 
 ### ContactPerson  *(PII)*
 
@@ -173,7 +173,7 @@ Organisation → Product → Application → StatusLogEntry
 ## 6. OPTIONAL MODULE — Applicant accountability ⚑ DECIDED: include, optional, non-gating
 
 > **Decision (D1, closed):** include, as **optional and non-gating**. SACNASP captured as a
-> **verified boolean**, not the raw number. **This whole block is a leaf, not a spine** — it is
+> **verification state**, not a raw registration number by default. **This whole block is a leaf, not a spine** — it is
 > applicant-*identity* data and does **not** drive the backlog metric, the stage pipeline, or any
 > public asset. If a future review drops it, the edit is localized and near-zero-ripple: delete this
 > §6 module and the `approved_person_id` FK — nothing else moves.
@@ -190,7 +190,7 @@ Organisation → Product → Application → StatusLogEntry
 |---|---|---|---|
 | name | I | MEMBER (own-record) / NEVER-public | Act 36 accountable individual (signs, consents to changes, can withdraw) |
 | sa_resident | I | MEMBER (own-record) | eligibility signal |
-| sacnasp_no (optional) | I | MEMBER (own-record) | professional credential; consider storing a **verified boolean** rather than the number |
+| sacnasp_verified (optional) | I | MEMBER (own-record) | professional credential captured as a verification state such as verified / not verified / unknown, not a raw number by default |
 | letter_of_authority_ref | I | MEMBER (own-record) | when submitter ≠ registration holder (third-party mandate) |
 
 ### Eligibility (applicant standing)
@@ -208,8 +208,8 @@ Organisation → Product → Application → StatusLogEntry
 
 | | Include (optional, non-gating) — **chosen** | Defer |
 |---|---|---|
-| **Worth** | Registrar-facing **credibility** (records look like properly-constituted Act 36 applications); completeness; minor analytics (local-agent routing, foreign-vs-local, SACNASP scientists) | Leaner, lower-friction open form; less PII to protect |
-| **Cost** | Extra optional fields; **highest PII/POPIA burden in the form** (approved-person name, SACNASP no.) | Records are thinner Act 36 representations; add later if registrar-facing use demands it |
+| **Worth** | Registrar-facing **credibility** (records look like properly-constituted Act 36 applications); completeness; minor analytics (local-agent routing, foreign-vs-local, SACNASP-verified participation) | Leaner, lower-friction open form; less PII to protect |
+| **Cost** | Extra optional fields; **highest PII/POPIA burden in the form** (approved-person name and accountability details) | Records are thinner Act 36 representations; add later if registrar-facing use demands it |
 
 ---
 

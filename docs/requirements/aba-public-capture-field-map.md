@@ -15,6 +15,10 @@ This note is meant to stop the next tranche from redesigning forms page by page 
 - route-specific fields
 - fields that should move to later review instead of first capture
 
+Canonical cross-reference:
+- `docs/requirements/aba-unified-membership-tracker-system-contract.md` now defines the shared record spine, route outputs, consent ownership, and tracker continuity rules that this field map feeds.
+- Read this file for route-by-route capture inventory, and the unified contract for the canonical objects those fields must normalize into.
+
 Current sequencing rule:
 - continue resolving the membership-side capture model now
 - keep registration-tracker redesign parked for now

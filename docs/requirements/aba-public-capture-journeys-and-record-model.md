@@ -16,6 +16,10 @@ The immediate goal is not to perfect UI.
 
 The goal is to understand who the different users are, what they are trying to do, what data ABA needs from them, and what record each journey should create.
 
+Canonical cross-reference:
+- `docs/requirements/aba-unified-membership-tracker-system-contract.md` now locks the shared record set, journey-to-record map, continuity rules, and visibility contract across membership and tracker routes.
+- Read this note for route intent and user-journey framing, and the unified contract for canonical record ownership and handoff behavior.
+
 ## Why this note is needed now
 
 The current prototype already implies several distinct user journeys:

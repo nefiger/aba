@@ -136,7 +136,7 @@ The intake should use an eligibility gate:
 
 The intake flow can use low-friction return links by email because this is a longitudinal process and companies may update records over time.
 
-The intake flow should not become a heavy membership sales funnel, but it may lightly explain that named advocacy support or registrar packet inclusion may be a member benefit.
+The intake flow should not become a heavy membership sales funnel, but it may lightly explain that named advocacy support or registrar export-preview inclusion may be a member benefit.
 
 ### Company Dashboard
 
@@ -151,7 +151,7 @@ The dashboard should show a company's own product/application pipeline, includin
 - records under ABA review
 - accepted tracker records
 - records needing clarification
-- records excluded from registrar packet use
+- records excluded from registrar export use
 
 The dashboard should show both pre-submission pipeline and regulatory submissions, but separate them clearly into lanes such as:
 
@@ -199,20 +199,20 @@ The registrar list is the final export-facing packet/list.
 
 It should default to reviewed, consented, operator-approved verified Full member records.
 
-Non-member submissions may be visible in adjacent review context or as excluded/upgrade candidates, but they should not be included in the registrar packet by default.
+Non-member submissions may be visible in adjacent review context or as excluded/upgrade candidates, but they should not be included in registrar export-preview handling by default.
 
 Registrar packet inclusion should require:
 
 - reviewed record
 - verified ABA relationship type
-- consent for named registrar packet use
+- consent for named registrar export use
 - proof attached
 - registrar reference number present, or an explicit reference-unavailable reason
 - operator inclusion decision
 
-The registrar list should show the current export-ready working list, but the underlying concept should include saved export packets or registrar submission batches.
+The registrar list should show the current export-preview working list, but the underlying concept should include saved export snapshots or registrar submission batches.
 
-An export packet is evidence sent at a moment in time. It should conceptually preserve:
+An export snapshot is evidence prepared at a moment in time. It should conceptually preserve:
 
 - records included
 - generated date
@@ -236,7 +236,7 @@ It should allow ABA staff to:
 - request clarification
 - decide whether a record is accepted into the tracker
 - decide whether a record is eligible for public aggregate use
-- decide whether a record is included in the registrar packet
+- decide whether a record is included in registrar export preview
 
 The intended data flow is:
 
@@ -254,7 +254,7 @@ Canonical review fields may include:
 - verified ABA relationship type
 - data quality status
 - public aggregate eligibility
-- registrar packet eligibility
+- registrar export-preview eligibility
 - operator inclusion decision
 - clarification needed
 
@@ -284,12 +284,12 @@ The admin/operator review area should distinguish between:
 - self-reported ABA relationship type
 - verified ABA relationship type
 
-Verified `Full member, active` is the default registrar-packet eligible relationship type. Other relationship types may contribute to reviewed aggregate intelligence but require operator exception before named packet inclusion.
+Verified `Full member, active` is the default registrar export-preview eligible relationship type. Other relationship types may contribute to reviewed aggregate intelligence but require operator exception before named export inclusion.
 
 ABA relationship type affects:
 
 - company dashboard access
-- registrar packet inclusion by default
+- registrar export-preview inclusion by default
 - public dashboard filtering
 - internal review and follow-up
 
@@ -305,7 +305,7 @@ Consent and inclusion must be separate concepts.
 
 - internal ABA review
 - anonymised public aggregate use
-- named registrar packet use
+- named registrar export use
 
 `operator_inclusion` describes what ABA decides to actually use:
 
@@ -318,13 +318,13 @@ Default visibility should be:
 - internal review
 - anonymised public aggregate use
 
-Named registrar packet use should require explicit opt-in.
+Named registrar export use should require explicit opt-in.
 
 High-sensitivity fields such as proof attachments, reference numbers, company names, product names, and free-text notes should not become public raw fields.
 
 The intake flow may use record-level defaults with optional advanced per-field visibility controls.
 
-For non-members, consent to registrar packet use should be captured as permission, not as a promise of inclusion.
+For non-members, consent to registrar export use should be captured as permission, not as a promise of inclusion.
 
 ## POPIA And Privacy
 
@@ -339,7 +339,7 @@ Add concise disclaimers where relevant:
 - intake: ABA uses information to build sector evidence and support advocacy; this is not legal or regulatory advice
 - company dashboard: benchmarks are informational and based on reviewed submissions
 - public dashboard: metrics are aggregated from reviewed submissions and do not identify individual companies
-- registrar list: export packets are prepared from consented and reviewed records for engagement with the registrar
+- registrar list: export previews are prepared from consented and reviewed records for engagement with the registrar
 
 ## Company And Contact Model
 
@@ -530,7 +530,7 @@ Proof and reference come in **two stages** that must not be conflated *[SRF; Pro
 
 "Proof" is likewise staged: **proof of payment** is a distinct mandatory artifact at verification, while the substantive proof of a submission is the **dossier** (List I + List II + supporting studies) — which the tracker records as a single **dossier-readiness** flag, not field-by-field.
 
-Proof of submission should be optional during intake but mandatory for registrar packet inclusion. A reference number should be optional, but a missing one requires an explicit reason.
+Proof of submission should be optional during intake but mandatory for registrar export-preview inclusion. A reference number should be optional, but a missing one requires an explicit reason.
 
 Suggested reference status:
 
@@ -622,7 +622,7 @@ Recommended states:
 - company dashboard: no accepted records yet
 - company dashboard: needs clarification
 - company dashboard: not export-ready
-- company dashboard: included in ABA registrar packet
+- company dashboard: included in ABA registrar export preview
 - public dashboard: suppressed small-cell state
 - admin/operator review: duplicate or possible duplicate
 - admin/operator review: needs clarification

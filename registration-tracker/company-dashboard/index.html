@@ -6,33 +6,20 @@
     <title>Company Workspace | ABA Registration Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+    <link rel="stylesheet" href="../../docs/site/assets/public-shell.css">
+    <script defer src="../../docs/site/assets/public-shell.js"></script>
   </head>
   <body>
     <div class="prototype-shell public-tracker-shell">
-      <header class="topbar public-site-topbar">
-        <div class="brand-block">
-          <div class="brand-mark">ABA</div>
-          <div><p class="product-kicker">African Biologicals Alliance</p><p class="product-title">Collective voice. Regulatory visibility. Better conditions for African biologicals.</p></div>
-        </div>
-        <div class="nav-wrap">
-          <nav class="nav" aria-label="ABA site">
-            <a href="../../docs/site/index.html">Home</a>
-            <a href="../../docs/site/about.html">About</a>
-            <a href="../../docs/membership-flow/index.html">Membership</a>
-            <a href="../../docs/database/index.html">Biologicals Explorer</a>
-            <a class="active" href="../../docs/registration-tracker/index.html">Track Registrations</a>
-          </nav>
-          <a class="nav-cta" href="../../docs/membership-flow/index.html">Join ABA</a>
-        </div>
-      </header>
+      <header class="surface topbar" aria-label="Shared public header"></header>
 
       <main class="page">
         <section class="page-header">
           <div>
             <h1>Member company workspace</h1>
-            <p>Private member view of your company's own registration records, open actions, wait-time benchmarks, and evidence readiness. Select a record or filter to focus the workspace.</p>
+            <p>Private member view of your company's own reviewed registration-application records, open actions, wait-time benchmarks, and export-preview readiness. Select a record or filter to focus the workspace.</p>
           </div>
           <span class="role-badge">Company member workspace</span>
         </section>
@@ -40,7 +27,7 @@
         <section class="grid three">
           <div class="panel ok"><h2>Workspace gate</h2><p>Member login or invited workspace access required. Intake return links do not unlock this area.</p></div>
           <div class="panel"><h2>Company</h2><p><strong>Example Bio Inputs (Pty) Ltd</strong><br>Verified ABA relationship: Full member, active<br>Records visible: own company only<br>Data refreshed: 2026-06-22 14:40</p></div>
-          <div class="panel warn"><h2>Private workspace boundary</h2><p>Company records stay private here. Only reviewed, anonymised patterns may later support public Regulatory Signals and Evidence Library context.</p></div>
+          <div class="panel warn"><h2>Private workspace boundary</h2><p>Company records stay private here. Only reviewed, anonymised patterns may later support public Regulatory Signals. Export-preview eligibility is narrower than ordinary company visibility.</p></div>
         </section>
 
         <section class="panel" style="margin-top: 16px;">
@@ -110,10 +97,10 @@
 
         <section class="grid two" style="margin-top: 16px;">
           <div class="panel warn"><h2>Needs clarification</h2><p id="clarificationText">ABA needs a proof file or reference-unavailable reason before blocked records can be accepted for evidence use.</p></div>
-          <div class="panel ok"><h2>Evidence candidate status</h2><p id="packetText">Visible only for consented, reviewed, ABA-approved member records. Evidence version and use date appear here once available.</p></div>
+          <div class="panel ok"><h2>Export-preview status</h2><p id="packetText">Visible only for consented, reviewed, operator-cleared member records. Export-preview status is narrower than ordinary company workspace visibility.</p></div>
         </section>
 
-        <p class="footer-note">Prototype member workspace state. Private company records are visible only inside this workspace, while only reviewed aggregate patterns may later support public signals.</p>
+        <p class="footer-note">Prototype member workspace state. Private company records are visible only inside this workspace, while only reviewed aggregate patterns may later support public signals and a narrower reviewed subset may support export-preview handling.</p>
       </main>
     </div>
 
@@ -407,7 +394,7 @@
         const actionCount = items.filter((record) => record.needsAction).length;
         setText("clarificationText", actionCount ? `${actionCount} filtered record needs clarification before it can be accepted for evidence use.` : "No filtered records currently need clarification.");
         const readyCount = items.filter((record) => record.ready).length;
-        setText("packetText", readyCount ? `${readyCount} filtered record is an evidence candidate after ABA review.` : "No filtered records are currently ready for evidence use.");
+        setText("packetText", readyCount ? `${readyCount} filtered record is an export-preview candidate after ABA review.` : "No filtered records are currently ready for export-preview use.");
         document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
       }
 

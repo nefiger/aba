@@ -28,7 +28,7 @@
         <section class="page-header">
           <div>
             <h1>Registrar packet workspace</h1>
-            <p>Export-facing operator view for reviewed, consented, operator-approved member records and blocked candidates. Toggle inclusion and packet actions to update the draft.</p>
+            <p>Export-facing operator preview for reviewed, consented, operator-approved member records and blocked candidates. Toggle inclusion and packet actions to update the draft snapshot.</p>
           </div>
           <span class="role-badge">Operator export workspace</span>
         </section>
@@ -36,7 +36,7 @@
         <section class="grid three">
           <div class="panel ok"><h2>Packet draft</h2><p><strong>Packet version:</strong> <span id="packetVersion">2026-Q2-v1</span><br><strong>Generated:</strong> <span id="packetDate">2026-06-22 14:50</span><br><strong>Status:</strong> <span id="packetStatus">Draft</span></p></div>
           <div class="panel"><h2>Included records</h2><span class="metric-value" id="includedCount">2</span><p class="note">Reviewed, consented, operator-approved member records.</p></div>
-          <div class="panel warn"><h2>Registrar disclaimer</h2><p>Export packets are prepared for engagement with the registrar and are not legal or regulatory advice.</p></div>
+          <div class="panel warn"><h2>Registrar disclaimer</h2><p>Export packets are prepared as reviewed evidence snapshots for engagement with the registrar and are not legal or regulatory advice.</p></div>
         </section>
 
         <section class="panel" style="margin-top: 16px;">
@@ -107,7 +107,7 @@
         { id: "biofert", company: "Sample Agri Sciences", product: "Fictional Biofert Product", serviceType: "New formulation (14AR2)", member: "Full member, active", applicationCountry: "South Africa", status: "Under technical review", officialStage: "Evaluation", submittedAt: "2026-06-21 16:44", fileRef: "Not issued (reason recorded)", regNumber: "—", dossier: "Ready", payment: "Attached", consent: "Named packet opt-in", ready: true, included: true, blocker: "None" },
         { id: "spray", company: "Example Bio Inputs", product: "Fictional Bio-Control Spray", serviceType: "Generic (14AR1)", member: "Full member, active", applicationCountry: "South Africa", status: "Query / additional information requested", officialStage: "Referred back", submittedAt: "2026-06-22 14:22", fileRef: "FILE-EXAMPLE-2044", regNumber: "—", dossier: "Ready", payment: "Missing", consent: "Named packet opt-in", ready: false, included: false, blocker: "Proof of payment missing" },
         { id: "water", company: "Fictional Water Culture", product: "Fictional Water Culture", serviceType: "Out of Act 36 scope", member: "Non-member", applicationCountry: "Kenya", status: "Submitted to authority", officialStage: "Not Act 36", submittedAt: "2026-06-21 11:06", fileRef: "Reason recorded", regNumber: "—", dossier: "Ready", payment: "Attached", consent: "Named packet opt-in", ready: false, included: false, blocker: "Out of Act 36 scope — not eligible for the registrar list (regime gate, not an exception case)" },
-        { id: "seed", company: "Example Bio Inputs", product: "Fictional Seed Coat", serviceType: "New molecule (14AR2)", member: "Associate", applicationCountry: "Nigeria", status: "Preparing submission", officialStage: "Pre-submission", submittedAt: "2026-06-22 14:28", fileRef: "Not issued", regNumber: "—", dossier: "In progress", payment: "—", consent: "No named consent", ready: false, included: false, blocker: "Named registrar consent missing" }
+        { id: "seed", company: "Example Bio Inputs", product: "Fictional Seed Coat", serviceType: "New molecule (14AR2)", member: "Technical partner", applicationCountry: "Nigeria", status: "Preparing submission", officialStage: "Pre-submission", submittedAt: "2026-06-22 14:28", fileRef: "Not issued", regNumber: "—", dossier: "In progress", payment: "—", consent: "No named consent", ready: false, included: false, blocker: "Named registrar consent missing" }
       ];
 
       let activeFilter = "all";
@@ -172,7 +172,7 @@
           ["Default inclusion rule", "Full member, active + reviewed + consented + dossier ready + proof of payment + file reference + operator included"],
           ["Included records submitted at", included.map((record) => record.submittedAt).join(", ") || "No records included"],
           ["Included countries", [...new Set(included.map((record) => record.applicationCountry))].join(", ") || "No records included"],
-          ["Attachments included", `${included.filter((record) => record.dossier === "Ready" && record.payment === "Attached").length} dossier + payment sets`],
+          ["Readiness flags present", `${included.filter((record) => record.dossier === "Ready" && record.payment === "Attached").length} records marked ready with proof-of-payment attached-state set`],
           ["History states", "Draft / prepared / frozen / sent / revised / withdrawn"],
           ["Preserved snapshot", "Included records, blockers, version, date"]
         ];

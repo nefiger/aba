@@ -7,67 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../docs/membership-flow/assets/membership-shell.css">
     <link rel="stylesheet" href="../shared/tracker-wireframe.css">
+    <link rel="stylesheet" href="../../docs/site/assets/public-shell.css">
+    <script defer src="../../docs/site/assets/public-shell.js"></script>
     <style>
       .public-dashboard-shell {
         color: #173039;
-      }
-
-      .public-site-topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
       }
 
       .public-dashboard-shell .product-title {
         font-family: "Public Sans", system-ui, sans-serif;
         font-size: 14px;
         line-height: 1.45;
-      }
-
-      .nav-wrap {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-
-      .nav a {
-        color: #173039;
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      .nav a.active,
-      .nav a:hover {
-        color: #2b6b4f;
-      }
-
-      .nav-cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 42px;
-        padding: 0 16px;
-        border-radius: 999px;
-        background: #214f3c;
-        color: #f7f7f2;
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-decoration: none;
-        text-transform: uppercase;
       }
 
       .page {
@@ -79,8 +31,9 @@
         position: relative;
         overflow: hidden;
         background:
+          radial-gradient(circle at 100% 0%, rgba(184, 93, 58, 0.14), transparent 28%),
           radial-gradient(circle at top right, rgba(87, 140, 105, 0.14), transparent 32%),
-          linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(247, 244, 236, 0.86));
+          linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 241, 232, 0.92));
       }
 
       .hero-shell::after {
@@ -98,7 +51,7 @@
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        grid-template-columns: 1fr;
         gap: 18px;
       }
 
@@ -127,7 +80,7 @@
 
       .page-header p {
         margin-top: 18px;
-        max-width: 62ch;
+        max-width: none;
         color: #5c6f73;
         font-size: 17px;
         line-height: 1.72;
@@ -235,7 +188,7 @@
 
       .section-heading p,
       .section-heading .note {
-        max-width: 72ch;
+        max-width: none;
       }
 
       .metric-grid {
@@ -297,9 +250,9 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 44px;
+        min-height: 46px;
         padding: 0 18px;
-        border-radius: 999px;
+        border-radius: 16px;
         font-size: 12px;
         font-weight: 900;
         letter-spacing: 0.08em;
@@ -310,14 +263,14 @@
       }
 
       .button-link.primary {
-        background: #214f3c;
-        color: #f7f7f2;
+        background: #173b35;
+        color: #f7f4ec;
       }
 
       .button-link.secondary {
-        border: 1px solid rgba(46, 58, 46, 0.16);
-        background: rgba(255, 255, 255, 0.78);
-        color: #173039;
+        border: 1px solid rgba(23, 48, 57, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+        color: #203b44;
       }
 
       .footer-note {
@@ -346,44 +299,23 @@
           grid-template-columns: 1fr;
         }
 
-        .nav {
-          gap: 14px;
-        }
       }
     </style>
   </head>
   <body>
     <div class="prototype-shell public-dashboard-shell">
-      <header class="topbar public-site-topbar">
-        <div class="brand-block">
-          <div class="brand-mark">ABA</div>
-          <div>
-            <p class="product-kicker">African Biologicals Alliance</p>
-            <p class="product-title">Collective voice. Regulatory visibility. Better conditions for African biologicals.</p>
-          </div>
-        </div>
-        <div class="nav-wrap">
-          <nav class="nav" aria-label="ABA site">
-            <a href="../../docs/site/index.html">Home</a>
-            <a href="../../docs/site/about.html">About</a>
-            <a href="../../docs/membership-flow/index.html">Membership</a>
-            <a href="../../docs/database/index.html">Biologicals Explorer</a>
-            <a class="active" href="../../docs/registration-tracker/index.html">Track Registrations</a>
-          </nav>
-          <a class="nav-cta" href="../../docs/membership-flow/index.html">Join ABA</a>
-        </div>
-      </header>
+      <header class="surface topbar" aria-label="Shared public header"></header>
 
-      <main class="page">
+      <main class="page shell">
         <section class="page-header panel hero-shell">
           <div>
             <div class="knowledge-eyebrow">Sector signals</div>
             <h1>Registration sector signals</h1>
-            <p>This page shows anonymised, public-safe registration patterns drawn from reviewed submissions. No company-level or product-level private records are exposed.</p>
+            <p>Explore anonymised registration patterns built from submissions shared with ABA. Public signals stay at sector level rather than exposing private company or product detail.</p>
             <div class="hero-stat-grid" aria-label="Sector signal highlights">
               <div class="hero-stat">
-                <strong>All reviewed submissions</strong>
-                <span>Public metrics are based only on records reviewed before publication.</span>
+                <strong>Screened before publication</strong>
+                <span>ABA checks submissions before they shape public-facing sector signals.</span>
               </div>
               <div class="hero-stat">
                 <strong>Small-cell protection</strong>
@@ -393,8 +325,8 @@
           </div>
           <aside class="knowledge-context-card panel muted">
             <div class="knowledge-chip">Public boundary</div>
-            <p>These are currently visible signals rather than a complete market picture. ABA can accept product-registration input from across Africa while current operating activity is centered in South Africa.</p>
-            <p class="note">Reviewed submissions contribute to aggregate intelligence only after ABA checks structure, removes direct identifiers, and applies suppression rules.</p>
+            <p>These signals show what is visible so far, not the full market. ABA can receive registration input from across Africa while current operating activity is strongest in South Africa.</p>
+            <p class="note">Counts stay suppressed where visibility is too thin to share safely.</p>
           </aside>
         </section>
 
@@ -403,9 +335,9 @@
             <div>
               <div class="section-label">Sector context</div>
               <h2 style="margin-top: 14px;">What the current signal picture is showing</h2>
-              <p>These concise context blocks bring together the strongest public-facing sector patterns without creating a second destination for overlapping registration intelligence.</p>
+              <p>These headline patterns show where registration visibility is strongest, where friction keeps recurring, and where broader participation would sharpen the picture.</p>
             </div>
-            <p class="note">Use these signals as directional evidence: they show what is currently visible in reviewed submissions, not the full market.</p>
+            <p class="note">Use these signals as directional evidence rather than a full census of the market.</p>
           </div>
           <div class="context-grid">
             <article class="context-card">
@@ -440,7 +372,7 @@
             </div>
             <p class="note">Data refreshed: <span id="dataRefreshed">2026-06-22 14:45</span>.</p>
           </div>
-          <p class="note" id="filterNote" style="margin-top: 8px;">All reviewed submissions, shown as one pool. ABA tracks member/non-member internally, but v1 doesn't expose a public filter for it (decided against — even suppressed, a split narrows inference on small cells). Cells below the anonymisation threshold stay suppressed.</p>
+          <p class="note" id="filterNote" style="margin-top: 8px;">Signals are shown as one pooled public view, with small counts hidden to protect contributors.</p>
         </section>
 
         <section class="metric-grid" style="margin-top: 16px;">
@@ -509,15 +441,15 @@
         <section class="panel" style="margin-top: 16px;">
           <div class="section-heading">
             <div>
-              <div class="section-label">Registrar evidence packets</div>
-              <h2 style="margin-top: 14px;">Aggregate evidence-packet activity</h2>
-              <p class="note">Aggregate only — packets are prepared from consented, reviewed records. No company is named here. Fictional placeholder figures.</p>
+              <div class="section-label">Registrar evidence preview</div>
+              <h2 style="margin-top: 14px;">Aggregate advocacy snapshot activity</h2>
+              <p class="note">This view summarises sector-level snapshot activity only. No company is named here.</p>
             </div>
           </div>
           <div class="metric-grid" style="margin-top: 12px;">
-            <div class="metric"><span>Registrar evidence packets prepared</span><span class="metric-value">4</span><p class="note">Across all engagement windows.</p></div>
-            <div class="metric"><span>Applications represented in submitted packets</span><span class="metric-value">29</span><p class="note">Consented, reviewed, included records.</p></div>
-            <div class="metric"><span>Most recent packet period</span><span class="metric-value">Q2 2026</span><p class="note">Latest registrar engagement window.</p></div>
+            <div class="metric"><span>Evidence snapshots prepared</span><span class="metric-value">4</span><p class="note">Across all prototype engagement windows.</p></div>
+            <div class="metric"><span>Applications represented in preview snapshots</span><span class="metric-value">29</span><p class="note">Consented, reviewed, included records.</p></div>
+            <div class="metric"><span>Most recent snapshot period</span><span class="metric-value">Q2 2026</span><p class="note">Latest prototype export window.</p></div>
           </div>
         </section>
 
