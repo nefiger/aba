@@ -545,49 +545,13 @@
           </article>
         </section>
 
-        <section class="panel" style="margin-top: 16px;">
-          <div class="section-heading">
-            <div>
-              <div class="section-label">Advocacy snapshots</div>
-              <h2 style="margin-top: 14px;">Registration evidence prepared for sector engagement</h2>
-              <p class="note">These snapshots stay at sector level. No company or product is named publicly.</p>
-            </div>
+        <details class="panel signal-context-reveal">
+          <summary>How public signals are protected</summary>
+          <div class="signal-context-inner">
+            <p>ABA publishes reviewed aggregate patterns only. Company names, product names, proof files, and file references stay out of the public view.</p>
+            <p class="note">Counts below the anonymisation threshold stay hidden, and pre-submission activity is shown separately from registrar backlog.</p>
           </div>
-          <div class="metric-grid" style="margin-top: 12px;">
-            <div class="metric"><span>Evidence snapshots prepared</span><span class="metric-value">4</span><p class="note">Across recent engagement windows.</p></div>
-            <div class="metric"><span>Applications represented in snapshots</span><span class="metric-value">29</span><p class="note">Consented, reviewed, included records.</p></div>
-            <div class="metric"><span>Most recent snapshot period</span><span class="metric-value">Q2 2026</span><p class="note">Latest prepared snapshot window.</p></div>
-          </div>
-        </section>
-
-        <section class="grid two" style="margin-top: 16px;">
-          <div class="panel warn">
-            <h2>Contributor protection</h2>
-            <p>Cells below the anonymisation threshold are hidden so a single company or product cannot be inferred.</p>
-            <div class="suppression-grid" id="suppressionGrid" style="margin-top: 12px;"></div>
-          </div>
-          <div class="panel">
-            <h2>Public signal rules</h2>
-            <div class="state-summary" id="publicSummary"></div>
-          </div>
-        </section>
-
-        <section class="panel ok" style="margin-top: 16px;">
-          <div class="section-heading">
-            <div>
-              <div class="section-label">Advocacy use</div>
-              <h2 style="margin-top: 14px;">Where these signals help</h2>
-              <p>Public sector signals help turn reviewed registration experience into clearer evidence for action without exposing private submissions.</p>
-            </div>
-          </div>
-          <div class="advocacy-grid">
-            <div class="support-card"><strong>Advocacy evidence</strong><span>Aggregate waits, thresholds, and bottlenecks help show where registration pressure is accumulating.</span></div>
-            <div class="support-card"><strong>Registrar engagement</strong><span>Reviewed patterns help frame sharper conversations around delay, category treatment, and pathway clarity.</span></div>
-            <div class="support-card"><strong>Sector coordination</strong><span>Shared signals make it easier for contributors and sector partners to understand recurring pain points together.</span></div>
-            <div class="support-card"><strong>Country readiness</strong><span>Country-level visibility helps identify where stronger registration support and future coordination may matter most.</span></div>
-            <div class="support-card"><strong>Better conditions for African biologicals</strong><span>Longer-term signal building supports a more credible case for practical, enabling regulatory conditions.</span></div>
-          </div>
-        </section>
+        </details>
 
         <section class="cta-band" style="margin-top: 16px;">
           <div>
@@ -792,32 +756,6 @@
         `;
       }
 
-      function renderSuppression(data) {
-        document.getElementById("suppressionGrid").innerHTML = data.suppression.map(([label, value, suppressed]) => `
-          <div class="suppression-cell ${suppressed ? "suppressed" : ""}">
-            <strong>${label}</strong>
-            <span>${value}</span>
-          </div>
-        `).join("");
-      }
-
-      function renderSummary() {
-        const rows = [
-          ["Records shown", "Reviewed tracker submissions only."],
-          ["Backlog", "Open records beyond the relevant statutory timeframe."],
-          ["Wait time", "Open duration shown in months."],
-          ["Coverage", "South Africa is strongest today; other country signals form as participation grows."],
-          ["Privacy", `Counts below ${SUPPRESS_K} records stay hidden.`],
-          ["Pipeline", "Pre-submission activity is shown separately from registrar backlog."]
-        ];
-        document.getElementById("publicSummary").innerHTML = rows.map(([key, value]) => `
-          <div class="state-row">
-            <div class="state-key">${key}</div>
-            <div class="state-value">${value}</div>
-          </div>
-        `).join("");
-      }
-
       function render() {
         const m = deriveMetrics();
         const open = m.open;
@@ -839,10 +777,6 @@
 
         setText("trendCaption", "All reviewed submissions: reviewed open-record trend (explicit monthly series).");
 
-        const cells = groupRows(open, (r) => r.co).map(([lbl, val, sup]) => [`${lbl} (reviewed)`, sup ? "Suppressed" : `${val} records`, Boolean(sup)]);
-        renderSuppression({ suppression: cells });
-
-        renderSummary();
       }
 
       render();
