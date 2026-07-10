@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!inSite && !inMembership && !inDatabase && !inTrackerDocs && !inTrackerWorkspace) return;
 
+  const shellStylesheet = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+    .find((link) => link.getAttribute("href")?.includes("public-shell.css"));
+  if (shellStylesheet) {
+    document.head.appendChild(shellStylesheet);
+  }
+
   const nestedTrackerPage = /\/registration-tracker\/[^/]+\/index\.html$/.test(path);
   const trackerDocsPrefix = inTrackerWorkspace
     ? (nestedTrackerPage ? "../../docs/" : "../docs/")

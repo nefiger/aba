@@ -168,13 +168,13 @@
       }
 
       .hero p {
-        max-width: 58ch;
+        max-width: none;
         font-size: clamp(1.02rem, 0.96rem + 0.24vw, 1.14rem);
         line-height: 1.6;
       }
 
       .hero-copy {
-        max-width: 58ch;
+        max-width: none;
       }
 
       .hero-actions {
@@ -264,6 +264,7 @@
       }
 
       .journey-brief p {
+        max-width: none;
         font-size: 0.98rem;
         line-height: 1.54;
       }
@@ -298,17 +299,17 @@
       }
 
       .summary-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
+        position: relative;
+        display: block;
         gap: 12px;
+        padding-right: 52px;
       }
 
       .section-head {
         display: grid;
         gap: 4px;
         min-width: 0;
-        flex: 1 1 auto;
+        width: 100%;
       }
 
       .section-head h2 {
@@ -316,6 +317,7 @@
         line-height: 1.08;
         letter-spacing: -0.035em;
         font-weight: 850;
+        max-width: none;
       }
 
       .section-head p {
@@ -323,9 +325,13 @@
         color: #516469;
         font-size: 0.94rem;
         line-height: 1.48;
+        max-width: none;
       }
 
       .summary-toggle {
+        position: absolute;
+        top: 0;
+        right: 0;
         flex: 0 0 auto;
         width: 38px;
         height: 38px;
@@ -534,6 +540,10 @@
         .checkbox-list,
         .hero-ribbon {
           grid-template-columns: 1fr;
+        }
+
+        .summary-row {
+          padding-right: 48px;
         }
 
         .hero::after {
