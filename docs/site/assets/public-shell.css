@@ -404,6 +404,10 @@ body {
   gap: 8px;
 }
 
+.site-footer a {
+  text-decoration: none;
+}
+
 .site-footer__nav a:hover,
 .site-footer__nav a:focus-visible {
   color: var(--green-deep);
