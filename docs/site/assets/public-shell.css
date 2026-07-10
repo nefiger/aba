@@ -129,8 +129,16 @@ body {
   font-weight: 750;
   line-height: 1;
   color: color-mix(in oklab, #203b44 84%, white);
+  text-decoration: none;
   white-space: nowrap;
   padding-bottom: 12px;
+}
+
+.button,
+.button-link,
+.action-button,
+.nav-cta {
+  text-decoration: none;
 }
 
 .nav a::after {

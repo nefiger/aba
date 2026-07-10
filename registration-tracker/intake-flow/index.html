@@ -72,7 +72,7 @@
       .hero-main {
         position: relative;
         display: grid;
-        gap: 20px;
+        gap: 14px;
         align-content: start;
       }
 
@@ -87,7 +87,7 @@
       }
 
       .hero-support {
-        gap: 18px;
+        gap: 14px;
       }
 
       .eyebrow,
@@ -129,12 +129,20 @@
       .hero {
         position: relative;
         overflow: hidden;
-        padding: clamp(30px, 3.2vw, 42px);
+        padding: clamp(22px, 2.4vw, 32px);
         background:
           radial-gradient(circle at 16% 18%, rgba(243, 241, 232, 0.72), transparent 22%),
           radial-gradient(circle at top right, rgba(90, 107, 58, 0.2), transparent 30%),
           linear-gradient(135deg, rgba(255, 253, 249, 0.94), rgba(244, 236, 220, 0.92));
         border-color: rgba(21, 50, 47, 0.12);
+      }
+
+      .tracker-intake-page .hero {
+        background:
+          radial-gradient(circle at 88% 8%, rgba(200, 155, 44, 0.18), transparent 28%),
+          radial-gradient(circle at 8% 110%, rgba(90, 107, 58, 0.22), transparent 34%),
+          linear-gradient(135deg, #15322f 0%, #1f473e 58%, #33472f 100%) !important;
+        color: #fbf7ed;
       }
 
       .hero::after {
@@ -160,17 +168,31 @@
 
       .hero h1 {
         margin-top: 8px;
-        font-size: clamp(2.2rem, 3.2vw, 3.5rem);
-        line-height: 0.94;
-        letter-spacing: -0.045em;
+        font-size: clamp(2rem, 2.8vw, 3rem);
+        line-height: 0.98;
+        letter-spacing: -0.04em;
         font-weight: 900;
         max-width: none;
       }
 
+      .tracker-intake-page .hero h1 {
+        color: #fbf7ed;
+      }
+
       .hero p {
         max-width: none;
-        font-size: clamp(1.02rem, 0.96rem + 0.24vw, 1.14rem);
-        line-height: 1.6;
+        font-size: clamp(0.98rem, 0.94rem + 0.18vw, 1.08rem);
+        line-height: 1.52;
+      }
+
+      .tracker-intake-page .hero p {
+        color: rgba(251, 247, 237, 0.82);
+      }
+
+      .tracker-intake-page .hero .eyebrow {
+        color: #f2d57e;
+        border-color: rgba(255, 247, 221, 0.2);
+        background: rgba(255, 247, 221, 0.1);
       }
 
       .hero-copy {
@@ -194,6 +216,7 @@
         font-size: 0.8rem;
         font-weight: 900;
         letter-spacing: 0.06em;
+        text-decoration: none;
         text-transform: uppercase;
         border: 1px solid rgba(35, 59, 68, 0.12);
       }
@@ -287,6 +310,15 @@
         border: 1px solid rgba(35, 59, 68, 0.1);
         border-radius: 22px;
         background: rgba(255, 253, 248, 0.96);
+      }
+
+      details.form-section[open] {
+        border-color: rgba(21, 50, 47, 0.22);
+        box-shadow: 0 18px 40px -36px rgba(21, 50, 47, 0.32);
+      }
+
+      details.form-section[open] .section-head h2 {
+        color: var(--green-deep);
       }
 
       details.form-section > summary {
@@ -394,6 +426,15 @@
         color: var(--ink);
         min-height: 42px;
         padding: 9px 10px;
+      }
+
+      .control:focus,
+      .control-select:focus,
+      .control-textarea:focus,
+      .textarea-box:focus {
+        border-color: rgba(21, 50, 47, 0.36);
+        box-shadow: 0 0 0 3px rgba(21, 50, 47, 0.1);
+        outline: none;
       }
 
       .control-textarea,
@@ -510,6 +551,7 @@
         font-size: 12px;
         font-weight: 900;
         letter-spacing: 0.08em;
+        text-decoration: none;
         text-transform: uppercase;
       }
 
@@ -576,18 +618,6 @@
                   <a class="button primary" href="#capture-flow">Start this route</a>
                   <a class="button secondary" href="../../docs/registration-tracker/index.html">Tracker overview</a>
                 </div>
-                <div class="hero-ribbon">
-                  <div class="hero-ribbon-item">
-                    <label>Open route</label>
-                    <strong>Membership is not required before a registration journey can be shared.</strong>
-                    <p>ABA can capture product-registration visibility first and connect that history to membership later.</p>
-                  </div>
-                  <div class="hero-ribbon-item">
-                    <label>Reviewed use</label>
-                    <strong>Submissions are reviewed before they inform wider sector signals or follow-up.</strong>
-                    <p>The route is built for practical visibility, while keeping named use and downstream sharing deliberate.</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -605,7 +635,7 @@
                 <h2>Step 1. Your details</h2>
                 <p>Tell ABA who is submitting, which company or organisation is involved, and how to reach you again. This information supports ABA review, anonymised sector evidence, and only with your consent any named or registrar-facing follow-up.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <label class="checkbox-item"><input id="responsibleAttestation" type="checkbox"> <span>Responsible submitter confirmation: I am responsible for, or authorised to report on, this product's registration.</span></label>
@@ -626,7 +656,7 @@
                 <h2>Step 2. Product, regime and legal pathway</h2>
                 <p>Describe the product, the market context, and the pathway the application is moving through.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="form-grid">
@@ -647,7 +677,7 @@
                 <h2>Step 3. Service / application type</h2>
                 <p>Select the type that best matches the work already underway. If you are unsure, choose the closest fit and ABA can clarify it during follow-up.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="form-grid">
@@ -696,7 +726,7 @@
                 <h2>Step 4. Status and stage</h2>
                 <p>Show where the application currently sits and when it reached that stage. Use the closest status if the record is still moving.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="form-grid">
@@ -731,7 +761,7 @@
                 <h2>Step 5. Reference and readiness</h2>
                 <p>Add the current file reference if you have it, then indicate whether the main supporting materials and payment proof are ready.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="form-grid">
@@ -761,7 +791,7 @@
                 <h2>Step 6. Optional accountability</h2>
                 <p>Add any named person or formal accountability detail that ABA should understand alongside the application. Leave this closed if it is not needed.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="form-grid">
@@ -780,7 +810,7 @@
                 <h2>Step 7. Visibility and consent</h2>
                 <p>Choose how ABA may use this submission beyond internal review. Named use is always optional.</p>
               </div>
-              <span class="summary-toggle" aria-hidden="true"></span>
+              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
             <div class="form-body">
               <div class="checkbox-list">

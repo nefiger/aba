@@ -205,6 +205,7 @@
       font-size: 0.82rem;
       font-weight: 900;
       letter-spacing: 0.1em;
+      text-decoration: none;
       text-transform: uppercase;
     }
 
@@ -223,7 +224,7 @@
     .hero,
     .page-section {
       margin-top: 12px;
-      padding: clamp(28px, 3vw, 40px);
+      padding: clamp(22px, 2.4vw, 30px);
     }
 
     .hero {
@@ -253,6 +254,49 @@
         );
       opacity: 0.15;
       pointer-events: none;
+    }
+
+    .tracker-overview .hero {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(200, 155, 44, 0.18), transparent 28%),
+        radial-gradient(circle at 8% 110%, rgba(90, 107, 58, 0.22), transparent 34%),
+        linear-gradient(135deg, #15322f 0%, #1f473e 58%, #33472f 100%) !important;
+      color: #fbf7ed;
+    }
+
+    .tracker-overview .hero h1,
+    .tracker-overview .hero .lede {
+      color: #fbf7ed;
+    }
+
+    .tracker-overview .hero .lede {
+      opacity: 0.82;
+    }
+
+    .tracker-overview .hero .eyebrow {
+      color: #f2d57e;
+      border-color: rgba(255, 247, 221, 0.2);
+      background: rgba(255, 247, 221, 0.1);
+    }
+
+    .tracker-overview .hero-aside {
+      background: rgba(8, 28, 25, 0.34) !important;
+      border-color: rgba(255, 247, 221, 0.16);
+      color: #fbf7ed;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .tracker-overview .hero-aside strong,
+    .tracker-overview .hero-aside .mini,
+    .tracker-overview .hero-aside p,
+    .tracker-overview .hero-aside li {
+      color: inherit;
+    }
+
+    .tracker-overview .hero-aside .mini,
+    .tracker-overview .hero-aside p,
+    .tracker-overview .hero-aside li {
+      opacity: 0.78;
     }
 
     .hero-grid,
@@ -308,9 +352,9 @@
     }
 
     h1 {
-      font-size: clamp(3.2rem, 5vw, 5.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.055em;
+      font-size: clamp(2.45rem, 3.7vw, 4.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
       color: var(--green-deep);
     }
 
@@ -335,8 +379,8 @@
     }
 
     .lede {
-      margin-top: 18px;
-      font-size: clamp(1.16rem, 1rem + 0.4vw, 1.34rem);
+      margin-top: 14px;
+      font-size: clamp(1.02rem, 0.96rem + 0.28vw, 1.18rem);
       line-height: 1.56;
       color: color-mix(in oklab, var(--ink) 76%, white);
     }
@@ -346,7 +390,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 18px;
     }
 
     .hero-aside,
@@ -365,7 +409,7 @@
     .evidence-card,
     .expectation-card,
     .trust-card {
-      padding: 20px;
+      padding: 18px;
     }
 
     .hero-aside {
@@ -404,7 +448,22 @@
     }
 
     .route-card.product {
-      background: linear-gradient(180deg, rgba(226, 235, 219, 0.98), rgba(255, 252, 246, 0.92));
+      background:
+        radial-gradient(circle at 96% 0%, rgba(200, 155, 44, 0.16), transparent 34%),
+        linear-gradient(135deg, #173b35, #264635) !important;
+      color: #fbf7ed;
+    }
+
+    .route-card.product h3,
+    .route-card.product p,
+    .route-card.product .mini,
+    .route-card.product .route-note {
+      color: inherit;
+    }
+
+    .route-card.product p,
+    .route-card.product .route-note {
+      opacity: 0.82;
     }
 
     .route-card.signals {
@@ -532,34 +591,16 @@
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header class="surface topbar">
-      <div class="brand">
-        <div class="mark"><img src="../site/assets/aba-route1-horizontal.png" alt="African Biologicals Alliance logo"></div>
-        <div class="brand-copy">
-          <strong>Collective voice. Biological transition. African-led growth.</strong>
-          <span>Membership, registration intelligence, and biologicals knowledge for a stronger agricultural transition.</span>
-        </div>
-      </div>
-      <div class="nav-wrap">
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="../site/index.html">Home</a>
-          <a href="../site/about.html">About</a>
-          <a href="../membership-flow/index.html">Membership</a>
-          <a href="../database/index.html">Biologicals Explorer</a>
-          <a class="active" href="./index.html">Track Registrations</a>
-        </nav>
-        <a class="nav-cta" href="../membership-flow/index.html">Join ABA</a>
-      </div>
-    </header>
+  <main class="shell tracker-overview">
+    <header class="surface topbar" aria-label="Shared public header"></header>
 
     <section class="surface hero">
       <div class="hero-grid">
         <div>
           <div class="eyebrow">Registration tracker</div>
-          <h1>Tell ABA about a product registration.</h1>
+          <h1>Share a product registration journey.</h1>
           <p class="lede">
-            Share where a biological product registration stands, what has already been submitted, and where progress is slowing. ABA uses reviewed submissions to strengthen follow-up, member visibility, and wider sector signals.
+            Tell ABA where a biological product registration stands, what has already been submitted, and where progress is slowing. Reviewed submissions help build clearer sector signals without exposing private company detail.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="../../registration-tracker/intake-flow/index.html">Add a product record</a>
@@ -570,9 +611,9 @@
         <aside class="hero-aside">
           <div>
             <div class="mini">Who this route is for</div>
-            <strong>Responsible submitters can contribute, whether or not membership is already in place.</strong>
+            <strong>Start here if you are responsible for a live or historic product registration.</strong>
           </div>
-          <p>Use this route when you are carrying a live or historic product registration and want ABA to understand the pathway more clearly.</p>
+          <p>You do not need to be a member to share a registration journey. Membership can connect later if the company joins ABA.</p>
           <ul>
             <li>Share one product journey and where it is getting held up.</li>
             <li>See public sector signals without exposing company-level detail.</li>
@@ -585,8 +626,8 @@
     <section class="surface page-section" id="routes">
       <div class="section-heading">
         <div class="section-label">Choose your route</div>
-        <h2>Use the tracker in the way that fits your situation.</h2>
-        <p>Start by sharing a registration journey, explore the wider public picture, or use membership to gain clearer company-facing follow-up.</p>
+        <h2>Choose what you need next.</h2>
+        <p>Share a product journey, read the public sector signal, or use member access for a company-level view.</p>
       </div>
 
       <div class="route-grid">
@@ -625,8 +666,8 @@
     <section class="surface page-section">
       <div class="section-heading">
         <div class="section-label">What you can see</div>
-        <h2>Make delays, bottlenecks, and pressure points easier to spot.</h2>
-        <p>The tracker helps turn scattered registration experience into a clearer view of where support, coordination, or stronger engagement may be needed.</p>
+        <h2>See where registration pressure is building.</h2>
+        <p>The public signal focuses on reviewed aggregate patterns: visible country coverage, time in stage, and recurring blockers.</p>
       </div>
 
       <div class="evidence-grid">
@@ -688,8 +729,8 @@
       <div class="trust-grid">
         <article class="trust-card">
           <div class="mini">Controlled submission</div>
-          <h3>ABA does not treat raw intake as public output.</h3>
-          <p>Submissions are reviewed before they shape any wider picture of the sector.</p>
+          <h3>Submitted detail is checked first.</h3>
+          <p>Records are reviewed before they shape any wider picture of the sector.</p>
         </article>
 
         <article class="trust-card">
