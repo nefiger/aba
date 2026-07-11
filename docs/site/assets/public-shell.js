@@ -23,20 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     : "";
 
   const rel = {
-    logo: inSite
-      ? "./assets/aba-route1-compact.png"
+    mark: inSite
+      ? "./assets/aba-mark-roundel.png"
       : inTrackerDocs
-        ? "../site/assets/aba-route1-compact.png"
+        ? "../site/assets/aba-mark-roundel.png"
         : inTrackerWorkspace
-          ? `${trackerSitePrefix}assets/aba-route1-compact.png`
-          : "../site/assets/aba-route1-compact.png",
-    logoHorizontal: inSite
-      ? "./assets/aba-route1-horizontal.png"
-      : inTrackerDocs
-        ? "../site/assets/aba-route1-horizontal.png"
-        : inTrackerWorkspace
-          ? `${trackerSitePrefix}assets/aba-route1-horizontal.png`
-          : "../site/assets/aba-route1-horizontal.png",
+          ? `${trackerSitePrefix}assets/aba-mark-roundel.png`
+          : "../site/assets/aba-mark-roundel.png",
     home: inSite
       ? "./index.html"
       : inTrackerDocs
@@ -110,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     header.innerHTML = `
       <div class="brand">
         <a class="mark" href="${rel.home}" aria-label="African Biologicals Alliance home">
-          <img src="${rel.logoHorizontal}" alt="African Biologicals Alliance logo">
+          <img src="${rel.mark}" alt="African Biologicals Alliance logo">
         </a>
         <div class="brand-copy">
           <strong>Collective voice. Biological transition. African-led growth.</strong>
