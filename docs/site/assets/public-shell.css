@@ -57,7 +57,7 @@ body {
 }
 
 .mark {
-  width: 184px;
+  width: 54px;
   height: 54px;
   border-radius: 0;
   background: transparent;
@@ -435,7 +435,7 @@ body {
 
 @media (max-width: 900px) {
   .mark {
-    width: 168px;
+    width: 50px;
     height: 50px;
   }
 
