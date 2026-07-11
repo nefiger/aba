@@ -57,11 +57,11 @@ body {
 }
 
 .mark {
-  width: 54px;
-  height: 54px;
-  border-radius: 0;
-  background: transparent;
-  overflow: hidden;
+  width: 66px !important;
+  height: 66px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: hidden !important;
   flex: 0 0 auto;
   color: transparent;
   font-size: 0;
@@ -435,8 +435,8 @@ body {
 
 @media (max-width: 900px) {
   .mark {
-    width: 50px;
-    height: 50px;
+    width: 58px !important;
+    height: 58px !important;
   }
 
   .brand-copy span {
