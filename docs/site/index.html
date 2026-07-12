@@ -757,7 +757,7 @@
 
     .system-intro {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 96px;
+      grid-template-columns: 1fr;
       gap: 18px;
       align-items: end;
       padding-bottom: 18px;
@@ -870,16 +870,6 @@
       overflow: hidden;
     }
 
-    .linkage-panel::after {
-      content: "";
-      position: absolute;
-      inset: 16px 16px auto auto;
-      width: 92px;
-      height: 92px;
-      background: url("./assets/symbols/shared-signal.svg") center / contain no-repeat;
-      opacity: 0.12;
-      pointer-events: none;
-    }
 
     .linkage-panel h3 {
       font-size: clamp(1.28rem, 1.55vw, 1.55rem);
@@ -1235,9 +1225,6 @@
             <div class="system-intro-copy">
               <h2 class="system-headline">A viable environment for local biologicals to thrive.</h2>
               <p>ABA is not just a membership roll or a knowledge archive. It is trying to create the conditions under which independent African biologicals can be represented, understood, and taken seriously.</p>
-            </div>
-            <div class="system-glyph" aria-hidden="true">
-              <img src="./assets/symbols/shared-signal.svg" alt="">
             </div>
           </div>
           <div class="pillar-list">

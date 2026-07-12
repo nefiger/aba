@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABA Symbol Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Expanded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F2EDE3; }
+  .aba-card { transition: all 0.15s; }
+  .aba-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30,58,52,0.08); }
+  .fieldtest-btn {
+    padding: 7px 16px; border-radius: 999px; border: 1px solid rgba(30,58,52,0.3);
+    background: transparent; color: #1E3A34; font-size: 12px; font-weight: 700;
+    cursor: pointer; font-family: 'Archivo', sans-serif;
+  }
+  .fieldtest-btn.is-active { border-color: #1E3A34; background: #1E3A34; color: #F2EDE3; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <g id="cband-color">
+      <path d="M4,66 C22,58 38,68 54,60 C68,54 82,64 96,58" fill="none" stroke="#556B3A" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M4,78 C22,71 38,81 54,73 C68,67 82,77 96,71" fill="none" stroke="#C38A2E" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M4,90 C22,84 38,93 54,86 C68,80 82,89 96,84" fill="none" stroke="#B54A28" stroke-width="3.4" stroke-linecap="round"/>
+    </g>
+    <g id="cband-mono">
+      <path d="M4,66 C22,58 38,68 54,60 C68,54 82,64 96,58" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" opacity="1"/>
+      <path d="M4,78 C22,71 38,81 54,73 C68,67 82,77 96,71" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" opacity="0.62"/>
+      <path d="M4,90 C22,84 38,93 54,86 C68,80 82,89 96,84" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" opacity="0.36"/>
+    </g>
+  </defs>
+</svg>
+
+<div id="symbol-root" style="--mono-bg:#F2EDE3;--mono-ink:#1E3A34;font-family:'Archivo',sans-serif;color:#1E3A34;max-width:1440px;margin:0 auto;padding:56px 40px 120px">
+
+  <!-- HEADER -->
+  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+    <div style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#B54A28">Route 1 Identity — Symbol System</div>
+    <h1 style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:44px;letter-spacing:-0.01em;margin:0">ABA Symbol Family</h1>
+    <div style="font-size:17px;color:#556B3A;max-width:700px;line-height:1.5">Twenty institutional symbols for the African Biologicals Alliance, drawn from the monogram's own grammar of curved contour lines — grown organically rather than boxed into hard grid geometry.</div>
+  </div>
+
+  <!-- PALETTE STRIP -->
+  <div style="display:flex;gap:0;margin:32px 0 40px;border:1px solid rgba(30,58,52,0.15);border-radius:6px;overflow:hidden">
+    <div style="flex:1;background:#1E3A34;color:#F2EDE3;padding:14px 16px;font-size:12px;font-weight:600">Deep Biological Green<br><span style="opacity:0.7;font-weight:400">#1E3A34</span></div>
+    <div style="flex:1;background:#556B3A;color:#F2EDE3;padding:14px 16px;font-size:12px;font-weight:600">Olive Green<br><span style="opacity:0.7;font-weight:400">#556B3A</span></div>
+    <div style="flex:1;background:#C38A2E;color:#1E3A34;padding:14px 16px;font-size:12px;font-weight:600">Ochre<br><span style="opacity:0.7;font-weight:400">#C38A2E</span></div>
+    <div style="flex:1;background:#B54A28;color:#F2EDE3;padding:14px 16px;font-size:12px;font-weight:600">Terracotta Clay<br><span style="opacity:0.7;font-weight:400">#B54A28</span></div>
+    <div style="flex:1;background:#F2EDE3;color:#1E3A34;padding:14px 16px;font-size:12px;font-weight:600;border-left:1px solid rgba(30,58,52,0.15)">Warm Cream<br><span style="opacity:0.7;font-weight:400">#F2EDE3</span></div>
+  </div>
+
+  <!-- SYSTEM NOTE -->
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:32px;background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:28px 32px;margin-bottom:40px">
+    <div>
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#556B3A;margin-bottom:10px">Construction system — softened</div>
+      <div style="font-size:14.5px;line-height:1.68;color:#1E3A34">
+        Every symbol sits on a <strong>512×512 square artboard</strong> over the shared field-mark ground — three flowing contour lines in olive, ochre and terracotta. Each glyph above it is built from curved paths, soft arcs and rounded-end strokes: nodes are circles, connectors bow gently rather than running straight, and volumes use rounded capsules and drops in place of boxes and hard angles. The result stays geometric and restrained in its logic — but reads as grown, not engineered, in keeping with a living biological system rather than a technical grid.
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:28px;border-left:1px solid rgba(30,58,52,0.1);padding-left:32px">
+      <div style="text-align:center">
+        <svg viewBox="0 0 100 100" width="88" height="88"><use href="#cband-color"/>
+          <path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,16" stroke="#1E3A34" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <circle cx="50" cy="49" r="5.5" fill="#1E3A34"/><circle cx="50" cy="30" r="5.5" fill="#1E3A34"/>
+        </svg>
+        <div style="font-size:11px;color:#556B3A;margin-top:8px;font-weight:600">Curved device anatomy</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.9;color:#1E3A34">
+        <div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1E3A34;margin-right:8px;vertical-align:middle"></span>Glyph — curves, arcs, drops</div>
+        <div><span style="display:inline-block;width:10px;height:3px;border-radius:2px;background:#556B3A;margin-right:8px;vertical-align:middle"></span>Shared contour ground</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BG TOGGLE -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#556B3A">One-colour field test:</span>
+    <button id="btn-cream" class="fieldtest-btn is-active" onclick="setBg('cream')">On Cream</button>
+    <button id="btn-green" class="fieldtest-btn" onclick="setBg('green')">On Deep Green</button>
+  </div>
+
+  <!-- SECTION: PRIORITY -->
+  <div data-screen-label="Priority Symbols">
+    <div style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:22px;margin:44px 0 4px">Priority Symbols</div>
+    <div style="font-size:13.5px;color:#556B3A;margin-bottom:20px">Registration Tracker · Biologicals Explorer · Membership · Technical Network · Updates</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px">
+
+    <!-- 1 Registration Tracker -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Registration Tracker</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-registration-tracker</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,17" stroke="#1E3A34" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <circle cx="50" cy="49" r="5.5" fill="#1E3A34"/><circle cx="50" cy="30" r="5.5" fill="#1E3A34"/>
+            <path d="M50,8 C54,8 58,12 58,16 C58,21 50,26 50,26 C50,26 42,21 42,16 C42,12 46,8 50,8 Z" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,17" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <circle cx="50" cy="49" r="5.5" fill="currentColor"/><circle cx="50" cy="30" r="5.5" fill="currentColor"/>
+            <path d="M50,8 C54,8 58,12 58,16 C58,21 50,26 50,26 C50,26 42,21 42,16 C42,12 46,8 50,8 Z" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Biologicals Explorer -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Biologicals Explorer</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-biologicals-explorer</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <ellipse cx="60" cy="30" rx="18" ry="14" fill="#1E3A34"/>
+            <ellipse cx="33" cy="46" rx="12" ry="10" fill="none" stroke="#1E3A34" stroke-width="3.2"/>
+            <ellipse cx="25" cy="28" rx="9" ry="7.5" fill="none" stroke="#1E3A34" stroke-width="3.2"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <ellipse cx="60" cy="30" rx="18" ry="14" fill="currentColor"/>
+            <ellipse cx="33" cy="46" rx="12" ry="10" fill="none" stroke="currentColor" stroke-width="3.2"/>
+            <ellipse cx="25" cy="28" rx="9" ry="7.5" fill="none" stroke="currentColor" stroke-width="3.2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Membership -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Membership / Join ABA</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-membership</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(120 50 42)"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(240 50 42)"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="currentColor"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="currentColor" transform="rotate(120 50 42)"/>
+            <path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="currentColor" transform="rotate(240 50 42)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Technical Network -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Technical Network</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-technical-network</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M50,16 Q38,30 30,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M50,16 Q62,30 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M30,48 Q50,58 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M50,16 Q52,32 50,38" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="16" r="5" fill="#1E3A34"/><circle cx="30" cy="48" r="5" fill="#1E3A34"/><circle cx="70" cy="48" r="5" fill="#1E3A34"/><circle cx="50" cy="38" r="5" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M50,16 Q38,30 30,48" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M50,16 Q62,30 70,48" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M30,48 Q50,58 70,48" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M50,16 Q52,32 50,38" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="16" r="5" fill="currentColor"/><circle cx="30" cy="48" r="5" fill="currentColor"/><circle cx="70" cy="48" r="5" fill="currentColor"/><circle cx="50" cy="38" r="5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Updates -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Updates / Stay Informed</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-updates</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <circle cx="28" cy="66" r="6" fill="#1E3A34"/>
+            <path d="M38,58 A16,16 0 0 1 38,50" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" transform="rotate(-45 38 54)"/>
+            <path d="M48,64 A28,28 0 0 1 48,44" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(-45 48 54)"/>
+            <path d="M58,70 A40,40 0 0 1 58,38" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.42" transform="rotate(-45 58 54)"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <circle cx="28" cy="66" r="6" fill="currentColor"/>
+            <path d="M38,58 A16,16 0 0 1 38,50" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" transform="rotate(-45 38 54)"/>
+            <path d="M48,64 A28,28 0 0 1 48,44" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(-45 48 54)"/>
+            <path d="M58,70 A40,40 0 0 1 58,38" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.42" transform="rotate(-45 58 54)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: HOMEPAGE -->
+  <div data-screen-label="Homepage Proposition Symbols">
+    <div style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:22px;margin:44px 0 4px">Homepage Proposition Symbols</div>
+    <div style="font-size:13.5px;color:#556B3A;margin-bottom:20px">Advocacy · Visibility · Credibility · Growth · Biological Transition · Institutional Voice · Shared Signal</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px">
+
+    <!-- 6 Advocacy -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Advocacy</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-advocacy</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M50,62 C44,50 44,28 50,14 C56,28 56,50 50,62 Z" fill="#1E3A34"/>
+            <path d="M50,58 L50,20" stroke="#F2EDE3" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M50,62 C44,50 44,28 50,14 C56,28 56,50 50,62 Z" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 Visibility -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Visibility</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-visibility</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M18,42 Q50,20 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+            <path d="M18,42 Q50,64 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="42" r="7.5" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M18,42 Q50,20 82,42" stroke="currentColor" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+            <path d="M18,42 Q50,64 82,42" stroke="currentColor" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="42" r="7.5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 Credibility -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Credibility</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-credibility</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <circle cx="50" cy="38" r="23" fill="none" stroke="#1E3A34" stroke-width="4.2"/>
+            <path d="M39,38 C42,42 45,46 47,49 C51,42 56,33 61,27" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <circle cx="50" cy="38" r="23" fill="none" stroke="currentColor" stroke-width="4.2"/>
+            <path d="M39,38 C42,42 45,46 47,49 C51,42 56,33 61,27" stroke="currentColor" stroke-width="4.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 Growth -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Growth</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-growth</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M22,60 Q40,60 40,42" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+            <path d="M22,60 Q54,60 54,28" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.68"/>
+            <path d="M22,60 Q68,60 68,16" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <circle cx="22" cy="60" r="5" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M22,60 Q40,60 40,42" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+            <path d="M22,60 Q54,60 54,28" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.68"/>
+            <path d="M22,60 Q68,60 68,16" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <circle cx="22" cy="60" r="5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 Biological Transition -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Biological Transition</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-biological-transition</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <circle cx="18" cy="30" r="3" fill="#1E3A34"/><circle cx="26" cy="30" r="3" fill="#1E3A34"/><circle cx="18" cy="38" r="3" fill="#1E3A34"/>
+            <path d="M32,42 C44,38 50,52 62,46 C70,42 74,34 80,30" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <circle cx="18" cy="30" r="3" fill="currentColor"/><circle cx="26" cy="30" r="3" fill="currentColor"/><circle cx="18" cy="38" r="3" fill="currentColor"/>
+            <path d="M32,42 C44,38 50,52 62,46 C70,42 74,34 80,30" stroke="currentColor" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 Institutional Voice -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Institutional Voice</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-institutional-voice</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <rect x="40" y="20" width="18" height="44" rx="9" fill="#1E3A34"/>
+            <path d="M64,30 Q71,38 64,46" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+            <path d="M71,22 Q82,38 71,54" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.55"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <rect x="40" y="20" width="18" height="44" rx="9" fill="currentColor"/>
+            <path d="M64,30 Q71,38 64,46" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+            <path d="M71,22 Q82,38 71,54" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.55"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 Shared Signal -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Shared Signal</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-shared-signal</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M16,20 Q32,30 42,40" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M16,40 Q30,40 42,42" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M16,60 Q32,50 42,44" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M42,42 Q60,42 82,42" stroke="#1E3A34" stroke-width="5.2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M16,20 Q32,30 42,40" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M16,40 Q30,40 42,42" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M16,60 Q32,50 42,44" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M42,42 Q60,42 82,42" stroke="currentColor" stroke-width="5.2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: ADDITIONAL -->
+  <div data-screen-label="Additional Symbols">
+    <div style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:22px;margin:44px 0 4px">Additional Useful Symbols</div>
+    <div style="font-size:13.5px;color:#556B3A;margin-bottom:20px">Governance & Data · Market Access · Regulatory Intelligence · Africa-wide Participation · South Africa Active Now · Local Manufacturing · Evidence / Knowledge · Sector Legitimacy</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:16px">
+
+    <!-- 13 Governance & Data -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Governance & Data</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-governance-data</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M28,34 Q50,25 72,34 L66,58 Q50,65 34,58 Z" fill="none" stroke="#1E3A34" stroke-width="3.8" stroke-linejoin="round"/>
+            <circle cx="42" cy="44" r="3.4" fill="#1E3A34"/><circle cx="50" cy="49" r="3.4" fill="#1E3A34"/><circle cx="58" cy="44" r="3.4" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M28,34 Q50,25 72,34 L66,58 Q50,65 34,58 Z" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linejoin="round"/>
+            <circle cx="42" cy="44" r="3.4" fill="currentColor"/><circle cx="50" cy="49" r="3.4" fill="currentColor"/><circle cx="58" cy="44" r="3.4" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 Market Access -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Market Access</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-market-access</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M32,60 L32,36 Q32,20 50,20 Q68,20 68,36 L68,60" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+            <path d="M40,60 C48,49 56,49 64,60" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M32,60 L32,36 Q32,20 50,20 Q68,20 68,36 L68,60" stroke="currentColor" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+            <path d="M40,60 C48,49 56,49 64,60" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 Regulatory Intelligence -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Regulatory Intelligence</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-regulatory-intelligence</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M20,20 Q40,30 54,46" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M17,42 Q36,44 53,49" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M24,64 Q40,58 55,52" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <circle cx="58" cy="50" r="5.5" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M20,20 Q40,30 54,46" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M17,42 Q36,44 53,49" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M24,64 Q40,58 55,52" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <circle cx="58" cy="50" r="5.5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16 Africa-wide Participation -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Africa-wide Participation</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-africa-wide-participation</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M72,40 Q67,54 55,60 Q42,65 30,58 Q19,51 19,38 Q19,25 30,19 Q42,12 55,17 Q67,22 72,40 Z" fill="none" stroke="#1E3A34" stroke-width="2.4" stroke-linejoin="round" opacity="0.55"/>
+            <circle cx="72" cy="40" r="4.2" fill="#1E3A34"/><circle cx="55" cy="60" r="4.2" fill="#1E3A34"/><circle cx="30" cy="58" r="4.2" fill="#1E3A34"/><circle cx="19" cy="38" r="4.2" fill="#1E3A34"/><circle cx="30" cy="19" r="4.2" fill="#1E3A34"/><circle cx="55" cy="17" r="4.2" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M72,40 Q67,54 55,60 Q42,65 30,58 Q19,51 19,38 Q19,25 30,19 Q42,12 55,17 Q67,22 72,40 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" opacity="0.55"/>
+            <circle cx="72" cy="40" r="4.2" fill="currentColor"/><circle cx="55" cy="60" r="4.2" fill="currentColor"/><circle cx="30" cy="58" r="4.2" fill="currentColor"/><circle cx="19" cy="38" r="4.2" fill="currentColor"/><circle cx="30" cy="19" r="4.2" fill="currentColor"/><circle cx="55" cy="17" r="4.2" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17 South Africa Active Now -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">South Africa Active Now</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-south-africa-active</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <circle cx="50" cy="36" r="19" fill="none" stroke="#1E3A34" stroke-width="2" opacity="0.35"/>
+            <path d="M50,50 C50,50 36,38 36,28 C36,19 42,14 50,14 C58,14 64,19 64,28 C64,38 50,50 50,50 Z" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <circle cx="50" cy="36" r="19" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+            <path d="M50,50 C50,50 36,38 36,28 C36,19 42,14 50,14 C58,14 64,19 64,28 C64,38 50,50 50,50 Z" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 18 Local Manufacturing -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Local Manufacturing</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-local-manufacturing</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <rect x="28" y="48" width="44" height="15" rx="7.5" fill="#1E3A34"/>
+            <rect x="35" y="30" width="30" height="15" rx="7.5" fill="#1E3A34" opacity="0.75"/>
+            <rect x="42" y="14" width="16" height="13" rx="6.5" fill="#1E3A34" opacity="0.5"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <rect x="28" y="48" width="44" height="15" rx="7.5" fill="currentColor"/>
+            <rect x="35" y="30" width="30" height="15" rx="7.5" fill="currentColor" opacity="0.75"/>
+            <rect x="42" y="14" width="16" height="13" rx="6.5" fill="currentColor" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 19 Evidence / Knowledge -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Evidence / Knowledge</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-evidence-knowledge</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <rect x="23" y="18" width="54" height="11" rx="5.5" fill="#1E3A34"/>
+            <rect x="23" y="36" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.75"/>
+            <rect x="23" y="54" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.5"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <rect x="23" y="18" width="54" height="11" rx="5.5" fill="currentColor"/>
+            <rect x="23" y="36" width="54" height="11" rx="5.5" fill="currentColor" opacity="0.75"/>
+            <rect x="23" y="54" width="54" height="11" rx="5.5" fill="currentColor" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20 Sector Legitimacy -->
+    <div class="aba-card" style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:18px;transition:all 0.15s">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Sector Legitimacy</div>
+      <div style="font-size:11px;color:#556B3A;margin-bottom:12px">aba-symbol-sector-legitimacy</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;aspect-ratio:1;background:#F2EDE3;border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%"><use href="#cband-color"/>
+            <path d="M26,52 Q19,32 38,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+            <path d="M74,52 Q81,32 62,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="42" r="10.5" fill="#1E3A34"/>
+          </svg>
+        </div>
+        <div style="flex:1;aspect-ratio:1;background:var(--mono-bg);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="76%" height="76%" style="color:var(--mono-ink)"><use href="#cband-mono"/>
+            <path d="M26,52 Q19,32 38,18" stroke="currentColor" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+            <path d="M74,52 Q81,32 62,18" stroke="currentColor" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="42" r="10.5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMALL SIZE EXPORT TEST -->
+  <div data-screen-label="Small-Size Export Test">
+    <div style="font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:22px;margin:48px 0 4px">Small-Size Export Test</div>
+    <div style="font-size:13.5px;color:#556B3A;margin-bottom:20px">Every glyph alone (no contour ground) at UI scale — 32 / 24 / 16px, solid Deep Green on Cream</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid rgba(30,58,52,0.12);border-radius:10px;padding:24px 28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px 8px">
+    <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,17" stroke="#1E3A34" stroke-width="4.5" stroke-linecap="round" fill="none"/><circle cx="50" cy="49" r="5.5" fill="#1E3A34"/><circle cx="50" cy="30" r="5.5" fill="#1E3A34"/><path d="M50,8 C54,8 58,12 58,16 C58,21 50,26 50,26 C50,26 42,21 42,16 C42,12 46,8 50,8 Z" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,17" stroke="#1E3A34" stroke-width="4.5" stroke-linecap="round" fill="none"/><circle cx="50" cy="49" r="5.5" fill="#1E3A34"/><circle cx="50" cy="30" r="5.5" fill="#1E3A34"/><path d="M50,8 C54,8 58,12 58,16 C58,21 50,26 50,26 C50,26 42,21 42,16 C42,12 46,8 50,8 Z" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C45,53 55,47 50,38 C45,29 55,24 50,17" stroke="#1E3A34" stroke-width="4.5" stroke-linecap="round" fill="none"/><circle cx="50" cy="49" r="5.5" fill="#1E3A34"/><circle cx="50" cy="30" r="5.5" fill="#1E3A34"/><path d="M50,8 C54,8 58,12 58,16 C58,21 50,26 50,26 C50,26 42,21 42,16 C42,12 46,8 50,8 Z" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Registration Tracker</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="60" cy="30" rx="18" ry="14" fill="#1E3A34"/><ellipse cx="33" cy="46" rx="12" ry="10" fill="none" stroke="#1E3A34" stroke-width="3.2"/><ellipse cx="25" cy="28" rx="9" ry="7.5" fill="none" stroke="#1E3A34" stroke-width="3.2"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="60" cy="30" rx="18" ry="14" fill="#1E3A34"/><ellipse cx="33" cy="46" rx="12" ry="10" fill="none" stroke="#1E3A34" stroke-width="3.2"/><ellipse cx="25" cy="28" rx="9" ry="7.5" fill="none" stroke="#1E3A34" stroke-width="3.2"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="60" cy="30" rx="18" ry="14" fill="#1E3A34"/><ellipse cx="33" cy="46" rx="12" ry="10" fill="none" stroke="#1E3A34" stroke-width="3.2"/><ellipse cx="25" cy="28" rx="9" ry="7.5" fill="none" stroke="#1E3A34" stroke-width="3.2"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Biologicals Explorer</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(120 50 42)"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(240 50 42)"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(120 50 42)"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(240 50 42)"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(120 50 42)"/><path d="M50,42 C46,32 46,14 50,6 C54,14 54,32 50,42 Z" fill="#1E3A34" transform="rotate(240 50 42)"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Membership</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,16 Q38,30 30,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M50,16 Q62,30 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M30,48 Q50,58 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="16" r="5" fill="#1E3A34"/><circle cx="30" cy="48" r="5" fill="#1E3A34"/><circle cx="70" cy="48" r="5" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,16 Q38,30 30,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M50,16 Q62,30 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M30,48 Q50,58 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="16" r="5" fill="#1E3A34"/><circle cx="30" cy="48" r="5" fill="#1E3A34"/><circle cx="70" cy="48" r="5" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,16 Q38,30 30,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M50,16 Q62,30 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M30,48 Q50,58 70,48" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="16" r="5" fill="#1E3A34"/><circle cx="30" cy="48" r="5" fill="#1E3A34"/><circle cx="70" cy="48" r="5" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Technical Network</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="28" cy="66" r="6" fill="#1E3A34"/><path d="M38,58 A16,16 0 0 1 38,50" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" transform="rotate(-45 38 54)"/><path d="M48,64 A28,28 0 0 1 48,44" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(-45 48 54)"/><path d="M58,70 A40,40 0 0 1 58,38" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.42" transform="rotate(-45 58 54)"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="28" cy="66" r="6" fill="#1E3A34"/><path d="M38,58 A16,16 0 0 1 38,50" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" transform="rotate(-45 38 54)"/><path d="M48,64 A28,28 0 0 1 48,44" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(-45 48 54)"/><path d="M58,70 A40,40 0 0 1 58,38" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.42" transform="rotate(-45 58 54)"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="28" cy="66" r="6" fill="#1E3A34"/><path d="M38,58 A16,16 0 0 1 38,50" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" transform="rotate(-45 38 54)"/><path d="M48,64 A28,28 0 0 1 48,44" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(-45 48 54)"/><path d="M58,70 A40,40 0 0 1 58,38" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.42" transform="rotate(-45 58 54)"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Updates</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C44,50 44,28 50,14 C56,28 56,50 50,62 Z" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C44,50 44,28 50,14 C56,28 56,50 50,62 Z" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50,62 C44,50 44,28 50,14 C56,28 56,50 50,62 Z" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Advocacy</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M18,42 Q50,20 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M18,42 Q50,64 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="7.5" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M18,42 Q50,20 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M18,42 Q50,64 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="7.5" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M18,42 Q50,20 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M18,42 Q50,64 82,42" stroke="#1E3A34" stroke-width="3.6" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="7.5" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Visibility</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="38" r="23" fill="none" stroke="#1E3A34" stroke-width="4.2"/><path d="M39,38 C42,42 45,46 47,49 C51,42 56,33 61,27" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="38" r="23" fill="none" stroke="#1E3A34" stroke-width="4.2"/><path d="M39,38 C42,42 45,46 47,49 C51,42 56,33 61,27" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="38" r="23" fill="none" stroke="#1E3A34" stroke-width="4.2"/><path d="M39,38 C42,42 45,46 47,49 C51,42 56,33 61,27" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Credibility</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M22,60 Q40,60 40,42" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M22,60 Q54,60 54,28" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.68"/><path d="M22,60 Q68,60 68,16" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.4"/><circle cx="22" cy="60" r="5" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M22,60 Q40,60 40,42" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M22,60 Q54,60 54,28" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.68"/><path d="M22,60 Q68,60 68,16" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.4"/><circle cx="22" cy="60" r="5" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M22,60 Q40,60 40,42" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M22,60 Q54,60 54,28" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.68"/><path d="M22,60 Q68,60 68,16" stroke="#1E3A34" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.4"/><circle cx="22" cy="60" r="5" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Growth</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="18" cy="30" r="3" fill="#1E3A34"/><circle cx="26" cy="30" r="3" fill="#1E3A34"/><circle cx="18" cy="38" r="3" fill="#1E3A34"/><path d="M32,42 C44,38 50,52 62,46 C70,42 74,34 80,30" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="18" cy="30" r="3" fill="#1E3A34"/><circle cx="26" cy="30" r="3" fill="#1E3A34"/><circle cx="18" cy="38" r="3" fill="#1E3A34"/><path d="M32,42 C44,38 50,52 62,46 C70,42 74,34 80,30" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="18" cy="30" r="3" fill="#1E3A34"/><circle cx="26" cy="30" r="3" fill="#1E3A34"/><circle cx="18" cy="38" r="3" fill="#1E3A34"/><path d="M32,42 C44,38 50,52 62,46 C70,42 74,34 80,30" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Biological Transition</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="40" y="20" width="18" height="44" rx="9" fill="#1E3A34"/><path d="M64,30 Q71,38 64,46" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M71,22 Q82,38 71,54" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.55"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="40" y="20" width="18" height="44" rx="9" fill="#1E3A34"/><path d="M64,30 Q71,38 64,46" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M71,22 Q82,38 71,54" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.55"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="40" y="20" width="18" height="44" rx="9" fill="#1E3A34"/><path d="M64,30 Q71,38 64,46" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M71,22 Q82,38 71,54" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.55"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Institutional Voice</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M16,20 Q32,30 42,40" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,40 Q30,40 42,42" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,60 Q32,50 42,44" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M42,42 Q60,42 82,42" stroke="#1E3A34" stroke-width="5.2" fill="none" stroke-linecap="round"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M16,20 Q32,30 42,40" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,40 Q30,40 42,42" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,60 Q32,50 42,44" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M42,42 Q60,42 82,42" stroke="#1E3A34" stroke-width="5.2" fill="none" stroke-linecap="round"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M16,20 Q32,30 42,40" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,40 Q30,40 42,42" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M16,60 Q32,50 42,44" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M42,42 Q60,42 82,42" stroke="#1E3A34" stroke-width="5.2" fill="none" stroke-linecap="round"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Shared Signal</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M28,34 Q50,25 72,34 L66,58 Q50,65 34,58 Z" fill="none" stroke="#1E3A34" stroke-width="3.8" stroke-linejoin="round"/><circle cx="42" cy="44" r="3.4" fill="#1E3A34"/><circle cx="50" cy="49" r="3.4" fill="#1E3A34"/><circle cx="58" cy="44" r="3.4" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M28,34 Q50,25 72,34 L66,58 Q50,65 34,58 Z" fill="none" stroke="#1E3A34" stroke-width="3.8" stroke-linejoin="round"/><circle cx="42" cy="44" r="3.4" fill="#1E3A34"/><circle cx="50" cy="49" r="3.4" fill="#1E3A34"/><circle cx="58" cy="44" r="3.4" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M28,34 Q50,25 72,34 L66,58 Q50,65 34,58 Z" fill="none" stroke="#1E3A34" stroke-width="3.8" stroke-linejoin="round"/><circle cx="42" cy="44" r="3.4" fill="#1E3A34"/><circle cx="50" cy="49" r="3.4" fill="#1E3A34"/><circle cx="58" cy="44" r="3.4" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Governance & Data</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M32,60 L32,36 Q32,20 50,20 Q68,20 68,36 L68,60" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round"/><path d="M40,60 C48,49 56,49 64,60" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.6"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M32,60 L32,36 Q32,20 50,20 Q68,20 68,36 L68,60" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round"/><path d="M40,60 C48,49 56,49 64,60" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.6"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M32,60 L32,36 Q32,20 50,20 Q68,20 68,36 L68,60" stroke="#1E3A34" stroke-width="4.6" fill="none" stroke-linecap="round"/><path d="M40,60 C48,49 56,49 64,60" stroke="#1E3A34" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.6"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Market Access</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M20,20 Q40,30 54,46" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M17,42 Q36,44 53,49" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M24,64 Q40,58 55,52" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="58" cy="50" r="5.5" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M20,20 Q40,30 54,46" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M17,42 Q36,44 53,49" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M24,64 Q40,58 55,52" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="58" cy="50" r="5.5" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M20,20 Q40,30 54,46" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M17,42 Q36,44 53,49" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M24,64 Q40,58 55,52" stroke="#1E3A34" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="58" cy="50" r="5.5" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Regulatory Intelligence</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M72,40 Q67,54 55,60 Q42,65 30,58 Q19,51 19,38 Q19,25 30,19 Q42,12 55,17 Q67,22 72,40 Z" fill="none" stroke="#1E3A34" stroke-width="2.4" stroke-linejoin="round" opacity="0.55"/><circle cx="72" cy="40" r="4.2" fill="#1E3A34"/><circle cx="55" cy="60" r="4.2" fill="#1E3A34"/><circle cx="30" cy="58" r="4.2" fill="#1E3A34"/><circle cx="19" cy="38" r="4.2" fill="#1E3A34"/><circle cx="30" cy="19" r="4.2" fill="#1E3A34"/><circle cx="55" cy="17" r="4.2" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M72,40 Q67,54 55,60 Q42,65 30,58 Q19,51 19,38 Q19,25 30,19 Q42,12 55,17 Q67,22 72,40 Z" fill="none" stroke="#1E3A34" stroke-width="2.4" stroke-linejoin="round" opacity="0.55"/><circle cx="72" cy="40" r="4.2" fill="#1E3A34"/><circle cx="55" cy="60" r="4.2" fill="#1E3A34"/><circle cx="30" cy="58" r="4.2" fill="#1E3A34"/><circle cx="19" cy="38" r="4.2" fill="#1E3A34"/><circle cx="30" cy="19" r="4.2" fill="#1E3A34"/><circle cx="55" cy="17" r="4.2" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M72,40 Q67,54 55,60 Q42,65 30,58 Q19,51 19,38 Q19,25 30,19 Q42,12 55,17 Q67,22 72,40 Z" fill="none" stroke="#1E3A34" stroke-width="2.4" stroke-linejoin="round" opacity="0.55"/><circle cx="72" cy="40" r="4.2" fill="#1E3A34"/><circle cx="55" cy="60" r="4.2" fill="#1E3A34"/><circle cx="30" cy="58" r="4.2" fill="#1E3A34"/><circle cx="19" cy="38" r="4.2" fill="#1E3A34"/><circle cx="30" cy="19" r="4.2" fill="#1E3A34"/><circle cx="55" cy="17" r="4.2" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Africa-wide Participation</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="36" r="19" fill="none" stroke="#1E3A34" stroke-width="2" opacity="0.35"/><path d="M50,50 C50,50 36,38 36,28 C36,19 42,14 50,14 C58,14 64,19 64,28 C64,38 50,50 50,50 Z" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="36" r="19" fill="none" stroke="#1E3A34" stroke-width="2" opacity="0.35"/><path d="M50,50 C50,50 36,38 36,28 C36,19 42,14 50,14 C58,14 64,19 64,28 C64,38 50,50 50,50 Z" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="36" r="19" fill="none" stroke="#1E3A34" stroke-width="2" opacity="0.35"/><path d="M50,50 C50,50 36,38 36,28 C36,19 42,14 50,14 C58,14 64,19 64,28 C64,38 50,50 50,50 Z" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">South Africa Active Now</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="28" y="48" width="44" height="15" rx="7.5" fill="#1E3A34"/><rect x="35" y="30" width="30" height="15" rx="7.5" fill="#1E3A34" opacity="0.75"/><rect x="42" y="14" width="16" height="13" rx="6.5" fill="#1E3A34" opacity="0.5"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="28" y="48" width="44" height="15" rx="7.5" fill="#1E3A34"/><rect x="35" y="30" width="30" height="15" rx="7.5" fill="#1E3A34" opacity="0.75"/><rect x="42" y="14" width="16" height="13" rx="6.5" fill="#1E3A34" opacity="0.5"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="28" y="48" width="44" height="15" rx="7.5" fill="#1E3A34"/><rect x="35" y="30" width="30" height="15" rx="7.5" fill="#1E3A34" opacity="0.75"/><rect x="42" y="14" width="16" height="13" rx="6.5" fill="#1E3A34" opacity="0.5"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Local Manufacturing</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="23" y="18" width="54" height="11" rx="5.5" fill="#1E3A34"/><rect x="23" y="36" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.75"/><rect x="23" y="54" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.5"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="23" y="18" width="54" height="11" rx="5.5" fill="#1E3A34"/><rect x="23" y="36" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.75"/><rect x="23" y="54" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.5"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="23" y="18" width="54" height="11" rx="5.5" fill="#1E3A34"/><rect x="23" y="36" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.75"/><rect x="23" y="54" width="54" height="11" rx="5.5" fill="#1E3A34" opacity="0.5"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Evidence / Knowledge</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M26,52 Q19,32 38,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><path d="M74,52 Q81,32 62,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="10.5" fill="#1E3A34"/></svg></div><div style="width:24px;height:24px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M26,52 Q19,32 38,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><path d="M74,52 Q81,32 62,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="10.5" fill="#1E3A34"/></svg></div><div style="width:16px;height:16px;flex-shrink:0"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M26,52 Q19,32 38,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><path d="M74,52 Q81,32 62,18" stroke="#1E3A34" stroke-width="4.2" fill="none" stroke-linecap="round"/><circle cx="50" cy="42" r="10.5" fill="#1E3A34"/></svg></div><span style="font-size:10.5px;color:#8a9a86;line-height:1.3">Sector Legitimacy</span></div>
+  </div>
+
+  <!-- DELIVERABLES NOTE -->
+  <div style="margin-top:48px;background:#1E3A34;color:#F2EDE3;border-radius:10px;padding:26px 32px">
+    <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#C38A2E;margin-bottom:10px">Deliverables checklist</div>
+    <div style="font-size:13.5px;line-height:1.8;opacity:0.92;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px">
+      <div>✓ Colour version — shown per symbol</div>
+      <div>✓ One-colour version — toggle above</div>
+      <div>✓ Small-size export test — section above</div>
+      <div>◻ Transparent PNG — export per symbol at handoff</div>
+      <div>◻ Vector source (SVG) — each glyph is native SVG, ready to save individually</div>
+      <div>✓ Consistent naming — aba-symbol-[name] across the set</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function setBg(mode) {
+    var root = document.getElementById('symbol-root');
+    var green = mode === 'green';
+    root.style.setProperty('--mono-bg', green ? '#1E3A34' : '#F2EDE3');
+    root.style.setProperty('--mono-ink', green ? '#F2EDE3' : '#1E3A34');
+    document.getElementById('btn-cream').classList.toggle('is-active', !green);
+    document.getElementById('btn-green').classList.toggle('is-active', green);
+  }
+</script>
+</body>
+</html>
