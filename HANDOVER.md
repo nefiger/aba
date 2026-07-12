@@ -1,6 +1,6 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-04
+Last updated: 2026-07-12
 
 ---
 
@@ -165,6 +165,22 @@ Current branch state after cleanup:
 
 ## What was completed in the last session
 
+### 2026-07-11 → 07-12: Brand mark, design system, symbol family, copy
+
+- Adopted the new ABA roundel logo (deep-green Africa-silhouette mark) across the public site, unified mark sizing in the shared shell, and removed the retired route-1 wordmark assets. (PR #30)
+- Extracted a **design system as a spec for the eventual monorepo build** — deliberately *not* wired into the prototype:
+  - `docs/design-system/tokens.css` — canonical design tokens (from homepage + shared shell) with a drift map for the older oklch / `#2b6b4f` palette dialects
+  - `docs/design-system/design-system.md` — colour, type, spacing, components, iconography, and how it pairs with `registration-tracker/data-model-v1.md` as the build spec
+  - `docs/design-system/symbol-family.html` — faithful record of the 20-symbol "ABA Symbol Family" handoff (from Claude Design)
+  - `docs/design-system/symbols/` — per-symbol assets (glyph-only SVG/PNG + composed `color/`)
+- Reconciled and rolled out the symbol family:
+  - Replaced the older multi-colour "refined" symbols with the **composed handoff symbols** (glyph + field-mark contour bands, live-brand palette) at the shared `docs/site/assets/symbols/*.svg` — updating homepage, About, Technical Network, and Updates in one file swap
+  - Homepage: removed two decorative shared-signal placements that read as blobs; About: dropped the tinted lockup boxes so symbols render full-sized
+  - The symbols predate the final logo and are supplementary iconography only — the roundel logo is unchanged
+- Refreshed `docs/requirements/aba-public-site-copy-working-document.md` into a full copy extract of all 21 public-facing pages, pulled from the live HTML.
+- Fixes: registration-tracker hero "Who this route is for" bullets made legible on the dark panel; intake-flow restored the shared-header top gap (it was missing `tracker-wireframe.css`'s `.prototype-shell` padding). (PRs #31, #32)
+- Minor leftover: dead `.system-glyph` CSS rules remain on `docs/site/index.html` after removing that element (harmless orphan; can be tidied in a follow-up).
+
 ### Internal documentation capture
 
 - captured Anna's post-meeting email into:
@@ -277,16 +293,11 @@ Current branch state after cleanup:
 ### Prototype-as-spec and visual consistency
 
 - The public site now has clearer shared-shell conventions, but the semantic visual language is still only partially implemented
-- The current symbol-family deployment should be revised before being treated as the preferred visual pattern
-- The next pass should:
-  - remove or greatly reduce tiny white-badge symbol treatments
-  - enlarge symbol presence in key homepage and public-page sections
-  - use the family more consistently across the wider site
-  - replace arbitrary cropped route-1 decorative fragments with more intentional brand-asset composition
+- The symbol family has been reconciled to the composed handoff symbols (glyph + field-mark bands) and rolled out across homepage, About, Technical Network, and Updates; tiny white-badge treatments and blob-like decorative placements were removed. Still to do: symbols are not yet used on the database, membership, or tracker pages (no slots there yet) — introduce them there if wanted.
 - `docs/site/about.html` still needs visual tuning around the sourced Africa-map treatment, marker placement, and how the illustration integrates with text
 - `docs/site/index.html`, `docs/membership-flow/index.html`, and `docs/database/index.html` still need deeper page-specific design passes rather than only consistency edits
 - Visual assets, imagery, and iconography still need to become more systematic and defensible across the site
-- A full design system is still intentionally deferred; the current requirement is disciplined consistency and reusable conventions, not component-library implementation
+- A design system has now been **extracted as a spec for the monorepo build** (`docs/design-system/`), paired with `registration-tracker/data-model-v1.md`. It is intentionally *not* wired into the prototype. A component-library implementation inside the prototype is still deferred; the prototype should keep using disciplined consistency and the shared shell.
 - For the next agent, do not reopen homepage / About / membership-core refinement as the immediate priority unless the user explicitly asks; those surfaces are currently considered good enough to move past
 
 ### Prototype-as-spec data-model work
@@ -362,6 +373,9 @@ Current branch state after cleanup:
 | `docs/site/assets/africa-map-freevectormaps.png` | Sourced Africa-map asset currently used on About |
 | `docs/membership-flow/index.html` | Membership application flow |
 | `docs/registration-tracker/index.html` | Registration tracker presenter page |
+| `docs/design-system/` | Extracted design tokens, design-system spec, and symbol-family assets — build spec for the monorepo (not wired into the prototype) |
+| `docs/site/assets/symbols/` | Composed ABA symbols (glyph + field-mark bands) used across the public site |
+| `docs/requirements/aba-public-site-copy-working-document.md` | Full copy extract of all public-facing pages |
 | `docs/database/assets/bioicons/ATTRIBUTION.md` | SVG icon licence attribution |
 | `docs/requirements/` | Working notes, specs, and session notes |
 | `AGENTS.md` | Repo working rules for agents |
