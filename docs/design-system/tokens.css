@@ -1,0 +1,102 @@
+/*
+  ABA Design Tokens — canonical values (BUILD SPEC)
+  ---------------------------------------------------------------------------
+  PURPOSE: this is a specification artifact for the proper ABA build in the
+  monorepo — it is NOT intended to be retrofitted into these prototype HTML
+  pages. Together with the emerging data model
+  (registration-tracker/data-model-v1.md) it forms the design + data spec that
+  the production implementation should be built from.
+
+  Extracted from the live prototype (canonical source: docs/site/index.html and
+  docs/site/assets/public-shell.css — the umbrella homepage + shared shell), so
+  the production system starts from the real, agreed visual language rather than
+  a fresh invention.
+
+  Use in the monorepo: seed the production design tokens (CSS vars, Tailwind
+  theme, or a tokens package) from these values and roles. The token names are
+  kept human-readable and role-oriented so they map cleanly to any token system.
+
+  The aliases at the bottom record how the prototype's divergent palettes (the
+  oklch dialect and the #2b6b4f hex dialect) resolve onto the canonical brand —
+  useful context for the build, and for reading the current prototype.
+
+  See design-system.md for intended use, roles, usage, contrast, and the drift map.
+*/
+
+:root {
+  /* ---- Brand ---- */
+  --green-deep: #15322f;                    /* primary brand: buttons, roundel, dark panels */
+  --green: #5a6b3a;                         /* olive secondary: Africa silhouette, accents */
+  --green-soft: rgba(90, 107, 58, 0.12);    /* olive tint: chips, soft fills */
+
+  /* ---- Text ---- */
+  --ink: #203b44;                           /* headings + body */
+  --muted: rgba(32, 59, 68, 0.74);          /* secondary text (use at >=14px) */
+  --muted-strong: color-mix(in oklab, var(--ink) 76%, white);
+
+  /* ---- Surfaces / backgrounds ---- */
+  --page: #f3eee1;                          /* warm sand page background */
+  --page-deep: #ebe3d3;                     /* deeper sand for banding */
+  --surface: rgba(251, 247, 239, 0.9);      /* translucent cream card */
+  --surface-strong: rgba(255, 252, 246, 0.94);
+  --sand: #f3f1e8;                          /* opaque sand panel */
+  --line: rgba(35, 59, 68, 0.12);           /* hairline border */
+
+  /* ---- Accents (brand + data/status) ---- */
+  --gold-deep: #c89b2c;                     /* gold: highlights, "waiting" status, graphic fills */
+  --gold-soft: rgba(200, 155, 44, 0.12);
+  --clay-deep: #b24a32;                     /* terracotta: alert / over-benchmark status */
+  --clay-soft: rgba(178, 74, 50, 0.1);
+  --teal-deep: #235344;                     /* teal: neutral info accent */
+  --teal-soft: rgba(35, 59, 68, 0.08);
+
+  /* ---- On-color / fixed ---- */
+  --on-primary: #f7f7f2;                    /* text/icon on --green-deep */
+
+  /* ---- Elevation ---- */
+  --shadow: 0 26px 54px -42px rgba(21, 50, 47, 0.28);
+  --shadow-hover: 0 16px 28px -24px rgba(23, 48, 57, 0.22);
+
+  /* ---- Typography ---- */
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  /* Logo lettering only (peaked, crossbar-less A): "Poiret One" — not used for UI text. */
+
+  /* ---- Spacing scale ---- */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 72px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 12px;                        /* buttons */
+  --radius-lg: 20px;                        /* inner cards */
+  --radius-xl: 28px;                        /* outer surfaces */
+  --radius-pill: 999px;                     /* chips, pills, nav-cta */
+
+  /* ---- Semantic status (dashboards) ---- */
+  --status-ok: var(--green);                /* on track */
+  --status-waiting: var(--gold-deep);       /* waiting / caution */
+  --status-alert: var(--clay-deep);         /* exceeded / blocked */
+  --status-info: var(--teal-deep);          /* neutral info */
+
+  /* =========================================================================
+     Compatibility aliases — map legacy per-page token names to the canonical
+     palette so older pages unify to brand when they drop their local :root.
+     Prefer the canonical names above in new work.
+     ========================================================================= */
+  --paper: var(--surface);                  /* older surface name */
+  --accent: var(--green);                   /* older accent name */
+  --accent-soft: var(--green-soft);
+  --amber: var(--gold-deep);                /* dashboards' "amber" -> brand gold */
+  --amber-soft: var(--gold-soft);
+  --red: var(--clay-deep);                  /* dashboards' "red" -> brand clay */
+  --red-soft: var(--clay-soft);
+  --teal: var(--teal-deep);
+  --sage: var(--green-soft);
+  --slate-soft: var(--teal-soft);
+  --sand-soft: var(--sand);
+}
