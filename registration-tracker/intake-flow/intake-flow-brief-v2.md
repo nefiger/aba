@@ -132,20 +132,24 @@ what V1 has, what V2 proposes, and the spec basis.
 - **Dossier-readiness** flag (List I/II bundle ready — single flag, not contents).
 - **Proof-of-payment attached** flag.
 
-### Applicant accountability (Screen 7 — optional, non-gating) *(moved here, R6; data-model-v1 §6, D1)*
+### Professional accountability (Screen 7) *(moved here, R6; data-model-v1 §6, D1)*
 - Collapsible/skippable block, one-line explainer: *"Optional — helps make the record a complete
   Act 36 application; skip if you'd rather not."* Never blocks continuing to consent/submit.
 - **Approved person named** (accountable individual, Act 36) — name + role. *(optional)*
 - **Eligibility signal:** applicant resident in SA / company has SA-registered office (Act 36
   records). *(optional)*
 - **Acting under letter of authority?** yes/no (third-party mandate, scope + duration). *(optional)*
-- **SACNASP signatory number** — captured as a **verified boolean**, not the raw number. *(optional)*
+- **SACNASP verification status** — captured as a **verified boolean**, not the raw number. This is required for submission; the submitter may select `Unknown` where verification is pending.
 
-### Consent & visibility (Screen 8) — unchanged
-- Internal ABA review (required) / anonymised public aggregate / named registrar export use (opt-in).
+### Consent & visibility (Screen 8) — revised
+- Internal ABA review is required. Named registrar-facing use is the second option and is visible but disabled until the submitter self-identifies as a Full ABA member. Anonymised public aggregate use is the third option.
 
 ### Save / submit (Screen 9) — unchanged
 - Save draft + email return link (saved-at only); submit for ABA review (sets `submittedAt`).
+
+### Monthly update reminder (future flow to design)
+- Once a submission has been made, ABA should send the submitter a monthly email reminder to review and update the record if its registration status, reference, readiness, or accountability details have changed.
+- This needs a separate reminder-and-update journey design before implementation: consent and recipient rules, reminder content, secure return-link handling, pause/unsubscribe controls, update confirmation, and the operator view of changes all need to be defined.
 
 ---
 

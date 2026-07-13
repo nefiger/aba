@@ -1,10 +1,18 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 
 ---
 
 ## Current state
+
+### Registration-tracker intake refinement (2026-07-13)
+
+- Branch `codex/registration-tracker-intake-refinements` updates the intake flow for the current review:
+  - Step 5 is now a complete-submission checklist.
+  - Step 6 is now `Professional accountability`; SACNASP verification status is required, with `Unknown` retained for pending verification.
+  - The named / registrar-facing consent is the second option and is visibly disabled unless the submitter identifies as a Full ABA member; anonymised aggregate use is third.
+  - The intake brief records a future monthly post-submission reminder flow, explicitly pending journey design before implementation.
 
 The prototype is now in a more explicit page-by-page review and refinement phase.
 
