@@ -763,8 +763,8 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <h2>Step 5. Reference and readiness</h2>
-                <p>Add the current file reference if you have it, then indicate whether the main supporting materials and payment proof are ready.</p>
+                <h2>Step 5. Complete-submission checklist</h2>
+                <p>Work through the items that make this submission complete, then add the current file reference if it has been issued.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
@@ -793,8 +793,8 @@
           <details class="form-section">
             <summary class="summary-row">
               <div class="section-head">
-                <h2>Step 6. Optional accountability</h2>
-                <p>Add any named person or formal accountability detail that ABA should understand alongside the application. Leave this closed if it is not needed.</p>
+                <h2>Step 6. Professional accountability</h2>
+                <p>Record the accountable professional details ABA should understand alongside the application.</p>
               </div>
               <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
             </summary>
@@ -803,7 +803,7 @@
                 <div class="field"><label for="approvedPerson">Approved person (Act 36)</label><input id="approvedPerson" class="control" placeholder="Optional" value=""></div>
                 <div class="field"><label for="approvedRole">Their role / title</label><input id="approvedRole" class="control" placeholder="Optional" value=""></div>
                 <div class="field"><label for="eligibility">SA residency / registered office</label><select id="eligibility" class="control-select"><option>Not specified</option><option>Resident in South Africa</option><option>Company registered office in South Africa</option><option>Neither — flag for review</option></select></div>
-                <div class="field"><label for="sacnasp">SACNASP verification status (optional)</label><select id="sacnasp" class="control-select"><option>Not specified</option><option>Verified</option><option>Not verified</option><option>Unknown</option></select></div>
+                <div class="field"><label for="sacnasp">SACNASP verification status</label><select id="sacnasp" class="control-select" required><option value="" selected disabled>Select verification status</option><option>Verified</option><option>Not verified</option><option>Unknown</option></select></div>
                 <div class="field"><label>Acting under letter of authority?</label><label class="checkbox-item"><input id="letterOfAuthority" type="checkbox"> <span>Yes — third-party mandate on file</span></label></div>
               </div>
             </div>
@@ -820,8 +820,9 @@
             <div class="form-body">
               <div class="checkbox-list">
                 <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review required</span></label>
+                <label class="checkbox-item"><input id="consentRegistrar" type="checkbox" disabled aria-describedby="registrarConsentNote"> <span>Named / registrar-facing use</span></label>
+                <p class="note" id="registrarConsentNote">Available to verified ABA members. Select “Full member” in Step 1 to opt in.</p>
                 <label class="checkbox-item"><input id="consentPublic" type="checkbox" checked> <span>Anonymised public aggregate use</span></label>
-                <label class="checkbox-item"><input id="consentRegistrar" type="checkbox"> <span>Named / registrar-facing use</span></label>
               </div>
             </div>
           </details>
@@ -931,6 +932,15 @@
           ? "Proof of payment marked as attached."
           : "Use this to show whether proof of payment has already been attached with the application.";
 
+        const registrarConsent = document.getElementById("consentRegistrar");
+        const registrarConsentNote = document.getElementById("registrarConsentNote");
+        const isAbaMember = value("membership") === "Full member";
+        registrarConsent.disabled = !isAbaMember;
+        if (!isAbaMember) registrarConsent.checked = false;
+        registrarConsentNote.textContent = isAbaMember
+          ? "As an ABA member, you may opt in to named / registrar-facing use. ABA will confirm any use with you."
+          : "Available to verified ABA members. Select “Full member” in Step 1 to opt in.";
+
         const submissionFeedback = document.getElementById("submissionFeedback");
         if (submissionFeedback) submissionFeedback.textContent = state.lastAction;
       }
@@ -948,6 +958,8 @@
       document.getElementById("submitReview").addEventListener("click", () => {
         if (!checked("responsibleAttestation")) {
           state.lastAction = "Please confirm that you are responsible for, or authorised to report on, this registration before submitting.";
+        } else if (!value("sacnasp")) {
+          state.lastAction = "Please select the SACNASP verification status before submitting.";
         } else {
           state.submittedAt = currentTimestamp();
           state.lastAction = "Thanks. Your registration journey has been sent to ABA for review.";

@@ -93,7 +93,7 @@ in what it captures.
 | Approved person (name) | Opt | text | Act 36 accountable individual — **most sensitive PII in the form** |
 | Their role | Opt | text | |
 | Resident in SA / SA-registered office | Opt | select | eligibility signal |
-| SACNASP verification status | Opt | select | verified / not verified / unknown; do not require a raw number in v1 |
+| SACNASP verification status | Req | select | verified / not verified / unknown; do not require a raw number. `Unknown` is valid where verification is pending. |
 | Acting under letter of authority? | Opt | checkbox | third-party mandate |
 
 - Present as a collapsible/skippable block with a one-line explainer: *"Optional — helps make the
