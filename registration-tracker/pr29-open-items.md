@@ -23,7 +23,7 @@ and the five `*-brief-v2.md`. Findings, all fixed in `data-model-v1.md` (and cas
    of their record. Cascaded to `page-feed-map-v1.md`'s field×surface matrix and footnote.
 4. **`submitted_at` sensitivity didn't match the source of truth.** Tagged `OPERATOR→MEMBER`
    (implying it's hidden from the submitting company until some later promotion event), but
-   `context-and-decisions-v1.md`'s "Submission Timestamp Rule" explicitly says operator/company/
+   `context-and-decisions-v1.md`'s "Application Submit Timestamp Rule" explicitly says operator/company/
    registrar views may all show it. Retagged `MEMBER (named) / PUBLIC (aggregate)` to match.
 5. **Legend didn't document its own notation.** §3 defines exactly four sensitivity values, but §5/§6
    use compound forms (`A→B`, `A(named)/B(aggregate)`, `-gate` suffix) that aren't in the legend.
@@ -34,7 +34,7 @@ and the five `*-brief-v2.md`. Findings, all fixed in `data-model-v1.md` (and cas
    purpose test doesn't need applicant identity), but undocumented. Added a note in §6 flagging this
    as a considered override, not an oversight.
 
-Grain (Submission→Org→Product→Application→StatusLog), the capture/optional/never lens, and the
+Grain (Organisation→Product→Application→StatusLog plus intake metadata), the capture/optional/never lens, and the
 derived backlog/median definitions all checked out consistent across sources — no changes needed
 there beyond what's listed above.
 

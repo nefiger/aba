@@ -56,7 +56,7 @@ These should be treated as the minimum first-pass admin spine:
   a country or regional chapter context
 - `ChapterMembership` or `ChapterRole`
   the link between a member and a chapter
-- `RegistrationSubmission`
+- `Application`
   product-registration-related record
 - `InternalReviewCase`
   operator-managed review object linked to membership or tracker records
@@ -167,7 +167,7 @@ Purpose:
 - give ABA internal visibility into tracker-derived regulatory patterns
 
 Primary records:
-- `RegistrationSubmission`
+- `Application`
 - linked `Organization`
 - linked `Person`
 

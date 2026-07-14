@@ -181,7 +181,7 @@ Source:
 - `Organization`
 - possible future `ReviewCase`
 - possible later `MembershipRelationship`
-- possible later `RegistrationSubmission`
+- possible later `Application`
 
 ## 2. Technical partner route
 
@@ -386,7 +386,7 @@ Source:
 
 ### Likely canonical record implications
 
-- `RegistrationSubmission`
+- `Application`
 - `Person`
 - optional or probable `Organization`
 - possible later linkage to `MembershipRelationship`

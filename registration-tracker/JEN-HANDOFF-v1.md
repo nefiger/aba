@@ -17,7 +17,7 @@ membership/tracker continuity, consent ownership, and soft-launch v1 surface sco
 
 1. **`registration-tracker/data-model-v1.md`** — the data model: what we capture and why, how sensitive
    each field is (`PUBLIC` / `MEMBER` / `OPERATOR` / `NEVER`), the lookup tables, the derived metrics,
-   and how it maps to your **"Registration Submission"** lead object.
+   and how it maps to your application-side lead/CRM model.
 2. **`registration-tracker/intake-form-spec-v1.md`** — the intake form as **fields / sequence /
    conditional logic / validation**. Content and structure only — **styling is yours.**
 3. **`registration-tracker/page-feed-map-v1.md`** — how captured data flows into each downstream page,

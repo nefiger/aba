@@ -60,7 +60,7 @@ Goal:
 - collect structured registration journey data
 
 Primary output created:
-- `Registration Submission`
+- `Application`
 
 Downstream value:
 - sector intelligence
@@ -409,7 +409,7 @@ List items:
 - `Support advocacy with evidence`
 
 Creates box:
-- `Registration Submission -> Sector Intelligence`
+- `Application -> Sector Intelligence`
 
 CTA:
 - `Share Registration Info`
@@ -504,7 +504,7 @@ Recommended initial set:
 - `Registrations by Stage`
 - `Reported Bottlenecks`
 - `Average Time in Stage` or `Time Stuck by Stage`
-- `Submission Growth Over Time`
+- `Application Growth Over Time`
 
 ### Advocacy framing
 
