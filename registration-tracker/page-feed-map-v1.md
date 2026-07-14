@@ -14,7 +14,7 @@ reads it. That makes it structurally hard to leak a field onto a page it shouldn
 
 ```
 Intake form (open, anyone)
-   → creates Submission → Organisation → Product → Application → StatusLog
+   → creates/updates Application with Organisation + Product + intake metadata + StatusLog
       → (later) Operator review verifies + tags
          ├─ Company dashboard   (member sees own records)          MEMBER
          ├─ Public / sector signals + ABA homepage intelligence     PUBLIC (aggregate, suppressed)
@@ -29,7 +29,7 @@ Pipeline (pre-submission) records are tracked but **never counted as registrar b
 ## 2. Per-surface feed
 
 ### A. Intake form — *creates* the data
-Writes Submission/Org/Product/Application/StatusLog/Consent. Nothing read from other records (open,
+Writes application/organisation/product/status/consent data plus intake metadata. Nothing read from other records (open,
 stateless entry). Draft return-link lets a submitter resume/update over time.
 
 ### B. Company dashboard — the submitter's own records  *(MEMBER)*

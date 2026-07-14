@@ -541,11 +541,11 @@ Suggested reference status:
 
 When no reference number is provided, require a reference note.
 
-## Submission Timestamp Rule
+## Application Submit Timestamp Rule
 
-Every completed submission should receive a system-generated timestamp when it is sent for ABA review.
+Every completed application intake should receive a system-generated timestamp when it is sent for ABA review.
 
-Do not expose submission timestamp as an intake form input. Draft saves may have a separate saved-at timestamp, but they are not submissions.
+Do not expose the submit timestamp as an intake form input. Draft saves may have a separate saved-at timestamp, but they are not completed application submissions.
 
 Downstream operator, company, and registrar views can display `submittedAt` as read-only audit metadata. Public dashboard views should only expose aggregate timestamp ranges where useful for transparency.
 
@@ -588,7 +588,7 @@ Conceptual CRM-linked entities:
 - Attachment / Proof
 - Consent / Visibility Setting
 - Review Decision
-- Export Packet / Registrar Submission Batch
+- Export Packet / Registrar-facing Application Batch
 
 Possible data relationships:
 
@@ -602,7 +602,7 @@ This relationship remains unresolved at implementation level.
 
 **Alignment with Jen's CRM (2026-07 review).** The membership-ops requirements
 (`docs/requirements/aba-public-capture-journeys-and-record-model.md` and `-field-map.md`) confirm the
-CRM's canonical records are `Person`, `Organization`, `Product`, `RegistrationSubmission`,
+CRM's canonical records are `Person`, `Organization`, `Product`, `Application`,
 `MembershipApplication`, and `MembershipRelationship` — and that the tracker is *expected to feed*
 them. Two handoff points are open with Jen and tracked as **D8** (organisation identity / continuity
 linkage — her "Journey E" matching layer; the tracker should defer to the CRM's dedupe, not build its

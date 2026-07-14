@@ -55,7 +55,7 @@ Requirements:
 At the current level of abstraction, the system should assume these lead/data objects exist.
 
 - `Membership Lead`
-- `Registration Submission`
+- `Application`
 - `Contact Record`
 - `Technical Network Lead`
 

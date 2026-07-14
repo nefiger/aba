@@ -138,23 +138,6 @@ Key rules:
 - `pending_activation` persists until dues, invoicing, and onboarding requirements are satisfied
 - relationship status governs member workspace and benefits, not the application alone
 
-### RegistrationSubmission
-
-One tracker intake event or submission envelope.
-
-Created by:
-- tracker intake
-
-Used for:
-- contact and organisation context at submission time
-- source attribution
-- consent captured for that intake
-- one or more application-level tracker records
-
-Key rules:
-- this is the intake envelope, not the backlog unit
-- repeated submissions by the same company create additional submission history, not duplicate companies
-
 ### Product
 
 One named product or product concept linked to tracker activity.
@@ -166,9 +149,9 @@ Used for:
 
 Key rules:
 - a product may appear across multiple applications or updates over time
-- product identity should not be collapsed into the submission envelope
+- product identity should not be collapsed into a received packet or receipt/admin event
 
-### RegistrationApplication
+### Application
 
 One application-level registration record under the tracker model.
 
@@ -176,14 +159,15 @@ Used for:
 - service/application type
 - status timeline
 - benchmark/wait-time logic
-- backlog calculation
+- workload and progress tracking
 - company workspace status lanes
 - public aggregate signals
 
 Key rules:
-- this is the unit of backlog
-- one `RegistrationSubmission` may create or update one or more `RegistrationApplication` records
-- public and export decisions operate on reviewed application-level records, not raw submissions alone
+- `application` is the source-defined unit in the regulator corpus
+- this is the record whose regulatory progress ABA tracks
+- intake and receipt details may be attached as metadata if needed, but should not be treated as a second source-defined business object here
+- public and export decisions operate on reviewed application-level records, not raw receipt/admin data alone
 
 ### ConsentRecord
 
@@ -208,7 +192,7 @@ One operator-managed review and follow-up object linked to a source record.
 
 Used for:
 - membership application review
-- tracker submission/application review
+- tracker application review
 - clarification requests
 - inclusion or exclusion decisions
 - audit trail of operator handling
@@ -287,10 +271,10 @@ Creates:
 - `Person` if new
 - `Organization` if new
 - `OrganizationPersonRole`
-- `RegistrationSubmission`
 - tracker-side `ConsentRecord`
 - one or more `Product`
-- one or more `RegistrationApplication`
+- one or more `Application`
+- intake or receipt metadata attached to the application where needed
 
 May later create:
 - `ReviewCase`
@@ -332,15 +316,16 @@ Meaning:
 
 ### Tracker states
 
-`RegistrationSubmission` is the intake envelope and should carry submission-state history.
-
-`RegistrationApplication` is the business record and should carry:
+`Application` is the business record and should carry:
 - current official status
 - official stage
 - service/application type
 - status timeline
 - benchmark/wait calculations
 - lane placement such as pipeline / with registrar / finalised
+
+If ABA needs to keep intake or receipt history, that should be treated as metadata attached to the
+application rather than as a second named canonical business object in this note.
 
 ### Review states
 
@@ -440,7 +425,7 @@ Packet use must remain narrower than:
 Use this ownership rule everywhere:
 
 - `MembershipApplication` owns membership-route follow-up and application-side permissions through its `ConsentRecord`
-- `RegistrationSubmission` owns tracker aggregate and named-use permissions through its `ConsentRecord`
+- tracker-side application intake owns tracker aggregate and named-use permissions through its `ConsentRecord`
 - `ContactSubscription` owns general updates/newsletter permissions
 - `MembershipRelationship` may reference standing member status, but does not rewrite earlier route-specific consent decisions
 
@@ -607,7 +592,7 @@ This note succeeds if a later implementer can answer all of the following withou
 
 - What record is created by each public route?
 - How does a tracker submitter become a member later without duplicate person or organisation history?
-- What is the difference between `MembershipApplication`, `MembershipRelationship`, `RegistrationSubmission`, and `RegistrationApplication`?
+- What is the difference between `MembershipApplication`, `MembershipRelationship`, `Application`, and application intake metadata?
 - Which field families are public aggregate, company-private, operator-only, or never stored?
 - What operator action is required before data appears in company workspace, public signals, or registrar/export context?
 - Which prototype surfaces are in-scope for v1, and which remain preview-only?

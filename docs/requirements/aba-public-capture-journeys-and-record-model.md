@@ -69,7 +69,7 @@ Likely downstream outcomes:
 - linked `Organization`
 - linked `Person`
 - possible later `DuesObligation` or `Invoice`
-- possible later `RegistrationSubmission`
+- possible later `Application`
 
 ### 2. Technical network applicant
 
@@ -132,7 +132,7 @@ Primary intent:
 - gain visibility on status, blockers, and follow-up
 
 Likely downstream outcomes:
-- `RegistrationSubmission`
+- `Application`
 - new prospect `Person`
 - optional prospect `Organization`
 - acquisition-channel tagging to `registration_tracker`
@@ -373,7 +373,7 @@ Likely first-pass capture:
 ### Record creation
 
 Creates:
-- `RegistrationSubmission`
+- `Application`
 - prospect `Person` if needed
 - prospect `Organization` if needed
 
@@ -416,7 +416,7 @@ Examples:
 This means the public-side capture model must support:
 - matching people and organisations over time
 - preserving acquisition source
-- linking later applications and submissions to earlier records
+- linking later applications and earlier tracker records to earlier records
 
 ## Canonical records that public capture must feed
 
@@ -427,7 +427,7 @@ Based on the current prototype, public capture should feed these core records:
 - `MembershipApplication`
 - `MembershipRelationship`
 - `MembershipTypePolicy`
-- `RegistrationSubmission`
+- `Application`
 - `DuesObligation` or `Invoice`
 - future review/case layer where needed
 

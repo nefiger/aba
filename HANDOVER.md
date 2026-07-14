@@ -1,10 +1,75 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-13
+Last updated: 2026-07-14
 
 ---
 
 ## Current state
+
+### Workshop handover for Lyle (2026-07-14)
+
+If Lyle needs to get his head around the system model quickly before the workshop, use this reading order:
+
+1. `docs/requirements/aba-system-model-workshop-reference.md`
+   - this is the best whole-system written reference
+   - it covers actors, records, relationships, business rules, and open gaps across membership, tracker, admin, and communications
+2. `docs/requirements/aba-system-model-uml-diagrams.md`
+   - this is the visual companion to the workshop reference
+   - it now includes:
+     - the shared database model
+     - CRM/admin entities
+     - admin modules
+     - status models
+     - user accounts and roles
+     - membership categories/types/packages
+     - finance/activation/renewal
+     - communications/opt-ins
+     - Biologicals Explorer/member-product listing model
+     - route-level capture-field models
+     - tracker and source-form relationship diagrams
+3. `registration-tracker/data-model-v1.md`
+   - this is now the source-grounded tracker/regulatory slice only
+   - use it for Act 36 / regulator-model questions, not for the whole ABA system
+4. `docs/requirements/aba-terminology-review-register.md`
+   - use this to spot vague, invented, or overloaded language in one place before the workshop
+
+Main corrections made in this pass:
+
+- `Application` is the source-grounded tracker business record.
+- A separate formal `Submission` object is **not** supported clearly by the source docs.
+- The `Service Request Form` sits with one or more application forms and carries distinct receipt/admin/payment/service-summary data.
+- If ABA wants to store that separate administrative grouping, the clean model is:
+  - `ServiceRequestPacket` as an admin/grouping record
+  - `Application` as the actual tracked registration record
+- `public aggregate signal output` was renamed to `Public registration tracker dashboard`.
+- The workshop note now treats the system as one shared database across membership, tracker, admin, CRM, finance, and comms.
+
+Key current modeling stance for tomorrow's workshop:
+
+- do not treat tracker and membership as separate databases
+- do treat membership, tracker, admin, comms, and explorer as one shared data model with different entry routes and visibility rules
+- do distinguish:
+  - `MembershipApplication` from `MembershipRelationship`
+  - `Product` from `Application`
+  - `Application` from receipt/admin metadata
+  - public dashboard use from member/private/admin/export use
+
+Where to find the clearest current status models:
+
+- membership application states:
+  `docs/requirements/aba-system-model-uml-diagrams.md`
+- membership relationship states:
+  `docs/requirements/aba-system-model-uml-diagrams.md`
+- tracker status/stage framing:
+  `docs/requirements/aba-system-model-uml-diagrams.md`
+
+Important remaining open questions for workshop discussion:
+
+- whether every observer becomes a true `MembershipRelationship` or whether some remain lighter stakeholder records
+- whether every Explorer-listed product must belong to an active member relationship
+- how explicit the final `ServiceRequestPacket` storage/handling should be in v1
+- whether a dedicated lead/prospect status model is needed, or whether `Person` / `Organization` / `MembershipApplication` / `ContactSubscription` are enough
+- the final permission model for company users, ABA admin, finance, chapter, and technical-network access
 
 ### Registration-tracker intake refinement (2026-07-13)
 
@@ -12,7 +77,35 @@ Last updated: 2026-07-13
   - Step 5 is now a complete-submission checklist.
   - Step 6 is now `Professional accountability`; SACNASP verification status is required, with `Unknown` retained for pending verification.
   - The named / registrar-facing consent is the second option and is visibly disabled unless the submitter identifies as a Full ABA member; anonymised aggregate use is third.
-  - The intake brief records a future monthly post-submission reminder flow, explicitly pending journey design before implementation.
+- The intake brief records a future monthly post-submission reminder flow, explicitly pending journey design before implementation.
+
+### UX workshop system-model reference added (2026-07-14)
+
+- Added `docs/requirements/aba-system-model-workshop-reference.md`.
+- This note now works as a workshop reference rather than a short brief.
+- It consolidates:
+  - actors
+  - canonical records
+  - key attributes
+  - relationships
+  - business rules already stated in the repo
+  - unresolved modeling gaps
+- Use it as the quickest re-entry point if the next session needs to reason about:
+  - tracker backlog unit versus intake envelope
+  - person/organisation continuity across membership and tracker routes
+  - the distinctions between membership category/type, company role, product category, service type, and status/stage
+
+### Registration-tracker regulator source docs and source-grounded model note added (2026-07-14)
+
+- Added the primary regulator reference files under `registration-tracker/reference/regulator-source-docs/`.
+- Replaced `registration-tracker/data-model-v1.md` with the cleaner rewrite from the side-thread handoff.
+- The tracker model note now distinguishes:
+  - source-defined regulator terms and process structures
+  - ABA tracker-side normalization choices
+  - open questions still not settled by the source documents
+- Most important clarification:
+  - `Application` is clearly source-defined in the regulator corpus
+  - the docs on this branch should now use `Application` as the main tracker record, with intake/receipt details treated as metadata rather than as a second named business object
 
 The prototype is now in a more explicit page-by-page review and refinement phase.
 
