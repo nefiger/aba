@@ -388,20 +388,18 @@ Fields shown or implied:
 - approximate_date flag
 - notes
 
-### ContactSubscription
+### PublicInterest
 
-Represents a general stay-informed, newsletter, or updates relationship.
+Represents a non-membership CRM interest relationship for a person who asks to receive ABA updates or hear about future membership opening. Permission to contact them is held separately in a consent record.
 
 Fields shown or implied:
 - person_link
 - organization_link where relevant
-- subscription_type
+- interest_type
 - source_channel
-- advocacy_contact_ok flag
-- fundraising_contact_ok flag
-- recruitment_contact_ok flag
-- newsletter_consent
-- active_status
+- captured_at
+- lifecycle_status
+- consent_record_link
 
 Rules:
 - this is separate from membership and tracker records
@@ -471,8 +469,9 @@ Fields shown or implied:
 
 1. Visitor signs up for updates through a public stay-informed entry point.
 2. A `Person` record is created or matched.
-3. A `ContactSubscription` record is created with clear source attribution.
-4. ABA may later use this contact base for newsletter, advocacy, recruitment, convening, or fundraising follow-up according to captured permissions.
+3. A `PublicInterest` record is created with clear source attribution.
+4. A linked consent record captures permission to send ABA updates for the stated purpose.
+5. ABA may later use this contact base for additional follow-up only where the person has given the applicable permission.
 
 ### Full membership with product-registration relevance
 

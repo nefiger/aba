@@ -1,10 +1,28 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-13
+Last updated: 2026-07-20
 
 ---
 
 ## Current state
+
+### Website reset and first-cohort specification (2026-07-20)
+
+The public-site work has been reset before implementation. Do not continue panel-beating the earlier public HTML as the primary path. Use the final brochure, the core-functions positioning diagram, and the new reset pack as the source of truth:
+
+1. `docs/requirements/aba-first-release-website-reset-spec.md`
+2. `docs/requirements/aba-membership-value-and-engagement-model-notes.md`
+3. `docs/requirements/aba-terminology-and-taxonomy-reset-register.md`
+4. `docs/requirements/aba-ux-workshop-decision-digest-2026-07-15.md`
+
+The first-release membership rule is now explicit:
+
+- one initial membership intake form, initially available at a private URL;
+- founding members use it first to complete their details;
+- later invited candidates use the same form, with a different entry context;
+- public visitors can only register membership interest / receive ABA updates, creating a CRM contact and consent relationship rather than a membership application.
+
+The tracker remains Lyle’s workstream and a useful public route for an actual registration situation. It must not be used as a membership gate. Membership needs a distinct, progressive proposition with carefully bounded claims.
 
 ### Registration-tracker intake refinement (2026-07-13)
 
@@ -198,6 +216,22 @@ Current branch state after cleanup:
 - created a condensed current-focus checklist in:
   `docs/requirements/aba-active-now-checklist.md`
 - updated `HANDOVER.md` to connect those notes back into session continuity
+- started the production-readiness website reset from the final brochure and the 15 July ABA UX workshop:
+  - `docs/requirements/aba-ux-workshop-decision-digest-2026-07-15.md`
+  - `docs/requirements/aba-terminology-and-taxonomy-reset-register.md`
+  - `docs/requirements/aba-first-release-website-reset-spec.md`
+  - `docs/requirements/aba-membership-value-and-engagement-model-notes.md`
+  - these now supersede the earlier page-by-page refinement stance for future public-site work, pending leadership agreement of the reset pack
+  - the next build must be brochure-led and first-cohort-led: there is one initial membership intake form, shared through a private URL with different founder and invited-candidate contexts; public membership interest remains a separate CRM/contact and communication-consent route
+  - tracker participation remains a public utility, not a membership gate; the new member-value note records the source-grounded distinction between tracker participation and the more direct collective relationship membership is intended to create
+  - the note also sets claim boundaries: no public promise of direct regulator access, outcomes, automatic product listing, endorsement, referrals, sales, or a marketing package
+- captured the supplied founding-group WhatsApp archive into:
+  `docs/requirements/aba-whatsapp-group-synthesis-2026-07-20.md`
+  - use this as the internal source for message discipline, regulatory-preparation context, service-boundary guardrails, and unresolved membership/governance questions
+  - it is deliberately explicit about what is confirmed direction versus material still needing legal, board, or technical review
+  - corresponding public-copy and knowledge-provenance guardrails were added to:
+    `docs/requirements/aba-homepage-strategy-and-copy-notes.md`
+    `docs/requirements/aba-content-taxonomy-and-semantic-visual-language.md`
 
 ### Membership/admin/CRM spec pass
 
@@ -384,6 +418,7 @@ Current branch state after cleanup:
 | `docs/design-system/` | Extracted design tokens, design-system spec, and symbol-family assets — build spec for the monorepo (not wired into the prototype) |
 | `docs/site/assets/symbols/` | Composed ABA symbols (glyph + field-mark bands) used across the public site |
 | `docs/requirements/aba-public-site-copy-working-document.md` | Full copy extract of all public-facing pages |
+| `docs/requirements/aba-whatsapp-group-synthesis-2026-07-20.md` | Internal synthesis of founding-group WhatsApp context; use before strategy, content, membership, regulatory, or advisory work |
 | `docs/database/assets/bioicons/ATTRIBUTION.md` | SVG icon licence attribution |
 | `docs/requirements/` | Working notes, specs, and session notes |
 | `AGENTS.md` | Repo working rules for agents |

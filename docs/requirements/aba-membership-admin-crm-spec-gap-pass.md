@@ -339,8 +339,8 @@ Recommended core records:
   one product-registration contribution record
 - `TechnicalNetworkProfile`
   structured specialist/advisory capability record
-- `ContactSubscription`
-  communications permission and update relationship record
+- `PublicInterest`
+  non-membership CRM interest relationship; its linked consent record owns permission to send ABA updates
 - `InternalReviewCase`
   operator-managed review and follow-up object linked to a source record
 - `PublicSignal`
