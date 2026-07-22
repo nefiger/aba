@@ -47,6 +47,11 @@ Before making substantial changes, read these files first:
 - `docs/requirements/african-biologicals-alliance-html-spec.md`
   broader website structure and messaging spec
 
+When working in the new soft-launch workspace, also read:
+
+- `soft-launch/PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.md`
+  governing public-copy, typography, composition, review, and preflight contract
+
 Read these when working specifically on the homepage or site copy:
 
 - `docs/requirements/aba-homepage-strategy-and-copy-notes.md`
@@ -81,6 +86,10 @@ Read these when working on related surfaces:
   do not set `max-width` constraints on headings.
   If a heading wraps awkwardly, fix the copy length, type size, or layout width instead of forcing a narrow heading measure.
   As pages are touched, remove heading-width constraints that violate this rule.
+- Do not describe a public soft-launch page as complete until both checks have been run:
+  - `node soft-launch/scripts/public-site-preflight.mjs`
+  - `soft-launch/qa/public-site-render-check.html` through a local server
+- Do not weaken the public voice/design guardrails to make a failing page pass. Correct the page or record the conflict for Jen's decision.
 
 ## Workspace Notes
 

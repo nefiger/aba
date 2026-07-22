@@ -3,150 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABA Launcher</title>
+  <meta name="description" content="Access the current African Biologicals Alliance soft-launch website and application pages.">
+  <title>ABA soft launch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #173039;
-      --muted: #5c6f73;
-      --line: rgba(23, 48, 57, 0.1);
-      --surface: rgba(255, 252, 246, 0.9);
-      --green: #2b6b4f;
-      --green-soft: #e7f0e8;
-      --shadow: 0 14px 28px -24px rgba(20, 32, 34, 0.28);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      font-family: "Public Sans", system-ui, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(99, 154, 108, 0.14), transparent 24%),
-        linear-gradient(180deg, #f4efe5 0%, #fbf8f2 52%, #f2f4ed 100%);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .panel {
-      width: min(620px, 100%);
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--green-soft);
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .mini {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    h1,
-    p {
-      margin: 0;
-    }
-
-    h1 {
-      margin-top: 14px;
-      font-size: 22px;
-      line-height: 1.2;
-    }
-
-    p {
-      margin-top: 8px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-
-    .links {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .link {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.72);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .link span:last-child {
-      color: var(--muted);
-      font-weight: 600;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=Saira+Semi+Condensed:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/launcher.css">
 </head>
 <body>
-  <main class="panel">
-    <div class="brand">
-      <div class="mark">ABA</div>
-      <div>
-        <div class="mini">African Biologicals Alliance</div>
+  <main class="gateway">
+    <section class="gateway__intro" aria-labelledby="gateway-title">
+      <div class="brand-lockup">
+        <img src="./soft-launch/design/assets/aba-logo-final.png" width="500" height="500" alt="ABA">
+        <div>
+          <strong>African Biologicals Alliance</strong>
+          <span>In Africa · For Africa</span>
+        </div>
       </div>
-    </div>
 
-    <h1>Project launcher</h1>
-    <p>Choose a prototype section.</p>
+      <div class="gateway__statement">
+        <p class="label">Current deployment</p>
+        <h1 id="gateway-title">Soft launch</h1>
+        <p>Open the current website and the forms prepared for the first live release.</p>
+      </div>
 
-    <nav class="links" aria-label="Project links">
-      <a class="link" href="./docs/site/index.html">
-        <span>ABA site prototype</span>
-        <span>Open</span>
+      <p class="gateway__status">Reference prototype · July 2026</p>
+    </section>
+
+    <nav class="gateway__links" aria-label="Current soft-launch pages">
+      <div class="gateway__links-heading">
+        <p class="label">Current release</p>
+        <p>These links will keep the same paths when GitHub Pages deploys this branch.</p>
+      </div>
+
+      <a class="release-link release-link--primary" href="./soft-launch/prototype/index.html">
+        <span><strong>Public website</strong><small>Open the complete ABA soft-launch site.</small></span>
+        <span aria-hidden="true">↗</span>
       </a>
-      <a class="link" href="./docs/membership-ops/index.html">
-        <span>Membership operations</span>
-        <span>Open</span>
+      <a class="release-link" href="./soft-launch/prototype/member-intake.html">
+        <span><strong>Member application</strong><small>The single application for founding members and later cohorts.</small></span>
+        <span aria-hidden="true">↗</span>
       </a>
-      <a class="link" href="./docs/index.html">
-        <span>Internal demo material</span>
-        <span>Open</span>
+      <a class="release-link" href="./soft-launch/prototype/membership-interest.html">
+        <span><strong>Membership interest</strong><small>For people who want to hear when membership opens.</small></span>
+        <span aria-hidden="true">↗</span>
       </a>
-      <a class="link" href="./docs/registration-tracker/index.html">
-        <span>Registration tracker demo material</span>
-        <span>Open</span>
+      <a class="release-link" href="./soft-launch/prototype/technical-network.html">
+        <span><strong>Technical Network application</strong><small>For specialists who want to contribute to ABA's work.</small></span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a class="release-link" href="./soft-launch/prototype/registration-tracker.html">
+        <span><strong>Registration Tracker</strong><small>Open the tracker orientation and public-utility page.</small></span>
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <a class="archive-link" href="./archive.html">
+        <span><strong>Archive</strong><small>Earlier prototypes and internal demo workspaces.</small></span>
+        <span aria-hidden="true">→</span>
       </a>
     </nav>
   </main>

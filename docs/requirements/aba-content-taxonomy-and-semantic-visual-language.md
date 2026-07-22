@@ -122,6 +122,18 @@ Preferred traits:
 
 This area wants the richest semantic iconography and classification language.
 
+### Provenance and claims discipline
+
+The knowledge layer must also make the status of its information legible. Regulatory guidance, published evidence, ABA analysis, member-supplied information, and unreviewed contributions are different content states and should not look interchangeable.
+
+For product, regulatory, safety, efficacy, residue, and market information:
+- show the source, publication date, and relevant jurisdiction where practical
+- label registration status accurately rather than inferring local approval from another country
+- keep private company material and tracker submissions out of public knowledge surfaces unless the intended use and consent are explicit
+- treat field learnings and member contributions as reviewable contributions, not automatically published fact
+
+See `aba-whatsapp-group-synthesis-2026-07-20.md` for the source context behind this requirement.
+
 ## 5. Application and intake content
 
 ### What it includes

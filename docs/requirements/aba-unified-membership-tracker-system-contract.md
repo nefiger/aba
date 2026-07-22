@@ -58,7 +58,7 @@ Used for:
 - tracker submitters
 - technical-network participants
 - observer representatives
-- newsletter or updates subscribers
+- CRM contacts who ask to receive ABA updates or hear about future membership opening
 
 Key rules:
 - every human resolves to one `Person` record over time
@@ -175,7 +175,7 @@ One field-owning consent bundle linked to the source route that captured it.
 
 Used for:
 - follow-up permission
-- newsletter permission
+- ABA-updates permission
 - public aggregate permission
 - named registrar/export permission
 - retention or withdrawal decisions where relevant
@@ -202,14 +202,19 @@ Key rules:
 - the review object stores operator workflow state
 - the source record stores the business data being reviewed
 
-### ContactSubscription
+### PublicInterest
 
-One non-membership communications relationship.
+One non-membership CRM interest relationship, linked to a `Person` and optionally an `Organization`.
 
 Used for:
-- newsletter signups
+- public membership-interest capture
 - stay-informed relationships
-- lighter contact capture that should still resolve to the same person spine
+- source and lifecycle context for a CRM contact who has not entered a membership application
+
+Key rules:
+- `PublicInterest` is not a membership application, membership relationship, or tracker submission.
+- the `Person` remains the CRM contact record; `PublicInterest` records what they asked to hear about and how they entered ABA’s contact base.
+- `ConsentRecord`, not `PublicInterest`, owns the permission to send ABA updates.
 
 ### RegistrarPacket
 
@@ -285,7 +290,8 @@ May later create:
 Creates:
 - `Person`
 - optional `Organization`
-- `ContactSubscription`
+- `PublicInterest`
+- `ConsentRecord` scoped to the stated ABA-updates purpose
 
 ## 4. State model and continuity rules
 
@@ -425,8 +431,8 @@ Packet use must remain narrower than:
 Use this ownership rule everywhere:
 
 - `MembershipApplication` owns membership-route follow-up and application-side permissions through its `ConsentRecord`
-- tracker-side application intake owns tracker aggregate and named-use permissions through its `ConsentRecord`
-- `ContactSubscription` owns general updates/newsletter permissions
+- tracker-side `Application` intake owns tracker aggregate and named-use permissions through its `ConsentRecord`
+- `PublicInterest` provides the non-membership interest context; its linked `ConsentRecord` owns general ABA-updates permission
 - `MembershipRelationship` may reference standing member status, but does not rewrite earlier route-specific consent decisions
 
 ### Visibility tiers

@@ -16,7 +16,9 @@ This repo currently holds the working materials for the ABA founding-members pre
 ## Repo Structure
 
 - `index.html`
-  - root launcher for the main workspaces
+  - GitHub Pages gateway for the current soft-launch website and application pages
+- `archive.html`
+  - earlier prototype and internal-workspace launcher links preserved in one place
 - `docs/site/`
   - the main ABA site prototype
 - `docs/membership-ops/`
@@ -44,7 +46,7 @@ GitHub Pages is configured to publish from:
 
 That means:
 
-- the live site entry point is root `index.html`
+- the live site entry point is root `index.html`, which links to the current soft-launch pages
 - `docs/` contains prototype and internal project material, but is not the Pages root anymore
 
 ## Current Working Model

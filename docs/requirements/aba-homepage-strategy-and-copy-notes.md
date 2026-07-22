@@ -12,6 +12,21 @@ ABA is a membership-based advocacy and sector-building body for independent Afri
 
 The homepage should reflect that wider role. It should feel more ambitious, political, and sector-shaping than the current thin or explanatory copy.
 
+### WhatsApp-derived message discipline
+
+The founding WhatsApp group confirms that ABA's public voice should be locally rooted, constructive, technically credible, and solutions-led. It must distinguish ABA from existing industry bodies through the value it creates for local biologicals, not through hostile or unverified comparison.
+
+For current source context and operational boundaries, use:
+`docs/requirements/aba-whatsapp-group-synthesis-2026-07-20.md`.
+
+Apply these rules to public copy:
+- prefer `locally rooted biologicals manufacturers and distributors` where the point is local economic participation; do not present `independent` as a settled legal eligibility test
+- describe Africa-wide ambition accurately: South Africa is active now; wider participation and future chapters are being built
+- lead with practical transition, regulatory readiness, collective representation, and viable alternatives; do not promise an instant or total replacement of all chemical inputs
+- do not make unverified claims about SABO, FERTASA, CropLife, regulators, competitors, or their motives
+- do not imply that ABA already provides individual legal, regulatory, scientific, or business advice; invite appropriate people to the Technical Network or a contact route until that service model is formally defined
+- support regulatory, safety, efficacy, and registration claims with an authoritative source, date, and clear jurisdictional scope
+
 ## What the homepage must do
 
 The homepage is a front door, not the entire ABA story.
@@ -79,6 +94,18 @@ These are parallel homepage paths, not one funnel.
 - Biologicals is the knowledge path.
 
 They should cross-reference one another lightly, but the homepage should not collapse them into a single story or imply that one path only exists to feed another.
+
+## Public utility, membership, and sector value
+
+The registration tracker should be useful to a person with a real registration situation whether or not they are a member. It is a public utility and evidence route, not a gate designed to force membership.
+
+Membership needs a separate, progressively revealed story: participation in an organised sector voice; the potential for relevant authorised matters to be included in ABA’s structured engagement with the registrar; and eligible product-information, technical-network, and market-development opportunities as ABA defines and develops those channels.
+
+The homepage should introduce that distinction without turning it into an internal explanation of rollout. Show value as a visitor becomes more engaged. Do not promise direct regulator access, registration outcomes, automatic listing, referrals, endorsement, sales, or a marketing package.
+
+Where relevant, membership-interest content may include a subtle pointer to the tracker for someone who has a registration matter. The tracker must remain an independent route; joining or registering interest is never a condition of using it.
+
+For detailed claim boundaries and member-value reasoning, use `aba-membership-value-and-engagement-model-notes.md`.
 
 ## Copy rules
 
