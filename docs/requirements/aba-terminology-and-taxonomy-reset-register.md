@@ -1,6 +1,6 @@
 # ABA Terminology And Taxonomy Reset Register
 
-Last updated: 2026-07-20
+Last updated: 2026-07-21
 
 ## Purpose
 
@@ -23,12 +23,12 @@ Source basis:
 
 | Term | Meaning | Use on public site? | Status |
 |---|---|---:|---|
-| `Founding member` | A known early ABA participant helping establish the alliance. In this release, they complete their details through a private route. | Only where it helps explain a private route, founding context, or a permitted founding members list and logos | Confirmed |
-| `Initial membership intake form` | The one membership form initially distributed through a private URL. Founding members complete it first; additional invited candidates use the same form. | Private-route only at first | Confirmed |
-| `Founding-member details capture` | A founding member’s completion of the initial membership intake form. It is not a new or separate form. | Private-route only | Confirmed |
-| `Invite-only membership intake` | A selected next cohort’s completion of the same initial membership intake form. | Private-route only | Confirmed |
+| `Founding member` | A known early ABA participant helping establish the alliance. Founding members complete the member application first. | Yes where the founding role is relevant, including a permitted founders list and logos | Confirmed |
+| `Member application` | The one application used by founding members first, later cohorts next and public applicants when ABA is ready. Its visible copy and questions do not change by cohort. | Controlled-release only at first; public later if approved | Confirmed |
+| `Founding-member details capture` | An internal operational description for reconciling a founding member's application with known records. It is not a public form name or variant. | No | Internal only |
+| `Cohort source` | Internal provenance attached by ABA or the release channel. It must not appear as a visitor-selected field or change the form. | No | Internal only |
 | `Membership interest` | A public request to hear when membership opens. It does not create an application or membership. | Yes | Confirmed concept; final button/form wording needed |
-| `Membership application` | A reviewed request for a defined ABA membership route. | Not public in this release; private invite route only | Confirmed |
+| `Membership application` | A reviewed submission from the canonical member-application page. Submitting does not itself confirm or activate membership. | Controlled-release only at first; may become public later | Confirmed |
 | `Member` | A person or organisation with an approved and activated ABA membership relationship. | Yes, when the activation condition is clear | Confirmed principle |
 | `Technical Network` | The ABA route for specialists and enabling contributors. | Yes, only if the available action and response boundary are clear | Existing direction; release scope needs confirmation |
 
@@ -37,7 +37,7 @@ Do not use as substitutes:
 - `interest` is not `application`
 - `application` is not `membership`
 - `approval` is not `activation`
-- founding-member details capture and invite-only membership intake use the same initial membership intake form; they are different entry contexts, not different forms
+- founding members, later cohorts and eventual public applicants use the same member application; source and reconciliation differences remain internal
 
 ## 2. Membership states
 
@@ -55,7 +55,7 @@ Do not use `Draft` for a membership application in v1. The form does not support
 | `Person` | One named human contact. A person may be linked to an organisation, membership, technical network, tracker activity, or public interest. | Internal | Confirmed system concept |
 | `Organisation` | A company, institution, lab, agency, association, or other body that relates to ABA. | Public where appropriate; internal as a record | Confirmed system concept |
 | `Organisation-person role` | The relationship between a person and organisation, including authority or primary-contact context. | Internal | Confirmed system concept |
-| `Membership application` | The reviewed record created from the initial membership intake form when a candidate requires membership review. Existing founding-member detail capture does not need to be described publicly as an application. | Internal record; private route may be described appropriately to its audience | Confirmed |
+| `Membership application` | The reviewed submission created from the canonical member-application page. Existing membership history may change how ABA reconciles the submission, not how the page is described. | Public page name and internal record concept | Confirmed |
 | `Membership relationship` | The approved ongoing relationship after membership activation. | Internal | Confirmed system concept |
 | `Public interest contact` | A CRM/contact relationship created when someone asks to hear about ABA or future membership opening. It is not a member, membership application, or membership relationship. | Internal record; public form wording still to be agreed | Confirmed principle |
 | `Communication consent` | Permission to send the person ABA updates for the stated purpose. | Internal term; use plain consent wording in the interface | Preferred |

@@ -1,5 +1,7 @@
 # ABA Public Site Copy
 
+> Historical copy snapshot only. Do not use this file as the implementation source for the current soft-launch prototype. The current public copy lives in `soft-launch/prototype/` and follows the active, declarative brochure-led copy rule recorded in `soft-launch/.impeccable.md`.
+
 A single working extract of the copy across every public-facing ABA page. Edit the text directly in place; keep the page headings and `Source` references stable so approved changes can be flowed back into the HTML.
 
 - **Generated:** 2026-07-11 (snapshot of the live pages; re-extract after site changes)

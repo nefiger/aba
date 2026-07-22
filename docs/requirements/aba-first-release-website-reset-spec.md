@@ -25,7 +25,7 @@ Launch a credible, clear ABA public presence that:
 - explains ABA as an African biologicals sector body
 - expresses the brochure’s five-pillar proposition without overclaiming unbuilt services
 - captures known founding-member details through a controlled route
-- captures a trusted next cohort through the same private membership intake form used first by founding members
+- captures founding members and later cohorts through the same member application, without visible cohort variants
 - lets the public register interest without implying membership is open
 - introduces the registration tracker in a way that is useful, safe, and aligned with Lyle’s implementation work
 - creates a stable basis for later public membership opening, knowledge content, chapters, and live aggregate reporting
@@ -45,13 +45,13 @@ The public tracker is a useful sector route, not a membership gate. Membership m
 | Technical Network | Describe the contribution route for specialists if confirmed for this release | express interest / make contact | promise a live directory, paid work, or individual advice |
 | Governance and data | Explain basic terms, consent, and privacy boundaries | read the relevant conditions | substitute provisional wording for final policy/legal documents |
 
-### 3.2 Private routes
+### 3.2 Member application
 
 | Route | Audience | Required result |
 |---|---|---|
-| Initial membership intake form | known founding members first, then selected invited candidates | capture the person, organisation, relationship, and relevant membership information needed for initial ABA records and a reviewable membership application where applicable |
+| Member application | founding members first, later cohorts next, and public applicants when ABA is ready | capture the person, organisation, role, operating and participation information needed for membership review and coherent member records |
 
-Private routes should be non-indexed and not linked in public navigation. They still need normal validation, consent, review, and safe handling; an unlisted URL is not access control by itself.
+The application should be non-indexed and absent from public navigation during the controlled release. That release choice must not create a different page, introduction, question set, action or confirmation for different cohorts. The page still needs normal validation, consent, review and safe handling; an unlisted URL is not access control by itself.
 
 ## 4. Information architecture
 
@@ -68,8 +68,8 @@ Registration Tracker
 Technical Network (only if release scope is approved)
 Governance and data
 
-Private, non-indexed
-  - initial membership intake form (shared private URL, introduced differently for founders and invited candidates)
+Controlled release, non-indexed initially
+  - member application (one page for founders, later cohorts and eventual public applicants)
 ```
 
 The Explorer/knowledge area remains strategically important, but it should be included in this release only if it can present real, reviewed content. If not, it is better represented as part of ABA’s work than as a thin public product destination.
@@ -84,7 +84,7 @@ The site must show value progressively instead of treating every visitor as a pr
 | Engage with ABA | A visitor can stay informed without becoming a member | Receive ABA updates |
 | Address a registration matter | The tracker may be relevant whether or not the participant is a member | Understand or begin permitted tracker intake |
 | Consider membership | Membership creates a more direct collective relationship, with eligible participation and visibility opportunities as ABA develops them | Register membership interest |
-| Complete private intake | Founding members and invited candidates complete the same initial membership form through a private URL | Submit the initial membership intake form |
+| Complete member application | Founding members complete it first; later cohorts and eventual public applicants complete the same page | Submit the member application |
 
 The membership story should be revealed in layers: sector purpose first; then participation and collective influence; then the specific value areas that are available or developing. For the wording and claim boundaries, use `aba-membership-value-and-engagement-model-notes.md`.
 
@@ -127,9 +127,9 @@ All copy that appears in a public interface must speak directly to a visitor. Ph
 
 ## 6. Journey requirements
 
-### 6.1 Initial membership intake form: founding members
+### 6.1 Member application
 
-There is one initial membership intake form, hosted at a private URL. Founding members complete it first. Their introduction should be short, factual, and completion-oriented; it should not make an existing founder feel as though they are applying from scratch.
+There is one member application. Founding members complete it first, later cohorts use it next, and ABA may make it public when ready. Its introduction, questions, submission action and confirmation do not change by cohort. It explains what ABA needs, how the information will be used, what happens next, and that submission does not itself confirm or change membership status.
 
 It needs to capture the agreed minimum information for:
 
@@ -140,17 +140,16 @@ It needs to capture the agreed minimum information for:
 - consent and communications preferences
 - possible registration-support interest, without turning the route into tracker intake
 
-### 6.2 Initial membership intake form: invited candidates
+Production may use known records to prefill or reconcile information and may attach source or cohort metadata internally. That handling must not produce visible application variants or require the applicant to identify their cohort.
 
-Additional invited candidates use the same form and private URL. Their introduction must:
+The application must:
 
-- state that ABA is currently inviting a limited cohort
-- explain what the applicant is being asked to provide and what happens after submission
+- explain what the applicant is being asked to provide and what happens after submission;
 - submit once complete; no save-and-return draft state in v1
 - use the agreed application states: `Submitted`, `More information required`, `Approved`, `Declined`, `Withdrawn`
 - make clear that approval, invoicing, and activation are separate later steps
 
-### 6.3 Public membership interest
+### 6.2 Public membership interest
 
 The public route must be intentionally small:
 
@@ -163,7 +162,7 @@ Where it is contextually relevant, this route may include a subtle parallel acti
 
 Final public form wording and fields need confirmation in the terminology/content pass.
 
-### 6.4 Registration tracker handoff
+### 6.3 Registration tracker handoff
 
 The public tracker page must work for two needs:
 
@@ -198,7 +197,7 @@ The build may start when these are agreed:
 
 1. the current logo file and replacement colour system
 2. the final public sitemap and which optional routes are included
-3. public wording for membership interest, founding-member capture, and invite-only intake
+3. public wording for membership interest and the cohort-neutral member application
 4. the terminology register’s unresolved items that affect visible copy or fields
 5. the membership-interest field set and consent wording
 6. tracker orientation/handoff copy approved with the tracker workstream
@@ -210,6 +209,6 @@ The build may start when these are agreed:
 2. Turn the brochure-led content hierarchy into a page-by-page content brief.
 3. Set logo, colour, type, imagery, and component rules.
 4. Build shared shell and public pages.
-5. Build the one private membership intake form with founder and invited-candidate entry contexts.
+5. Build the one member application with unchanged copy, fields, action and confirmation across cohorts.
 6. Integrate the public tracker handoff when the tracker branch is ready.
 7. Test with founding members before inviting the next cohort.

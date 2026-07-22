@@ -1,10 +1,50 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-20
+Last updated: 2026-07-22
 
 ---
 
 ## Current state
+
+### GitHub Pages release gateway (2026-07-22)
+
+The root `index.html` is now the GitHub Pages gateway for the current soft-launch work. It links directly to the public website, the single member application, membership interest, the Technical Network application, and Registration Tracker orientation under `soft-launch/prototype/`.
+
+The four links from the earlier root launcher are preserved in `archive.html`. The root page exposes them through one subdued `Archive` link rather than mixing old prototypes and internal workspaces into the current-release list. GitHub Pages remains configured to publish from `main:/`, so the deployed base remains `https://nefiger.github.io/aba/`.
+
+### Public voice and design quality gate (2026-07-21)
+
+Public soft-launch work is now governed by:
+
+- `soft-launch/PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.md`
+- `soft-launch/design/remaining-pages-delivery-plan.md`
+- `soft-launch/scripts/public-site-preflight.mjs`
+- `soft-launch/qa/public-site-render-check.html`
+
+This was added after repeated copy and composition drift: compressed slogan fragments, internal-model language, oversized headings, repeated two-column blocks, large empty fields, and page treatments that became indistinguishable from one another.
+
+The final ABA brochure is the governing creative source for the entire soft-launch site, not a reference for one or two pages. Its palette, type roles, labels, chapter transitions, image fields, rules, square controls, form treatment and footer now live in one shared `brochure-theme` foundation in `soft-launch/prototype/assets/styles.css`, consumed by all eight public routes.
+
+Shared CSS does not mean shared page composition. The current route treatments deliberately differ:
+
+- Home is the umbrella narrative with the agricultural image field, member cycle, three public actions and founding-member logo scaffold.
+- About follows the brochure's challenge/response sequence, five named pillars, outcomes band and South Africa/Africa close, using the brochure's original soil and grain images. Its opening soil image is a controlled 25rem field on wide screens, not a full-fold splash; the first viewport must also reveal the proposition and challenge.
+- Membership uses one brochure-derived green/cream spread, an indexed account of what members can do through ABA, a compact staged joining sequence, firm boundaries, and one restrained close. The earlier exchange table and repeated full-width colour slabs were rejected and must not be restored.
+- Membership interest is a short public contact-capture page.
+- Technical Network is a dark recruitment brief and application, not a membership-page variant.
+- Registration Tracker is a public-utility case brief with an inset information sheet; it is not a membership gate and no longer reuses Membership's vertical split.
+- The member application is a compact working document with a clear private-data notice and one unchanged form for founders, later cohorts and eventual public applicants.
+- Privacy is a restrained reading document rather than another marketing hero.
+
+The visual/content migration is implemented but has not been declared finally approved. Jen's 2026-07-21 screenshots are the current review evidence. Membership was rebuilt again after the latest screenshot was rejected for its layout and system drift; it is ready for review, not recorded as accepted. The full render check currently reports zero blocking horizontal-overflow or primary-title failures across 320, 375, 768, 1024 and 1440 CSS px. The remaining work is whole-site refinement, interaction/error-state completion, accessibility review and final route-by-route approval.
+
+The latest six-page screenshot review triggered a shared-system correction rather than another set of isolated page overrides. The active stylesheet now fixes the cascade order explicitly: Saira is used for page and major-section identity, Archivo for body/operational UI, and Lora only for selected brochure propositions. Forest, paper and cream carry the pages; orange is an action/transition accent; sage and leaf green no longer become competing full-width palettes. Routine section spacing was compressed across Home, Membership, Membership interest, Technical Network and Tracker. Tracker prototype narration was removed and its opening was rebuilt as a compact public-utility brief. These changes are recorded in `soft-launch/prototype/qa-log.md` and remain ready for Jen's visual review, not accepted by implication.
+
+The top navigation now uses the same deep-forest field as the footer. Wordmark and navigation copy are paper, active-route text/rule and the primary action use light orange, and the mobile menu retains the same dark field. Do not revert individual routes to pale headers.
+
+Before changing public soft-launch copy or layouts, read the guardrail contract and the remaining-pages plan. Before describing a route as complete, run the static preflight, run the responsive browser check, inspect full-page mobile and desktop captures, compare the route silhouette with the rest of the site, and record material corrections in `soft-launch/prototype/qa-log.md`.
+
+Do not weaken the checks to permit a failing page. Jen's direct corrections and the final brochure govern public tone; behaviour and claim boundaries remain governed by the accepted workshop and requirements pack.
 
 ### Website reset and first-cohort specification (2026-07-20)
 
@@ -17,9 +57,10 @@ The public-site work has been reset before implementation. Do not continue panel
 
 The first-release membership rule is now explicit:
 
-- one initial membership intake form, initially available at a private URL;
+- one member application page, initially available at a private URL;
 - founding members use it first to complete their details;
-- later invited candidates use the same form, with a different entry context;
+- later invited candidates use the same page and questions, and the page may open publicly later;
+- cohort or invitation provenance may be retained as internal metadata but must not create query-based form variants or different public copy;
 - public visitors can only register membership interest / receive ABA updates, creating a CRM contact and consent relationship rather than a membership application.
 
 The tracker remains Lyle’s workstream and a useful public route for an actual registration situation. It must not be used as a membership gate. Membership needs a distinct, progressive proposition with carefully bounded claims.
@@ -222,7 +263,7 @@ Current branch state after cleanup:
   - `docs/requirements/aba-first-release-website-reset-spec.md`
   - `docs/requirements/aba-membership-value-and-engagement-model-notes.md`
   - these now supersede the earlier page-by-page refinement stance for future public-site work, pending leadership agreement of the reset pack
-  - the next build must be brochure-led and first-cohort-led: there is one initial membership intake form, shared through a private URL with different founder and invited-candidate contexts; public membership interest remains a separate CRM/contact and communication-consent route
+  - the next build must be brochure-led and first-cohort-led: there is one member application page, used by founding members first, later cohorts next and potentially public applicants later; the visible page and questions do not change by cohort, while public membership interest remains a separate CRM/contact and communication-consent route
   - tracker participation remains a public utility, not a membership gate; the new member-value note records the source-grounded distinction between tracker participation and the more direct collective relationship membership is intended to create
   - the note also sets claim boundaries: no public promise of direct regulator access, outcomes, automatic product listing, endorsement, referrals, sales, or a marketing package
 - captured the supplied founding-group WhatsApp archive into:

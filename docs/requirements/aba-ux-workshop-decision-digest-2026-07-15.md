@@ -1,6 +1,6 @@
 # ABA UX Workshop Decision Digest
 
-Last updated: 2026-07-20
+Last updated: 2026-07-21
 
 ## Purpose
 
@@ -22,21 +22,25 @@ Use the brochure as the primary visual and strategic reference for the website r
 
 ## 1. First-release membership model
 
+### Superseding clarification — 2026-07-21
+
+The release sequence remains founding members first, the next cohort second and possible public access later. The member application itself does not change across those stages. It uses one URL, introduction, question set, submission action and confirmation. Known-record reconciliation and source/cohort provenance are operational concerns behind the form, not different visitor contexts.
+
 ### Confirmed
 
 The first release is a controlled launch, not a public membership launch.
 
 | Audience | Route | Immediate outcome |
 |---|---|---|
-| Existing founding members | the private initial membership intake form, introduced as founding-member details capture | their people, organisations, and membership details are captured for the first usable ABA data set |
-| Next trusted cohort | the same private initial membership intake form, introduced as invite-only intake | a reviewable membership application is captured |
+| Existing founding members | the canonical member application, initially shared privately | their people, organisations, and membership details are captured for the first usable ABA data set |
+| Next trusted cohort | the same member application, with unchanged visible copy and questions | a reviewable membership submission is captured |
 | General public | public interest route | a lightweight request to hear when membership opens; not a membership application |
 
 Implications:
 
 - The public site must not present an open `Apply for membership` route in this release.
 - The private routes can be implemented as non-indexed URLs. Their privacy is operational rather than a security boundary; submission review is still required.
-- There is one initial membership intake form, initially hosted at a private URL. Founding members use it first; additional invited candidates use the same form later. Their entry context and explanatory copy differ, but the form itself does not.
+- There is one member application, initially hosted at an unlisted URL. Founding members use it first; later cohorts and eventual public applicants use the same visible form without query-based or copy variants.
 - The public interest route should create a CRM/contact relationship and permission to receive relevant ABA updates. It remains distinct from a membership application, membership relationship, and tracker intake.
 
 ### Membership application workflow confirmed for v1

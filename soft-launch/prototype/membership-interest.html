@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Ask the African Biologicals Alliance to contact you when membership opens.">
+  <title>Membership interest · African Biologicals Alliance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20260721-system5">
+  <script src="assets/app.js?v=20260721-wave1" defer></script>
+</head>
+<body class="site-v2 brochure-theme page-v2 interest-v2" data-page="membership">
+  <aba-header></aba-header>
+  <main id="main-content">
+    <section class="interest-intro">
+      <div class="site-shell interest-intro__grid">
+        <div class="interest-intro__copy reveal">
+          <p class="page-label">Membership interest</p>
+          <h1 class="interest-intro__title">Hear when membership opens.</h1>
+          <p>ABA is inviting members in groups. Leave your details and ABA will email you when applications open to a group that may be relevant to you.</p>
+          <p class="interest-intro__boundary"><strong>You are asking for email updates.</strong> You are not submitting a membership application.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interest-capture">
+      <div class="site-shell interest-capture__inner">
+          <header class="interest-capture__head reveal">
+            <p class="page-label">Leave your details</p>
+            <h2>Leave your details.</h2>
+            <p>Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
+          </header>
+
+            <div class="interest-form-wrap">
+              <div class="form-status form-status--error" data-form-state="error" hidden tabindex="-1" role="alert">
+                <strong>ABA could not save your details.</strong>
+                <p>Your entries are still here. Check your connection and try again.</p>
+              </div>
+              <div class="form-status" data-form-state="duplicate" hidden tabindex="-1">
+                <strong>ABA already has this email address.</strong>
+                <p>You do not need to submit it again. Read <a href="privacy.html">Privacy and data use</a> if you want to change your email permission.</p>
+              </div>
+              <div class="form-status" data-form-state="unavailable" hidden tabindex="-1">
+                <strong>The membership-interest form is temporarily unavailable.</strong>
+                <p>Please return later. No information has been submitted.</p>
+              </div>
+
+              <form class="form interest-form reveal" data-prototype-form="interest" novalidate>
+                <div class="form-error-summary" data-error-summary hidden tabindex="-1" role="alert">
+                  <strong>Check the highlighted fields.</strong>
+                  <ul></ul>
+                </div>
+                <fieldset class="form-section">
+                  <legend>Your details</legend>
+                  <div class="field-grid field-grid--2">
+                    <div class="field"><label for="interest-first">First name <span aria-hidden="true">*</span></label><input id="interest-first" name="first_name" autocomplete="given-name" required></div>
+                    <div class="field"><label for="interest-last">Last name <span aria-hidden="true">*</span></label><input id="interest-last" name="last_name" autocomplete="family-name" required></div>
+                    <div class="field"><label for="interest-email">Email <span aria-hidden="true">*</span></label><input id="interest-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div>
+                    <div class="field"><label for="interest-org">Organisation <span>(optional)</span></label><input id="interest-org" name="organisation" autocomplete="organization"></div>
+                    <div class="field"><label for="interest-country">Country <span>(optional)</span></label><input id="interest-country" name="country" autocomplete="country-name"></div>
+                    <div class="field"><label for="interest-role">Your work in biologicals <span>(optional)</span></label><select id="interest-role" name="biologicals_relationship"><option value="">Choose one</option><option>Manufacturer or formulator</option><option>Importer, distributor or product owner</option><option>Researcher or technical expert</option><option>Institutional or development stakeholder</option><option>Farmer, practitioner or advisor</option><option>Other</option></select></div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-section interest-permission">
+                  <legend>Email permission</legend>
+                  <label class="choice"><input type="checkbox" name="receive_updates" required><span><strong>Send me membership-opening and relevant ABA updates. <span aria-hidden="true">*</span></strong><small>I can withdraw this permission later. This does not submit a membership application.</small></span></label>
+                </fieldset>
+                <div class="form-actions"><button class="button button--primary" type="submit" data-loading-label="Saving your details…">Send me membership updates</button></div>
+                <p class="required-note">ABA uses these details for the purpose explained above. Read <a href="privacy.html">Privacy and data use</a>.</p>
+              </form>
+
+              <section class="form-success interest-success" data-success="interest" aria-live="polite">
+                <p class="page-label">Details received</p>
+                <h2>ABA will email you when membership opens.</h2>
+                <p>ABA has your contact details and permission to send membership-opening and relevant updates. You have not submitted a membership application.</p>
+                <div><a class="button button--primary" href="membership.html">Read about membership</a></div>
+              </section>
+            </div>
+      </div>
+    </section>
+
+    <section class="interest-next">
+      <div class="site-shell interest-next__inner reveal">
+        <p class="page-label">What happens next</p>
+        <ol>
+          <li><span>01</span><p>ABA keeps the contact details and email permission you submit here.</p></li>
+          <li><span>02</span><p>ABA emails you when membership opens to an appropriate group.</p></li>
+          <li><span>03</span><p>When applications open to your group, you complete the member application.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+  <aba-footer></aba-footer>
+</body>
+</html>

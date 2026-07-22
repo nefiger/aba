@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABA public-site render preflight</title>
+  <style>
+    :root { color-scheme: light; font-family: ui-sans-serif, system-ui, sans-serif; background: #f7f3ee; color: #0b3d2e; }
+    body { max-width: 72rem; margin: 0 auto; padding: 2rem; }
+    h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+    p { max-width: 70ch; line-height: 1.55; }
+    button { min-height: 2.75rem; padding: 0.65rem 1rem; border: 0; background: #0b3d2e; color: #f7f3ee; font: inherit; font-weight: 700; cursor: pointer; }
+    #summary { margin-block: 1.5rem; padding-block: 1rem; border-block: 1px solid #8fa18d; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.7rem; border-bottom: 1px solid #c8c3bc; text-align: left; vertical-align: top; }
+    th { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pass { color: #176b3a; }
+    .warn { color: #8a4a14; }
+    .fail { color: #a1261c; font-weight: 700; }
+    .test-frame { position: fixed; top: 0; left: -20000px; height: 900px; border: 0; visibility: hidden; }
+    code { font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ABA public-site render preflight</h1>
+    <p>Checks every reference-prototype route for horizontal overflow and rendered heading line counts. Page titles must remain on one line at every width. Every supporting-heading wrap is reported for review because the same heading levels are also used for smaller components and form states.</p>
+    <button id="run" type="button">Run checks</button>
+    <div id="summary" aria-live="polite">Ready.</div>
+    <table>
+      <thead><tr><th>Route</th><th>Width</th><th>Status</th><th>Details</th></tr></thead>
+      <tbody id="results"></tbody>
+    </table>
+    <pre id="machine-result" hidden></pre>
+  </main>
+  <script>
+    const routes = [
+      "index.html",
+      "about.html",
+      "membership.html",
+      "membership-interest.html",
+      "member-intake.html",
+      "technical-network.html",
+      "registration-tracker.html",
+      "privacy.html",
+    ];
+    const widths = [320, 375, 768, 1024, 1440];
+    const button = document.querySelector("#run");
+    const summary = document.querySelector("#summary");
+    const resultsBody = document.querySelector("#results");
+    const machineResult = document.querySelector("#machine-result");
+
+    function renderedLines(element) {
+      const styles = element.ownerDocument.defaultView.getComputedStyle(element);
+      const parsed = Number.parseFloat(styles.lineHeight);
+      const lineHeight = Number.isFinite(parsed) ? parsed : Number.parseFloat(styles.fontSize) * 1.2;
+      return Math.max(1, Math.round(element.getBoundingClientRect().height / lineHeight));
+    }
+
+    function loadRoute(route, width) {
+      return new Promise((resolve) => {
+        const frame = document.createElement("iframe");
+        frame.className = "test-frame";
+        frame.width = String(width);
+        frame.style.width = `${width}px`;
+        frame.src = `../prototype/${route}${route.includes("?") ? "&" : "?"}preflight=${Date.now()}`;
+        frame.addEventListener("load", () => {
+          requestAnimationFrame(() => {
+            const documentUnderTest = frame.contentDocument;
+            const viewport = frame.contentWindow.innerWidth;
+            const overflow = documentUnderTest.documentElement.scrollWidth - documentUnderTest.documentElement.clientWidth;
+            const headings = [...documentUnderTest.querySelectorAll("h1, h2, h3")]
+              .filter((heading) => heading.getClientRects().length > 0)
+              .map((heading) => ({
+                level: heading.tagName.toLowerCase(),
+                text: heading.textContent.trim(),
+                lines: renderedLines(heading),
+              }));
+            const failures = [];
+            const warnings = [];
+            if (overflow > 1) failures.push(`horizontal overflow: ${overflow}px`);
+            headings.forEach((heading) => {
+              if (heading.level === "h1" && heading.lines > 1) failures.push(`page title wraps (${heading.lines} lines): ${heading.text}`);
+              if (heading.level !== "h1" && heading.lines > 1) {
+                warnings.push(`${width >= 1024 ? "desktop" : "mobile"} heading wraps (${heading.lines} lines): ${heading.text}`);
+              }
+            });
+            resolve({ route, requestedWidth: width, viewport, failures, warnings });
+            frame.remove();
+          });
+        }, { once: true });
+        document.body.append(frame);
+      });
+    }
+
+    async function run() {
+      button.disabled = true;
+      resultsBody.replaceChildren();
+      summary.textContent = "Running…";
+      const results = [];
+      for (const route of routes) {
+        for (const width of widths) results.push(await loadRoute(route, width));
+      }
+
+      results.forEach((result) => {
+        const row = document.createElement("tr");
+        const state = result.failures.length ? "fail" : result.warnings.length ? "warn" : "pass";
+        const details = [...result.failures, ...result.warnings].join(" | ") || "No overflow or heading-wrap issue.";
+        row.innerHTML = `<td><code>${result.route}</code></td><td>${result.requestedWidth}px</td><td class="${state}">${state.toUpperCase()}</td><td>${details}</td>`;
+        resultsBody.append(row);
+      });
+
+      const failureCount = results.reduce((total, result) => total + result.failures.length, 0);
+      const warningOccurrenceCount = results.reduce((total, result) => total + result.warnings.length, 0);
+      const reviewedHeadings = new Set(results.flatMap((result) => result.warnings.map((warning) => {
+        const heading = warning.replace(/^(desktop|mobile) heading wraps \(\d+ lines\): /, "");
+        return `${result.route}::${heading}`;
+      })));
+      const warningCount = reviewedHeadings.size;
+      summary.className = failureCount ? "fail" : warningCount ? "warn" : "pass";
+      summary.textContent = failureCount
+        ? `FAIL: ${failureCount} blocking issue(s); ${warningCount} heading-wrap review warning(s).`
+        : `PASS: no blocking issues; ${warningCount} heading-wrap review warning(s).`;
+      machineResult.textContent = JSON.stringify({ failureCount, warningCount, warningOccurrenceCount, results }, null, 2);
+      button.disabled = false;
+    }
+
+    button.addEventListener("click", run);
+    run();
+  </script>
+</body>
+</html>
