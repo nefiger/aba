@@ -58,9 +58,9 @@ Read `starting-prompt-v1.md` for the original master prompt that launched the lo
 ## Current Working Notes
 
 - Buttons, filters, toggles, and selections in the HTML wireframes should be real interactive controls, not visual labels only.
-- Submission timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed submission is sent.
-- Draft save state can show its own saved-at time, but it must not create or imply a submission timestamp.
-- Downstream views may display `submittedAt` as read-only audit metadata. Public views should show only aggregate timestamp ranges, not identifiable submission timestamps.
+- Application submit timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed application is sent.
+- Draft save state can show its own saved-at time, but it must not create or imply an application submit timestamp.
+- Downstream views may display `submittedAt` as read-only audit metadata. Public views should show only aggregate timestamp ranges, not identifiable application submit timestamps.
 - Use ABA relationship types consistently: `Full member`, `Technical partner`, `Observer`, `Non-member`, and `Not sure / pending`; only verified `Full member, active` records are default registrar export-preview candidates.
 - Track bottleneck themes as controlled review metadata so private blockers can aggregate into public evidence safely.
 - Keep the tracker deeper than the Knowledge Hub: tracker dashboards show reviewed evidence logic, while Knowledge Hub pages remain lighter public context surfaces.

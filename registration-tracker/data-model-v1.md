@@ -1,8 +1,31 @@
-# Registration Tracker — Data Model V1 (first draft)
+# Registration Tracker — Source-Grounded Model Note V1
 
-**Status:** First draft for review with Jen (and Anna). Derived from
-`registrar-requirements-spec-v1.md` (verified Phase 2 extraction), `context-and-decisions-v1.md`,
-and the five reconciled area briefs. Expect edits — this is the starting point, not the final word.
+**Status:** Workshop review draft.
+
+This file only covers the registration-tracker / regulatory slice.
+The whole ABA system model for the workshop is in:
+
+- `docs/requirements/aba-system-model-workshop-reference.md`
+
+This file has been checked against the original regulator documents now stored in this repo at:
+
+- `registration-tracker/reference/regulator-source-docs/Application form_16.08.2023_Final.docx`
+- `registration-tracker/reference/regulator-source-docs/Service Request Form for Agricultural Remedies (2).doc`
+- `registration-tracker/reference/regulator-source-docs/Guide-Reg-Process-Agric-Remedies-2015  (time frame).pdf`
+- `registration-tracker/reference/regulator-source-docs/Guidelines on Data Requirements for Agricultural Remedies 2015 AVCASA.pdf`
+
+The same files were originally supplied locally as:
+
+- `Application form_16.08.2023_Final.docx`
+- `Service Request Form for Agricultural Remedies (2).doc`
+- `Guide-Reg-Process-Agric-Remedies-2015 (time frame).pdf`
+- `Guidelines on Data Requirements for Agricultural Remedies 2015 AVCASA.pdf`
+
+**How to read this note:**
+
+- if a statement is tied directly to the regulator documents, treat it as **source-grounded**
+- if a statement is a tracker structure or CRM mapping, treat it as **our modelling proposal**
+- if the documents do not settle something cleanly, treat it as an **open question**
 
 **Domain frame.** This models the *paperwork* side of registering ordinary farm inputs (microbial
 inoculants, plant biostimulants, biofertilisers, plant extracts, biological crop-protection products)
@@ -13,75 +36,198 @@ registrar) so ABA can build sector-intelligence and advocacy assets.
 
 ---
 
-## 1. Two design axes (read this first)
+## 0. What is source-defined vs what is our model
 
-The model is governed by two **independent** dials that must not be conflated:
+The source documents are strong enough to ground several important business terms and process rules.
+They are **not** strong enough to justify presenting the entire tracker model as if it came
+directly from the regulator corpus.
+
+### Source-defined in the regulator documents
+
+These are clearly present in the documents:
+
+- `application` as the formal unit being completed, signed, submitted, screened, evaluated,
+  withdrawn, decided, and appealed
+- application/service categories
+- approved-person responsibilities
+- receipt/file-number/application-reference mechanics
+- the verification -> screening -> evaluation -> decision -> appeal process
+
+*[Application form_16.08.2023_Final.docx, "Information for Applicants"; Service Request Form for
+Agricultural Remedies (2).doc, Instructions and Tables 1-3; Guide-Reg-Process-Agric-Remedies-2015
+(time frame).pdf, §§4-6; Guidelines on Data Requirements for Agricultural Remedies 2015 AVCASA.pdf,
+§§2-4.]*
+
+### Our tracker-side modelling
+
+These are useful ABA modelling choices, but they are still **our structure**, not regulator wording:
+
+- splitting one received packet into `Organisation`, `Product`, `Application`, and `StatusLogEntry`
+- deciding whether receipt/admin details should live on the application or in a separate stored record
+- mapping this model onto Jen's CRM objects
+
+### Open questions
+
+These still need explicit confirmation rather than assumption:
+
+- whether the tracker really needs a separate received-packet record
+- what the correct tracker grain is when one received packet covers multiple products and services
+- which entities belong in the ABA tracker model versus the CRM layer
+
+## 1. Design constraints
+
+This model is governed by two independent constraints:
 
 - **Access = open.** Anyone — ABA member or not — reaches the submission form from a link and
   submits. No membership gate, no login wall. Membership is one optional self-reported field.
 - **Data rigor = full Act 36 alignment.** What we collect about each registration mirrors the real
   Act 36 process, *for everyone*, member or not. Rigor is **not** lightened for non-members.
 
-## 2. How rigorous? — the capture lens (the ceiling on depth)
+## 2. Capture policy
 
-Rigor aligns with the **structure** of Act 36 but is capped at the **tracker's purpose** (spec §0).
-Three tiers govern every field:
+Capture aligns with the **structure** of Act 36 but is capped at the **tracker's purpose**.
+Use three capture levels:
 
 - **CAPTURE (rigorous, Act 36-exact):** the registration's position and shape in the process —
   service type, official stage, status dates/wait, legal pathway, functional category, file reference
   vs L-number, dossier-readiness + proof-of-payment flags. Collected in full from everyone.
 - **OPTIONAL (D1 — decided, included):** applicant-identity (approved person, eligibility, SACNASP,
-  letter of authority). Authentic Act 36 data, but a leaf — included as optional, non-gating; see §6.
+  letter of authority). Authentic Act 36 data, but **not part of the core backlog model**. Included as
+  optional, non-gating; see §5.
 - **NEVER (flag only):** dossier contents (chemistry, tox, efficacy), payment documents. We record
   readiness/attached flags; we never store the documents.
 
-> **Principle:** as rigorous as the Act 36 process *map*, not as heavy as the Act 36 *application*.
-
-## 3. Legends used below
-
-- **Provenance:** `I` intake · `O` operator (later) · `D` derived · `L` lookup · `S` system/audit
-- **Sensitivity:** `PUBLIC` aggregate-safe · `MEMBER` own-record only · `OPERATOR` internal only ·
-  `NEVER` never store in tracker (secure reference only). Below, these four base values are sometimes
-  combined: `A(named) / B(aggregate)` means tier A applies to the record-level value, tier B to its
-  aggregate; `A→B` means the field starts at tier A and is promoted to tier B on some event (e.g. a
-  submission is OPERATOR-only until reviewed, then MEMBER-visible); `-gate` (e.g. `MEMBER + PUBLIC-gate`)
-  marks a field that doesn't hold public data itself but controls whether *other* fields on the same
-  record may flow into PUBLIC aggregates.
+**Principle:** capture the Act 36 process *map*, not the full Act 36 dossier.
 
 ---
 
-## 4. Grain and spine
+## 3. Model boundary
 
-Open-capture, Organisation-centred, with an intake envelope that maps to Jen's lead object.
+The regulator documents are clear about the **application** grain.
+They also show receipt/admin handling around the service request form.
+They do **not** clearly define a second formal business object called `submission`.
+
+### 3.1 Source-defined concepts
+
+- The corpus consistently treats an **application** as the formal unit that is completed, signed,
+  submitted with fees and supporting documents, screened, evaluated, altered, withdrawn, decided, and
+  appealed. *[Application form_16.08.2023_Final.docx, "Information for Applicants"; Guide-Reg-
+  Process-Agric-Remedies-2015 (time frame).pdf, §§4-6; Guidelines on Data Requirements for
+  Agricultural Remedies 2015 AVCASA.pdf, §§2-4.]*
+- The Service Request Form shows that one received packet may include the relevant application form(s)
+  plus supporting documentation, multiple requested services, and multiple product rows, and that the
+  Registrar records receipt through a stamped front page, `File no.`, and `Application Reference No.`.
+  *[Service Request Form for Agricultural Remedies (2).doc, Instructions, "For official use only",
+  Table 1, and Table 3.]*
+- The official process flow is application-centred: verification, scientific screening, evaluation,
+  decision, and appeal, with time frames by application category. *[Guide-Reg-Process-Agric-
+  Remedies-2015 (time frame).pdf, §6 and Table 1.]*
+
+#### Official process / status ladder from the source documents
+
+- `Verification`
+- `Scientific screening`
+- `Evaluation`
+- `Decision`
+- `Appeal`
+
+These are the source-defined process stages the tracker should anchor to before it introduces any
+additional product-side statuses.
+
+### 3.2 How the application form and service request form relate
+
+- The `Application form` is the detailed regulator form for the registration matter itself. It is
+  titled `APPLICATION FOR THE REGISTRATION OF AN AGRICULTURAL REMEDY` and is written around a single
+  applicant and a single product dossier. *[Application form_16.08.2023_Final.docx, title page and
+  product section.]*
+- The `Service Request Form` says it must be submitted **with the relevant application form(s) and
+  supporting documentation**. It captures requested services, payment details, receipt details, and
+  product rows. *[Service Request Form for Agricultural Remedies (2).doc, Instructions and Tables
+  1-3.]*
+- Table 1 of the Service Request Form captures the kinds of services requested and their quantities.
+- Table 3 lists product names, service(s) required for each, and official-use `Application Reference
+  No.` handling.
+- The safest reading is therefore: the Service Request Form acts as a cover / receipt / service-summary
+  form for one or more underlying application forms.
+
+What this supports:
+
+- one received packet may contain more than one application
+- one received packet may contain more than one product row
+- ABA may need receipt/admin details as well as application records
+
+What this does not settle cleanly:
+
+- whether ABA should store the received packet as its own first-class record
+- the final rule for product-to-application cardinality in the tracker model
+
+### 3.3 ABA tracker modelling
+
+The current tracker model may still be the right design move, but it should be labelled plainly as
+**ABA-side modelling**, not as if the regulator documents themselves define it:
 
 ```
-Submission  (= Jen's "Registration Submission" — an intake event, not the data itself)
-   └─ creates/updates one Organisation + one-or-more Product + Application records
+Application
+   └─ carries intake / receipt metadata if ABA needs it operationally
 Organisation → Product → Application → StatusLogEntry
                                     └─ (later) Attachment, ReviewDecision
 ```
 
-- The **Application is the unit of backlog.** One submission = one Organisation + N Products + M
-  Applications. The form guides one application at a time ("add another application / product / finish").
-- Jen mapping: her single `Registration Submission` lead object decomposes into our normalized spine.
-  A "submission count" (Jen) and an "application count" (backlog) are **different units** — keep them
-  distinct.
+- The official categories, fees, completeness tests, stages, decisions, and time frames are all
+  defined at application level, so `Application` is the record whose regulatory progress ABA should
+  track over time.
+- Intake / receipt metadata may still be useful operationally, but in this note it should not be
+  described as a second source-defined business object.
+- Jen mapping may still be practical for implementation, but it is integration shorthand, not
+  regulator terminology.
+
+### 3.4 Open questions and required validation
+
+- Does the tracker need anything more than `Application` plus receipt/audit metadata to cover the
+  required history?
+- When one service request form covers multiple product rows and multiple service types, what is the
+  correct tracker grain for one received packet versus many applications?
+- Once the original source files are added to the repo, all downstream notes that currently assume a
+  settled `Organisation -> Product -> Application` spine should be rechecked against the
+  primary files.
 
 ---
 
-## 5. Core entities (v1 capture core)
+## 4. Core entities (tracker-side v1 capture proposal)
 
-### Submission — the intake envelope
+Unless a subsection explicitly says otherwise, the entities below should be read as **tracker-side
+modelling proposals** built to support ABA's product needs. They are not all terms that appear as
+standalone business objects in the regulator corpus.
+
+### Application intake / receipt metadata
+
+> **Source note:** the corpus describes an application being submitted, received, stamped, and
+> assigned a file/reference number, but it does **not** clearly define a separate formal business
+> object for that administrative packet. These fields should therefore be read as application-level
+> intake or receipt metadata unless ABA deliberately decides to store a separate received-packet
+> record. *[Application form_16.08.2023_Final.docx,
+> "Information for Applicants"; Service Request Form for Agricultural Remedies (2).doc, Instructions
+> and "For official use only"; Guide-Reg-Process-Agric-Remedies-2015 (time frame).pdf, §§5.5-5.7.]*
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
-| submitted_at | S | MEMBER (named) / PUBLIC (aggregate) | system-set on submit; **never an input**; visible to the submitting org from the start (context §"Submission Timestamp Rule" — operator/company/registrar views may all show it); public shows only aggregate ranges |
-| saved_at (draft) | S | OPERATOR | draft return-link save; not a submission timestamp |
+| submitted_at | S | MEMBER (named) / PUBLIC (aggregate) | system-set on submit; **never an input**; visible to the submitting org from the start (context §"Application Submit Timestamp Rule" — operator/company/registrar views may all show it); public shows only aggregate ranges |
+| saved_at (draft) | S | OPERATOR | draft return-link save; not an application submission timestamp |
 | submitter_contact_id | I | OPERATOR | FK → ContactPerson |
 | responsible_attestation | I | OPERATOR | light checkbox: "I'm responsible for this product's registration" (data quality, **not** an auth gate) |
 | consent_id | I | OPERATOR | FK → ConsentSetting |
 
 ### Organisation
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
@@ -92,12 +238,16 @@ Organisation → Product → Application → StatusLogEntry
 
 ### ContactPerson  *(PII)*
 
-> **Sensitivity principle (same rule as §6 ApprovedPerson):** PII the submitter enters about
+> **Sensitivity principle (same rule as §5 ApprovedPerson):** PII the submitter enters about
 > themselves or their own people is **MEMBER (own-record)** — the submitting org can see its own
 > contact details, they are **never public raw**, and the operator may use them for follow-up.
 > Previously this block was tagged OPERATOR, which inconsistently hid a company's own contact record
-> from itself while §6 ApprovedPerson (identical kind of data) was MEMBER. Corrected here so the
+> from itself while §5 ApprovedPerson (identical kind of data) was MEMBER. Corrected here so the
 > principle is applied the same way to both.
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
 
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
@@ -109,6 +259,11 @@ Organisation → Product → Application → StatusLogEntry
 | permission_to_contact | I | MEMBER (own-record) | POPIA basis for operator follow-up |
 
 ### Product
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
@@ -120,7 +275,20 @@ Organisation → Product → Application → StatusLogEntry
 | country | I | PUBLIC | |
 | governing_regime | I,L | PUBLIC | Agriculture·Act 36 fully modelled; others awareness-only (see §9 regime gate) |
 
-### Application — *the unit of backlog*
+### Application — source-defined, and the record ABA tracks over time
+
+> **Source note:** `Application` is explicit in the corpus: application categories, fees, completeness
+> checks, approved-person responsibilities, screening/evaluation/decision flow, and official time
+> frames are all defined at application level. The tracker's progress logic should therefore stay
+> application-centred. *[Application form_16.08.2023_Final.docx, "Information for Applicants"; Service
+> Request Form for Agricultural Remedies (2).doc, Table 1 and Table 3; Guide-Reg-Process-Agric-
+> Remedies-2015 (time frame).pdf, §§3-6; Guidelines on Data Requirements for Agricultural Remedies
+> 2015 AVCASA.pdf, §§2-4.]*
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
@@ -137,9 +305,19 @@ Organisation → Product → Application → StatusLogEntry
 | term_end_date | D | MEMBER | granted_date + 3 years |
 | renew_by_date | D | MEMBER | before 31 May of expiry year |
 | is_pipeline | D | PUBLIC | true until submitted-to-registrar; pipeline ≠ backlog |
-| approved_person_id | I | OPERATOR | FK → ApprovedPerson *(optional module — §6)* |
+| approved_person_id | I | OPERATOR | FK → ApprovedPerson *(optional module — §5)* |
 
-### StatusLogEntry — the dated timeline (wait-time source of truth)
+### StatusLogEntry — inferred tracker timeline built from source-defined stages
+
+> **Source note:** the corpus defines application stages, stage-specific review flow, and time frames,
+> but it does not prescribe a `StatusLogEntry` table. The tracker timeline is therefore a source-
+> grounded implementation choice rather than a quoted source entity. *[Guide-Reg-Process-Agric-
+> Remedies-2015 (time frame).pdf, §6 and Table 1.]*
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | id | S | OPERATOR | |
@@ -161,6 +339,10 @@ Organisation → Product → Application → StatusLogEntry
 > aggregates. (Previous draft marked this whole entity OPERATOR while its own Notes column said
 > "submitter may withdraw" — a self-contradiction; corrected here.)
 
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | allow_internal_review | I | MEMBER | default ON |
@@ -170,22 +352,25 @@ Organisation → Product → Application → StatusLogEntry
 
 ---
 
-## 6. OPTIONAL MODULE — Applicant accountability ⚑ DECIDED: include, optional, non-gating
+## 5. Optional module: applicant accountability
 
-> **Decision (D1, closed):** include, as **optional and non-gating**. SACNASP captured as a
-> **verification state**, not a raw registration number by default. **This whole block is a leaf, not a spine** — it is
-> applicant-*identity* data and does **not** drive the backlog metric, the stage pipeline, or any
-> public asset. If a future review drops it, the edit is localized and near-zero-ripple: delete this
-> §6 module and the `approved_person_id` FK — nothing else moves.
+> **Decision (D1, closed):** include, as **optional and non-gating**. SACNASP is captured as a
+> **verification state**, not a raw registration number by default. This whole block is
+> **secondary identity data, not part of the core backlog model**. It does **not** drive the backlog
+> metric, the stage pipeline, or any public asset. If a future review drops it, the edit is localized:
+> delete this module and the `approved_person_id` FK.
 >
 > **Note on the spec's bucketing:** `registrar-requirements-spec-v1.md` §0/§7 sorts approved-person
-> and eligibility into its **CAPTURE** bucket (G13, G14) — i.e. authentic, spec-mandated Act 36 data.
-> This model deliberately demotes that CAPTURE-bucket data to an optional leaf here, because the
-> tracker's own purpose test (backlog metric + sector view) doesn't need applicant identity to
-> function. That's a considered override, not an oversight — recorded here so a future reader doesn't
-> mistake the demotion for a gap against the spec.
+> and eligibility into its **CAPTURE** bucket (G13, G14). This model deliberately treats that data as
+> **optional secondary identity data** because the tracker can still function for backlog and sector
+> reporting without making it part of the core record spine.
 
 ### ApprovedPerson  *(PII — the most sensitive data in the form)*
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | name | I | MEMBER (own-record) / NEVER-public | Act 36 accountable individual (signs, consents to changes, can withdraw) |
@@ -194,6 +379,11 @@ Organisation → Product → Application → StatusLogEntry
 | letter_of_authority_ref | I | MEMBER (own-record) | when submitter ≠ registration holder (third-party mandate) |
 
 ### Eligibility (applicant standing)
+
+Table notation:
+`Prov` = `I` intake, `O` operator, `D` derived, `L` lookup, `S` system/audit.
+`Sens` = `PUBLIC` aggregate-safe, `MEMBER` own-record only, `OPERATOR` internal only, `NEVER` not stored.
+
 | Field | Prov | Sens | Notes |
 |---|---|---|---|
 | sa_residency_or_office | I,L | MEMBER (own-record) | resident in SA / SA-registered office / neither (flag) |
@@ -312,7 +502,7 @@ The public/sector assets read these definitions (from `public-dashboard-brief-v2
 | D5 | Registrar packet scope — in-process only vs include registered | **Decided: in-process applications only.** Already-registered records are never packet candidates | Closed |
 | D6 | Biostimulant pathway (claim-based split) | Documentary reading, flagged for **regulatory specialist** consultation — not a Jen/Anna decision | Specialist |
 | D7 | Service-type breadth — full union taxonomy vs. registration+renewal only | **Chosen for v1:** full taxonomy (see §8 callout for rationale + peel-back path). Initial scope call, not architectural — revisit if intake friction becomes a problem | Team |
-| D8 | Tracker → CRM organisation identity / continuity linkage — how open (no-login) submissions link to one canonical `Organization` over time | **Open — with Jen (CRM).** Her capture model already frames this (Journey E "continuity"; the tracker's flagged "missing CRM linkage" in `aba-public-capture-field-map.md`). Tracker should **defer to the CRM's matching** and capture the same key the membership side uses (business registration number + name + country + acquisition source), **not invent its own dedupe**. Entity-name alignment (our `Organisation`/`ContactPerson`/`Submission` ↔ CRM `Organization`/`Person`/`RegistrationSubmission`) folds in here — resolve when the handoff is designed, not before | Jen (CRM) |
+| D8 | Tracker → CRM organisation identity / continuity linkage — how open (no-login) application intake links to one shared `Organization` over time | **Open — with Jen (CRM).** Her capture model already frames this (Journey E "continuity"; the tracker's flagged "missing CRM linkage" in `aba-public-capture-field-map.md`). Tracker should **defer to the CRM's matching** and capture the same key the membership side uses (business registration number + name + country + acquisition source), **not invent its own dedupe**. Entity-name alignment now needs to preserve the source-led `Application` language while still handing intake metadata and contact context into CRM in a coherent way. Resolve that when the handoff is designed, not before | Jen (CRM) |
 | D9 | Post-registration attribute provenance + home of the verified registration lifecycle (L-number, grant/expiry) | **Open — with Jen (CRM).** Registrar-owned facts: submitter-*reported* now, operator-*verified* later (the "two vocabularies" pattern, §9). The CRM `Product` record is the likely home for the verified lifecycle. Confirm whether the CRM will hold per-product registration lifecycle so the tracker captures toward that shape. **Note:** tracker "renewal" (Act 36, 3-year term) ≠ CRM "renewals" (membership dues) — keep distinct | Jen (CRM) |
 
 ---

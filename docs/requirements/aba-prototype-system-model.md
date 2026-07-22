@@ -126,7 +126,7 @@ Relationships:
 - can have many `Person`
 - can have many `MembershipApplication`
 - can become one `Member`
-- can have many `RegistrationSubmission`
+- can have many tracker-side applications
 
 ### Person
 
@@ -181,7 +181,7 @@ Status model:
 - declined
 
 Rules:
-- `MembershipApplication` is separate from `RegistrationSubmission`
+- `MembershipApplication` is separate from tracker-side application capture
 - approval does not make the member active by itself
 - an application may be approved into a different membership type from the one originally applied for
 - `applied_membership_category`, `applied_membership_type`, `approved_membership_category`, and `approved_membership_type` must remain separate fields
@@ -346,9 +346,9 @@ Fields shown or implied:
 - act36_pathway when relevant
 - classification_code when relevant
 
-### RegistrationSubmission
+### Application
 
-Represents a product registration record submitted through the tracker flow.
+Represents the product-registration application record tracked through the tracker flow.
 
 Fields shown or implied:
 - submitting_organization
@@ -490,7 +490,7 @@ Current sequencing note:
 1. Authorised representative opens tracker intake.
 2. They pass the authorisation gate.
 3. If person or organisation does not already exist, the system creates prospect records with clear source attribution to the tracker.
-4. A `RegistrationSubmission` record is created for review.
+4. An `Application` record is created for review.
 5. ABA operator reviews, clarifies, includes, or excludes.
 6. Public aggregates and export packet logic depend on operator decisions and consent.
 

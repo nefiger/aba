@@ -103,7 +103,7 @@ This is the right overall architecture.
 
 ## Gap 1: The CRM spine is implied, but not yet canonical
 
-The current system model includes `Organization`, `Person`, `MembershipApplication`, `Member`, `RegistrationSubmission`, `PublicSignal`, and `InternalReview`.
+The current system model includes `Organization`, `Person`, `MembershipApplication`, `Member`, `Application`, `PublicSignal`, and `InternalReview`.
 
 That is a strong start, but it still leaves the operational relationship model partly implied.
 
@@ -335,8 +335,8 @@ Recommended core records:
   the durable approved or managed ABA relationship after review
 - `MembershipTypePolicy`
   the fee, renewal, and privileges definition for one membership type
-- `RegistrationSubmission`
-  one product-registration contribution record
+- `Application`
+  one product-registration application record
 - `TechnicalNetworkProfile`
   structured specialist/advisory capability record
 - `PublicInterest`
@@ -364,7 +364,7 @@ These decisions should be made explicitly in the next tranche:
 2. `Organization` and `Person` may exist before membership approval.
 3. One `Organization` may have many `Person` records.
 4. One `Person` may appear in multiple ABA capacities.
-5. `RegistrationSubmission` may exist without an active `MembershipRelationship`.
+5. `Application` may exist without an active `MembershipRelationship`.
 6. Later membership approval may attach to earlier submission history.
 7. Public aggregate eligibility and export eligibility are not the same decision.
 8. Technical/advisory participation should not live outside the same person-organisation graph.

@@ -105,7 +105,7 @@ Inputs:
 - bottlenecks
 
 Created record:
-- `Registration Submission`
+- `Application`
 
 ### Flow C: Stay Informed
 
@@ -327,7 +327,7 @@ Audience flows:
 
 Created records:
 - Membership Lead
-- Registration Submission
+- Application
 - Contact Record
 - Technical Network Lead
 

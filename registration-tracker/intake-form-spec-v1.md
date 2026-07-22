@@ -13,8 +13,9 @@ in what it captures.
 - **Data rigor = full Act 36 alignment**, for everyone — as rigorous as the Act 36 process *map*, not
   as heavy as the *application* (readiness flags, never the dossier).
 
-**What one completed form creates:** a `Submission` → one `Organisation` + one-or-more
-`Product` + `Application` + opening `StatusLogEntry`.
+**What one completed form creates:** one `Application` record, linked `Organisation`/`Product`
+context as needed, opening `StatusLogEntry`, and intake/receipt metadata for ABA's own operational
+handling.
 
 ---
 

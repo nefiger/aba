@@ -42,10 +42,10 @@ Typical fields:
 - country
 - notes or status
 
-### Registration Submissions
+### Registration Applications
 
 Typical fields:
-- product or submission name
+- product or application name
 - country
 - stage
 - product category if available
@@ -150,7 +150,7 @@ Optional first-pass filter:
 - `Registrations by Stage`
 - `Most Common Bottlenecks`
 - `Time Stuck by Stage`
-- `Submission Trend Over Time`
+- `Application Trend Over Time`
 
 ### Supporting record view
 
