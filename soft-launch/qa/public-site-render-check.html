@@ -35,14 +35,16 @@
   </main>
   <script>
     const routes = [
-      "index.html",
-      "about.html",
-      "membership.html",
-      "membership-interest.html",
-      "member-intake.html",
-      "technical-network.html",
-      "registration-tracker.html",
-      "privacy.html",
+      { label: "index.html", path: "../prototype/index.html" },
+      { label: "about.html", path: "../prototype/about.html" },
+      { label: "membership.html", path: "../prototype/membership.html" },
+      { label: "membership-interest.html", path: "../prototype/membership-interest.html" },
+      { label: "member-intake.html", path: "../prototype/member-intake.html" },
+      { label: "technical-network.html", path: "../prototype/technical-network.html" },
+      { label: "registration-tracker.html", path: "../prototype/registration-tracker.html" },
+      { label: "privacy.html", path: "../prototype/privacy.html" },
+      { label: "tracker intake", path: "../../registration-tracker/intake-flow/index.html" },
+      { label: "registration insights", path: "../../registration-tracker/public-dashboard/index.html" },
     ];
     const widths = [320, 375, 768, 1024, 1440];
     const button = document.querySelector("#run");
@@ -63,7 +65,7 @@
         frame.className = "test-frame";
         frame.width = String(width);
         frame.style.width = `${width}px`;
-        frame.src = `../prototype/${route}${route.includes("?") ? "&" : "?"}preflight=${Date.now()}`;
+        frame.src = `${route.path}${route.path.includes("?") ? "&" : "?"}preflight=${Date.now()}`;
         frame.addEventListener("load", () => {
           requestAnimationFrame(() => {
             const documentUnderTest = frame.contentDocument;
@@ -85,7 +87,7 @@
                 warnings.push(`${width >= 1024 ? "desktop" : "mobile"} heading wraps (${heading.lines} lines): ${heading.text}`);
               }
             });
-            resolve({ route, requestedWidth: width, viewport, failures, warnings });
+            resolve({ route: route.label, requestedWidth: width, viewport, failures, warnings });
             frame.remove();
           });
         }, { once: true });
