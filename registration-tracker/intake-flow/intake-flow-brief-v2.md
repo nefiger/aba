@@ -1,5 +1,7 @@
 # Intake Flow Brief V2
 
+> **Current mockup release note (28 July 2026):** `docs/requirements/registration-tracker-module-change-spec.md` supersedes this brief where it conflicts. The active static mockup is limited to South African Act 36 new registrations, uses five participant-facing stages, requires authority and the combined non-named insight-use acknowledgement, makes SACNASP status required with `Unknown` accepted, and does not present save/resume, named use, registrar export, general updates, or persistent submission behavior. This V2 brief remains as historical domain and planning context.
+
 *Supersedes `intake-flow-brief-v1.md`. Reconciled to `../registrar-requirements-spec-v1.md`
 (the verified Phase 2 extraction) and `../context-and-decisions-v1.md`. V1 is retained as history.*
 

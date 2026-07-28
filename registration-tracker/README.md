@@ -1,5 +1,31 @@
 # Registration Tracker Workspace
 
+## Current Static Mockup Release
+
+`docs/requirements/registration-tracker-module-change-spec.md` governs the current four-page static mockup. Where older briefs or wireframes conflict with that specification, the change specification governs this release.
+
+Active mockup pages:
+
+- `../soft-launch/prototype/registration-tracker.html` — canonical public landing and qualification
+- `intake-flow/index.html` — five-stage South African Act 36 new-registration intake
+- `public-dashboard/index.html` — truthful registration-insights evidence-status page
+- `../soft-launch/prototype/privacy.html` — tracker privacy and required data-use explanation
+
+Archived earlier prototypes, preserved without redesign:
+
+- `../docs/registration-tracker/index.html`
+- `index.html`
+- `admin-operator-review/index.html`
+- `../docs/site/workspace.html`
+- `../docs/site/operator-workspace.html`
+
+Preserved future pages, outside active navigation:
+
+- `company-dashboard/index.html`
+- `registrar-list/index.html`
+
+The static mockup does not persist data, save drafts, provide participant accounts, verify membership, publish metrics, or provide registrar export. Production requirements are recorded in `registration-tracker-mockup-implementation-report.md`.
+
 This folder contains planning material, domain-grounding work, and low-fidelity wireframes for the ABA registration tracker — a tool that follows how registrations of biological and alternative *agricultural* inputs (microbial inoculants, biostimulants, biofertilisers, plant extracts, biological crop-protection products) move through the South African registrar's process under Act 36 of 1947. "Biological" here refers only to the natural origin of these crop inputs. The tracker does not try to resolve the regulatory ambiguity these products sit in — it tracks registration status per company and aggregates submissions into a sector-wide picture of the registrar's backlog. It is designed to stand alone during prototyping but should eventually unify with the main ABA website and the custom CRM work.
 
 ## Important Principle

@@ -1,5 +1,7 @@
 # Public Dashboard Brief V2
 
+> **Current mockup release note (28 July 2026):** `docs/requirements/registration-tracker-module-change-spec.md` supersedes this brief where it conflicts. The active public page is a registration-insights evidence-status experience with no fictional records, totals, trends, timestamps, packet activity, country comparisons, or charts. It explains the process, future questions, review and publication pipeline, and truthful collecting/insufficient-information state. This V2 brief remains as historical metric-planning context for a later evidence-backed release.
+
 *Supersedes `public-dashboard-brief-v1.md`. Reconciled to `../registrar-requirements-spec-v1.md`
 (verified Phase 2 extraction) and `../context-and-decisions-v1.md`. V1 retained as history.*
 
