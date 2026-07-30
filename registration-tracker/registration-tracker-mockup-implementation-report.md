@@ -1,8 +1,20 @@
 # Registration Tracker Static Mockup Implementation Report
 
-Status: ready for browser review  
+Status: browser QA complete; ready for user review
 Specification: `docs/requirements/registration-tracker-module-change-spec.md`  
 Branch: `codex/registration-tracker-mockup`
+
+## Verification completed
+
+Browser QA completed on 30 July 2026 against a local server:
+
+- Tracker static preflight: 43 checks passed.
+- Public-site static preflight: passed; two ordinary-language privacy-page terms remain flagged for human review.
+- Browser render preflight: no blocking issues across 10 routes at 320, 375, 768, 1024, and 1440 pixels.
+- Qualification: incomplete, out-of-scope service, unauthorized participant, other regime, missing information, and eligible outcomes passed.
+- Intake: required-field validation, unavailable-reference conditional field, `Unknown` SACNASP completion, acknowledgement blocking, review, correction, confirmation, and reset passed.
+- Visual review: tracker landing, intake, registration insights, and privacy pages checked at 375 and 1440 pixels with no horizontal overflow.
+- Browser console: no page errors or warnings across the four active routes.
 
 ## Active release surfaces
 

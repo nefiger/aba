@@ -89,6 +89,7 @@ requireMatch("intake", /Approved for insights[\s\S]*Needs clarification[\s\S]*Ex
 requireMatch("intake", /within two weeks/i, "two-week review target");
 
 requireMatch("insights", /Not enough reviewed information to publish findings/i, "insufficient-information evidence state");
+forbidMatch("insights", /for this mockup/i, "public mockup framing");
 requireMatch("insights", /Preparing[\s\S]*Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked registration process");
 requireMatch("privacy", /condition of using the tracker/i, "required tracker data-use condition");
 requireMatch("privacy", /does not give ABA permission to send unrelated general updates/i, "unrelated-communications boundary");

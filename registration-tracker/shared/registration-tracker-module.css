@@ -333,10 +333,15 @@
   border-left: 4px solid var(--tracker-orange);
   padding: 0.9rem 1rem;
   background: var(--tracker-cream);
+  color: var(--tracker-ink);
 }
 
 .tracker-module .tracker-note p {
   margin: 0;
+}
+
+.tracker-module .tracker-note a {
+  color: inherit;
 }
 
 .tracker-module .tracker-module-header {

@@ -70,7 +70,10 @@
           requestAnimationFrame(() => {
             const documentUnderTest = frame.contentDocument;
             const viewport = frame.contentWindow.innerWidth;
-            const overflow = documentUnderTest.documentElement.scrollWidth - documentUnderTest.documentElement.clientWidth;
+            const overflow = Math.max(
+              documentUnderTest.documentElement.scrollWidth,
+              documentUnderTest.body.scrollWidth,
+            ) - viewport;
             const headings = [...documentUnderTest.querySelectorAll("h1, h2, h3")]
               .filter((heading) => heading.getClientRects().length > 0)
               .map((heading) => ({
