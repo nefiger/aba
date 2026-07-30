@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730-insights2">
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-tracker-view="insights">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -60,33 +60,95 @@
     <section class="tracker-section">
       <div class="tracker-shell">
         <div class="tracker-section-heading">
-          <p class="tracker-label">Registration process map</p>
-          <h2>The structure used to locate a new registration.</h2>
-          <p>This sequence explains the process model. It does not represent live counts or the progress of a particular registration.</p>
+          <p class="tracker-label">What this page will reveal</p>
+          <h2>Four views will reveal shared registration patterns.</h2>
+          <p>The structures below show the questions, classifications, and publication safeguards that will shape the live view. They contain no sample values, estimated results, or fictional registrations.</p>
         </div>
-        <ol class="tracker-flow">
-          <li><strong>Received</strong></li>
-          <li><strong>Verification</strong></li>
-          <li><strong>Scientific screening</strong></li>
-          <li><strong>Evaluation</strong></li>
-          <li><strong>Decision</strong></li>
-        </ol>
-      </div>
-    </section>
+        <div class="tracker-evidence-grid">
+          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">01</p>
+              <div>
+                <p class="tracker-label">Process position</p>
+                <h3>Where are new registrations waiting?</h3>
+              </div>
+            </div>
+            <p>Once evidence is sufficient, this view will compare the combined position of included registrations across the post-submission process.</p>
+            <figure class="tracker-evidence-figure">
+              <figcaption><strong>Future view:</strong> distribution of included registrations by reviewed process stage.</figcaption>
+              <ol class="tracker-stage-scale">
+                <li><span>Received</span><i aria-hidden="true"></i></li>
+                <li><span>Verification</span><i aria-hidden="true"></i></li>
+                <li><span>Scientific screening</span><i aria-hidden="true"></i></li>
+                <li><span>Evaluation</span><i aria-hidden="true"></i></li>
+                <li><span>Decision</span><i aria-hidden="true"></i></li>
+              </ol>
+              <p class="tracker-awaiting-state">Awaiting sufficient reviewed registrations. No stage totals are available.</p>
+            </figure>
+          </article>
 
-    <section class="tracker-section tracker-section--beige">
-      <div class="tracker-shell">
-        <div class="tracker-section-heading">
-          <p class="tracker-label">Questions future insights may answer</p>
-          <h2>Reviewed evidence will determine what can be said.</h2>
-          <p>Each area remains unavailable until ABA has enough reviewed information and approved publication rules.</p>
+          <article class="tracker-evidence-panel">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">02</p>
+              <div>
+                <p class="tracker-label">Elapsed time</p>
+                <h3>How does time compare with the published timeframe?</h3>
+              </div>
+            </div>
+            <p>The live view will compare reviewed elapsed time with the applicable published timeframe without exposing an individual registration.</p>
+            <figure class="tracker-evidence-figure">
+              <figcaption><strong>Future view:</strong> combined elapsed-time distribution and timeframe reference.</figcaption>
+              <div class="tracker-time-scale" aria-label="Empty elapsed-time framework">
+                <span>Status began</span>
+                <span class="tracker-time-scale__line" aria-hidden="true"></span>
+                <span>Published timeframe</span>
+                <span class="tracker-time-scale__line tracker-time-scale__line--after" aria-hidden="true"></span>
+                <span>Beyond timeframe</span>
+              </div>
+              <p class="tracker-awaiting-state">Awaiting sufficient reviewed dates. No duration or comparison is available.</p>
+            </figure>
+          </article>
+
+          <article class="tracker-evidence-panel">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">03</p>
+              <div>
+                <p class="tracker-label">Recurring barriers</p>
+                <h3>Which obstacles appear across registrations?</h3>
+              </div>
+            </div>
+            <p>ABA review will determine whether recurring issues can be classified consistently enough to support a combined finding.</p>
+            <figure class="tracker-evidence-figure">
+              <figcaption><strong>Future view:</strong> reviewed barrier categories ordered by defensible evidence.</figcaption>
+              <ol class="tracker-classification-path">
+                <li><strong>Review</strong><span>Assess the registration context.</span></li>
+                <li><strong>Classify</strong><span>Apply a consistent barrier category.</span></li>
+                <li><strong>Combine</strong><span>Look for recurrence without names.</span></li>
+              </ol>
+              <p class="tracker-awaiting-state">No barrier categories or rankings have been published.</p>
+            </figure>
+          </article>
+
+          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">04</p>
+              <div>
+                <p class="tracker-label">Evidence coverage</p>
+                <h3>What can ABA responsibly say?</h3>
+              </div>
+            </div>
+            <p>Coverage views will show which registration groupings are sufficiently represented for a useful combined statement and which remain unavailable.</p>
+            <figure class="tracker-evidence-figure">
+              <figcaption><strong>Future view:</strong> availability by functional category, legal pathway, and new-registration type.</figcaption>
+              <dl class="tracker-coverage-list">
+                <div><dt>Functional category</dt><dd>Not yet assessable</dd></div>
+                <div><dt>Legal pathway</dt><dd>Not yet assessable</dd></div>
+                <div><dt>New-registration type</dt><dd>Not yet assessable</dd></div>
+              </dl>
+              <p class="tracker-awaiting-state">Availability will be shown before any comparison, so missing coverage is not mistaken for a result.</p>
+            </figure>
+          </article>
         </div>
-        <ul class="tracker-question-list">
-          <li><strong>Where are new registrations waiting?</strong><span>Insufficient reviewed information</span></li>
-          <li><strong>How does elapsed time compare with the published timeframe?</strong><span>Insufficient reviewed information</span></li>
-          <li><strong>Which barriers recur across registrations?</strong><span>Insufficient reviewed information</span></li>
-          <li><strong>What safe coverage exists by registration category and country?</strong><span>Insufficient reviewed information</span></li>
-        </ul>
       </div>
     </section>
 
@@ -94,14 +156,15 @@
       <div class="tracker-shell">
         <div class="tracker-section-heading">
           <p class="tracker-label">Publication pipeline</p>
-          <h2>Submission does not mean automatic publication.</h2>
+          <h2>Every published finding must pass the same evidence gates.</h2>
+          <p>Submission starts a review process. It does not make information public or guarantee inclusion in a future finding.</p>
         </div>
-        <ol class="tracker-flow">
-          <li><strong>Participant shares information</strong></li>
-          <li><strong>ABA reviews it</strong></li>
-          <li><strong>Quality and inclusion checks are applied</strong></li>
-          <li><strong>Approved information is combined without names</strong></li>
-          <li><strong>Findings are published when the evidence is sufficient</strong></li>
+        <ol class="tracker-publication-gates">
+          <li><strong>Submitted</strong><span>A participant shares one registration.</span></li>
+          <li><strong>Reviewed</strong><span>ABA checks quality and may request clarification.</span></li>
+          <li><strong>Classified</strong><span>Approved information is mapped consistently.</span></li>
+          <li><strong>Protected</strong><span>Names and identifying detail stay out of the public view.</span></li>
+          <li><strong>Publishable</strong><span>The combined evidence is sufficient and interpretable.</span></li>
         </ol>
         <p><a href="../../soft-launch/prototype/privacy.html">Read the Privacy and data use explanation</a>.</p>
       </div>

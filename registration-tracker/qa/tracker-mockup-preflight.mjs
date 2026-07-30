@@ -103,6 +103,10 @@ requireMatch("intake", /within two weeks/i, "two-week review target");
 
 requireMatch("insights", /Not enough reviewed information to publish findings/i, "insufficient-information evidence state");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
+requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four future evidence questions");
+requireMatch("insights", /no sample values, estimated results, or fictional registrations/i, "non-fabrication explanation");
+requireMatch("insights", /Awaiting sufficient reviewed registrations[\s\S]*Awaiting sufficient reviewed dates[\s\S]*No barrier categories or rankings have been published[\s\S]*Not yet assessable/i, "truthful panel empty states");
+requireMatch("insights", /Submitted[\s\S]*Reviewed[\s\S]*Classified[\s\S]*Protected[\s\S]*Publishable/, "five evidence publication gates");
 for (const sourceKey of ["landing", "intake", "insights", "privacy"]) {
   forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
   forbidMatch(sourceKey, /\bPreparing\b|pre-submission/i, "pre-submission active-flow language");

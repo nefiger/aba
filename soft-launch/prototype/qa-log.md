@@ -12,10 +12,12 @@ Gate: G3 in progress
 - the pre-submission `Preparing` state and the earlier supporting-information / payment-readiness controls were removed from the active flow;
 - the review screen preserves and displays all three submission confirmations, blocks submission until both data-use acknowledgements are checked, permits correction, and retains completed values while the page remains open;
 - registration insights now begins its process explanation at `Received` and explains submission confirmations instead of readiness data;
+- registration insights now previews four real future evidence views—process position, elapsed time, recurring barriers, and evidence coverage—using labelled structures and explicit unavailable states without sample values, estimated results, or fictional registrations;
+- at 375 CSS pixels, the four evidence-panel question headings retain natural one- or two-line wraps because each full question names the analytical distinction the future view will answer; none exceeds two lines and shortening them further would remove meaning;
 - Privacy and data use now names submission-confirmation information and explains the current tracker limits without exposing mockup or prototype narration;
 - the tracker static preflight passes 57 checks and now covers the four-question qualification, the three affirmative submission confirmations, the absence of pre-submission states, and the absence of visible mockup/prototype framing;
 - the public-site static preflight passes with the two existing ordinary-language privacy warnings for `relationship` and `record`;
-- the browser render check reports no blocking horizontal-overflow or page-title failures across 10 routes at 320, 375, 768, 1024, and 1440 CSS pixels; 42 supporting-heading wraps remain human-review warnings;
+- the browser render check reports no blocking horizontal-overflow or page-title failures across 10 routes at 320, 375, 768, 1024, and 1440 CSS pixels; 45 supporting-heading wraps remain human-review warnings;
 - landing, intake opening, intake review, registration insights, and Privacy and data use were inspected through their complete scroll at 375 and 1440 CSS pixels with no horizontal overflow;
 - all qualification outcomes, all five intake stages, conditional reference handling, `Unknown` SACNASP, acknowledgement blocking, correction, confirmation, and add-another reset behavior passed;
 - the four active tracker pages reported no browser console errors or warnings;
