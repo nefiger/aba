@@ -29,13 +29,13 @@
         body: "Do not use this form for another country or regulatory regime. ABA is limiting the first release so that the questions and published timeframe remain accurate.",
         action: "",
       },
-      missing: {
-        title: "Prepare the key information before starting.",
-        body: "Have the product name, new-registration type, South African Act 36 pathway if known, current status, status date, readiness information, and the responsible contact available. You can return to this page later.",
+      submission: {
+        title: "Complete the regulator submission steps before starting.",
+        body: "Start after the Application Form, Service Request Form, and proof of payment have all been submitted. Return after completing those steps.",
         action: "",
       },
       incomplete: {
-        title: "Answer all three questions.",
+        title: "Answer all four questions.",
         body: "Your answers are used only to show the appropriate next step and are not stored.",
         action: "",
       },
@@ -44,15 +44,16 @@
     function renderQualification() {
       const formData = new FormData(qualificationForm);
       const registration = formData.get("registration_scope");
+      const jurisdiction = formData.get("jurisdiction_scope");
       const authority = formData.get("authority");
-      const readiness = formData.get("readiness_scope");
+      const submission = formData.get("submission_scope");
       let key = "incomplete";
 
-      if (registration && authority && readiness) {
+      if (registration && jurisdiction && authority && submission) {
         if (registration !== "new") key = "service";
+        else if (jurisdiction !== "south-africa-act-36") key = "jurisdiction";
         else if (authority !== "yes") key = "unauthorized";
-        else if (readiness === "other-regime") key = "jurisdiction";
-        else if (readiness === "missing") key = "missing";
+        else if (submission !== "submitted") key = "submission";
         else key = "eligible";
       }
 
@@ -91,7 +92,10 @@
     ],
     2: ["product-name", "functional-category", "legal-pathway", "registration-type"],
     3: ["current-status", "status-date", "decision-expectation", "reference-issued"],
-    4: ["supporting-information", "payment-status", "sacnasp-status"],
+    4: [
+      "application-form-submitted", "service-request-form-submitted",
+      "proof-of-payment-submitted", "sacnasp-status",
+    ],
     5: acknowledgementIds,
   };
 
@@ -124,10 +128,12 @@
       ],
     },
     {
-      title: "Readiness and accountability",
+      title: "Submission confirmation and accountability",
       stage: 4,
       fields: [
-        ["Supporting information", "supporting-information"], ["Proof of payment", "payment-status"],
+        ["Application Form submitted", "application-form-submitted"],
+        ["Service Request Form submitted", "service-request-form-submitted"],
+        ["Proof of payment submitted", "proof-of-payment-submitted"],
         ["SACNASP status", "sacnasp-status"], ["Responsible person", "responsible-person-name"],
         ["Responsible person role", "responsible-person-role"], ["Residency or office", "residency-information"],
         ["Authority or appointment", "appointment-confirmation"],

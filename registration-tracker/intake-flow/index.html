@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
   <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730">
-  <script src="../shared/registration-tracker-module.js?v=20260728" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260730" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-tracker-view="intake">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -43,7 +43,7 @@
         <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
         <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
         <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
-        <li><button type="button" data-stage-button="4"><span>04</span>Readiness and accountability</button></li>
+        <li><button type="button" data-stage-button="4"><span>04</span>Submission and accountability</button></li>
         <li><button type="button" data-stage-button="5"><span>05</span>Data use and submission</button></li>
       </ol>
     </nav>
@@ -129,7 +129,7 @@
           <p>Choose the closest fit. Select “Not sure” for the legal pathway rather than forcing a precise answer.</p>
         </div>
         <div class="tracker-note">
-          <p>This mockup covers applications in South Africa under Act 36. It does not accept amendments, renewals, appeals, permits, source changes, reinstatements, or other post-registration services.</p>
+          <p>This form covers applications in South Africa under Act 36. It does not accept amendments, renewals, appeals, permits, source changes, reinstatements, or other post-registration services.</p>
         </div>
         <div class="tracker-form-grid">
           <div class="tracker-field">
@@ -188,7 +188,6 @@
             <label for="current-status">Participant-reported current status <span class="tracker-required">*</span></label>
             <select id="current-status" required>
               <option value="">Select a status</option>
-              <option>Preparing the new-registration application</option>
               <option>Submitted to the registrar</option>
               <option>Received or acknowledged</option>
               <option>In verification</option>
@@ -226,7 +225,7 @@
               <option value="not-available">Not issued or unavailable</option>
               <option value="unknown">Unknown</option>
             </select>
-            <small>Do not invent a regulator reference. This mockup does not ask you to enter the number.</small>
+            <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
           </div>
           <div class="tracker-field tracker-field--wide" data-reference-reason hidden>
             <label for="reference-reason">Why is the expected reference unavailable? <span class="tracker-required">*</span></label>
@@ -235,34 +234,28 @@
         </div>
         <div class="tracker-form-actions">
           <button class="tracker-button tracker-button--secondary" type="button" data-previous-stage="2">Back</button>
-          <button class="tracker-button" type="button" data-next-stage="4">Continue to readiness</button>
+          <button class="tracker-button" type="button" data-next-stage="4">Continue to submission confirmation</button>
         </div>
       </section>
 
       <section class="tracker-form-panel" data-stage-panel="4" hidden>
         <div class="tracker-form-panel__heading">
           <p class="tracker-label">Stage 4 of 5</p>
-          <h2 tabindex="-1">Readiness and professional accountability</h2>
-          <p>Report readiness and professional status without uploading a dossier, payment file, or credential number.</p>
+          <h2 tabindex="-1">Confirm submission</h2>
+          <p>Confirm the three regulator submission steps and report professional status without uploading forms, payment files, a dossier, or a credential number.</p>
         </div>
         <div class="tracker-form-grid">
-          <div class="tracker-field">
-            <label for="supporting-information">Supporting information ready <span class="tracker-required">*</span></label>
-            <select id="supporting-information" required>
-              <option value="">Select one</option>
-              <option>Yes</option>
-              <option>No</option>
-              <option>Not sure</option>
-            </select>
+          <div class="tracker-field tracker-field--wide">
+            <span class="tracker-field-label">Application Form <span class="tracker-required">*</span></span>
+            <label class="tracker-choice"><input id="application-form-submitted" type="checkbox"> <span>I confirm that the Application Form was submitted.</span></label>
           </div>
-          <div class="tracker-field">
-            <label for="payment-status">Proof-of-payment status <span class="tracker-required">*</span></label>
-            <select id="payment-status" required>
-              <option value="">Select one</option>
-              <option>Yes</option>
-              <option>No</option>
-              <option>Not sure</option>
-            </select>
+          <div class="tracker-field tracker-field--wide">
+            <span class="tracker-field-label">Service Request Form <span class="tracker-required">*</span></span>
+            <label class="tracker-choice"><input id="service-request-form-submitted" type="checkbox"> <span>I confirm that the Service Request Form was submitted.</span></label>
+          </div>
+          <div class="tracker-field tracker-field--wide">
+            <span class="tracker-field-label">Proof of payment <span class="tracker-required">*</span></span>
+            <label class="tracker-choice"><input id="proof-of-payment-submitted" type="checkbox"> <span>I confirm that proof of payment was submitted.</span></label>
           </div>
           <div class="tracker-field">
             <label for="sacnasp-status">Self-reported SACNASP status <span class="tracker-required">*</span></label>

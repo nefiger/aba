@@ -1,10 +1,33 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-22
+Last updated: 2026-07-30
 
 ---
 
 ## Current state
+
+### Registration Tracker post-submission reconciliation (2026-07-30)
+
+The isolated worktree `C:\Users\krimc\OneDrive\Desktop\Claude\projects\aba-registration-tracker-mockup` on `codex/registration-tracker-mockup` now implements the reconciled tracker model from the documentation checkpoint `e8f9e12`.
+
+The active tracker journey now:
+
+- asks four landing-qualification questions;
+- starts only after the Application Form, Service Request Form, and proof of payment were submitted;
+- captures those three affirmative confirmations as `Application` intake metadata;
+- removes the active pre-submission `Preparing` state and older readiness fields;
+- keeps one intake at one `Product` and one new-product `Application`;
+- preserves the shared `Person`, `Organization`, and `OrganizationPersonRole` continuity constraint without choosing Jen's production matching algorithm;
+- keeps participant status, mapped official stage, and the ABA `active` / `complete` lifecycle distinct;
+- explains reviewed Application-level public insights without invented data.
+
+Static QA passes 57 tracker assertions and the public-site preflight. Browser QA covered the four qualification failure branches plus eligibility, all five intake stages, three submission-confirmation gates, conditional reference handling, `Unknown` SACNASP, acknowledgement blocking, review/correction, confirmation, reset behavior, and complete-scroll inspection of the landing, intake opening, intake review, insights, and privacy pages at 375 and 1440 pixels. The shared render checker reports no blocking issue at 320, 375, 768, 1024, or 1440 pixels. The four active pages have clean browser consoles.
+
+The screenshot packet includes full-page stitched scroll captures, viewport captures, and `full-page-contact-sheet.png` at:
+
+`C:\Users\krimc\.codex\visualizations\2026\07\30\019fb40a-b2c2-75d2-950b-aa261efe7a1f\tracker-reconciliation-screenshots`
+
+Do not merge, push, deploy, or change `main` until the user has completed the local browser review.
 
 ### GitHub Pages release gateway (2026-07-22)
 

@@ -11,6 +11,10 @@ Active mockup pages:
 - `public-dashboard/index.html` — truthful registration-insights evidence-status page
 - `../soft-launch/prototype/privacy.html` — tracker privacy and required data-use explanation
 
+The active intake begins only after the Application Form, Service Request Form, and proof of payment have all been submitted. One intake concerns one `Product` and one new-product `Application`; the three submission facts are application intake metadata rather than a separate Service Request record. Pre-submission preparation is not part of the active V1 flow.
+
+Tracker and membership journeys must reuse the same `Person`, `Organization`, and `OrganizationPersonRole` records in production. The matching and duplicate-resolution method remains open and is not simulated in this static mockup.
+
 Archived earlier prototypes, preserved without redesign:
 
 - `../docs/registration-tracker/index.html`
@@ -24,7 +28,7 @@ Preserved future pages, outside active navigation:
 - `company-dashboard/index.html`
 - `registrar-list/index.html`
 
-The static mockup does not persist data, save drafts, provide participant accounts, verify membership, publish metrics, or provide registrar export. Production requirements are recorded in `registration-tracker-mockup-implementation-report.md`.
+The static mockup does not persist data, save drafts, provide participant accounts, verify membership, publish metrics, or provide registrar export. Production requirements—including append-only status history, participant and administrator updates, reminders, and the separate ABA `active` / `complete` lifecycle—are recorded in `registration-tracker-mockup-implementation-report.md`.
 
 This folder contains planning material, domain-grounding work, and low-fidelity wireframes for the ABA registration tracker — a tool that follows how registrations of biological and alternative *agricultural* inputs (microbial inoculants, biostimulants, biofertilisers, plant extracts, biological crop-protection products) move through the South African registrar's process under Act 36 of 1947. "Biological" here refers only to the natural origin of these crop inputs. The tracker does not try to resolve the regulatory ambiguity these products sit in — it tracks registration status per company and aggregates submissions into a sector-wide picture of the registrar's backlog. It is designed to stand alone during prototyping but should eventually unify with the main ABA website and the custom CRM work.
 
@@ -81,7 +85,9 @@ Read `context-and-decisions-v1.md` before creating or revising any wireframes.
 
 Read `starting-prompt-v1.md` for the original master prompt that launched the low-fidelity wireframe work.
 
-## Current Working Notes
+## Historical Working Notes
+
+The notes below describe earlier prototype decisions and remain useful as historical context. The current four-page release and the 30 July reconciliation above supersede them where they conflict.
 
 - Buttons, filters, toggles, and selections in the HTML wireframes should be real interactive controls, not visual labels only.
 - Application submit timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed application is sent.

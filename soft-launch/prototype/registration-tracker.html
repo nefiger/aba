@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/styles.css?v=20260721-system5">
   <link rel="stylesheet" href="../../registration-tracker/shared/registration-tracker-module.css?v=20260730">
   <script src="assets/app.js?v=20260721-copy3" defer></script>
-  <script src="../../registration-tracker/shared/registration-tracker-module.js?v=20260728" defer></script>
+  <script src="../../registration-tracker/shared/registration-tracker-module.js?v=20260730" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header></aba-header>
@@ -50,18 +50,24 @@
             </div>
           </fieldset>
           <fieldset class="tracker-question">
-            <legend>2. Are you responsible for the registration or authorized to provide its information?</legend>
+            <legend>2. Is it a South African registration under Act 36?</legend>
+            <div class="tracker-choice-list">
+              <label class="tracker-choice"><input type="radio" name="jurisdiction_scope" value="south-africa-act-36"> <span>Yes, it is a South African registration under Act 36.</span></label>
+              <label class="tracker-choice"><input type="radio" name="jurisdiction_scope" value="other-regime"> <span>No, it is for another country or regulatory regime.</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="tracker-question">
+            <legend>3. Are you responsible for the registration or authorized to provide its information?</legend>
             <div class="tracker-choice-list">
               <label class="tracker-choice"><input type="radio" name="authority" value="yes"> <span>Yes, I am responsible or authorized.</span></label>
               <label class="tracker-choice"><input type="radio" name="authority" value="no"> <span>No, another person should provide it.</span></label>
             </div>
           </fieldset>
           <fieldset class="tracker-question">
-            <legend>3. Do you have the product, country, and current-status information available?</legend>
+            <legend>4. Have the Application Form, Service Request Form, and proof of payment all been submitted?</legend>
             <div class="tracker-choice-list">
-              <label class="tracker-choice"><input type="radio" name="readiness_scope" value="ready"> <span>Yes, for a South African registration under Act 36.</span></label>
-              <label class="tracker-choice"><input type="radio" name="readiness_scope" value="other-regime"> <span>The registration is for another country or regulatory regime.</span></label>
-              <label class="tracker-choice"><input type="radio" name="readiness_scope" value="missing"> <span>No, key information is not ready.</span></label>
+              <label class="tracker-choice"><input type="radio" name="submission_scope" value="submitted"> <span>Yes, all three have been submitted.</span></label>
+              <label class="tracker-choice"><input type="radio" name="submission_scope" value="not-submitted"> <span>No, one or more submission steps are not complete.</span></label>
             </div>
           </fieldset>
           <div class="tracker-actions">
@@ -71,7 +77,7 @@
           <p class="tracker-screen-reader-status" data-qualification-status aria-live="assertive"></p>
           <noscript>
             <div class="tracker-note">
-              <p>This intake is for an authorized person sharing one South African Act 36 new registration with the product and current-status information available.</p>
+              <p>This intake is for a responsible or authorized person sharing one South African Act 36 new registration after the Application Form, Service Request Form, and proof of payment have all been submitted.</p>
               <p><a href="../../registration-tracker/intake-flow/index.html">Start the intake</a></p>
             </div>
           </noscript>

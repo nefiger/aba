@@ -8,13 +8,14 @@ Branch: `codex/registration-tracker-mockup`
 
 Browser QA completed on 30 July 2026 against a local server:
 
-- Tracker static preflight: 43 checks passed.
+- Tracker static preflight: 57 checks passed.
 - Public-site static preflight: passed; two ordinary-language privacy-page terms remain flagged for human review.
-- Browser render preflight: no blocking issues across 10 routes at 320, 375, 768, 1024, and 1440 pixels.
-- Qualification: incomplete, out-of-scope service, unauthorized participant, other regime, missing information, and eligible outcomes passed.
-- Intake: required-field validation, unavailable-reference conditional field, `Unknown` SACNASP completion, acknowledgement blocking, review, correction, confirmation, and reset passed.
-- Visual review: tracker landing, intake, registration insights, and privacy pages checked at 375 and 1440 pixels with no horizontal overflow.
+- Browser render preflight: no blocking issues across 10 routes at 320, 375, 768, 1024, and 1440 pixels; 42 supporting-heading wrap warnings were retained for human review.
+- Qualification: incomplete, out-of-scope service, unauthorized participant, other regime, incomplete regulator submission, and eligible outcomes passed.
+- Intake: required-field validation, unavailable-reference conditional field, all three affirmative submission confirmations, `Unknown` SACNASP completion, acknowledgement blocking, review, correction, confirmation, and reset passed.
+- Visual review: tracker landing, intake opening, intake review, registration insights, and privacy pages checked through their complete scroll at 375 and 1440 pixels with no horizontal overflow.
 - Browser console: no page errors or warnings across the four active routes.
+- Screenshot packet: full-page stitched scroll captures, viewport captures, and `full-page-contact-sheet.png` at `C:\Users\krimc\.codex\visualizations\2026\07\30\019fb40a-b2c2-75d2-950b-aa261efe7a1f\tracker-reconciliation-screenshots`.
 
 ## Active release surfaces
 
@@ -23,13 +24,15 @@ Browser QA completed on 30 July 2026 against a local server:
 - `registration-tracker/public-dashboard/index.html`
 - `soft-launch/prototype/privacy.html`
 
-The canonical landing qualifies a visitor before intake. Intake captures one South African Act 36 new registration in five stages, supports review and correction, and shows a client-side confirmation without persistence. Registration insights reports an honest collecting/insufficient-information state. Privacy explains raw review, the required data-use condition, combined non-named insights, and correction/contact handling.
+The canonical landing qualifies a visitor before intake and excludes registrations whose required regulator submission steps are incomplete. Intake captures one South African Act 36 new registration in five stages, supports review and correction, and shows a client-side confirmation without persistence. Registration insights reports an honest collecting/insufficient-information state beginning at receipt rather than preparation. Privacy explains raw review, submission-confirmation information, the required data-use condition, combined non-named insights, and correction/contact handling.
 
 ## Release decisions applied
 
 - New registrations only.
 - South Africa / Act 36 only.
 - The participant must be responsible or authorized.
+- Intake begins only after the Application Form, Service Request Form, and proof of payment have all been submitted.
+- One intake concerns one `Product` and one new-product `Application`; no separate Service Request entity is introduced.
 - Self-reported ABA relationship is stored as category plus status and is not treated as verified.
 - SACNASP status is required and self-reported; `Unknown` remains a completed answer.
 - Required combined, non-named insight use is a submission condition, initially unchecked.
@@ -60,8 +63,9 @@ The canonical landing qualifies a visitor before intake. Intake captures one Sou
 | `decision-expectation` | controlled expectation | required | participant | private / operator | Capture approximate decision position without fabricating a result. |
 | `reference-issued` | `issued`, `not-available`, `unknown` | required | participant | private / operator | Record availability without collecting or inventing the reference number. |
 | `reference-reason` | text | conditional | participant | private / operator | Explain why an expected reference is unavailable. |
-| `supporting-information` | `Yes`, `No`, `Not sure` | required | participant | private; reviewed aggregate | Readiness signal; no dossier is stored. |
-| `payment-status` | `Yes`, `No`, `Not sure` | required | participant | private / operator | Payment-readiness signal; no payment file is stored. |
+| `application-form-submitted` | affirmative boolean | required | participant | private / operator | Confirm that the regulator Application Form was submitted; no form is stored. |
+| `service-request-form-submitted` | affirmative boolean | required | participant | private / operator | Confirm that the accompanying Service Request Form was submitted; no separate Service Request record or form is stored. |
+| `proof-of-payment-submitted` | affirmative boolean | required | participant | private / operator | Confirm that proof of payment was submitted; no payment file is stored. |
 | `sacnasp-status` | `Verified`, `Not verified`, `Unknown` | required | participant | private / operator | Self-reported accountability state; no number is collected. |
 | `responsible-person-name` | text | optional | participant | private / operator | Optional Act 36 accountability context. |
 | `responsible-person-role` | text | optional | participant | private / operator | Optional accountability context. |
@@ -79,9 +83,12 @@ The canonical landing qualifies a visitor before intake. Intake captures one Sou
 - The final change specification supersedes the older optional SACNASP treatment for this release: the visible self-reported status is required and accepts `Unknown`.
 - The broader service taxonomy remains valid domain context, but the visible mockup filters to five new-registration types.
 - The older open-access attestation behavior is superseded: the active journey qualifies for a responsible or authorized contributor and requires that confirmation in intake.
+- The older pre-submission `Preparing` state and readiness flags are superseded: active V1 starts after the Application Form, Service Request Form, and proof of payment were submitted.
 - The older optional aggregate choice is superseded: the required insight-use acknowledgement is a condition of tracker submission.
 - Older named-use, general-updates, and registrar-export concepts are preserved only as future-domain context and have no active controls or links.
-- The protected data-model file was not modified. These differences are release overrides recorded by the governing specification.
+- `Person`, `Organization`, and `OrganizationPersonRole` are shared across tracker and membership journeys; only the production matching and duplicate-resolution method remains open.
+- Application/service type, participant-reported status, mapped official regulator stage, and the ABA `active` / `complete` lifecycle remain distinct.
+- The tracker-local data-model reconciliation was committed separately. Shared cross-journey contracts and Jen’s implementation were not modified.
 
 ## Preserved archived and future pages
 
@@ -107,6 +114,10 @@ The static mockup deliberately does not implement persistence. Production work m
 - token invalidation on final submission;
 - preservation of entered values after recoverable errors;
 - secure participant editing after submission;
+- participant and ABA-administrator status updates;
+- participant reminders;
+- append-only, auditable status history with reporting source, actor, recorded timestamp, and superseding corrections;
+- a separate ABA record lifecycle of `active` or `complete`;
 - membership verification through admin status links;
 - duplicate detection and reconciliation;
 - auditable ABA review and publication-inclusion decisions;
