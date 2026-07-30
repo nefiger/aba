@@ -3,6 +3,13 @@
 Last updated: 2026-07-30
 Gate: G3 in progress
 
+## Registration insights hierarchy refinement — 30 July 2026
+
+- replaced the large evidence-status card and repeated panel warnings with one quiet page-level notice;
+- removed repeated “Future view”, “Awaiting sufficient”, and “Not yet assessable” language;
+- differentiated the four evidence previews as a stage distribution, timeframe plot, classification flow, and coverage matrix without adding sample values;
+- verified the revised page at 375px and 1440px CSS widths with no horizontal overflow or console warnings.
+
 ## Rendered browser checks completed
 
 ### Registration Tracker post-submission reconciliation

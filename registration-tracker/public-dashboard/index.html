@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730-insights2">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730-insights3">
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-tracker-view="insights">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -37,32 +37,16 @@
       </div>
     </section>
 
-    <section class="tracker-section tracker-section--cream">
-      <div class="tracker-shell">
-        <div class="tracker-evidence-status">
-          <p class="tracker-label">Current evidence status</p>
-          <h2>Not enough reviewed information to publish findings.</h2>
-          <p>Submissions are being collected and reviewed. This page does not turn a small or unavailable sample into totals, trends, comparisons, or charts.</p>
-          <ul class="tracker-status-list" aria-label="Evidence publication states">
-            <li aria-current="true">Collecting</li>
-            <li>Reviewing</li>
-            <li>Insufficient</li>
-            <li>Limited</li>
-            <li>Live</li>
-            <li>Stale</li>
-            <li>Unavailable</li>
-          </ul>
-          <p>ABA has not set a numeric publication threshold. Findings will be published only after review and safe-inclusion rules are established and the evidence can be shared without identifying participants, organisations, or products.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="tracker-section">
       <div class="tracker-shell">
+        <aside class="tracker-evidence-note" aria-label="Current evidence status">
+          <strong>Evidence status: collecting and reviewing.</strong>
+          <span>The views below show what ABA will publish when the evidence is sufficient; they contain no current totals or findings.</span>
+        </aside>
         <div class="tracker-section-heading">
           <p class="tracker-label">What this page will reveal</p>
           <h2>Four views will reveal shared registration patterns.</h2>
-          <p>The structures below show the questions, classifications, and publication safeguards that will shape the live view. They contain no sample values, estimated results, or fictional registrations.</p>
+          <p>Together, they will show where registrations are held up, how long movement takes, which barriers recur, and where the evidence is strong enough to support a finding.</p>
         </div>
         <div class="tracker-evidence-grid">
           <article class="tracker-evidence-panel tracker-evidence-panel--wide">
@@ -73,17 +57,17 @@
                 <h3>Where are new registrations waiting?</h3>
               </div>
             </div>
-            <p>Once evidence is sufficient, this view will compare the combined position of included registrations across the post-submission process.</p>
+            <p>A stage-by-stage distribution will make concentrations and potential bottlenecks visible across included registrations.</p>
             <figure class="tracker-evidence-figure">
-              <figcaption><strong>Future view:</strong> distribution of included registrations by reviewed process stage.</figcaption>
+              <figcaption>Share of included registrations</figcaption>
               <ol class="tracker-stage-scale">
-                <li><span>Received</span><i aria-hidden="true"></i></li>
-                <li><span>Verification</span><i aria-hidden="true"></i></li>
-                <li><span>Scientific screening</span><i aria-hidden="true"></i></li>
-                <li><span>Evaluation</span><i aria-hidden="true"></i></li>
-                <li><span>Decision</span><i aria-hidden="true"></i></li>
+                <li><span>Received</span><i aria-hidden="true"><b></b></i></li>
+                <li><span>Verification</span><i aria-hidden="true"><b></b></i></li>
+                <li><span>Scientific screening</span><i aria-hidden="true"><b></b></i></li>
+                <li><span>Evaluation</span><i aria-hidden="true"><b></b></i></li>
+                <li><span>Decision</span><i aria-hidden="true"><b></b></i></li>
               </ol>
-              <p class="tracker-awaiting-state">Awaiting sufficient reviewed registrations. No stage totals are available.</p>
+              <div class="tracker-axis" aria-hidden="true"><span>Lower share</span><span>Higher share</span></div>
             </figure>
           </article>
 
@@ -95,17 +79,20 @@
                 <h3>How does time compare with the published timeframe?</h3>
               </div>
             </div>
-            <p>The live view will compare reviewed elapsed time with the applicable published timeframe without exposing an individual registration.</p>
+            <p>Combined elapsed time will be read against the applicable published timeframe, without exposing an individual registration.</p>
             <figure class="tracker-evidence-figure">
-              <figcaption><strong>Future view:</strong> combined elapsed-time distribution and timeframe reference.</figcaption>
-              <div class="tracker-time-scale" aria-label="Empty elapsed-time framework">
-                <span>Status began</span>
-                <span class="tracker-time-scale__line" aria-hidden="true"></span>
-                <span>Published timeframe</span>
-                <span class="tracker-time-scale__line tracker-time-scale__line--after" aria-hidden="true"></span>
-                <span>Beyond timeframe</span>
+              <figcaption>Elapsed time across included registrations</figcaption>
+              <div class="tracker-time-scale" aria-label="Elapsed-time comparison framework">
+                <div class="tracker-time-scale__plot" aria-hidden="true">
+                  <span class="tracker-time-scale__baseline"></span>
+                  <span class="tracker-time-scale__reference"></span>
+                </div>
+                <div class="tracker-time-scale__labels">
+                  <span>Status began</span>
+                  <strong>Published timeframe</strong>
+                  <span>Beyond timeframe</span>
+                </div>
               </div>
-              <p class="tracker-awaiting-state">Awaiting sufficient reviewed dates. No duration or comparison is available.</p>
             </figure>
           </article>
 
@@ -117,15 +104,14 @@
                 <h3>Which obstacles appear across registrations?</h3>
               </div>
             </div>
-            <p>ABA review will determine whether recurring issues can be classified consistently enough to support a combined finding.</p>
+            <p>Reviewed issues will be grouped consistently so recurring obstacles can be distinguished from isolated experiences.</p>
             <figure class="tracker-evidence-figure">
-              <figcaption><strong>Future view:</strong> reviewed barrier categories ordered by defensible evidence.</figcaption>
+              <figcaption>From individual context to a combined signal</figcaption>
               <ol class="tracker-classification-path">
-                <li><strong>Review</strong><span>Assess the registration context.</span></li>
-                <li><strong>Classify</strong><span>Apply a consistent barrier category.</span></li>
-                <li><strong>Combine</strong><span>Look for recurrence without names.</span></li>
+                <li><span aria-hidden="true">01</span><strong>Review context</strong></li>
+                <li><span aria-hidden="true">02</span><strong>Classify consistently</strong></li>
+                <li><span aria-hidden="true">03</span><strong>Rank recurring barriers</strong></li>
               </ol>
-              <p class="tracker-awaiting-state">No barrier categories or rankings have been published.</p>
             </figure>
           </article>
 
@@ -137,15 +123,15 @@
                 <h3>What can ABA responsibly say?</h3>
               </div>
             </div>
-            <p>Coverage views will show which registration groupings are sufficiently represented for a useful combined statement and which remain unavailable.</p>
+            <p>A coverage map will show where comparisons are supported and where gaps limit what can responsibly be said.</p>
             <figure class="tracker-evidence-figure">
-              <figcaption><strong>Future view:</strong> availability by functional category, legal pathway, and new-registration type.</figcaption>
+              <figcaption>Evidence available for comparison</figcaption>
               <dl class="tracker-coverage-list">
-                <div><dt>Functional category</dt><dd>Not yet assessable</dd></div>
-                <div><dt>Legal pathway</dt><dd>Not yet assessable</dd></div>
-                <div><dt>New-registration type</dt><dd>Not yet assessable</dd></div>
+                <div><dt>Functional category</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>Legal pathway</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>New-registration type</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
               </dl>
-              <p class="tracker-awaiting-state">Availability will be shown before any comparison, so missing coverage is not mistaken for a result.</p>
+              <div class="tracker-coverage-key" aria-hidden="true"><span>Limited coverage</span><span>Stronger coverage</span></div>
             </figure>
           </article>
         </div>

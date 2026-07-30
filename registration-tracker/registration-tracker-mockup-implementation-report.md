@@ -14,7 +14,7 @@ Browser QA completed on 30 July 2026 against a local server:
 - Qualification: incomplete, out-of-scope service, unauthorized participant, other regime, incomplete regulator submission, and eligible outcomes passed.
 - Intake: required-field validation, unavailable-reference conditional field, all three affirmative submission confirmations, `Unknown` SACNASP completion, acknowledgement blocking, review, correction, confirmation, and reset passed.
 - Visual review: tracker landing, intake opening, intake review, registration insights, and privacy pages checked through their complete scroll at 375 and 1440 pixels with no horizontal overflow.
-- Registration insights visual review: the evidence-building preview shows four labelled future views and five publication gates without fictional marks or values; desktop and mobile reading order, overflow, and empty-state clarity were checked.
+- Registration insights visual review: one restrained evidence-status note now precedes four distinct analytical frameworks and five publication gates. Repeated panel warnings were removed; desktop and mobile reading order, overflow, visual hierarchy, and non-fabrication were checked.
 - Browser console: no page errors or warnings across the four active routes.
 - Screenshot packet: full-page stitched scroll captures, viewport captures, and `full-page-contact-sheet.png` at `C:\Users\krimc\.codex\visualizations\2026\07\30\019fb40a-b2c2-75d2-950b-aa261efe7a1f\tracker-reconciliation-screenshots`.
 
