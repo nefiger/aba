@@ -1,6 +1,39 @@
 # Registration Tracker — Source-Grounded Model Note V1
 
-**Status:** Workshop review draft.
+**Status:** Reconciled V1 model note (30 July 2026).
+
+## 2026-07-30 workshop reconciliation
+
+The following decisions supersede older exploratory language in this note:
+
+- `Person`, `Organization`, and `OrganizationPersonRole` are shared across tracker, membership, and
+  CRM journeys. `OrganizationPersonRole` carries role, authority, and primary-contact context.
+- A tracker participant who later becomes a member reuses the same records and history. Only the
+  production matching and duplicate-resolution algorithm remains open.
+- Intake creates or matches one `Person`, one `Organization`, one `Product`, and one `Application`.
+- One scoped V1 intake concerns one new-product `Application` for one `Product`. `Product` remains a
+  separate durable record and may have later applications or lifecycle events.
+- V1 begins after the regulator's Application Form, accompanying Service Request Form, and proof of
+  payment have all been submitted. The tracker records three affirmative confirmations; it does not
+  store those documents.
+- Application intake metadata uses `submitter_person_id` and `submitter_role_id` for the shared
+  records, plus required `application_form_submitted`, `service_request_form_submitted`, and
+  `proof_of_payment_submitted` booleans. Older `submitter_contact_id`, `dossier_ready`,
+  proof-readiness, and pre-submission `is_pipeline` fields are not active V1 intake fields.
+- V1 does not introduce a separate Service Request entity. Administrative receipt and submission
+  facts remain metadata on `Application`.
+- Status has four distinct layers: application/service type, participant-reported current status,
+  mapped official regulator stage, and ABA record lifecycle (`active` or `complete`).
+- Status history is append-only. Participant and ABA-admin updates and participant reminders are
+  production requirements. Each entry records reporting source, actor, and recorded timestamp;
+  corrections append a superseding entry.
+- Public insights derive only from reviewed `Application` records, never directly from `Person`,
+  `ConsentSetting`, `Product`, or raw intake records.
+- The active V1 intake exposes only the five approved new-registration types. The broader source
+  taxonomy remains reference data for later releases.
+- The active tracker uses a required, initially unchecked acknowledgement for combined, non-named
+  insight use. The older optional aggregate and named-use controls below are superseded. A future
+  named regulator-facing use would require a separate purpose-specific permission.
 
 This file only covers the registration-tracker / regulatory slice.
 The whole ABA system model for the workshop is in:
@@ -70,9 +103,10 @@ These are useful ABA modelling choices, but they are still **our structure**, no
 
 These still need explicit confirmation rather than assumption:
 
-- whether the tracker really needs a separate received-packet record
-- what the correct tracker grain is when one received packet covers multiple products and services
-- which entities belong in the ABA tracker model versus the CRM layer
+- the production matching and duplicate-resolution algorithm for shared records
+- final privacy, retention, and publication-threshold policy
+- whether a later release needs a first-class received-packet or Service Request record for broader
+  service types
 
 ## 1. Design constraints
 
@@ -236,7 +270,7 @@ Table notation:
 | company_role | I,L | MEMBER | manufacturer / importer / local registration holder / distributor / other |
 | aba_relationship_self | I,L | MEMBER | **optional self-reported**: Full member / Technical partner / Observer / Non-member / Not sure. Not a gate. |
 
-### ContactPerson  *(PII)*
+### Legacy ContactPerson capture  *(superseded by shared Person and OrganizationPersonRole)*
 
 > **Sensitivity principle (same rule as §5 ApprovedPerson):** PII the submitter enters about
 > themselves or their own people is **MEMBER (own-record)** — the submitting org can see its own

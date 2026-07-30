@@ -1,7 +1,7 @@
 # Registration Tracker Module — Change Specification
 
-**Status:** Final implementation specification for the static mockup; titles remain subject to product review  
-**Last updated:** 28 July 2026  
+**Status:** Reconciled implementation specification for the static mockup; titles remain subject to product review
+**Last updated:** 30 July 2026
 **Planning baseline:** `bdd1921` (`origin/main` when the implementation scope and workflow were finalized)  
 **Implementation scope:** Registration Tracker landing page, intake form, public insights view, and tracker content on the Privacy and data use page  
 **Not in scope:** Production persistence or security implementation, participant editing after submission, a live operator workspace, company dashboard, registrar export, or redesign of archived prototype pages
@@ -12,7 +12,7 @@
 
 Use this prompt when handing the work to a new agent:
 
-> Implement `docs/requirements/registration-tracker-module-change-spec.md` exactly. Read `AGENTS.md`, `README.md`, `HANDOVER.md`, and the complete specification before editing anything. Follow the mandatory worktree workflow. Do not modify the current checkout, archived or future pages, data-model files, system-model or workshop documents, glossary files, taxonomy workbooks, or other parallel planning work. Complete the four-page static mockup and its QA, start the local browser preview, and give me the review links, 375px and 1440px screenshots, changed-file list, and QA results. Stop for my browser review. Do not merge, deploy, or change `main` without my explicit approval.
+> Implement `docs/requirements/registration-tracker-module-change-spec.md` exactly. Read `AGENTS.md`, `README.md`, `HANDOVER.md`, and the complete specification before editing anything. Follow the mandatory worktree workflow. The 30 July 2026 reconciliation in this tracker module spec and tracker-local data-model note governs the form changes. Do not modify the current checkout, archived or future pages, shared cross-journey contracts, glossary files, taxonomy workbooks, or unrelated parallel planning work. Complete the four-page static mockup and its QA, start the local browser preview, and give me the review links, 375px and 1440px screenshots, changed-file list, and QA results. Stop for my browser review. Do not merge, deploy, or change `main` without my explicit approval.
 
 ## 1. Purpose
 
@@ -54,8 +54,11 @@ Shared link
 
 When sources conflict, use this order:
 
-1. Confirmed product decisions in this specification.
-2. The current registration-tracker data model and registrar-source requirements, except where this specification records an explicit release decision that supersedes them.
+1. Confirmed product decisions in this specification, reconciled on 30 July 2026 against the
+   workshop recording.
+2. The reconciled registration-tracker data model, current unified system contract, and
+   registrar-source requirements, except where this specification records an explicit release
+   decision that supersedes them.
 3. Current registration-tracker reset, UX, and product requirement documents.
 4. `soft-launch/PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.md`.
 5. The live Membership page as a reference for CTA hierarchy and journey clarity.
@@ -106,7 +109,11 @@ This reading list does not make every older statement equally authoritative. Use
 | SACNASP | SACNASP status is required and self-reported in the mockup. Valid responses are `Verified`, `Not verified`, and `Unknown`. `Unknown` is a valid answer. Do not collect a raw SACNASP number. |
 | ABA relationship | The only membership categories are `Full member` and `Technical partner`, plus no current relationship. Each category must distinguish `Active` from `Application submitted`. |
 | Jurisdiction | Structured V1 capture is South Africa / Act 36 only. Do not apply South African terminology or published timeframes to other jurisdictions. |
-| New-registration lifecycle | A qualifying new-registration application may be represented from preparation through decision. Post-registration changes, renewals, and other service types remain out of scope. |
+| New-registration lifecycle | V1 begins only after the Application Form, Service Request Form, and proof of payment have all been submitted. It represents a qualifying new-registration application from submission through decision. Pre-submission preparation, post-registration changes, renewals, and other service types remain out of scope. |
+| V1 record grain | One intake concerns one new-product `Application` for one `Product`. `Product` remains separate and may have later applications or lifecycle events. |
+| Service-request handling | Do not create a separate Service Request entity in V1. Store the three required submission confirmations as application intake metadata. |
+| Identity continuity | Tracker and membership routes share `Person`, `Organization`, and `OrganizationPersonRole`; later membership must reuse the same records and history. The production matching algorithm remains open. |
+| Status layers | Keep application/service type, participant-reported status, mapped official regulator stage, and ABA lifecycle (`active` or `complete`) distinct. Production updates must be append-only and auditable. |
 | Save draft | Save and resume is required for production, but is not implemented or presented as functional in this static mockup. Record the production requirement in the migration note. |
 | Post-submission editing | ABA manages corrections and status changes in this mockup. Secure participant editing is required in production and belongs in the migration note. |
 | Review | ABA admin reviews each submission and selects `Approved for insights`, `Needs clarification`, or `Excluded`. The public mockup states a two-week review target; the existing operator-review page remains archived and is not redesigned. |
@@ -228,11 +235,12 @@ Do not lead with “How the tracker works” as the only action.
 
 #### B. “Is this for you?” qualification
 
-Ask three short questions:
+Ask four short questions:
 
 1. Is this a new biological product registration?
-2. Are you responsible for the registration or authorized to provide its information?
-3. Do you have the product, country, and current-status information available?
+2. Is it a South African registration under Act 36?
+3. Are you responsible for the registration or authorized to provide its information?
+4. Have the Application Form, Service Request Form, and proof of payment all been submitted?
 
 Provide a clear next step for each outcome:
 
@@ -242,7 +250,7 @@ Provide a clear next step for each outcome:
 | Not responsible or authorized | Ask the visitor to forward the link to the responsible person. |
 | Registration service is out of scope | Explain that the first release focuses on new registrations. Do not route the person into an incompatible form. |
 | Country or regime is out of scope | Explain that structured capture currently covers South African Act 36 registrations. |
-| Key information is not ready | Show a brief preparation checklist and allow the visitor to return later. |
+| Required submission steps are incomplete | Explain that this release begins after the Application Form, Service Request Form, and proof of payment have all been submitted. Ask the visitor to return after completing those steps; do not route them into intake. |
 
 This interaction must use accessible form controls, keyboard operation, visible focus, and announced status changes. It must be progressive enhancement:
 
@@ -328,7 +336,7 @@ Use five user-facing stages:
 1. You and your organisation
 2. Product and new-registration type
 3. Current status
-4. Readiness and professional accountability
+4. Submission confirmation and professional accountability
 5. Data use and submission
 
 The implementation may use smaller technical components internally, but the participant should not experience an unnecessarily long or fragmented wizard.
@@ -434,12 +442,13 @@ Rules:
 - Treat `submitted_at` as a production system event, not a participant field or a fabricated mockup value.
 - Keep participant wording distinguishable from ABA-reviewed or mapped status.
 
-### 8.6 Stage 4 — Readiness and professional accountability
+### 8.6 Stage 4 — Submission confirmation and professional accountability
 
 Required:
 
-- supporting information ready: `Yes | No | Not sure`;
-- proof-of-payment status: `Yes | No | Not sure`;
+- confirmation that the Application Form was submitted;
+- confirmation that the Service Request Form was submitted;
+- confirmation that proof of payment was submitted;
 - self-reported SACNASP status: `Verified | Not verified | Unknown`.
 
 Optional or conditional:
@@ -448,6 +457,9 @@ Optional or conditional:
 - role;
 - residency information where the legal pathway requires it;
 - confirmation of authority or appointment.
+
+All three submission confirmations must be affirmative. `No` and `Not sure` are not valid intake
+states in this release because the landing qualification excludes pre-submission records.
 
 Do not collect:
 
@@ -504,7 +516,7 @@ The repository already contains `soft-launch/prototype/privacy.html`. Update its
 
 The page must explain in plain language:
 
-- the tracker collects contact, organisation, product, registration, status, readiness, professional-accountability, and acknowledgement information;
+- the tracker collects contact, organisation, product, registration, status, submission-confirmation, professional-accountability, and acknowledgement information;
 - ABA uses the raw submission for follow-up and review;
 - submitting through the tracker includes a required acknowledgement that approved information may contribute to combined, non-named registration insights;
 - contact details are not published through the public insights view;
@@ -785,6 +797,7 @@ Additional required distinctions:
 - future `saved_at` and `submitted_at` are separate lifecycle events;
 - self-reported and verified membership are separate;
 - participant status and ABA-mapped official stage are separate;
+- participant status, mapped official stage, and ABA lifecycle are separate;
 - the required insight-use acknowledgement and any future named-use permission are separate;
 - reviewed and published are separate;
 - registration state and display state are separate.
@@ -904,8 +917,9 @@ The implementation agent must not:
 - reorganize `registration-tracker/`;
 - redesign the public ABA homepage;
 - redesign archived or future tracker pages;
-- edit or copy `registration-tracker/data-model-v1.md`;
-- edit or copy system-model documents, workshop references, glossary files, taxonomy workbooks, or other parallel planning work;
+- edit workshop, shared system-contract, or model documents beyond the tracker-local
+  `registration-tracker/data-model-v1.md` reconciliation authorized for this branch;
+- edit or copy glossary files, taxonomy workbooks, or other parallel planning work;
 - build an operator workspace or participant account;
 - turn the tracker into a membership application;
 - implement registrar export;
@@ -961,6 +975,8 @@ The implementation agent must not:
 - [ ] A direct “Start a new registration” action is visible.
 - [ ] No save/resume action claims persistence in the static mockup.
 - [ ] The visitor can determine whether they are the responsible or authorized person.
+- [ ] The visitor confirms that the Application Form, Service Request Form, and proof of payment
+      were submitted before entering intake.
 - [ ] Out-of-scope registration services receive a clear boundary, not a dead end.
 - [ ] What ABA does with the information is explained before intake.
 - [ ] ABA/regulator and tracker/membership boundaries are explicit.
@@ -972,6 +988,8 @@ The implementation agent must not:
 - [ ] The participant experiences five clear stages.
 - [ ] Only the approved new-registration types are shown.
 - [ ] SACNASP status is required and supports `Unknown`.
+- [ ] The Application Form, Service Request Form, and proof-of-payment confirmations are all
+      required and affirmative.
 - [ ] No raw SACNASP number is collected.
 - [ ] ABA relationship offers only Full member, Technical partner, and no relationship, with active/application-submitted distinctions.
 - [ ] ABA relationship and SACNASP status are clearly self-reported.
@@ -1050,6 +1068,10 @@ These do not block structural implementation but must not be silently finalized:
 
 Publication thresholds, metric definitions, draft expiry, retention, deletion, duplicate matching, clock treatment, production security, and legal/privacy approval are production-migration items. They are not implemented or invented in the mockup.
 
+The shared-record outcome is not open: tracker and membership journeys must reuse the same `Person`,
+`Organization`, and history. Only the production matching and duplicate-resolution method remains
+open.
+
 Where an unresolved item affects public copy, use the working language in this specification and flag it for review rather than inventing a new commitment.
 
 ## 21. Mandatory safe Git and browser-review workflow
@@ -1119,7 +1141,8 @@ git commit -m "docs: add registration tracker mockup specification"
 
 Do not copy other modified or untracked files into the worktree without explicit review.
 
-In particular, do not copy or modify:
+Except for the targeted 30 July 2026 tracker-local data-model reconciliation committed on this
+branch, do not copy or modify:
 
 - `registration-tracker/data-model-v1.md`;
 - `docs/requirements/aba-system-model-workshop-reference.md`;
@@ -1127,7 +1150,9 @@ In particular, do not copy or modify:
 - canonical-glossary or taxonomy-workbook files;
 - other parallel planning files found modified or untracked in the original checkout.
 
-Use this specification as the mockup-release authority. Record any conflict with those protected files in the implementation report instead of editing them.
+Use this specification and the reconciled tracker-local data-model note as the mockup-release
+authority.
+Record any new conflict with protected files in the implementation report instead of editing them.
 
 ### 21.3 Keep the change surface narrow
 
