@@ -35,7 +35,7 @@
 
           <fieldset class="form-section">
             <legend>Confirm this fits your registration</legend>
-            <p>These answers help ABA understand the submission. If any answer doesn't fit, this tracker isn't the right form yet — see <a href="../resources/index.html">Registration resources</a> or return to the <a href="../../soft-launch/prototype/registration-tracker.html">Registration Tracker</a>.</p>
+            <p class="required-note">If this isn't a match, see <a href="../resources/index.html">Registration resources</a> instead.</p>
             <div class="field"><span class="field__label">Is this a new biological product registration? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="registration_scope" required><span>Yes, this is a new registration.</span></label><label class="choice"><input type="radio" name="registration_scope"><span>No, this is an amendment, renewal, appeal, permit, source change, reinstatement, or another service.</span></label></div></div>
             <div class="field"><span class="field__label">Is it a South African registration under Act 36? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="jurisdiction_scope" required><span>Yes, it is a South African registration under Act 36.</span></label><label class="choice"><input type="radio" name="jurisdiction_scope"><span>No, it is for another country or regulatory regime.</span></label></div></div>
             <div class="field"><span class="field__label">Are you responsible for the registration or authorized to provide its information? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="authority_scope" required><span>Yes, I am responsible or authorized.</span></label><label class="choice"><input type="radio" name="authority_scope"><span>No, another person should provide it.</span></label></div></div>
@@ -68,7 +68,6 @@
 
           <fieldset class="form-section">
             <legend>Product and new-registration type</legend>
-            <p>Choose the closest fit. Select "Not sure" for the legal pathway rather than forcing a precise answer. This form covers applications in South Africa under Act 36 only — it does not accept amendments, renewals, appeals, permits, source changes, reinstatements, or other post-registration services.</p>
             <div class="field-grid field-grid--2">
               <div class="field"><label for="product-name">Product name <span aria-hidden="true">*</span></label><input id="product-name" name="product_name" required></div>
               <div class="field"><label for="functional-category">Functional category <span aria-hidden="true">*</span></label>
@@ -90,7 +89,7 @@
                   <option>Fertilizer</option>
                   <option>Not sure</option>
                 </select>
-                <small>The appropriate pathway can depend on the product and the claim being made.</small>
+                <small>Depends on the product and the claim being made — choose "Not sure" rather than forcing a precise answer.</small>
               </div>
               <div class="field"><label for="registration-type">New-registration type <span aria-hidden="true">*</span></label>
                 <select id="registration-type" name="registration_type" required>
@@ -107,7 +106,6 @@
 
           <fieldset class="form-section">
             <legend>Current status</legend>
-            <p>Report the status as you understand it. ABA may later map or clarify it during review.</p>
             <div class="field-grid field-grid--2">
               <div class="field"><label for="current-status">Participant-reported current status <span aria-hidden="true">*</span></label>
                 <select id="current-status" name="current_status" required>
@@ -180,7 +178,6 @@
 
           <fieldset class="form-section">
             <legend>Data use and submission</legend>
-            <p>ABA reviews the raw submission for follow-up and quality. Review determines whether the information is suitable to contribute to combined insights. Contact details and identifying organisation or product information are not published through the public insights view. Read the <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy and data use explanation</a> before submitting.</p>
             <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights.</strong><small>This condition is required to use the tracker and is not pre-selected. ABA will not publish my contact details or identify my organisation or product through the public insights view.</small></span></label>
           </fieldset>
 
@@ -193,7 +190,7 @@
         <section class="form-review" data-review="tracker-intake" aria-live="polite" tabindex="-1">
           <p class="eyebrow">Before you send this</p>
           <h2>Check your answers.</h2>
-          <p>Use "Edit" next to any section to change it. Submitting sends this information to ABA for review — it does not submit an application to the registrar.</p>
+          <p class="required-note">Use "Edit" to change a section. Submitting does not send anything to the registrar.</p>
           <div data-review-groups></div>
           <div class="form-actions"><button class="button button--orange" type="button" data-review-confirm data-loading-label="Sending…">Confirm and submit</button></div>
         </section>
