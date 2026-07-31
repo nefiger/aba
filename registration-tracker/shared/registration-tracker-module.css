@@ -345,13 +345,16 @@
 }
 
 .tracker-module .tracker-subnav {
+  background: var(--tracker-deep);
+  color: var(--tracker-paper);
+}
+
+.tracker-module .tracker-subnav__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.3rem 1.25rem;
   padding-block: 0.85rem;
-  background: var(--tracker-deep);
-  color: var(--tracker-paper);
 }
 
 .tracker-module .tracker-subnav a {
