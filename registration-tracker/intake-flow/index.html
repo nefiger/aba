@@ -7,23 +7,14 @@
   <title>New registration intake · African Biologicals Alliance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
-  <script src="../shared/registration-tracker-module.js?v=20260730" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260731" defer></script>
 </head>
-<body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="intake">
+<body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
-  <nav class="tracker-subnav" aria-label="Registration Tracker sections">
-    <div class="tracker-shell tracker-subnav__inner">
-      <a href="../../soft-launch/prototype/registration-tracker.html">Tracker</a>
-      <a href="index.html" aria-current="page">New registration</a>
-      <a href="../public-dashboard/index.html">Registration insights</a>
-      <a href="../resources/index.html">Resources</a>
-      <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy</a>
-    </div>
-  </nav>
 
   <main id="main-content">
     <section class="tracker-page-header tracker-page-header--compact">
@@ -34,325 +25,194 @@
       </div>
     </section>
 
-    <nav class="tracker-shell" aria-label="Intake stages">
-      <ol class="tracker-stage-nav">
-        <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
-        <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
-        <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
-        <li><button type="button" data-stage-button="4"><span>04</span>Submission and accountability</button></li>
-        <li><button type="button" data-stage-button="5"><span>05</span>Data use and submission</button></li>
-      </ol>
-    </nav>
+    <section class="section">
+      <div class="shell">
+        <form class="form" data-prototype-form="tracker-intake" data-review-before-submit novalidate>
+          <div class="form-error-summary" data-error-summary hidden tabindex="-1" role="alert">
+            <strong>Check the highlighted fields.</strong>
+            <ul></ul>
+          </div>
 
-    <p class="tracker-screen-reader-status" data-intake-status aria-live="polite"></p>
+          <fieldset class="form-section">
+            <legend>Confirm this fits your registration</legend>
+            <p>These answers help ABA understand the submission. If any answer doesn't fit, this tracker isn't the right form yet — see <a href="../resources/index.html">Registration resources</a> or return to the <a href="../../soft-launch/prototype/registration-tracker.html">Registration Tracker</a>.</p>
+            <div class="field"><span class="field__label">Is this a new biological product registration? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="registration_scope" required><span>Yes, this is a new registration.</span></label><label class="choice"><input type="radio" name="registration_scope"><span>No, this is an amendment, renewal, appeal, permit, source change, reinstatement, or another service.</span></label></div></div>
+            <div class="field"><span class="field__label">Is it a South African registration under Act 36? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="jurisdiction_scope" required><span>Yes, it is a South African registration under Act 36.</span></label><label class="choice"><input type="radio" name="jurisdiction_scope"><span>No, it is for another country or regulatory regime.</span></label></div></div>
+            <div class="field"><span class="field__label">Are you responsible for the registration or authorized to provide its information? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="authority_scope" required><span>Yes, I am responsible or authorized.</span></label><label class="choice"><input type="radio" name="authority_scope"><span>No, another person should provide it.</span></label></div></div>
+            <div class="field"><span class="field__label">Have the Application Form, Service Request Form, and proof of payment all been submitted? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="submission_scope" required><span>Yes, all three have been submitted.</span></label><label class="choice"><input type="radio" name="submission_scope"><span>No, one or more submission steps are not complete.</span></label></div></div>
+          </fieldset>
 
-    <form class="tracker-shell tracker-form" data-tracker-intake novalidate>
-      <section class="tracker-form-panel" data-stage-panel="1">
-        <div class="tracker-form-panel__heading">
-          <p class="tracker-label">Stage 1 of 5</p>
-          <h2 tabindex="-1">You and your organisation</h2>
-          <p>ABA uses these details to review the submission and contact the responsible person about this registration only.</p>
-        </div>
-        <div class="tracker-form-grid">
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Authority <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="authority-confirmation" type="checkbox"> <span>I am responsible for this registration or authorized to provide its information.</span></label>
-          </div>
-          <div class="tracker-field">
-            <label for="participant-name">Name <span class="tracker-required">*</span></label>
-            <input id="participant-name" autocomplete="name" required>
-          </div>
-          <div class="tracker-field">
-            <label for="participant-email">Email <span class="tracker-required">*</span></label>
-            <input id="participant-email" type="email" autocomplete="email" required>
-          </div>
-          <div class="tracker-field">
-            <label for="participant-phone">Phone <span>(optional)</span></label>
-            <input id="participant-phone" type="tel" autocomplete="tel">
-          </div>
-          <div class="tracker-field">
-            <label for="participant-role">Role or job title <span class="tracker-required">*</span></label>
-            <input id="participant-role" autocomplete="organization-title" required>
-          </div>
-          <div class="tracker-field">
-            <label for="organisation-name">Organisation <span class="tracker-required">*</span></label>
-            <input id="organisation-name" autocomplete="organization" required>
-          </div>
-          <div class="tracker-field">
-            <label for="organisation-role">Organisation role in the registration <span class="tracker-required">*</span></label>
-            <select id="organisation-role" required>
-              <option value="">Select a role</option>
-              <option>Manufacturer</option>
-              <option>Importer</option>
-              <option>Local registration holder</option>
-              <option>Distributor responsible for registration</option>
-              <option>Authorized representative</option>
-              <option>Other responsible organisation</option>
-            </select>
-          </div>
-          <div class="tracker-field">
-            <label for="organisation-country">Country <span class="tracker-required">*</span></label>
-            <input id="organisation-country" value="South Africa" readonly required>
-            <small>This release supports South African Act 36 new registrations only.</small>
-          </div>
-          <div class="tracker-field">
-            <label for="aba-relationship">Self-reported ABA relationship <span class="tracker-required">*</span></label>
-            <select id="aba-relationship" required>
-              <option value="">Select one</option>
-              <option value="full_member|active">Active Full member</option>
-              <option value="full_member|application_submitted">Applied for Full membership</option>
-              <option value="technical_partner|active">Active Technical partner</option>
-              <option value="technical_partner|application_submitted">Applied as Technical partner</option>
-              <option value="none|not_applicable">No current membership or application</option>
-            </select>
-            <small>This answer is not treated as verified membership.</small>
-          </div>
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Contact permission <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="contact-permission" type="checkbox"> <span>ABA may contact me about this submission, including requests for clarification.</span></label>
-          </div>
-        </div>
-        <div class="tracker-form-actions">
-          <a class="tracker-button tracker-button--secondary" href="../../soft-launch/prototype/registration-tracker.html">Return to the Tracker</a>
-          <button class="tracker-button" type="button" data-next-stage="2">Continue to product</button>
-        </div>
-      </section>
+          <fieldset class="form-section">
+            <legend>You and your organisation</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="participant-name">Name <span aria-hidden="true">*</span></label><input id="participant-name" name="participant_name" autocomplete="name" required></div>
+              <div class="field"><label for="participant-email">Email <span aria-hidden="true">*</span></label><input id="participant-email" name="participant_email" type="email" autocomplete="email" required></div>
+              <div class="field"><label for="participant-phone">Phone <span>(optional)</span></label><input id="participant-phone" name="participant_phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="participant-role">Role or job title <span aria-hidden="true">*</span></label><input id="participant-role" name="participant_role" autocomplete="organization-title" required></div>
+              <div class="field"><label for="organisation-name">Organisation <span aria-hidden="true">*</span></label><input id="organisation-name" name="organisation_name" autocomplete="organization" required></div>
+              <div class="field"><label for="organisation-role">Organisation role in the registration <span aria-hidden="true">*</span></label>
+                <select id="organisation-role" name="organisation_role" required>
+                  <option value="">Select a role</option>
+                  <option>Manufacturer</option>
+                  <option>Importer</option>
+                  <option>Local registration holder</option>
+                  <option>Distributor responsible for registration</option>
+                  <option>Authorized representative</option>
+                  <option>Other responsible organisation</option>
+                </select>
+              </div>
+              <div class="field"><label for="organisation-country">Organisation's country <span aria-hidden="true">*</span></label><input id="organisation-country" name="organisation_country" autocomplete="country-name" required><small>The organisation's own country, not the registration jurisdiction — the questions above already confirm this is a South African Act 36 registration.</small></div>
+            </div>
+            <label class="choice"><input id="contact-permission" name="contact_permission" type="checkbox" required><span><strong>ABA may contact me about this submission, including requests for clarification.</strong></span></label>
+          </fieldset>
 
-      <section class="tracker-form-panel" data-stage-panel="2" hidden>
-        <div class="tracker-form-panel__heading">
-          <p class="tracker-label">Stage 2 of 5</p>
-          <h2 tabindex="-1">Product and new-registration type</h2>
-          <p>Choose the closest fit. Select “Not sure” for the legal pathway rather than forcing a precise answer.</p>
-        </div>
-        <div class="tracker-note">
-          <p>This form covers applications in South Africa under Act 36. It does not accept amendments, renewals, appeals, permits, source changes, reinstatements, or other post-registration services.</p>
-        </div>
-        <div class="tracker-form-grid">
-          <div class="tracker-field">
-            <label for="product-name">Product name <span class="tracker-required">*</span></label>
-            <input id="product-name" required>
-          </div>
-          <div class="tracker-field">
-            <label for="functional-category">Functional category <span class="tracker-required">*</span></label>
-            <select id="functional-category" required>
-              <option value="">Select a category</option>
-              <option>Biofertiliser</option>
-              <option>Biopesticide</option>
-              <option>Biostimulant</option>
-              <option>Microbial inoculant</option>
-              <option>Plant extract</option>
-              <option>Other biological input</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <div class="tracker-field">
-            <label for="legal-pathway">Act 36 legal pathway <span class="tracker-required">*</span></label>
-            <select id="legal-pathway" required>
-              <option value="">Select a pathway</option>
-              <option>Agricultural remedy</option>
-              <option>Fertilizer</option>
-              <option>Not sure</option>
-            </select>
-            <small>The appropriate pathway can depend on the product and the claim being made.</small>
-          </div>
-          <div class="tracker-field">
-            <label for="registration-type">New-registration type <span class="tracker-required">*</span></label>
-            <select id="registration-type" required>
-              <option value="">Select a type</option>
-              <option>New molecule or active ingredient</option>
-              <option>New formulation</option>
-              <option>Generic active ingredient</option>
-              <option>Parallel registration</option>
-              <option>Daughter registration</option>
-            </select>
-          </div>
-        </div>
-        <div class="tracker-form-actions">
-          <button class="tracker-button tracker-button--secondary" type="button" data-previous-stage="1">Back</button>
-          <button class="tracker-button" type="button" data-next-stage="3">Continue to status</button>
-        </div>
-      </section>
+          <fieldset class="form-section">
+            <legend>Product and new-registration type</legend>
+            <p>Choose the closest fit. Select "Not sure" for the legal pathway rather than forcing a precise answer. This form covers applications in South Africa under Act 36 only — it does not accept amendments, renewals, appeals, permits, source changes, reinstatements, or other post-registration services.</p>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="product-name">Product name <span aria-hidden="true">*</span></label><input id="product-name" name="product_name" required></div>
+              <div class="field"><label for="functional-category">Functional category <span aria-hidden="true">*</span></label>
+                <select id="functional-category" name="functional_category" required>
+                  <option value="">Select a category</option>
+                  <option>Biofertiliser</option>
+                  <option>Biopesticide</option>
+                  <option>Biostimulant</option>
+                  <option>Microbial inoculant</option>
+                  <option>Plant extract</option>
+                  <option>Other biological input</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="legal-pathway">Act 36 legal pathway <span aria-hidden="true">*</span></label>
+                <select id="legal-pathway" name="legal_pathway" required>
+                  <option value="">Select a pathway</option>
+                  <option>Agricultural remedy</option>
+                  <option>Fertilizer</option>
+                  <option>Not sure</option>
+                </select>
+                <small>The appropriate pathway can depend on the product and the claim being made.</small>
+              </div>
+              <div class="field"><label for="registration-type">New-registration type <span aria-hidden="true">*</span></label>
+                <select id="registration-type" name="registration_type" required>
+                  <option value="">Select a type</option>
+                  <option>New molecule or active ingredient</option>
+                  <option>New formulation</option>
+                  <option>Generic active ingredient</option>
+                  <option>Parallel registration</option>
+                  <option>Daughter registration</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
 
-      <section class="tracker-form-panel" data-stage-panel="3" hidden>
-        <div class="tracker-form-panel__heading">
-          <p class="tracker-label">Stage 3 of 5</p>
-          <h2 tabindex="-1">Current status</h2>
-          <p>Report the status as you understand it. ABA may later map or clarify it during review.</p>
-        </div>
-        <div class="tracker-form-grid">
-          <div class="tracker-field">
-            <label for="current-status">Participant-reported current status <span class="tracker-required">*</span></label>
-            <select id="current-status" required>
-              <option value="">Select a status</option>
-              <option>Submitted to the registrar</option>
-              <option>Received or acknowledged</option>
-              <option>In verification</option>
-              <option>In scientific screening</option>
-              <option>In evaluation</option>
-              <option>Additional information requested</option>
-              <option>Response submitted</option>
-              <option>Awaiting a decision</option>
-              <option>Approved or registered</option>
-              <option>Rejected</option>
-              <option>Withdrawn</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <div class="tracker-field">
-            <label for="status-date">Date this status began <span class="tracker-required">*</span></label>
-            <input id="status-date" type="date" required>
-          </div>
-          <div class="tracker-field">
-            <label for="decision-expectation">Approximate decision state or expectation <span class="tracker-required">*</span></label>
-            <select id="decision-expectation" required>
-              <option value="">Select the closest answer</option>
-              <option>No decision expected yet</option>
-              <option>Decision expected within the published timeframe</option>
-              <option>Decision expected after the published timeframe</option>
-              <option>Decision already received</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <div class="tracker-field">
-            <label for="reference-issued">Has an official reference been issued? <span class="tracker-required">*</span></label>
-            <select id="reference-issued" required>
-              <option value="">Select one</option>
-              <option value="issued">Yes</option>
-              <option value="not-available">Not issued or unavailable</option>
-              <option value="unknown">Unknown</option>
-            </select>
-            <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
-          </div>
-          <div class="tracker-field tracker-field--wide" data-reference-reason hidden>
-            <label for="reference-reason">Why is the expected reference unavailable? <span class="tracker-required">*</span></label>
-            <textarea id="reference-reason"></textarea>
-          </div>
-        </div>
-        <div class="tracker-form-actions">
-          <button class="tracker-button tracker-button--secondary" type="button" data-previous-stage="2">Back</button>
-          <button class="tracker-button" type="button" data-next-stage="4">Continue to submission confirmation</button>
-        </div>
-      </section>
+          <fieldset class="form-section">
+            <legend>Current status</legend>
+            <p>Report the status as you understand it. ABA may later map or clarify it during review.</p>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="current-status">Participant-reported current status <span aria-hidden="true">*</span></label>
+                <select id="current-status" name="current_status" required>
+                  <option value="">Select a status</option>
+                  <option>Submitted to the registrar</option>
+                  <option>Received or acknowledged</option>
+                  <option>In verification</option>
+                  <option>In scientific screening</option>
+                  <option>In evaluation</option>
+                  <option>Additional information requested</option>
+                  <option>Response submitted</option>
+                  <option>Awaiting a decision</option>
+                  <option>Approved or registered</option>
+                  <option>Rejected</option>
+                  <option>Withdrawn</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="status-date">Month this status began <span aria-hidden="true">*</span></label><input id="status-date" name="status_date" type="month" required><small>A best estimate is fine — this does not need to be the exact day.</small></div>
+              <div class="field"><label for="reference-issued">Has an official reference been issued? <span aria-hidden="true">*</span></label>
+                <select id="reference-issued" name="reference_issued" required>
+                  <option value="">Select one</option>
+                  <option value="issued">Yes</option>
+                  <option value="not-available">Not issued or unavailable</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+                <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
+              </div>
+              <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason" required></textarea></div>
+            </div>
+          </fieldset>
 
-      <section class="tracker-form-panel" data-stage-panel="4" hidden>
-        <div class="tracker-form-panel__heading">
-          <p class="tracker-label">Stage 4 of 5</p>
-          <h2 tabindex="-1">Confirm submission</h2>
-          <p>Confirm the three regulator submission steps and report professional status without uploading forms, payment files, a dossier, or a credential number.</p>
-        </div>
-        <div class="tracker-form-grid">
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Application Form <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="application-form-submitted" type="checkbox"> <span>I confirm that the Application Form was submitted.</span></label>
-          </div>
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Service Request Form <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="service-request-form-submitted" type="checkbox"> <span>I confirm that the Service Request Form was submitted.</span></label>
-          </div>
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Proof of payment <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="proof-of-payment-submitted" type="checkbox"> <span>I confirm that proof of payment was submitted.</span></label>
-          </div>
-          <div class="tracker-field">
-            <label for="sacnasp-status">Self-reported SACNASP status <span class="tracker-required">*</span></label>
-            <select id="sacnasp-status" required>
-              <option value="">Select one</option>
-              <option>Verified</option>
-              <option>Not verified</option>
-              <option>Unknown</option>
-            </select>
-            <small>“Unknown” is a valid completed answer. No SACNASP registration number is collected.</small>
-          </div>
-          <div class="tracker-field">
-            <label for="responsible-person-name">Approved or responsible person name <span>(optional)</span></label>
-            <input id="responsible-person-name">
-          </div>
-          <div class="tracker-field">
-            <label for="responsible-person-role">Approved or responsible person role <span>(optional)</span></label>
-            <input id="responsible-person-role">
-          </div>
-          <div class="tracker-field">
-            <label for="residency-information">Residency or registered-office information <span>(optional)</span></label>
-            <select id="residency-information">
-              <option value="">Not provided</option>
-              <option>Responsible person is resident in South Africa</option>
-              <option>Organisation has a registered office in South Africa</option>
-              <option>Neither</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <div class="tracker-field tracker-field--wide">
-            <label for="appointment-confirmation">Authority or appointment information <span>(optional)</span></label>
-            <textarea id="appointment-confirmation" placeholder="Briefly describe the appointment or authority where it is relevant."></textarea>
-          </div>
-        </div>
-        <div class="tracker-form-actions">
-          <button class="tracker-button tracker-button--secondary" type="button" data-previous-stage="3">Back</button>
-          <button class="tracker-button" type="button" data-next-stage="5">Continue to data use</button>
-        </div>
-      </section>
+          <fieldset class="form-section">
+            <legend>Submission and accountability</legend>
+            <label class="choice"><input id="submission-confirmed" name="submission_confirmed" type="checkbox" required><span><strong>I confirm that the Application Form, Service Request Form, and proof of payment have all been submitted to the registrar.</strong></span></label>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="sacnasp-status">Self-reported SACNASP status <span aria-hidden="true">*</span></label>
+                <select id="sacnasp-status" name="sacnasp_status" required>
+                  <option value="">Select one</option>
+                  <option>Registered with SACNASP</option>
+                  <option>Application submitted</option>
+                  <option>Not registered</option>
+                  <option>Unknown</option>
+                </select>
+                <small>Self-reported; ABA does not treat this as a verified status. No SACNASP registration number is collected.</small>
+              </div>
+              <div class="field"><label for="responsible-person-status">Are you the approved or responsible person? <span aria-hidden="true">*</span></label>
+                <select id="responsible-person-status" name="responsible_person_status" required>
+                  <option value="">Select one</option>
+                  <option value="self">I am the approved or responsible person.</option>
+                  <option value="on-behalf">I am acting on behalf of the approved or responsible person.</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-grid field-grid--2" data-responsible-person-details hidden>
+              <div class="field"><label for="responsible-person-name">Approved or responsible person name <span>(optional)</span></label><input id="responsible-person-name" name="responsible_person_name"></div>
+              <div class="field"><label for="responsible-person-role">Approved or responsible person role <span>(optional)</span></label><input id="responsible-person-role" name="responsible_person_role"></div>
+              <div class="field"><label for="residency-information">Residency or registered-office information <span>(optional)</span></label>
+                <select id="residency-information" name="residency_information">
+                  <option value="">Not provided</option>
+                  <option>Responsible person is resident in South Africa</option>
+                  <option>Organisation has a registered office in South Africa</option>
+                  <option>Neither</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="appointment-confirmation">Authority or appointment information <span>(optional)</span></label><textarea id="appointment-confirmation" name="appointment_confirmation" placeholder="Briefly describe the appointment or authority where it is relevant."></textarea></div>
+            </div>
+          </fieldset>
 
-      <section class="tracker-form-panel" data-stage-panel="5" hidden>
-        <div class="tracker-form-panel__heading">
-          <p class="tracker-label">Stage 5 of 5</p>
-          <h2 tabindex="-1">Data use and submission</h2>
-          <p>ABA reviews the raw submission for follow-up and quality. Review determines whether the information is suitable to contribute to combined insights.</p>
-        </div>
-        <div class="tracker-note">
-          <p>Contact details and identifying organisation or product information are not published through the public insights view. Read the <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy and data use explanation</a> before submitting.</p>
-        </div>
-        <div class="tracker-form-grid">
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Processing acknowledgement <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="processing-acknowledgement" type="checkbox"> <span>I understand that ABA needs to process and review this submission and may contact me for clarification.</span></label>
-          </div>
-          <div class="tracker-field tracker-field--wide">
-            <span class="tracker-field-label">Required data-use acknowledgement <span class="tracker-required">*</span></span>
-            <label class="tracker-choice"><input id="insight-acknowledgement" type="checkbox"> <span>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights. ABA will not publish my contact details or identify my organisation or product through the public insights view.</span></label>
-            <small>This condition is required to use the tracker and is not pre-selected.</small>
-          </div>
-        </div>
-        <div class="tracker-form-actions">
-          <button class="tracker-button tracker-button--secondary" type="button" data-previous-stage="4">Back</button>
-          <button class="tracker-button" type="button" data-show-review>Review answers</button>
-        </div>
-      </section>
-    </form>
+          <fieldset class="form-section">
+            <legend>Data use and submission</legend>
+            <p>ABA reviews the raw submission for follow-up and quality. Review determines whether the information is suitable to contribute to combined insights. Contact details and identifying organisation or product information are not published through the public insights view. Read the <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy and data use explanation</a> before submitting.</p>
+            <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights.</strong><small>This condition is required to use the tracker and is not pre-selected. ABA will not publish my contact details or identify my organisation or product through the public insights view.</small></span></label>
+          </fieldset>
 
-    <section class="tracker-shell tracker-review" data-review hidden>
-      <p class="tracker-label">Review before submission</p>
-      <h2 tabindex="-1">Check the material answers.</h2>
-      <p>Use “Correct answers” to return to a stage. Your completed fields remain available while this page is open.</p>
-      <div class="tracker-error-summary" data-review-error role="alert">
-        <h3>Submission is blocked.</h3>
-        <p>Return to stage 5 and check both required acknowledgements before submitting.</p>
-      </div>
-      <div class="tracker-review-grid" data-review-grid></div>
-      <div class="tracker-form-actions">
-        <button class="tracker-button tracker-button--secondary" type="button" data-edit-stage="5">Correct data-use answers</button>
-        <button class="tracker-button tracker-button--orange" type="button" data-submit-registration disabled>Submit registration information</button>
-      </div>
-    </section>
+          <input type="hidden" id="referral-source" name="referral_source">
 
-    <section class="tracker-confirmation tracker-section--cream" data-confirmation hidden>
-      <div class="tracker-shell">
-        <div class="tracker-confirmation__panel">
-          <p class="tracker-label">Registration information received</p>
-          <h2 tabindex="-1">ABA will review the submission.</h2>
+          <div class="form-actions"><button class="button button--orange" type="submit" data-loading-label="Sending…">Review and submit</button></div>
+          <p class="required-note">Read <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy and data use</a>.</p>
+        </form>
+
+        <section class="form-review" data-review="tracker-intake" aria-live="polite" tabindex="-1">
+          <p class="eyebrow">Before you send this</p>
+          <h2>Check your answers.</h2>
+          <p>Use "Edit" next to any section to change it. Submitting sends this information to ABA for review — it does not submit an application to the registrar.</p>
+          <div data-review-groups></div>
+          <div class="form-actions"><button class="button button--orange" type="button" data-review-confirm data-loading-label="Sending…">Confirm and submit</button></div>
+        </section>
+
+        <section class="form-success" data-success="tracker-intake" aria-live="polite">
+          <p class="eyebrow">Registration information received</p>
+          <h2>ABA will review the submission.</h2>
           <p>ABA aims to review it within two weeks and may contact you for clarification. An ABA administrator may mark the submission <strong>Approved for insights</strong>, <strong>Needs clarification</strong>, or <strong>Excluded</strong>.</p>
           <p>Approved information may contribute to combined, non-named insights. Contact details and identifying organisation or product information are not published through the insights view. Submission does not create or change membership and does not submit anything to the registrar.</p>
           <p><a href="../../soft-launch/prototype/privacy.html#registration-tracker">Read the Privacy and data use explanation</a>.</p>
-          <div class="tracker-actions">
-            <button class="tracker-button tracker-button--orange" type="button" data-add-another>Add another registration</button>
-            <a class="tracker-button tracker-button--secondary" href="../public-dashboard/index.html">View registration insights</a>
-            <a class="tracker-button tracker-button--secondary" href="../../soft-launch/prototype/registration-tracker.html">Return to the Registration Tracker</a>
-            <a class="tracker-button tracker-button--secondary" href="../../soft-launch/prototype/index.html">Return to the ABA site</a>
+          <div class="form-actions">
+            <button class="button button--orange" type="button" data-add-another>Add another registration</button>
+            <a class="button button--outline" href="../public-dashboard/index.html">View registration insights</a>
+            <a class="button button--outline" href="../../soft-launch/prototype/registration-tracker.html">Return to the Registration Tracker</a>
           </div>
-        </div>
+        </section>
       </div>
     </section>
   </main>
-
   <aba-footer base="../../soft-launch/prototype/"></aba-footer>
 </body>
 </html>

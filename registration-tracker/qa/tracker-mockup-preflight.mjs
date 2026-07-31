@@ -10,6 +10,7 @@ const pages = {
   landing: "soft-launch/prototype/registration-tracker.html",
   intake: "registration-tracker/intake-flow/index.html",
   insights: "registration-tracker/public-dashboard/index.html",
+  resources: "registration-tracker/resources/index.html",
   privacy: "soft-launch/prototype/privacy.html",
 };
 
@@ -19,6 +20,9 @@ const sources = Object.fromEntries(
     await readFile(path.join(repoRoot, relativePath), "utf8"),
   ])),
 );
+
+const moduleJsPath = "registration-tracker/shared/registration-tracker-module.js";
+const moduleJs = await readFile(path.join(repoRoot, moduleJsPath), "utf8");
 
 const failures = [];
 const checks = [];
@@ -48,6 +52,7 @@ const forbiddenActivePatterns = [
   ["general-updates control", /<(?:input|select|button)[^>]*(?:general[-_ ]?updates|newsletter)/i],
   ["saved-draft claim", /\b(?:draft saved|email return link|save and resume|save draft)\b/i],
   ["chart markup", /<(?:svg|canvas)[^>]*(?:chart|graph)|class=["'][^"']*\bchart\b/i],
+  ["duplicate module header/footer", /tracker-module-header|tracker-module-footer/i],
 ];
 
 for (const [description, pattern] of forbiddenActivePatterns) {
@@ -55,29 +60,62 @@ for (const [description, pattern] of forbiddenActivePatterns) {
   else checks.push(`all active pages: no ${description}`);
 }
 
-requireMatch("landing", /data-qualification-form/, "progressively enhanced qualification");
-requireMatch("landing", /value="other-service"/, "out-of-service outcome");
-requireMatch("landing", /value="other-regime"/, "out-of-country or regime outcome");
-requireMatch("landing", /value="not-submitted"/, "incomplete-submission outcome");
-requireMatch("landing", /Application Form[\s\S]*Service Request Form[\s\S]*proof of payment/i, "three-part submission qualification");
-requireMatch("landing", /<noscript>[\s\S]*intake-flow\/index\.html/i, "no-JavaScript intake fallback");
+// --- Qualifier now lives as intake's first visible form section, not a gated landing-page mini-form ---
+forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
+forbidMatch("intake", /data-stage-panel=|tracker-stage-nav|data-show-review\b/i, "hidden/gated wizard-stage markup");
+requireMatch("intake", /Is this a new biological product registration\?/, "qualifier question: new registration");
+requireMatch("intake", /Is it a South African registration under Act 36\?/, "qualifier question: SA/Act 36 jurisdiction");
+requireMatch("intake", /Are you responsible for the registration or authorized to provide its information\?/, "qualifier question: authority");
+requireMatch("intake", /Have the Application Form, Service Request Form, and proof of payment all been submitted\?/, "qualifier question: three-part submission");
+requireMatch("intake", /amendment, renewal, appeal, permit, source change, reinstatement, or another service/, "out-of-service outcome option");
+requireMatch("intake", /another country or regulatory regime/, "out-of-country or regime outcome option");
+requireMatch("intake", /one or more submission steps are not complete/, "incomplete-submission outcome option");
 
-const qualificationQuestionCount = (sources.landing.match(/class="tracker-question"/g) || []).length;
-if (qualificationQuestionCount !== 4) failures.push(`landing: expected 4 qualification questions, found ${qualificationQuestionCount}`);
-else checks.push("landing: four qualification questions");
+const formSectionCount = (sources.intake.match(/<fieldset class="form-section">/g) || []).length;
+if (formSectionCount !== 6) failures.push(`intake: expected 6 form sections, found ${formSectionCount}`);
+else checks.push("intake: six form sections (qualifier, participant/org, product, status, submission/accountability, data use)");
 
-const stageCount = (sources.intake.match(/data-stage-panel="/g) || []).length;
-if (stageCount !== 5) failures.push(`intake: expected 5 stage panels, found ${stageCount}`);
-else checks.push("intake: five stage panels");
+// --- All sections visible and scrollable; only one confirm screen sits between filling the form and sending it ---
+requireMatch("intake", /data-review-before-submit/, "review-and-confirm-before-submit opt-in");
+requireMatch("intake", /data-review="tracker-intake"/, "review screen container");
+requireMatch("intake", /data-review-confirm/, "review screen confirm action");
 
-const relationships = [
-  "Active Full member",
-  "Applied for Full membership",
-  "Active Technical partner",
-  "Applied as Technical partner",
-  "No current membership or application",
-];
-for (const relationship of relationships) requireMatch("intake", new RegExp(relationship), `relationship option “${relationship}”`);
+// --- ABA relationship captured passively via URL param, not a self-reported form field ---
+forbidMatch("intake", /id="aba-relationship"/, "self-reported ABA-relationship form field");
+requireMatch("intake", /id="referral-source"\s+name="referral_source"/, "passive referral-source hidden field");
+if (!/URLSearchParams[\s\S]*get\(["']ref["']\)/.test(moduleJs)) failures.push(`${moduleJsPath}: missing referral param capture`);
+else checks.push(`${moduleJsPath}: referral param capture`);
+
+// --- Country vs. jurisdiction: organisation's country is a real field, not fixed to the registration jurisdiction ---
+forbidMatch("intake", /id="organisation-country"[^>]*readonly/, "readonly organisation-country field");
+forbidMatch("intake", /id="organisation-country"[^>]*value="South Africa"/, "organisation-country fixed to South Africa");
+
+// --- Self-reported SACNASP status cannot claim a verified state ---
+requireMatch("intake", /id="sacnasp-status"[\s\S]*?<option>Unknown<\/option>/, "required SACNASP Unknown option");
+forbidMatch("intake", /id="sacnasp-status"[\s\S]{0,400}<option>Verified<\/option>/, "contradictory self-reported/Verified SACNASP option");
+
+// --- Status date allows approximation instead of forcing exact-day precision ---
+requireMatch("intake", /id="status-date"[^>]*type="month"/, "month-precision status date (not exact day)");
+
+// --- Decision-expectation dropped; that determination is derived by ABA, not guessed by the participant ---
+forbidMatch("intake", /id="decision-expectation"/, "removed decision-expectation field");
+
+// --- One compact submission-confirmation instead of three near-identical checkboxes ---
+requireMatch("intake", /id="submission-confirmed"\s+name="submission_confirmed"\s+type="checkbox"/, "single compact submission confirmation");
+forbidMatch("intake", /id="(?:application-form-submitted|service-request-form-submitted|proof-of-payment-submitted)"/, "superseded triple submission-confirmation checkboxes");
+
+// --- Contact permission and processing acknowledgement no longer duplicate one another ---
+requireMatch("intake", /id="contact-permission"/, "single contact-permission choice");
+forbidMatch("intake", /id="processing-acknowledgement"/, "superseded duplicate processing-acknowledgement checkbox");
+
+// --- Responsible-person, residency and appointment fields are actually conditional ---
+requireMatch("intake", /data-responsible-person-details hidden/, "responsible-person detail fields hidden by default");
+requireMatch("intake", /id="responsible-person-status"/, "responsible-person-status conditional trigger");
+
+forbidMatch("intake", /id="(?:supporting-information|payment-status)"/, "superseded readiness field");
+requireMatch("intake", /id="insight-acknowledgement"[^>]*type="checkbox"(?![^>]*checked)/, "initially unchecked insight-use acknowledgement");
+requireMatch("intake", /Approved for insights[\s\S]*Needs clarification[\s\S]*Excluded/, "three ABA review outcomes");
+requireMatch("intake", /within two weeks/i, "two-week review target");
 
 const registrationTypes = [
   "New molecule or active ingredient",
@@ -88,32 +126,21 @@ const registrationTypes = [
 ];
 for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
 
-requireMatch("intake", /id="sacnasp-status"[\s\S]*?<option>Unknown<\/option>/, "required SACNASP Unknown option");
-for (const confirmationId of [
-  "application-form-submitted",
-  "service-request-form-submitted",
-  "proof-of-payment-submitted",
-]) {
-  requireMatch("intake", new RegExp(`id="${confirmationId}"\\s+type="checkbox"`), `affirmative submission confirmation “${confirmationId}”`);
-}
-forbidMatch("intake", /id="(?:supporting-information|payment-status)"/, "superseded readiness field");
-requireMatch("intake", /id="insight-acknowledgement"\s+type="checkbox"(?![^>]*checked)/, "initially unchecked insight-use acknowledgement");
-requireMatch("intake", /Approved for insights[\s\S]*Needs clarification[\s\S]*Excluded/, "three ABA review outcomes");
-requireMatch("intake", /within two weeks/i, "two-week review target");
-
 requireMatch("insights", /Evidence status: collecting and reviewing/i, "single page-level evidence notice");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
 requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four future evidence questions");
 requireMatch("insights", /contain no current totals or findings/i, "non-fabrication explanation");
 forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:/i, "repeated panel-level evidence warnings");
 requireMatch("insights", /Submitted[\s\S]*Reviewed[\s\S]*Classified[\s\S]*Protected[\s\S]*Publishable/, "five evidence publication gates");
-for (const sourceKey of ["landing", "intake", "insights", "privacy"]) {
+
+for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
   forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
   forbidMatch(sourceKey, /\bPreparing\b|pre-submission/i, "pre-submission active-flow language");
 }
 requireMatch("privacy", /condition of using the tracker/i, "required tracker data-use condition");
 requireMatch("privacy", /submission confirmations?/i, "submission-confirmation information group");
 requireMatch("privacy", /does not give ABA permission to send unrelated general updates/i, "unrelated-communications boundary");
+requireMatch("privacy", /id="registration-tracker"/, "formalized #registration-tracker anchor");
 
 for (const [sourceKey, source] of Object.entries(sources)) {
   if (/<h[1-3][^>]*>[\s\S]*?<br\b/i.test(source)) failures.push(`${sourceKey}: forced heading break found`);
@@ -141,5 +168,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log("PASS: active routes, fields, states, and release boundaries match the tracker change specification.");
+  console.log("PASS: active routes, fields, states, and release boundaries match the tracker's single-scroll, review-and-confirm intake architecture.");
 }

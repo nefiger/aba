@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../../registration-tracker/shared/registration-tracker-module.css?v=20260730">
+  <link rel="stylesheet" href="../../registration-tracker/shared/registration-tracker-module.css?v=20260731">
   <script src="assets/app.js?v=20260721-copy3" defer></script>
-  <script src="../../registration-tracker/shared/registration-tracker-module.js?v=20260730" defer></script>
+  <script src="../../registration-tracker/shared/registration-tracker-module.js?v=20260731" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header></aba-header>
@@ -24,7 +24,7 @@
           <p class="tracker-lede">Share the current position of one South African biological product registration under Act 36. ABA reviews every submission before approved information may support combined, non-named public insights.</p>
           <div class="tracker-actions">
             <a class="tracker-button tracker-button--orange" href="../../registration-tracker/intake-flow/index.html">Start a new registration</a>
-            <a class="tracker-button tracker-button--secondary" href="#is-this-for-you">Check if this is for you</a>
+            <a class="tracker-button tracker-button--secondary" href="#is-this-for-you">Is this for you?</a>
           </div>
         </div>
         <aside class="tracker-note">
@@ -39,50 +39,19 @@
       <div class="tracker-shell">
         <div class="tracker-section-heading">
           <p class="tracker-label">Is this for you?</p>
-          <h2>Confirm that this intake fits your registration.</h2>
-          <p>These answers are not stored. They only show the correct next step.</p>
+          <h2>This tracker is for one specific situation.</h2>
+          <p>The intake opens with the same four checks below, so nothing here needs to be answered twice — start when all four are true for you.</p>
         </div>
-        <form class="tracker-qualifier" data-qualification-form data-intake-href="../../registration-tracker/intake-flow/index.html">
-          <fieldset class="tracker-question">
-            <legend>1. Is this a new biological product registration?</legend>
-            <div class="tracker-choice-list">
-              <label class="tracker-choice"><input type="radio" name="registration_scope" value="new"> <span>Yes, this is a new registration.</span></label>
-              <label class="tracker-choice"><input type="radio" name="registration_scope" value="other-service"> <span>No, this is an amendment, renewal, appeal, permit, source change, reinstatement, or another service.</span></label>
-            </div>
-          </fieldset>
-          <fieldset class="tracker-question">
-            <legend>2. Is it a South African registration under Act 36?</legend>
-            <div class="tracker-choice-list">
-              <label class="tracker-choice"><input type="radio" name="jurisdiction_scope" value="south-africa-act-36"> <span>Yes, it is a South African registration under Act 36.</span></label>
-              <label class="tracker-choice"><input type="radio" name="jurisdiction_scope" value="other-regime"> <span>No, it is for another country or regulatory regime.</span></label>
-            </div>
-          </fieldset>
-          <fieldset class="tracker-question">
-            <legend>3. Are you responsible for the registration or authorized to provide its information?</legend>
-            <div class="tracker-choice-list">
-              <label class="tracker-choice"><input type="radio" name="authority" value="yes"> <span>Yes, I am responsible or authorized.</span></label>
-              <label class="tracker-choice"><input type="radio" name="authority" value="no"> <span>No, another person should provide it.</span></label>
-            </div>
-          </fieldset>
-          <fieldset class="tracker-question">
-            <legend>4. Have the Application Form, Service Request Form, and proof of payment all been submitted?</legend>
-            <div class="tracker-choice-list">
-              <label class="tracker-choice"><input type="radio" name="submission_scope" value="submitted"> <span>Yes, all three have been submitted.</span></label>
-              <label class="tracker-choice"><input type="radio" name="submission_scope" value="not-submitted"> <span>No, one or more submission steps are not complete.</span></label>
-            </div>
-          </fieldset>
-          <div class="tracker-actions">
-            <button class="tracker-button" type="submit">Show my next step</button>
-          </div>
-          <div class="tracker-outcome" data-qualification-outcome aria-live="polite" hidden></div>
-          <p class="tracker-screen-reader-status" data-qualification-status aria-live="assertive"></p>
-          <noscript>
-            <div class="tracker-note">
-              <p>This intake is for a responsible or authorized person sharing one South African Act 36 new registration after the Application Form, Service Request Form, and proof of payment have all been submitted.</p>
-              <p><a href="../../registration-tracker/intake-flow/index.html">Start the intake</a></p>
-            </div>
-          </noscript>
-        </form>
+        <ul class="tracker-boundaries">
+          <li>It is a <strong>new</strong> biological product registration — not an amendment, renewal, appeal, permit, source change, reinstatement, or other service.</li>
+          <li>It is a <strong>South African registration under Act 36</strong> — not another country or regulatory regime.</li>
+          <li>You are the <strong>responsible or authorized person</strong> for the registration, or providing its information on their behalf.</li>
+          <li>The <strong>Application Form, Service Request Form, and proof of payment</strong> have all already been submitted to the registrar.</li>
+        </ul>
+        <div class="tracker-actions">
+          <a class="tracker-button tracker-button--orange" href="../../registration-tracker/intake-flow/index.html">Start a new registration</a>
+          <a class="tracker-button tracker-button--secondary" href="../../registration-tracker/resources/index.html">Not there yet? See registration resources</a>
+        </div>
       </div>
     </section>
 
