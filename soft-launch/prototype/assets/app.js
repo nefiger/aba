@@ -8,17 +8,18 @@ const routes = [
 
 class AbaHeader extends HTMLElement {
   connectedCallback() {
+    const base = this.getAttribute("base") || "";
     const current = document.body.dataset.page || "";
     const links = routes.map(([key, label, href]) => `
-      <li><a href="${href}" ${current === key ? 'aria-current="page"' : ""}>${label}</a></li>
+      <li><a href="${base}${href}" ${current === key ? 'aria-current="page"' : ""}>${label}</a></li>
     `).join("");
 
     this.innerHTML = `
       <a class="skip-link" href="#main-content">Skip to main content</a>
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="brand" href="index.html" aria-label="African Biologicals Alliance home">
-            <img src="assets/aba-logo-final.png" alt="">
+          <a class="brand" href="${base}index.html" aria-label="African Biologicals Alliance home">
+            <img src="${base}assets/aba-logo-final.png" alt="">
             <span class="brand__name">African Biologicals Alliance<small>In Africa · For Africa</small></span>
           </a>
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
@@ -27,7 +28,7 @@ class AbaHeader extends HTMLElement {
           </button>
           <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-open="false">
             <ul class="site-nav__links">${links}</ul>
-            <a class="button button--primary site-nav__action" href="membership-interest.html">Express interest</a>
+            <a class="button button--primary site-nav__action" href="${base}membership-interest.html">Express interest</a>
           </nav>
         </div>
       </header>`;
@@ -45,28 +46,29 @@ class AbaHeader extends HTMLElement {
 
 class AbaFooter extends HTMLElement {
   connectedCallback() {
+    const base = this.getAttribute("base") || "";
     this.innerHTML = `
       <footer class="site-footer">
         <div class="shell site-footer__main">
           <div class="site-footer__brand">
-            <img src="assets/aba-logo-final.png" alt="African Biologicals Alliance">
+            <img src="${base}assets/aba-logo-final.png" alt="African Biologicals Alliance">
             <p>An African alliance working on the regulatory and market barriers that biologicals companies cannot solve alone.</p>
           </div>
           <div class="site-footer__nav">
             <section aria-labelledby="footer-explore">
               <h2 id="footer-explore">Explore</h2>
               <ul>
-                <li><a href="about.html">About ABA</a></li>
-                <li><a href="membership.html">Membership</a></li>
-                <li><a href="technical-network.html">Technical Network</a></li>
-                <li><a href="registration-tracker.html">Registration Tracker</a></li>
+                <li><a href="${base}about.html">About ABA</a></li>
+                <li><a href="${base}membership.html">Membership</a></li>
+                <li><a href="${base}technical-network.html">Technical Network</a></li>
+                <li><a href="${base}registration-tracker.html">Registration Tracker</a></li>
               </ul>
             </section>
             <section aria-labelledby="footer-connect">
               <h2 id="footer-connect">Connect</h2>
               <ul>
-                <li><a href="membership-interest.html">Membership interest</a></li>
-                <li><a href="privacy.html">Privacy and data use</a></li>
+                <li><a href="${base}membership-interest.html">Membership interest</a></li>
+                <li><a href="${base}privacy.html">Privacy and data use</a></li>
               </ul>
             </section>
           </div>

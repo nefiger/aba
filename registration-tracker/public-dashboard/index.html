@@ -10,23 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
   <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260730-insights3">
+  <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
 </head>
-<body class="site-v2 brochure-theme tracker-module" data-tracker-view="insights">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="tracker-module-header">
-    <div class="tracker-module-header__inner">
-      <a class="tracker-module-brand" href="../../soft-launch/prototype/index.html">
-        <img src="../../soft-launch/prototype/assets/aba-logo-final.png" alt="">
-        <span>African Biologicals Alliance</span>
-      </a>
-      <nav class="tracker-module-nav" aria-label="Registration Tracker">
-        <a href="../../soft-launch/prototype/registration-tracker.html">Tracker</a>
-        <a href="../intake-flow/index.html">New registration</a>
-        <a href="index.html" aria-current="page">Registration insights</a>
-        <a href="../../soft-launch/prototype/privacy.html">Privacy</a>
-      </nav>
-    </div>
-  </header>
+<body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="insights">
+  <aba-header base="../../soft-launch/prototype/"></aba-header>
+  <nav class="tracker-shell tracker-subnav" aria-label="Registration Tracker sections">
+    <a href="../../soft-launch/prototype/registration-tracker.html">Tracker</a>
+    <a href="../intake-flow/index.html">New registration</a>
+    <a href="index.html" aria-current="page">Registration insights</a>
+    <a href="../resources/index.html">Resources</a>
+    <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy</a>
+  </nav>
 
   <main id="main-content">
     <section class="tracker-page-header tracker-page-header--compact">
@@ -192,11 +186,6 @@
     </section>
   </main>
 
-  <footer class="tracker-module-footer">
-    <div class="tracker-module-footer__inner">
-      <span>African Biologicals Alliance · Registration Tracker</span>
-      <span><a href="../../soft-launch/prototype/privacy.html">Privacy and data use</a></span>
-    </div>
-  </footer>
+  <aba-footer base="../../soft-launch/prototype/"></aba-footer>
 </body>
 </html>
