@@ -8,17 +8,18 @@ const routes = [
 
 class AbaHeader extends HTMLElement {
   connectedCallback() {
+    const base = this.getAttribute("base") || "";
     const current = document.body.dataset.page || "";
     const links = routes.map(([key, label, href]) => `
-      <li><a href="${href}" ${current === key ? 'aria-current="page"' : ""}>${label}</a></li>
+      <li><a href="${base}${href}" ${current === key ? 'aria-current="page"' : ""}>${label}</a></li>
     `).join("");
 
     this.innerHTML = `
       <a class="skip-link" href="#main-content">Skip to main content</a>
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="brand" href="index.html" aria-label="African Biologicals Alliance home">
-            <img src="assets/aba-logo-final.png" alt="">
+          <a class="brand" href="${base}index.html" aria-label="African Biologicals Alliance home">
+            <img src="${base}assets/aba-logo-final.png" alt="">
             <span class="brand__name">African Biologicals Alliance<small>In Africa · For Africa</small></span>
           </a>
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
@@ -27,7 +28,7 @@ class AbaHeader extends HTMLElement {
           </button>
           <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-open="false">
             <ul class="site-nav__links">${links}</ul>
-            <a class="button button--primary site-nav__action" href="membership-interest.html">Express interest</a>
+            <a class="button button--primary site-nav__action" href="${base}membership-interest.html">Express interest</a>
           </nav>
         </div>
       </header>`;
@@ -45,28 +46,29 @@ class AbaHeader extends HTMLElement {
 
 class AbaFooter extends HTMLElement {
   connectedCallback() {
+    const base = this.getAttribute("base") || "";
     this.innerHTML = `
       <footer class="site-footer">
         <div class="shell site-footer__main">
           <div class="site-footer__brand">
-            <img src="assets/aba-logo-final.png" alt="African Biologicals Alliance">
+            <img src="${base}assets/aba-logo-final.png" alt="African Biologicals Alliance">
             <p>An African alliance working on the regulatory and market barriers that biologicals companies cannot solve alone.</p>
           </div>
           <div class="site-footer__nav">
             <section aria-labelledby="footer-explore">
               <h2 id="footer-explore">Explore</h2>
               <ul>
-                <li><a href="about.html">About ABA</a></li>
-                <li><a href="membership.html">Membership</a></li>
-                <li><a href="technical-network.html">Technical Network</a></li>
-                <li><a href="registration-tracker.html">Registration Tracker</a></li>
+                <li><a href="${base}about.html">About ABA</a></li>
+                <li><a href="${base}membership.html">Membership</a></li>
+                <li><a href="${base}technical-network.html">Technical Network</a></li>
+                <li><a href="${base}registration-tracker.html">Registration Tracker</a></li>
               </ul>
             </section>
             <section aria-labelledby="footer-connect">
               <h2 id="footer-connect">Connect</h2>
               <ul>
-                <li><a href="membership-interest.html">Membership interest</a></li>
-                <li><a href="privacy.html">Privacy and data use</a></li>
+                <li><a href="${base}membership-interest.html">Membership interest</a></li>
+                <li><a href="${base}privacy.html">Privacy and data use</a></li>
               </ul>
             </section>
           </div>
@@ -201,7 +203,112 @@ function validatePrototypeForm(form) {
   return false;
 }
 
+function reviewRowLabel(item) {
+  if (item.matches(".choice")) {
+    const lead = item.querySelector("span > strong");
+    return (lead?.textContent || item.textContent || "").replace(/\*/g, "").trim();
+  }
+  const label = item.querySelector(":scope > label, :scope > .field__label");
+  return (label?.textContent || "").replace(/\(optional\)/gi, "").replace(/\*/g, "").trim();
+}
+
+function reviewRowValue(item) {
+  if (item.matches(".choice")) {
+    return item.querySelector("input")?.checked ? "Yes" : "No";
+  }
+  const choiceGrid = item.querySelector(":scope > .choice-grid");
+  if (choiceGrid) {
+    const picked = [...choiceGrid.querySelectorAll("input:checked")]
+      .map((input) => input.closest(".choice")?.querySelector("span")?.textContent.trim())
+      .filter(Boolean);
+    return picked.length ? picked.join(", ") : "None selected";
+  }
+  const control = item.querySelector("input, select, textarea");
+  if (!control) return "";
+  if (control.type === "checkbox") return control.checked ? "Yes" : "No";
+  const value = control.value.trim();
+  if (!value) return "Not provided";
+  if (control instanceof HTMLSelectElement) return control.selectedOptions[0]?.textContent.trim() || value;
+  return value;
+}
+
+function buildReviewGroups(form) {
+  return [...form.querySelectorAll("fieldset.form-section")].map((fieldset, index) => {
+    const legend = fieldset.querySelector("legend");
+    const title = (legend?.textContent || `Section ${index + 1}`).replace(/\*/g, "").trim();
+    const items = [];
+    const collect = (container) => {
+      [...container.children].forEach((child) => {
+        if (child.matches(".field-grid")) { collect(child); return; }
+        if (child.matches(".field") || child.matches(".choice")) {
+          items.push({ label: reviewRowLabel(child), value: reviewRowValue(child) });
+        }
+      });
+    };
+    collect(fieldset);
+    return { title, items, target: fieldset };
+  });
+}
+
+function renderFormReview(form, review) {
+  const groups = buildReviewGroups(form);
+  const container = review.querySelector("[data-review-groups]");
+  container.replaceChildren(...groups.map((group, index) => {
+    const section = document.createElement("section");
+    section.className = "form-review__group";
+    const rows = group.items.map((item) => `<dt>${item.label}</dt><dd>${item.value}</dd>`).join("");
+    section.innerHTML = `
+      <div class="form-review__heading">
+        <h3>${group.title}</h3>
+        <button type="button" data-review-edit="${index}">Edit</button>
+      </div>
+      <dl class="form-review-list">${rows}</dl>`;
+    return section;
+  }));
+  container.querySelectorAll("[data-review-edit]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const group = groups[Number(button.dataset.reviewEdit)];
+      form.hidden = false;
+      review.dataset.visible = "false";
+      const legend = group.target.querySelector("legend");
+      legend?.setAttribute("tabindex", "-1");
+      group.target.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      legend?.focus();
+    });
+  });
+}
+
+function performFakeSubmit(form, button) {
+  const original = button.textContent;
+  button.disabled = true;
+  button.textContent = button.dataset.loadingLabel || "Sending…";
+  window.setTimeout(() => {
+    form.hidden = true;
+    const review = document.querySelector(`[data-review='${form.dataset.prototypeForm}']`);
+    if (review) review.dataset.visible = "false";
+    const success = document.querySelector(`[data-success='${form.dataset.prototypeForm}']`);
+    if (success) {
+      success.dataset.visible = "true";
+      success.setAttribute("tabindex", "-1");
+      success.focus();
+    }
+    button.disabled = false;
+    button.textContent = original;
+  }, 450);
+}
+
 document.querySelectorAll("[data-prototype-form]").forEach((form) => {
+  const reviewBeforeSubmit = form.hasAttribute("data-review-before-submit");
+  const review = reviewBeforeSubmit ? document.querySelector(`[data-review='${form.dataset.prototypeForm}']`) : null;
+
+  review?.querySelector("[data-review-confirm]")?.addEventListener("click", (event) => {
+    form.hidden = false;
+    review.dataset.visible = "false";
+    const valid = form.hasAttribute("novalidate") ? validatePrototypeForm(form) : form.checkValidity();
+    if (!valid) return;
+    performFakeSubmit(form, event.currentTarget);
+  });
+
   form.addEventListener("input", (event) => {
     const control = event.target;
     if (!(control instanceof HTMLInputElement || control instanceof HTMLSelectElement || control instanceof HTMLTextAreaElement)) return;
@@ -238,19 +345,14 @@ document.querySelectorAll("[data-prototype-form]").forEach((form) => {
     const valid = form.hasAttribute("novalidate") ? validatePrototypeForm(form) : form.checkValidity();
     if (!valid) return;
     const button = form.querySelector("button[type='submit']");
-    const original = button.textContent;
-    button.disabled = true;
-    button.textContent = button.dataset.loadingLabel || "Sending…";
-    window.setTimeout(() => {
+    if (reviewBeforeSubmit && review) {
+      renderFormReview(form, review);
       form.hidden = true;
-      const success = document.querySelector(`[data-success='${form.dataset.prototypeForm}']`);
-      if (success) {
-        success.dataset.visible = "true";
-        success.setAttribute("tabindex", "-1");
-        success.focus();
-      }
-      button.disabled = false;
-      button.textContent = original;
-    }, 450);
+      review.dataset.visible = "true";
+      review.setAttribute("tabindex", "-1");
+      review.focus();
+      return;
+    }
+    performFakeSubmit(form, button);
   });
 });

@@ -1,43 +1,132 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Share the progress and barriers affecting a biological product registration.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Share the current position of one South African Act 36 new biological product registration for ABA review.">
   <title>Registration Tracker · African Biologicals Alliance</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260721-system5"><script src="assets/app.js?v=20260721-copy3" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20260721-system5">
+  <link rel="stylesheet" href="../../registration-tracker/shared/registration-tracker-module.css?v=20260731b">
+  <script src="assets/app.js?v=20260721-copy3" defer></script>
+  <script src="../../registration-tracker/shared/registration-tracker-module.js?v=20260731b" defer></script>
 </head>
-<body class="site-v2 brochure-theme legacy-route tracker-v2" data-page="tracker">
+<body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header></aba-header>
   <main id="main-content">
-    <section class="tracker-cover">
-      <div class="site-shell tracker-cover__grid">
-        <div class="tracker-cover__main reveal"><p class="brochure-label brochure-label--light">Registration Tracker</p><h1>Track a registration.</h1><p>Use this when a biological product is being prepared for or moving through registration. Tell ABA where it stands, what has happened and what is holding it up.</p><a class="button button--orange" href="#tracker-handoff">How the tracker works <span aria-hidden="true">↓</span></a></div>
-        <aside class="tracker-cover__brief reveal"><p class="brochure-label">Before you begin</p><h2>Share where the registration stands.</h2><ul><li><span>Use the tracker when</span><p>A biological product is being prepared for, submitted or moving through registration.</p></li><li><span>Membership</span><p>You do not need to be an ABA member.</p></li><li><span>What to have ready</span><p>The application, its current status, work already completed and the problem that needs attention.</p></li></ul></aside>
+    <section class="tracker-page-header">
+      <div class="tracker-shell tracker-page-header__grid">
+        <div>
+          <p class="tracker-label">Registration Tracker · New registrations</p>
+          <h1>Track a new registration.</h1>
+          <p class="tracker-lede">Share the current position of one South African biological product registration under Act 36. ABA reviews every submission before approved information may support combined, non-named public insights.</p>
+          <div class="tracker-actions">
+            <a class="tracker-button tracker-button--orange" href="../../registration-tracker/intake-flow/index.html">Start a new registration</a>
+            <a class="tracker-button tracker-button--secondary" href="#is-this-for-you">Is this for you?</a>
+          </div>
+        </div>
+        <aside class="tracker-note">
+          <p><strong>What stays out of public insights:</strong> your contact details and identifying organisation, product, and raw registration information.</p>
+          <p><a href="privacy.html#registration-tracker">Read how tracker information is used</a></p>
+          <p><a href="../../registration-tracker/resources/index.html">Not submitted yet? See registration resources</a></p>
+        </aside>
       </div>
     </section>
 
-    <section class="section" id="tracker-handoff">
-      <div class="shell tracker-handoff">
-        <div class="editorial-copy reveal"><p class="eyebrow">Who can use it</p><h2 class="section-title">You do not need to be a member.</h2><p class="lede">Anyone responsible for a biological product registration can use the tracker.</p><p>Tell ABA where the process stands and what is holding it up. You will not be asked to upload a full confidential dossier.</p></div>
-        <aside class="tracker-handoff__signal reveal"><strong>Prepare the registration details.</strong><p>Have the product, application status, work completed and the issue that needs attention ready before you start.</p></aside>
-      </div>
-    </section>
-
-    <section class="section section--sage">
-      <div class="shell">
-        <div class="section__intro reveal"><div><p class="eyebrow">How ABA may use the information</p><h2 class="section-title">You control what ABA shares.</h2></div><p class="lede">You decide whether ABA may use the information without naming your organisation or product. Any named use requires separate permission.</p></div>
-        <div class="principles reveal" style="margin-top: var(--space-2xl)">
-          <article class="principle"><span class="principle__label">Kept private</span><h3>Your submission</h3><p>Your organisation, product and application details are not published by default.</p></article>
-          <article class="principle"><span class="principle__label">Used without names</span><h3>Shared patterns</h3><p>With the right permission, ABA may combine reviewed information to show common delays or barriers without naming a company or product.</p></article>
-          <article class="principle"><span class="principle__label">Used with names</span><h3>Only with permission</h3><p>ABA needs separate permission and review before using your organisation, product or registration matter by name.</p></article>
+    <section class="tracker-section tracker-section--cream" id="is-this-for-you">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">Is this for you?</p>
+          <h2>This tracker is for one specific situation.</h2>
+          <p>The intake opens with the same four checks below, so nothing here needs to be answered twice — start when all four are true for you.</p>
+        </div>
+        <ul class="tracker-boundaries">
+          <li>It is a <strong>new</strong> biological product registration — not an amendment, renewal, appeal, permit, source change, reinstatement, or other service.</li>
+          <li>It is a <strong>South African registration under Act 36</strong> — not another country or regulatory regime.</li>
+          <li>You are the <strong>responsible or authorized person</strong> for the registration, or providing its information on their behalf.</li>
+          <li>The <strong>Application Form, Service Request Form, and proof of payment</strong> have all already been submitted to the registrar.</li>
+        </ul>
+        <div class="tracker-actions">
+          <a class="tracker-button tracker-button--orange" href="../../registration-tracker/intake-flow/index.html">Start a new registration</a>
+          <a class="tracker-button tracker-button--secondary" href="../../registration-tracker/resources/index.html">Not there yet? See registration resources</a>
         </div>
       </div>
     </section>
 
-    <section class="section section--beige">
-      <div class="shell editorial-split"><div class="editorial-copy reveal"><p class="eyebrow">What the public will see</p><h2 class="section-title">ABA publishes reviewed information only.</h2></div><div class="editorial-copy reveal"><p>ABA will only publish a sector view when there is enough real information and the required permissions are in place. Nothing is published simply because it was submitted.</p><p>Using the tracker does not make you a member and does not sign you up for unrelated ABA emails.</p></div></div>
+    <section class="tracker-section">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">What ABA can learn</p>
+          <h2>Reviewed information can reveal recurring registration barriers.</h2>
+        </div>
+        <ol class="tracker-index-list">
+          <li><strong>01</strong><p>Where new registrations are in the process.</p></li>
+          <li><strong>02</strong><p>Elapsed time in relation to the published timeframe.</p></li>
+          <li><strong>03</strong><p>Barriers that recur across reviewed registrations.</p></li>
+          <li><strong>04</strong><p>Evidence that can be shared safely through public insights.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tracker-section tracker-section--beige">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">How it works</p>
+          <h2>From one submission to reviewed evidence.</h2>
+        </div>
+        <ol class="tracker-process">
+          <li><strong>Share</strong><p>Provide the current position of one new registration.</p></li>
+          <li><strong>Review and submit</strong><p>Check your answers and acknowledge how reviewed information may be used.</p></li>
+          <li><strong>ABA reviews</strong><p>ABA aims to review the submission within two weeks and may request clarification.</p></li>
+          <li><strong>Build insights</strong><p>Approved information may contribute to combined, non-named findings when the evidence is sufficient.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tracker-section tracker-section--forest">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">Clear boundaries</p>
+          <h2>The tracker records a situation; it does not act as the registrar.</h2>
+        </div>
+        <ul class="tracker-boundaries">
+          <li>ABA is not the registrar.</li>
+          <li>The tracker does not submit an application to a regulator.</li>
+          <li>ABA does not provide legal or regulatory advice through this form.</li>
+          <li>Do not upload a full dossier or payment documentation.</li>
+          <li>Contact, organisation, product, and raw registration details are not made public automatically.</li>
+          <li>Contribution to combined, non-named insights after review is a condition of submitting.</li>
+          <li>Using the tracker does not create, approve, or change ABA membership.</li>
+          <li>A registrar export is not available in this release.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tracker-section">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">Public evidence</p>
+          <h2>See how registration insights will be published.</h2>
+          <p>The public view explains what ABA is collecting and why findings may not yet be available. It does not use sample data to imitate a live evidence base.</p>
+        </div>
+        <div class="tracker-actions">
+          <a class="tracker-button tracker-button--secondary" href="../../registration-tracker/public-dashboard/index.html">View registration insights</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="tracker-section tracker-section--cream">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">Ready to share a new registration?</p>
+          <h2>Start when the responsible person has the current details.</h2>
+        </div>
+        <div class="tracker-actions">
+          <a class="tracker-button tracker-button--orange" href="../../registration-tracker/intake-flow/index.html">Start a new registration</a>
+        </div>
+      </div>
     </section>
   </main>
   <aba-footer></aba-footer>

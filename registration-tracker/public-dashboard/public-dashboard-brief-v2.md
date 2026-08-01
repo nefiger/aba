@@ -1,5 +1,7 @@
 # Public Dashboard Brief V2
 
+> **Current mockup release note (30 July 2026):** `docs/requirements/registration-tracker-module-change-spec.md` and the reconciliation at the top of `../data-model-v1.md` supersede this brief where they conflict. The active public page is a registration-insights evidence-status experience based on reviewed `Application` records. Its process explanation begins at receipt rather than pre-submission preparation, and it contains no fictional records, totals, trends, timestamps, packet activity, country comparisons, or charts. It previews four real future evidence views—process position, elapsed time, recurring barriers, and evidence coverage—through labelled analytical structures with explicit unavailable states, then explains the review and publication gates. This V2 brief remains as historical metric-planning context for a later evidence-backed release.
+
 *Supersedes `public-dashboard-brief-v1.md`. Reconciled to `../registrar-requirements-spec-v1.md`
 (verified Phase 2 extraction) and `../context-and-decisions-v1.md`. V1 retained as history.*
 

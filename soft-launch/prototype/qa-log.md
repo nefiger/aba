@@ -1,9 +1,34 @@
 # Reference Prototype QA Log
 
-Last updated: 2026-07-21
+Last updated: 2026-07-30
 Gate: G3 in progress
 
+## Registration insights hierarchy refinement — 30 July 2026
+
+- replaced the large evidence-status card and repeated panel warnings with one quiet page-level notice;
+- removed repeated “Future view”, “Awaiting sufficient”, and “Not yet assessable” language;
+- differentiated the four evidence previews as a stage distribution, timeframe plot, classification flow, and coverage matrix without adding sample values;
+- verified the revised page at 375px and 1440px CSS widths with no horizontal overflow or console warnings.
+
 ## Rendered browser checks completed
+
+### Registration Tracker post-submission reconciliation
+
+- the landing qualification now asks four questions and routes only a new South African Act 36 registration, a responsible or authorized participant, and a registration with the Application Form, Service Request Form, and proof of payment already submitted into intake;
+- the intake retains five participant-facing stages but stage 4 is now `Confirm submission`, with three required affirmative confirmations and required self-reported SACNASP status;
+- the pre-submission `Preparing` state and the earlier supporting-information / payment-readiness controls were removed from the active flow;
+- the review screen preserves and displays all three submission confirmations, blocks submission until both data-use acknowledgements are checked, permits correction, and retains completed values while the page remains open;
+- registration insights now begins its process explanation at `Received` and explains submission confirmations instead of readiness data;
+- registration insights now previews four real future evidence views—process position, elapsed time, recurring barriers, and evidence coverage—using labelled structures and explicit unavailable states without sample values, estimated results, or fictional registrations;
+- at 375 CSS pixels, the four evidence-panel question headings retain natural one- or two-line wraps because each full question names the analytical distinction the future view will answer; none exceeds two lines and shortening them further would remove meaning;
+- Privacy and data use now names submission-confirmation information and explains the current tracker limits without exposing mockup or prototype narration;
+- the tracker static preflight passes 57 checks and now covers the four-question qualification, the three affirmative submission confirmations, the absence of pre-submission states, and the absence of visible mockup/prototype framing;
+- the public-site static preflight passes with the two existing ordinary-language privacy warnings for `relationship` and `record`;
+- the browser render check reports no blocking horizontal-overflow or page-title failures across 10 routes at 320, 375, 768, 1024, and 1440 CSS pixels; 45 supporting-heading wraps remain human-review warnings;
+- landing, intake opening, intake review, registration insights, and Privacy and data use were inspected through their complete scroll at 375 and 1440 CSS pixels with no horizontal overflow;
+- all qualification outcomes, all five intake stages, conditional reference handling, `Unknown` SACNASP, acknowledgement blocking, correction, confirmation, and add-another reset behavior passed;
+- the four active tracker pages reported no browser console errors or warnings;
+- the screenshot packet contains full-page stitched scroll captures and viewport captures for both widths; `full-page-contact-sheet.png` records the ten-route review set at `C:\Users\krimc\.codex\visualizations\2026\07\30\019fb40a-b2c2-75d2-950b-aa261efe7a1f\tracker-reconciliation-screenshots`.
 
 ### Single member application correction
 

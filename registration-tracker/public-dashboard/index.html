@@ -1,844 +1,133 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ABA Sector Signals | Registration Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../docs/membership-flow/assets/membership-shell.css">
-    <link rel="stylesheet" href="../shared/tracker-wireframe.css">
-    <link rel="stylesheet" href="../../docs/site/assets/public-shell.css">
-    <script defer src="../../docs/site/assets/public-shell.js"></script>
-    <style>
-      .public-dashboard-shell {
-        color: #173039;
-      }
-
-      .public-dashboard-shell .product-title {
-        font-family: "Public Sans", system-ui, sans-serif;
-        font-size: 14px;
-        line-height: 1.45;
-      }
-
-      .page {
-        width: min(1340px, calc(100% - 28px));
-        margin: 0 auto;
-      }
-
-      .public-dashboard-shell .dashboard-hero.hero-shell {
-        position: relative;
-        overflow: hidden;
-        background:
-          radial-gradient(circle at 92% 0%, rgba(214, 175, 78, 0.2), transparent 30%),
-          radial-gradient(circle at 18% 115%, rgba(82, 126, 94, 0.24), transparent 34%),
-          linear-gradient(135deg, #14342f 0%, #1d473d 58%, #2b4a36 100%) !important;
-        color: #fbf7ed;
-      }
-
-      .public-dashboard-shell .dashboard-hero.hero-shell::after {
-        content: "";
-        position: absolute;
-        inset: auto -10% -22% auto;
-        width: 320px;
-        height: 320px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 247, 221, 0.16) 0%, rgba(255, 247, 221, 0.05) 48%, transparent 72%);
-        pointer-events: none;
-      }
-
-      .page-header {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .knowledge-eyebrow,
-      .section-label {
-        display: inline-flex;
-        align-items: center;
-        min-height: 32px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(23, 48, 57, 0.08);
-        background: rgba(255, 255, 255, 0.76);
-        color: #2b6b4f;
-        font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .public-dashboard-shell .dashboard-hero.hero-shell .knowledge-eyebrow {
-        border-color: rgba(255, 247, 221, 0.22);
-        background: rgba(255, 247, 221, 0.1);
-        color: #f5d98c;
-      }
-
-      .public-dashboard-shell .dashboard-hero.hero-shell h1 {
-        margin-top: 12px;
-        font-size: clamp(2rem, 3.2vw, 3.25rem);
-        line-height: 1;
-        letter-spacing: -0.04em;
-        color: #fbf7ed;
-      }
-
-      .public-dashboard-shell .dashboard-hero.hero-shell p {
-        margin-top: 10px;
-        max-width: none;
-        color: rgba(251, 247, 237, 0.76);
-        font-size: 15px;
-        line-height: 1.5;
-      }
-
-      .public-dashboard-shell .dashboard-hero {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        padding: clamp(18px, 2.2vw, 28px);
-      }
-
-      .dashboard-hero__copy,
-      .dashboard-metrics {
-        position: relative;
-        z-index: 1;
-      }
-
-      .dashboard-chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 14px;
-      }
-
-      .dashboard-chip {
-        display: inline-flex;
-        align-items: center;
-        min-height: 28px;
-        padding: 0 10px;
-        border-radius: 999px;
-        background: rgba(255, 247, 221, 0.12);
-        border: 1px solid rgba(255, 247, 221, 0.18);
-        color: #fbf7ed;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 0.02em;
-      }
-
-      .dashboard-metrics {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0;
-        margin-top: 4px;
-        padding: 6px;
-        border-radius: 18px;
-        border: 1px solid rgba(255, 247, 221, 0.18);
-        background: rgba(7, 26, 24, 0.3);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      }
-
-      .dashboard-metrics .metric {
-        min-height: 0;
-        padding: 8px 12px;
-        border: 0;
-        border-radius: 16px;
-        background: transparent !important;
-        box-shadow: none !important;
-      }
-
-      .dashboard-metrics .metric + .metric {
-        border-left: 1px solid rgba(255, 247, 221, 0.16);
-      }
-
-      .dashboard-metrics .metric > span:first-child {
-        color: rgba(251, 247, 237, 0.66);
-        font-size: 11px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .dashboard-metrics .metric-value {
-        margin-top: 8px;
-        color: #fbf7ed;
-        font-size: clamp(1.7rem, 2.4vw, 2.45rem);
-        line-height: 0.95;
-      }
-
-      .public-dashboard-shell .dashboard-grid {
-        margin-top: 12px;
-        gap: 12px;
-        align-items: stretch;
-      }
-
-      .public-dashboard-shell .dashboard-grid + .dashboard-grid,
-      .public-dashboard-shell .dashboard-grid + .signal-context-reveal,
-      .public-dashboard-shell .signal-context-reveal + .cta-band {
-        margin-top: 12px;
-      }
-
-      .public-dashboard-shell .chart-grid.dashboard-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .public-dashboard-shell .chart-card {
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-        overflow: hidden;
-        padding: 14px 16px 12px;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.72);
-      }
-
-      .public-dashboard-shell .chart-card h3 {
-        margin-bottom: 8px;
-        color: #173039;
-        font-size: 0.98rem;
-        line-height: 1.2;
-      }
-
-      .public-dashboard-shell .chart-card .note {
-        margin-top: 8px;
-        font-size: 0.78rem;
-        line-height: 1.35;
-      }
-
-      .public-dashboard-shell .chart-svg {
-        width: 100%;
-        min-height: 0;
-        overflow: visible;
-      }
-
-      .public-dashboard-shell .wide-chart {
-        min-height: 0;
-      }
-
-      .public-dashboard-shell .chart-svg text {
-        font-family: "Public Sans", system-ui, sans-serif;
-      }
-
-      .chart-mark {
-        outline: none;
-        transition: opacity 160ms ease, filter 160ms ease;
-      }
-
-      .chart-mark:hover,
-      .chart-mark:focus {
-        filter: brightness(0.92);
-        opacity: 1;
-      }
-
-      .chart-value {
-        pointer-events: none;
-      }
-
-      .signal-context-reveal {
-        padding: 0;
-        overflow: hidden;
-      }
-
-      .signal-context-reveal summary {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 18px 20px;
-        color: #15322f;
-        font-size: 1rem;
-        font-weight: 900;
-        list-style: none;
-      }
-
-      .signal-context-reveal summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .signal-context-reveal summary::after {
-        content: "+";
-        display: inline-grid;
-        place-items: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 999px;
-        background: #173b35;
-        color: #f7f4ec;
-        flex: 0 0 auto;
-      }
-
-      .signal-context-reveal[open] summary::after {
-        content: "-";
-      }
-
-      .signal-context-inner {
-        padding: 0 20px 20px;
-      }
-
-      .hero-stat-grid,
-      .context-grid,
-      .advocacy-grid,
-      .cta-actions {
-        display: grid;
-        gap: 12px;
-      }
-
-      .hero-stat-grid,
-      .context-grid,
-      .advocacy-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-top: 18px;
-      }
-
-      .hero-stat {
-        padding: 14px 16px;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(23, 48, 57, 0.08);
-      }
-
-      .hero-stat strong {
-        display: block;
-        color: #173039;
-        font-size: 1.35rem;
-        font-weight: 800;
-      }
-
-      .hero-stat span {
-        display: block;
-        margin-top: 6px;
-        color: #5c6f73;
-        font-size: 13px;
-        line-height: 1.5;
-      }
-
-      .knowledge-context-card,
-      .context-card,
-      .support-card,
-      .cta-band {
-        border-radius: 20px;
-      }
-
-      .knowledge-context-card {
-        padding: 18px;
-      }
-
-      .knowledge-chip {
-        display: inline-flex;
-        align-items: center;
-        min-height: 30px;
-        padding: 0 11px;
-        border-radius: 999px;
-        background: rgba(43, 107, 79, 0.12);
-        color: #2b6b4f;
-        font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .knowledge-context-card p {
-        margin-top: 14px;
-      }
-
-      .context-card {
-        padding: 16px;
-        background: rgba(255, 255, 255, 0.76);
-        border: 1px solid rgba(46, 58, 46, 0.08);
-        box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
-      }
-
-      .context-card h3 {
-        margin-top: 10px;
-        font-size: 1.05rem;
-        line-height: 1.35;
-      }
-
-      .context-card p {
-        margin-top: 10px;
-      }
-
-      .context-card strong {
-        color: #173039;
-      }
-
-      .section-heading {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        align-items: end;
-        flex-wrap: wrap;
-      }
-
-      .section-heading > :first-child {
-        min-width: 0;
-        flex: 1 1 auto;
-      }
-
-      .section-heading p,
-      .section-heading .note {
-        max-width: none;
-      }
-
-      .metric-grid {
-        margin-top: 16px;
-      }
-
-      .metric {
-        min-height: 100%;
-      }
-
-      .metric-value {
-        display: block;
-      }
-
-      .support-card {
-        padding: 18px;
-        background: rgba(255, 255, 255, 0.76);
-        border: 1px solid rgba(46, 58, 46, 0.08);
-      }
-
-      .support-card strong {
-        display: block;
-        font-size: 1rem;
-      }
-
-      .support-card span {
-        display: block;
-        margin-top: 8px;
-        color: #5c6f73;
-        font-size: 14px;
-        line-height: 1.58;
-      }
-
-      .cta-band {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 18px;
-        align-items: center;
-        padding: 22px;
-        background:
-          radial-gradient(circle at top right, rgba(87, 140, 105, 0.14), transparent 34%),
-          rgba(255, 252, 246, 0.92);
-        border: 1px solid rgba(46, 58, 46, 0.08);
-        box-shadow: 0 16px 36px -30px rgba(33, 39, 30, 0.3);
-      }
-
-      .cta-band p {
-        margin-top: 10px;
-      }
-
-      .cta-actions {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 10px;
-      }
-
-      .button-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 46px;
-        padding: 0 18px;
-        border-radius: 16px;
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-decoration: none;
-        text-transform: uppercase;
-        white-space: nowrap;
-        flex: 0 0 auto;
-      }
-
-      .button-link.primary {
-        background: #173b35;
-        color: #f7f4ec;
-      }
-
-      .button-link.secondary {
-        border: 1px solid rgba(23, 48, 57, 0.12);
-        background: rgba(255, 255, 255, 0.92);
-        color: #203b44;
-      }
-
-      .footer-note {
-        margin: 18px 0 0;
-        text-align: center;
-      }
-
-      @media (max-width: 960px) {
-        .page-header,
-        .public-dashboard-shell .dashboard-hero,
-        .grid.two,
-        .cta-band {
-          grid-template-columns: 1fr;
-        }
-
-        .dashboard-metrics {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .dashboard-metrics .metric + .metric {
-          border-left: 0;
-        }
-
-        .cta-actions {
-          justify-content: flex-start;
-        }
-      }
-
-      @media (max-width: 720px) {
-        .hero-stat-grid,
-        .context-grid,
-        .advocacy-grid,
-        .metric-grid,
-        .dashboard-metrics,
-        .chart-grid {
-          grid-template-columns: 1fr;
-        }
-
-      }
-    </style>
-  </head>
-  <body>
-    <div class="prototype-shell public-dashboard-shell">
-      <header class="surface topbar" aria-label="Shared public header"></header>
-
-      <main class="page shell">
-        <section class="page-header panel hero-shell dashboard-hero">
-          <div class="dashboard-hero__copy">
-            <div class="knowledge-eyebrow">Sector signals</div>
-            <h1>Registration pressure</h1>
-            <p>Reviewed tracker submissions show where biological product registrations are active, waiting, and thinly covered.</p>
-            <div class="dashboard-chip-row" aria-label="Public signal safeguards">
-              <span class="dashboard-chip">Reviewed records only</span>
-              <span class="dashboard-chip">Sector-level view</span>
-              <span class="dashboard-chip">Small counts hidden</span>
-              <span class="dashboard-chip">Refreshed 2026-06-22 14:45</span>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Combined, non-named evidence from reviewed South African Act 36 new-registration submissions.">
+  <title>Registration insights · African Biologicals Alliance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260801b">
+  <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
+  <script src="../shared/registration-tracker-insights-seed.js?v=20260801" defer></script>
+  <script src="../shared/registration-tracker-insights.js?v=20260801" defer></script>
+</head>
+<body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="insights">
+  <aba-header base="../../soft-launch/prototype/"></aba-header>
+
+  <main id="main-content">
+    <section class="tracker-page-header tracker-page-header--compact">
+      <div class="tracker-shell">
+        <p class="tracker-label">Registration Tracker · Public evidence</p>
+        <h1>Registration insights.</h1>
+        <p class="tracker-lede">Combined, non-named evidence from reviewed South African Act 36 new-registration submissions.</p>
+        <p class="tracker-example-tag">Example data — fictional registrations, not real findings.</p>
+      </div>
+    </section>
+
+    <section class="tracker-section">
+      <div class="tracker-shell">
+        <div class="tracker-evidence-grid">
+          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">01</p>
+              <div>
+                <p class="tracker-label">Process position</p>
+                <h3>Where are new registrations waiting?</h3>
+              </div>
             </div>
-          </div>
-          <div class="metric-grid dashboard-metrics" aria-label="Reviewed registration signal metrics">
-            <div class="metric"><span>Open applications</span><span class="metric-value" id="metricOpen">—</span></div>
-            <div class="metric"><span>Over timeframe</span><span class="metric-value" id="metricBacklog">—</span></div>
-            <div class="metric"><span>Median wait</span><span class="metric-value" id="metricMedian">—</span></div>
-            <div class="metric"><span>Longest open</span><span class="metric-value" id="metricWorst">—</span></div>
-            <div class="metric"><span>Product-years waiting</span><span class="metric-value" id="metricYears">—</span></div>
-          </div>
-        </section>
+            <figure class="tracker-evidence-figure">
+              <figcaption>Share of included registrations</figcaption>
+              <ol class="tracker-stage-scale" data-stage-scale>
+                <li><span>Received</span><i aria-hidden="true"><b data-stage="Received"></b></i></li>
+                <li><span>Verification</span><i aria-hidden="true"><b data-stage="Verification"></b></i></li>
+                <li><span>Scientific screening</span><i aria-hidden="true"><b data-stage="Scientific screening"></b></i></li>
+                <li><span>Evaluation</span><i aria-hidden="true"><b data-stage="Evaluation"></b></i></li>
+                <li><span>Decision</span><i aria-hidden="true"><b data-stage="Decision"></b></i></li>
+              </ol>
+              <div class="tracker-axis" aria-hidden="true"><span>Lower share</span><span>Higher share</span></div>
+            </figure>
+          </article>
 
-        <section class="grid two dashboard-grid">
-          <article class="chart-card">
-            <h3>Where time is lost — by official stage</h3>
-            <svg class="chart-svg wide-chart" id="stageChart" viewBox="0 0 560 250" role="img" aria-label="Open reviewed records by official Act 36 stage"></svg>
-            <p class="note">Open records by current stage.</p>
-          </article>
-          <article class="chart-card">
-            <h3>Wait vs statutory benchmark — by service type</h3>
-            <svg class="chart-svg wide-chart" id="benchmarkChart" viewBox="0 0 560 310" role="img" aria-label="Median wait versus statutory timeframe by service type"></svg>
-            <p class="note">Red marks exceed the statutory clock; dashed ticks show the official timeframe.</p>
-          </article>
-        </section>
-
-        <section class="grid two dashboard-grid">
-          <article class="chart-card">
-            <h3>Open records by legal pathway</h3>
-            <svg class="chart-svg wide-chart" id="pathwayChart" viewBox="0 0 560 190" role="img" aria-label="Open records by legal pathway"></svg>
-            <p class="note">Small cells stay hidden.</p>
-          </article>
-          <article class="chart-card">
-            <h3>Reviewed open-record trend</h3>
-            <svg class="chart-svg wide-chart" id="trendChart" viewBox="0 0 560 190" role="img" aria-label="Reviewed open-record trend over time"></svg>
-            <p class="note" id="trendCaption">All reviewed submissions: reviewed backlog trend over the last six months.</p>
-          </article>
-        </section>
-
-        <section class="chart-grid dashboard-grid">
-          <article class="chart-card">
-            <h3>Product category signal</h3>
-            <svg class="chart-svg" id="categoryChart" viewBox="0 0 360 170" role="img" aria-label="Product category signal"></svg>
-          </article>
-          <article class="chart-card">
-            <h3>Governing regime</h3>
-            <svg class="chart-svg" id="regimeChart" viewBox="0 0 360 170" role="img" aria-label="Reviewed records by governing regime"></svg>
-          </article>
-          <article class="chart-card">
-            <h3>Pre-submission pipeline signal</h3>
-            <svg class="chart-svg" id="pipelineChart" viewBox="0 0 360 170" role="img" aria-label="Pre-submission pipeline signal"></svg>
-            <p class="note">Pre-submission activity is separate from registrar backlog.</p>
-          </article>
-        </section>
-
-        <section class="grid two dashboard-grid">
-          <article class="chart-card">
-            <h3>Country coverage</h3>
-            <svg class="chart-svg wide-chart" id="countryChart" viewBox="0 0 560 190" role="img" aria-label="Reviewed records by country"></svg>
-            <p class="note">Small country cells stay hidden.</p>
-          </article>
-          <article class="chart-card">
-            <h3>Recurring bottleneck themes</h3>
-            <svg class="chart-svg wide-chart" id="bottleneckChart" viewBox="0 0 560 220" role="img" aria-label="Recurring bottleneck themes"></svg>
-            <p class="note">Themes appear after ABA review.</p>
-          </article>
-        </section>
-
-        <details class="panel signal-context-reveal">
-          <summary>Signal notes and protection</summary>
-          <div class="signal-context-inner">
-            <div class="context-grid">
-              <article class="context-card">
-                <div class="section-label">Country coverage</div>
-                <h3>South Africa carries the strongest visible signal, with early records forming elsewhere.</h3>
-                <p>New country participation will make continental comparisons more useful over time.</p>
-              </article>
-              <article class="context-card">
-                <div class="section-label">Delay points</div>
-                <h3>Evaluation, proof gaps, and classification uncertainty are the clearest friction points.</h3>
-                <p>Repeated themes help focus advocacy and registrar engagement where pressure is accumulating.</p>
-              </article>
-              <article class="context-card">
-                <div class="section-label">Privacy</div>
-                <h3>Public signals stay aggregated and reviewed.</h3>
-                <p>Company names, product names, proof files, and file references stay out of the public view.</p>
-              </article>
-              <article class="context-card">
-                <div class="section-label">Suppression</div>
-                <h3>Small counts stay hidden until participation is broad enough to share safely.</h3>
-                <p>Suppressed cells show where more contribution is needed before public signals can be trusted.</p>
-              </article>
+          <article class="tracker-evidence-panel">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">02</p>
+              <div>
+                <p class="tracker-label">Elapsed time</p>
+                <h3>How does time compare with the published timeframe?</h3>
+              </div>
             </div>
-          </div>
-        </details>
+            <figure class="tracker-evidence-figure">
+              <figcaption>Elapsed time across included registrations</figcaption>
+              <div class="tracker-time-scale" aria-label="Elapsed-time comparison framework">
+                <div class="tracker-time-scale__plot" data-time-scale-plot>
+                  <span class="tracker-time-scale__baseline" aria-hidden="true"></span>
+                  <span class="tracker-time-scale__reference" aria-hidden="true"></span>
+                </div>
+                <div class="tracker-time-scale__labels">
+                  <span>Status began</span>
+                  <strong>Published timeframe</strong>
+                  <span>Beyond timeframe</span>
+                </div>
+                <p class="tracker-time-scale__summary" data-time-scale-summary></p>
+              </div>
+            </figure>
+          </article>
 
-        <section class="cta-band" style="margin-top: 16px;">
-          <div>
-            <div class="section-label">Contribute</div>
-            <h2 style="margin-top: 14px;">Strengthen the public evidence base</h2>
-            <p>Contribute structured product-registration data to improve the visibility of sector bottlenecks, country patterns, and regulatory readiness signals over time.</p>
-          </div>
-          <div class="cta-actions">
-            <a class="button-link primary" href="../intake-flow/index.html">Add product data</a>
-            <a class="button-link secondary" href="../../docs/registration-tracker/index.html">Back to registration tracker overview</a>
-          </div>
-        </section>
+          <article class="tracker-evidence-panel">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">03</p>
+              <div>
+                <p class="tracker-label">Recurring barriers</p>
+                <h3>Which obstacles appear across registrations?</h3>
+              </div>
+            </div>
+            <figure class="tracker-evidence-figure">
+              <figcaption>Most frequently reported, this period</figcaption>
+              <dl class="tracker-barrier-rank" data-barrier-rank></dl>
+            </figure>
+          </article>
 
-        <p class="footer-note">Illustrative aggregate data only. No company, product, proof, or reference details appear publicly.</p>
-      </main>
-    </div>
+          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
+            <div class="tracker-evidence-panel__heading">
+              <p class="tracker-evidence-panel__number">04</p>
+              <div>
+                <p class="tracker-label">Evidence coverage</p>
+                <h3>What can ABA responsibly say?</h3>
+              </div>
+            </div>
+            <figure class="tracker-evidence-figure">
+              <figcaption>Evidence available for comparison</figcaption>
+              <dl class="tracker-coverage-list" data-coverage-list>
+                <div><dt>Functional category</dt><dd aria-hidden="true" data-coverage-field="functional_category"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>Legal pathway</dt><dd aria-hidden="true" data-coverage-field="legal_pathway"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>New-registration type</dt><dd aria-hidden="true" data-coverage-field="registration_type"><i></i><i></i><i></i><i></i><i></i></dd></div>
+              </dl>
+              <div class="tracker-coverage-key" aria-hidden="true"><span>Limited coverage</span><span>Stronger coverage</span></div>
+            </figure>
+          </article>
+        </div>
+        <p class="tracker-methodology-note">Built from reviewed submissions that pass ABA's evidence gates without naming a participant, organisation, or product. <a href="../../soft-launch/prototype/privacy.html#registration-tracker">How this works</a>.</p>
+      </div>
+    </section>
 
-    <script>
-      // One record-level fictional dataset. Every headline figure and breakdown is DERIVED from
-      // this — nothing is hardcoded twice, so figures cannot drift. Fields: m member/non-member,
-      // f final?, s official stage, t service-type key, p legal pathway, c category, co country,
-      // rg regime, d open days, b bottleneck theme. Benchmarks are lookup constants (below), not
-      // stored per record. All data fictional.
-      const reviewedApplications = [
-        { m:"member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:70, b:"Reference issue" },
-        { m:"member", f:false, s:"Scientific screening", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:210, b:"Regulator delay" },
-        { m:"member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:520, b:"Regulator delay" },
-        { m:"member", f:false, s:"Evaluation", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:760, b:"Regulator delay" },
-        { m:"member", f:false, s:"Evaluation", t:"new-formulation", p:"Agricultural remedy", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:610, b:"Classification ambiguity" },
-        { m:"member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:470, b:"Regulator delay" },
-        { m:"member", f:false, s:"Scientific screening", t:"parallel", p:"Agricultural remedy", c:"Biopesticide", co:"Kenya", rg:"Agriculture / Act 36", d:150, b:"Regulator delay" },
-        { m:"member", f:false, s:"Referred back", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:300, b:"Proof missing" },
-        { m:"member", f:false, s:"Evaluation", t:"new-source", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:260, b:"Regulator delay" },
-        { m:"member", f:false, s:"Verification", t:"renewal", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:40, b:"None" },
-        { m:"member", f:false, s:"Evaluation", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:540, b:"Classification ambiguity" },
-        { m:"member", f:false, s:"Decision", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:430, b:"Regulator delay" },
-        { m:"member", f:false, s:"Scientific screening", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"Kenya", rg:"Agriculture / Act 36", d:120, b:"Reference issue" },
-        { m:"member", f:true, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:395, b:"None" },
-        { m:"member", f:true, s:"Decision", t:"parallel", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:110, b:"None" },
-        { m:"member", f:false, s:"Appeal", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:820, b:"Regulator delay" },
-        { m:"member", f:false, s:"Evaluation", t:"major-amendment", p:"Agricultural remedy", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:450, b:"Classification ambiguity" },
-        { m:"member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:360, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:60, b:"Consent missing" },
-        { m:"non-member", f:false, s:"Scientific screening", t:"generic", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:140, b:"Membership not verified" },
-        { m:"non-member", f:false, s:"Evaluation", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:560, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Kenya", rg:"Agriculture / Act 36", d:480, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Referred back", t:"minor-amendment", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:160, b:"Proof missing" },
-        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Not sure", c:"Biostimulant", co:"South Africa", rg:"Agriculture / Act 36", d:500, b:"Classification ambiguity" },
-        { m:"non-member", f:false, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Nigeria", rg:"Agriculture / Act 36", d:430, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Scientific screening", t:null, p:"N/A (non-Act 36)", c:"Biopesticide", co:"South Africa", rg:"Water treatment", d:150, b:"Regulator delay" },
-        { m:"non-member", f:true, s:"Decision", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:410, b:"None" },
-        { m:"non-member", f:false, s:"Evaluation", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"Ghana", rg:"Agriculture / Act 36", d:470, b:"Regulator delay" },
-        { m:"member", f:false, s:"Verification", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:55, b:"Reference issue" },
-        { m:"non-member", f:false, s:"Referred back", t:"generic", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:280, b:"Proof missing" },
-        { m:"member", f:false, s:"Referred back", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:230, b:"Classification ambiguity" },
-        { m:"member", f:false, s:"Evaluation", t:"new-molecule", p:"Agricultural remedy", c:"Biopesticide", co:"South Africa", rg:"Agriculture / Act 36", d:680, b:"Regulator delay" },
-        { m:"non-member", f:false, s:"Decision", t:"new-formulation", p:"Fertilizer", c:"Biofertiliser", co:"South Africa", rg:"Agriculture / Act 36", d:500, b:"Regulator delay" }
-      ];
+    <section class="tracker-section tracker-section--cream">
+      <div class="tracker-shell">
+        <div class="tracker-section-heading">
+          <p class="tracker-label">Contribute reviewed evidence</p>
+          <h2>Share a new registration.</h2>
+          <p>The intake currently supports one South African Act 36 new registration at a time.</p>
+        </div>
+        <div class="tracker-actions">
+          <a class="tracker-button tracker-button--orange" href="../intake-flow/index.html">Share a new registration</a>
+          <a class="tracker-button tracker-button--secondary" href="../../soft-launch/prototype/registration-tracker.html">Return to the Registration Tracker</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-      const PIPELINE = 24;                       // separate pre-submission list; never counted as backlog
-      const TREND = [22, 24, 26, 27, 25, 28];    // reviewed open-record count by month (explicit series)
-      const SUPPRESS_K = 4;                       // anonymisation threshold placeholder (k)
-
-      // Official statutory timeframes (calendar days) — the benchmark spine. Lookup constants.
-      const BENCHMARK = { "new-molecule":627, "new-formulation":418, "generic":418, "parallel":118, "daughter":118, "reinstatement":118, "new-source":208, "major-amendment":418, "minor-amendment":118, "renewal":90 };
-      const TYPE_LABEL = { "new-molecule":"New molecule", "new-formulation":"New formulation", "generic":"Generic", "parallel":"Parallel", "daughter":"Daughter", "reinstatement":"Reinstatement", "new-source":"New source", "major-amendment":"Major amendment", "minor-amendment":"Minor amendment", "renewal":"Renewal" };
-      const STAGE_ORDER = ["Verification", "Scientific screening", "Evaluation", "Decision", "Appeal", "Referred back"];
-
-      function isAct36(r) { return r.rg === "Agriculture / Act 36"; }
-      function benchmarkOf(r) { return isAct36(r) && BENCHMARK[r.t] != null ? BENCHMARK[r.t] : null; }
-      function overBenchmark(r) { const b = benchmarkOf(r); return b != null && r.d > b; }
-      function daysToMonths(d) { return Math.round((d / 30.44) * 10) / 10; }
-      function median(nums) { if (!nums.length) return 0; const s = [...nums].sort((a, b) => a - b); const i = Math.floor(s.length / 2); return s.length % 2 ? s[i] : Math.round((s[i - 1] + s[i]) / 2); }
-
-      // The public dashboard always uses the full reviewed pool.
-      function filteredRecords() { return reviewedApplications; }
-
-      function deriveMetrics() {
-        const open = filteredRecords().filter((r) => !r.f);
-        const days = open.map((r) => r.d);
-        return {
-          open,
-          openCount: open.length,
-          backlogCount: open.filter(overBenchmark).length,
-          median: median(days),
-          worst: days.length ? Math.max(...days) : 0,
-          years: Math.round((days.reduce((a, b) => a + b, 0) / 365) * 10) / 10
-        };
-      }
-
-      // Group records by a key, ordered, with small cells (< k) flagged suppressed.
-      function groupRows(records, keyFn, order) {
-        const map = new Map();
-        records.forEach((r) => { const k = keyFn(r); map.set(k, (map.get(k) || 0) + 1); });
-        const keys = order ? order.filter((k) => map.has(k)) : [...map.keys()];
-        return keys.map((k) => (map.get(k) < SUPPRESS_K ? [k, map.get(k), true] : [k, map.get(k)]));
-      }
-
-      // Per service type: median actual open days vs the official benchmark. [label, actual, bench, count]
-      function benchmarkRows(open) {
-        const groups = {};
-        open.forEach((r) => { if (benchmarkOf(r) != null) { (groups[r.t] = groups[r.t] || []).push(r.d); } });
-        return Object.keys(groups)
-          .sort((a, b) => BENCHMARK[b] - BENCHMARK[a])
-          .map((t) => [TYPE_LABEL[t], median(groups[t]), BENCHMARK[t], groups[t].length]);
-      }
-
-      function benchmarkChart(id, rows) {
-        const shown = rows.flatMap((r) => (r[3] < SUPPRESS_K ? [] : [r[1], r[2]]));
-        const max = Math.max(1, ...shown);
-        const rowHeight = 46, chartX = 150, chartWidth = 520 - chartX - 70;
-        const body = rows.map(([label, actual, bench, count], i) => {
-          const y = 26 + i * rowHeight;
-          if (count < SUPPRESS_K) {
-            return `<text x="16" y="${y + 17}" font-size="13" fill="#66706b">${label}</text>
-              <rect x="${chartX}" y="${y}" width="54" height="22" rx="11" fill="#a97924" opacity="0.42"></rect>
-              <text x="${chartX + 62}" y="${y + 17}" font-size="12" fill="#66706b">Suppressed</text>`;
-          }
-          const aw = Math.max(8, chartWidth * actual / max);
-          const bx = chartX + chartWidth * bench / max;
-          const over = actual > bench;
-          return `<text x="16" y="${y + 17}" font-size="13" fill="#66706b">${label}</text>
-            <rect x="${chartX}" y="${y}" width="${aw}" height="22" rx="11" fill="${over ? "#b74a36" : "#2f7a56"}" opacity="0.9"></rect>
-            <text x="${chartX + aw + 8}" y="${y + 17}" font-size="12" font-weight="700" fill="#22302d">${daysToMonths(actual)} mo</text>
-            <line x1="${bx}" y1="${y - 5}" x2="${bx}" y2="${y + 27}" stroke="#22302d" stroke-width="2" stroke-dasharray="3 3"></line>`;
-        }).join("");
-        const legendY = 26 + rows.length * rowHeight + 8;
-        document.getElementById(id).innerHTML = body +
-          `<text x="16" y="${legendY}" font-size="11" fill="#66706b">Dashed line = official statutory timeframe. Red bar = median exceeds it.</text>`;
-      }
-
-      function setText(id, text) {
-        document.getElementById(id).textContent = text;
-      }
-
-      function barChart(id, rows, options = {}) {
-        const max = Math.max(1, ...rows.map((row) => row[2] ? 0 : row[1]));
-        const rowHeight = 44;
-        const width = options.width || 520;
-        const chartWidth = width - 190;
-        const content = rows.map(([label, value, suppressed], index) => {
-          const y = 36 + index * rowHeight;
-          const barWidth = suppressed ? 58 : Math.max(10, chartWidth * value / max);
-          const fill = suppressed ? "#a97924" : (options.color || "#2f7a56");
-          const text = suppressed ? "Suppressed" : value;
-          return `
-            <text x="18" y="${y + 18}" font-size="13" fill="#66706b">${label}</text>
-            <rect x="170" y="${y}" width="${barWidth}" height="24" rx="12" fill="${fill}" opacity="${suppressed ? 0.45 : 0.9}"></rect>
-            <text x="${180 + barWidth}" y="${y + 18}" font-size="13" font-weight="700" fill="#22302d">${text}</text>
-          `;
-        }).join("");
-        document.getElementById(id).innerHTML = content;
-      }
-
-      function verticalChart(id, rows) {
-        const max = Math.max(1, ...rows.map((row) => row[2] ? 0 : row[1]));
-        const colors = ["#2f7a56", "#4069b2", "#a97924", "#b74a36"];
-        document.getElementById(id).innerHTML = rows.map(([label, value, suppressed], index) => {
-          const x = 40 + index * 105;
-          const h = suppressed ? 24 : 122 * value / max;
-          const y = 154 - h;
-          return `
-            <rect x="${x}" y="${y}" width="58" height="${h}" rx="10" fill="${colors[index % colors.length]}" opacity="${suppressed ? 0.42 : 0.9}"></rect>
-            <text x="${x + 29}" y="${y - 10}" text-anchor="middle" font-size="18" font-weight="700" fill="#22302d">${suppressed ? "*" : value}</text>
-            <text x="${x + 29}" y="188" text-anchor="middle" font-size="11" fill="#66706b">${label.split(" ")[0]}</text>
-          `;
-        }).join("");
-      }
-
-      function renderTrend(data) {
-        const values = data.trend;
-        const max = Math.max(...values);
-        const min = Math.min(...values);
-        const points = values.map((value, index) => {
-          const x = 34 + index * 88;
-          const y = 190 - ((value - min) / Math.max(1, max - min)) * 126;
-          return [x, y, value];
-        });
-        const path = points.map(([x, y], index) => `${index ? "L" : "M"} ${x} ${y}`).join(" ");
-        const dots = points.map(([x, y, value]) => `<circle cx="${x}" cy="${y}" r="5" fill="#2f7a56"></circle><text x="${x}" y="${y - 12}" text-anchor="middle" font-size="12" fill="#22302d">${value}</text>`).join("");
-        document.getElementById("trendChart").innerHTML = `
-          <line x1="30" y1="196" x2="488" y2="196" stroke="rgba(46,58,46,.16)"></line>
-          <line x1="30" y1="50" x2="30" y2="196" stroke="rgba(46,58,46,.16)"></line>
-          <path d="${path}" fill="none" stroke="#2f7a56" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
-          ${dots}
-          <text x="34" y="228" font-size="12" fill="#66706b">Jan</text>
-          <text x="474" y="228" font-size="12" fill="#66706b">Jun</text>
-        `;
-      }
-
-      function renderPipeline(data) {
-        const backlog = data.backlog;
-        const pipeline = data.pipeline;
-        const max = Math.max(backlog, pipeline, 1);
-        document.getElementById("pipelineChart").innerHTML = `
-          <text x="32" y="46" font-size="13" fill="#66706b">Reviewed backlog</text>
-          <rect x="32" y="62" width="${260 * backlog / max}" height="34" rx="17" fill="#4069b2"></rect>
-          <text x="${42 + 260 * backlog / max}" y="85" font-size="20" font-weight="700" fill="#22302d">${backlog}</text>
-          <text x="32" y="136" font-size="13" fill="#66706b">Future pre-submission pipeline</text>
-          <rect x="32" y="152" width="${260 * pipeline / max}" height="34" rx="17" fill="#a97924"></rect>
-          <text x="${42 + 260 * pipeline / max}" y="175" font-size="20" font-weight="700" fill="#22302d">${pipeline}</text>
-        `;
-      }
-
-      function render() {
-        const m = deriveMetrics();
-        const open = m.open;
-        setText("metricOpen", m.openCount);
-        setText("metricBacklog", m.backlogCount);
-        setText("metricMedian", `${daysToMonths(m.median)} mo`);
-        setText("metricWorst", `${daysToMonths(m.worst)} mo`);
-        setText("metricYears", m.years);
-
-        barChart("stageChart", groupRows(open, (r) => r.s, STAGE_ORDER));
-        benchmarkChart("benchmarkChart", benchmarkRows(open));
-        barChart("pathwayChart", groupRows(open, (r) => r.p));
-        verticalChart("categoryChart", groupRows(open, (r) => r.c));
-        verticalChart("regimeChart", groupRows(open, (r) => r.rg));
-        barChart("countryChart", groupRows(open, (r) => r.co));
-        barChart("bottleneckChart", groupRows(open, (r) => r.b));
-        renderPipeline({ backlog: m.backlogCount, pipeline: PIPELINE });
-        renderTrend({ trend: TREND });
-
-        setText("trendCaption", "All reviewed submissions: reviewed open-record trend (explicit monthly series).");
-
-      }
-
-      render();
-    </script>
-  </body>
+  <aba-footer base="../../soft-launch/prototype/"></aba-footer>
+</body>
 </html>

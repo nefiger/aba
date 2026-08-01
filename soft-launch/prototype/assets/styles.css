@@ -878,6 +878,35 @@
   }
   .form-success[data-visible="true"] { display: grid; }
   .form-success h2 { font-size: clamp(1.75rem, 4vw, 3.2rem); }
+  .form-review {
+    display: none;
+    gap: var(--space-2xl);
+    padding-block: var(--space-xl);
+    border-block: 1px solid var(--forest);
+  }
+  .form-review[data-visible="true"] { display: grid; }
+  .form-review h2 { font-size: clamp(1.75rem, 4vw, 3.2rem); }
+  .form-review__group {
+    display: grid;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--line);
+  }
+  .form-review__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-md); }
+  .form-review__heading h3 { margin: 0; color: var(--forest); font-family: var(--font-display); font-size: 1.3rem; font-weight: 620; }
+  .form-review__heading button {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--orange-action);
+    font-size: 0.85rem;
+    font-weight: 720;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .form-review-list { display: grid; gap: var(--space-sm); margin: 0; }
+  .form-review-list dt { color: var(--sage-deep); font-size: 0.78rem; font-weight: 720; }
+  .form-review-list dd { margin: 0.1rem 0 0; color: var(--forest); }
   .form-intro {
     display: grid;
     gap: var(--space-md);

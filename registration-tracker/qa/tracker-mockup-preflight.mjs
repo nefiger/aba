@@ -1,0 +1,208 @@
+import { readFile, access } from "node:fs/promises";
+import path from "node:path";
+import process from "node:process";
+import { fileURLToPath } from "node:url";
+
+const qaDirectory = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(qaDirectory, "..", "..");
+
+const pages = {
+  landing: "soft-launch/prototype/registration-tracker.html",
+  intake: "registration-tracker/intake-flow/index.html",
+  insights: "registration-tracker/public-dashboard/index.html",
+  resources: "registration-tracker/resources/index.html",
+  privacy: "soft-launch/prototype/privacy.html",
+};
+
+const sources = Object.fromEntries(
+  await Promise.all(Object.entries(pages).map(async ([key, relativePath]) => [
+    key,
+    await readFile(path.join(repoRoot, relativePath), "utf8"),
+  ])),
+);
+
+const moduleJsPath = "registration-tracker/shared/registration-tracker-module.js";
+const moduleJs = await readFile(path.join(repoRoot, moduleJsPath), "utf8");
+
+const failures = [];
+const checks = [];
+
+function requireMatch(sourceKey, pattern, description) {
+  if (!pattern.test(sources[sourceKey])) failures.push(`${sourceKey}: missing ${description}`);
+  else checks.push(`${sourceKey}: ${description}`);
+}
+
+function forbidMatch(sourceKey, pattern, description) {
+  if (pattern.test(sources[sourceKey])) failures.push(`${sourceKey}: found forbidden ${description}`);
+  else checks.push(`${sourceKey}: no ${description}`);
+}
+
+const activeSource = Object.values(sources).join("\n");
+
+for (const sourceKey of Object.keys(sources)) {
+  forbidMatch(sourceKey, /href=["'][^"']*(?:docs\/registration-tracker|admin-operator-review|company-dashboard|registrar-list|docs\/site\/(?:workspace|operator-workspace))/i, "archived or future tracker link");
+}
+
+const forbiddenActivePatterns = [
+  ["browser persistence API", /\b(?:localStorage|sessionStorage)\b/i],
+  ["fake L-number", /\bL[- ]?\d{3,}\b/i],
+  ["fake registrar reference", /\b(?:reference|file)\s*(?:number|no\.?)\s*[:#-]?\s*[A-Z0-9]{5,}/i],
+  ["registrar export control", /<(?:a|button|input|select)[^>]*(?:registrar[- ]?export|export[- ]?(?:preview|packet|readiness)|packet[- ]?activity)/i],
+  ["named-use control", /<(?:input|select|button)[^>]*(?:named[-_ ]?use|consentRegistrar)/i],
+  ["general-updates control", /<(?:input|select|button)[^>]*(?:general[-_ ]?updates|newsletter)/i],
+  ["saved-draft claim", /\b(?:draft saved|email return link|save and resume|save draft)\b/i],
+  ["chart markup", /<(?:svg|canvas)[^>]*(?:chart|graph)|class=["'][^"']*\bchart\b/i],
+  ["duplicate module header/footer", /tracker-module-header|tracker-module-footer/i],
+];
+
+for (const [description, pattern] of forbiddenActivePatterns) {
+  if (pattern.test(activeSource)) failures.push(`all active pages: found forbidden ${description}`);
+  else checks.push(`all active pages: no ${description}`);
+}
+
+// --- Qualifier now lives as intake's first, separate, always-visible form section (not a
+// tab, not a gated landing-page mini-form). The other five sections are tabbed, but tabs
+// are freely clickable in any order -- there is no Continue/Back gating between them. ---
+forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
+forbidMatch("intake", /data-next-stage|data-previous-stage|data-show-review\b/i, "sequential Continue/Back wizard gating");
+
+const stagePanelCount = (sources.intake.match(/data-stage-panel="/g) || []).length;
+if (stagePanelCount !== 5) failures.push(`intake: expected 5 tabbed sections, found ${stagePanelCount}`);
+else checks.push("intake: five tabbed sections (qualifier stays separate, ungated)");
+
+const stageButtonCount = (sources.intake.match(/data-stage-button="/g) || []).length;
+if (stageButtonCount !== 5) failures.push(`intake: expected 5 section tabs, found ${stageButtonCount}`);
+else checks.push("intake: five section tabs");
+
+requireMatch("intake", /Is this a new biological product registration\?/, "qualifier question: new registration");
+requireMatch("intake", /Is it a South African registration under Act 36\?/, "qualifier question: SA/Act 36 jurisdiction");
+requireMatch("intake", /Are you responsible for the registration or authorized to provide its information\?/, "qualifier question: authority");
+requireMatch("intake", /Have the Application Form, Service Request Form, and proof of payment all been submitted\?/, "qualifier question: three-part submission");
+requireMatch("intake", /amendment, renewal, appeal, permit, source change, reinstatement, or another service/, "out-of-service outcome option");
+requireMatch("intake", /another country or regulatory regime/, "out-of-country or regime outcome option");
+requireMatch("intake", /one or more submission steps are not complete/, "incomplete-submission outcome option");
+
+const formSectionCount = (sources.intake.match(/<fieldset class="form-section">/g) || []).length;
+if (formSectionCount !== 6) failures.push(`intake: expected 6 form sections, found ${formSectionCount}`);
+else checks.push("intake: six form sections (qualifier, participant/org, product, status, submission/accountability, data use)");
+
+// --- Regardless of which tab is open, only one confirm screen sits between filling the form and sending it ---
+requireMatch("intake", /data-review-before-submit/, "review-and-confirm-before-submit opt-in");
+requireMatch("intake", /data-review="tracker-intake"/, "review screen container");
+requireMatch("intake", /data-review-confirm/, "review screen confirm action");
+
+// --- ABA relationship captured passively via URL param, not a self-reported form field ---
+forbidMatch("intake", /id="aba-relationship"/, "self-reported ABA-relationship form field");
+requireMatch("intake", /id="referral-source"\s+name="referral_source"/, "passive referral-source hidden field");
+if (!/URLSearchParams[\s\S]*get\(["']ref["']\)/.test(moduleJs)) failures.push(`${moduleJsPath}: missing referral param capture`);
+else checks.push(`${moduleJsPath}: referral param capture`);
+
+// --- Country vs. jurisdiction: organisation's country is a real field, not fixed to the registration jurisdiction ---
+forbidMatch("intake", /id="organisation-country"[^>]*readonly/, "readonly organisation-country field");
+forbidMatch("intake", /id="organisation-country"[^>]*value="South Africa"/, "organisation-country fixed to South Africa");
+
+// --- Self-reported SACNASP status cannot claim a verified state ---
+requireMatch("intake", /id="sacnasp-status"[\s\S]*?<option>Unknown<\/option>/, "required SACNASP Unknown option");
+forbidMatch("intake", /id="sacnasp-status"[\s\S]{0,400}<option>Verified<\/option>/, "contradictory self-reported/Verified SACNASP option");
+
+// --- Status date allows approximation instead of forcing exact-day precision ---
+requireMatch("intake", /id="status-date"[^>]*type="month"/, "month-precision status date (not exact day)");
+
+// --- Decision-expectation dropped; that determination is derived by ABA, not guessed by the participant ---
+forbidMatch("intake", /id="decision-expectation"/, "removed decision-expectation field");
+
+// --- One compact submission-confirmation instead of three near-identical checkboxes ---
+requireMatch("intake", /id="submission-confirmed"\s+name="submission_confirmed"\s+type="checkbox"/, "single compact submission confirmation");
+forbidMatch("intake", /id="(?:application-form-submitted|service-request-form-submitted|proof-of-payment-submitted)"/, "superseded triple submission-confirmation checkboxes");
+
+// --- Contact permission and processing acknowledgement no longer duplicate one another ---
+requireMatch("intake", /id="contact-permission"/, "single contact-permission choice");
+forbidMatch("intake", /id="processing-acknowledgement"/, "superseded duplicate processing-acknowledgement checkbox");
+
+// --- Responsible-person, residency and appointment fields are actually conditional ---
+requireMatch("intake", /data-responsible-person-details hidden/, "responsible-person detail fields hidden by default");
+requireMatch("intake", /id="responsible-person-status"/, "responsible-person-status conditional trigger");
+
+forbidMatch("intake", /id="(?:supporting-information|payment-status)"/, "superseded readiness field");
+requireMatch("intake", /id="insight-acknowledgement"[^>]*type="checkbox"(?![^>]*checked)/, "initially unchecked insight-use acknowledgement");
+requireMatch("intake", /Approved for insights[\s\S]*Needs clarification[\s\S]*Excluded/, "three ABA review outcomes");
+requireMatch("intake", /within two weeks/i, "two-week review target");
+
+const registrationTypes = [
+  "New molecule or active ingredient",
+  "New formulation",
+  "Generic active ingredient",
+  "Parallel registration",
+  "Daughter registration",
+];
+for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
+
+// --- Insights behaves like the real, populated page -- not a page that narrates its own
+// empty/example state in paragraphs. Exactly one compact tag marks the data as fictional;
+// everything else (headings, captions, methodology) reads like the mature page will. ---
+requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four evidence-panel questions");
+requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
+requireMatch("insights", /class="tracker-example-tag"[^>]*>Example data/i, "exactly one compact example-data tag, not a narrated disclaimer");
+forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:|no real findings|not enough real registrations|do not describe any real|fictional example dataset|Illustrative example|labelled, empty structures/i, "narrated empty-state or illustrative-example prose (the compact tag already covers this)");
+requireMatch("insights", /registration-tracker-insights-seed\.js/, "insights page loads the seed-data script");
+requireMatch("insights", /registration-tracker-insights\.js/, "insights page loads the seed-data render script");
+{
+  const seedJs = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights-seed.js"), "utf8");
+  const renderJs = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8");
+  if (!/window\.ABA_TRACKER_INSIGHTS_SEED\s*=/.test(seedJs)) failures.push("insights-seed.js: missing ABA_TRACKER_INSIGHTS_SEED dataset");
+  else checks.push("insights-seed.js: defines ABA_TRACKER_INSIGHTS_SEED dataset");
+  if (!/ABA_TRACKER_INSIGHTS_SEED/.test(renderJs)) failures.push("insights.js: does not read the seed dataset -- evidence-preview panels would not be driven by it");
+  else checks.push("insights.js: evidence-preview panels driven by the seed dataset (not hand-typed figures)");
+}
+
+// --- A single short methodology line replaces the old full "Publication pipeline" /
+// "What is collected and why" sections, which duplicated privacy.html and dominated the page ---
+requireMatch("insights", /class="tracker-methodology-note"/i, "single compact methodology line (not a full duplicate-of-privacy section)");
+forbidMatch("insights", /Publication pipeline|What is collected and why|Every published finding must pass/i, "the old full-section methodology explanation, now duplicated on privacy.html");
+
+// --- No paragraph-per-panel narration restating what the heading/figure already show ---
+{
+  const panelParagraphs = (sources.insights.match(/tracker-evidence-panel[\s\S]{0,20}?<\/div>\s*<p>/g) || []).length;
+  if (panelParagraphs > 0) failures.push(`insights: found ${panelParagraphs} explanatory paragraph(s) directly under an evidence-panel heading -- panels should carry only a heading, figcaption, and figure`);
+  else checks.push("insights: evidence panels carry no restating explanatory paragraphs");
+}
+
+for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
+  forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
+  forbidMatch(sourceKey, /\bPreparing\b|pre-submission/i, "pre-submission active-flow language");
+}
+requireMatch("privacy", /condition of using the tracker/i, "required tracker data-use condition");
+requireMatch("privacy", /submission confirmations?/i, "submission-confirmation information group");
+requireMatch("privacy", /does not give ABA permission to send unrelated general updates/i, "unrelated-communications boundary");
+requireMatch("privacy", /id="registration-tracker"/, "formalized #registration-tracker anchor");
+
+for (const [sourceKey, source] of Object.entries(sources)) {
+  if (/<h[1-3][^>]*>[\s\S]*?<br\b/i.test(source)) failures.push(`${sourceKey}: forced heading break found`);
+  else checks.push(`${sourceKey}: no forced heading break`);
+}
+
+const linkedAssets = [
+  "registration-tracker/shared/registration-tracker-module.css",
+  "registration-tracker/shared/registration-tracker-module.js",
+  "registration-tracker/shared/registration-tracker-insights-seed.js",
+  "registration-tracker/shared/registration-tracker-insights.js",
+];
+for (const relativePath of linkedAssets) {
+  try {
+    await access(path.join(repoRoot, relativePath));
+    checks.push(`${relativePath}: exists`);
+  } catch {
+    failures.push(`${relativePath}: missing`);
+  }
+}
+
+console.log("Registration Tracker static mockup preflight");
+console.log(`Passed checks: ${checks.length}`);
+
+if (failures.length) {
+  console.error(`FAIL (${failures.length})`);
+  failures.forEach((failure) => console.error(`- ${failure}`));
+  process.exitCode = 1;
+} else {
+  console.log("PASS: active routes, fields, states, and release boundaries match the tracker's tabbed, ungated, review-and-confirm intake architecture.");
+}

@@ -1,973 +1,235 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Track a Product Registration | ABA Registration Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../docs/site/assets/public-shell.css">
-    <script defer src="../../docs/site/assets/public-shell.js"></script>
-    <style>
-      :root {
-        --page: #f3eee1;
-        --surface: rgba(251, 247, 239, 0.9);
-        --surface-strong: rgba(255, 252, 246, 0.94);
-        --line: rgba(35, 59, 68, 0.12);
-        --ink: #203b44;
-        --muted: rgba(32, 59, 68, 0.74);
-        --green: #5a6b3a;
-        --green-deep: #15322f;
-        --gold-deep: #c89b2c;
-        --clay-deep: #b24a32;
-        --shadow: 0 26px 54px -42px rgba(21, 50, 47, 0.28);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: "Public Sans", system-ui, sans-serif;
-        color: var(--ink);
-        background:
-          radial-gradient(circle at 14% 0%, rgba(21, 50, 47, 0.14), transparent 24%),
-          radial-gradient(circle at 100% 12%, rgba(200, 155, 44, 0.16), transparent 28%),
-          radial-gradient(circle at 84% 84%, rgba(178, 74, 50, 0.08), transparent 24%),
-          linear-gradient(180deg, #f6f1e7 0%, #fbf8f1 40%, #f1ede2 100%);
-      }
-
-      button,
-      input,
-      select,
-      textarea {
-        font: inherit;
-      }
-
-      .prototype-shell {
-        min-height: 100vh;
-        padding: 14px 0 36px;
-      }
-
-      .shell {
-        width: min(1320px, calc(100vw - 32px));
-        margin: 0 auto;
-        padding: 14px 0 40px;
-      }
-
-      .surface {
-        background: var(--surface);
-        border: 1px solid rgba(73, 95, 82, 0.12);
-        border-radius: 28px;
-        box-shadow: var(--shadow);
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 18px;
-        align-items: start;
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-main {
-        position: relative;
-        display: grid;
-        gap: 14px;
-        align-content: start;
-      }
-
-      .hero-intro,
-      .hero-support {
-        display: grid;
-        align-content: start;
-      }
-
-      .hero-intro {
-        gap: 10px;
-      }
-
-      .hero-support {
-        gap: 14px;
-      }
-
-      .eyebrow,
-      .section-label {
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--green-deep);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        justify-self: start;
-        min-height: 32px;
-        padding: 0 12px;
-        border-radius: 999px;
-        background: rgba(21, 50, 47, 0.08);
-        border: 1px solid rgba(21, 50, 47, 0.12);
-      }
-
-      .hero h1,
-      .section-head h2 {
-        margin: 0;
-        color: var(--ink);
-      }
-
-      .hero p,
-      .section-head p,
-      .journey-brief p,
-      .inline-note,
-      .note {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .hero {
-        position: relative;
-        overflow: hidden;
-        padding: clamp(22px, 2.4vw, 32px);
-        background:
-          radial-gradient(circle at 16% 18%, rgba(243, 241, 232, 0.72), transparent 22%),
-          radial-gradient(circle at top right, rgba(90, 107, 58, 0.2), transparent 30%),
-          linear-gradient(135deg, rgba(255, 253, 249, 0.94), rgba(244, 236, 220, 0.92));
-        border-color: rgba(21, 50, 47, 0.12);
-      }
-
-      .tracker-intake-page .hero {
-        background:
-          radial-gradient(circle at 88% 8%, rgba(200, 155, 44, 0.18), transparent 28%),
-          radial-gradient(circle at 8% 110%, rgba(90, 107, 58, 0.22), transparent 34%),
-          linear-gradient(135deg, #15322f 0%, #1f473e 58%, #33472f 100%) !important;
-        color: #fbf7ed;
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: auto -6% -18% auto;
-        width: 460px;
-        height: 260px;
-        border-radius: 220px 220px 0 0;
-        background:
-          linear-gradient(180deg, rgba(21, 50, 47, 0.14), rgba(21, 50, 47, 0)),
-          repeating-linear-gradient(
-            -15deg,
-            rgba(21, 50, 47, 0.92) 0 16px,
-            rgba(90, 107, 58, 0.92) 16px 34px,
-            rgba(200, 155, 44, 0.88) 34px 52px,
-            rgba(178, 74, 50, 0.84) 52px 70px
-          );
-        pointer-events: none;
-        opacity: 0.18;
-        filter: blur(1px);
-      }
-
-      .hero h1 {
-        margin-top: 8px;
-        font-size: clamp(2rem, 2.8vw, 3rem);
-        line-height: 0.98;
-        letter-spacing: -0.04em;
-        font-weight: 900;
-        max-width: none;
-      }
-
-      .tracker-intake-page .hero h1 {
-        color: #fbf7ed;
-      }
-
-      .hero p {
-        max-width: none;
-        font-size: clamp(0.98rem, 0.94rem + 0.18vw, 1.08rem);
-        line-height: 1.52;
-      }
-
-      .tracker-intake-page .hero p {
-        color: rgba(251, 247, 237, 0.82);
-      }
-
-      .tracker-intake-page .hero .eyebrow {
-        color: #f2d57e;
-        border-color: rgba(255, 247, 221, 0.2);
-        background: rgba(255, 247, 221, 0.1);
-      }
-
-      .hero-copy {
-        max-width: none;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 12px;
-        align-items: center;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 900;
-        letter-spacing: 0.06em;
-        text-decoration: none;
-        text-transform: uppercase;
-        border: 1px solid rgba(35, 59, 68, 0.12);
-      }
-
-      .button.primary {
-        background: var(--green-deep);
-        border-color: var(--green-deep);
-        color: #f7f7f2;
-      }
-
-      .button.secondary {
-        background: rgba(255, 255, 255, 0.9);
-        color: var(--ink);
-      }
-
-      .hero-ribbon {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .hero-ribbon-item {
-        display: grid;
-        gap: 6px;
-        padding: 16px 18px;
-        border-radius: 20px;
-        border: 1px solid rgba(35, 59, 68, 0.08);
-        background: rgba(255, 255, 255, 0.68);
-      }
-
-      .hero-ribbon-item label {
-        font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: rgba(32, 59, 68, 0.62);
-      }
-
-      .hero-ribbon-item strong {
-        font-size: 1rem;
-        line-height: 1.18;
-        letter-spacing: -0.025em;
-        color: var(--ink);
-      }
-
-      .hero-ribbon-item p {
-        font-size: 0.98rem;
-        line-height: 1.52;
-        max-width: none;
-      }
-
-      .section {
-        padding: 18px;
-      }
-
-      .tracker-intake-page {
-        display: grid;
-        gap: 12px;
-      }
-
-      .tracker-form-shell {
-        display: grid;
-        gap: 12px;
-      }
-
-      .journey-brief {
-        padding: 2px 4px 4px;
-      }
-
-      .journey-brief p {
-        max-width: none;
-        font-size: 0.98rem;
-        line-height: 1.54;
-      }
-
-      .grid.two {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .stack {
-        display: grid;
-        gap: 10px;
-      }
-
-      .form-section {
-        display: grid;
-        gap: 8px;
-        padding: 14px 16px;
-        border: 1px solid rgba(35, 59, 68, 0.1);
-        border-radius: 22px;
-        background: rgba(255, 253, 248, 0.96);
-      }
-
-      details.form-section[open] {
-        border-color: rgba(21, 50, 47, 0.22);
-        box-shadow: 0 18px 40px -36px rgba(21, 50, 47, 0.32);
-      }
-
-      details.form-section[open] .section-head h2 {
-        color: var(--green-deep);
-      }
-
-      details.form-section > summary {
-        list-style: none;
-        cursor: pointer;
-      }
-
-      details.form-section > summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .summary-row {
-        position: relative;
-        display: block;
-        gap: 12px;
-        padding-right: 52px;
-      }
-
-      .section-head {
-        display: grid;
-        gap: 4px;
-        min-width: 0;
-        width: 100%;
-      }
-
-      .section-head h2 {
-        font-size: clamp(1.2rem, 1.7vw, 1.65rem);
-        line-height: 1.08;
-        letter-spacing: -0.035em;
-        font-weight: 850;
-        max-width: none;
-      }
-
-      .section-head p {
-        margin: 0;
-        color: #516469;
-        font-size: 0.94rem;
-        line-height: 1.48;
-        max-width: none;
-      }
-
-      .summary-toggle {
-        position: absolute;
-        top: 0;
-        right: 0;
-        flex: 0 0 auto;
-        width: 38px;
-        height: 38px;
-        border-radius: 999px;
-        border: 1px solid rgba(21, 50, 47, 0.12);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--green-deep);
-        background: rgba(245, 248, 239, 0.96);
-        font-size: 18px;
-        line-height: 1;
-      }
-
-      details.form-section[open] .summary-toggle::before { content: "-"; }
-      details.form-section:not([open]) .summary-toggle::before { content: "+"; }
-      details.form-section:not([open]) .section-head p { display: none; }
-
-      .form-body {
-        display: grid;
-        gap: 10px;
-        margin-top: 8px;
-      }
-
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .field {
-        display: grid;
-        gap: 5px;
-        padding: 10px 11px;
-        border: 1px solid rgba(35, 59, 68, 0.09);
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.86);
-      }
-
-      .field label,
-      .panel h3 {
-        color: rgba(32, 59, 68, 0.68);
-        font-size: 0.8rem;
-        font-weight: 800;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-      }
-
-      .field.full {
-        grid-column: 1 / -1;
-      }
-
-      .control,
-      .control-select,
-      .control-textarea,
-      .textarea-box {
-        border-radius: 10px;
-        border: 1px solid rgba(35, 59, 68, 0.12);
-        background: rgba(255, 255, 255, 0.98);
-        color: var(--ink);
-        min-height: 42px;
-        padding: 9px 10px;
-      }
-
-      .control:focus,
-      .control-select:focus,
-      .control-textarea:focus,
-      .textarea-box:focus {
-        border-color: rgba(21, 50, 47, 0.36);
-        box-shadow: 0 0 0 3px rgba(21, 50, 47, 0.1);
-        outline: none;
-      }
-
-      .control-textarea,
-      .textarea-box {
-        min-height: 80px;
-      }
-
-      .inline-note {
-        margin: 0;
-        color: #516469;
-        font-size: 0.88rem;
-        line-height: 1.44;
-      }
-
-      .checkbox-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        min-height: 44px;
-        padding: 9px 10px;
-        border-radius: 12px;
-        border: 1px solid rgba(35, 59, 68, 0.08);
-        background: rgba(255, 255, 255, 0.88);
-      }
-
-      .checkbox-item input {
-        margin-top: 3px;
-        flex: 0 0 auto;
-      }
-
-      .checkbox-item span {
-        min-width: 0;
-      }
-
-      .checkbox-list {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .checkbox-list .checkbox-item {
-        height: 100%;
-        align-items: start;
-      }
-
-      .panel {
-        border: 1px solid rgba(35, 59, 68, 0.08);
-        background: rgba(255, 255, 255, 0.88);
-        padding: 12px;
-      }
-
-      .panel.warn,
-      .panel.ok,
-      .panel.muted {
-        border-radius: 18px;
-      }
-
-      .panel h3 {
-        margin: 0;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 8px;
-      }
-
-      .timeline-item {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 10px 12px;
-        border: 1px solid rgba(35, 59, 68, 0.08);
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.88);
-        color: var(--ink);
-        font-size: 0.9rem;
-      }
-
-      .status-chip {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 28px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(227, 236, 217, 0.74);
-        color: var(--green-deep);
-        font-size: 0.82rem;
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      .toggle-row {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .form-actions {
-        display: grid;
-        gap: 10px;
-        padding-top: 2px;
-      }
-
-      .action-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 46px;
-        padding: 0 18px;
-        border-radius: 16px;
-        border: 1px solid rgba(23, 48, 57, 0.12);
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-
-      .action-button.primary {
-        background: var(--green-deep);
-        border-color: var(--green-deep);
-        color: #f7f4ec;
-      }
-
-      .action-button.secondary {
-        background: rgba(255, 255, 255, 0.94);
-        color: var(--ink);
-      }
-
-      .submission-feedback {
-        margin: 0;
-        padding: 10px 12px;
-        border-radius: 14px;
-        background: rgba(227, 236, 217, 0.62);
-        color: #21483f;
-        font-size: 0.92rem;
-        line-height: 1.46;
-      }
-
-      @media (max-width: 900px) {
-        .form-grid,
-        .grid.two,
-        .checkbox-list,
-        .hero-ribbon {
-          grid-template-columns: 1fr;
-        }
-
-        .summary-row {
-          padding-right: 48px;
-        }
-
-        .hero::after {
-          width: 300px;
-          height: 180px;
-          opacity: 0.12;
-        }
-      }
-
-      .is-hidden {
-        display: none !important;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="prototype-shell">
-      <header class="surface topbar" aria-label="Shared public header"></header>
-
-      <main class="page shell tracker-intake-page">
-        <section class="surface hero">
-          <div class="hero-grid">
-            <div class="hero-main">
-              <div class="hero-intro">
-                <span class="eyebrow">Registration tracker</span>
-                <h1>Tell ABA about a product registration.</h1>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Share one South African Act 36 new biological product registration for ABA review.">
+  <title>New registration intake · African Biologicals Alliance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731b">
+  <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260731c" defer></script>
+</head>
+<body class="site-v2 brochure-theme tracker-module" data-page="tracker">
+  <aba-header base="../../soft-launch/prototype/"></aba-header>
+
+  <main id="main-content">
+    <section class="tracker-page-header tracker-page-header--compact">
+      <div class="tracker-shell">
+        <p class="tracker-label">Registration Tracker · South Africa · Act 36</p>
+        <h1>Share a new registration.</h1>
+        <p class="tracker-lede">Provide the current position of one new biological product registration. This form sends information to ABA for review; it does not submit an application to the registrar.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <form class="form" data-prototype-form="tracker-intake" data-review-before-submit novalidate>
+          <div class="form-error-summary" data-error-summary hidden tabindex="-1" role="alert">
+            <strong>Check the highlighted fields.</strong>
+            <ul></ul>
+          </div>
+
+          <fieldset class="form-section">
+            <legend>Confirm this fits your registration</legend>
+            <p class="required-note">If this isn't a match, see <a href="../resources/index.html">Registration resources</a> instead.</p>
+            <div class="field"><span class="field__label">Is this a new biological product registration? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="registration_scope" required><span>Yes, this is a new registration.</span></label><label class="choice"><input type="radio" name="registration_scope"><span>No, this is an amendment, renewal, appeal, permit, source change, reinstatement, or another service.</span></label></div></div>
+            <div class="field"><span class="field__label">Is it a South African registration under Act 36? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="jurisdiction_scope" required><span>Yes, it is a South African registration under Act 36.</span></label><label class="choice"><input type="radio" name="jurisdiction_scope"><span>No, it is for another country or regulatory regime.</span></label></div></div>
+            <div class="field"><span class="field__label">Are you responsible for the registration or authorized to provide its information? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="authority_scope" required><span>Yes, I am responsible or authorized.</span></label><label class="choice"><input type="radio" name="authority_scope"><span>No, another person should provide it.</span></label></div></div>
+            <div class="field"><span class="field__label">Have the Application Form, Service Request Form, and proof of payment all been submitted? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="submission_scope" required><span>Yes, all three have been submitted.</span></label><label class="choice"><input type="radio" name="submission_scope"><span>No, one or more submission steps are not complete.</span></label></div></div>
+          </fieldset>
+
+          <nav aria-label="Intake sections">
+            <ol class="tracker-stage-nav">
+              <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
+              <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
+              <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
+              <li><button type="button" data-stage-button="4"><span>04</span>Submission and accountability</button></li>
+              <li><button type="button" data-stage-button="5"><span>05</span>Data use and submission</button></li>
+            </ol>
+          </nav>
+
+          <section data-stage-panel="1">
+          <fieldset class="form-section">
+            <legend>You and your organisation</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="participant-name">Name <span aria-hidden="true">*</span></label><input id="participant-name" name="participant_name" autocomplete="name" required></div>
+              <div class="field"><label for="participant-email">Email <span aria-hidden="true">*</span></label><input id="participant-email" name="participant_email" type="email" autocomplete="email" required></div>
+              <div class="field"><label for="participant-phone">Phone <span>(optional)</span></label><input id="participant-phone" name="participant_phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="participant-role">Role or job title <span aria-hidden="true">*</span></label><input id="participant-role" name="participant_role" autocomplete="organization-title" required></div>
+              <div class="field"><label for="organisation-name">Organisation <span aria-hidden="true">*</span></label><input id="organisation-name" name="organisation_name" autocomplete="organization" required></div>
+              <div class="field"><label for="organisation-role">Organisation role in the registration <span aria-hidden="true">*</span></label>
+                <select id="organisation-role" name="organisation_role" required>
+                  <option value="">Select a role</option>
+                  <option>Manufacturer</option>
+                  <option>Importer</option>
+                  <option>Local registration holder</option>
+                  <option>Distributor responsible for registration</option>
+                  <option>Authorized representative</option>
+                  <option>Other responsible organisation</option>
+                </select>
               </div>
-              <div class="hero-support">
-                <p class="hero-copy">Share where a biological product registration stands, what has already been submitted, and where progress is slowing. This route is open to responsible submitters whether or not membership is already in place.</p>
-                <div class="hero-actions">
-                  <a class="button primary" href="#capture-flow">Start this route</a>
-                  <a class="button secondary" href="../../docs/registration-tracker/index.html">Tracker overview</a>
-                </div>
+              <div class="field"><label for="organisation-country">Organisation's country <span aria-hidden="true">*</span></label><input id="organisation-country" name="organisation_country" autocomplete="country-name" required><small>The organisation's own country, not the registration jurisdiction — the questions above already confirm this is a South African Act 36 registration.</small></div>
+            </div>
+            <label class="choice"><input id="contact-permission" name="contact_permission" type="checkbox" required><span><strong>ABA may contact me about this submission, including requests for clarification.</strong></span></label>
+          </fieldset>
+          </section>
+
+          <section data-stage-panel="2" hidden>
+          <fieldset class="form-section">
+            <legend>Product and new-registration type</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="product-name">Product name <span aria-hidden="true">*</span></label><input id="product-name" name="product_name" required></div>
+              <div class="field"><label for="functional-category">Functional category <span aria-hidden="true">*</span></label>
+                <select id="functional-category" name="functional_category" required>
+                  <option value="">Select a category</option>
+                  <option>Biofertiliser</option>
+                  <option>Biopesticide</option>
+                  <option>Biostimulant</option>
+                  <option>Microbial inoculant</option>
+                  <option>Plant extract</option>
+                  <option>Other biological input</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="legal-pathway">Act 36 legal pathway <span aria-hidden="true">*</span></label>
+                <select id="legal-pathway" name="legal_pathway" required>
+                  <option value="">Select a pathway</option>
+                  <option>Agricultural remedy</option>
+                  <option>Fertilizer</option>
+                  <option>Not sure</option>
+                </select>
+                <small>Depends on the product and the claim being made — choose "Not sure" rather than forcing a precise answer.</small>
+              </div>
+              <div class="field"><label for="registration-type">New-registration type <span aria-hidden="true">*</span></label>
+                <select id="registration-type" name="registration_type" required>
+                  <option value="">Select a type</option>
+                  <option>New molecule or active ingredient</option>
+                  <option>New formulation</option>
+                  <option>Generic active ingredient</option>
+                  <option>Parallel registration</option>
+                  <option>Daughter registration</option>
+                </select>
               </div>
             </div>
+          </fieldset>
+          </section>
+
+          <section data-stage-panel="3" hidden>
+          <fieldset class="form-section">
+            <legend>Current status</legend>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="current-status">Participant-reported current status <span aria-hidden="true">*</span></label>
+                <select id="current-status" name="current_status" required>
+                  <option value="">Select a status</option>
+                  <option>Submitted to the registrar</option>
+                  <option>Received or acknowledged</option>
+                  <option>In verification</option>
+                  <option>In scientific screening</option>
+                  <option>In evaluation</option>
+                  <option>Additional information requested</option>
+                  <option>Response submitted</option>
+                  <option>Awaiting a decision</option>
+                  <option>Approved or registered</option>
+                  <option>Rejected</option>
+                  <option>Withdrawn</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="status-date">Month this status began <span aria-hidden="true">*</span></label><input id="status-date" name="status_date" type="month" required><small>A best estimate is fine — this does not need to be the exact day.</small></div>
+              <div class="field"><label for="reference-issued">Has an official reference been issued? <span aria-hidden="true">*</span></label>
+                <select id="reference-issued" name="reference_issued" required>
+                  <option value="">Select one</option>
+                  <option value="issued">Yes</option>
+                  <option value="not-available">Not issued or unavailable</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+                <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
+              </div>
+              <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason"></textarea></div>
+            </div>
+          </fieldset>
+          </section>
+
+          <section data-stage-panel="4" hidden>
+          <fieldset class="form-section">
+            <legend>Submission and accountability</legend>
+            <label class="choice"><input id="submission-confirmed" name="submission_confirmed" type="checkbox" required><span><strong>I confirm that the Application Form, Service Request Form, and proof of payment have all been submitted to the registrar.</strong></span></label>
+            <div class="field-grid field-grid--2">
+              <div class="field"><label for="sacnasp-status">Self-reported SACNASP status <span aria-hidden="true">*</span></label>
+                <select id="sacnasp-status" name="sacnasp_status" required>
+                  <option value="">Select one</option>
+                  <option>Registered with SACNASP</option>
+                  <option>Application submitted</option>
+                  <option>Not registered</option>
+                  <option>Unknown</option>
+                </select>
+                <small>Self-reported; ABA does not treat this as a verified status. No SACNASP registration number is collected.</small>
+              </div>
+              <div class="field"><label for="responsible-person-status">Are you the approved or responsible person? <span aria-hidden="true">*</span></label>
+                <select id="responsible-person-status" name="responsible_person_status" required>
+                  <option value="">Select one</option>
+                  <option value="self">I am the approved or responsible person.</option>
+                  <option value="on-behalf">I am acting on behalf of the approved or responsible person.</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-grid field-grid--2" data-responsible-person-details hidden>
+              <div class="field"><label for="responsible-person-name">Approved or responsible person name <span>(optional)</span></label><input id="responsible-person-name" name="responsible_person_name"></div>
+              <div class="field"><label for="responsible-person-role">Approved or responsible person role <span>(optional)</span></label><input id="responsible-person-role" name="responsible_person_role"></div>
+              <div class="field"><label for="residency-information">Residency or registered-office information <span>(optional)</span></label>
+                <select id="residency-information" name="residency_information">
+                  <option value="">Not provided</option>
+                  <option>Responsible person is resident in South Africa</option>
+                  <option>Organisation has a registered office in South Africa</option>
+                  <option>Neither</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div class="field"><label for="appointment-confirmation">Authority or appointment information <span>(optional)</span></label><textarea id="appointment-confirmation" name="appointment_confirmation" placeholder="Briefly describe the appointment or authority where it is relevant."></textarea></div>
+            </div>
+          </fieldset>
+          </section>
+
+          <section data-stage-panel="5" hidden>
+          <fieldset class="form-section">
+            <legend>Data use and submission</legend>
+            <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights.</strong><small>This condition is required to use the tracker and is not pre-selected. ABA will not publish my contact details or identify my organisation or product through the public insights view.</small></span></label>
+          </fieldset>
+          </section>
+
+          <input type="hidden" id="referral-source" name="referral_source">
+
+          <div class="form-actions"><button class="button button--orange" type="submit" data-loading-label="Sending…">Review and submit</button></div>
+          <p class="required-note">Read <a href="../../soft-launch/prototype/privacy.html#registration-tracker">Privacy and data use</a>.</p>
+        </form>
+
+        <section class="form-review" data-review="tracker-intake" aria-live="polite" tabindex="-1">
+          <p class="eyebrow">Before you send this</p>
+          <h2>Check your answers.</h2>
+          <p class="required-note">Use "Edit" to change a section. Submitting does not send anything to the registrar.</p>
+          <div data-review-groups></div>
+          <div class="form-actions"><button class="button button--orange" type="button" data-review-confirm data-loading-label="Sending…">Confirm and submit</button></div>
+        </section>
+
+        <section class="form-success" data-success="tracker-intake" aria-live="polite">
+          <p class="eyebrow">Registration information received</p>
+          <h2>ABA will review the submission.</h2>
+          <p>ABA aims to review it within two weeks and may contact you for clarification. An ABA administrator may mark the submission <strong>Approved for insights</strong>, <strong>Needs clarification</strong>, or <strong>Excluded</strong>.</p>
+          <p>Approved information may contribute to combined, non-named insights. Contact details and identifying organisation or product information are not published through the insights view. Submission does not create or change membership and does not submit anything to the registrar.</p>
+          <p><a href="../../soft-launch/prototype/privacy.html#registration-tracker">Read the Privacy and data use explanation</a>.</p>
+          <div class="form-actions">
+            <button class="button button--orange" type="button" data-add-another>Add another registration</button>
+            <a class="button button--outline" href="../public-dashboard/index.html">View registration insights</a>
+            <a class="button button--outline" href="../../soft-launch/prototype/registration-tracker.html">Return to the Registration Tracker</a>
           </div>
         </section>
-
-        <section class="surface section">
-          <form class="tracker-form-shell" id="capture-flow">
-            <div class="journey-brief">
-              <p>Eight-step capture covering your details, product and pathway, application type, status and stage, reference and readiness, optional accountability, consent, and final submission.</p>
-            </div>
-
-          <details class="form-section" open>
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 1. Your details</h2>
-                <p>Tell ABA who is submitting, which company or organisation is involved, and how to reach you again. This information supports ABA review, anonymised sector evidence, and only with your consent any named or registrar-facing follow-up.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <label class="checkbox-item"><input id="responsibleAttestation" type="checkbox"> <span>Responsible submitter confirmation: I am responsible for, or authorised to report on, this product's registration.</span></label>
-              <div class="form-grid">
-                <div class="field"><label for="contactName">Contact person</label><input id="contactName" class="control" placeholder="Full name"></div>
-                <div class="field"><label for="contactEmail">Email for return link</label><input id="contactEmail" class="control" type="email" placeholder="name@example.com"></div>
-                <div class="field"><label for="companyName">Company name</label><input id="companyName" class="control" placeholder="Company or organisation name"></div>
-                <div class="field"><label for="companyRole">Company role</label><select id="companyRole" class="control-select"><option>Manufacturer</option><option>Importer</option><option>Local registration holder</option><option>Distributor responsible for registration</option><option>Other authorised representative</option></select></div>
-                <div class="field"><label for="companyCountry">Company country</label><select id="companyCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
-                <div class="field"><label for="membership">ABA relationship (optional, self-reported)</label><select id="membership" class="control-select"><option>Not sure / pending</option><option>Full member</option><option>Technical partner</option><option>Observer</option><option>Non-member</option></select></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 2. Product, regime and legal pathway</h2>
-                <p>Describe the product, the market context, and the pathway the application is moving through.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="form-grid">
-                <div class="field"><label for="productName">Product name</label><input id="productName" class="control" placeholder="Product name"></div>
-                <div class="field"><label for="functionalCategory">Functional category</label><select id="functionalCategory" class="control-select"><option>Biofertiliser</option><option>Biopesticide</option><option>Biostimulant</option><option>Not sure</option></select></div>
-                <div class="field"><label for="applicationCountry">Country for application</label><select id="applicationCountry" class="control-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option><option>Other African country</option></select></div>
-                <div class="field"><label for="regime">Governing regime</label><select id="regime" class="control-select"><option>Agriculture / Act 36</option><option>Public-health pest control</option><option>Water treatment</option><option>Other</option></select></div>
-                <div class="field act36-field"><label for="legalPathway">Act 36 legal pathway</label><select id="legalPathway" class="control-select"><option>Agricultural remedy (incl. biopesticide / inoculant / PGR)</option><option>Fertilizer (biofertiliser)</option><option>Not sure</option></select></div>
-                <div class="field act36-field"><label for="dataPath">Data path (optional)</label><select id="dataPath" class="control-select"><option>Not specified</option><option>5-batch analysis</option><option>Certificate of Analysis (no fixed purity)</option><option>Botanical Cat 1</option><option>Botanical Cat 2</option><option>Botanical Cat 3</option></select></div>
-                <div class="field full act36-field" id="biostimulantNote"><label>Biostimulant pathway note</label><p class="inline-note">Some biostimulant products follow different routes depending on the claim being made. If you are unsure, choose the closest fit and ABA can follow up if needed.</p></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 3. Service / application type</h2>
-                <p>Select the type that best matches the work already underway. If you are unsure, choose the closest fit and ABA can clarify it during follow-up.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="form-grid">
-                <div class="field"><label for="serviceType">Service type</label>
-                  <select id="serviceType" class="control-select">
-                    <optgroup label="Registration">
-                      <option value="new-molecule|14AR2|627">New molecule (new active ingredient) — 14AR2</option>
-                      <option value="new-formulation|14AR2|418">New formulation type — 14AR2</option>
-                      <option value="generic|14AR1|418" selected>Generic active ingredient — 14AR1</option>
-                      <option value="parallel|14AR1|118">Parallel registration — 14AR1</option>
-                      <option value="daughter|14AR1|118">Daughter registration — 14AR1</option>
-                      <option value="reinstatement|14AR1|118">Reinstatement of lapsed registration — 14AR1</option>
-                      <option value="new-source|—|208">New source of active ingredient</option>
-                    </optgroup>
-                    <optgroup label="Amendment">
-                      <option value="major-amendment|14AR16|418">Major amendment to formulation — 14AR16</option>
-                      <option value="minor-amendment|14AR15|118">Minor amendment to formulation — 14AR15</option>
-                      <option value="label-extension|14AR5|418">Label extension (new claims) — 14AR5</option>
-                      <option value="admin-amendment|14AR8|118">Administrative amendment — 14AR8</option>
-                      <option value="transfer|14AR9|118">Transfer / name change — 14AR9</option>
-                      <option value="new-manufacturer|14AR10|208">New / additional manufacturer or formulator — 14AR10</option>
-                      <option value="packaging|14AR14|118">Change of packaging size / material — 14AR14</option>
-                    </optgroup>
-                    <optgroup label="Renewal">
-                      <option value="renewal|14AR3|90">Renewal of registration — 14AR3</option>
-                      <option value="late-renewal|14AR3|—">Late renewal</option>
-                    </optgroup>
-                    <optgroup label="Permits &amp; certificates">
-                      <option value="import-permit|14AR6|14">Import / export permit — 14AR6</option>
-                      <option value="free-sale|14AR7|7">Free sale certificate — 14AR7</option>
-                      <option value="advert|14AR4|35">Advertisement approval — 14AR4</option>
-                    </optgroup>
-                    <optgroup label="Appeal">
-                      <option value="appeal|—|—">Appeal under section 6</option>
-                    </optgroup>
-                  </select>
-                </div>
-                <div class="field full is-hidden" id="renewalReminder"><label>Term and renewal note</label><p class="inline-note">An Act 36 registration is valid for three years and must be renewed before 31 May.</p></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 4. Status and stage</h2>
-                <p>Show where the application currently sits and when it reached that stage. Use the closest status if the record is still moving.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="form-grid">
-                <div class="field"><label for="currentStatus">Current status</label><select id="currentStatus" class="control-select">
-                  <option value="Preparing submission|Pre-submission (pipeline, not backlog)">Preparing submission</option>
-                  <option value="Submitted to registrar|Received (clock starts)" selected>Submitted to registrar</option>
-                  <option value="Acknowledged / reference issued|Verification — file number issued">Acknowledged / reference issued</option>
-                  <option value="Under screening|Scientific screening">Under screening</option>
-                  <option value="Under technical review|Evaluation">Under technical review</option>
-                  <option value="Query / additional information requested|Referred back (cross-stage)">Query / additional information requested</option>
-                  <option value="Response submitted|Back to screening / evaluation">Response submitted</option>
-                  <option value="Awaiting decision|Decision">Awaiting decision</option>
-                  <option value="Approved / registered|Decision → registered (L-number issued)">Approved / registered</option>
-                  <option value="Rejected|Decision → rejected">Rejected</option>
-                  <option value="Withdrawn|Withdrawal (after evaluation = rejection, no refund)">Withdrawn</option>
-                  <option value="Under appeal|Appeal (s.6 to the Minister)">Under appeal</option>
-                  <option value="Unknown / not sure|n/a">Unknown / not sure</option>
-                </select></div>
-                <div class="field"><label>Official stage</label><div><span class="status-chip" id="stageBadge">Received</span></div></div>
-                <div class="field"><label for="statusDate">Date status began</label><input id="statusDate" class="control" type="date"></div>
-                <div class="field"><label>Approximate date?</label><label class="checkbox-item"><input id="approximateDate" type="checkbox"> <span>Yes, this date is approximate</span></label></div>
-              </div>
-              <div class="timeline">
-                <div class="timeline-item"><strong id="timelineDate">No date set</strong> <span id="timelineStatus">Submitted to registrar</span> <span class="status-chip" id="timelineStage">Received</span></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 5. Complete-submission checklist</h2>
-                <p>Work through the items that make this submission complete, then add the current file reference if it has been issued.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="form-grid">
-                <div class="field"><label for="referenceStatus">Application / file reference (pre-registration)</label><select id="referenceStatus" class="control-select"><option>Provided</option><option>Not issued</option><option>Unknown</option><option>Lost / unavailable</option></select></div>
-                <div class="field" id="referenceNumberField"><label for="referenceNumber">File number</label><input id="referenceNumber" class="control" placeholder="File or application reference"></div>
-                <div class="field full is-hidden" id="referenceReasonField"><label for="referenceReason">Reference unavailable reason</label><textarea id="referenceReason" class="control-textarea">Registrar has not issued a file number yet.</textarea></div>
-                <div class="field full"><label for="regNumber">Registration number (L-number) — shown only once registered</label><input id="regNumber" class="control" readonly value=""><div class="note" id="regNumberNote" style="margin-top:6px;">No registration number is shown until a product reaches the registered state.</div></div>
-              </div>
-              <div class="grid two">
-                <div class="panel warn stack">
-                  <h3>Dossier readiness</h3>
-                  <label class="checkbox-item"><input id="dossierReady" type="checkbox"> <span>Dossier pack ready for submission</span></label>
-                  <p class="note" id="dossierNote">Use this to show whether the main supporting submission pack is ready.</p>
-                </div>
-                <div class="panel warn stack">
-                  <h3>Proof of payment</h3>
-                  <label class="checkbox-item"><input id="proofOfPayment" type="checkbox"> <span>Proof of payment already attached</span></label>
-                  <p class="note" id="paymentNote">Use this to show whether proof of payment has already been attached with the application.</p>
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 6. Professional accountability</h2>
-                <p>Record the accountable professional details ABA should understand alongside the application.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="form-grid">
-                <div class="field"><label for="approvedPerson">Approved person (Act 36)</label><input id="approvedPerson" class="control" placeholder="Optional" value=""></div>
-                <div class="field"><label for="approvedRole">Their role / title</label><input id="approvedRole" class="control" placeholder="Optional" value=""></div>
-                <div class="field"><label for="eligibility">SA residency / registered office</label><select id="eligibility" class="control-select"><option>Not specified</option><option>Resident in South Africa</option><option>Company registered office in South Africa</option><option>Neither — flag for review</option></select></div>
-                <div class="field"><label for="sacnasp">SACNASP verification status</label><select id="sacnasp" class="control-select" required><option value="" selected disabled>Select verification status</option><option>Verified</option><option>Not verified</option><option>Unknown</option></select></div>
-                <div class="field"><label>Acting under letter of authority?</label><label class="checkbox-item"><input id="letterOfAuthority" type="checkbox"> <span>Yes — third-party mandate on file</span></label></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="form-section">
-            <summary class="summary-row">
-              <div class="section-head">
-                <h2>Step 7. Visibility and consent</h2>
-                <p>Choose how ABA may use this submission beyond internal review. Named use is always optional.</p>
-              </div>
-              <span class="summary-toggle" aria-hidden="true">&nbsp;</span>
-            </summary>
-            <div class="form-body">
-              <div class="checkbox-list">
-                <label class="checkbox-item"><input id="consentInternal" type="checkbox" checked disabled> <span>Internal ABA review required</span></label>
-                <label class="checkbox-item"><input id="consentRegistrar" type="checkbox" disabled aria-describedby="registrarConsentNote"> <span>Named / registrar-facing use</span></label>
-                <p class="note" id="registrarConsentNote">Available to verified ABA members. Select “Full member” in Step 1 to opt in.</p>
-                <label class="checkbox-item"><input id="consentPublic" type="checkbox" checked> <span>Anonymised public aggregate use</span></label>
-              </div>
-            </div>
-          </details>
-
-            <div class="form-actions">
-              <div class="toggle-row">
-                <button class="action-button secondary" type="button" id="saveDraft">Save draft and email return link</button>
-                <button class="action-button primary" type="button" id="submitReview">Submit for ABA review</button>
-              </div>
-              <p class="submission-feedback" id="submissionFeedback">You can save a draft or submit when you are ready.</p>
-            </div>
-          </form>
-        </section>
-      </main>
-    </div>
-
-    <script>
-      const state = {
-        submittedAt: null,
-        lastSavedAt: null,
-        lastAction: "You can save a draft or submit when you are ready."
-      };
-
-      const fields = [
-        "contactName", "contactEmail",
-        "companyName", "companyRole", "companyCountry", "membership",
-        "productName", "functionalCategory", "applicationCountry", "regime",
-        "legalPathway", "dataPath",
-        "serviceType",
-        "currentStatus", "statusDate",
-        "referenceStatus", "referenceNumber", "referenceReason",
-        "approvedPerson", "approvedRole", "eligibility", "sacnasp"
-      ];
-
-      const checks = [
-        "responsibleAttestation", "approximateDate",
-        "dossierReady", "proofOfPayment",
-        "consentPublic", "consentRegistrar", "letterOfAuthority"
-      ];
-
-      function value(id) {
-        const el = document.getElementById(id);
-        return el ? el.value : "";
-      }
-
-      function checked(id) {
-        const el = document.getElementById(id);
-        return Boolean(el && el.checked);
-      }
-
-      function currentTimestamp() {
-        const date = new Date();
-        const pad = (v) => String(v).padStart(2, "0");
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
-      }
-
-      function setHidden(id, hidden) {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle("is-hidden", hidden);
-      }
-
-      function serviceParts() {
-        const [key] = value("serviceType").split("|");
-        return { key };
-      }
-
-      function statusParts() {
-        const [label, stage] = value("currentStatus").split("|");
-        return { label, stage };
-      }
-
-      function renderSummary() {
-        const isAct36 = value("regime") === "Agriculture / Act 36";
-        document.querySelectorAll(".act36-field").forEach((el) => el.classList.toggle("is-hidden", !isAct36));
-        setHidden("biostimulantNote", !(isAct36 && value("functionalCategory") === "Biostimulant"));
-
-        const svc = serviceParts();
-        const isRenewal = svc.key === "renewal" || svc.key === "late-renewal";
-
-        const st = statusParts();
-        document.getElementById("stageBadge").textContent = st.stage;
-        document.getElementById("timelineDate").textContent = value("statusDate") || "No date set";
-        document.getElementById("timelineStatus").textContent = st.label;
-        document.getElementById("timelineStage").textContent = st.stage;
-
-        const isRegistered = st.label === "Approved / registered";
-        setHidden("renewalReminder", !(isAct36 && (isRenewal || isRegistered)));
-
-        const referenceProvided = value("referenceStatus") === "Provided";
-        setHidden("referenceNumberField", !referenceProvided);
-        setHidden("referenceReasonField", referenceProvided);
-
-        const regInput = document.getElementById("regNumber");
-        const regNote = document.getElementById("regNumberNote");
-        if (isRegistered) {
-          if (!regInput.value) regInput.value = "L1234";
-          regNote.textContent = "A registration number is shown only once the product reaches the registered state.";
-        } else {
-          regInput.value = "";
-          regNote.textContent = "No registration number is shown until a product reaches the registered state.";
-        }
-
-        document.getElementById("dossierNote").innerHTML = checked("dossierReady")
-          ? "Dossier readiness marked as confirmed."
-          : "Use this to show whether the main supporting submission pack is ready.";
-        document.getElementById("paymentNote").textContent = checked("proofOfPayment")
-          ? "Proof of payment marked as attached."
-          : "Use this to show whether proof of payment has already been attached with the application.";
-
-        const registrarConsent = document.getElementById("consentRegistrar");
-        const registrarConsentNote = document.getElementById("registrarConsentNote");
-        const isAbaMember = value("membership") === "Full member";
-        registrarConsent.disabled = !isAbaMember;
-        if (!isAbaMember) registrarConsent.checked = false;
-        registrarConsentNote.textContent = isAbaMember
-          ? "As an ABA member, you may opt in to named / registrar-facing use. ABA will confirm any use with you."
-          : "Available to verified ABA members. Select “Full member” in Step 1 to opt in.";
-
-        const submissionFeedback = document.getElementById("submissionFeedback");
-        if (submissionFeedback) submissionFeedback.textContent = state.lastAction;
-      }
-
-      fields.forEach((id) => document.getElementById(id)?.addEventListener("input", renderSummary));
-      fields.forEach((id) => document.getElementById(id)?.addEventListener("change", renderSummary));
-      checks.forEach((id) => document.getElementById(id)?.addEventListener("change", renderSummary));
-
-      document.getElementById("saveDraft").addEventListener("click", () => {
-        state.lastSavedAt = currentTimestamp();
-        state.lastAction = `Draft saved. ABA can use ${value("contactEmail") || "your return email"} to help you continue later.`;
-        renderSummary();
-      });
-
-      document.getElementById("submitReview").addEventListener("click", () => {
-        if (!checked("responsibleAttestation")) {
-          state.lastAction = "Please confirm that you are responsible for, or authorised to report on, this registration before submitting.";
-        } else if (!value("sacnasp")) {
-          state.lastAction = "Please select the SACNASP verification status before submitting.";
-        } else {
-          state.submittedAt = currentTimestamp();
-          state.lastAction = "Thanks. Your registration journey has been sent to ABA for review.";
-        }
-        renderSummary();
-      });
-
-      renderSummary();
-    </script>
-  </body>
+      </div>
+    </section>
+  </main>
+  <aba-footer base="../../soft-launch/prototype/"></aba-footer>
+</body>
 </html>
