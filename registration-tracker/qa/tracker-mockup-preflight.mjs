@@ -137,16 +137,13 @@ const registrationTypes = [
 ];
 for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
 
-// --- Evidence status/methodology leads the page; the evidence-preview panels are demoted and now populated
-// from a clearly labelled fictional example dataset (not empty placeholders, and not real findings) ---
-requireMatch("insights", /Evidence status<\/p>\s*<h2>No real findings are published yet/i, "single page-level evidence notice, leading the page");
+// --- Insights behaves like the real, populated page -- not a page that narrates its own
+// empty/example state in paragraphs. Exactly one compact tag marks the data as fictional;
+// everything else (headings, captions, methodology) reads like the mature page will. ---
+requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four evidence-panel questions");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
-requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four future evidence questions");
-requireMatch("insights", /do not describe any real company, product, or registration/i, "explicit fictional-data disclaimer in the leading status section");
-requireMatch("insights", /Illustrative example/i, "evidence-preview panels explicitly labelled as a fictional illustrative example, not real findings");
-requireMatch("insights", /Illustrative example — not real registrations/i, "persistent illustrative-example notice directly above the evidence-preview panels");
-forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:/i, "repeated panel-level evidence warnings");
-requireMatch("insights", /Submitted[\s\S]*Reviewed[\s\S]*Classified[\s\S]*Protected[\s\S]*Publishable/, "five evidence publication gates");
+requireMatch("insights", /class="tracker-example-tag"[^>]*>Example data/i, "exactly one compact example-data tag, not a narrated disclaimer");
+forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:|no real findings|not enough real registrations|do not describe any real|fictional example dataset|Illustrative example|labelled, empty structures/i, "narrated empty-state or illustrative-example prose (the compact tag already covers this)");
 requireMatch("insights", /registration-tracker-insights-seed\.js/, "insights page loads the seed-data script");
 requireMatch("insights", /registration-tracker-insights\.js/, "insights page loads the seed-data render script");
 {
@@ -158,15 +155,16 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   else checks.push("insights.js: evidence-preview panels driven by the seed dataset (not hand-typed figures)");
 }
 
-// --- Status/methodology sections must physically precede the evidence-preview panels ---
+// --- A single short methodology line replaces the old full "Publication pipeline" /
+// "What is collected and why" sections, which duplicated privacy.html and dominated the page ---
+requireMatch("insights", /class="tracker-methodology-note"/i, "single compact methodology line (not a full duplicate-of-privacy section)");
+forbidMatch("insights", /Publication pipeline|What is collected and why|Every published finding must pass/i, "the old full-section methodology explanation, now duplicated on privacy.html");
+
+// --- No paragraph-per-panel narration restating what the heading/figure already show ---
 {
-  const statusIndex = sources.insights.indexOf("Evidence status");
-  const previewIndex = sources.insights.indexOf("Illustrative example");
-  if (statusIndex === -1 || previewIndex === -1 || statusIndex > previewIndex) {
-    failures.push("insights: evidence status/methodology does not precede the preview panels");
-  } else {
-    checks.push("insights: evidence status/methodology precedes the preview panels");
-  }
+  const panelParagraphs = (sources.insights.match(/tracker-evidence-panel[\s\S]{0,20}?<\/div>\s*<p>/g) || []).length;
+  if (panelParagraphs > 0) failures.push(`insights: found ${panelParagraphs} explanatory paragraph(s) directly under an evidence-panel heading -- panels should carry only a heading, figcaption, and figure`);
+  else checks.push("insights: evidence panels carry no restating explanatory paragraphs");
 }
 
 for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
