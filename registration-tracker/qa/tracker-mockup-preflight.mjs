@@ -137,12 +137,25 @@ const registrationTypes = [
 ];
 for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
 
-requireMatch("insights", /Evidence status: collecting and reviewing/i, "single page-level evidence notice");
+// --- Evidence status/methodology leads the page; the evidence-preview panels are a clearly demoted, later "preview" section ---
+requireMatch("insights", /Evidence status<\/p>\s*<h2>Collecting and reviewing/i, "single page-level evidence notice, leading the page");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
 requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four future evidence questions");
-requireMatch("insights", /contain no current totals or findings/i, "non-fabrication explanation");
+requireMatch("insights", /contains no totals, trends, or figures/i, "non-fabrication explanation");
+requireMatch("insights", /Preview — not yet real/i, "evidence-preview panels explicitly labelled as a preview, not the page's main content");
 forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:/i, "repeated panel-level evidence warnings");
 requireMatch("insights", /Submitted[\s\S]*Reviewed[\s\S]*Classified[\s\S]*Protected[\s\S]*Publishable/, "five evidence publication gates");
+
+// --- Status/methodology sections must physically precede the evidence-preview panels ---
+{
+  const statusIndex = sources.insights.indexOf("Evidence status");
+  const previewIndex = sources.insights.indexOf("Preview — not yet real");
+  if (statusIndex === -1 || previewIndex === -1 || statusIndex > previewIndex) {
+    failures.push("insights: evidence status/methodology does not precede the preview panels");
+  } else {
+    checks.push("insights: evidence status/methodology precedes the preview panels");
+  }
+}
 
 for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
   forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
