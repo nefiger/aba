@@ -137,19 +137,31 @@ const registrationTypes = [
 ];
 for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
 
-// --- Evidence status/methodology leads the page; the evidence-preview panels are a clearly demoted, later "preview" section ---
-requireMatch("insights", /Evidence status<\/p>\s*<h2>Collecting and reviewing/i, "single page-level evidence notice, leading the page");
+// --- Evidence status/methodology leads the page; the evidence-preview panels are demoted and now populated
+// from a clearly labelled fictional example dataset (not empty placeholders, and not real findings) ---
+requireMatch("insights", /Evidence status<\/p>\s*<h2>No real findings are published yet/i, "single page-level evidence notice, leading the page");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
 requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four future evidence questions");
-requireMatch("insights", /contains no totals, trends, or figures/i, "non-fabrication explanation");
-requireMatch("insights", /Preview — not yet real/i, "evidence-preview panels explicitly labelled as a preview, not the page's main content");
+requireMatch("insights", /do not describe any real company, product, or registration/i, "explicit fictional-data disclaimer in the leading status section");
+requireMatch("insights", /Illustrative example/i, "evidence-preview panels explicitly labelled as a fictional illustrative example, not real findings");
+requireMatch("insights", /Illustrative example — not real registrations/i, "persistent illustrative-example notice directly above the evidence-preview panels");
 forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:/i, "repeated panel-level evidence warnings");
 requireMatch("insights", /Submitted[\s\S]*Reviewed[\s\S]*Classified[\s\S]*Protected[\s\S]*Publishable/, "five evidence publication gates");
+requireMatch("insights", /registration-tracker-insights-seed\.js/, "insights page loads the seed-data script");
+requireMatch("insights", /registration-tracker-insights\.js/, "insights page loads the seed-data render script");
+{
+  const seedJs = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights-seed.js"), "utf8");
+  const renderJs = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8");
+  if (!/window\.ABA_TRACKER_INSIGHTS_SEED\s*=/.test(seedJs)) failures.push("insights-seed.js: missing ABA_TRACKER_INSIGHTS_SEED dataset");
+  else checks.push("insights-seed.js: defines ABA_TRACKER_INSIGHTS_SEED dataset");
+  if (!/ABA_TRACKER_INSIGHTS_SEED/.test(renderJs)) failures.push("insights.js: does not read the seed dataset -- evidence-preview panels would not be driven by it");
+  else checks.push("insights.js: evidence-preview panels driven by the seed dataset (not hand-typed figures)");
+}
 
 // --- Status/methodology sections must physically precede the evidence-preview panels ---
 {
   const statusIndex = sources.insights.indexOf("Evidence status");
-  const previewIndex = sources.insights.indexOf("Preview — not yet real");
+  const previewIndex = sources.insights.indexOf("Illustrative example");
   if (statusIndex === -1 || previewIndex === -1 || statusIndex > previewIndex) {
     failures.push("insights: evidence status/methodology does not precede the preview panels");
   } else {
@@ -174,6 +186,8 @@ for (const [sourceKey, source] of Object.entries(sources)) {
 const linkedAssets = [
   "registration-tracker/shared/registration-tracker-module.css",
   "registration-tracker/shared/registration-tracker-module.js",
+  "registration-tracker/shared/registration-tracker-insights-seed.js",
+  "registration-tracker/shared/registration-tracker-insights.js",
 ];
 for (const relativePath of linkedAssets) {
   try {

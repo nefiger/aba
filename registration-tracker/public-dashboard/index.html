@@ -9,8 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731b">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260801">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
+  <script src="../shared/registration-tracker-insights-seed.js?v=20260801" defer></script>
+  <script src="../shared/registration-tracker-insights.js?v=20260801" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="insights">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
@@ -28,8 +30,8 @@
       <div class="tracker-shell">
         <div class="tracker-section-heading">
           <p class="tracker-label">Evidence status</p>
-          <h2>Collecting and reviewing — no findings published yet.</h2>
-          <p>ABA is receiving and reviewing individual submissions. Nothing is published until enough reviewed registrations exist to combine into a finding without naming a participant, organisation, or product. This page currently contains no totals, trends, or figures of any kind.</p>
+          <h2>No real findings are published yet.</h2>
+          <p>ABA is receiving and reviewing individual submissions, but not enough real registrations have been reviewed to combine into a finding without naming a participant, organisation, or product. The four views further down this page use a fictional example dataset to show what this page will look like once that changes — they do not describe any real company, product, or registration.</p>
         </div>
       </div>
     </section>
@@ -76,10 +78,14 @@
     <section class="tracker-section tracker-section--beige">
       <div class="tracker-shell">
         <div class="tracker-section-heading">
-          <p class="tracker-label">Preview — not yet real</p>
-          <h2>What this page becomes once evidence is sufficient.</h2>
-          <p>These four views are shown as labelled, empty structures only. Together they will eventually show where registrations are held up, how long movement takes, which barriers recur, and where the evidence is strong enough to support a finding.</p>
+          <p class="tracker-label">Illustrative example</p>
+          <h2>What this page will show, demonstrated with fictional data.</h2>
+          <p>The four views below are populated from a fictional example dataset of 24 example registrations, built to demonstrate this page's eventual shape. Once real reviewed evidence is sufficient, ABA will replace this example with real, non-named findings.</p>
         </div>
+        <aside class="tracker-evidence-note" aria-label="Illustrative example notice">
+          <strong>Illustrative example — not real registrations.</strong>
+          <span>Every value below is generated from a fictional dataset for demonstration only.</span>
+        </aside>
         <div class="tracker-evidence-grid">
           <article class="tracker-evidence-panel tracker-evidence-panel--wide">
             <div class="tracker-evidence-panel__heading">
@@ -89,15 +95,15 @@
                 <h3>Where are new registrations waiting?</h3>
               </div>
             </div>
-            <p>A stage-by-stage distribution will make concentrations and potential bottlenecks visible across included registrations.</p>
+            <p>A stage-by-stage distribution makes concentrations and potential bottlenecks visible across included registrations.</p>
             <figure class="tracker-evidence-figure">
               <figcaption>Share of included registrations</figcaption>
-              <ol class="tracker-stage-scale">
-                <li><span>Received</span><i aria-hidden="true"><b></b></i></li>
-                <li><span>Verification</span><i aria-hidden="true"><b></b></i></li>
-                <li><span>Scientific screening</span><i aria-hidden="true"><b></b></i></li>
-                <li><span>Evaluation</span><i aria-hidden="true"><b></b></i></li>
-                <li><span>Decision</span><i aria-hidden="true"><b></b></i></li>
+              <ol class="tracker-stage-scale" data-stage-scale>
+                <li><span>Received</span><i aria-hidden="true"><b data-stage="Received"></b></i></li>
+                <li><span>Verification</span><i aria-hidden="true"><b data-stage="Verification"></b></i></li>
+                <li><span>Scientific screening</span><i aria-hidden="true"><b data-stage="Scientific screening"></b></i></li>
+                <li><span>Evaluation</span><i aria-hidden="true"><b data-stage="Evaluation"></b></i></li>
+                <li><span>Decision</span><i aria-hidden="true"><b data-stage="Decision"></b></i></li>
               </ol>
               <div class="tracker-axis" aria-hidden="true"><span>Lower share</span><span>Higher share</span></div>
             </figure>
@@ -111,19 +117,20 @@
                 <h3>How does time compare with the published timeframe?</h3>
               </div>
             </div>
-            <p>Combined elapsed time will be read against the applicable published timeframe, without exposing an individual registration.</p>
+            <p>Combined elapsed time is read against the applicable published timeframe, without exposing an individual registration.</p>
             <figure class="tracker-evidence-figure">
               <figcaption>Elapsed time across included registrations</figcaption>
               <div class="tracker-time-scale" aria-label="Elapsed-time comparison framework">
-                <div class="tracker-time-scale__plot" aria-hidden="true">
-                  <span class="tracker-time-scale__baseline"></span>
-                  <span class="tracker-time-scale__reference"></span>
+                <div class="tracker-time-scale__plot" data-time-scale-plot>
+                  <span class="tracker-time-scale__baseline" aria-hidden="true"></span>
+                  <span class="tracker-time-scale__reference" aria-hidden="true"></span>
                 </div>
                 <div class="tracker-time-scale__labels">
                   <span>Status began</span>
                   <strong>Published timeframe</strong>
                   <span>Beyond timeframe</span>
                 </div>
+                <p class="tracker-time-scale__summary" data-time-scale-summary></p>
               </div>
             </figure>
           </article>
@@ -136,7 +143,7 @@
                 <h3>Which obstacles appear across registrations?</h3>
               </div>
             </div>
-            <p>Reviewed issues will be grouped consistently so recurring obstacles can be distinguished from isolated experiences.</p>
+            <p>Reviewed issues are grouped consistently so recurring obstacles can be distinguished from isolated experiences.</p>
             <figure class="tracker-evidence-figure">
               <figcaption>From individual context to a combined signal</figcaption>
               <ol class="tracker-classification-path">
@@ -144,6 +151,7 @@
                 <li><span aria-hidden="true">02</span><strong>Classify consistently</strong></li>
                 <li><span aria-hidden="true">03</span><strong>Rank recurring barriers</strong></li>
               </ol>
+              <dl class="tracker-barrier-rank" data-barrier-rank></dl>
             </figure>
           </article>
 
@@ -155,13 +163,13 @@
                 <h3>What can ABA responsibly say?</h3>
               </div>
             </div>
-            <p>A coverage map will show where comparisons are supported and where gaps limit what can responsibly be said.</p>
+            <p>A coverage map shows where comparisons are supported and where gaps limit what can responsibly be said.</p>
             <figure class="tracker-evidence-figure">
               <figcaption>Evidence available for comparison</figcaption>
-              <dl class="tracker-coverage-list">
-                <div><dt>Functional category</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>Legal pathway</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>New-registration type</dt><dd aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></dd></div>
+              <dl class="tracker-coverage-list" data-coverage-list>
+                <div><dt>Functional category</dt><dd aria-hidden="true" data-coverage-field="functional_category"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>Legal pathway</dt><dd aria-hidden="true" data-coverage-field="legal_pathway"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>New-registration type</dt><dd aria-hidden="true" data-coverage-field="registration_type"><i></i><i></i><i></i><i></i><i></i></dd></div>
               </dl>
               <div class="tracker-coverage-key" aria-hidden="true"><span>Limited coverage</span><span>Stronger coverage</span></div>
             </figure>
