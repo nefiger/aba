@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731b">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
-  <script src="../shared/registration-tracker-module.js?v=20260731" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260731c" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
@@ -42,6 +42,17 @@
             <div class="field"><span class="field__label">Have the Application Form, Service Request Form, and proof of payment all been submitted? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="submission_scope" required><span>Yes, all three have been submitted.</span></label><label class="choice"><input type="radio" name="submission_scope"><span>No, one or more submission steps are not complete.</span></label></div></div>
           </fieldset>
 
+          <nav aria-label="Intake sections">
+            <ol class="tracker-stage-nav">
+              <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
+              <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
+              <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
+              <li><button type="button" data-stage-button="4"><span>04</span>Submission and accountability</button></li>
+              <li><button type="button" data-stage-button="5"><span>05</span>Data use and submission</button></li>
+            </ol>
+          </nav>
+
+          <section data-stage-panel="1">
           <fieldset class="form-section">
             <legend>You and your organisation</legend>
             <div class="field-grid field-grid--2">
@@ -65,7 +76,9 @@
             </div>
             <label class="choice"><input id="contact-permission" name="contact_permission" type="checkbox" required><span><strong>ABA may contact me about this submission, including requests for clarification.</strong></span></label>
           </fieldset>
+          </section>
 
+          <section data-stage-panel="2" hidden>
           <fieldset class="form-section">
             <legend>Product and new-registration type</legend>
             <div class="field-grid field-grid--2">
@@ -103,7 +116,9 @@
               </div>
             </div>
           </fieldset>
+          </section>
 
+          <section data-stage-panel="3" hidden>
           <fieldset class="form-section">
             <legend>Current status</legend>
             <div class="field-grid field-grid--2">
@@ -134,10 +149,12 @@
                 </select>
                 <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
               </div>
-              <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason" required></textarea></div>
+              <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason"></textarea></div>
             </div>
           </fieldset>
+          </section>
 
+          <section data-stage-panel="4" hidden>
           <fieldset class="form-section">
             <legend>Submission and accountability</legend>
             <label class="choice"><input id="submission-confirmed" name="submission_confirmed" type="checkbox" required><span><strong>I confirm that the Application Form, Service Request Form, and proof of payment have all been submitted to the registrar.</strong></span></label>
@@ -175,11 +192,14 @@
               <div class="field"><label for="appointment-confirmation">Authority or appointment information <span>(optional)</span></label><textarea id="appointment-confirmation" name="appointment_confirmation" placeholder="Briefly describe the appointment or authority where it is relevant."></textarea></div>
             </div>
           </fieldset>
+          </section>
 
+          <section data-stage-panel="5" hidden>
           <fieldset class="form-section">
             <legend>Data use and submission</legend>
             <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights.</strong><small>This condition is required to use the tracker and is not pre-selected. ABA will not publish my contact details or identify my organisation or product through the public insights view.</small></span></label>
           </fieldset>
+          </section>
 
           <input type="hidden" id="referral-source" name="referral_source">
 

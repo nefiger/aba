@@ -300,6 +300,45 @@
   color: var(--tracker-orange-light);
 }
 
+.tracker-module .tracker-stage-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0 0 var(--space-2xl);
+  padding: 0;
+  border-block: 1px solid var(--tracker-line);
+  list-style: none;
+}
+
+.tracker-module .tracker-stage-nav button {
+  width: 100%;
+  min-height: 4.4rem;
+  border: 0;
+  border-right: 1px solid var(--tracker-line);
+  padding: 0.65rem 0.35rem;
+  background: transparent;
+  color: var(--tracker-forest);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.tracker-module .tracker-stage-nav li:last-child button {
+  border-right: 0;
+}
+
+.tracker-module .tracker-stage-nav button[aria-current="step"] {
+  background: var(--tracker-forest);
+  color: var(--tracker-paper);
+}
+
+.tracker-module .tracker-stage-nav span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--tracker-orange);
+  font-weight: 800;
+}
+
 .tracker-module .tracker-evidence-note {
   display: flex;
   flex-wrap: wrap;
@@ -672,6 +711,24 @@
 }
 
 @media (max-width: 52rem) {
+  .tracker-module .tracker-stage-nav {
+    grid-template-columns: 1fr;
+    border-block: 0;
+    border-top: 1px solid var(--tracker-line);
+  }
+
+  .tracker-module .tracker-stage-nav button {
+    min-height: 3.6rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--tracker-line);
+    text-align: left;
+  }
+
+  .tracker-module .tracker-stage-nav span {
+    display: inline;
+    margin-right: 0.4rem;
+  }
+
   .tracker-module .tracker-publication-gates {
     grid-template-columns: 1fr;
   }

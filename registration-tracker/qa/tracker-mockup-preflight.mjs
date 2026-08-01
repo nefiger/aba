@@ -60,9 +60,20 @@ for (const [description, pattern] of forbiddenActivePatterns) {
   else checks.push(`all active pages: no ${description}`);
 }
 
-// --- Qualifier now lives as intake's first visible form section, not a gated landing-page mini-form ---
+// --- Qualifier now lives as intake's first, separate, always-visible form section (not a
+// tab, not a gated landing-page mini-form). The other five sections are tabbed, but tabs
+// are freely clickable in any order -- there is no Continue/Back gating between them. ---
 forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
-forbidMatch("intake", /data-stage-panel=|tracker-stage-nav|data-show-review\b/i, "hidden/gated wizard-stage markup");
+forbidMatch("intake", /data-next-stage|data-previous-stage|data-show-review\b/i, "sequential Continue/Back wizard gating");
+
+const stagePanelCount = (sources.intake.match(/data-stage-panel="/g) || []).length;
+if (stagePanelCount !== 5) failures.push(`intake: expected 5 tabbed sections, found ${stagePanelCount}`);
+else checks.push("intake: five tabbed sections (qualifier stays separate, ungated)");
+
+const stageButtonCount = (sources.intake.match(/data-stage-button="/g) || []).length;
+if (stageButtonCount !== 5) failures.push(`intake: expected 5 section tabs, found ${stageButtonCount}`);
+else checks.push("intake: five section tabs");
+
 requireMatch("intake", /Is this a new biological product registration\?/, "qualifier question: new registration");
 requireMatch("intake", /Is it a South African registration under Act 36\?/, "qualifier question: SA/Act 36 jurisdiction");
 requireMatch("intake", /Are you responsible for the registration or authorized to provide its information\?/, "qualifier question: authority");
@@ -75,7 +86,7 @@ const formSectionCount = (sources.intake.match(/<fieldset class="form-section">/
 if (formSectionCount !== 6) failures.push(`intake: expected 6 form sections, found ${formSectionCount}`);
 else checks.push("intake: six form sections (qualifier, participant/org, product, status, submission/accountability, data use)");
 
-// --- All sections visible and scrollable; only one confirm screen sits between filling the form and sending it ---
+// --- Regardless of which tab is open, only one confirm screen sits between filling the form and sending it ---
 requireMatch("intake", /data-review-before-submit/, "review-and-confirm-before-submit opt-in");
 requireMatch("intake", /data-review="tracker-intake"/, "review screen container");
 requireMatch("intake", /data-review-confirm/, "review screen confirm action");
@@ -168,5 +179,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log("PASS: active routes, fields, states, and release boundaries match the tracker's single-scroll, review-and-confirm intake architecture.");
+  console.log("PASS: active routes, fields, states, and release boundaries match the tracker's tabbed, ungated, review-and-confirm intake architecture.");
 }
