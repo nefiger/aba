@@ -213,6 +213,16 @@ for (const [sourceKey, source] of Object.entries(sources)) {
       checks.push(`registration-tracker-module.css: .${variant} has a dedicated :hover rule`);
     }
   }
+
+  // --- Sitewide .brochure-theme h1 (styles.css) forces white-space: nowrap by design, and
+  // wins the cascade on tracker pages (equal specificity, later source order) unless overridden
+  // here -- confirmed empirically to force real horizontal overflow on any tracker h1 too long
+  // for one line (e.g. Resources' "Before you submit a new registration."). ---
+  if (!/\.brochure-theme\.tracker-module h1[\s\S]{0,80}white-space:\s*normal/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: missing .brochure-theme.tracker-module h1 white-space override -- multi-word tracker h1s will overflow at narrow widths");
+  } else {
+    checks.push("registration-tracker-module.css: .brochure-theme.tracker-module h1 white-space override present");
+  }
 }
 
 const linkedAssets = [

@@ -64,6 +64,20 @@
   letter-spacing: -0.025em;
 }
 
+/* .brochure-theme h1 (styles.css) forces white-space: nowrap sitewide, by design, so
+   headings never wrap awkwardly -- copy is supposed to be shortened instead. That rule
+   matches tracker pages too (body carries both .brochure-theme and .tracker-module), and
+   has equal specificity, so it wins by source order and forces this h1 off-canvas at
+   narrow widths regardless of what .tracker-module h1 sets. Override it here specifically
+   for tracker pages: unlike the rest of the brochure-theme site, several tracker h1s are
+   full sentences that can't be shortened to one nowrap-safe line without losing meaning
+   (e.g. "Before you submit a new registration."), so tracker headings are allowed to wrap
+   normally instead. */
+.brochure-theme.tracker-module h1 {
+  white-space: normal;
+  text-wrap: wrap;
+}
+
 .tracker-module h2 {
   margin: 0;
   font: 700 clamp(1.65rem, 4.2vw, 2.8rem)/1.05 "Saira Semi Condensed", sans-serif;
