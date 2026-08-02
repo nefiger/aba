@@ -60,31 +60,35 @@ for (const [description, pattern] of forbiddenActivePatterns) {
   else checks.push(`all active pages: no ${description}`);
 }
 
-// --- Qualifier now lives as intake's first, separate, always-visible form section (not a
-// tab, not a gated landing-page mini-form). The other five sections are tabbed, but tabs
-// are freely clickable in any order -- there is no Continue/Back gating between them. ---
+// --- The readiness self-check (new registration / SA-Act-36 / authorized / already
+// submitted) lives ONLY on the landing page, as plain non-blocking bullet content -- not
+// as form controls, and not duplicated inside the intake. Two of those four facts turned
+// out to already be real submission data ABA needs on file (authority, submission-confirmed)
+// and live as ordinary required checkboxes inside the real form sections where they belong;
+// the other two (new-registration-only, SA/Act-36-only) aren't stored per-record at all,
+// since the whole product is scoped to only that case this release -- so there was nothing
+// left to gate in the intake once the two real facts moved into the actual form. The five
+// real sections are tabbed, but tabs are freely clickable in any order -- no Continue/Back
+// gating between them. ---
 forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
 forbidMatch("intake", /data-next-stage|data-previous-stage|data-show-review\b/i, "sequential Continue/Back wizard gating");
+forbidMatch("intake", /type="radio"/i, "Yes/No radio-pair readiness questions");
+forbidMatch("intake", /\bqualifier\b|\bqualification\b/i, "internal 'qualifier/qualification' language in user-facing copy");
+forbidMatch("intake", /id="readiness-/i, "readiness self-check duplicated as intake form controls (belongs on the landing page only)");
 
 const stagePanelCount = (sources.intake.match(/data-stage-panel="/g) || []).length;
 if (stagePanelCount !== 5) failures.push(`intake: expected 5 tabbed sections, found ${stagePanelCount}`);
-else checks.push("intake: five tabbed sections (qualifier stays separate, ungated)");
+else checks.push("intake: five tabbed sections");
 
 const stageButtonCount = (sources.intake.match(/data-stage-button="/g) || []).length;
 if (stageButtonCount !== 5) failures.push(`intake: expected 5 section tabs, found ${stageButtonCount}`);
 else checks.push("intake: five section tabs");
 
-requireMatch("intake", /Is this a new biological product registration\?/, "qualifier question: new registration");
-requireMatch("intake", /Is it a South African registration under Act 36\?/, "qualifier question: SA/Act 36 jurisdiction");
-requireMatch("intake", /Are you responsible for the registration or authorized to provide its information\?/, "qualifier question: authority");
-requireMatch("intake", /Have the Application Form, Service Request Form, and proof of payment all been submitted\?/, "qualifier question: three-part submission");
-requireMatch("intake", /amendment, renewal, appeal, permit, source change, reinstatement, or another service/, "out-of-service outcome option");
-requireMatch("intake", /another country or regulatory regime/, "out-of-country or regime outcome option");
-requireMatch("intake", /one or more submission steps are not complete/, "incomplete-submission outcome option");
-
 const formSectionCount = (sources.intake.match(/<fieldset class="form-section">/g) || []).length;
-if (formSectionCount !== 6) failures.push(`intake: expected 6 form sections, found ${formSectionCount}`);
-else checks.push("intake: six form sections (qualifier, participant/org, product, status, submission/accountability, data use)");
+if (formSectionCount !== 5) failures.push(`intake: expected 5 form sections, found ${formSectionCount}`);
+else checks.push("intake: five form sections (participant/org, product, status, submission/accountability, data use)");
+
+requireMatch("intake", /id="authority-confirmation"\s+name="authority_confirmation"\s+type="checkbox"\s+required/, "real, stored authority-confirmation checkbox");
 
 // --- Regardless of which tab is open, only one confirm screen sits between filling the form and sending it ---
 requireMatch("intake", /data-review-before-submit/, "review-and-confirm-before-submit opt-in");
