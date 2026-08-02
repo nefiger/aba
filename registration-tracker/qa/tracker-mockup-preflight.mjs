@@ -186,6 +186,21 @@ for (const [sourceKey, source] of Object.entries(sources)) {
   else checks.push(`${sourceKey}: no forced heading break`);
 }
 
+// --- .tracker-button--orange/--secondary must each declare their own :hover rule -- without
+// one, the base variant's text color survives while the generic .tracker-button:hover changes
+// only the background, and for both variants that collision converges text and background on
+// the same near-black tone (confirmed empirically: text became illegible on hover). ---
+{
+  const moduleCss = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-module.css"), "utf8");
+  for (const variant of ["tracker-button--orange", "tracker-button--secondary"]) {
+    if (!new RegExp(`\\.${variant}:hover\\s*\\{`).test(moduleCss)) {
+      failures.push(`registration-tracker-module.css: .${variant} has no dedicated :hover rule -- risks converging text and background to the same color`);
+    } else {
+      checks.push(`registration-tracker-module.css: .${variant} has a dedicated :hover rule`);
+    }
+  }
+}
+
 const linkedAssets = [
   "registration-tracker/shared/registration-tracker-module.css",
   "registration-tracker/shared/registration-tracker-module.js",
