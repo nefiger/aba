@@ -158,7 +158,18 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   else checks.push("insights-seed.js: defines ABA_TRACKER_INSIGHTS_SEED dataset");
   if (!/ABA_TRACKER_INSIGHTS_SEED/.test(renderJs)) failures.push("insights.js: does not read the seed dataset -- evidence-preview panels would not be driven by it");
   else checks.push("insights.js: evidence-preview panels driven by the seed dataset (not hand-typed figures)");
+
+  // --- Every aria-hidden chart element (stage bars, coverage dots) must have a visible
+  // sibling value the render script populates -- otherwise the data is sighted-only. ---
+  for (const attr of ["data-stage-value", "data-coverage-value"]) {
+    if (!new RegExp(attr).test(sources.insights)) failures.push(`insights: missing ${attr} elements -- aria-hidden chart data has no accessible text equivalent`);
+    else checks.push(`insights: ${attr} elements present for accessible chart values`);
+    if (!new RegExp(`querySelector\\(\`\\[${attr}`).test(renderJs)) failures.push(`insights.js: does not populate ${attr} elements`);
+    else checks.push(`insights.js: populates ${attr} elements`);
+  }
 }
+
+forbidMatch("insights", /this period/i, "undefined 'this period' language (use a stated, defined reporting basis instead)");
 
 // --- A single short methodology line replaces the old full "Publication pipeline" /
 // "What is collected and why" sections, which duplicated privacy.html and dominated the page ---

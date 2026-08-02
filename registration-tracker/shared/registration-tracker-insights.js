@@ -8,10 +8,15 @@
 
   const total = records.length;
 
-  // 01 -- Process position: share of records per pipeline stage.
+  // 01 -- Process position: share of records per pipeline stage. The bar itself is
+  // decorative (aria-hidden); the count/percentage next to it is the real accessible value.
   document.querySelectorAll("[data-stage-scale] [data-stage]").forEach((bar) => {
-    const count = records.filter((record) => record.stage === bar.dataset.stage).length;
-    bar.style.width = `${Math.round((count / total) * 100)}%`;
+    const stage = bar.dataset.stage;
+    const count = records.filter((record) => record.stage === stage).length;
+    const percent = Math.round((count / total) * 100);
+    bar.style.width = `${percent}%`;
+    const value = document.querySelector(`[data-stage-value="${stage}"]`);
+    if (value) value.textContent = `${count} of ${total} (${percent}%)`;
   });
 
   // 02 -- Elapsed time: each record plotted as a point along the timeframe axis.
@@ -54,6 +59,8 @@
   }
 
   // 04 -- Evidence coverage: share of records with a specific (non-"Not sure") value.
+  // The dot indicators are decorative (aria-hidden); the fraction next to them is the
+  // real accessible value.
   document.querySelectorAll("[data-coverage-field]").forEach((dd) => {
     const field = dd.dataset.coverageField;
     const covered = records.filter((record) => record[field] && record[field] !== "Not sure").length;
@@ -61,5 +68,7 @@
     [...dd.querySelectorAll("i")].forEach((segment, index) => {
       segment.classList.toggle("is-filled", index < filledSegments);
     });
+    const value = document.querySelector(`[data-coverage-value="${field}"]`);
+    if (value) value.textContent = `${covered} of ${total}`;
   });
 })();

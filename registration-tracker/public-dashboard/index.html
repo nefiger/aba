@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260802">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
   <script src="../shared/registration-tracker-insights-seed.js?v=20260801" defer></script>
-  <script src="../shared/registration-tracker-insights.js?v=20260801" defer></script>
+  <script src="../shared/registration-tracker-insights.js?v=20260802" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="insights">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
@@ -41,11 +41,11 @@
             <figure class="tracker-evidence-figure">
               <figcaption>Share of included registrations</figcaption>
               <ol class="tracker-stage-scale" data-stage-scale>
-                <li><span>Received</span><i aria-hidden="true"><b data-stage="Received"></b></i></li>
-                <li><span>Verification</span><i aria-hidden="true"><b data-stage="Verification"></b></i></li>
-                <li><span>Scientific screening</span><i aria-hidden="true"><b data-stage="Scientific screening"></b></i></li>
-                <li><span>Evaluation</span><i aria-hidden="true"><b data-stage="Evaluation"></b></i></li>
-                <li><span>Decision</span><i aria-hidden="true"><b data-stage="Decision"></b></i></li>
+                <li><span>Received</span><span class="tracker-stage-scale__value" data-stage-value="Received"></span><i aria-hidden="true"><b data-stage="Received"></b></i></li>
+                <li><span>Verification</span><span class="tracker-stage-scale__value" data-stage-value="Verification"></span><i aria-hidden="true"><b data-stage="Verification"></b></i></li>
+                <li><span>Scientific screening</span><span class="tracker-stage-scale__value" data-stage-value="Scientific screening"></span><i aria-hidden="true"><b data-stage="Scientific screening"></b></i></li>
+                <li><span>Evaluation</span><span class="tracker-stage-scale__value" data-stage-value="Evaluation"></span><i aria-hidden="true"><b data-stage="Evaluation"></b></i></li>
+                <li><span>Decision</span><span class="tracker-stage-scale__value" data-stage-value="Decision"></span><i aria-hidden="true"><b data-stage="Decision"></b></i></li>
               </ol>
               <div class="tracker-axis" aria-hidden="true"><span>Lower share</span><span>Higher share</span></div>
             </figure>
@@ -85,7 +85,7 @@
               </div>
             </div>
             <figure class="tracker-evidence-figure">
-              <figcaption>Most frequently reported, this period</figcaption>
+              <figcaption>Most frequently reported, across all included registrations</figcaption>
               <dl class="tracker-barrier-rank" data-barrier-rank></dl>
             </figure>
           </article>
@@ -101,9 +101,9 @@
             <figure class="tracker-evidence-figure">
               <figcaption>Evidence available for comparison</figcaption>
               <dl class="tracker-coverage-list" data-coverage-list>
-                <div><dt>Functional category</dt><dd aria-hidden="true" data-coverage-field="functional_category"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>Legal pathway</dt><dd aria-hidden="true" data-coverage-field="legal_pathway"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>New-registration type</dt><dd aria-hidden="true" data-coverage-field="registration_type"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>Functional category</dt><span class="tracker-coverage-list__value" data-coverage-value="functional_category"></span><dd aria-hidden="true" data-coverage-field="functional_category"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>Legal pathway</dt><span class="tracker-coverage-list__value" data-coverage-value="legal_pathway"></span><dd aria-hidden="true" data-coverage-field="legal_pathway"><i></i><i></i><i></i><i></i><i></i></dd></div>
+                <div><dt>New-registration type</dt><span class="tracker-coverage-list__value" data-coverage-value="registration_type"></span><dd aria-hidden="true" data-coverage-field="registration_type"><i></i><i></i><i></i><i></i><i></i></dd></div>
               </dl>
               <div class="tracker-coverage-key" aria-hidden="true"><span>Limited coverage</span><span>Stronger coverage</span></div>
             </figure>

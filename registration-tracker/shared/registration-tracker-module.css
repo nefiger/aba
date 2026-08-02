@@ -435,11 +435,17 @@
 
 .tracker-module .tracker-stage-scale li {
   display: grid;
-  grid-template-columns: minmax(8rem, 0.65fr) minmax(5rem, 1fr);
+  grid-template-columns: minmax(8rem, 0.65fr) minmax(3.5rem, auto) minmax(5rem, 1fr);
   gap: 0.8rem;
   align-items: center;
   font-size: 0.84rem;
   font-weight: 750;
+}
+
+.tracker-module .tracker-stage-scale__value {
+  color: #57665f;
+  font-weight: 700;
+  text-align: right;
 }
 
 .tracker-module .tracker-stage-scale i {
@@ -585,14 +591,22 @@
 
 .tracker-module .tracker-coverage-list > div {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.8fr) minmax(10rem, 1.2fr);
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(3.5rem, auto) minmax(10rem, 1.2fr);
   gap: 0.8rem;
+  align-items: center;
   border-top: 1px solid var(--tracker-line);
   padding: 0.75rem 0;
 }
 
 .tracker-module .tracker-coverage-list dt {
   font-weight: 750;
+}
+
+.tracker-module .tracker-coverage-list__value {
+  color: #57665f;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: right;
 }
 
 .tracker-module .tracker-coverage-list dd {
