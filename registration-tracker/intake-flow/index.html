@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260731b">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260803">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
-  <script src="../shared/registration-tracker-module.js?v=20260731c" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260803b" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
@@ -33,21 +33,22 @@
             <ul></ul>
           </div>
 
-          <fieldset class="form-section">
-            <legend>Confirm this fits your registration</legend>
-            <p class="required-note">If this isn't a match, see <a href="../resources/index.html">Registration resources</a> instead.</p>
-            <div class="field"><span class="field__label">Is this a new biological product registration? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="registration_scope" required><span>Yes, this is a new registration.</span></label><label class="choice"><input type="radio" name="registration_scope"><span>No, this is an amendment, renewal, appeal, permit, source change, reinstatement, or another service.</span></label></div></div>
-            <div class="field"><span class="field__label">Is it a South African registration under Act 36? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="jurisdiction_scope" required><span>Yes, it is a South African registration under Act 36.</span></label><label class="choice"><input type="radio" name="jurisdiction_scope"><span>No, it is for another country or regulatory regime.</span></label></div></div>
-            <div class="field"><span class="field__label">Are you responsible for the registration or authorized to provide its information? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="authority_scope" required><span>Yes, I am responsible or authorized.</span></label><label class="choice"><input type="radio" name="authority_scope"><span>No, another person should provide it.</span></label></div></div>
-            <div class="field"><span class="field__label">Have the Application Form, Service Request Form, and proof of payment all been submitted? <span aria-hidden="true">*</span></span><div class="choice-grid"><label class="choice"><input type="radio" name="submission_scope" required><span>Yes, all three have been submitted.</span></label><label class="choice"><input type="radio" name="submission_scope"><span>No, one or more submission steps are not complete.</span></label></div></div>
-          </fieldset>
+          <p class="required-note">Not the right fit for this? See <a href="../resources/index.html">Registration resources</a>, or check the criteria on the <a href="../../soft-launch/prototype/registration-tracker.html#is-this-for-you">Registration Tracker</a> page.</p>
 
           <nav aria-label="Intake sections">
-            <ol class="tracker-stage-nav">
+            <div class="tracker-stage-compact" data-stage-compact>
+              <button type="button" class="tracker-stage-compact__arrow" data-stage-prev aria-label="Previous section">‹</button>
+              <div class="tracker-stage-compact__status">
+                <p class="tracker-stage-compact__label" data-stage-compact-label aria-live="polite"></p>
+                <button type="button" class="tracker-stage-compact__toggle" data-stage-toggle aria-expanded="false" aria-controls="intake-stage-list">Show all sections</button>
+              </div>
+              <button type="button" class="tracker-stage-compact__arrow" data-stage-next aria-label="Next section">›</button>
+            </div>
+            <ol class="tracker-stage-nav" id="intake-stage-list" data-stage-list>
               <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
               <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
               <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
-              <li><button type="button" data-stage-button="4"><span>04</span>Submission and accountability</button></li>
+              <li><button type="button" data-stage-button="4"><span>04</span>Accountability</button></li>
               <li><button type="button" data-stage-button="5"><span>05</span>Data use and submission</button></li>
             </ol>
           </nav>
@@ -72,8 +73,9 @@
                   <option>Other responsible organisation</option>
                 </select>
               </div>
-              <div class="field"><label for="organisation-country">Organisation's country <span aria-hidden="true">*</span></label><input id="organisation-country" name="organisation_country" autocomplete="country-name" required><small>The organisation's own country, not the registration jurisdiction — the questions above already confirm this is a South African Act 36 registration.</small></div>
+              <div class="field"><label for="organisation-country">Organisation's country <span aria-hidden="true">*</span></label><input id="organisation-country" name="organisation_country" autocomplete="country-name" required><small>The organisation's own country, not the registration jurisdiction. This release supports South African Act 36 new registrations only.</small></div>
             </div>
+            <label class="choice"><input id="authority-confirmation" name="authority_confirmation" type="checkbox" required><span><strong>I am responsible for this registration or authorized to provide its information.</strong></span></label>
             <label class="choice"><input id="contact-permission" name="contact_permission" type="checkbox" required><span><strong>ABA may contact me about this submission, including requests for clarification.</strong></span></label>
           </fieldset>
           </section>

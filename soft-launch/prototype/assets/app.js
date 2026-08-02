@@ -122,6 +122,7 @@ const fieldNames = {
   values_alignment: "Purpose acknowledgement",
   code_of_conduct: "Code of conduct acknowledgement",
   network_follow_up: "Application contact permission",
+  insight_acknowledgement: "Data-use acknowledgement",
 };
 
 function getFieldName(control) {

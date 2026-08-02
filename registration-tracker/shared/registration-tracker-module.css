@@ -64,6 +64,20 @@
   letter-spacing: -0.025em;
 }
 
+/* .brochure-theme h1 (styles.css) forces white-space: nowrap sitewide, by design, so
+   headings never wrap awkwardly -- copy is supposed to be shortened instead. That rule
+   matches tracker pages too (body carries both .brochure-theme and .tracker-module), and
+   has equal specificity, so it wins by source order and forces this h1 off-canvas at
+   narrow widths regardless of what .tracker-module h1 sets. Override it here specifically
+   for tracker pages: unlike the rest of the brochure-theme site, several tracker h1s are
+   full sentences that can't be shortened to one nowrap-safe line without losing meaning
+   (e.g. "Before you submit a new registration."), so tracker headings are allowed to wrap
+   normally instead. */
+.brochure-theme.tracker-module h1 {
+  white-space: normal;
+  text-wrap: wrap;
+}
+
 .tracker-module h2 {
   margin: 0;
   font: 700 clamp(1.65rem, 4.2vw, 2.8rem)/1.05 "Saira Semi Condensed", sans-serif;
@@ -137,9 +151,19 @@
   color: var(--tracker-deep);
 }
 
+.tracker-module .tracker-button--orange:hover {
+  background: var(--tracker-deep);
+  color: var(--tracker-paper);
+}
+
 .tracker-module .tracker-button--secondary {
   background: transparent;
   color: var(--tracker-forest);
+}
+
+.tracker-module .tracker-button--secondary:hover {
+  background: var(--tracker-forest);
+  color: var(--tracker-paper);
 }
 
 .tracker-module .tracker-page-header .tracker-button--secondary {
@@ -339,6 +363,22 @@
   font-weight: 800;
 }
 
+.tracker-module .tracker-stage-nav button.is-complete::after {
+  content: "✓";
+  margin-left: 0.4rem;
+  color: var(--tracker-orange);
+}
+
+.tracker-module .tracker-stage-nav button[aria-current="step"].is-complete::after {
+  color: var(--tracker-paper);
+}
+
+/* Compact mobile section nav: hidden by default (desktop keeps the always-visible
+   five-tab list below, unchanged). Only shown inside the mobile breakpoint. */
+.tracker-module .tracker-stage-compact {
+  display: none;
+}
+
 .tracker-module .tracker-example-tag {
   display: inline-block;
   margin: 0.9rem 0 0;
@@ -382,9 +422,13 @@
   align-items: start;
 }
 
-.tracker-module .tracker-evidence-panel__heading h3,
 .tracker-module .tracker-evidence-panel__heading p {
   margin: 0;
+}
+
+.tracker-module .tracker-evidence-panel__title {
+  margin: 0;
+  font: 700 clamp(1.05rem, 2vw, 1.35rem)/1.2 Archivo, sans-serif;
 }
 
 .tracker-module .tracker-evidence-panel__number {
@@ -421,11 +465,17 @@
 
 .tracker-module .tracker-stage-scale li {
   display: grid;
-  grid-template-columns: minmax(8rem, 0.65fr) minmax(5rem, 1fr);
+  grid-template-columns: minmax(8rem, 0.65fr) minmax(3.5rem, auto) minmax(5rem, 1fr);
   gap: 0.8rem;
   align-items: center;
   font-size: 0.84rem;
   font-weight: 750;
+}
+
+.tracker-module .tracker-stage-scale__value {
+  color: #57665f;
+  font-weight: 700;
+  text-align: right;
 }
 
 .tracker-module .tracker-stage-scale i {
@@ -571,14 +621,22 @@
 
 .tracker-module .tracker-coverage-list > div {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.8fr) minmax(10rem, 1.2fr);
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(3.5rem, auto) minmax(10rem, 1.2fr);
   gap: 0.8rem;
+  align-items: center;
   border-top: 1px solid var(--tracker-line);
   padding: 0.75rem 0;
 }
 
 .tracker-module .tracker-coverage-list dt {
   font-weight: 750;
+}
+
+.tracker-module .tracker-coverage-list__value {
+  color: #57665f;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: right;
 }
 
 .tracker-module .tracker-coverage-list dd {
@@ -766,10 +824,74 @@
 }
 
 @media (max-width: 52rem) {
+  .tracker-module .tracker-stage-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.75rem;
+    border: 1px solid var(--tracker-line);
+    padding: 0.6rem 0.75rem;
+  }
+
+  .tracker-module .tracker-stage-compact__arrow {
+    flex: 0 0 auto;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    border: 1px solid var(--tracker-line);
+    background: transparent;
+    color: var(--tracker-forest);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .tracker-module .tracker-stage-compact__arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .tracker-module .tracker-stage-compact__status {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .tracker-module .tracker-stage-compact__label {
+    margin: 0;
+    overflow: hidden;
+    color: var(--tracker-forest);
+    font-size: 0.8rem;
+    font-weight: 750;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tracker-module .tracker-stage-compact__toggle {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--tracker-orange);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Collapsed by default on mobile; the compact bar's toggle adds .is-expanded to reveal
+     the full list, e.g. to jump straight to a section further away than next/previous. */
   .tracker-module .tracker-stage-nav {
+    display: none;
     grid-template-columns: 1fr;
     border-block: 0;
     border-top: 1px solid var(--tracker-line);
+  }
+
+  .tracker-module .tracker-stage-nav.is-expanded {
+    display: grid;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .tracker-module .tracker-stage-nav button {
