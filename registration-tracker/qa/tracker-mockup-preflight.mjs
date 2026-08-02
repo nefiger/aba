@@ -71,6 +71,7 @@ for (const [description, pattern] of forbiddenActivePatterns) {
 // real sections are tabbed, but tabs are freely clickable in any order -- no Continue/Back
 // gating between them. ---
 forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
+forbidMatch("landing", /does not use sample data|imitate a live evidence base/i, "landing-page claim that Insights uses no sample data (Insights is seeded with example data)");
 forbidMatch("intake", /data-next-stage|data-previous-stage|data-show-review\b/i, "sequential Continue/Back wizard gating");
 forbidMatch("intake", /type="radio"/i, "Yes/No radio-pair readiness questions");
 forbidMatch("intake", /\bqualifier\b|\bqualification\b/i, "internal 'qualifier/qualification' language in user-facing copy");
