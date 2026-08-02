@@ -174,6 +174,8 @@ forbidMatch("insights", /this period/i, "undefined 'this period' language (use a
 // --- A single short methodology line replaces the old full "Publication pipeline" /
 // "What is collected and why" sections, which duplicated privacy.html and dominated the page ---
 requireMatch("insights", /class="tracker-methodology-note"/i, "single compact methodology line (not a full duplicate-of-privacy section)");
+requireMatch("insights", /<dt>Reporting basis<\/dt>/i, "stated reporting basis (not left implicit)");
+requireMatch("insights", /<dt>Last revised<\/dt>/i, "stated last-revised date");
 forbidMatch("insights", /Publication pipeline|What is collected and why|Every published finding must pass/i, "the old full-section methodology explanation, now duplicated on privacy.html");
 
 // --- No paragraph-per-panel narration restating what the heading/figure already show ---
