@@ -145,6 +145,7 @@ for (const registrationType of registrationTypes) requireMatch("intake", new Reg
 // empty/example state in paragraphs. Exactly one compact tag marks the data as fictional;
 // everything else (headings, captions, methodology) reads like the mature page will. ---
 requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four evidence-panel questions");
+forbidMatch("insights", /<h3>/i, "H1-to-H3 heading-level skip (evidence-panel titles must be H2)");
 requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
 requireMatch("insights", /class="tracker-example-tag"[^>]*>Example data/i, "exactly one compact example-data tag, not a narrated disclaimer");
 forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:|no real findings|not enough real registrations|do not describe any real|fictional example dataset|Illustrative example|labelled, empty structures/i, "narrated empty-state or illustrative-example prose (the compact tag already covers this)");

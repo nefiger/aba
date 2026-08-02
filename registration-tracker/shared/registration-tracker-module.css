@@ -382,9 +382,13 @@
   align-items: start;
 }
 
-.tracker-module .tracker-evidence-panel__heading h3,
 .tracker-module .tracker-evidence-panel__heading p {
   margin: 0;
+}
+
+.tracker-module .tracker-evidence-panel__title {
+  margin: 0;
+  font: 700 clamp(1.05rem, 2vw, 1.35rem)/1.2 Archivo, sans-serif;
 }
 
 .tracker-module .tracker-evidence-panel__number {
