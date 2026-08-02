@@ -188,8 +188,20 @@ forbidMatch("insights", /Publication pipeline|What is collected and why|Every pu
 
 for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
   forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
+}
+// Resources is legitimately a pre-submission preparation page, so ordinary uses of
+// "preparing" are expected there -- this check only needs to guard the pages where the old
+// deprecated `Preparing submission` tracked-status value could actually resurface.
+for (const sourceKey of ["landing", "intake", "insights", "privacy"]) {
   forbidMatch(sourceKey, /\bPreparing\b|pre-submission/i, "pre-submission active-flow language");
 }
+// --- Resources is a real, complete page for launch, not a "still being built" placeholder ---
+forbidMatch("resources", /still being assembled|being built|does not yet cover every step/i, "Resources placeholder framing (page must be genuinely complete for launch)");
+requireMatch("resources", /Application Form/, "Resources covers the Application Form requirement");
+requireMatch("resources", /Service Request Form/, "Resources covers the Service Request Form requirement");
+requireMatch("resources", /biological reference sample|reference sample/i, "Resources covers the reference-sample deposit requirement");
+requireMatch("resources", /Last reviewed \d/, "Resources states a last-reviewed date");
+
 requireMatch("privacy", /condition of using the tracker/i, "required tracker data-use condition");
 requireMatch("privacy", /submission confirmations?/i, "submission-confirmation information group");
 requireMatch("privacy", /does not give ABA permission to send unrelated general updates/i, "unrelated-communications boundary");
