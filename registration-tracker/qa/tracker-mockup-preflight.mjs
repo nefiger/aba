@@ -96,6 +96,21 @@ requireMatch("intake", /data-review-before-submit/, "review-and-confirm-before-s
 requireMatch("intake", /data-review="tracker-intake"/, "review screen container");
 requireMatch("intake", /data-review-confirm/, "review screen confirm action");
 
+// --- Mobile compact section nav: hidden on desktop (full 5-tab bar stays as the only
+// nav there), replaces the five full-size stacked buttons as the default view at narrow
+// widths -- Prev/Next plus a toggle that still reaches the full, jumpable section list. ---
+for (const hook of ["data-stage-compact", "data-stage-prev", "data-stage-next", "data-stage-toggle", "data-stage-compact-label", "data-stage-list"]) {
+  requireMatch("intake", new RegExp(hook), `mobile compact-nav hook ${hook} present`);
+}
+{
+  const moduleCssForNav = await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-module.css"), "utf8");
+  if (!/\.tracker-stage-compact\s*\{\s*display:\s*none/.test(moduleCssForNav)) {
+    failures.push("registration-tracker-module.css: .tracker-stage-compact must be display:none outside the mobile breakpoint (desktop keeps the always-visible tab bar only)");
+  } else {
+    checks.push("registration-tracker-module.css: .tracker-stage-compact hidden by default (desktop unaffected)");
+  }
+}
+
 // --- ABA relationship captured passively via URL param, not a self-reported form field ---
 forbidMatch("intake", /id="aba-relationship"/, "self-reported ABA-relationship form field");
 requireMatch("intake", /id="referral-source"\s+name="referral_source"/, "passive referral-source hidden field");

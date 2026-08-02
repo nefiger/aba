@@ -363,6 +363,22 @@
   font-weight: 800;
 }
 
+.tracker-module .tracker-stage-nav button.is-complete::after {
+  content: "✓";
+  margin-left: 0.4rem;
+  color: var(--tracker-orange);
+}
+
+.tracker-module .tracker-stage-nav button[aria-current="step"].is-complete::after {
+  color: var(--tracker-paper);
+}
+
+/* Compact mobile section nav: hidden by default (desktop keeps the always-visible
+   five-tab list below, unchanged). Only shown inside the mobile breakpoint. */
+.tracker-module .tracker-stage-compact {
+  display: none;
+}
+
 .tracker-module .tracker-example-tag {
   display: inline-block;
   margin: 0.9rem 0 0;
@@ -808,10 +824,74 @@
 }
 
 @media (max-width: 52rem) {
+  .tracker-module .tracker-stage-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.75rem;
+    border: 1px solid var(--tracker-line);
+    padding: 0.6rem 0.75rem;
+  }
+
+  .tracker-module .tracker-stage-compact__arrow {
+    flex: 0 0 auto;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    border: 1px solid var(--tracker-line);
+    background: transparent;
+    color: var(--tracker-forest);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .tracker-module .tracker-stage-compact__arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .tracker-module .tracker-stage-compact__status {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .tracker-module .tracker-stage-compact__label {
+    margin: 0;
+    overflow: hidden;
+    color: var(--tracker-forest);
+    font-size: 0.8rem;
+    font-weight: 750;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tracker-module .tracker-stage-compact__toggle {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--tracker-orange);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Collapsed by default on mobile; the compact bar's toggle adds .is-expanded to reveal
+     the full list, e.g. to jump straight to a section further away than next/previous. */
   .tracker-module .tracker-stage-nav {
+    display: none;
     grid-template-columns: 1fr;
     border-block: 0;
     border-top: 1px solid var(--tracker-line);
+  }
+
+  .tracker-module .tracker-stage-nav.is-expanded {
+    display: grid;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .tracker-module .tracker-stage-nav button {

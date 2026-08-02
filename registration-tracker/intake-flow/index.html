@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260721-system5">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260802b">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260803">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260721-system5" defer></script>
-  <script src="../shared/registration-tracker-module.js?v=20260731c" defer></script>
+  <script src="../shared/registration-tracker-module.js?v=20260803b" defer></script>
 </head>
 <body class="site-v2 brochure-theme tracker-module" data-page="tracker">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
@@ -36,7 +36,15 @@
           <p class="required-note">Not the right fit for this? See <a href="../resources/index.html">Registration resources</a>, or check the criteria on the <a href="../../soft-launch/prototype/registration-tracker.html#is-this-for-you">Registration Tracker</a> page.</p>
 
           <nav aria-label="Intake sections">
-            <ol class="tracker-stage-nav">
+            <div class="tracker-stage-compact" data-stage-compact>
+              <button type="button" class="tracker-stage-compact__arrow" data-stage-prev aria-label="Previous section">‹</button>
+              <div class="tracker-stage-compact__status">
+                <p class="tracker-stage-compact__label" data-stage-compact-label aria-live="polite"></p>
+                <button type="button" class="tracker-stage-compact__toggle" data-stage-toggle aria-expanded="false" aria-controls="intake-stage-list">Show all sections</button>
+              </div>
+              <button type="button" class="tracker-stage-compact__arrow" data-stage-next aria-label="Next section">›</button>
+            </div>
+            <ol class="tracker-stage-nav" id="intake-stage-list" data-stage-list>
               <li><button type="button" data-stage-button="1" aria-current="step"><span>01</span>You and your organisation</button></li>
               <li><button type="button" data-stage-button="2"><span>02</span>Product and type</button></li>
               <li><button type="button" data-stage-button="3"><span>03</span>Current status</button></li>
