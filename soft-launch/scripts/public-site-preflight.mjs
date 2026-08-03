@@ -5,7 +5,20 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const softLaunchRoot = path.resolve(scriptDirectory, "..");
+const repositoryRoot = path.resolve(softLaunchRoot, "..");
 const prototypeRoot = path.join(softLaunchRoot, "prototype");
+const trackerRoot = path.join(repositoryRoot, "registration-tracker");
+
+// Registration Tracker directories that are NOT part of the public journey.
+// These are internal operator and spec views, excluded deliberately rather
+// than by oversight. If one becomes user-facing, remove it from this set and
+// fix whatever the scan then reports — do not weaken the checks to let it pass.
+const internalTrackerDirectories = new Set([
+  "admin-operator-review",
+  "company-dashboard",
+  "registrar-list",
+  "stitch-wireframe",
+]);
 
 const exactBans = [
   "Biologicals, organised.",
@@ -27,6 +40,17 @@ const bannedVisiblePatterns = [
   { label: "relationship and next step", pattern: /\brelationship(?:s)? and (?:a |the )?next step(?:s)?\b/i },
   { label: "different relationships and permissions", pattern: /\bdifferent relationships and permissions\b/i },
   { label: "choose the right route", pattern: /\bchoose the right route\b/i },
+
+  // Institutional / internal-model drift. Added 2026-08-03 after this class of
+  // copy accumulated unchecked in registration-tracker/, which this script did
+  // not scan at the time.
+  { label: "release-note voice", pattern: /\b(?:in |for )?this release\b/i },
+  { label: "internal policy reference", pattern: /\bapproved polic(?:y|ies)\b/i },
+  { label: "evidence gates", pattern: /\bevidence gates?\b/i },
+  { label: "non-named", pattern: /\bnon-named\b/i },
+  { label: "spec state", pattern: /\bspec state\b/i },
+  { label: "operator inclusion", pattern: /\boperator inclusion\b/i },
+  { label: "prototype narration", pattern: /\bprototype (?:spec|state|form|mockup|narration)\b/i },
 ];
 
 const reviewTerms = ["ecosystem", "route", "relationship", "context", "record"];
@@ -60,7 +84,7 @@ function wordCount(value) {
 }
 
 function relative(file) {
-  return path.relative(softLaunchRoot, file);
+  return path.relative(repositoryRoot, file);
 }
 
 async function htmlFiles(directory) {
@@ -76,7 +100,13 @@ async function htmlFiles(directory) {
 
 const failures = [];
 const warnings = [];
-const files = await htmlFiles(prototypeRoot);
+
+const publicTrackerFiles = (await htmlFiles(trackerRoot)).filter((file) => {
+  const segments = path.relative(trackerRoot, file).split(path.sep);
+  return !internalTrackerDirectories.has(segments[0]);
+});
+
+const files = [...await htmlFiles(prototypeRoot), ...publicTrackerFiles];
 
 for (const file of files) {
   const source = await readFile(file, "utf8");
@@ -130,7 +160,11 @@ for (const { label, pattern } of bannedVisiblePatterns) {
 }
 
 console.log("ABA public-site static preflight");
-console.log(`Checked ${files.length} HTML files and the shared shell.`);
+console.log(
+  `Checked ${files.length} HTML files and the shared shell ` +
+    `(soft-launch/prototype + public registration-tracker routes; ` +
+    `excluded internal: ${[...internalTrackerDirectories].join(", ")}).`,
+);
 
 if (warnings.length) {
   console.log(`\nReview warnings (${warnings.length}):`);

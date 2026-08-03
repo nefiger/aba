@@ -33,12 +33,21 @@ Verification: `soft-launch/scripts/public-site-preflight.mjs` passes. All nine e
 
 **Not visually confirmed at desktop width.** The browser pane reported `innerWidth: 0` for the whole session and returned blank captures. The membership notes card and the tracker's forest section should be eyeballed in a real browser before this is treated as accepted.
 
-**Open gap — this is why the drift keeps returning.** The preflight scans only `soft-launch/prototype`; it reports `Checked 8 HTML files`. The entire `registration-tracker/` tree — intake flow, public dashboard, resources — is never checked, and that is where the heaviest internal-model language had accumulated. Two changes would close it:
+**Preflight gap closed (same day).** The script previously scanned only `soft-launch/prototype` and reported `Checked 8 HTML files`, so the entire `registration-tracker/` tree — intake flow, public dashboard, resources — was never checked. That is why this class of copy accumulated there unchallenged. It now checks 12 files across both roots and carries seven added `bannedVisiblePatterns` for institutional drift: `this release`, `approved polic(y|ies)`, `evidence gates`, `non-named`, `spec state`, `operator inclusion`, `prototype (spec|state|form|mockup|narration)`.
 
-1. extend the preflight's scan root to cover `registration-tracker/**`;
-2. add this drift class to `bannedVisiblePatterns`: `this release`, `approved policy`, `evidence gates`, `non-named`, `spec state`, `operator inclusion`.
+The internal operator and spec views are excluded through a **named** `internalTrackerDirectories` set — `admin-operator-review`, `company-dashboard`, `registrar-list`, `stitch-wireframe` — so the exclusion is a visible decision rather than a silent omission, and the console line prints it on every run. `registrar-list` still carries `Prototype spec state. Export readiness is controlled by review, consent, proof, reference, membership verification, and operator inclusion.` If any of those four becomes user-facing, remove it from the set and fix what the scan reports. Do not weaken the checks to let a page pass.
 
-Deliberately not done in this change, to keep it reviewable. Extending the scan will surface further failures in pages this sweep did not touch — `registration-tracker/registrar-list` still carries `Prototype spec state. Export readiness is controlled by review, consent, proof, reference, membership verification, and operator inclusion.` — and those pages first need a decision on whether they are user-facing at all.
+On its first run the extended scan immediately caught copy the manual sweep had missed: `This release supports South African Act 36 new registrations only.` in an intake-flow field hint. Now reworded. The three remaining `reviewTerms` warnings (`record`, `route`, `context`) are pre-existing and unreviewed.
+
+### Follow-ups from Jen's review of the same session
+
+Three further defects, all of the same family:
+
+- **Tracker landing, `Is this for you?`** — opened with `These aren't saved or sent to ABA`. That section is a static `<ul>` with no inputs, so the sentence described form fields that do not exist — the same defect as the deleted dossier-upload bullet. Cut.
+- **Resources copy** — the lede duplicated the table directly beneath it; a note repeated the non-existent upload concept; and the sample-deposit aside closed with `that's exactly the kind of detail ABA wants to hear about` while **the site has no contact route at all** (zero `mailto:` anywhere, no contact page). All three cut or tightened. The missing contact route is a real gap and still open — several pages want to invite a reply and have nowhere to send it.
+- **`.tracker-methodology-note` wrapping (sitewide root cause)** — `soft-launch/prototype/assets/styles.css:515` sets `p { max-width: var(--reading) }` with `--reading: 68ch`. Because `ch` scales with the element's *own* font size, small print resolves to a **narrower** pixel width than body copy: this 0.82rem note computed to 511px inside an 1184px shell and broke over three lines under a full-width table. Overridden with `max-width: 100%` on methodology notes, which annotate the block above them. Verified at 1440px: 511px/3 lines to 1184px/1 line. **Any other small-text paragraph on the site has the same latent problem** — worth a sweep if more cramped columns turn up.
+
+The shared module CSS changed without its cache key moving, so `registration-tracker-module.css?v=20260803` was bumped to `?v=20260803c` across all five referencing pages. Returning visitors and the Pages CDN would otherwise have served stale CSS and never seen the wrapping fix.
 
 ### Registration Tracker post-submission reconciliation (2026-07-30)
 
