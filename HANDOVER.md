@@ -76,6 +76,16 @@ It is renamed to `registration-tracker/prototype-overview.html` and listed in `a
 
 The `docs/**` references to `../registration-tracker/index.html` resolve to `docs/registration-tracker/index.html`, a different and already-archived file. They are not dangling.
 
+**`.nojekyll` added — read this before removing it.** Vacating the index slot did not 404 as expected: the URL began serving `registration-tracker/README.md`, the internal workspace doc, because GitHub Pages runs Jekyll by default and converts `README.md` to `index.html`. Checking that turned up the wider issue — Jekyll was publishing **every internal `.md` in the repo as a browsable HTML page**. All of these returned 200:
+
+- `HANDOVER.html`, `AGENTS.html`
+- `soft-launch/PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.html`
+- `registration-tracker/JEN-HANDOFF-v1.html`, `pr29-open-items.html`, and every spec, brief, prompt and session-template file in that tree
+
+The repository is public, so the Markdown was already readable on GitHub. The difference is that Pages rendered it as clean, crawlable, indexable pages on the project domain, where it reads as part of the site.
+
+`.nojekyll` at the repository root disables that processing. Verified safe first: no HTML file carries Jekyll front matter, none contains Liquid tags, and `/`, `/docs/` and `/soft-launch/prototype/` each have a real `index.html`, so nothing relied on Markdown conversion. The raw `.md` files remain fetchable at their own paths — `.nojekyll` stops them being rendered as pages, it does not unpublish them. If internal docs must not be reachable at all, they have to move out of the Pages source or into a private repo; that is a separate decision and is **not** done.
+
 The shared module CSS changed without its cache key moving, so `registration-tracker-module.css?v=20260803` was bumped to `?v=20260803c` across all five referencing pages. Returning visitors and the Pages CDN would otherwise have served stale CSS and never seen the wrapping fix.
 
 ### Registration Tracker post-submission reconciliation (2026-07-30)
