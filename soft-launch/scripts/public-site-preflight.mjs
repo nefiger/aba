@@ -20,6 +20,13 @@ const internalTrackerDirectories = new Set([
   "stitch-wireframe",
 ]);
 
+// Individual archived files inside the tracker tree. `prototype-overview.html`
+// was `registration-tracker/index.html` until 2026-08-03: an unlinked internal
+// hub on its own wireframe stylesheet, now listed in archive.html. Renamed
+// rather than relocated so its sibling-relative links and iframe sources keep
+// resolving. Same rule as above — if it goes public, delete it from this set.
+const archivedTrackerFiles = new Set(["prototype-overview.html"]);
+
 const exactBans = [
   "Biologicals, organised.",
   "Useful work.",
@@ -103,7 +110,8 @@ const warnings = [];
 
 const publicTrackerFiles = (await htmlFiles(trackerRoot)).filter((file) => {
   const segments = path.relative(trackerRoot, file).split(path.sep);
-  return !internalTrackerDirectories.has(segments[0]);
+  if (internalTrackerDirectories.has(segments[0])) return false;
+  return !(segments.length === 1 && archivedTrackerFiles.has(segments[0]));
 });
 
 const files = [...await htmlFiles(prototypeRoot), ...publicTrackerFiles];

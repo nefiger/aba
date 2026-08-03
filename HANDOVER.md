@@ -51,9 +51,30 @@ Three further defects, all of the same family:
 
   On Resources at 1440px: lede 992px/3 lines to 1184px/1; methodology note 511px/3 to 1184px/1; the sample-deposit aside 623px/2 to 1148px/1; the delay list 623px/2 to 1115px/1.
 
-  Audited all six public tracker pages via same-origin iframes at 1440px. What remains narrow is genuine multi-column grid layout, not the bug: the two-column eligibility list on the tracker landing (48%) and the five-column stage nav in the intake flow (20%). The dashboard `.tracker-example-tag` measured as two lines but has one real line box — vertical padding inflating a naive `height / lineHeight` estimate. No horizontal overflow at 375, 768, or 1024 on any page. `registration-tracker/index.html` carries no `tracker-module` class, so the module fix does not reach it; its one constrained paragraph sits at 92% of its container and is not visually broken.
+  Audited all six public tracker pages via same-origin iframes at 1440px. What remains narrow is genuine multi-column grid layout, not the bug: the two-column eligibility list on the tracker landing (48%) and the five-column stage nav in the intake flow (20%). The dashboard `.tracker-example-tag` measured as two lines but has one real line box — vertical padding inflating a naive `height / lineHeight` estimate. No horizontal overflow at 375, 768, or 1024 on any page.
 
   **Process note.** The first pass found this root cause, fixed only `.tracker-methodology-note`, and recorded the rest as "latent, worth a sweep if more turn up." Jen hit the remaining three cases on the very next page load. Having the diagnosis and shipping one selector is worse than not finding it, because the handover then reads as though it were handled. When a root cause is identified, sweep every element it touches in the same change.
+
+### Reading measure fixed sitewide; tracker prototype hub archived (2026-08-03)
+
+**Sitewide.** `--reading: 68ch` is deleted and `p { max-width: var(--reading) }` is now `p { max-width: 100% }` in `soft-launch/prototype/assets/styles.css`. The tracker module fix above only covered `.tracker-module`; the same inversion was live on every other public page.
+
+Measured across all eight brochure pages at 1440px, before and after, via same-origin iframes:
+
+- Paragraphs still carrying a `ch`-derived cap: **25 → 0**.
+- Cramped paragraphs (multi-line, wrapping more than 30px short of their container): **25 → 9**. Every one of the nine is held by a deliberate **rem** cap on its own component — 38rem, 42rem, 43rem, 46rem, 64rem — not by the bug. Those were left alone; they are per-component design decisions, and the guardrails doc forbids page-level overrides.
+- Worst case before: a paragraph on `index.html` at **29%** of its container (374px inside 1296px). Also 36% on Technical Network, 37% on Membership.
+- No horizontal overflow at 375, 768, 1024 or 1440 on any of the eight pages.
+
+Resulting measures land at 78–92 characters per line, which is long but defensible. Three blocks on `privacy.html` run to 101–117 characters: two are `<dd>` elements the `p` rule never governed, so that is pre-existing, and one is a `.tracker-section-heading p` that widened from 1024px to 1184px. If those read too wide, cap those two components in rem — do not restore a global measure.
+
+**Cache keys.** Both stylesheets changed without their keys moving, which is how the first wrapping fix appeared not to deploy. `styles.css` is now `?v=20260803a` across all 11 referencing pages (one straggler was still on `20260722-system6`), and the tracker module is `?v=20260803d` across its 5. **Any change to either file must bump its key in the same commit.**
+
+**Archived.** `registration-tracker/index.html` was an unlinked internal hub — no public page pointed at it, its nav went to Company Dashboard / Operator Review / Registrar Export, and it loaded only `shared/tracker-wireframe.css`, never the site CSS. Adding a `tracker-module` class to it would have been inert.
+
+It is renamed to `registration-tracker/prototype-overview.html` and listed in `archive.html`. Renamed rather than relocated: it has 11 relative paths, including five iframe `src`s to sibling directories, all of which resolve from `registration-tracker/` and would break on a directory move. `/registration-tracker/index.html` now 404s, which is intended — the sibling public routes (`intake-flow`, `resources`, `public-dashboard`) are unaffected. The preflight excludes it through a named `archivedTrackerFiles` set, so the scan is 11 files and the two stale `route` / `context` warnings it produced are gone.
+
+The `docs/**` references to `../registration-tracker/index.html` resolve to `docs/registration-tracker/index.html`, a different and already-archived file. They are not dangling.
 
 The shared module CSS changed without its cache key moving, so `registration-tracker-module.css?v=20260803` was bumped to `?v=20260803c` across all five referencing pages. Returning visitors and the Pages CDN would otherwise have served stale CSS and never seen the wrapping fix.
 
