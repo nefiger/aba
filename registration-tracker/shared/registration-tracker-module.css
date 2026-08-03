@@ -105,8 +105,21 @@
   line-height: 1.62;
 }
 
+/* --- Reading measure -------------------------------------------------------
+   soft-launch/prototype/assets/styles.css sets `p { max-width: var(--reading) }`
+   with `--reading: 68ch`. `ch` resolves against each element's OWN font size, so
+   one rule produces a different pixel width per element — 623px for 1rem body
+   copy, 511px for a 0.82rem note — and text wraps into mismatched narrow columns
+   inside the same 1184px shell, next to headings and tables that span it fully.
+   `.tracker-shell` is already the reading constraint here, so tracker text fills
+   it. Do not reintroduce ch-based measures in this module; if a block genuinely
+   needs a narrower measure, give it an explicit rem value and say why. */
+.tracker-module p,
+.tracker-module li {
+  max-width: 100%;
+}
+
 .tracker-module .tracker-lede {
-  max-width: 62rem;
   margin: 1.1rem 0 0;
   font-size: clamp(1rem, 2vw, 1.22rem);
   line-height: 1.6;
@@ -200,7 +213,6 @@
 }
 
 .tracker-module .tracker-section-heading p {
-  max-width: 64rem;
   margin: 0;
 }
 
@@ -392,11 +404,6 @@
 }
 
 .tracker-module .tracker-methodology-note {
-  /* The sitewide `p { max-width: var(--reading) }` uses `ch`, which scales with
-     the element's own font size — so small print resolves to a NARROWER pixel
-     width than body copy and wraps into a cramped column under full-width
-     content. These notes annotate the block above them; let them span it. */
-  max-width: 100%;
   margin: 1.75rem 0 0;
   color: #6c7772;
   font-size: 0.82rem;
