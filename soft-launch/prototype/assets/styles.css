@@ -2613,7 +2613,7 @@
     }
 
     .brochure-theme.membership-v4 .membership-joining__notes {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
     }
 
     .brochure-theme.membership-v4 .membership-joining__notes > div + div {

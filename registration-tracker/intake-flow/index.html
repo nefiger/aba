@@ -21,7 +21,7 @@
       <div class="tracker-shell">
         <p class="tracker-label">Registration Tracker · South Africa · Act 36</p>
         <h1>Share a new registration.</h1>
-        <p class="tracker-lede">Provide the current position of one new biological product registration. This form sends information to ABA for review; it does not submit an application to the registrar.</p>
+        <p class="tracker-lede">Tell ABA where one new biological product registration currently stands. This goes to ABA for review — it doesn't file anything with the registrar.</p>
       </div>
     </section>
 
@@ -149,7 +149,7 @@
                   <option value="not-available">Not issued or unavailable</option>
                   <option value="unknown">Unknown</option>
                 </select>
-                <small>Do not invent a regulator reference. This form does not ask you to enter the number.</small>
+                <small>You won't be asked for the number itself — only whether one exists.</small>
               </div>
               <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason"></textarea></div>
             </div>
@@ -169,7 +169,7 @@
                   <option>Not registered</option>
                   <option>Unknown</option>
                 </select>
-                <small>Self-reported; ABA does not treat this as a verified status. No SACNASP registration number is collected.</small>
+                <small>ABA records this as you've reported it and won't ask for your SACNASP number.</small>
               </div>
               <div class="field"><label for="responsible-person-status">Are you the approved or responsible person? <span aria-hidden="true">*</span></label>
                 <select id="responsible-person-status" name="responsible_person_status" required>
@@ -199,7 +199,7 @@
           <section data-stage-panel="5" hidden>
           <fieldset class="form-section">
             <legend>Data use and submission</legend>
-            <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in combined, non-named registration insights.</strong><small>This condition is required to use the tracker and is not pre-selected. ABA will not publish my contact details or identify my organisation or product through the public insights view.</small></span></label>
+            <label class="choice"><input id="insight-acknowledgement" name="insight_acknowledgement" type="checkbox" required><span><strong>I understand that ABA may use reviewed information from this submission in grouped registration insights.</strong><small>Required to use the tracker. Your contact details, organisation, and product are never named in those insights.</small></span></label>
           </fieldset>
           </section>
 
@@ -212,7 +212,7 @@
         <section class="form-review" data-review="tracker-intake" aria-live="polite" tabindex="-1">
           <p class="eyebrow">Before you send this</p>
           <h2>Check your answers.</h2>
-          <p class="required-note">Use "Edit" to change a section. Submitting does not send anything to the registrar.</p>
+          <p class="required-note">Use "Edit" to change a section. Sending this doesn't file anything with the registrar.</p>
           <div data-review-groups></div>
           <div class="form-actions"><button class="button button--orange" type="button" data-review-confirm data-loading-label="Sending…">Confirm and submit</button></div>
         </section>
@@ -220,8 +220,8 @@
         <section class="form-success" data-success="tracker-intake" aria-live="polite">
           <p class="eyebrow">Registration information received</p>
           <h2>ABA will review the submission.</h2>
-          <p>ABA aims to review it within two weeks and may contact you for clarification. An ABA administrator may mark the submission <strong>Approved for insights</strong>, <strong>Needs clarification</strong>, or <strong>Excluded</strong>.</p>
-          <p>Approved information may contribute to combined, non-named insights. Contact details and identifying organisation or product information are not published through the insights view. Submission does not create or change membership and does not submit anything to the registrar.</p>
+          <p>ABA aims to review it within two weeks. You'll hear back if it's approved for insights, if something needs clarifying, or if it's been set aside.</p>
+          <p>If it's approved, it may feed grouped insights that don't name you, your organisation, or your product.</p>
           <p><a href="../../soft-launch/prototype/privacy.html#registration-tracker">Read the Privacy and data use explanation</a>.</p>
           <div class="form-actions">
             <button class="button button--orange" type="button" data-add-another>Add another registration</button>

@@ -1,10 +1,44 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-07-30
+Last updated: 2026-08-03
 
 ---
 
 ## Current state
+
+### Public copy: institutional disclaimer sweep (2026-08-03)
+
+**For Lyle and his agent.**
+
+Jen flagged the Registration Tracker landing page's `Clear boundaries` block — eight negative statements — as copy written for ABA's protection rather than for the reader, and asked what reason it had to exist. It had none. The sweep that followed removed that class of copy across the public site.
+
+Four findings justified deleting the section outright rather than rewriting it:
+
+- The intake flow has **no file input at all**, so `Do not upload a full dossier or payment documentation` warned against an interaction the product does not offer.
+- `registration-tracker/intake-flow/index.html` already stated four of the eight points in a single paragraph on the success screen, at the moment they matter.
+- The tracker landing page's own header aside already carried the privacy point, in better words.
+- `soft-launch/prototype/privacy.html` already carried the membership and registrar-export statements.
+
+Jen's two decisions governed the pass: legal/liability copy is **cut from marketing and form pages** and lives in `privacy.html`; scope was the **whole public site**, not only tracker pages. The single line privacy did not already carry — no legal or regulatory advice — was added to `Current tracker limits`.
+
+What changed:
+
+- Deleted: `Clear boundaries` (tracker landing), `Membership boundaries` (membership), the duplicated liability paragraph above the Technical Network submit button, the outcome-guarantee sentence on home, and a policy sentence being used as a checkbox hint in the member application.
+- Rewritten in second person: tracker and intake ledes, the insights consent checkbox, the review step, the intake success screen, four member-application hints, and the dashboard methodology note.
+- Terminology: `combined, non-named` (9 instances) replaced with plain phrasing. None remain. `privacy.html` keeps precise wording but now uses the same words people consent to in the form.
+- Layout: `Public evidence` took over the forest treatment left by the deleted section, so the tracker landing keeps its dark band and spends it on the insights call to action instead of on disclaimers. Section rhythm is unchanged: cream, default, beige, forest, cream.
+- `membership-joining__notes` lost one of its two grid children, so its desktop rule moved from `repeat(2, minmax(0, 1fr))` to `repeat(auto-fit, minmax(min(100%, 22rem), 1fr))` and the remaining card fills the row rather than half of it.
+
+Verification: `soft-launch/scripts/public-site-preflight.mjs` passes. All nine edited files parse with balanced tags. Section order, backgrounds and the collapsed grid were confirmed by DOM measurement. The one warning (`record` in `privacy.html`) is pre-existing and unrelated to this change.
+
+**Not visually confirmed at desktop width.** The browser pane reported `innerWidth: 0` for the whole session and returned blank captures. The membership notes card and the tracker's forest section should be eyeballed in a real browser before this is treated as accepted.
+
+**Open gap — this is why the drift keeps returning.** The preflight scans only `soft-launch/prototype`; it reports `Checked 8 HTML files`. The entire `registration-tracker/` tree — intake flow, public dashboard, resources — is never checked, and that is where the heaviest internal-model language had accumulated. Two changes would close it:
+
+1. extend the preflight's scan root to cover `registration-tracker/**`;
+2. add this drift class to `bannedVisiblePatterns`: `this release`, `approved policy`, `evidence gates`, `non-named`, `spec state`, `operator inclusion`.
+
+Deliberately not done in this change, to keep it reviewable. Extending the scan will surface further failures in pages this sweep did not touch — `registration-tracker/registrar-list` still carries `Prototype spec state. Export readiness is controlled by review, consent, proof, reference, membership verification, and operator inclusion.` — and those pages first need a decision on whether they are user-facing at all.
 
 ### Registration Tracker post-submission reconciliation (2026-07-30)
 
