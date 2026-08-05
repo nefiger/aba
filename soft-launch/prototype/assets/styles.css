@@ -67,6 +67,16 @@
     line-height: 1.5;
   }
 
+  /* These hints carry consent and data-use statements, so they have to meet AA.
+     `.choice small` resolves --sage-deep, which brochure-theme remaps to the
+     light --brochure-sage, landing every hint at 2.16:1. Specificity here (0,2,1)
+     deliberately beats the `.choice small` rule that sets the sage colour. */
+  .brochure-theme .field small,
+  .brochure-theme .choice small,
+  .brochure-theme .required-note {
+    color: var(--brochure-muted-ink);
+  }
+
   .brochure-theme :where(.field input, .field select, .field textarea) {
     font-family: var(--brochure-body);
     font-size: 1rem;
@@ -1651,6 +1661,11 @@
     --brochure-cream: #f4eee4;
     --brochure-beige: #e3dcd6;
     --brochure-sage: #9dac99;
+    /* Muted ink for form hints. --brochure-sage is a surface/accent tone and
+       fails badly as text (2.16:1 on paper). Even the pre-brochure --sage-deep
+       (#667762) only reaches 4.34:1. This clears AA at 4.86:1 while staying
+       visibly secondary to body copy. */
+    --brochure-muted-ink: #5f6f5b;
     --brochure-orange: #c75c2b;
     --brochure-orange-light: #efa16f;
     --brochure-rule: color-mix(in srgb, var(--brochure-forest) 23%, transparent);
@@ -2355,8 +2370,7 @@
     padding-inline: 0;
   }
 
-  .brochure-theme.intake-v2 .intake-banner__main,
-  .brochure-theme.intake-v2 .intake-banner__note {
+  .brochure-theme.intake-v2 .intake-banner__main {
     min-width: 0;
     display: grid;
     align-content: center;
@@ -2385,17 +2399,6 @@
     line-height: 1.6;
   }
 
-  .brochure-theme.intake-v2 .intake-banner__note {
-    background: var(--brochure-forest);
-    color: var(--brochure-paper);
-  }
-
-  .brochure-theme.intake-v2 .intake-banner__note > p:last-child {
-    margin: 0;
-    font-family: var(--brochure-serif);
-    font-size: clamp(1.2rem, 2vw, 1.7rem);
-    line-height: 1.4;
-  }
 
   .brochure-theme.intake-v2 .form-layout {
     align-items: start;
@@ -2413,7 +2416,12 @@
     color: inherit;
   }
 
+  /* A heading inside a form aside, so it takes the body face per the guardrails
+     type roles. This was inherited from a `legacy-route` class carried only by
+     this page; stated here instead so the page no longer needs it. */
   .brochure-theme.intake-v2 .form-aside .section-title {
+    font-family: var(--brochure-body);
+    font-weight: 650;
     font-size: clamp(1.55rem, 2.1vw, 1.9rem);
     line-height: 1.05;
     white-space: nowrap;
@@ -2433,11 +2441,14 @@
     box-shadow: none;
   }
 
+  /* "Your organisation" is a form heading. The guardrails name form headings as
+     one of the places the serif must never appear; it was set in Lora italic
+     here, matching no other form on the site. Archivo, as on Technical Network
+     and Membership interest. */
   .brochure-theme.intake-v2 .form-intro h2 {
     max-width: none;
-    font-family: var(--brochure-serif);
-    font-style: italic;
-    font-weight: 500;
+    font-weight: 650;
+    letter-spacing: -0.025em;
   }
 
   /* Privacy: a reading document with a brochure statement header. */
@@ -2551,14 +2562,6 @@
     line-height: 1.35;
   }
 
-  .brochure-theme.legacy-route .hero-title {
-    font-size: clamp(2.25rem, 4vw, 3.75rem);
-  }
-
-  .brochure-theme.legacy-route .section-title {
-    font-family: var(--brochure-body);
-    font-weight: 650;
-  }
 }
 
 @layer brochure-foundation {
@@ -2654,15 +2657,14 @@
       padding-left: clamp(3.5rem, 7vw, 8.5rem);
     }
 
+    /* Single column since the data-use aside was removed; the banner would
+       otherwise reserve an empty 23rem track to its right. */
     .brochure-theme.intake-v2 .intake-banner__grid {
-      grid-template-columns: minmax(0, 1.45fr) minmax(23rem, 0.55fr);
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .brochure-theme.intake-v2 .intake-banner__main {
       padding-left: max(2rem, calc((100vw - 92rem) / 2));
-    }
-
-    .brochure-theme.intake-v2 .intake-banner__note {
       padding-right: max(2rem, calc((100vw - 92rem) / 2));
     }
 
@@ -2742,8 +2744,7 @@
     .brochure-theme.intake-v2 .intake-banner__grid { display: block; }
     .brochure-theme.tracker-v2 .tracker-cover__main,
     .brochure-theme.tracker-v2 .tracker-cover__brief,
-    .brochure-theme.intake-v2 .intake-banner__main,
-    .brochure-theme.intake-v2 .intake-banner__note { min-height: auto; padding-block: 3.25rem; }
+    .brochure-theme.intake-v2 .intake-banner__main { min-height: auto; padding-block: 3.25rem; }
     .brochure-theme.tracker-v2 .tracker-cover__main h1,
     .brochure-theme.privacy-v2 .privacy-cover h1 { font-size: clamp(2.2rem, 10.8vw, 2.85rem); }
     .brochure-theme.intake-v2 .intake-banner__main h1 { font-size: clamp(1.85rem, 9.2vw, 2.4rem); }

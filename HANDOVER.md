@@ -6,6 +6,36 @@ Last updated: 2026-08-03
 
 ## Current state
 
+### Member application brought into the design system; archive link hidden (2026-08-03)
+
+Branch `fix/member-intake-refinements`. `member-intake.html` had drifted furthest from the system.
+
+**Type-role violations.** The guardrails reserve Lora for propositions and bar it from "routine headings, form headings, lists or cards". A sitewide audit of computed fonts across all eight brochure pages found every other Lora use is a genuine proposition; both uses on this page were the forbidden kind:
+
+- `.form-intro h2` "Your organisation" — a **form heading** in Lora italic 36px. Now Archivo.
+- `.intake-banner__note` body line — an operational data-use note in Lora 27px, dominating the banner it was meant to sit beside.
+
+**`legacy-route` retired.** This page was the only one carrying it. It was load-bearing — it supplied the body face for `.form-aside .section-title`, which is correct for a form-aside heading — so the declaration moved into the `intake-v2` rule and the class and its two now-dead rules were removed. Verified afterwards: that heading is still Archivo 650.
+
+**Contrast bug.** The `.status-note` inside the forest aside carried its own light panel, but `.form-aside span { color: inherit }` painted its body line paper-white on light green: **1.07:1**, against a 4.5:1 AA requirement. The `<strong>` was unaffected, which is why only one line vanished. Moot now — the container was removed — but the same inherit rule will do it again to anything else placed in that aside with its own background.
+
+**Two containers removed on Jen's instruction.** The registration cross-link in the form aside, and the banner data-use note. The latter was **factually wrong**: it claimed ABA reviews the application and does not publish details, whereas the form goes to invited members only, there is no review step, and member names are likely to be listed. Removing the note left the banner grid reserving an empty 23rem track, so the desktop rule collapsed to a single column; verified no overflow and full-width fill at 375, 768, 1024 and 1440.
+
+**Data-use position, resolved.** Jen initially said there is no review and names will be listed, then revised it: the no-review description is how the form runs *at first*, but applicants will still expect a review and expect to know what the public will see. Two decisions taken:
+
+- **Public listing is the organisation name only.** Individual contact details stay internal.
+- **Review wording stays as written** — "ABA will review what you send and contact you if anything needs clarifying."
+
+So the review copy in `.form-intro` and on the success screen is correct and was left alone. What was wrong was the *publication* claim, which said the opposite of the truth. Now stated consistently in three places: a "What becomes public" note in the form aside, the privacy-acknowledgement checkbox hint (previously the flatly false "It isn't published"), and the Member application row on `privacy.html`.
+
+**Form hints failed AA sitewide — fixed.** Checking the new note's contrast surfaced a pre-existing failure affecting every form hint: `.choice small` resolves `--sage-deep`, which `brochure-theme` remaps from `#667762` to the far lighter `--brochure-sage` (`#9dac99`), landing every hint at **2.16:1** at 13px against a 4.5:1 requirement. This covered consent and data-use statements — the copy that most needs to be readable.
+
+Added `--brochure-muted-ink: #5f6f5b` (4.86:1 on paper) and applied it to `.field small`, `.choice small` and `.required-note`. Note the pre-brochure `#667762` would **not** have been enough on its own at 4.34:1. The rule's specificity (0,2,1) deliberately beats the `.choice small` sage rule. Verified across member-intake, technical-network, membership-interest, intake-flow, registration-tracker and privacy: 33 elements checked, none below 4.5:1.
+
+**Asset versions.** The same `app.js` was referenced under five different cache keys (`application1`, `brochure1`, `copy3`, `system5`, `wave1`), so pages served different cached copies of one file. All 11 references now `?v=20260803a`. `styles.css` moved to `?v=20260803b` for this change.
+
+**Launcher.** The Archive row is commented out of the root `index.html` with a note and a restore instruction. `archive.html` is untouched and still reachable directly at `/aba/archive.html`; this only stops it being advertised. Verified the rendered launcher text contains no stray characters or "Archive".
+
 ### Public copy: institutional disclaimer sweep (2026-08-03)
 
 **For Lyle and his agent.**
