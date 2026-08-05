@@ -6,6 +6,33 @@ Last updated: 2026-08-03
 
 ## Current state
 
+### Member application brought into the design system; archive link hidden (2026-08-03)
+
+Branch `fix/member-intake-refinements`. `member-intake.html` had drifted furthest from the system.
+
+**Type-role violations.** The guardrails reserve Lora for propositions and bar it from "routine headings, form headings, lists or cards". A sitewide audit of computed fonts across all eight brochure pages found every other Lora use is a genuine proposition; both uses on this page were the forbidden kind:
+
+- `.form-intro h2` "Your organisation" — a **form heading** in Lora italic 36px. Now Archivo.
+- `.intake-banner__note` body line — an operational data-use note in Lora 27px, dominating the banner it was meant to sit beside.
+
+**`legacy-route` retired.** This page was the only one carrying it. It was load-bearing — it supplied the body face for `.form-aside .section-title`, which is correct for a form-aside heading — so the declaration moved into the `intake-v2` rule and the class and its two now-dead rules were removed. Verified afterwards: that heading is still Archivo 650.
+
+**Contrast bug.** The `.status-note` inside the forest aside carried its own light panel, but `.form-aside span { color: inherit }` painted its body line paper-white on light green: **1.07:1**, against a 4.5:1 AA requirement. The `<strong>` was unaffected, which is why only one line vanished. Moot now — the container was removed — but the same inherit rule will do it again to anything else placed in that aside with its own background.
+
+**Two containers removed on Jen's instruction.** The registration cross-link in the form aside, and the banner data-use note. The latter was **factually wrong**: it claimed ABA reviews the application and does not publish details, whereas the form goes to invited members only, there is no review step, and member names are likely to be listed. Removing the note left the banner grid reserving an empty 23rem track, so the desktop rule collapsed to a single column; verified no overflow and full-width fill at 375, 768, 1024 and 1440.
+
+**Still inaccurate — not changed, needs a decision.** The same false review premise survives elsewhere on the page and I did not guess at replacements:
+
+- `.form-intro` — "ABA will review what you send and contact you if anything needs clarifying."
+- success screen — "ABA will review it and contact you if anything needs clarifying. Nothing is confirmed until ABA comes back to you."
+- success screen `.status-note` — still offers the Registration Tracker as "the separate Registration Tracker".
+
+If there is genuinely no review step, all three are wrong and the surrounding privacy copy should be checked against what actually happens to this data.
+
+**Asset versions.** The same `app.js` was referenced under five different cache keys (`application1`, `brochure1`, `copy3`, `system5`, `wave1`), so pages served different cached copies of one file. All 11 references now `?v=20260803a`. `styles.css` moved to `?v=20260803b` for this change.
+
+**Launcher.** The Archive row is commented out of the root `index.html` with a note and a restore instruction. `archive.html` is untouched and still reachable directly at `/aba/archive.html`; this only stops it being advertised. Verified the rendered launcher text contains no stray characters or "Archive".
+
 ### Public copy: institutional disclaimer sweep (2026-08-03)
 
 **For Lyle and his agent.**
