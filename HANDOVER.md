@@ -21,13 +21,16 @@ Branch `fix/member-intake-refinements`. `member-intake.html` had drifted furthes
 
 **Two containers removed on Jen's instruction.** The registration cross-link in the form aside, and the banner data-use note. The latter was **factually wrong**: it claimed ABA reviews the application and does not publish details, whereas the form goes to invited members only, there is no review step, and member names are likely to be listed. Removing the note left the banner grid reserving an empty 23rem track, so the desktop rule collapsed to a single column; verified no overflow and full-width fill at 375, 768, 1024 and 1440.
 
-**Still inaccurate — not changed, needs a decision.** The same false review premise survives elsewhere on the page and I did not guess at replacements:
+**Data-use position, resolved.** Jen initially said there is no review and names will be listed, then revised it: the no-review description is how the form runs *at first*, but applicants will still expect a review and expect to know what the public will see. Two decisions taken:
 
-- `.form-intro` — "ABA will review what you send and contact you if anything needs clarifying."
-- success screen — "ABA will review it and contact you if anything needs clarifying. Nothing is confirmed until ABA comes back to you."
-- success screen `.status-note` — still offers the Registration Tracker as "the separate Registration Tracker".
+- **Public listing is the organisation name only.** Individual contact details stay internal.
+- **Review wording stays as written** — "ABA will review what you send and contact you if anything needs clarifying."
 
-If there is genuinely no review step, all three are wrong and the surrounding privacy copy should be checked against what actually happens to this data.
+So the review copy in `.form-intro` and on the success screen is correct and was left alone. What was wrong was the *publication* claim, which said the opposite of the truth. Now stated consistently in three places: a "What becomes public" note in the form aside, the privacy-acknowledgement checkbox hint (previously the flatly false "It isn't published"), and the Member application row on `privacy.html`.
+
+**Form hints failed AA sitewide — fixed.** Checking the new note's contrast surfaced a pre-existing failure affecting every form hint: `.choice small` resolves `--sage-deep`, which `brochure-theme` remaps from `#667762` to the far lighter `--brochure-sage` (`#9dac99`), landing every hint at **2.16:1** at 13px against a 4.5:1 requirement. This covered consent and data-use statements — the copy that most needs to be readable.
+
+Added `--brochure-muted-ink: #5f6f5b` (4.86:1 on paper) and applied it to `.field small`, `.choice small` and `.required-note`. Note the pre-brochure `#667762` would **not** have been enough on its own at 4.34:1. The rule's specificity (0,2,1) deliberately beats the `.choice small` sage rule. Verified across member-intake, technical-network, membership-interest, intake-flow, registration-tracker and privacy: 33 elements checked, none below 4.5:1.
 
 **Asset versions.** The same `app.js` was referenced under five different cache keys (`application1`, `brochure1`, `copy3`, `system5`, `wave1`), so pages served different cached copies of one file. All 11 references now `?v=20260803a`. `styles.css` moved to `?v=20260803b` for this change.
 

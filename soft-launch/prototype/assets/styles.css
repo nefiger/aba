@@ -67,6 +67,16 @@
     line-height: 1.5;
   }
 
+  /* These hints carry consent and data-use statements, so they have to meet AA.
+     `.choice small` resolves --sage-deep, which brochure-theme remaps to the
+     light --brochure-sage, landing every hint at 2.16:1. Specificity here (0,2,1)
+     deliberately beats the `.choice small` rule that sets the sage colour. */
+  .brochure-theme .field small,
+  .brochure-theme .choice small,
+  .brochure-theme .required-note {
+    color: var(--brochure-muted-ink);
+  }
+
   .brochure-theme :where(.field input, .field select, .field textarea) {
     font-family: var(--brochure-body);
     font-size: 1rem;
@@ -1651,6 +1661,11 @@
     --brochure-cream: #f4eee4;
     --brochure-beige: #e3dcd6;
     --brochure-sage: #9dac99;
+    /* Muted ink for form hints. --brochure-sage is a surface/accent tone and
+       fails badly as text (2.16:1 on paper). Even the pre-brochure --sage-deep
+       (#667762) only reaches 4.34:1. This clears AA at 4.86:1 while staying
+       visibly secondary to body copy. */
+    --brochure-muted-ink: #5f6f5b;
     --brochure-orange: #c75c2b;
     --brochure-orange-light: #efa16f;
     --brochure-rule: color-mix(in srgb, var(--brochure-forest) 23%, transparent);
