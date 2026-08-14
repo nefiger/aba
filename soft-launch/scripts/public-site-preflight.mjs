@@ -167,6 +167,81 @@ for (const { label, pattern } of bannedVisiblePatterns) {
   if (pattern.test(sharedSource)) failures.push(`${relative(sharedScript)}: banned public wording: ${label}`);
 }
 
+const canonicalTagline = "For Africa. By Africa.";
+const shellSources = [
+  [sharedScript, sharedSource],
+  [path.join(repositoryRoot, "index.html"), await readFile(path.join(repositoryRoot, "index.html"), "utf8")],
+  [path.join(repositoryRoot, "archive.html"), await readFile(path.join(repositoryRoot, "archive.html"), "utf8")],
+];
+for (const [file, source] of shellSources) {
+  if (!source.includes(canonicalTagline)) failures.push(`${relative(file)}: missing canonical ABA tagline: ${canonicalTagline}`);
+  if (/In Africa\s*(?:·|&middot;)\s*For Africa/i.test(source)) failures.push(`${relative(file)}: superseded ABA tagline remains visible`);
+}
+
+const homepageSource = await readFile(path.join(prototypeRoot, "index.html"), "utf8");
+if (/home-button--ghost[^>]*href="about\.html"[^>]*>Why ABA exists</i.test(homepageSource)) failures.push("soft-launch/prototype/index.html: redundant About hero action remains visible");
+
+const trackerFeatureMatch = homepageSource.match(/<section class="home-tracker-feature"[\s\S]*?<\/section>/i);
+if (!trackerFeatureMatch) {
+  failures.push("soft-launch/prototype/index.html: missing prominent Registration Tracker feature");
+} else {
+  const trackerFeature = trackerFeatureMatch[0];
+  const trackerFeatureText = visibleText(trackerFeature);
+  const trackerFeatureRequirements = [
+    ["South Africa label", /Registration Tracker · South Africa/i],
+    ["already-submitted prompt", /Already submitted an Act 36 application\?/i],
+    ["submitted South African Act 36 scope", /South African Act 36 applications? that (?:has|have) already been submitted/i],
+    ["open participation", /open to members and non-members/i],
+    ["grouped sector evidence", /individual delays and barriers into grouped sector evidence/i],
+    ["public identity protection", /Grouped insights do not name organisations or products/i],
+  ];
+  for (const [label, pattern] of trackerFeatureRequirements) {
+    if (!pattern.test(trackerFeatureText)) failures.push(`soft-launch/prototype/index.html: tracker feature missing ${label}`);
+  }
+
+  const trackerFeatureLinks = [...trackerFeature.matchAll(/<a\b[^>]*href="registration-tracker\.html"[^>]*>([\s\S]*?)<\/a>/gi)];
+  if (trackerFeatureLinks.length !== 1) failures.push("soft-launch/prototype/index.html: tracker feature must contain exactly one Registration Tracker link");
+  if (trackerFeatureLinks.length === 1 && !/Open the Registration Tracker/i.test(visibleText(trackerFeatureLinks[0][1]))) {
+    failures.push("soft-launch/prototype/index.html: tracker feature CTA label is not canonical");
+  }
+}
+
+const heroIndex = homepageSource.indexOf('<section class="home-hero">');
+const trackerFeatureIndex = homepageSource.indexOf('<section class="home-tracker-feature"');
+const membershipValueIndex = homepageSource.indexOf('<section class="home-section home-value"');
+if (!(heroIndex !== -1 && trackerFeatureIndex > heroIndex && membershipValueIndex > trackerFeatureIndex)) {
+  failures.push("soft-launch/prototype/index.html: tracker feature must appear after the hero and before the membership-value section");
+}
+if (!/Registration Tracker evidence/i.test(homepageSource)) failures.push("soft-launch/prototype/index.html: membership-value cycle does not name Registration Tracker evidence");
+
+const trackerRouteMatch = homepageSource.match(/<a class="home-route home-route--tracker"[\s\S]*?<\/a>/i);
+if (!trackerRouteMatch || !/submitted Act 36 application/i.test(visibleText(trackerRouteMatch[0])) || !/South African biological-product application/i.test(visibleText(trackerRouteMatch[0]))) {
+  failures.push("soft-launch/prototype/index.html: Take part tracker route does not state its submitted South African Act 36 scope");
+}
+
+const membershipSource = await readFile(path.join(prototypeRoot, "membership.html"), "utf8");
+if (!/Already submitted an Act 36 application\?/i.test(membershipSource) || !/South African biological-product application/i.test(membershipSource) || !/open to members and non-members/i.test(membershipSource) || !/href="registration-tracker\.html"/i.test(membershipSource)) {
+  failures.push("soft-launch/prototype/membership.html: missing precise open Registration Tracker route");
+}
+
+const aboutSource = await readFile(path.join(prototypeRoot, "about.html"), "utf8");
+if (/A new, organised agricultural sector and system in Africa/i.test(aboutSource)) failures.push("soft-launch/prototype/about.html: vague 'sector and system' proposition remains visible");
+if (!/Registration Tracker gathers structured updates on South African Act 36 biological-product applications that have already been submitted/i.test(aboutSource) || !/public insights keep organisations and products private/i.test(aboutSource)) {
+  failures.push("soft-launch/prototype/about.html: missing factual Registration Tracker evidence reference");
+}
+
+const trackerLandingSource = await readFile(path.join(prototypeRoot, "registration-tracker.html"), "utf8");
+const privacySource = await readFile(path.join(prototypeRoot, "privacy.html"), "utf8");
+if (!/South African Act 36 application/i.test(trackerLandingSource) || !/href="\.\.\/\.\.\/registration-tracker\/intake-flow\/index\.html"[^>]*>Add an application update/i.test(trackerLandingSource)) {
+  failures.push("soft-launch/prototype/registration-tracker.html: tracker landing route or South African Act 36 scope is inaccurate");
+}
+if (!/does not submit an application to the registrar, provide legal or regulatory advice, or make your registration publicly searchable/i.test(privacySource)) {
+  failures.push("soft-launch/prototype/privacy.html: missing Registration Tracker submission, advice and publication boundary");
+}
+if (/Start a new registration|Share a new registration|Return to new-registration intake/i.test(`${homepageSource}\n${trackerLandingSource}\n${privacySource}`)) {
+  failures.push("public tracker routes: misleading new-registration action remains visible");
+}
+
 console.log("ABA public-site static preflight");
 console.log(
   `Checked ${files.length} HTML files and the shared shell ` +

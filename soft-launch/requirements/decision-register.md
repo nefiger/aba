@@ -1,7 +1,7 @@
 # Soft-Launch Decision Register
 
 Status: Phase 1 working draft
-Last updated: 2026-07-21
+Last updated: 2026-08-14
 
 This register distinguishes accepted decisions from actual open choices. Accepted workshop conclusions are not sent back for validation.
 
@@ -41,6 +41,7 @@ This register distinguishes accepted decisions from actual open choices. Accepte
 | DEC-030 | Brochure inspiration does not mean an editorial or serif-dominant website. | Translate the brochure through real agricultural imagery, hard green/cream fields, compact labels, orange interruptions, disciplined rules, structured information, and a condensed institutional sans. The homepage is rebuilt first as the visual-direction proof before the remaining pages are restyled. |
 | DEC-031 | The revised homepage treatment is the accepted visual-system basis for the remaining soft-launch routes. | Propagate its palette, type hierarchy, shell, interaction quality, spacing and compositional discipline; adapt layouts by narrative, orientation, capture, private-intake, and trust/legal page role rather than copying the homepage structure. |
 | DEC-032 | Public copy and composition are governed by `PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.md` and its preflight checks. | Do not use compressed AI-slogan fragments, `ambition`, internal-model narration, forced heading breaks, repetitive page silhouettes, or unreviewed full-page spacing. A clean automated check is necessary but does not replace full-scroll visual review. |
+| DEC-033 | ABA's canonical public tagline is `For Africa. By Africa.` | Use this exact wording in the shared brand lockup and branded signatures. It supersedes earlier and generated alternatives, including `In Africa · For Africa`, `Membership · Advocacy · Harmonisation`, `Independent. African. Biological.` and `Stop competing alone. Start winning together.` Anna supplied the correction directly on 2026-08-05. |
 
 ## Phase 2 discovery decisions
 

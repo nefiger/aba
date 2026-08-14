@@ -3,7 +3,7 @@
   "generated_on": "2026-08-14",
   "base_url": "http://127.0.0.1:8766/",
   "source_harness": "soft-launch/qa/public-site-render-check.html",
-  "commit_baseline": "d27fbd8",
+  "commit_baseline": "dcce574",
   "blocking_failure_count": 0,
   "contract_checks": [
     {
@@ -42,12 +42,32 @@
       "assertion": "A fits/self/issued submission review excludes pathway-mismatch, private-note, responsible-person-detail and reference-explanation rows."
     },
     {
+      "id": "all-suppressed-low-data",
+      "status": "pass",
+      "assertion": "With four publishable records split into below-threshold registration-type and stage groups, all five insights render the low-data answer, headline values and table cells remain suppressed, no reconstructable synopsis markers appear, and all five ECharts instances render without a runtime error."
+    },
+    {
+      "id": "public-site-tracker-integration",
+      "status": "pass",
+      "assertion": "The homepage places one substantive Registration Tracker feature directly after the hero, links to the tracker, states the submitted South African Act 36 scope, welcomes members and non-members, explains grouped evidence and protects organisation and product identities; Home, Membership and About references preserve the same boundaries."
+    },
+    {
       "id": "browser-console",
       "status": "pass",
       "assertion": "No browser errors or warnings were observed during the targeted functional run."
     }
   ],
   "responsive_routes": [
+    {
+      "route": "index.html",
+      "widths": {
+        "320": { "blocking_failures": 0, "heading_wrap_warnings": 13 },
+        "375": { "blocking_failures": 0, "heading_wrap_warnings": 11 },
+        "768": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1024": { "blocking_failures": 0, "heading_wrap_warnings": 10 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 9 }
+      }
+    },
     {
       "route": "registration-tracker.html",
       "widths": {
@@ -85,6 +105,12 @@
         "375": { "blocking_failures": 0, "heading_wrap_warnings": 5 },
         "768": { "blocking_failures": 0, "heading_wrap_warnings": 1 },
         "1024": { "blocking_failures": 0, "heading_wrap_warnings": 1 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
+      }
+    },
+    {
+      "route": "tracker low-data regression",
+      "widths": {
         "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
       }
     }

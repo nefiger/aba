@@ -46,6 +46,7 @@
       { label: "tracker intake", path: "../../registration-tracker/intake-flow/index.html" },
       { label: "registration insights", path: "../../registration-tracker/public-dashboard/index.html" },
       { label: "tracker resources", path: "../../registration-tracker/resources/index.html" },
+      { label: "tracker low-data regression", path: "tracker-insights-low-data.html", widths: [1440] },
     ];
     const widths = [320, 375, 768, 1024, 1440];
     const button = document.querySelector("#run");
@@ -165,6 +166,46 @@
       return failures;
     }
 
+    function trackerLowDataFailures(documentUnderTest, windowUnderTest) {
+      const failures = [];
+      const insufficient = "There is not enough shared information to show this comparison yet.";
+      ["pending", "stage", "outcome", "benchmark", "pathway"].forEach((name) => {
+        if (documentUnderTest.querySelector(`[data-${name}-answer]`)?.textContent.trim() !== insufficient) {
+          failures.push(`${name}: missing low-data answer`);
+        }
+      });
+      ["median-pending", "pending-count", "beyond-count"].forEach((name) => {
+        if (documentUnderTest.querySelector(`[data-summary="${name}"]`)?.textContent.trim() !== "Not shown") {
+          failures.push(`${name}: low-volume summary value is visible`);
+        }
+      });
+      if (documentUnderTest.querySelector("[data-summary-queue]")?.childElementCount) failures.push("low-volume synopsis renders reconstructable application markers");
+
+      const assertCells = (selector, valueIndexes) => {
+        documentUnderTest.querySelectorAll(`${selector} tr`).forEach((row) => {
+          const cells = [...row.cells].map((cell) => cell.textContent.trim());
+          if (valueIndexes.some((index) => cells[index] !== "Not shown")) failures.push(`${selector}: below-threshold table value is visible`);
+        });
+      };
+      assertCells("[data-pending-table]", [1, 2, 3]);
+      assertCells("[data-stage-table]", [1, 2, 3]);
+      assertCells("[data-outcome-table]", [1, 2, 3, 4]);
+      assertCells("[data-benchmark-table]", [2, 3]);
+      assertCells("[data-pathway-table]", [1, 2]);
+
+      const charts = [...documentUnderTest.querySelectorAll("[data-chart]")];
+      if (charts.length !== 5 || charts.some((chart) => !chart.querySelector("svg"))) failures.push("one or more low-data charts did not render");
+      charts.forEach((chart) => {
+        chart.focus();
+        chart.dispatchEvent(new windowUnderTest.KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+        chart.blur();
+      });
+      const invalidText = documentUnderTest.body.textContent.match(/\b(?:undefined|null|Infinity)\b/);
+      if (invalidText) failures.push(`low-data output contains ${invalidText[0]}`);
+      (windowUnderTest.__TRACKER_LOW_DATA_ERRORS__ || []).forEach((message) => failures.push(`low-data runtime error: ${message}`));
+      return failures;
+    }
+
     function loadRoute(route, width) {
       return new Promise((resolve) => {
         const frame = document.createElement("iframe");
@@ -192,6 +233,7 @@
             if (overflow > 1) failures.push(`horizontal overflow: ${overflow}px`);
             if (route.label === "registration insights" && width === 1440) failures.push(...trackerPrivacyFailures(documentUnderTest, frame.contentWindow));
             if (route.label === "tracker intake" && width === 1440) failures.push(...trackerIntakeFailures(documentUnderTest, frame.contentWindow));
+            if (route.label === "tracker low-data regression") failures.push(...trackerLowDataFailures(documentUnderTest, frame.contentWindow));
             headings.forEach((heading) => {
               if (heading.level === "h1" && heading.lines > 1) failures.push(`page title wraps (${heading.lines} lines): ${heading.text}`);
               if (heading.level !== "h1" && heading.lines > 1) {
@@ -212,7 +254,7 @@
       summary.textContent = "Running…";
       const results = [];
       for (const route of routes) {
-        for (const width of widths) results.push(await loadRoute(route, width));
+        for (const width of route.widths || widths) results.push(await loadRoute(route, width));
       }
 
       results.forEach((result) => {

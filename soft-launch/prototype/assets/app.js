@@ -20,7 +20,7 @@ class AbaHeader extends HTMLElement {
         <div class="site-header__inner">
           <a class="brand" href="${base}index.html" aria-label="African Biologicals Alliance home">
             <img src="${base}assets/aba-logo-final.png" alt="">
-            <span class="brand__name">African Biologicals Alliance<small>In Africa · For Africa</small></span>
+            <span class="brand__name">African Biologicals Alliance<small>For Africa. By Africa.</small></span>
           </a>
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
             <span class="sr-only">Open navigation</span>

@@ -129,6 +129,8 @@ Prefer complete, active statements. Write for an informed visitor who knows the 
 
 Do not split one thought into two short slogan fragments. Do not use punctuation as a substitute for meaning.
 
+Brand exception: `For Africa. By Africa.` is ABA's canonical tagline, supplied directly by Anna on 2026-08-05. Use it only as the shared brand tagline or a deliberate branded signature; do not use it as a pattern for page headings or manufacture variations of it.
+
 Rejected:
 
 - `Biologicals, organised.`
@@ -140,7 +142,7 @@ Rejected:
 
 Accepted direction:
 
-- `A new, organised agricultural sector and system in Africa. For Africa.`
+- `ABA is building a stronger biologicals sector in Africa.`
 - `ABA brings African manufacturers, formulators, distributors and specialists together to improve the conditions for biological agriculture.`
 - `ABA is based in South Africa and welcomes participation from across Africa.`
 - `Members help set ABA's priorities.`

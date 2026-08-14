@@ -68,11 +68,11 @@
     if (registrationSourceContext) registrationSourceContext.hidden = true;
 
     if (registrationType.value === "reinstatement") {
-      registrationType.setCustomValidity("This tracker accepts new registrations only. It cannot accept a reinstatement.");
+      registrationType.setCustomValidity("This tracker accepts submitted new-registration applications only. It cannot accept a reinstatement.");
       renderContext(
         registrationSourceContext,
         "Do not use this form for a reinstatement.",
-        "The tracker accepts new applications but does not currently collect reinstatements of lapsed registrations.",
+        "The tracker accepts submitted new-registration applications but does not currently collect reinstatements of lapsed registrations.",
         { href: "../resources/index.html#tracker-scope", label: "See what the tracker accepts" },
       );
       return;

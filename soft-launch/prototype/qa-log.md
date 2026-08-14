@@ -3,6 +3,22 @@
 Last updated: 2026-08-14
 Gate: G3 in progress
 
+## Registration Tracker pre-review polish — 14 August 2026
+
+- made every insight safe when no group meets the reporting threshold: pending and stage answers, chart emphasis and ARIA descriptions no longer dereference a missing publishable group, and empty chart axes retain finite fallback ranges;
+- extended low-volume suppression to the headline synopsis and concise outcome, benchmark and pathway answers so an above-threshold total split entirely across below-threshold groups exposes no exact totals or reconstructable marker pattern;
+- added `soft-launch/qa/tracker-insights-low-data.html`, which runs the real renderer and ECharts library with four publishable records split into two-record registration-type groups and one-record stages;
+- added the low-data fixture to the responsive browser gate, including answer, summary, table, chart, keyboard and runtime-error assertions;
+- replaced the shared shell and root-launcher tagline with Anna's exact `For Africa. By Africa.` wording, documented her 5 August instruction as the source authority, and recorded the explicit exception to the normal anti-slogan rule;
+- removed the redundant `Why ABA exists` homepage hero action while retaining About in navigation and the single `Explore membership` hero action;
+- rewrote the About principle as `ABA is building a stronger biologicals sector in Africa.` and retained the separate homepage proposition unchanged;
+- increased the effective desktop shell-tagline size from 0.64rem to 0.68rem; the existing responsive rule still hides it below 64rem, so the compact header is unaffected;
+- added a dedicated Registration Tracker utility band directly after the homepage hero, with one action and explicit submitted South African Act 36, open-participation, grouped-evidence and public-identity boundaries;
+- tightened the later homepage route, named Registration Tracker evidence in the membership-value cycle, added precise routes on Membership and member intake, and added a factual evidence reference on About without creating another content CTA;
+- replaced public `new registration` action labels with `application update` language while preserving the distinction between accepted new-registration application types and excluded reinstatements;
+- extended the public-site preflight and machine-readable browser report to lock the feature position, single link, scope, privacy, participation, non-advice and non-submission boundaries;
+- the tracker static preflight passes 181 checks, the public-site static preflight passes, and the responsive browser gate reports zero blocking failures with 43 distinct heading-wrap review warnings. The low-data fixture, Home, Membership and About report no horizontal overflow or browser runtime errors.
+
 ## Registration Tracker review corrections — 14 August 2026
 
 - extended the preview privacy threshold across pending-age, process-stage and benchmark groups so a group below three exposes neither its count nor derived medians, waits, barriers, overdue values, chart marks or tooltips;

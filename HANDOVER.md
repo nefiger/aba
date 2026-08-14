@@ -435,7 +435,7 @@ Latest form-shape decisions now locked:
 - full-member capture has been reduced to factual commercial, support, and eligibility inputs and should not drift back into duplicated review logic
 
 Latest public-shell decision now locked:
-- public ABA pages should use one consistent logo placement, organisation name, and tagline
+- public ABA pages should use one consistent logo placement, organisation name, and the canonical tagline `For Africa. By Africa.`
 - public pages should end with one shared footer pattern rather than ad hoc CTA footers
 - governance and data surfaces are now part of the public information architecture through:
   `docs/site/governance-and-data.html`

@@ -1,6 +1,6 @@
 # ABA Visual Language Conventions
 
-Last updated: 2026-06-30
+Last updated: 2026-08-14
 
 Purpose:
 - turn the content taxonomy and design-principles thinking into practical conventions for the prototype
@@ -26,7 +26,7 @@ All core ABA prototype pages should share these baseline traits:
 - `Public Sans` as the default family
 - same ABA mark, brand line, and topbar structure
 - same public tagline:
-  `Collective voice, regulatory visibility, and stronger market conditions for African biologicals.`
+  `For Africa. By Africa.`
 - same background atmosphere:
   warm sand base, light green natural tint, restrained gold support
 - same rounded translucent surface treatment for primary page sections

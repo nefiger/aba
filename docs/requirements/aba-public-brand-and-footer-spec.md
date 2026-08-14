@@ -1,6 +1,6 @@
 # ABA Public Brand And Footer Spec
 
-Last updated: 2026-07-01
+Last updated: 2026-08-14
 
 Purpose:
 - standardise the public ABA brand lockup across pages
@@ -19,7 +19,9 @@ All public ABA pages should use the same topbar brand treatment:
 - organisation name:
   `African Biologicals Alliance`
 - shared tagline:
-  `Collective voice, regulatory visibility, and stronger market conditions for African biologicals.`
+  `For Africa. By Africa.`
+
+Tagline authority: Anna's direct WhatsApp correction on 2026-08-05. This wording supersedes earlier or generated alternatives, including `In Africa · For Africa`, `Membership · Advocacy · Harmonisation`, `Independent. African. Biological.` and `Stop competing alone. Start winning together.`
 
 The lockup should stay stable across:
 - `docs/site/`

@@ -28,6 +28,8 @@ const appJsPath = "soft-launch/prototype/assets/app.js";
 const appJs = await readFile(path.join(repoRoot, appJsPath), "utf8");
 const referenceJsPath = "registration-tracker/shared/registration-tracker-reference-data.js";
 const referenceJs = await readFile(path.join(repoRoot, referenceJsPath), "utf8");
+const lowDataFixturePath = "soft-launch/qa/tracker-insights-low-data.html";
+const lowDataFixture = await readFile(path.join(repoRoot, lowDataFixturePath), "utf8");
 
 const failures = [];
 const checks = [];
@@ -238,6 +240,19 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   else checks.push("insights.js: outcome comparison uses grouped bars with a common baseline");
   if (!/String\(record\.legal_pathway \|\| ""\)\.trim\(\)\.toLowerCase\(\) === "fertilizer"/.test(renderJs)) failures.push("insights.js: Fertilizer pathway comparison is case-sensitive and can mislabel seed records");
   else checks.push("insights.js: Fertilizer pathway labels are normalized case-insensitively");
+  if (!/const insufficientInsight = "There is not enough shared information to show this comparison yet\."/.test(renderJs)
+    || !/const pendingAnswer = longestMedianGroup\s*\?/.test(renderJs)
+    || !/description:\s*longestMedianGroup\s*\?/.test(renderJs)) failures.push("insights.js: pending insight can dereference a missing publishable group");
+  else checks.push("insights.js: pending insight has a low-data answer and ARIA fallback");
+  if (!/const stageAnswer = busiestStage\s*\?/.test(renderJs)
+    || !/busiestStage && item\.stage === busiestStage\.stage/.test(renderJs)
+    || !/description:\s*busiestStage\s*\?/.test(renderJs)) failures.push("insights.js: stage insight can dereference a missing publishable stage");
+  else checks.push("insights.js: stage insight has low-data answer, styling, and ARIA fallbacks");
+  if (!/publicValue\(pendingSummarySuppressed, medianPending\)/.test(renderJs)
+    || !/publicValue\(benchmarkSummarySuppressed, beyondPending\.length\)/.test(renderJs)
+    || !/pendingSummarySuppressed[\s\S]{0,260}!\[\.\.\.pendingGroups\.values\(\)\]\.some/.test(renderJs)
+    || !/if \(!pendingSummarySuppressed && !benchmarkSummarySuppressed\)/.test(renderJs)) failures.push("insights.js: low-volume synopsis can expose values or reconstructable markers");
+  else checks.push("insights.js: low-volume synopsis suppresses values and reconstructable markers");
 
   const privacySections = [
     {
@@ -286,6 +301,11 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
     checks.push("insights-seed.js: all Agricultural remedy codes, rows, and clocks derive from the shared lookup");
   }
 }
+
+if ((lowDataFixture.match(/review_status:\s*"approved_for_insights"/g) || []).length !== 4
+  || !/registration-tracker-insights\.js/.test(lowDataFixture)
+  || !/__TRACKER_LOW_DATA_ERRORS__/.test(lowDataFixture)) failures.push(`${lowDataFixturePath}: fixture must execute the real renderer with four publishable records and capture runtime errors`);
+else checks.push(`${lowDataFixturePath}: all-suppressed browser fixture executes the real renderer with four records`);
 
 if (!/function isSuppressed\(items\)[\s\S]{0,100}items\.length < threshold/.test(await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8"))) failures.push("insights.js: missing shared small-group suppression predicate");
 else checks.push("insights.js: small-group suppression uses the shared privacy-threshold predicate");
@@ -440,6 +460,7 @@ const linkedAssets = [
   "registration-tracker/shared/registration-tracker-insights-seed.js",
   "registration-tracker/shared/registration-tracker-insights.js",
   "registration-tracker/shared/vendor/echarts-6.1.0.min.js",
+  "soft-launch/qa/tracker-insights-low-data.html",
 ];
 for (const relativePath of linkedAssets) {
   try {

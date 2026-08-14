@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tracker low-data regression fixture</title>
+  <style>
+    [data-chart] { width: 48rem; height: 18rem; }
+  </style>
+  <script>
+    window.__TRACKER_LOW_DATA_ERRORS__ = [];
+    window.addEventListener("error", (event) => {
+      window.__TRACKER_LOW_DATA_ERRORS__.push(event.message);
+    });
+    window.ABA_TRACKER_INSIGHTS_SEED = Object.freeze([
+      Object.freeze({
+        review_status: "approved_for_insights",
+        public_inclusion: true,
+        outcome: "pending",
+        registration_type_label: "New formulation",
+        legal_pathway: "Agricultural remedy",
+        official_stage: "Received",
+        elapsed_days: 100,
+        days_in_stage: 12,
+        barrier: "Additional information requested",
+        official_timeframe_days: 418,
+        service_request_code: "14AR2",
+        pathway_fit: "fits"
+      }),
+      Object.freeze({
+        review_status: "approved_for_insights",
+        public_inclusion: true,
+        outcome: "pending",
+        registration_type_label: "Generic active ingredient",
+        legal_pathway: "Agricultural remedy",
+        official_stage: "Verification",
+        elapsed_days: 140,
+        days_in_stage: 18,
+        barrier: "Category uncertainty",
+        official_timeframe_days: 418,
+        service_request_code: "14AR1",
+        pathway_fit: "fits"
+      }),
+      Object.freeze({
+        review_status: "approved_for_insights",
+        public_inclusion: true,
+        outcome: "pending",
+        registration_type_label: "New formulation",
+        legal_pathway: "Agricultural remedy",
+        official_stage: "Scientific screening",
+        elapsed_days: 180,
+        days_in_stage: 24,
+        barrier: "Additional information requested",
+        official_timeframe_days: 418,
+        service_request_code: "14AR2",
+        pathway_fit: "not_sure"
+      }),
+      Object.freeze({
+        review_status: "approved_for_insights",
+        public_inclusion: true,
+        outcome: "pending",
+        registration_type_label: "Generic active ingredient",
+        legal_pathway: "Agricultural remedy",
+        official_stage: "Decision",
+        elapsed_days: 220,
+        days_in_stage: 30,
+        barrier: "Category uncertainty",
+        official_timeframe_days: 418,
+        service_request_code: "14AR1",
+        pathway_fit: "not_sure"
+      })
+    ]);
+  </script>
+  <script src="../../registration-tracker/shared/vendor/echarts-6.1.0.min.js" defer></script>
+  <script src="../../registration-tracker/shared/registration-tracker-reference-data.js" defer></script>
+  <script src="../../registration-tracker/shared/registration-tracker-insights.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Tracker low-data regression fixture</h1>
+    <section class="tracker-insight-summary">
+      <span data-summary="median-pending">—</span>
+      <span data-summary="pending-count">—</span>
+      <span data-summary="beyond-count">—</span>
+      <div data-summary-queue></div>
+    </section>
+
+    <p data-pending-answer></p>
+    <span data-pending-axis-max></span>
+    <div data-chart="pending" tabindex="0"></div>
+    <table><tbody data-pending-table></tbody></table>
+
+    <p data-stage-answer></p>
+    <div data-chart="stage" tabindex="0"></div>
+    <table><tbody data-stage-table></tbody></table>
+
+    <p data-outcome-answer></p>
+    <div data-chart="outcomes" tabindex="0"></div>
+    <table><tbody data-outcome-table></tbody></table>
+
+    <p data-benchmark-answer></p>
+    <div data-chart="benchmark" tabindex="0"></div>
+    <table><tbody data-benchmark-table></tbody></table>
+
+    <p data-pathway-answer></p>
+    <div data-chart="pathway" tabindex="0"></div>
+    <table><tbody data-pathway-table></tbody></table>
+    <dl data-pathway-reasons></dl>
+
+    <span data-privacy-threshold></span>
+  </main>
+</body>
+</html>

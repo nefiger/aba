@@ -8,6 +8,7 @@
   const records = seed.filter((record) => record.review_status === "approved_for_insights" && record.public_inclusion === true);
   const pending = records.filter((record) => record.outcome === "pending");
   const threshold = reference.privacy_threshold_preview;
+  const insufficientInsight = "There is not enough shared information to show this comparison yet.";
 
   const outcomeOrder = ["pending", "approved", "rejected", "withdrawn"];
   const stageOrder = ["Received", "Verification", "Scientific screening", "Evaluation", "Decision"];
@@ -68,6 +69,15 @@
 
   function publicThresholdCount(items) {
     return isSuppressed(items) ? "Not shown" : `${threshold}+`;
+  }
+
+  function appendStatusRow(table, columnCount) {
+    if (!table) return;
+    const row = document.createElement("tr");
+    const status = cell("Not enough information to show values.");
+    status.colSpan = columnCount;
+    row.append(status);
+    table.append(row);
   }
 
   function mostCommonBarrier(items) {
@@ -174,25 +184,37 @@
   const medianPending = median(pending.map((record) => record.elapsed_days));
   const benchmarkEligiblePending = pending.filter((record) => Number.isFinite(record.official_timeframe_days));
   const beyondPending = benchmarkEligiblePending.filter((record) => record.elapsed_days > record.official_timeframe_days);
-  text('[data-summary="median-pending"]', String(medianPending));
-  text('[data-summary="pending-count"]', String(pending.length));
-  text('[data-summary="beyond-count"]', String(beyondPending.length));
+  const pendingGroups = groupBy(pending, typeLabel);
+  const stageGroups = groupBy(pending, "official_stage");
+  const benchmarkGroups = groupBy(benchmarkEligiblePending, typeLabel);
+  const pendingSummarySuppressed = isSuppressed(pending)
+    || ![...pendingGroups.values()].some((items) => !isSuppressed(items))
+    || ![...stageGroups.values()].some((items) => !isSuppressed(items));
+  const otherPendingCount = pending.length - beyondPending.length;
+  const benchmarkSummarySuppressed = isSuppressed(benchmarkEligiblePending)
+    || ![...benchmarkGroups.values()].some((items) => !isSuppressed(items))
+    || isSuppressed(beyondPending)
+    || otherPendingCount < threshold;
+  text('[data-summary="median-pending"]', publicValue(pendingSummarySuppressed, medianPending));
+  text('[data-summary="pending-count"]', publicValue(pendingSummarySuppressed, pending.length));
+  text('[data-summary="beyond-count"]', publicValue(benchmarkSummarySuppressed, beyondPending.length));
   text("[data-privacy-threshold]", String(threshold));
 
   const summaryQueue = document.querySelector("[data-summary-queue]");
-  [
-    ["overdue", beyondPending.length],
-    ["other", pending.length - beyondPending.length],
-  ].forEach(([state, count]) => {
-    for (let index = 0; index < count; index += 1) {
-      const marker = document.createElement("i");
-      marker.dataset.state = state;
-      summaryQueue?.append(marker);
-    }
-  });
+  if (!pendingSummarySuppressed && !benchmarkSummarySuppressed) {
+    [
+      ["overdue", beyondPending.length],
+      ["other", otherPendingCount],
+    ].forEach(([state, count]) => {
+      for (let index = 0; index < count; index += 1) {
+        const marker = document.createElement("i");
+        marker.dataset.state = state;
+        summaryQueue?.append(marker);
+      }
+    });
+  }
 
   // 01 — ranked median pending time by sourced subtype / unbenchmarked pathway.
-  const pendingGroups = groupBy(pending, typeLabel);
   const pendingTable = document.querySelector("[data-pending-table]");
   const pendingGroupStats = [...pendingGroups.entries()]
     .map(([label, items]) => ({
@@ -204,10 +226,13 @@
     }))
     .sort((a, b) => b.medianDays - a.medianDays);
   const publicPendingMedians = pendingGroupStats.filter((group) => !group.suppressed).map((group) => group.medianDays);
-  const axisMax = Math.ceil(Math.max(...publicPendingMedians) / 100) * 100;
+  const axisMax = publicPendingMedians.length ? Math.ceil(Math.max(...publicPendingMedians) / 100) * 100 : 100;
   text("[data-pending-axis-max]", `${axisMax} days`);
   const longestMedianGroup = pendingGroupStats.find((group) => !group.suppressed);
-  text("[data-pending-answer]", `${longestMedianGroup.label} has the longest median pending time: ${longestMedianGroup.medianDays} days.`);
+  const pendingAnswer = longestMedianGroup
+    ? `${longestMedianGroup.label} has the longest median pending time: ${longestMedianGroup.medianDays} days.`
+    : insufficientInsight;
+  text("[data-pending-answer]", pendingAnswer);
 
   pendingGroupStats.forEach(({ label, items, medianDays, longestDays, suppressed }) => {
     const tableRow = document.createElement("tr");
@@ -219,6 +244,7 @@
     );
     pendingTable?.append(tableRow);
   });
+  if (!pendingGroupStats.length) appendStatusRow(pendingTable, 4);
 
   mountChart("[data-chart='pending']", {
     grid: { top: 28, right: 72, bottom: 42, left: 250, containLabel: false },
@@ -253,7 +279,7 @@
       tooltip: {
         formatter: (params) => {
           const group = pendingGroupStats[params.dataIndex];
-          if (group.suppressed) return tooltipHtml(group.label, ["Values are not shown for small groups."]);
+          if (!group || group.suppressed) return tooltipHtml(group?.label || "Pending time", ["Values are not shown for small groups."]);
           return tooltipHtml(group.label, [
             `Median pending time: ${group.medianDays} days`,
             `Longest current wait: ${group.longestDays} days`,
@@ -272,11 +298,12 @@
     }],
   }, {
     dataCount: pendingGroupStats.length,
-    description: `Ranked median pending time by registration type. ${longestMedianGroup.label} has the longest median at ${longestMedianGroup.medianDays} days.`,
+    description: longestMedianGroup
+      ? `Ranked median pending time by registration type. ${longestMedianGroup.label} has the longest median at ${longestMedianGroup.medianDays} days.`
+      : `Ranked median pending time by registration type. ${insufficientInsight}`,
   });
 
   // 02 — official-stage bars, count, median days in stage, and reported block.
-  const stageGroups = groupBy(pending, "official_stage");
   const stageTable = document.querySelector("[data-stage-table]");
   const stageStats = stageOrder.map((stage) => {
     const items = stageGroups.get(stage) || [];
@@ -289,8 +316,12 @@
       suppressed: isSuppressed(items),
     };
   });
-  const busiestStage = stageStats.filter((item) => !item.suppressed).sort((a, b) => b.count - a.count)[0];
-  text("[data-stage-answer]", `${busiestStage.stage} is the largest waiting group: ${busiestStage.count} of ${pending.length} pending applications.`);
+  const publicStageStats = stageStats.filter((item) => !item.suppressed);
+  const busiestStage = [...publicStageStats].sort((a, b) => b.count - a.count)[0];
+  const stageAnswer = busiestStage
+    ? `${busiestStage.stage} is the largest waiting group: ${busiestStage.count} of ${pending.length} pending applications.`
+    : insufficientInsight;
+  text("[data-stage-answer]", stageAnswer);
   stageStats.forEach(({ stage, count, medianDays, barrier, suppressed }) => {
     const tableRow = document.createElement("tr");
     tableRow.append(
@@ -320,7 +351,7 @@
     yAxis: {
       type: "value",
       min: 0,
-      max: Math.max(...stageStats.map((item) => item.count)) + 1,
+      max: publicStageStats.length ? Math.max(...publicStageStats.map((item) => item.count)) + 1 : threshold,
       interval: 1,
       name: "Pending applications",
       nameTextStyle: { color: chartColors.muted, fontSize: 11 },
@@ -335,7 +366,7 @@
       barMaxWidth: 76,
       data: stageStats.map((item) => ({
         value: item.suppressed ? null : item.count,
-        itemStyle: { color: item.stage === busiestStage.stage ? chartColors.orange : chartColors.forest },
+        itemStyle: { color: busiestStage && item.stage === busiestStage.stage ? chartColors.orange : chartColors.forest },
       })),
       label: { show: true, position: "top", color: chartColors.forest, fontSize: 14, fontWeight: 800 },
       emphasis: { itemStyle: { color: chartColors.orangeLight } },
@@ -361,7 +392,9 @@
     }],
   }, {
     dataCount: stageStats.length,
-    description: `Pending applications by official stage. ${busiestStage.stage} is the largest waiting group with ${busiestStage.count} of ${pending.length} pending applications.`,
+    description: busiestStage
+      ? `Pending applications by official stage. ${busiestStage.stage} is the largest waiting group with ${busiestStage.count} of ${pending.length} pending applications.`
+      : `Pending applications by official stage. ${insufficientInsight}`,
   });
 
   // 03 — grouped outcomes by subtype/pathway with threshold suppression.
@@ -375,8 +408,14 @@
     outcomeTable?.append(tableRow);
     return { label, items, counts, suppressed: items.length < threshold };
   });
-  const rejected = records.filter((record) => record.outcome === "rejected").length;
-  text("[data-outcome-answer]", `${pending.length} applications are pending; ${rejected} of ${records.length} ended in rejection.`);
+  if (!outcomeStats.length) appendStatusRow(outcomeTable, 5);
+  const rejectedRecords = records.filter((record) => record.outcome === "rejected");
+  const rejected = rejectedRecords.length;
+  const outcomeHasPublicGroup = outcomeStats.some((item) => !item.suppressed);
+  const outcomeAnswer = !isSuppressed(pending) && !isSuppressed(rejectedRecords)
+    ? `${pending.length} applications are pending; ${rejected} of ${records.length} ended in rejection.`
+    : insufficientInsight;
+  text("[data-outcome-answer]", outcomeAnswer);
 
   const outcomeNames = { pending: "Pending", approved: "Approved", rejected: "Rejected", withdrawn: "Withdrawn" };
   const outcomeColors = { pending: chartColors.pending, approved: chartColors.approved, rejected: chartColors.rejected, withdrawn: chartColors.withdrawn };
@@ -394,7 +433,7 @@
     xAxis: {
       type: "value",
       min: 0,
-      max: Math.max(...outcomeStats.map((item) => item.items.length)),
+      max: outcomeHasPublicGroup ? Math.max(...outcomeStats.filter((item) => !item.suppressed).map((item) => item.items.length)) : threshold,
       interval: 1,
       name: "Applications",
       nameLocation: "middle",
@@ -424,6 +463,7 @@
       tooltip: {
         formatter: (params) => {
           const item = outcomeStats[params.dataIndex];
+          if (!item || item.suppressed) return tooltipHtml(item?.label || "Application outcomes", ["Values are not shown for small groups."]);
           return tooltipHtml(item.label, [
             `${params.seriesName}: ${params.value} of ${item.items.length}`,
             `Share: ${percent(params.value, item.items.length)}%`,
@@ -442,11 +482,12 @@
   }, {
     dataCount: outcomeStats.length,
     seriesCount: outcomeOrder.length,
-    description: `Grouped application outcomes by registration type. There are ${pending.length} pending applications and ${rejected} rejected applications in this illustrative dataset. The legend can hide or show each outcome.`,
+    description: outcomeHasPublicGroup
+      ? `Grouped application outcomes by registration type. ${outcomeAnswer} The legend can hide or show each outcome.`
+      : `Grouped application outcomes by registration type. ${insufficientInsight}`,
   });
 
   // 04 — beyond an applicable, source-backed published timeframe.
-  const benchmarkGroups = groupBy(benchmarkEligiblePending, typeLabel);
   const benchmarkTable = document.querySelector("[data-benchmark-table]");
   const benchmarkStats = [...benchmarkGroups.entries()].map(([label, items]) => {
     const beyond = items.filter((item) => item.elapsed_days > item.official_timeframe_days).length;
@@ -469,7 +510,11 @@
       suppressed,
     };
   });
-  text("[data-benchmark-answer]", `${beyondPending.length} eligible pending applications are overdue. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`);
+  if (!benchmarkStats.length) appendStatusRow(benchmarkTable, 4);
+  const benchmarkAnswer = benchmarkSummarySuppressed
+    ? insufficientInsight
+    : `${beyondPending.length} eligible pending applications are overdue. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`;
+  text("[data-benchmark-answer]", benchmarkAnswer);
 
   mountChart("[data-chart='benchmark']", {
     grid: { top: 26, right: 76, bottom: 44, left: 250 },
@@ -513,7 +558,7 @@
       tooltip: {
         formatter: (params) => {
           const item = benchmarkStats[params.dataIndex];
-          if (item.suppressed) return tooltipHtml(`${item.label} — ${item.code}`, ["Values are not shown for small groups."]);
+          if (!item || item.suppressed) return tooltipHtml(item ? `${item.label} — ${item.code}` : "Published timeframe", ["Values are not shown for small groups."]);
           return tooltipHtml(`${item.label} — ${item.code}`, [
             `${item.beyond} of ${item.items.length} pending applications are overdue`,
             `${item.percentBeyond}% overdue`,
@@ -531,7 +576,9 @@
     }],
   }, {
     dataCount: benchmarkStats.length,
-    description: `${beyondPending.length} eligible pending applications are beyond the published timeframe. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`,
+    description: benchmarkSummarySuppressed
+      ? `Published-timeframe comparison. ${insufficientInsight}`
+      : `${beyondPending.length} eligible pending applications are beyond the published timeframe. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`,
   });
 
   // 05 — pathway fit with reason-level threshold suppression.
@@ -548,13 +595,14 @@
     pathwayTable?.append(tableRow);
     return { key, label, count, suppressed: count < threshold };
   });
+  const doesNotFitStat = pathwayStats.find((item) => item.key === "does_not_fit");
 
   mountChart("[data-chart='pathway']", {
     grid: { top: 22, right: 74, bottom: 44, left: 150 },
     xAxis: {
       type: "value",
       min: 0,
-      max: records.length,
+      max: Math.max(records.length, threshold),
       interval: 5,
       name: "Applications",
       nameLocation: "middle",
@@ -591,6 +639,7 @@
       tooltip: {
         formatter: (params) => {
           const item = pathwayStats[params.dataIndex];
+          if (item.suppressed) return tooltipHtml(item.label, ["Values are not shown for small groups."]);
           return tooltipHtml(item.label, [
             `${item.count} of ${records.length} applications`,
             `${percent(item.count, records.length)}% of included applications`,
@@ -604,7 +653,9 @@
     }],
   }, {
     dataCount: pathwayStats.length,
-    description: `Reported pathway fit across ${records.length} included applications. ${pathwayStats.find((item) => item.key === "does_not_fit").count} report that the pathway does not fit the product.`,
+    description: !isSuppressed(records) && doesNotFitStat && !doesNotFitStat.suppressed
+      ? `Reported pathway fit across ${records.length} included applications. ${doesNotFitStat.count} report that the pathway does not fit the product.`
+      : `Reported pathway fit. ${insufficientInsight}`,
   });
 
   const mismatchRecords = pathwayGroups.get("does_not_fit") || [];
@@ -619,5 +670,7 @@
     row.append(term, value);
     pathwayReasons?.append(row);
   });
-  text("[data-pathway-answer]", `${mismatchRecords.length} of ${records.length} applications report that the submitted pathway does not fit the product.`);
+  text("[data-pathway-answer]", !isSuppressed(records) && !isSuppressed(mismatchRecords)
+    ? `${mismatchRecords.length} of ${records.length} applications report that the submitted pathway does not fit the product.`
+    : insufficientInsight);
 })();
