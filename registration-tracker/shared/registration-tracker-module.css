@@ -6,10 +6,18 @@
   --tracker-cream: #f4eee4;
   --tracker-beige: #e3dcd6;
   --tracker-sage: #9dac99;
+  --tracker-sage-wash: #e7ece5;
   --tracker-orange: #c75c2b;
   --tracker-orange-light: #efa16f;
+  --tracker-accent-text: #963f1e;
+  --tracker-orange-dark: var(--tracker-accent-text);
   --tracker-ink: #16362c;
+  --tracker-muted: #52645a;
   --tracker-line: rgba(16, 55, 41, 0.22);
+  --tracker-pending: #667762;
+  --tracker-approved: #285619;
+  --tracker-rejected: #963f1e;
+  --tracker-withdrawn: #6a746d;
   background: var(--tracker-paper);
   color: var(--tracker-ink);
 }
@@ -46,19 +54,26 @@
 
 .tracker-module .tracker-label {
   margin: 0 0 0.75rem;
-  color: var(--tracker-orange-light);
+  color: var(--tracker-accent-text);
   font: 700 0.76rem/1.2 Archivo, sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.tracker-module h1,
-.tracker-module h2,
-.tracker-module h3 {
+.tracker-module .tracker-page-header .tracker-label,
+.tracker-module .tracker-section--forest .tracker-label {
+  color: var(--tracker-orange-light);
+}
+
+/* Route typography belongs to the tracker content only. The shared header and footer
+   are rendered by app.js and must retain the canonical public-shell type system. */
+.tracker-module main h1,
+.tracker-module main h2,
+.tracker-module main h3 {
   color: inherit;
 }
 
-.tracker-module h1 {
+.tracker-module main h1 {
   margin: 0;
   font: 700 clamp(1.72rem, 7.7vw, 4.75rem)/0.98 "Saira Semi Condensed", sans-serif;
   letter-spacing: -0.025em;
@@ -73,35 +88,41 @@
    full sentences that can't be shortened to one nowrap-safe line without losing meaning
    (e.g. "Before you submit a new registration."), so tracker headings are allowed to wrap
    normally instead. */
-.brochure-theme.tracker-module h1 {
+.brochure-theme.tracker-module main h1 {
   white-space: normal;
   text-wrap: wrap;
 }
 
-.tracker-module h2 {
+/* The landing header shares its row with the privacy note from tablet widths
+   upward. Keep its short title on one line by scaling the type with that grid. */
+.tracker-module[data-page="tracker"] .tracker-page-header h1 {
+  font-size: clamp(2rem, 5vw, 4.25rem);
+}
+
+.tracker-module main h2 {
   margin: 0;
   font: 700 clamp(1.65rem, 4.2vw, 2.8rem)/1.05 "Saira Semi Condensed", sans-serif;
 }
 
-.tracker-module h3 {
+.tracker-module main h3 {
   margin: 0;
   font: 700 clamp(1.05rem, 2vw, 1.35rem)/1.2 Archivo, sans-serif;
 }
 
-.tracker-module p,
-.tracker-module li,
-.tracker-module td,
-.tracker-module th,
-.tracker-module label,
-.tracker-module input,
-.tracker-module select,
-.tracker-module textarea,
-.tracker-module button {
+.tracker-module main p,
+.tracker-module main li,
+.tracker-module main td,
+.tracker-module main th,
+.tracker-module main label,
+.tracker-module main input,
+.tracker-module main select,
+.tracker-module main textarea,
+.tracker-module main button {
   font-family: Archivo, sans-serif;
 }
 
-.tracker-module p,
-.tracker-module li {
+.tracker-module main p,
+.tracker-module main li {
   line-height: 1.62;
 }
 
@@ -114,8 +135,8 @@
    `.tracker-shell` is already the reading constraint here, so tracker text fills
    it. Do not reintroduce ch-based measures in this module; if a block genuinely
    needs a narrower measure, give it an explicit rem value and say why. */
-.tracker-module p,
-.tracker-module li {
+.tracker-module main p,
+.tracker-module main li {
   max-width: 100%;
 }
 
@@ -179,6 +200,17 @@
   color: var(--tracker-paper);
 }
 
+.tracker-module .tracker-section--forest .tracker-button--secondary {
+  border-color: var(--tracker-paper);
+  color: var(--tracker-paper);
+}
+
+.tracker-module .tracker-section--forest .tracker-button--secondary:hover {
+  border-color: var(--tracker-paper);
+  background: var(--tracker-paper);
+  color: var(--tracker-deep);
+}
+
 .tracker-module .tracker-page-header .tracker-button--secondary {
   border-color: var(--tracker-paper);
   color: var(--tracker-paper);
@@ -198,12 +230,19 @@
 }
 
 .tracker-module .tracker-section--beige {
-  background: var(--tracker-beige);
+  border-block: 1px solid var(--tracker-line);
+  background: var(--tracker-paper);
 }
 
 .tracker-module .tracker-section--forest {
   background: var(--tracker-deep);
   color: var(--tracker-paper);
+}
+
+.tracker-module .tracker-section--quiet {
+  border-block: 1px solid var(--tracker-line);
+  padding-block: clamp(1.5rem, 3vw, 2.4rem);
+  background: var(--tracker-cream);
 }
 
 .tracker-module .tracker-section-heading {
@@ -238,7 +277,7 @@
 }
 
 .tracker-module .tracker-index-list strong {
-  color: var(--tracker-orange);
+  color: var(--tracker-accent-text);
   font-weight: 800;
 }
 
@@ -298,7 +337,7 @@
 }
 
 .tracker-module .tracker-note {
-  border-left: 4px solid var(--tracker-orange);
+  border: 1px solid var(--tracker-line);
   padding: 0.9rem 1rem;
   background: var(--tracker-cream);
   color: var(--tracker-ink);
@@ -371,14 +410,14 @@
 .tracker-module .tracker-stage-nav span {
   display: block;
   margin-bottom: 0.25rem;
-  color: var(--tracker-orange);
+  color: var(--tracker-accent-text);
   font-weight: 800;
 }
 
 .tracker-module .tracker-stage-nav button.is-complete::after {
   content: "✓";
   margin-left: 0.4rem;
-  color: var(--tracker-orange);
+  color: var(--tracker-accent-text);
 }
 
 .tracker-module .tracker-stage-nav button[aria-current="step"].is-complete::after {
@@ -403,10 +442,213 @@
   text-transform: uppercase;
 }
 
+.tracker-module .tracker-source-context,
+.tracker-module .tracker-pathway-guidance {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 0.3rem;
+  border: 1px solid var(--tracker-line);
+  padding: 0.9rem 1rem;
+  background: var(--tracker-sage-wash);
+  color: var(--tracker-forest);
+  font-family: Archivo, sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.tracker-module .tracker-pathway-guidance {
+  background: var(--tracker-cream);
+}
+
+.tracker-module .tracker-source-context a,
+.tracker-module .tracker-pathway-guidance a {
+  color: inherit;
+  font-weight: 750;
+}
+
+.tracker-module .tracker-pathway-fit-details {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.tracker-module .tracker-insight-summary {
+  border-block: 1px solid var(--tracker-line);
+  background: var(--tracker-cream);
+  color: var(--tracker-forest);
+}
+
+.tracker-module .tracker-insight-summary__grid {
+  display: grid;
+}
+
+.tracker-module .tracker-insight-summary__grid > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.2rem 1rem;
+  align-items: baseline;
+  padding-block: 1rem;
+}
+
+.tracker-module .tracker-insight-summary__grid > div + div {
+  border-top: 1px solid rgba(11, 40, 30, 0.25);
+}
+
+.tracker-module .tracker-insight-summary span,
+.tracker-module .tracker-insight-summary small {
+  font-family: Archivo, sans-serif;
+}
+
+.tracker-module .tracker-insight-summary span {
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.tracker-module .tracker-insight-summary strong {
+  color: var(--tracker-forest);
+  font: 750 clamp(1.55rem, 3vw, 2.2rem)/1 "Saira Semi Condensed", sans-serif;
+}
+
+.tracker-module .tracker-insight-summary small {
+  grid-column: 1 / -1;
+  color: var(--tracker-muted);
+  font-size: 0.76rem;
+}
+
+.tracker-module .tracker-insight-stack {
+  display: grid;
+  border-top: 1px solid var(--tracker-line);
+}
+
+.tracker-module .tracker-insight-block {
+  --insight-field: var(--tracker-paper);
+  display: grid;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--tracker-line);
+  padding: clamp(1.4rem, 4vw, 2.6rem);
+  background: var(--insight-field);
+}
+
+.tracker-module .tracker-insight-block--stage {
+  --insight-field: var(--tracker-paper);
+}
+
+.tracker-module .tracker-insight-block--outcomes {
+  --insight-field: var(--tracker-paper);
+}
+
+.tracker-module .tracker-insight-block--pathway {
+  --insight-field: var(--tracker-paper);
+}
+
+.tracker-module .tracker-insight-block__heading {
+  display: grid;
+  gap: 1rem;
+}
+
+.tracker-module .tracker-insight-block__heading h2 {
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+}
+
+.tracker-module .tracker-insight-block__heading p {
+  margin: 0;
+}
+
+.tracker-module .tracker-insight-block__heading > p {
+  align-self: end;
+  color: var(--tracker-forest);
+  font-weight: 650;
+}
+
+.tracker-module .tracker-pathway-reasons {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.tracker-module .tracker-pathway-reasons > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--tracker-line);
+  padding-block: 0.65rem;
+}
+
+.tracker-module .tracker-pathway-reasons dt,
+.tracker-module .tracker-pathway-reasons dd {
+  font: 700 0.82rem/1.4 Archivo, sans-serif;
+}
+
+.tracker-module .tracker-pathway-reasons dd {
+  margin: 0;
+  color: #53635b;
+}
+
+.tracker-module .tracker-data-alternative {
+  border-top: 1px solid var(--tracker-line);
+  padding-top: 0.8rem;
+}
+
+.tracker-module .tracker-data-alternative summary {
+  color: var(--tracker-forest);
+  font: 750 0.82rem/1.4 Archivo, sans-serif;
+  cursor: pointer;
+}
+
+.tracker-module .tracker-table-scroll {
+  overflow-x: auto;
+  margin-top: 0.8rem;
+}
+
+.tracker-module .tracker-chart-data {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+}
+
+.tracker-module .tracker-chart-data th,
+.tracker-module .tracker-chart-data td {
+  border-bottom: 1px solid var(--tracker-line);
+  padding: 0.65rem;
+  font: 650 0.78rem/1.4 Archivo, sans-serif;
+  text-align: left;
+}
+
+.tracker-module .tracker-chart-data th {
+  color: var(--tracker-forest);
+  font-weight: 800;
+}
+
 .tracker-module .tracker-methodology-note {
   margin: 1.75rem 0 0;
   color: #6c7772;
   font-size: 0.82rem;
+}
+
+.tracker-module .tracker-insight-method {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.tracker-module .tracker-insight-method p {
+  margin: 0.75rem 0 0;
+  color: var(--tracker-muted);
+  font-size: 0.88rem;
+}
+
+.tracker-module .tracker-section:not(.tracker-section--forest) .tracker-button--orange,
+.tracker-module .button--orange {
+  border-color: var(--tracker-forest);
+  background: var(--tracker-forest);
+  color: var(--tracker-paper);
+}
+
+.tracker-module .tracker-section:not(.tracker-section--forest) .tracker-button--orange:hover,
+.tracker-module .button--orange:hover {
+  border-color: var(--tracker-deep);
+  background: var(--tracker-deep);
+  color: var(--tracker-paper);
 }
 
 .tracker-module .tracker-evidence-grid {
@@ -833,6 +1075,23 @@
     column-gap: 2.5rem;
   }
 
+  .tracker-module .tracker-insight-summary__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tracker-module .tracker-insight-summary__grid > div {
+    padding: 1.45rem;
+  }
+
+  .tracker-module .tracker-insight-summary__grid > div + div {
+    border-top: 0;
+    border-left: 1px solid rgba(11, 40, 30, 0.25);
+  }
+
+  .tracker-module .tracker-insight-block__heading {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.6fr);
+  }
+
 }
 
 @media (max-width: 52rem) {
@@ -965,6 +1224,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+
 }
 
 @media (max-width: 28rem) {
@@ -999,6 +1259,393 @@
     right: 50%;
     bottom: -0.7rem;
     transform: rotate(90deg);
+  }
+
+}
+
+/* --- Public data-infographic: regulatory signal story ---------------------
+   Aggregate findings form a visual narrative: a marker-based overview followed
+   by chart forms chosen for each question. Impact comes from comparative scale,
+   process structure and meaningful marks, not interchangeable dashboard cards. */
+.tracker-module.tracker-module--data-infographic {
+  background-color: var(--tracker-paper);
+}
+
+.tracker-module--data-infographic .tracker-shell {
+  width: min(100% - 2rem, 82rem);
+}
+
+.tracker-module--data-infographic .tracker-page-header--compact {
+  border-bottom: 1px solid var(--tracker-orange);
+  padding-block: clamp(1.35rem, 2.3vw, 2rem);
+}
+
+.tracker-module--data-infographic .tracker-page-header .tracker-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  column-gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.tracker-module--data-infographic .tracker-page-header .tracker-label,
+.tracker-module--data-infographic .tracker-page-header h1,
+.tracker-module--data-infographic .tracker-page-header .tracker-lede {
+  grid-column: 1;
+}
+
+.tracker-module--data-infographic .tracker-page-header h1 {
+  font-size: clamp(2.5rem, 4vw, 3.65rem);
+}
+
+.tracker-module--data-infographic .tracker-page-header .tracker-lede {
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+}
+
+.tracker-module--data-infographic .tracker-example-tag {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: end;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--tracker-orange-light);
+  padding: 0.75rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary {
+  border: 0;
+  padding-block: 0;
+  background: var(--tracker-paper);
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__grid {
+  grid-template-columns: minmax(20rem, 0.82fr) minmax(0, 1.18fr);
+  border-top: 1px solid var(--tracker-forest);
+  border-bottom: 1px solid var(--tracker-forest);
+  background: var(--tracker-paper);
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__headline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  align-items: center;
+  min-height: 6.8rem;
+  border-right: 1px solid var(--tracker-line);
+  padding: clamp(0.95rem, 1.8vw, 1.3rem) clamp(1.5rem, 3vw, 2.5rem) clamp(0.95rem, 1.8vw, 1.3rem) 0;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__headline p {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__headline p > strong {
+  color: var(--tracker-forest);
+  font: 800 clamp(2.35rem, 4vw, 3.25rem)/0.9 "Saira Semi Condensed", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__duration {
+  display: inline-flex;
+  gap: 0.38rem;
+  align-items: baseline;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__duration b {
+  font: inherit;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__headline em {
+  color: var(--tracker-orange-dark);
+  font: 750 0.8rem/1 Archivo, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__queue {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(10rem, auto);
+  gap: 0.85rem clamp(1.25rem, 2.5vw, 2rem);
+  align-content: center;
+  padding: clamp(0.95rem, 1.8vw, 1.3rem) 0 clamp(0.95rem, 1.8vw, 1.3rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.tracker-module--data-infographic .tracker-summary-queue {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: clamp(0.18rem, 0.4vw, 0.36rem);
+  align-self: center;
+  min-height: 0;
+}
+
+.tracker-module--data-infographic .tracker-summary-queue i {
+  display: block;
+  height: 1rem;
+  background: var(--tracker-forest);
+}
+
+.tracker-module--data-infographic .tracker-summary-queue i[data-state="overdue"] {
+  height: 1rem;
+  background: var(--tracker-orange-dark);
+}
+
+.tracker-module--data-infographic .tracker-summary-queue i[data-state="unbenchmarked"] {
+  border: 1px solid var(--tracker-forest);
+  background: transparent;
+}
+
+.tracker-module--data-infographic .tracker-summary-key {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.15rem;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__overdue {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+}
+
+.tracker-module--data-infographic .tracker-insight-summary__overdue strong {
+  color: var(--tracker-forest);
+  font: 800 clamp(1.7rem, 2.8vw, 2.3rem)/0.95 "Saira Semi Condensed", sans-serif;
+}
+
+.tracker-module--data-infographic .tracker-summary-key span {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  color: var(--tracker-muted);
+  font-size: 0.68rem;
+}
+
+.tracker-module--data-infographic .tracker-summary-key span::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--tracker-forest);
+}
+
+.tracker-module--data-infographic .tracker-summary-key [data-key="overdue"]::before {
+  background: var(--tracker-orange-dark);
+}
+
+.tracker-module--data-infographic .tracker-summary-key [data-key="unbenchmarked"]::before {
+  border: 1px solid var(--tracker-forest);
+  background: transparent;
+}
+
+.tracker-module--data-infographic .tracker-infographic-body {
+  padding-block: clamp(2.25rem, 5vw, 4.5rem);
+}
+
+.tracker-module--data-infographic .tracker-insight-stack {
+  gap: 0;
+  border-top: 1px solid var(--tracker-forest);
+}
+
+.tracker-module--data-infographic .tracker-insight-block {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: clamp(1.2rem, 2.4vw, 2rem);
+  border: 0;
+  border-bottom: 1px solid var(--tracker-forest);
+  padding: clamp(2.2rem, 4.5vw, 4rem) 0;
+  background: transparent;
+}
+
+.tracker-module--data-infographic .tracker-insight-block:nth-child(1) { --infographic-index: "01"; }
+.tracker-module--data-infographic .tracker-insight-block:nth-child(2) { --infographic-index: "02"; }
+.tracker-module--data-infographic .tracker-insight-block:nth-child(3) { --infographic-index: "03"; }
+.tracker-module--data-infographic .tracker-insight-block:nth-child(4) { --infographic-index: "04"; }
+.tracker-module--data-infographic .tracker-insight-block:nth-child(5) { --infographic-index: "05"; }
+
+.tracker-module--data-infographic .tracker-insight-block::before {
+  content: var(--infographic-index);
+  grid-column: 1;
+  grid-row: 1 / span 4;
+  border-top: 0.18rem solid var(--tracker-orange);
+  padding-top: 0.7rem;
+  color: var(--tracker-orange-dark);
+  font: 800 0.78rem/1 Archivo, sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.tracker-module--data-infographic .tracker-insight-block__heading {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+}
+
+.tracker-module--data-infographic .tracker-insight-block__heading h2 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 0.98;
+}
+
+.tracker-module--data-infographic .tracker-insight-block__heading > p {
+  border-top: 1px solid var(--tracker-orange);
+  padding-top: 0.8rem;
+  font-size: 0.93rem;
+}
+
+.tracker-module--data-infographic .tracker-evidence-figure {
+  grid-column: 2;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--tracker-line);
+  padding: clamp(1.2rem, 2.2vw, 1.8rem) 0 0;
+  background: transparent;
+}
+
+.tracker-module--data-infographic .tracker-evidence-figure figcaption {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--tracker-muted);
+}
+
+.tracker-module--data-infographic .tracker-pathway-reasons {
+  margin-inline: 0;
+  margin-bottom: 0;
+}
+
+.tracker-module--data-infographic .tracker-echart {
+  width: 100%;
+  min-height: 22rem;
+  outline: 0;
+  touch-action: manipulation;
+}
+
+.tracker-module--data-infographic .tracker-echart--pending,
+.tracker-module--data-infographic .tracker-echart--outcomes {
+  min-height: 28rem;
+}
+
+.tracker-module--data-infographic .tracker-echart--stage {
+  min-height: 22rem;
+}
+
+.tracker-module--data-infographic .tracker-echart--benchmark {
+  min-height: 24rem;
+}
+
+.tracker-module--data-infographic .tracker-echart--pathway {
+  min-height: 18rem;
+}
+
+.tracker-module--data-infographic .tracker-echart:focus-visible {
+  outline: 2px solid var(--tracker-orange-dark);
+  outline-offset: 0.35rem;
+}
+
+.tracker-module--data-infographic .tracker-echart.is-unavailable {
+  display: grid;
+  place-items: center;
+  min-height: 10rem;
+  border: 1px solid var(--tracker-line);
+  padding: 1rem;
+  color: var(--tracker-muted);
+  font-size: 0.86rem;
+}
+
+.tracker-module .tracker-chart-tooltip {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.tracker-module .tracker-chart-tooltip strong,
+.tracker-module .tracker-chart-tooltip span {
+  display: block;
+}
+
+.tracker-module--data-infographic .tracker-data-alternative {
+  grid-column: 2;
+}
+
+.tracker-module--signal-infographic .tracker-infographic-body {
+  padding-top: 0;
+}
+
+.tracker-module--signal-infographic .tracker-insight-stack {
+  border-top: 0;
+}
+
+.tracker-module--signal-infographic .tracker-insight-block--pending {
+  position: relative;
+  border-bottom: 0;
+  background: var(--tracker-sage-wash);
+  box-shadow: 0 0 0 100vmax var(--tracker-sage-wash);
+  clip-path: inset(0 -100vmax);
+}
+
+.tracker-module--signal-infographic .tracker-insight-block--pending .tracker-evidence-figure {
+  border-color: rgba(16, 55, 41, 0.35);
+}
+
+@media (max-width: 56rem) {
+  .tracker-module--data-infographic .tracker-page-header .tracker-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-module--data-infographic .tracker-example-tag {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    margin-top: 1rem;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-block__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__headline {
+    border-right: 0;
+    border-bottom: 1px solid var(--tracker-line);
+    padding-inline: 0;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__queue {
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 43.99rem) {
+  .tracker-module--data-infographic .tracker-insight-summary__headline {
+    min-height: 0;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__headline p > strong {
+    font-size: clamp(2.5rem, 14vw, 3.6rem);
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__queue {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-summary__overdue,
+  .tracker-module--data-infographic .tracker-summary-key {
+    grid-column: 1;
+  }
+
+  .tracker-module--data-infographic .tracker-insight-block {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    column-gap: 1rem;
+  }
+
+  .tracker-module--data-infographic .tracker-echart--pending,
+  .tracker-module--data-infographic .tracker-echart--outcomes {
+    min-height: 31rem;
   }
 }
 

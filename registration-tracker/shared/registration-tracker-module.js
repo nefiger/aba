@@ -6,6 +6,171 @@
   const referral = new URLSearchParams(window.location.search).get("ref");
   if (referralField && referral) referralField.value = referral;
 
+  const referenceData = window.ABA_TRACKER_REFERENCE;
+  const legalPathway = document.getElementById("legal-pathway");
+  const registrationType = document.getElementById("registration-type");
+  const registrationTypeWrap = document.querySelector("[data-agricultural-remedy-type]");
+  const registrationSourceContext = document.querySelector("[data-registration-source-context]");
+  const pathwayGuidance = document.querySelector("[data-pathway-guidance]");
+  const pathwayFit = document.getElementById("pathway-fit");
+  const pathwayFitDetails = document.querySelector("[data-pathway-fit-details]");
+  const bestFitPathway = document.getElementById("believed-best-fit-pathway");
+  const pathwayFitReason = document.getElementById("pathway-fit-reason");
+
+  const contractFields = {
+    submitted_legal_pathway: document.getElementById("submitted-legal-pathway"),
+    registration_type_key: document.getElementById("registration-type-key"),
+    registration_type_label: document.getElementById("registration-type-label"),
+    service_request_code: document.getElementById("service-request-code"),
+    service_request_row: document.getElementById("service-request-row"),
+    source_document_version: document.getElementById("source-document-version"),
+    official_timeframe_days: document.getElementById("official-timeframe-days"),
+    official_timeframe_source: document.getElementById("official-timeframe-source"),
+  };
+
+  function setContractField(name, value = "") {
+    if (contractFields[name]) contractFields[name].value = value == null ? "" : String(value);
+  }
+
+  function clearRegistrationContract() {
+    [
+      "registration_type_key",
+      "registration_type_label",
+      "service_request_code",
+      "service_request_row",
+      "source_document_version",
+      "official_timeframe_days",
+      "official_timeframe_source",
+    ].forEach((name) => setContractField(name));
+  }
+
+  function renderContext(container, heading, text, link) {
+    if (!container) return;
+    container.replaceChildren();
+    const strong = document.createElement("strong");
+    strong.textContent = heading;
+    const span = document.createElement("span");
+    span.textContent = text;
+    container.append(strong, span);
+    if (link) {
+      const anchor = document.createElement("a");
+      anchor.href = link.href;
+      anchor.textContent = link.label;
+      container.append(anchor);
+    }
+    container.hidden = false;
+  }
+
+  function updateRegistrationTypeContract() {
+    clearRegistrationContract();
+    if (!registrationType || !referenceData) return;
+    registrationType.setCustomValidity("");
+    if (registrationSourceContext) registrationSourceContext.hidden = true;
+
+    if (registrationType.value === "reinstatement") {
+      registrationType.setCustomValidity("This tracker accepts new registrations only. It cannot accept a reinstatement.");
+      renderContext(
+        registrationSourceContext,
+        "Do not use this form for a reinstatement.",
+        "The tracker accepts new applications but does not currently collect reinstatements of lapsed registrations.",
+        { href: "../resources/index.html#tracker-scope", label: "See what the tracker accepts" },
+      );
+      return;
+    }
+
+    if (registrationType.value === "not_sure") {
+      setContractField("registration_type_key", "not_sure");
+      setContractField("registration_type_label", "Not sure");
+      renderContext(
+        registrationSourceContext,
+        "Not sure is okay.",
+        "ABA may contact you to confirm the registration type.",
+      );
+      return;
+    }
+
+    const selected = referenceData.registration_types?.[registrationType.value];
+    if (!selected) return;
+    Object.entries(selected).forEach(([name, value]) => setContractField(name, value));
+    setContractField("source_document_version", referenceData.source_document_version);
+    setContractField("official_timeframe_source", referenceData.official_timeframe_source);
+    renderContext(
+      registrationSourceContext,
+      selected.registration_type_label,
+      `Service code ${selected.service_request_code} · published timeframe ${selected.official_timeframe_days} calendar days.`,
+    );
+  }
+
+  function updateLegalPathway() {
+    if (!legalPathway || !registrationType || !registrationTypeWrap) return;
+    const isAgriculturalRemedy = legalPathway.value === "agricultural_remedy";
+    setContractField("submitted_legal_pathway", legalPathway.value);
+    registrationTypeWrap.hidden = !isAgriculturalRemedy;
+    registrationType.required = isAgriculturalRemedy;
+    if (!isAgriculturalRemedy) {
+      registrationType.value = "";
+      registrationType.setCustomValidity("");
+      clearRegistrationContract();
+      if (registrationSourceContext) registrationSourceContext.hidden = true;
+    }
+    if (pathwayGuidance) {
+      pathwayGuidance.hidden = !legalPathway.value || isAgriculturalRemedy;
+      if (!pathwayGuidance.hidden) {
+        const heading = legalPathway.value === "fertilizer"
+          ? "Fertilizer pathway selected."
+          : "Not sure is okay.";
+        const copy = legalPathway.value === "fertilizer"
+          ? "You can continue. ABA will include this application in general registration insights, but will not label it overdue until the applicable Fertilizer timeframe is confirmed."
+          : "ABA may contact you to confirm the pathway.";
+        renderContext(pathwayGuidance, heading, copy);
+      }
+    }
+    if (isAgriculturalRemedy) updateRegistrationTypeContract();
+  }
+
+  legalPathway?.addEventListener("change", updateLegalPathway);
+  registrationType?.addEventListener("change", updateRegistrationTypeContract);
+
+  function updatePathwayFitDetails() {
+    if (!pathwayFitDetails || !bestFitPathway || !pathwayFitReason) return;
+    const show = pathwayFit?.value === "does_not_fit";
+    pathwayFitDetails.hidden = !show;
+    bestFitPathway.required = show;
+    pathwayFitReason.required = show;
+    if (!show) {
+      bestFitPathway.value = "";
+      pathwayFitReason.value = "";
+      const note = document.getElementById("pathway-fit-note");
+      if (note) note.value = "";
+    }
+  }
+
+  pathwayFit?.addEventListener("change", updatePathwayFitDetails);
+
+  const currentStatus = document.getElementById("current-status");
+  const officialStage = document.getElementById("official-stage");
+  const statusStageMap = {
+    "Submitted to the registrar": "Received",
+    "Received or acknowledged": "Verification",
+    "In verification": "Verification",
+    "In scientific screening": "Scientific screening",
+    "In evaluation": "Evaluation",
+    "Additional information requested": "Referred back — stage confirmed during ABA review",
+    "Response submitted": "Scientific screening or evaluation — confirmed during ABA review",
+    "Awaiting a decision": "Decision",
+    "Approved or registered": "Decision — registered",
+    Rejected: "Decision — rejected",
+    Withdrawn: "Decision — withdrawn",
+    "Not sure": "Pending ABA review",
+  };
+
+  function updateOfficialStage() {
+    if (!currentStatus || !officialStage) return;
+    officialStage.value = statusStageMap[currentStatus.value] || "";
+  }
+
+  currentStatus?.addEventListener("change", updateOfficialStage);
+
   const referenceIssued = document.getElementById("reference-issued");
   referenceIssued?.addEventListener("change", (event) => {
     const wrap = document.querySelector("[data-reference-reason]");
@@ -137,8 +302,16 @@
     }
     const success = document.querySelector("[data-success='tracker-intake']");
     if (success) success.dataset.visible = "false";
+    updateLegalPathway();
+    updateRegistrationTypeContract();
+    updatePathwayFitDetails();
+    updateOfficialStage();
     showStage(1);
     intakeForm.hidden = false;
     intakeForm.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   });
+
+  updateLegalPathway();
+  updatePathwayFitDetails();
+  updateOfficialStage();
 })();

@@ -2,6 +2,7 @@ import { readFile, access } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { runInNewContext } from "node:vm";
 
 const qaDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(qaDirectory, "..", "..");
@@ -23,6 +24,8 @@ const sources = Object.fromEntries(
 
 const moduleJsPath = "registration-tracker/shared/registration-tracker-module.js";
 const moduleJs = await readFile(path.join(repoRoot, moduleJsPath), "utf8");
+const referenceJsPath = "registration-tracker/shared/registration-tracker-reference-data.js";
+const referenceJs = await readFile(path.join(repoRoot, referenceJsPath), "utf8");
 
 const failures = [];
 const checks = [];
@@ -43,6 +46,11 @@ for (const sourceKey of Object.keys(sources)) {
   forbidMatch(sourceKey, /href=["'][^"']*(?:docs\/registration-tracker|admin-operator-review|company-dashboard|registrar-list|docs\/site\/(?:workspace|operator-workspace))/i, "archived or future tracker link");
 }
 
+requireMatch("landing", /<aba-footer><\/aba-footer>/i, "canonical shared footer component");
+for (const sourceKey of ["intake", "insights", "resources"]) {
+  requireMatch(sourceKey, /<aba-footer base="\.\.\/\.\.\/soft-launch\/prototype\/"><\/aba-footer>/i, "canonical shared footer component with nested-route base");
+}
+
 const forbiddenActivePatterns = [
   ["browser persistence API", /\b(?:localStorage|sessionStorage)\b/i],
   ["fake L-number", /\bL[- ]?\d{3,}\b/i],
@@ -51,7 +59,6 @@ const forbiddenActivePatterns = [
   ["named-use control", /<(?:input|select|button)[^>]*(?:named[-_ ]?use|consentRegistrar)/i],
   ["general-updates control", /<(?:input|select|button)[^>]*(?:general[-_ ]?updates|newsletter)/i],
   ["saved-draft claim", /\b(?:draft saved|email return link|save and resume|save draft)\b/i],
-  ["chart markup", /<(?:svg|canvas)[^>]*(?:chart|graph)|class=["'][^"']*\bchart\b/i],
   ["duplicate module header/footer", /tracker-module-header|tracker-module-footer/i],
 ];
 
@@ -72,6 +79,16 @@ for (const [description, pattern] of forbiddenActivePatterns) {
 // gating between them. ---
 forbidMatch("landing", /data-qualification-form|class="tracker-question"|tracker-qualifier/i, "standalone gated landing-page qualifier");
 forbidMatch("landing", /does not use sample data|imitate a live evidence base/i, "landing-page claim that Insights uses no sample data (Insights is seeded with example data)");
+{
+  const hero = sources.landing.match(/<section class="tracker-page-header">[\s\S]*?<\/section>/i)?.[0] || "";
+  const heroPrimaryActions = (hero.match(/tracker-button--orange/g) || []).length;
+  if (heroPrimaryActions !== 1) failures.push(`landing: expected one dominant hero CTA, found ${heroPrimaryActions}`);
+  else checks.push("landing: one dominant hero CTA");
+  if (/href=["'][^"']*resources/i.test(hero)) failures.push("landing: found registration-resources action in the hero");
+  else checks.push("landing: no registration-resources action in the hero");
+  if (/>Is this for you\?</i.test(hero)) failures.push("landing: found competing 'Is this for you?' hero action");
+  else checks.push("landing: no competing 'Is this for you?' hero action");
+}
 forbidMatch("intake", /data-next-stage|data-previous-stage|data-show-review\b/i, "sequential Continue/Back wizard gating");
 forbidMatch("intake", /type="radio"/i, "Yes/No radio-pair readiness questions");
 forbidMatch("intake", /\bqualifier\b|\bqualification\b/i, "internal 'qualifier/qualification' language in user-facing copy");
@@ -145,11 +162,11 @@ requireMatch("intake", /id="responsible-person-status"/, "responsible-person-sta
 
 forbidMatch("intake", /id="(?:supporting-information|payment-status)"/, "superseded readiness field");
 requireMatch("intake", /id="insight-acknowledgement"[^>]*type="checkbox"(?![^>]*checked)/, "initially unchecked insight-use acknowledgement");
-requireMatch("intake", /Approved for insights[\s\S]*Needs clarification[\s\S]*Excluded/, "three ABA review outcomes");
 requireMatch("intake", /within two weeks/i, "two-week review target");
+requireMatch("intake", /contact you if any detail needs clarification[\s\S]*non-identifying information may contribute/i, "user-focused review outcome and privacy expectation");
 
 const registrationTypes = [
-  "New molecule or active ingredient",
+  "New molecule / new active ingredient — 14AR2",
   "New formulation",
   "Generic active ingredient",
   "Parallel registration",
@@ -157,14 +174,50 @@ const registrationTypes = [
 ];
 for (const registrationType of registrationTypes) requireMatch("intake", new RegExp(registrationType), `new-registration type “${registrationType}”`);
 
-// --- Insights behaves like the real, populated page -- not a page that narrates its own
-// empty/example state in paragraphs. Exactly one compact tag marks the data as fictional;
-// everything else (headings, captions, methodology) reads like the mature page will. ---
-requireMatch("insights", /Where are new registrations waiting[\s\S]*How does time compare[\s\S]*Which obstacles appear[\s\S]*What can ABA responsibly say/i, "four evidence-panel questions");
+// --- Three classification axes and conditional, source-backed type contract. ---
+requireMatch("intake", /id="aba-product-category"\s+name="aba_product_category"/, "separate ABA product-category field");
+requireMatch("intake", /id="registrar-function"\s+name="registrar_function"/, "separate registrar-function field");
+requireMatch("intake", /Other \(PGR, Swimming Pool, Rodenticide, Adjuvant\)/, "verbatim Service Request Form Table 2 'Other' label");
+requireMatch("intake", /id="legal-pathway"\s+name="legal_pathway"/, "separate legal-pathway field");
+for (const fieldName of [
+  "registration_type_key",
+  "registration_type_label",
+  "service_request_code",
+  "service_request_row",
+  "submitted_legal_pathway",
+  "source_document_version",
+  "official_timeframe_days",
+  "official_timeframe_source",
+]) requireMatch("intake", new RegExp(`name="${fieldName}"`), `data-contract field ${fieldName}`);
+requireMatch("intake", /value="not_sure">Not sure<\/option>/, "registration-type Not sure path");
+requireMatch("intake", /value="reinstatement">Reinstatement — 14AR1/, "Reinstatement visible but marked outside V1");
+if (!/registrationType\.required\s*=\s*isAgriculturalRemedy/.test(moduleJs)) failures.push(`${moduleJsPath}: registration type is not conditional on Agricultural remedy`);
+else checks.push(`${moduleJsPath}: registration type conditional on Agricultural remedy`);
+if (!/include this application in general registration insights[\s\S]*will not label it overdue until the applicable Fertilizer timeframe is confirmed/i.test(moduleJs) || !/clearRegistrationContract\(\)/.test(moduleJs)) failures.push(`${moduleJsPath}: missing explicit user-facing Fertilizer no-benchmark consequence`);
+else checks.push(`${moduleJsPath}: Fertilizer retains no agricultural-remedy code or benchmark`);
+if (!/cannot accept a reinstatement[\s\S]*does not currently collect reinstatements of lapsed registrations/i.test(moduleJs)) failures.push(`${moduleJsPath}: missing direct reinstatement rejection and reason`);
+else checks.push(`${moduleJsPath}: reinstatement state gives a direct user consequence`);
+
+// --- Neutral, private-by-default pathway-fit capture. ---
+for (const fieldName of ["pathway_fit", "believed_best_fit_pathway", "pathway_fit_reason", "pathway_fit_note_private"]) {
+  requireMatch("intake", new RegExp(`name="${fieldName}"`), `pathway-fit field ${fieldName}`);
+}
+requireMatch("intake", /ABA can read this note, but it will not appear in public insights/i, "pathway-fit private-note boundary");
+
+// --- Insights answers the five stakeholder questions with a conspicuous illustrative-data label. ---
+requireMatch("insights", /Which registration types wait longest[\s\S]*Where are applications blocked[\s\S]*Which types see different outcomes[\s\S]*Which applications are overdue[\s\S]*How often is the pathway a poor fit/i, "five direct public-insight questions");
 forbidMatch("insights", /<h3>/i, "H1-to-H3 heading-level skip (evidence-panel titles must be H2)");
-requireMatch("insights", /Received[\s\S]*Verification[\s\S]*Scientific screening[\s\S]*Evaluation[\s\S]*Decision/, "source-checked post-submission registration process");
-requireMatch("insights", /class="tracker-example-tag"[^>]*>Example data/i, "exactly one compact example-data tag, not a narrated disclaimer");
-forbidMatch("insights", /Awaiting sufficient|Not yet assessable|Future view:|no real findings|not enough real registrations|do not describe any real|fictional example dataset|Illustrative example|labelled, empty structures/i, "narrated empty-state or illustrative-example prose (the compact tag already covers this)");
+requireMatch("insights", /class="tracker-example-tag"[^>]*>Illustrative data — not sector findings\./i, "explicit illustrative-data label");
+requireMatch("insights", /class="[^"]*tracker-module--data-infographic[^"]*"/i, "dedicated public data-infographic page type");
+requireMatch("insights", /class="[^"]*tracker-module--signal-infographic[^"]*"/i, "regulatory signal-infographic composition");
+requireMatch("insights", /data-summary-queue[\s\S]*Median pending time by registration type\. Hover, tap, or use the arrow keys for exact values\./i, "compact synopsis and self-explaining interactive median-wait chart");
+requireMatch("insights", /data-summary="median-pending"[\s\S]*Median pending time[\s\S]*data-summary="pending-count"[\s\S]*applications pending/i, "median as first pending-time summary");
+requireMatch("insights", /Fertilizer applications contribute to the overall and process-stage figures[\s\S]*left out of the overdue figure[\s\S]*has not confirmed the applicable published timeframe/i, "visible user-focused Fertilizer benchmark consequence");
+for (const hook of ["data-pending-table", "data-stage-table", "data-outcome-table", "data-benchmark-table", "data-pathway-table"]) {
+  requireMatch("insights", new RegExp(hook), `accessible chart data alternative ${hook}`);
+}
+requireMatch("insights", /registration-tracker-reference-data\.js/, "insights page loads source-backed reference data");
+requireMatch("insights", /vendor\/echarts-6\.1\.0\.min\.js/, "insights page loads the pinned local ECharts library");
 requireMatch("insights", /registration-tracker-insights-seed\.js/, "insights page loads the seed-data script");
 requireMatch("insights", /registration-tracker-insights\.js/, "insights page loads the seed-data render script");
 {
@@ -174,41 +227,66 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   else checks.push("insights-seed.js: defines ABA_TRACKER_INSIGHTS_SEED dataset");
   if (!/ABA_TRACKER_INSIGHTS_SEED/.test(renderJs)) failures.push("insights.js: does not read the seed dataset -- evidence-preview panels would not be driven by it");
   else checks.push("insights.js: evidence-preview panels driven by the seed dataset (not hand-typed figures)");
+  if (!/window\.echarts\.init/.test(renderJs) || !/renderer:\s*"svg"/.test(renderJs)) failures.push("insights.js: charts must use the pinned ECharts SVG renderer rather than hand-built plot markup");
+  else checks.push("insights.js: interactive charts use the pinned ECharts SVG renderer");
+  if (!/aria:\s*\{\s*enabled:\s*true,\s*show:\s*true/.test(renderJs) || !/ResizeObserver/.test(renderJs) || !/dispatchAction\(\{\s*type:\s*"showTip"/.test(renderJs)) failures.push("insights.js: charts need ARIA descriptions, responsive resize, and keyboard tooltip navigation");
+  else checks.push("insights.js: charts include ARIA descriptions, responsive resize, and keyboard tooltip navigation");
+  if (!/03 — grouped outcomes/.test(renderJs) || /stack:\s*["']/.test(renderJs)) failures.push("insights.js: outcome comparison must use grouped bars, not stacked bars");
+  else checks.push("insights.js: outcome comparison uses grouped bars with a common baseline");
 
-  // --- Every aria-hidden chart element (stage bars, coverage dots) must have a visible
-  // sibling value the render script populates -- otherwise the data is sighted-only. ---
-  for (const attr of ["data-stage-value", "data-coverage-value"]) {
-    if (!new RegExp(attr).test(sources.insights)) failures.push(`insights: missing ${attr} elements -- aria-hidden chart data has no accessible text equivalent`);
-    else checks.push(`insights: ${attr} elements present for accessible chart values`);
-    if (!new RegExp(`querySelector\\(\`\\[${attr}`).test(renderJs)) failures.push(`insights.js: does not populate ${attr} elements`);
-    else checks.push(`insights.js: populates ${attr} elements`);
+  const sandbox = { window: {} };
+  runInNewContext(referenceJs, sandbox);
+  runInNewContext(seedJs, sandbox);
+  const previewRecords = sandbox.window.ABA_TRACKER_INSIGHTS_SEED;
+  const sourceTypes = sandbox.window.ABA_TRACKER_REFERENCE.registration_types;
+  if (sandbox.window.ABA_TRACKER_REFERENCE.privacy_threshold_preview !== 3) failures.push("registration-tracker-reference-data.js: preview privacy threshold must remain 3 until the policy decision changes");
+  else checks.push("registration-tracker-reference-data.js: preview privacy threshold remains 3");
+  const fertilizerRecords = previewRecords.filter((record) => record.legal_pathway === "Fertilizer");
+  if (!fertilizerRecords.length) failures.push("insights-seed.js: missing Fertilizer records needed to verify the unsupported-path state");
+  else if (fertilizerRecords.some((record) => record.service_request_code !== null || record.official_timeframe_days !== null)) failures.push("insights-seed.js: Fertilizer record received an agricultural-remedy code or benchmark");
+  else checks.push("insights-seed.js: Fertilizer records have null service code and official timeframe");
+
+  const remedyRecords = previewRecords.filter((record) => record.legal_pathway === "Agricultural remedy");
+  if (remedyRecords.some((record) => {
+    const source = sourceTypes[record.registration_type_key];
+    return !source
+      || record.service_request_code !== source.service_request_code
+      || record.service_request_row !== source.service_request_row
+      || record.official_timeframe_days !== source.official_timeframe_days;
+  })) {
+    failures.push("insights-seed.js: an Agricultural remedy record diverges from the shared source-backed lookup");
+  } else {
+    checks.push("insights-seed.js: all Agricultural remedy codes, rows, and clocks derive from the shared lookup");
   }
 }
 
+if (!/items\.length < threshold/.test(await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8"))) failures.push("insights.js: missing thresholded small-group hiding");
+else checks.push("insights.js: small groups hidden by the internal privacy threshold");
+
 forbidMatch("insights", /this period/i, "undefined 'this period' language (use a stated, defined reporting basis instead)");
 
-// --- A single short methodology line replaces the old full "Publication pipeline" /
-// "What is collected and why" sections, which duplicated privacy.html and dominated the page ---
-requireMatch("insights", /class="tracker-methodology-note"/i, "single compact methodology line (not a full duplicate-of-privacy section)");
-requireMatch("insights", /<dt>Reporting basis<\/dt>/i, "stated reporting basis (not left implicit)");
-requireMatch("insights", /<dt>Last revised<\/dt>/i, "stated last-revised date");
+requireMatch("insights", /<summary>About these figures<\/summary>/i, "quiet public provenance disclosure");
+forbidMatch("insights", /Design preview|Primary summary|reviewed and included|production threshold|regulator constants/i, "internal methodology narration");
 forbidMatch("insights", /Publication pipeline|What is collected and why|Every published finding must pass/i, "the old full-section methodology explanation, now duplicated on privacy.html");
-
-// --- No paragraph-per-panel narration restating what the heading/figure already show ---
-{
-  const panelParagraphs = (sources.insights.match(/tracker-evidence-panel[\s\S]{0,20}?<\/div>\s*<p>/g) || []).length;
-  if (panelParagraphs > 0) failures.push(`insights: found ${panelParagraphs} explanatory paragraph(s) directly under an evidence-panel heading -- panels should carry only a heading, figcaption, and figure`);
-  else checks.push("insights: evidence panels carry no restating explanatory paragraphs");
-}
 
 for (const sourceKey of ["landing", "intake", "insights", "resources", "privacy"]) {
   forbidMatch(sourceKey, />[^<]*\b(?:mockup|prototype)\b[^<]*</i, "public mockup or prototype framing");
+  forbidMatch(sourceKey, />[^<]*(?:Design preview|\bV1\b|source pack|reviewed and included|production threshold|regulator constants|Approved for insights|Mapped official stage)[^<]*</i, "internal implementation, review, or release-language exposed as public copy");
+}
+
+// Helper copy is useful only when it helps someone complete the form, understand a
+// privacy consequence, or recover from uncertainty. A rising count is an early warning
+// that specification notes are leaking back into the interface.
+{
+  const intakeHelperCount = (sources.intake.match(/<small\b/g) || []).length;
+  if (intakeHelperCount > 8) failures.push(`intake: found ${intakeHelperCount} helper notes; expected no more than 8 motivated completion/privacy aids`);
+  else checks.push(`intake: helper-copy budget respected (${intakeHelperCount}/8)`);
 }
 // Resources is legitimately a pre-submission preparation page, so ordinary uses of
 // "preparing" are expected there -- this check only needs to guard the pages where the old
 // deprecated `Preparing submission` tracked-status value could actually resurface.
 for (const sourceKey of ["landing", "intake", "insights", "privacy"]) {
-  forbidMatch(sourceKey, /\bPreparing\b|pre-submission/i, "pre-submission active-flow language");
+  forbidMatch(sourceKey, /<option[^>]*>Preparing submission<\/option>/i, "deprecated Preparing submission tracked status");
 }
 // --- Resources is a real, complete page for launch, not a "still being built" placeholder ---
 forbidMatch("resources", /still being assembled|being built|does not yet cover every step/i, "Resources placeholder framing (page must be genuinely complete for launch)");
@@ -216,11 +294,16 @@ requireMatch("resources", /Application Form/, "Resources covers the Application 
 requireMatch("resources", /Service Request Form/, "Resources covers the Service Request Form requirement");
 requireMatch("resources", /biological reference sample|reference sample/i, "Resources covers the reference-sample deposit requirement");
 requireMatch("resources", /Last reviewed \d/, "Resources states a last-reviewed date");
+requireMatch("resources", /Use the tracker for a new application[\s\S]*new Agricultural remedy or Fertilizer application/i, "plain tracker scope for new applications");
+requireMatch("resources", /Reinstating a lapsed registration[\s\S]*Do not use this form[\s\S]*does not currently collect reinstatements/i, "direct reinstatement exclusion");
+requireMatch("resources", /Resolve these three issues before submitting/i, "actionable pre-submission check");
+forbidMatch("resources", /preparation delays|Other registration services|agricultural-remedy service codes and published timeframes shown elsewhere/i, "ambiguous preparation-delay or implementation-boundary copy");
 
-requireMatch("privacy", /condition of using the tracker/i, "required tracker data-use condition");
+requireMatch("privacy", /To use the tracker, you must agree/i, "required tracker data-use condition");
 requireMatch("privacy", /submission confirmations?/i, "submission-confirmation information group");
 requireMatch("privacy", /does not give ABA permission to send unrelated general updates/i, "unrelated-communications boundary");
 requireMatch("privacy", /id="registration-tracker"/, "formalized #registration-tracker anchor");
+requireMatch("privacy", /Pathway-fit answers[\s\S]*grouped answers[\s\S]*private notes are never published/i, "pathway-fit privacy boundary");
 
 for (const [sourceKey, source] of Object.entries(sources)) {
   if (/<h[1-3][^>]*>[\s\S]*?<br\b/i.test(source)) failures.push(`${sourceKey}: forced heading break found`);
@@ -241,22 +324,85 @@ for (const [sourceKey, source] of Object.entries(sources)) {
     }
   }
 
+  if (!/\.tracker-module \.tracker-section--forest \.tracker-button--secondary\s*\{[\s\S]{0,180}border-color:\s*var\(--tracker-paper\);[\s\S]{0,100}color:\s*var\(--tracker-paper\)/.test(moduleCss)
+    || !/\.tracker-module \.tracker-section--forest \.tracker-button--secondary:hover\s*\{[\s\S]{0,220}background:\s*var\(--tracker-paper\);[\s\S]{0,100}color:\s*var\(--tracker-deep\)/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: secondary buttons on forest need a paper outline/text and an inverse hover state");
+  } else {
+    checks.push("registration-tracker-module.css: secondary buttons retain contrast on forest fields");
+  }
+
+  if (/^\.tracker-module (?:h[1-6]|p\b|li\b)/m.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: unscoped route typography can leak into the shared header or footer");
+  } else {
+    checks.push("registration-tracker-module.css: route typography is contained within main and cannot override the shared shell");
+  }
+
   // --- Sitewide .brochure-theme h1 (styles.css) forces white-space: nowrap by design, and
   // wins the cascade on tracker pages (equal specificity, later source order) unless overridden
   // here -- confirmed empirically to force real horizontal overflow on any tracker h1 too long
   // for one line (e.g. Resources' "Before you submit a new registration."). ---
-  if (!/\.brochure-theme\.tracker-module h1[\s\S]{0,80}white-space:\s*normal/.test(moduleCss)) {
+  if (!/\.brochure-theme\.tracker-module main h1[\s\S]{0,80}white-space:\s*normal/.test(moduleCss)) {
     failures.push("registration-tracker-module.css: missing .brochure-theme.tracker-module h1 white-space override -- multi-word tracker h1s will overflow at narrow widths");
   } else {
     checks.push("registration-tracker-module.css: .brochure-theme.tracker-module h1 white-space override present");
+  }
+
+  if (!/\.tracker-insight-summary\s*\{[\s\S]{0,260}background:\s*var\(--tracker-cream\)/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: insight summary must use the restrained cream field, not a page-wide orange treatment");
+  } else {
+    checks.push("registration-tracker-module.css: insight summary uses the restrained cream field");
+  }
+
+  if (/\.tracker-insight-summary\s*\{[\s\S]{0,260}background:\s*var\(--tracker-orange(?:-light)?\)/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: insight summary reintroduces an orange field");
+  } else {
+    checks.push("registration-tracker-module.css: no orange insight-summary field");
+  }
+
+  if (/\.tracker-dot--(?:type|stage|outcome|pathway)-[^,{\s]+\s*\{[\s\S]{0,80}(?:background|color):/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: subtype-specific rainbow dots reintroduced; charts must use the minimal semantic palette");
+  } else {
+    checks.push("registration-tracker-module.css: no subtype-specific rainbow dots");
+  }
+
+  if (!/\.tracker-module\.tracker-module--data-infographic\s*\{/.test(moduleCss)
+    || !/Public data-infographic: regulatory signal story/.test(moduleCss)
+    || !/\.tracker-module--data-infographic \.tracker-summary-queue\s*\{/.test(moduleCss)
+    || !/\.tracker-module--data-infographic \.tracker-echart\s*\{/.test(moduleCss)
+    || !/\.tracker-module--data-infographic \.tracker-insight-block\s*\{[\s\S]{0,260}border:\s*0;[\s\S]{0,120}border-bottom:\s*1px/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: incomplete signal-infographic type (needs marker overview, question-specific chart forms, and open findings)");
+  } else {
+    checks.push("registration-tracker-module.css: dedicated regulatory signal-infographic page type present");
+  }
+
+  if (/\.tracker-pending-row__line/.test(moduleCss) || /--dot-offset/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: pending-time scatterplot reintroduced; compare registration types with ranked median bars");
+  } else {
+    checks.push("registration-tracker-module.css: pending-time comparison uses ranked median bars, not a scatterplot");
+  }
+
+  if (/\.tracker-stage-bars|\.tracker-outcome-bars|\.tracker-pending-bars/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: hand-built chart scaffolding reintroduced");
+  } else {
+    checks.push("registration-tracker-module.css: no hand-built chart scaffolding");
+  }
+
+  if (/\.tracker-module--data-infographic \.tracker-insight-block::after/.test(moduleCss)
+    || /font:\s*800 clamp\(6rem/.test(moduleCss)
+    || /\.tracker-module--data-infographic \.tracker-insight-summary__grid > div:first-child\s*\{[\s\S]{0,100}background:\s*var\(--tracker-forest\)/.test(moduleCss)) {
+    failures.push("registration-tracker-module.css: data-infographic reintroduces a side rail, decorative giant numeral, or hero metric card");
+  } else {
+    checks.push("registration-tracker-module.css: no side rails, decorative giant numerals, or hero metric card");
   }
 }
 
 const linkedAssets = [
   "registration-tracker/shared/registration-tracker-module.css",
   "registration-tracker/shared/registration-tracker-module.js",
+  "registration-tracker/shared/registration-tracker-reference-data.js",
   "registration-tracker/shared/registration-tracker-insights-seed.js",
   "registration-tracker/shared/registration-tracker-insights.js",
+  "registration-tracker/shared/vendor/echarts-6.1.0.min.js",
 ];
 for (const relativePath of linkedAssets) {
   try {

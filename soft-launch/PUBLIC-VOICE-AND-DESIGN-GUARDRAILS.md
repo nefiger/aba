@@ -79,6 +79,34 @@ The shared tokens are not permission to use every brochure colour at page scale.
 - Leaf green is rare. It must not compete with forest as a second site identity.
 - A public page should not introduce a new green, beige or orange because its local composition feels flat. Fix the hierarchy and density first.
 
+For data and tracker pages, the same restraint still applies:
+
+- summary figures sit on paper, cream, or a contained forest field—not a full orange band;
+- orange may identify the primary action, a short label, a rule, or one exceptional state;
+- charts use the smallest accessible semantic set needed to distinguish outcomes;
+- section-to-section rhythm comes from spacing, rules, and composition before colour changes;
+- do not assign a different brand tint to every insight block.
+
+### Data infographic page type
+
+Use the `tracker-module--data-infographic` foundation with the
+`tracker-module--signal-infographic` composition for a public aggregate-data view whose
+primary job is to communicate findings. It complements the shared forest identity but is
+not composed like an editorial brochure or a software dashboard.
+
+- Open with one compact, light visual synopsis that encodes the headline data through meaningful marks. It must establish the sample, central tendency and exceptional share without becoming a row of oversized metric cells.
+- Choose each chart from the question being answered: ranked horizontal bars for category comparisons, ordered columns for stage counts, grouped bars for comparing several outcomes across categories, and percentage bars for benchmark status. Use a process flow only when movement between stages is the question.
+- Use stacked bars only for a genuine part-to-whole question when the whole and segment order are stable. Do not stack several outcome series when readers need to compare each series across categories; interior segments do not share a readable baseline.
+- Do not use a scatterplot merely because individual observations are available. Use one only when distribution or correlation is the actual public question, and explain its axes and marks directly.
+- Give charts more area than explanatory copy and place each short answer beside its question.
+- Use visible axes, exact values, disciplined rules, compact labels and an explicit top-to-bottom sequence.
+- Vary the visual grammar between findings while preserving a coherent data story. Do not box every finding, add side rails, or use oversized sequence numerals as decoration.
+- Create impact through comparative scale, evidence density and diagram structure—not more brand colours, decorative cards or magazine-like whitespace.
+- Keep forest and paper dominant. Use orange for a threshold, axis, index or exceptional figure; use semantic outcome colours only where the distinction is necessary.
+- Use a maintained charting library for public interactive data graphics rather than hand-building plot geometry. The current static tracker standard is a pinned local Apache ECharts 6.1 bundle with SVG rendering.
+- Every interactive chart must provide hover and tap tooltips, a visible keyboard focus state, arrow-key value navigation, responsive resizing and an ARIA description. Hover must not be the only path to meaning.
+- Keep tables as accessible alternatives and provenance as a quiet disclosure rather than part of the main composition.
+
 The brochure also governs narrative order and naming. Prefer its real concepts—`African agriculture is at a crossroads`, `advocacy and representation`, `enabling environment and harmonisation`, `local manufacturing and circularity`, `membership, chapters and governance`, and `product clarity and sector credibility`—where they remain accurate. The claims matrix still decides what may be described as current, developing or unavailable; brochure language is not permission to publish an unsupported promise.
 
 ## Public voice contract
@@ -143,6 +171,27 @@ Before implementation, read the page as plain text and ask:
 5. Does it promise only what ABA can support?
 
 If the page sounds like campaign filler, LinkedIn copy, a pitch-deck label, or an internal architecture note, rewrite it before styling it.
+
+### Public guidance must have a user job
+
+Do not expose a requirement, mapping, caveat, workflow state, or implementation fact
+merely because it exists in the specification. Before placing explanatory text in the
+interface, name the user job it serves:
+
+- **decide** — helps the visitor know whether this action is right for them;
+- **complete** — prevents a likely error at the point where it can occur;
+- **trust** — explains a material consequence, privacy boundary, or next step; or
+- **recover** — tells the visitor how to correct a problem.
+
+If copy serves none of these jobs, remove it from the public interface. Keep source-row
+reconciliation, field-taxonomy rationale, data-contract language, review-state names,
+prototype or release labels, threshold approval notes, and operator instructions in the
+governing specification or QA material.
+
+For form guidance, state the visitor benefit or risk in ordinary language. Prefer
+`We ask because unclear categories can add delay` to an explanation of how ABA stores or
+maps the answer. Do not repeat a label, explain the interface itself, or narrate what the
+software is doing.
 
 ## Typography and composition contract
 

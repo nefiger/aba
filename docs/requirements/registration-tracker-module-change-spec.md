@@ -1,12 +1,123 @@
 # Registration Tracker Module — Change Specification
 
-**Status:** Reconciled implementation specification for the static mockup; titles remain subject to product review
-**Last updated:** 30 July 2026
+**Status:** Reconciled implementation specification for the static mockup; amended by the 14 August 2026 takeover reconciliation below
+**Last updated:** 14 August 2026
 **Planning baseline:** `bdd1921` (`origin/main` when the implementation scope and workflow were finalized)  
 **Implementation scope:** Registration Tracker landing page, intake form, public insights view, and tracker content on the Privacy and data use page  
 **Not in scope:** Production persistence or security implementation, participant editing after submission, a live operator workspace, company dashboard, registrar export, or redesign of archived prototype pages
 
 > **Mandatory first action:** Do not edit the current checkout. Read this complete specification, including Section 21, and create or safely reuse the isolated worktree before making any implementation change.
+
+## 0. Takeover reconciliation — 14 August 2026
+
+This section records Anna's later direction and governs wherever the older 30 July instructions below conflict. The earlier decisions remain in place as historical context; they have not been deleted.
+
+**Newer sources:**
+
+- `reference/shared/transcripts/2026-08-05-anna-lyle-registration-tracker-meeting-notes.md` — Anna's tracker review on 5 August 2026;
+- `reference/shared/transcripts/2026-08-13-anna-jen-priorities-meeting-notes.md` — Anna's handover to Jen on 13 August 2026; and
+- `reference/shared/task-tracking/2026-08-13-registration-tracker-handover.md` — the source and implementation reconciliation prepared on 13 August 2026.
+
+### Superseding decisions
+
+| Earlier instruction retained below | Later decision that now governs |
+|---|---|
+| Orient and qualify through a prominent `Is this for you?` action | Use **one dominant hero action: `Start a new registration`**. Do not place an `Is this for you?` button or a registration-resources action beside it. |
+| Treat preparation as a branch that can block the visitor before intake | Keep concise readiness criteria and preparation help lower in the journey. Early submissions can be manually reviewed, so the public entry should help a legitimate participant move forward instead of over-gating them. |
+| Lead public insights with a future methodology / insufficient-evidence explanation and avoid charts | Put the sector questions first. The static mockup may use clearly labelled **illustrative data**, provided it cannot be mistaken for live evidence, uses source-backed regulator constants, and implements the future review and privacy-threshold contract. |
+| Use a restrained evidence-status page | Use accessible infographic summaries, but keep the approved paper/forest palette dominant. Orange is a scarce action or graphic signal, not a full-width metrics field, and insight blocks do not each receive a different brand tint. |
+| Treat `functional category` as the only visible product classification | Keep three axes separate: **ABA product category**, **Registrar function of product**, and **Legal pathway**. Do not present ABA's sector categories as the registrar's verbatim taxonomy. |
+| Show the five new-registration subtypes regardless of legal pathway | Show the sourced subtype / `14ARx` mapping only for **Agricultural remedy**. Fertilizer and unresolved pathways remain capturable for manual review but receive no agricultural-remedy code or published timeframe. |
+| Store/display a registration type as one value | Store the specific plain-language subtype separately from `service_request_code` and `service_request_row`. The code is a shared payment reference, not a unique subtype. |
+
+### Public voice and colour correction — 14 August 2026
+
+The public tracker must not narrate its implementation. A visible explanation is kept
+only when it helps the visitor decide, complete the form, trust the consequence, or
+recover from an error. Source-row reconciliation, field-taxonomy rationale, review-state
+names, data-contract language, prototype status, and operator instructions remain in
+this specification and QA.
+
+The public wording may say that figures are illustrative and not sector findings. It
+must not present `Design preview`, release terminology such as `V1`, threshold approval
+notes, or phrases such as `reviewed and included records` as page content. The intake may
+show a service code and published timeframe after a relevant choice because those values
+help the applicant; it must not explain the internal mapping machinery.
+
+Tracker colour follows the approved soft-launch system: paper and forest dominate, cream
+or sage wash may group supporting information, and orange remains rare. Data graphics use
+the smallest semantic set needed for comprehension. Section rhythm comes from spacing,
+rules, and composition before colour changes.
+
+The public insights route uses the `tracker-module--data-infographic` foundation and the
+`tracker-module--signal-infographic` composition. It must read as a sequenced regulatory
+data story rather than an editorial brochure or software dashboard: a compact, light visual
+synopsis, direct questions, visible axes, exact values and chart forms selected for the
+question. Ranked median bars compare pending time, ordered columns compare official-stage
+counts, grouped bars compare outcomes on a common baseline and percentage bars show
+benchmark status. Process flows are reserved for questions about movement, and stacked bars
+for genuine part-to-whole questions; neither is the default for cross-category comparison.
+Public interactive charts use the pinned local Apache ECharts 6.1 SVG renderer, with
+hover/tap tooltips, visible keyboard focus, arrow-key value navigation, responsive resizing,
+ARIA descriptions and accessible data tables.
+The page gets impact from comparative scale, density and diagram structure while retaining
+the shared forest/paper palette. It must not box every finding, use a scatterplot where the
+question is comparison, add thick side rails or use oversized sequence numerals as
+decoration.
+
+### Source-backed new-registration lookup
+
+For Agricultural remedy records only, the mockup uses this single lookup, verified against the Service Request Form and Process Guide 2015:
+
+| `registration_type_key` | Public label | `service_request_code` | `service_request_row` | `official_timeframe_days` |
+|---|---|---:|---:|---:|
+| `new_molecule` | New molecule / new active ingredient | `14AR2` | 2 | 627 |
+| `new_formulation` | New formulation | `14AR2` | 2 | 418 |
+| `generic_active_ingredient` | Generic active ingredient | `14AR1` | 1 | 418 |
+| `parallel_registration` | Parallel registration | `14AR1` | 1 | 118 |
+| `daughter_registration` | Daughter registration | `14AR1` | 1 | 118 |
+
+`Reinstatement` is present on Service Request Form row 1 / `14AR1`, but it is not a new registration and remains outside V1 metrics. Selecting it must stop submission and say directly that this tracker does not collect reinstatements. `Not sure` is valid and leads to manual review with no invented code or timeframe.
+
+The shared source metadata is:
+
+```text
+source_document_version = Service Request Form, modified October 2016
+official_timeframe_source = Guideline of the Registration Process for Agricultural Remedies, 2015, Table 1
+```
+
+The current source pack does not establish equivalent Fertilizer service codes, subtype labels, or published timeframes. Obtaining the current Fertilizer Application Form and Service Request Form is an unresolved dependency.
+
+This is not a reason to reject a Fertilizer application from the tracker. It may contribute
+to overall, stage, outcome and pathway-fit insights. It is excluded only from the overdue
+comparison until ABA confirms the applicable Fertilizer timeframe. Public copy states that
+consequence, not the source-pack limitation.
+
+### Public-insight questions for this pass
+
+The illustrative insights page must answer directly:
+
+1. How long are current applications pending, using the median as the primary summary?
+2. Where in the official process are applications waiting or blocked?
+3. How do outcomes vary by new-registration subtype or ABA product category?
+4. Which eligible Agricultural remedy records are beyond an applicable source-backed published timeframe?
+5. What thresholded aggregate pathway-fit problems are being reported?
+
+Every illustrative application is fictional. The page must say `Illustrative data — not sector findings` prominently. The implementation counts only records marked reviewed and included, hides cells below the documented threshold, and never exposes names, products, contact details, references, registration numbers, or private pathway-fit notes. Those implementation rules remain testable but are not narrated as public page copy.
+
+### Pathway-fit capture
+
+Capture the underlying mismatch neutrally without presenting B/K/L/M prefixes as applicant-selected categories:
+
+```text
+submitted_legal_pathway
+believed_best_fit_pathway
+pathway_fit = fits | does_not_fit | not_sure
+pathway_fit_reason = registrar_advice | precedent | no_suitable_category | evidence_burden | delay_or_repeated_difficulty | other
+pathway_fit_note_private
+```
+
+Raw answers and notes are participant/ABA-review information. Only reviewed, thresholded aggregates may feed public insights. Kathy or Anouska must still validate when and how L/M/K terminology is used in practice before those letters appear in applicant-facing copy.
 
 ## Fresh-session kickoff prompt
 

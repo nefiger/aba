@@ -3,126 +3,147 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="What reviewed South African Act 36 new-registration submissions show, grouped so no participant is named.">
+  <meta name="description" content="Illustrative registration insights showing pending time, process delays, outcomes and pathway-fit concerns for South African Act 36 applications.">
   <title>Registration insights · African Biologicals Alliance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260803c">
-  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260803d">
+  <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260814l">
   <script src="../../soft-launch/prototype/assets/app.js?v=20260803a" defer></script>
-  <script src="../shared/registration-tracker-insights-seed.js?v=20260801" defer></script>
-  <script src="../shared/registration-tracker-insights.js?v=20260802" defer></script>
+  <script src="../shared/vendor/echarts-6.1.0.min.js" defer></script>
+  <script src="../shared/registration-tracker-reference-data.js?v=20260814a" defer></script>
+  <script src="../shared/registration-tracker-insights-seed.js?v=20260814a" defer></script>
+  <script src="../shared/registration-tracker-insights.js?v=20260814f" defer></script>
 </head>
-<body class="site-v2 brochure-theme tracker-module" data-page="tracker" data-tracker-view="insights">
+<body class="site-v2 brochure-theme tracker-module tracker-module--data-infographic tracker-module--signal-infographic" data-page="tracker" data-tracker-view="insights">
   <aba-header base="../../soft-launch/prototype/"></aba-header>
 
   <main id="main-content">
     <section class="tracker-page-header tracker-page-header--compact">
       <div class="tracker-shell">
-        <p class="tracker-label">Registration Tracker · Public evidence</p>
+        <p class="tracker-label">Registration Tracker · Illustrative insights</p>
         <h1>Registration insights.</h1>
-        <p class="tracker-lede">What reviewed South African Act 36 new-registration submissions show, grouped so no participant is named.</p>
-        <p class="tracker-example-tag">Example data — fictional registrations, not real findings.</p>
+        <p class="tracker-lede">See how shared registration updates can reveal long waits, recurring process delays, different outcomes and poor pathway fit.</p>
+        <p class="tracker-example-tag">Illustrative data — not sector findings.</p>
       </div>
     </section>
 
-    <section class="tracker-section">
-      <div class="tracker-shell">
-        <div class="tracker-evidence-grid">
-          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
-            <div class="tracker-evidence-panel__heading">
-              <p class="tracker-evidence-panel__number">01</p>
-              <div>
-                <p class="tracker-label">Process position</p>
-                <h2 class="tracker-evidence-panel__title">Where are new registrations waiting?</h2>
-              </div>
-            </div>
-            <figure class="tracker-evidence-figure">
-              <figcaption>Share of included registrations</figcaption>
-              <ol class="tracker-stage-scale" data-stage-scale>
-                <li><span>Received</span><span class="tracker-stage-scale__value" data-stage-value="Received"></span><i aria-hidden="true"><b data-stage="Received"></b></i></li>
-                <li><span>Verification</span><span class="tracker-stage-scale__value" data-stage-value="Verification"></span><i aria-hidden="true"><b data-stage="Verification"></b></i></li>
-                <li><span>Scientific screening</span><span class="tracker-stage-scale__value" data-stage-value="Scientific screening"></span><i aria-hidden="true"><b data-stage="Scientific screening"></b></i></li>
-                <li><span>Evaluation</span><span class="tracker-stage-scale__value" data-stage-value="Evaluation"></span><i aria-hidden="true"><b data-stage="Evaluation"></b></i></li>
-                <li><span>Decision</span><span class="tracker-stage-scale__value" data-stage-value="Decision"></span><i aria-hidden="true"><b data-stage="Decision"></b></i></li>
-              </ol>
-              <div class="tracker-axis" aria-hidden="true"><span>Lower share</span><span>Higher share</span></div>
-            </figure>
-          </article>
-
-          <article class="tracker-evidence-panel">
-            <div class="tracker-evidence-panel__heading">
-              <p class="tracker-evidence-panel__number">02</p>
-              <div>
-                <p class="tracker-label">Elapsed time</p>
-                <h2 class="tracker-evidence-panel__title">How does time compare with the published timeframe?</h2>
-              </div>
-            </div>
-            <figure class="tracker-evidence-figure">
-              <figcaption>Elapsed time across included registrations</figcaption>
-              <div class="tracker-time-scale" aria-label="Elapsed-time comparison framework">
-                <div class="tracker-time-scale__plot" data-time-scale-plot>
-                  <span class="tracker-time-scale__baseline" aria-hidden="true"></span>
-                  <span class="tracker-time-scale__reference" aria-hidden="true"></span>
-                </div>
-                <div class="tracker-time-scale__labels">
-                  <span>Status began</span>
-                  <strong>Published timeframe</strong>
-                  <span>Beyond timeframe</span>
-                </div>
-                <p class="tracker-time-scale__summary" data-time-scale-summary></p>
-              </div>
-            </figure>
-          </article>
-
-          <article class="tracker-evidence-panel">
-            <div class="tracker-evidence-panel__heading">
-              <p class="tracker-evidence-panel__number">03</p>
-              <div>
-                <p class="tracker-label">Recurring barriers</p>
-                <h2 class="tracker-evidence-panel__title">Which obstacles appear across registrations?</h2>
-              </div>
-            </div>
-            <figure class="tracker-evidence-figure">
-              <figcaption>Most frequently reported, across all included registrations</figcaption>
-              <dl class="tracker-barrier-rank" data-barrier-rank></dl>
-            </figure>
-          </article>
-
-          <article class="tracker-evidence-panel tracker-evidence-panel--wide">
-            <div class="tracker-evidence-panel__heading">
-              <p class="tracker-evidence-panel__number">04</p>
-              <div>
-                <p class="tracker-label">Evidence coverage</p>
-                <h2 class="tracker-evidence-panel__title">What can ABA responsibly say?</h2>
-              </div>
-            </div>
-            <figure class="tracker-evidence-figure">
-              <figcaption>Evidence available for comparison</figcaption>
-              <dl class="tracker-coverage-list" data-coverage-list>
-                <div><dt>Functional category</dt><span class="tracker-coverage-list__value" data-coverage-value="functional_category"></span><dd aria-hidden="true" data-coverage-field="functional_category"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>Legal pathway</dt><span class="tracker-coverage-list__value" data-coverage-value="legal_pathway"></span><dd aria-hidden="true" data-coverage-field="legal_pathway"><i></i><i></i><i></i><i></i><i></i></dd></div>
-                <div><dt>New-registration type</dt><span class="tracker-coverage-list__value" data-coverage-value="registration_type"></span><dd aria-hidden="true" data-coverage-field="registration_type"><i></i><i></i><i></i><i></i><i></i></dd></div>
-              </dl>
-              <div class="tracker-coverage-key" aria-hidden="true"><span>Limited coverage</span><span>Stronger coverage</span></div>
-            </figure>
-          </article>
+    <section class="tracker-insight-summary" aria-label="Registration insight summary">
+      <div class="tracker-shell tracker-insight-summary__grid">
+        <div class="tracker-insight-summary__headline">
+          <p><strong class="tracker-insight-summary__duration"><b data-summary="median-pending">—</b> <em>days</em></strong><span>Median pending time</span></p>
+          <p><strong data-summary="pending-count">—</strong><span>applications pending</span></p>
         </div>
-        <p class="tracker-methodology-note">Built only from submissions ABA has reviewed and approved, and never naming a participant, organisation, or product. <a href="../../soft-launch/prototype/privacy.html#registration-tracker">How this works</a>.</p>
-        <dl class="tracker-barrier-rank">
-          <div><dt>Reporting basis</dt><dd>Rolling — all included registrations to date</dd></div>
-          <div><dt>Last revised</dt><dd>2 August 2026 (example dataset)</dd></div>
-        </dl>
+        <div class="tracker-insight-summary__queue">
+          <div class="tracker-summary-queue" data-summary-queue aria-hidden="true"></div>
+          <p class="tracker-insight-summary__overdue"><strong data-summary="beyond-count">—</strong><span>with a confirmed timeframe are overdue</span></p>
+          <div class="tracker-summary-key">
+            <span data-key="overdue">Overdue</span>
+            <span data-key="within">Within timeframe</span>
+            <span data-key="unbenchmarked">Timeframe not confirmed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tracker-section tracker-infographic-body">
+      <div class="tracker-shell tracker-insight-stack">
+        <article class="tracker-insight-block tracker-insight-block--pending">
+          <div class="tracker-insight-block__heading">
+            <div><p class="tracker-label">Pending age</p><h2>Which registration types wait longest?</h2></div>
+            <p data-pending-answer></p>
+          </div>
+          <figure class="tracker-evidence-figure">
+            <figcaption>Median pending time by registration type. Hover, tap, or use the arrow keys for exact values.</figcaption>
+            <div class="tracker-echart tracker-echart--pending" data-chart="pending" tabindex="0"></div>
+          </figure>
+          <details class="tracker-data-alternative">
+            <summary>Read the pending-age values</summary>
+            <div class="tracker-table-scroll"><table class="tracker-chart-data"><thead><tr><th>Type or pathway</th><th>Pending applications</th><th>Median days</th><th>Longest wait</th></tr></thead><tbody data-pending-table></tbody></table></div>
+          </details>
+        </article>
+
+        <article class="tracker-insight-block tracker-insight-block--stage">
+          <div class="tracker-insight-block__heading">
+            <div><p class="tracker-label">Official process stage</p><h2>Where are applications blocked?</h2></div>
+            <p data-stage-answer></p>
+          </div>
+          <figure class="tracker-evidence-figure">
+            <figcaption>Pending applications at each official process stage.</figcaption>
+            <div class="tracker-echart tracker-echart--stage" data-chart="stage" tabindex="0"></div>
+          </figure>
+          <details class="tracker-data-alternative">
+            <summary>Read the stage values</summary>
+            <div class="tracker-table-scroll"><table class="tracker-chart-data"><thead><tr><th>Official stage</th><th>Applications</th><th>Median days in stage</th><th>Reported block</th></tr></thead><tbody data-stage-table></tbody></table></div>
+          </details>
+        </article>
+
+        <article class="tracker-insight-block tracker-insight-block--outcomes">
+          <div class="tracker-insight-block__heading">
+            <div><p class="tracker-label">Outcomes by type</p><h2>Which types see different outcomes?</h2></div>
+            <p data-outcome-answer></p>
+          </div>
+          <figure class="tracker-evidence-figure">
+            <figcaption>Applications by outcome and registration type. Select a legend item to isolate an outcome.</figcaption>
+            <div class="tracker-echart tracker-echart--outcomes" data-chart="outcomes" tabindex="0"></div>
+          </figure>
+          <details class="tracker-data-alternative">
+            <summary>Read the outcome values</summary>
+            <div class="tracker-table-scroll"><table class="tracker-chart-data"><thead><tr><th>Type</th><th>Pending</th><th>Approved</th><th>Rejected</th><th>Withdrawn</th></tr></thead><tbody data-outcome-table></tbody></table></div>
+          </details>
+        </article>
+
+        <article class="tracker-insight-block tracker-insight-block--benchmark">
+          <div class="tracker-insight-block__heading">
+            <div><p class="tracker-label">Published timeframe</p><h2>Which applications are overdue?</h2></div>
+            <p data-benchmark-answer></p>
+          </div>
+          <figure class="tracker-evidence-figure">
+            <figcaption>Pending agricultural remedies with a published timeframe.</figcaption>
+            <div class="tracker-echart tracker-echart--benchmark" data-chart="benchmark" tabindex="0"></div>
+          </figure>
+          <details class="tracker-data-alternative">
+            <summary>Read the timeframe values</summary>
+            <div class="tracker-table-scroll"><table class="tracker-chart-data"><thead><tr><th>Type and code</th><th>Published timeframe</th><th>Pending</th><th>Beyond</th></tr></thead><tbody data-benchmark-table></tbody></table></div>
+          </details>
+        </article>
+
+        <article class="tracker-insight-block tracker-insight-block--pathway">
+          <div class="tracker-insight-block__heading">
+            <div><p class="tracker-label">Reported pathway fit</p><h2>How often is the pathway a poor fit?</h2></div>
+            <p data-pathway-answer></p>
+          </div>
+          <figure class="tracker-evidence-figure">
+            <figcaption>Grouped answers only. Names and private notes are excluded.</figcaption>
+            <div class="tracker-echart tracker-echart--pathway" data-chart="pathway" tabindex="0"></div>
+            <dl class="tracker-pathway-reasons" data-pathway-reasons></dl>
+          </figure>
+          <details class="tracker-data-alternative">
+            <summary>Read the pathway-fit values</summary>
+            <div class="tracker-table-scroll"><table class="tracker-chart-data"><thead><tr><th>Response</th><th>Records</th><th>Share</th></tr></thead><tbody data-pathway-table></tbody></table></div>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section class="tracker-section tracker-section--quiet">
+      <div class="tracker-shell">
+        <details class="tracker-data-alternative tracker-insight-method">
+          <summary>About these figures</summary>
+          <p>These figures use illustrative data and are not sector findings. Small groups are hidden to reduce identification risk.</p>
+          <p>Fertilizer applications contribute to the overall and process-stage figures. They are left out of the overdue figure because ABA has not confirmed the applicable published timeframe.</p>
+          <p>Published-timeframe source: Process Guide 2015, Table 1. <a href="../../soft-launch/prototype/privacy.html#registration-tracker">How ABA protects tracker information.</a></p>
+        </details>
       </div>
     </section>
 
     <section class="tracker-section tracker-section--cream">
       <div class="tracker-shell">
         <div class="tracker-section-heading">
-          <p class="tracker-label">Contribute reviewed evidence</p>
-          <h2>Share a new registration.</h2>
-          <p>The intake currently supports one South African Act 36 new registration at a time.</p>
+          <p class="tracker-label">Add your experience</p>
+          <h2>Is your Act 36 application under way?</h2>
+          <p>Sharing its current status helps ABA build stronger evidence about delays and barriers affecting biological products.</p>
         </div>
         <div class="tracker-actions">
           <a class="tracker-button tracker-button--orange" href="../intake-flow/index.html">Share a new registration</a>

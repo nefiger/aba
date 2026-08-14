@@ -84,6 +84,30 @@ Colour must never be the only carrier of status or meaning.
 
 This is visual weight, not a literal pixel formula. Orange should feel like a purposeful spark running through the experience, as it does in the brochure.
 
+### Registration Tracker application
+
+- Keep page openings and the shared chrome in forest; keep the working and reading area predominantly paper.
+- Use cream or sage wash only for contained supporting information that benefits from grouping.
+- Do not use light orange as a full-width metrics or chapter background.
+- Primary actions may use light orange on forest. On light surfaces, prefer a forest action unless orange is the page's single deliberate emphasis.
+- Insight charts may use forest, sage-deep, rust-deep, and one muted neutral when distinct status categories genuinely require them. Do not create a separate tint for every chart or registration subtype.
+- Provenance and privacy information should be typographically quiet and structurally clear; colour must not make internal methodology more prominent than the finding.
+
+### Data infographic application
+
+Pages using `tracker-module--data-infographic` retain the Registration Tracker palette.
+The `tracker-module--signal-infographic` composition adds a marker-based synopsis,
+question-specific chart forms, sage-wash plotting structure and rare orange benchmark or
+exception marks. Forest carries the quantities; orange only changes meaning. Impact comes
+from comparative scale, visible axes, direct labels and evidence density. Ranked bars,
+ordered columns, grouped outcome bars and percentage bars are the default comparison
+grammar; stacked bars are reserved for genuine part-to-whole questions. Interactive charts
+use the pinned local Apache ECharts 6.1 SVG renderer and must retain hover/tap tooltips,
+keyboard value navigation, responsive resizing, ARIA descriptions and accessible tables.
+Do not turn the
+page into a brochure spread, a metric-cell dashboard, a stack of interchangeable cards or
+a rainbow chart.
+
 ## Logo rules for the reference prototype
 
 - Use the supplied PNG unchanged while a vector master is unavailable.

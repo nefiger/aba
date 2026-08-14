@@ -1,7 +1,42 @@
 # Reference Prototype QA Log
 
-Last updated: 2026-07-30
+Last updated: 2026-08-14
 Gate: G3 in progress
+
+## Registration insights infographic page type — 14 August 2026
+
+- corrected tracker-module selector leakage so route heading, paragraph and list rules apply only inside `main`; the shared header and `<aba-footer>` now retain the canonical shell typography on every active tracker route;
+- corrected the landing page's secondary action on the deep-forest closing field to use a paper outline and text with an inverse paper hover state, and audited the remaining active tracker actions for the same contrast collision;
+- added tracker preflight guards for canonical shared-footer markup, nested-route base paths, shell typography isolation and secondary-button contrast on forest fields;
+- introduced the reusable `tracker-module--data-infographic` page type for public aggregate-data views;
+- rebuilt Registration insights as a regulatory signal infographic: a compact 14-marker synopsis followed by five indexed findings with chart forms selected for each public question;
+- replaced the unreadable individual-observation scatterplot with ranked median-wait bars and exact values; longest current waits are available in the tooltip, and the unexplained red ticks were removed entirely;
+- replaced the ambiguous stage slices with an ordered column chart that highlights Evaluation as the current bottleneck;
+- replaced stacked outcome bars with grouped bars on a common baseline and a selectable legend;
+- moved all five charts to a pinned local Apache ECharts 6.1 SVG renderer with hover/tap tooltips, keyboard value navigation, responsive resizing and ARIA descriptions while retaining the accessible data tables;
+- removed the dashboard-style hero metric, repeated card borders, thick side rails and oversized watermark numerals after visual review showed that they overwhelmed the evidence;
+- retained ABA's forest/paper identity, with orange limited to small index rules, the illustrative-data boundary and exceptional chart states;
+- kept all five analytical questions concise and gave the chart fields the main visual weight across supported widths;
+- documented the page type in the canonical public guardrail, design context, brand palette and Registration Tracker change specification;
+- rewrote the Resources coverage section to say directly that new Agricultural remedy and Fertilizer applications are accepted, while reinstatements are not collected;
+- replaced `preparation delays` with a three-item action check covering matching forms, proof of payment and the biological-reference-sample requirement;
+- clarified the intake consequence: Fertilizer applications contribute to general insights but are not labelled overdue until the applicable timeframe is confirmed; reinstatement selection blocks the form with a direct explanation;
+- the tracker static preflight passes 168 checks, the public-site static preflight passes, `git diff --check` passes and the responsive renderer reports zero blocking failures across 320, 375, 768, 1024 and 1440 CSS px.
+
+## Registration Tracker public-copy and colour correction — 14 August 2026
+
+- removed visible implementation, release, mapping, review-state and threshold narration from the landing page, intake, insights, resources and tracker privacy copy;
+- retained guidance only where it helps someone decide whether to use the tracker, complete a field, understand a privacy consequence or recover from uncertainty;
+- replaced internal registration-type and status explanations with applicant-facing outcomes, including clear `Not sure`, Fertilizer and reinstatement paths;
+- labels the sample dashboard `Illustrative data — not sector findings.` without presenting the mechanics of the privacy threshold or review pipeline as page content;
+- restored the palette hierarchy: forest and paper carry the module, cream and sage support contained information, and orange is reserved for a primary action or small accent;
+- replaced the orange insight-summary field and subtype colour scatter with a cream summary, paper question fields and a minimal semantic chart palette;
+- updated the public voice/design guardrail, design context, brand palette and internal tracker wireframe brief so the old annotation-first `DESIGN.md` cannot be mistaken for public design authority;
+- the tracker preflight now blocks the leaked internal phrases, enforces an eight-note intake helper-copy budget and guards against orange summary fields and rainbow chart dots;
+- the tracker static preflight passes 145 checks, the public-site static preflight passes, and `git diff --check` reports no whitespace errors;
+- the rendered site check reports no blocking page-title or horizontal-overflow failures across all public routes at 320, 375, 768, 1024 and 1440 CSS px;
+- landing and privacy supporting headings pass without warnings from 768 CSS px upward; the tracker insight questions pass from 1024 CSS px upward and retain reviewed natural two- or three-line wraps on narrow screens where each question still needs to state the comparison;
+- the landing, all five intake sections and dynamic Agricultural remedy, `Not sure`, reinstatement and Fertilizer guidance states, illustrative insights, resources and tracker privacy routes were inspected in the browser with no public internal-language matches or document-width overflow.
 
 ## Registration insights hierarchy refinement — 30 July 2026
 

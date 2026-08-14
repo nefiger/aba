@@ -2,16 +2,20 @@
 
 ## Current Static Mockup Release
 
-`docs/requirements/registration-tracker-module-change-spec.md` governs the current four-page static mockup. Where older briefs or wireframes conflict with that specification, the change specification governs this release.
+`docs/requirements/registration-tracker-module-change-spec.md` governs the current four-page static mockup, including the 14 August 2026 takeover reconciliation. Where older briefs or wireframes conflict with that specification, the change specification governs this release.
 
 Active mockup pages:
 
 - `../soft-launch/prototype/registration-tracker.html` — canonical public landing and qualification
 - `intake-flow/index.html` — five-stage South African Act 36 new-registration intake
-- `public-dashboard/index.html` — truthful registration-insights evidence-status page
+- `public-dashboard/index.html` — illustrative registration insights using explicitly fictional, non-publishable application data
 - `../soft-launch/prototype/privacy.html` — tracker privacy and required data-use explanation
 
-The active intake begins only after the Application Form, Service Request Form, and proof of payment have all been submitted. One intake concerns one `Product` and one new-product `Application`; the three submission facts are application intake metadata rather than a separate Service Request record. Pre-submission preparation is not part of the active V1 flow.
+The public landing lets a participant open the intake directly and places preparation guidance below that action. Final intake review still requires confirmation that the Application Form, Service Request Form, and proof of payment were submitted. One intake concerns one `Product` and one new-product `Application`; the three submission facts are application intake metadata rather than a separate Service Request record. Pre-submission preparation is not a separate active V1 workflow.
+
+Agricultural-remedy service codes and published timeframes come from the shared `shared/registration-tracker-reference-data.js` lookup. Fertilizer and unresolved-pathway records deliberately receive no Agricultural remedy code or benchmark until a Fertilizer source pack is confirmed. Public insight examples count reviewed-and-included records only, suppress groups below the preview threshold, and never include contact, organisation, product, reference-number, L-number, or private-note fields.
+
+The public insights page uses a pinned local Apache ECharts 6.1 bundle in `shared/vendor/` with SVG rendering. Ranked bars compare pending time, ordered columns compare process-stage counts, grouped bars compare outcomes and percentage bars show overdue or pathway-fit shares. Every chart supports hover/tap tooltips, keyboard value navigation, responsive resizing and an ARIA description, with a readable HTML table as the data alternative.
 
 Tracker and membership journeys must reuse the same `Person`, `Organization`, and `OrganizationPersonRole` records in production. The matching and duplicate-resolution method remains open and is not simulated in this static mockup.
 
@@ -87,7 +91,7 @@ Read `starting-prompt-v1.md` for the original master prompt that launched the lo
 
 ## Historical Working Notes
 
-The notes below describe earlier prototype decisions and remain useful as historical context. The current four-page release and the 30 July reconciliation above supersede them where they conflict.
+The notes below describe earlier prototype decisions and remain useful as historical context. The current four-page release and the 14 August reconciliation above supersede them where they conflict.
 
 - Buttons, filters, toggles, and selections in the HTML wireframes should be real interactive controls, not visual labels only.
 - Application submit timestamps are system audit metadata. The intake form must not ask the submitter to enter one; it is set only when the completed application is sent.

@@ -100,6 +100,13 @@ spacing:
   annotation-width: 240px
 ---
 
+> **Internal wireframe brief only — not public design authority.** This file describes
+> the old annotated Stitch wireframe and its deliberately grayscale review treatment.
+> Its annotation-first copy, Inter/Space Mono typography, blueprint styling, and
+> component notes must not appear in public Registration Tracker pages. Public work is
+> governed by `soft-launch/PUBLIC-VOICE-AND-DESIGN-GUARDRAILS.md`,
+> `soft-launch/.impeccable.md`, and `soft-launch/design/brand-palette.md`.
+
 ## Brand & Style
 
 The design system is a high-utility, low-fidelity framework focused on structural integrity and information architecture. The personality is clinical, objective, and analytical, removing the distraction of aesthetic flourishes to prioritize user flow and content hierarchy.
