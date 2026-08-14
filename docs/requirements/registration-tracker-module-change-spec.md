@@ -103,7 +103,9 @@ The illustrative insights page must answer directly:
 4. Which eligible Agricultural remedy records are beyond an applicable source-backed published timeframe?
 5. What thresholded aggregate pathway-fit problems are being reported?
 
-Every illustrative application is fictional. The page must say `Illustrative data — not sector findings` prominently. The implementation counts only records marked reviewed and included, hides cells below the documented threshold, and never exposes names, products, contact details, references, registration numbers, or private pathway-fit notes. Those implementation rules remain testable but are not narrated as public page copy.
+Every illustrative application is fictional. The page must say `Illustrative data — not sector findings` prominently. The implementation counts only records marked reviewed and included and never exposes names, products, contact details, references, registration numbers, or private pathway-fit notes.
+
+The preview privacy threshold applies independently to every displayed group in every public view, including pending-age, process-stage, benchmark, outcome and pathway-fit views. When a group is below the threshold, its count and every derivative—median, longest wait, barrier, overdue count, chart mark, tooltip and accessible alternative—must be suppressed. Synopsis totals and legends must also avoid complementary disclosure that would let a reader derive a suppressed group. These implementation rules remain testable but are not narrated as public page copy.
 
 ### Pathway-fit capture
 

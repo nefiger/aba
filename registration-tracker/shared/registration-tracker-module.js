@@ -172,22 +172,35 @@
   currentStatus?.addEventListener("change", updateOfficialStage);
 
   const referenceIssued = document.getElementById("reference-issued");
-  referenceIssued?.addEventListener("change", (event) => {
-    const wrap = document.querySelector("[data-reference-reason]");
-    const reason = document.getElementById("reference-reason");
-    if (!wrap || !reason) return;
-    wrap.hidden = event.target.value !== "not-available";
+  const referenceReasonWrap = document.querySelector("[data-reference-reason]");
+  const referenceReason = document.getElementById("reference-reason");
+
+  function updateReferenceReason() {
+    if (!referenceIssued || !referenceReasonWrap || !referenceReason) return;
+    referenceReasonWrap.hidden = referenceIssued.value !== "not-available";
     // The wrapper's `hidden` state alone doesn't exempt a nested `required`
     // control from constraint validation, so toggle the constraint itself.
-    reason.required = !wrap.hidden;
-    if (wrap.hidden) reason.value = "";
-  });
+    referenceReason.required = !referenceReasonWrap.hidden;
+    if (referenceReasonWrap.hidden) referenceReason.value = "";
+  }
+
+  referenceIssued?.addEventListener("change", updateReferenceReason);
 
   const responsiblePersonStatus = document.getElementById("responsible-person-status");
-  responsiblePersonStatus?.addEventListener("change", (event) => {
-    const wrap = document.querySelector("[data-responsible-person-details]");
-    if (wrap) wrap.hidden = event.target.value !== "on-behalf";
-  });
+  const responsiblePersonDetails = document.querySelector("[data-responsible-person-details]");
+
+  function updateResponsiblePersonDetails() {
+    if (!responsiblePersonStatus || !responsiblePersonDetails) return;
+    responsiblePersonDetails.hidden = responsiblePersonStatus.value !== "on-behalf";
+    if (responsiblePersonDetails.hidden) {
+      responsiblePersonDetails.querySelectorAll("input, select, textarea").forEach((control) => {
+        if (control instanceof HTMLInputElement && ["checkbox", "radio"].includes(control.type)) control.checked = false;
+        else control.value = "";
+      });
+    }
+  }
+
+  responsiblePersonStatus?.addEventListener("change", updateResponsiblePersonDetails);
 
   // Intake sections are tabbed, not a gated wizard: any section can be opened at any
   // time, filled or not, so the participant can see the whole form before committing
@@ -288,8 +301,6 @@
   document.querySelector("[data-add-another]")?.addEventListener("click", () => {
     if (!intakeForm) return;
     intakeForm.reset();
-    document.querySelector("[data-reference-reason]")?.setAttribute("hidden", "");
-    document.querySelector("[data-responsible-person-details]")?.setAttribute("hidden", "");
     intakeForm.querySelectorAll(".field-error").forEach((error) => error.remove());
     intakeForm.querySelectorAll("[aria-invalid]").forEach((control) => {
       control.removeAttribute("aria-invalid");
@@ -306,6 +317,8 @@
     updateRegistrationTypeContract();
     updatePathwayFitDetails();
     updateOfficialStage();
+    updateReferenceReason();
+    updateResponsiblePersonDetails();
     showStage(1);
     intakeForm.hidden = false;
     intakeForm.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
@@ -314,4 +327,6 @@
   updateLegalPathway();
   updatePathwayFitDetails();
   updateOfficialStage();
+  updateReferenceReason();
+  updateResponsiblePersonDetails();
 })();

@@ -54,8 +54,20 @@
 
   function typeLabel(record) {
     if (record.registration_type_label) return record.registration_type_label;
-    if (record.legal_pathway === "fertilizer") return "Fertilizer pathway";
+    if (String(record.legal_pathway || "").trim().toLowerCase() === "fertilizer") return "Fertilizer pathway";
     return "Pathway not confirmed";
+  }
+
+  function isSuppressed(items) {
+    return items.length < threshold;
+  }
+
+  function publicValue(suppressed, value) {
+    return suppressed ? "Not shown" : String(value);
+  }
+
+  function publicThresholdCount(items) {
+    return isSuppressed(items) ? "Not shown" : `${threshold}+`;
   }
 
   function mostCommonBarrier(items) {
@@ -164,16 +176,13 @@
   const beyondPending = benchmarkEligiblePending.filter((record) => record.elapsed_days > record.official_timeframe_days);
   text('[data-summary="median-pending"]', String(medianPending));
   text('[data-summary="pending-count"]', String(pending.length));
-  text('[data-summary="beyond-count"]', `${beyondPending.length} of ${benchmarkEligiblePending.length}`);
+  text('[data-summary="beyond-count"]', String(beyondPending.length));
   text("[data-privacy-threshold]", String(threshold));
 
   const summaryQueue = document.querySelector("[data-summary-queue]");
-  const withinPending = benchmarkEligiblePending.length - beyondPending.length;
-  const unbenchmarkedPendingCount = pending.length - benchmarkEligiblePending.length;
   [
     ["overdue", beyondPending.length],
-    ["within", withinPending],
-    ["unbenchmarked", unbenchmarkedPendingCount],
+    ["other", pending.length - beyondPending.length],
   ].forEach(([state, count]) => {
     for (let index = 0; index < count; index += 1) {
       const marker = document.createElement("i");
@@ -184,10 +193,6 @@
 
   // 01 — ranked median pending time by sourced subtype / unbenchmarked pathway.
   const pendingGroups = groupBy(pending, typeLabel);
-  const pendingMax = Math.max(...pending.map((record) => record.elapsed_days));
-  const axisMax = Math.ceil(pendingMax / 100) * 100;
-  text("[data-pending-axis-max]", `${axisMax} days`);
-
   const pendingTable = document.querySelector("[data-pending-table]");
   const pendingGroupStats = [...pendingGroups.entries()]
     .map(([label, items]) => ({
@@ -195,18 +200,22 @@
       items,
       medianDays: median(items.map((item) => item.elapsed_days)),
       longestDays: Math.max(...items.map((item) => item.elapsed_days)),
+      suppressed: isSuppressed(items),
     }))
     .sort((a, b) => b.medianDays - a.medianDays);
-  const longestMedianGroup = pendingGroupStats[0];
+  const publicPendingMedians = pendingGroupStats.filter((group) => !group.suppressed).map((group) => group.medianDays);
+  const axisMax = Math.ceil(Math.max(...publicPendingMedians) / 100) * 100;
+  text("[data-pending-axis-max]", `${axisMax} days`);
+  const longestMedianGroup = pendingGroupStats.find((group) => !group.suppressed);
   text("[data-pending-answer]", `${longestMedianGroup.label} has the longest median pending time: ${longestMedianGroup.medianDays} days.`);
 
-  pendingGroupStats.forEach(({ label, items, medianDays, longestDays }) => {
+  pendingGroupStats.forEach(({ label, items, medianDays, longestDays, suppressed }) => {
     const tableRow = document.createElement("tr");
     tableRow.append(
       cell(label),
-      cell(String(items.length)),
-      cell(String(medianDays)),
-      cell(String(longestDays)),
+      cell(publicThresholdCount(items)),
+      cell(publicValue(suppressed, medianDays)),
+      cell(publicValue(suppressed, longestDays)),
     );
     pendingTable?.append(tableRow);
   });
@@ -237,17 +246,18 @@
       name: "Median pending time",
       type: "bar",
       barWidth: 22,
-      data: pendingGroupStats.map((group) => group.medianDays),
+      data: pendingGroupStats.map((group) => group.suppressed ? null : group.medianDays),
       itemStyle: { color: chartColors.forest },
       emphasis: { itemStyle: { color: chartColors.orange } },
       label: { show: true, position: "right", color: chartColors.forest, fontWeight: 800, formatter: "{c} days" },
       tooltip: {
         formatter: (params) => {
           const group = pendingGroupStats[params.dataIndex];
+          if (group.suppressed) return tooltipHtml(group.label, ["Values are not shown for small groups."]);
           return tooltipHtml(group.label, [
             `Median pending time: ${group.medianDays} days`,
             `Longest current wait: ${group.longestDays} days`,
-            `${group.items.length} pending application${group.items.length === 1 ? "" : "s"}`,
+            `At least ${threshold} pending applications`,
           ]);
         },
       },
@@ -276,17 +286,18 @@
       count: items.length,
       medianDays: items.length ? median(items.map((item) => item.days_in_stage)) : null,
       barrier: mostCommonBarrier(items),
+      suppressed: isSuppressed(items),
     };
   });
-  const busiestStage = [...stageStats].sort((a, b) => b.count - a.count)[0];
+  const busiestStage = stageStats.filter((item) => !item.suppressed).sort((a, b) => b.count - a.count)[0];
   text("[data-stage-answer]", `${busiestStage.stage} is the largest waiting group: ${busiestStage.count} of ${pending.length} pending applications.`);
-  stageStats.forEach(({ stage, count, medianDays, barrier }) => {
+  stageStats.forEach(({ stage, count, medianDays, barrier, suppressed }) => {
     const tableRow = document.createElement("tr");
     tableRow.append(
       cell(stage),
-      cell(String(count)),
-      cell(medianDays === null ? "—" : String(medianDays)),
-      cell(barrier),
+      cell(publicValue(suppressed, count)),
+      cell(suppressed ? "Not shown" : medianDays === null ? "—" : String(medianDays)),
+      cell(publicValue(suppressed, barrier)),
     );
     stageTable?.append(tableRow);
   });
@@ -323,7 +334,7 @@
       type: "bar",
       barMaxWidth: 76,
       data: stageStats.map((item) => ({
-        value: item.count,
+        value: item.suppressed ? null : item.count,
         itemStyle: { color: item.stage === busiestStage.stage ? chartColors.orange : chartColors.forest },
       })),
       label: { show: true, position: "top", color: chartColors.forest, fontSize: 14, fontWeight: 800 },
@@ -331,6 +342,7 @@
       tooltip: {
         formatter: (params) => {
           const item = stageStats[params.dataIndex];
+          if (item.suppressed) return tooltipHtml(item.stage, ["Values are not shown for small groups."]);
           return tooltipHtml(item.stage, [
             `${item.count} pending application${item.count === 1 ? "" : "s"}`,
             item.medianDays === null ? "No median wait available" : `Median time in stage: ${item.medianDays} days`,
@@ -438,12 +450,13 @@
   const benchmarkTable = document.querySelector("[data-benchmark-table]");
   const benchmarkStats = [...benchmarkGroups.entries()].map(([label, items]) => {
     const beyond = items.filter((item) => item.elapsed_days > item.official_timeframe_days).length;
+    const suppressed = isSuppressed(items);
     const tableRow = document.createElement("tr");
     tableRow.append(
       cell(`${label} — ${items[0].service_request_code}`),
       cell(`${items[0].official_timeframe_days} calendar days`),
-      cell(String(items.length)),
-      cell(String(beyond)),
+      cell(publicValue(suppressed, items.length)),
+      cell(publicValue(suppressed, beyond)),
     );
     benchmarkTable?.append(tableRow);
     return {
@@ -453,10 +466,10 @@
       percentBeyond: percent(beyond, items.length),
       code: items[0].service_request_code,
       timeframe: items[0].official_timeframe_days,
+      suppressed,
     };
   });
-  const unbenchmarkedPending = pending.length - benchmarkEligiblePending.length;
-  text("[data-benchmark-answer]", `${beyondPending.length} of ${benchmarkEligiblePending.length} eligible pending applications are overdue. The figure excludes ${unbenchmarkedPending} Fertilizer applications because their applicable timeframe has not been confirmed.`);
+  text("[data-benchmark-answer]", `${beyondPending.length} eligible pending applications are overdue. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`);
 
   mountChart("[data-chart='benchmark']", {
     grid: { top: 26, right: 76, bottom: 44, left: 250 },
@@ -487,7 +500,7 @@
       barWidth: 24,
       showBackground: true,
       backgroundStyle: { color: chartColors.sageWash },
-      data: benchmarkStats.map((item) => item.percentBeyond),
+      data: benchmarkStats.map((item) => item.suppressed ? null : item.percentBeyond),
       itemStyle: { color: chartColors.orange },
       emphasis: { itemStyle: { color: chartColors.orangeLight } },
       label: {
@@ -500,6 +513,7 @@
       tooltip: {
         formatter: (params) => {
           const item = benchmarkStats[params.dataIndex];
+          if (item.suppressed) return tooltipHtml(`${item.label} — ${item.code}`, ["Values are not shown for small groups."]);
           return tooltipHtml(`${item.label} — ${item.code}`, [
             `${item.beyond} of ${item.items.length} pending applications are overdue`,
             `${item.percentBeyond}% overdue`,
@@ -517,7 +531,7 @@
     }],
   }, {
     dataCount: benchmarkStats.length,
-    description: `${beyondPending.length} of ${benchmarkEligiblePending.length} eligible pending applications are beyond the published timeframe. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`,
+    description: `${beyondPending.length} eligible pending applications are beyond the published timeframe. Fertilizer applications are excluded because their applicable timeframe has not been confirmed.`,
   });
 
   // 05 — pathway fit with reason-level threshold suppression.

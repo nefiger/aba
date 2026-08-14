@@ -240,6 +240,7 @@ function buildReviewGroups(form) {
     const items = [];
     const collect = (container) => {
       [...container.children].forEach((child) => {
+        if (child.hidden) return;
         if (child.matches(".field-grid")) { collect(child); return; }
         if (child.matches(".field") || child.matches(".choice")) {
           items.push({ label: reviewRowLabel(child), value: reviewRowValue(child) });

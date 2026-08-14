@@ -1392,11 +1392,6 @@
   background: var(--tracker-orange-dark);
 }
 
-.tracker-module--data-infographic .tracker-summary-queue i[data-state="unbenchmarked"] {
-  border: 1px solid var(--tracker-forest);
-  background: transparent;
-}
-
 .tracker-module--data-infographic .tracker-summary-key {
   display: flex;
   grid-column: 1 / -1;
@@ -1432,11 +1427,6 @@
 
 .tracker-module--data-infographic .tracker-summary-key [data-key="overdue"]::before {
   background: var(--tracker-orange-dark);
-}
-
-.tracker-module--data-infographic .tracker-summary-key [data-key="unbenchmarked"]::before {
-  border: 1px solid var(--tracker-forest);
-  background: transparent;
 }
 
 .tracker-module--data-infographic .tracker-infographic-body {

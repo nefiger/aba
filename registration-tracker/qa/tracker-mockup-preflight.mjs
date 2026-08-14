@@ -24,6 +24,8 @@ const sources = Object.fromEntries(
 
 const moduleJsPath = "registration-tracker/shared/registration-tracker-module.js";
 const moduleJs = await readFile(path.join(repoRoot, moduleJsPath), "utf8");
+const appJsPath = "soft-launch/prototype/assets/app.js";
+const appJs = await readFile(path.join(repoRoot, appJsPath), "utf8");
 const referenceJsPath = "registration-tracker/shared/registration-tracker-reference-data.js";
 const referenceJs = await readFile(path.join(repoRoot, referenceJsPath), "utf8");
 
@@ -212,6 +214,7 @@ requireMatch("insights", /class="[^"]*tracker-module--data-infographic[^"]*"/i, 
 requireMatch("insights", /class="[^"]*tracker-module--signal-infographic[^"]*"/i, "regulatory signal-infographic composition");
 requireMatch("insights", /data-summary-queue[\s\S]*Median pending time by registration type\. Hover, tap, or use the arrow keys for exact values\./i, "compact synopsis and self-explaining interactive median-wait chart");
 requireMatch("insights", /data-summary="median-pending"[\s\S]*Median pending time[\s\S]*data-summary="pending-count"[\s\S]*applications pending/i, "median as first pending-time summary");
+forbidMatch("insights", /data-key="(?:within|unbenchmarked)"/i, "complementary disclosure of a below-threshold benchmark group in the synopsis");
 requireMatch("insights", /Fertilizer applications contribute to the overall and process-stage figures[\s\S]*left out of the overdue figure[\s\S]*has not confirmed the applicable published timeframe/i, "visible user-focused Fertilizer benchmark consequence");
 for (const hook of ["data-pending-table", "data-stage-table", "data-outcome-table", "data-benchmark-table", "data-pathway-table"]) {
   requireMatch("insights", new RegExp(hook), `accessible chart data alternative ${hook}`);
@@ -233,6 +236,30 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   else checks.push("insights.js: charts include ARIA descriptions, responsive resize, and keyboard tooltip navigation");
   if (!/03 — grouped outcomes/.test(renderJs) || /stack:\s*["']/.test(renderJs)) failures.push("insights.js: outcome comparison must use grouped bars, not stacked bars");
   else checks.push("insights.js: outcome comparison uses grouped bars with a common baseline");
+  if (!/String\(record\.legal_pathway \|\| ""\)\.trim\(\)\.toLowerCase\(\) === "fertilizer"/.test(renderJs)) failures.push("insights.js: Fertilizer pathway comparison is case-sensitive and can mislabel seed records");
+  else checks.push("insights.js: Fertilizer pathway labels are normalized case-insensitively");
+
+  const privacySections = [
+    {
+      name: "pending",
+      source: renderJs.slice(renderJs.indexOf("// 01 —"), renderJs.indexOf("// 02 —")),
+      patterns: [/suppressed:\s*isSuppressed\(items\)/, /cell\(publicThresholdCount\(items\)\)/, /group\.suppressed \? null : group\.medianDays/],
+    },
+    {
+      name: "stage",
+      source: renderJs.slice(renderJs.indexOf("// 02 —"), renderJs.indexOf("// 03 —")),
+      patterns: [/suppressed:\s*isSuppressed\(items\)/, /cell\(publicValue\(suppressed, count\)\)/, /item\.suppressed \? null : item\.count/],
+    },
+    {
+      name: "benchmark",
+      source: renderJs.slice(renderJs.indexOf("// 04 —"), renderJs.indexOf("// 05 —")),
+      patterns: [/const suppressed = isSuppressed\(items\)/, /cell\(publicValue\(suppressed, beyond\)\)/, /item\.suppressed \? null : item\.percentBeyond/],
+    },
+  ];
+  privacySections.forEach((section) => {
+    if (!section.source || section.patterns.some((pattern) => !pattern.test(section.source))) failures.push(`insights.js: ${section.name} output does not independently suppress below-threshold table and chart values`);
+    else checks.push(`insights.js: ${section.name} table and chart values independently enforce the privacy threshold`);
+  });
 
   const sandbox = { window: {} };
   runInNewContext(referenceJs, sandbox);
@@ -260,8 +287,18 @@ requireMatch("insights", /registration-tracker-insights\.js/, "insights page loa
   }
 }
 
-if (!/items\.length < threshold/.test(await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8"))) failures.push("insights.js: missing thresholded small-group hiding");
-else checks.push("insights.js: small groups hidden by the internal privacy threshold");
+if (!/function isSuppressed\(items\)[\s\S]{0,100}items\.length < threshold/.test(await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8"))) failures.push("insights.js: missing shared small-group suppression predicate");
+else checks.push("insights.js: small-group suppression uses the shared privacy-threshold predicate");
+
+if (!/function publicThresholdCount\(items\)[\s\S]{0,140}`\$\{threshold\}\+`/.test(await readFile(path.join(repoRoot, "registration-tracker/shared/registration-tracker-insights.js"), "utf8"))) failures.push("insights.js: pending-group counts permit complementary disclosure from the headline total");
+else checks.push("insights.js: pending-group counts are threshold-bucketed to prevent complementary disclosure");
+
+if (!/function updateReferenceReason\(\)[\s\S]{0,420}referenceReason\.required = !referenceReasonWrap\.hidden/.test(moduleJs)
+  || !/intakeForm\.reset\(\)[\s\S]{0,900}updateReferenceReason\(\)/.test(moduleJs)) failures.push(`${moduleJsPath}: reset does not reapply the hidden reference-reason requirement state`);
+else checks.push(`${moduleJsPath}: add-another reset clears the hidden reference-reason requirement`);
+
+if (!/if \(child\.hidden\) return;/.test(appJs)) failures.push(`${appJsPath}: review builder includes fields inside hidden conditional groups`);
+else checks.push(`${appJsPath}: review builder excludes hidden conditional groups`);
 
 forbidMatch("insights", /this period/i, "undefined 'this period' language (use a stated, defined reporting basis instead)");
 

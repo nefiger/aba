@@ -3,6 +3,18 @@
 Last updated: 2026-08-14
 Gate: G3 in progress
 
+## Registration Tracker review corrections — 14 August 2026
+
+- extended the preview privacy threshold across pending-age, process-stage and benchmark groups so a group below three exposes neither its count nor derived medians, waits, barriers, overdue values, chart marks or tooltips;
+- removed the synopsis split that allowed the two unbenchmarked Fertilizer applications to be inferred by subtraction and threshold-bucketed the remaining pending-group counts so the headline total cannot reconstruct the four suppressed groups;
+- normalized legal-pathway matching so the four illustrative Fertilizer records render as `Fertilizer pathway` rather than `Pathway not confirmed`;
+- corrected `Add another registration` so a previously required reference explanation is cleared, hidden and no longer required after reset;
+- changed the review builder to omit hidden conditional groups, removing irrelevant pathway-mismatch, private-note, responsible-person-detail and reference-explanation rows;
+- made the tracker preflight assert the privacy contract separately for pending, stage and benchmark sections instead of accepting one suppression expression anywhere in the script;
+- added runtime privacy and intake assertions to the responsive browser gate and added the Resources route to its tracker coverage;
+- committed the machine-readable browser evidence in `registration-tracker/qa/tracker-browser-report.json`: all four tracker routes pass at 320, 375, 768, 1024 and 1440 CSS px with zero blocking failures, and targeted functional runs report no browser console errors or warnings;
+- the tracker static preflight passes 176 checks, the public-site static preflight passes, the responsive renderer reports zero blocking failures with 42 distinct heading-wrap review warnings, and `git diff --check` passes.
+
 ## Registration insights infographic page type — 14 August 2026
 
 - corrected tracker-module selector leakage so route heading, paragraph and list rules apply only inside `main`; the shared header and `<aba-footer>` now retain the canonical shell typography on every active tracker route;
@@ -21,7 +33,7 @@ Gate: G3 in progress
 - rewrote the Resources coverage section to say directly that new Agricultural remedy and Fertilizer applications are accepted, while reinstatements are not collected;
 - replaced `preparation delays` with a three-item action check covering matching forms, proof of payment and the biological-reference-sample requirement;
 - clarified the intake consequence: Fertilizer applications contribute to general insights but are not labelled overdue until the applicable timeframe is confirmed; reinstatement selection blocks the form with a direct explanation;
-- the tracker static preflight passes 168 checks, the public-site static preflight passes, `git diff --check` passes and the responsive renderer reports zero blocking failures across 320, 375, 768, 1024 and 1440 CSS px.
+- the tracker static preflight passes 176 checks after the later privacy-contract corrections, the public-site static preflight passes, `git diff --check` passes and the responsive renderer reports zero blocking failures across 320, 375, 768, 1024 and 1440 CSS px.
 
 ## Registration Tracker public-copy and colour correction — 14 August 2026
 

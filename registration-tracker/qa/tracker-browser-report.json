@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "generated_on": "2026-08-14",
+  "base_url": "http://127.0.0.1:8766/",
+  "source_harness": "soft-launch/qa/public-site-render-check.html",
+  "commit_baseline": "d27fbd8",
+  "blocking_failure_count": 0,
+  "contract_checks": [
+    {
+      "id": "privacy-pending-groups",
+      "status": "pass",
+      "assertion": "All pending groups below the threshold of 3 show Not shown for count, median and longest wait, and render no chart value."
+    },
+    {
+      "id": "privacy-stage-groups",
+      "status": "pass",
+      "assertion": "All process-stage groups below the threshold of 3 show Not shown for count, median and barrier, and render no chart value."
+    },
+    {
+      "id": "privacy-benchmark-groups",
+      "status": "pass",
+      "assertion": "All benchmark groups below the threshold of 3 show Not shown for pending and overdue counts, and render no chart value."
+    },
+    {
+      "id": "privacy-complementary-disclosure",
+      "status": "pass",
+      "assertion": "The synopsis does not split the below-threshold unbenchmarked group, and reportable pending-group counts are threshold-bucketed so the headline total cannot reveal suppressed groups by subtraction."
+    },
+    {
+      "id": "fertilizer-label-normalization",
+      "status": "pass",
+      "assertion": "Four rendered references use Fertilizer pathway and zero use Pathway not confirmed."
+    },
+    {
+      "id": "add-another-reference-reset",
+      "status": "pass",
+      "assertion": "After a not-issued reference submission, Add another registration hides, clears and removes required from the reference explanation."
+    },
+    {
+      "id": "review-hidden-fields",
+      "status": "pass",
+      "assertion": "A fits/self/issued submission review excludes pathway-mismatch, private-note, responsible-person-detail and reference-explanation rows."
+    },
+    {
+      "id": "browser-console",
+      "status": "pass",
+      "assertion": "No browser errors or warnings were observed during the targeted functional run."
+    }
+  ],
+  "responsive_routes": [
+    {
+      "route": "registration-tracker.html",
+      "widths": {
+        "320": { "blocking_failures": 0, "heading_wrap_warnings": 3 },
+        "375": { "blocking_failures": 0, "heading_wrap_warnings": 2 },
+        "768": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1024": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
+      }
+    },
+    {
+      "route": "tracker intake",
+      "widths": {
+        "320": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "375": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "768": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1024": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
+      }
+    },
+    {
+      "route": "registration insights",
+      "widths": {
+        "320": { "blocking_failures": 0, "heading_wrap_warnings": 6 },
+        "375": { "blocking_failures": 0, "heading_wrap_warnings": 6 },
+        "768": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1024": { "blocking_failures": 0, "heading_wrap_warnings": 0 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
+      }
+    },
+    {
+      "route": "tracker resources",
+      "widths": {
+        "320": { "blocking_failures": 0, "heading_wrap_warnings": 5 },
+        "375": { "blocking_failures": 0, "heading_wrap_warnings": 5 },
+        "768": { "blocking_failures": 0, "heading_wrap_warnings": 1 },
+        "1024": { "blocking_failures": 0, "heading_wrap_warnings": 1 },
+        "1440": { "blocking_failures": 0, "heading_wrap_warnings": 0 }
+      }
+    }
+  ]
+}

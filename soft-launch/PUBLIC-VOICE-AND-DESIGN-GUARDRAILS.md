@@ -106,6 +106,7 @@ not composed like an editorial brochure or a software dashboard.
 - Use a maintained charting library for public interactive data graphics rather than hand-building plot geometry. The current static tracker standard is a pinned local Apache ECharts 6.1 bundle with SVG rendering.
 - Every interactive chart must provide hover and tap tooltips, a visible keyboard focus state, arrow-key value navigation, responsive resizing and an ARIA description. Hover must not be the only path to meaning.
 - Keep tables as accessible alternatives and provenance as a quiet disclosure rather than part of the main composition.
+- Apply the approved privacy threshold independently to every displayed group in every chart and table. Suppress the count and all derived values, chart marks, tooltips and accessible alternatives for a below-threshold group, and avoid synopsis or legend breakdowns that disclose the group by subtraction.
 
 The brochure also governs narrative order and naming. Prefer its real concepts—`African agriculture is at a crossroads`, `advocacy and representation`, `enabling environment and harmonisation`, `local manufacturing and circularity`, `membership, chapters and governance`, and `product clarity and sector credibility`—where they remain accurate. The claims matrix still decides what may be described as current, developing or unavailable; brochure language is not permission to publish an unsupported promise.
 

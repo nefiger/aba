@@ -45,6 +45,7 @@
       { label: "privacy.html", path: "../prototype/privacy.html" },
       { label: "tracker intake", path: "../../registration-tracker/intake-flow/index.html" },
       { label: "registration insights", path: "../../registration-tracker/public-dashboard/index.html" },
+      { label: "tracker resources", path: "../../registration-tracker/resources/index.html" },
     ];
     const widths = [320, 375, 768, 1024, 1440];
     const button = document.querySelector("#run");
@@ -57,6 +58,111 @@
       const parsed = Number.parseFloat(styles.lineHeight);
       const lineHeight = Number.isFinite(parsed) ? parsed : Number.parseFloat(styles.fontSize) * 1.2;
       return Math.max(1, Math.round(element.getBoundingClientRect().height / lineHeight));
+    }
+
+    function trackerPrivacyFailures(documentUnderTest, windowUnderTest) {
+      const reference = windowUnderTest.ABA_TRACKER_REFERENCE;
+      const seed = windowUnderTest.ABA_TRACKER_INSIGHTS_SEED;
+      if (!reference || !Array.isArray(seed)) return ["privacy check could not read the tracker reference data and illustrative records"];
+      const threshold = reference.privacy_threshold_preview;
+      const records = seed.filter((record) => record.review_status === "approved_for_insights" && record.public_inclusion === true);
+      const pending = records.filter((record) => record.outcome === "pending");
+      const typeLabel = (record) => record.registration_type_label
+        || (String(record.legal_pathway || "").trim().toLowerCase() === "fertilizer" ? "Fertilizer pathway" : "Pathway not confirmed");
+      const groupBy = (items, key) => items.reduce((groups, item) => {
+        const value = typeof key === "function" ? key(item) : item[key];
+        if (!groups.has(value)) groups.set(value, []);
+        groups.get(value).push(item);
+        return groups;
+      }, new Map());
+      const rows = (selector) => new Map([...documentUnderTest.querySelectorAll(`${selector} tr`)].map((row) => {
+        const cells = [...row.cells].map((cell) => cell.textContent.trim());
+        return [cells[0], cells];
+      }));
+      const failures = [];
+      const assertSuppressed = (label, items, tableRows, valueIndexes) => {
+        if (items.length >= threshold) return;
+        const cells = tableRows.get(label);
+        if (!cells || valueIndexes.some((index) => cells[index] !== "Not shown")) failures.push(`${label}: below-threshold values remain visible`);
+      };
+
+      const pendingRows = rows("[data-pending-table]");
+      groupBy(pending, typeLabel).forEach((items, label) => assertSuppressed(label, items, pendingRows, [1, 2, 3]));
+      pendingRows.forEach((cells, label) => {
+        if (cells[1] !== "Not shown" && cells[1] !== `${threshold}+`) failures.push(`${label}: exact pending-group count permits complementary disclosure`);
+      });
+
+      const stageRows = rows("[data-stage-table]");
+      groupBy(pending, "official_stage").forEach((items, label) => assertSuppressed(label, items, stageRows, [1, 2, 3]));
+
+      const benchmarkRows = rows("[data-benchmark-table]");
+      groupBy(pending.filter((record) => Number.isFinite(record.official_timeframe_days)), typeLabel)
+        .forEach((items, label) => {
+          const rowLabel = [...benchmarkRows.keys()].find((candidate) => candidate.startsWith(`${label} —`));
+          assertSuppressed(rowLabel, items, benchmarkRows, [2, 3]);
+        });
+
+      const text = documentUnderTest.body.textContent;
+      if (records.some((record) => String(record.legal_pathway).toLowerCase() === "fertilizer") && !text.includes("Fertilizer pathway")) failures.push("Fertilizer records are not labelled as Fertilizer pathway");
+      if (text.includes("Pathway not confirmed")) failures.push("known Fertilizer records are mislabelled as Pathway not confirmed");
+      const synopsis = documentUnderTest.querySelector(".tracker-insight-summary")?.textContent || "";
+      if (/Timeframe not confirmed|Within timeframe/.test(synopsis)) failures.push("synopsis exposes a complementary below-threshold benchmark group");
+      return failures;
+    }
+
+    function trackerIntakeFailures(documentUnderTest, windowUnderTest) {
+      const failures = [];
+      const form = documentUnderTest.querySelector("[data-prototype-form='tracker-intake']");
+      const setValue = (selector, value) => {
+        const control = documentUnderTest.querySelector(selector);
+        control.value = value;
+        control.dispatchEvent(new windowUnderTest.Event("input", { bubbles: true }));
+        control.dispatchEvent(new windowUnderTest.Event("change", { bubbles: true }));
+      };
+      const check = (selector) => {
+        const control = documentUnderTest.querySelector(selector);
+        control.checked = true;
+        control.dispatchEvent(new windowUnderTest.Event("change", { bubbles: true }));
+      };
+
+      setValue("#reference-issued", "not-available");
+      const reason = documentUnderTest.querySelector("#reference-reason");
+      if (!reason.required) failures.push("reference explanation is not required when the reference is unavailable");
+      documentUnderTest.querySelector("[data-add-another]").click();
+      if (reason.required || !reason.closest("[data-reference-reason]").hidden) failures.push("Add another registration retains a hidden required reference explanation");
+
+      setValue("#participant-name", "Browser QA");
+      setValue("#participant-email", "browser-qa@example.org");
+      setValue("#participant-role", "Regulatory lead");
+      setValue("#organisation-name", "Example organisation");
+      setValue("#organisation-role", "Manufacturer");
+      setValue("#organisation-country", "South Africa");
+      check("#authority-confirmation");
+      check("#contact-permission");
+      setValue("#product-name", "Example product");
+      setValue("#aba-product-category", "Biofertiliser");
+      setValue("#registrar-function", "Insecticide");
+      setValue("#legal-pathway", "fertilizer");
+      setValue("#pathway-fit", "fits");
+      setValue("#current-status", "In evaluation");
+      setValue("#status-date", "2026-01");
+      setValue("#reference-issued", "issued");
+      check("#submission-confirmed");
+      setValue("#sacnasp-status", "Registered with SACNASP");
+      setValue("#responsible-person-status", "self");
+      check("#insight-acknowledgement");
+      form.querySelector("button[type='submit']").click();
+      const reviewText = documentUnderTest.querySelector("[data-review-groups]")?.textContent || "";
+      [
+        "Which pathway do you believe fits better?",
+        "Private note",
+        "Approved or responsible person name",
+        "Authority or appointment information",
+        "Why is the expected reference unavailable?",
+      ].forEach((label) => {
+        if (reviewText.includes(label)) failures.push(`review includes irrelevant hidden field: ${label}`);
+      });
+      return failures;
     }
 
     function loadRoute(route, width) {
@@ -84,6 +190,8 @@
             const failures = [];
             const warnings = [];
             if (overflow > 1) failures.push(`horizontal overflow: ${overflow}px`);
+            if (route.label === "registration insights" && width === 1440) failures.push(...trackerPrivacyFailures(documentUnderTest, frame.contentWindow));
+            if (route.label === "tracker intake" && width === 1440) failures.push(...trackerIntakeFailures(documentUnderTest, frame.contentWindow));
             headings.forEach((heading) => {
               if (heading.level === "h1" && heading.lines > 1) failures.push(`page title wraps (${heading.lines} lines): ${heading.text}`);
               if (heading.level !== "h1" && heading.lines > 1) {
