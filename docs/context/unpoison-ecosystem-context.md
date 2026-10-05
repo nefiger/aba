@@ -65,6 +65,7 @@ These are the most important structured records currently available:
 | 2026-08-28 | `reference/shared/transcripts/2026-08-28-regulator-agenda-and-hhp-briefing-note.md` | Act 36 engagement, registry, derogations, Substances of Concern and HHP orientation |
 | 2026-09-03–04 | `reference/shared/transcripts/2026-09-03-04-anna-deshni-kbf-correspondence.md` | KBF/UNDP proposition and relationship between policy, ABA, Healthy Hectare and the platform |
 | 2026-09-05 | `reference/shared/transcripts/2026-09-05-anna-jen-lyle-priorities-meeting-notes.md` | ABA launch, member intake, tracker validation and African HHP demonstration |
+| 2026-09-22 | `reference/shared/transcripts/2026-09-22-member-feedback-on-tracker-workbook.md` | First member trial, minimal workbook design, fertiliser-pathway mismatch and multi-reason pathway-fit capture |
 | 2026-10-01 | `reference/aba/strategy/2026-10-01-sector-capture-and-launch-context.md` | Sector-capture threat analysis and controlled-launch implications |
 
 The transcript notes preserve decisions and actions extracted from source conversations. For important or disputed wording, return to the original source transcript or correspondence identified in the note.
@@ -102,4 +103,3 @@ When a meeting changes ABA strategy, product scope or launch direction:
 2. Update the monorepo decision log/current-context documents where appropriate.
 3. Update this gateway only when the reading path or durable summary changes.
 4. Record specific prototype consequences in this ABA repository's requirements or decision register.
-
