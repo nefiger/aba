@@ -62,3 +62,9 @@ That means:
 - This is a demo suite, not a production application.
 - Optimize for clear story, believable product logic, and easy live walkthroughs.
 - Keep major artifacts in their own folders rather than flattening new pages into `docs/`.
+
+## Wider Ecosystem Context
+
+ABA sits within a wider UnPoison ecosystem spanning regulatory advocacy, the HHP/crop-transition platform and Healthy Hectare. Cross-initiative strategy, meetings, funding, deadlines and decisions are maintained in the separate `unpoison-ecosystem` monorepo rather than duplicated here.
+
+Before strategy, membership, Registration Tracker, regulatory, launch or cross-project work, read [`docs/context/unpoison-ecosystem-context.md`](./docs/context/unpoison-ecosystem-context.md). It provides the local and remote source paths and the current ABA-relevant meeting reading list.

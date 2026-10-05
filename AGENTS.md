@@ -46,6 +46,10 @@ Before making substantial changes, read these files first:
   current status, open work, and key files
 - `docs/requirements/african-biologicals-alliance-html-spec.md`
   broader website structure and messaging spec
+- `docs/context/unpoison-ecosystem-context.md`
+  mandatory gateway to current UnPoison ecosystem strategy, meeting notes, decisions, deadlines, funding and sibling project context
+
+When `/Users/nefiger/projects/unpoison-ecosystem` is available locally, read the live files linked by the context gateway before making strategic, regulatory, membership, tracker, launch or cross-project assumptions. This ABA repo governs the reviewed prototype experience; the UnPoison Ecosystem monorepo governs shared meeting records and cross-initiative decisions.
 
 When working in the new soft-launch workspace, also read:
 
