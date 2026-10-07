@@ -84,7 +84,7 @@ Read these when working on related surfaces:
 - Treat `docs/index.html` as internal working/demo material unless explicitly told otherwise.
 - Every prototype surface should read as the real product for its intended audience. Do not leave meta narration, repo explanation, prototype framing, or internal instructional copy visible inside the UI unless the user explicitly asks for that treatment.
 - Preserve the core ABA framing:
-  Africa-wide participation, South Africa currently active, registration tracker as a member-value and advocacy engine.
+  pan-African evidence, regulatory intelligence and industry representation for biological agriculture; registration tracker as regulatory intelligence infrastructure. South Africa is a factual note (where founding members and current regulatory work are based, and what the tracker covers), never a headline or the framing. Follow `docs/requirements/aba-public-positioning-and-language-brief.md`.
 - If you add new pages for a workspace, keep relative links stable from that folder back to the hub.
 - Typography rule across the entire site:
   do not set `max-width` constraints on headings.

@@ -1,10 +1,24 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-08-03
+Last updated: 2026-10-07
 
 ---
 
 ## Current state
+
+### Public positioning alignment for the quiet launch (2026-10-07)
+
+Jen decided the public copy must be final before ABA makes a splash, so the existing prototype was brought in line with Anna's expansion strategy. The strategy is an internal red-team document. Its threat analysis never appears in public copy. Only its positioning rules do.
+
+- **Read first:** `docs/requirements/aba-public-positioning-and-language-brief.md` (proposition, claims we can and cannot make, wording table, tracker framing) and `docs/requirements/aba-public-copy-audit-2026-10-07.md` (every change, current and new wording).
+- **Proposition:** building the regulatory and commercial environment for biological agriculture across Africa. Membership sits underneath. Do not headline South Africa, name or position against SABO or any competitor, say "easier" or "faster" registration, claim countries, markets or members, or claim regulator recognition. The language to use is proportionate, science-based, risk-appropriate regulation.
+- **Decisions taken with Jen:** South Africa is one factual sentence on About and the factual scope on the tracker, nowhere else (AGENTS.md updated). "Members decide / agree" became participation language. The central line is the first sentence of the home lede, because hero titles must stay on one line. The illustrative insights page is unlinked from public pages (still in the repo). Tracker corrections go to info@africanbiologicalsalliance.org. The four member-logo placeholders on home were removed because members have not consented to being named.
+- **Open dependency for the tracker workstream (not touched here):** the tracker landing now says each published finding shows its source and when it was last checked, and the privacy page says tracker submissions are kept apart from member records and never used as sales leads. Provenance labels (official regulator, manufacturer verified, ABA researched, unverified), "last verified" dates and that data separation must exist before findings are published, or the copy is wrong. The site showing "Insufficient data" is a staged module, not a completed tracker rollout.
+- **Copy that changes with state:** membership interest becoming open applications, named consented member logos, and the tracker moving from "Insufficient data" to findings. Swap those blocks. Do not rewrite the voice.
+- **Open decision, still Jen's:** whether a documented consultation process exists at launch. Home and About currently say ABA "develops positions with members and technical advisers before it speaks". If a documented process and publication of positions will exist, the wording can be strengthened.
+- **Not changed, flagged:** the member application asks about multinational ownership or control. Eligibility is not a settled governance decision, so the form was left alone.
+- **Checks:** `public-site-preflight.mjs` passes, the tracker preflight passes 181 checks, and the render check reports zero blocking failures with 42 heading-wrap warnings. Only desktop was inspected visually. Mobile full-page captures were not taken.
+- **Cache key:** `app.js` is `?v=20261007a` everywhere. No CSS changed.
 
 ### Member application brought into the design system; archive link hidden (2026-08-03)
 

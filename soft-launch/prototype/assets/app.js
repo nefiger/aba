@@ -52,7 +52,7 @@ class AbaFooter extends HTMLElement {
         <div class="shell site-footer__main">
           <div class="site-footer__brand">
             <img src="${base}assets/aba-logo-final.png" alt="African Biologicals Alliance">
-            <p>An African alliance working on the regulatory and market barriers that biologicals companies cannot solve alone.</p>
+            <p>Building the regulatory and commercial environment for biological agriculture across Africa.</p>
           </div>
           <div class="site-footer__nav">
             <section aria-labelledby="footer-explore">
@@ -73,7 +73,7 @@ class AbaFooter extends HTMLElement {
             </section>
           </div>
         </div>
-        <div class="shell site-footer__legal">African Biologicals Alliance · <span data-year></span> · Based in South Africa and open to participation across Africa.</div>
+        <div class="shell site-footer__legal">African Biologicals Alliance · <span data-year></span></div>
       </footer>`;
     this.querySelector("[data-year]").textContent = new Date().getFullYear();
   }
