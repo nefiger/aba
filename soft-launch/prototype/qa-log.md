@@ -1,7 +1,21 @@
 # Reference Prototype QA Log
 
-Last updated: 2026-08-14
+Last updated: 2026-10-07
 Gate: G3 in progress
+
+## Public positioning alignment — 7 October 2026
+
+- brought the public copy in line with `docs/requirements/aba-public-positioning-and-language-brief.md`; line-level edits only, no layout or CSS changes (audit: `docs/requirements/aba-public-copy-audit-2026-10-07.md`);
+- home: hero lede leads with the central line, the "Why ABA exists" block adds the national-associations line, the membership cycle moves from "decide" and "agree" to "bring" and "help shape", and the four unconsented "Member logo / Pending" placeholders are removed;
+- about: harmonisation pillar rewritten as proportionate, science-based, risk-appropriate regulation, "South Africa first" removed, the South Africa section reduced to one factual sentence, and an integrated pest management and farmer-choice sentence added;
+- membership: "decide" language replaced and a no-endorsement sentence added;
+- tracker landing: lede made evidence-led and the insights block replaced with an "Insufficient data" state; the landing, privacy page and intake success screen no longer link to the illustrative insights page, which stays in the repository, unlinked;
+- privacy: added the structural-separation statement and the corrections address; shared footer brand line and legal line changed (South Africa removed from the footer);
+- removed four em dashes and one release-narration line; root gateway labels ("Soft launch", "July 2026", "Current release") removed;
+- `app.js` cache key moved to `?v=20261007a` on every referencing page; `styles.css` and the tracker module CSS are unchanged;
+- shortened three headings that gained a wrap (`Regulation differs at every border.`, `Open across Africa.`, `Working groups`); the home `Regulation differs at every border.` still wraps to two lines at 320 and 375px, reviewed and accepted as with the other supporting headings;
+- `public-site-preflight.mjs` passes, the tracker preflight passes 181 checks, and the responsive render check reports zero blocking failures with 42 heading-wrap review warnings (the earlier baseline);
+- visually confirmed at one desktop width only: the tracker landing "Insufficient data" band, the home founding-members section after the placeholder removal, and the root gateway. Mobile full-page captures were not taken this session.
 
 ## Registration Tracker pre-review polish — 14 August 2026
 

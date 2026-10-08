@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700;100,800&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Saira+Semi+Condensed:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../soft-launch/prototype/assets/styles.css?v=20260814e">
   <link rel="stylesheet" href="../shared/registration-tracker-module.css?v=20260814m">
-  <script src="../../soft-launch/prototype/assets/app.js?v=20260814c" defer></script>
+  <script src="../../soft-launch/prototype/assets/app.js?v=20261007a" defer></script>
   <script src="../shared/registration-tracker-reference-data.js?v=20260814a" defer></script>
   <script src="../shared/registration-tracker-module.js?v=20260814e" defer></script>
 </head>
@@ -196,7 +196,7 @@
                   <option>Not sure</option>
                 </select>
               </div>
-              <div class="field"><label for="status-date">Month this status began <span aria-hidden="true">*</span></label><input id="status-date" name="status_date" type="month" required><small>A best estimate is fine — this does not need to be the exact day.</small></div>
+              <div class="field"><label for="status-date">Month this status began <span aria-hidden="true">*</span></label><input id="status-date" name="status_date" type="month" required><small>A best estimate is fine. This does not need to be the exact day.</small></div>
               <div class="field"><label for="reference-issued">Have you received an official reference? <span aria-hidden="true">*</span></label>
                 <select id="reference-issued" name="reference_issued" required>
                   <option value="">Select one</option>
@@ -204,7 +204,7 @@
                   <option value="not-available">Not issued or unavailable</option>
                   <option value="unknown">Unknown</option>
                 </select>
-                <small>You won't be asked for the number itself — only whether one exists.</small>
+                <small>You won't be asked for the number itself, only whether one exists.</small>
               </div>
               <div class="field" data-reference-reason hidden><label for="reference-reason">Why is the expected reference unavailable? <span aria-hidden="true">*</span></label><textarea id="reference-reason" name="reference_reason"></textarea></div>
             </div>
@@ -281,7 +281,6 @@
           <p><a href="../../soft-launch/prototype/privacy.html#registration-tracker">Read the Privacy and data use explanation</a>.</p>
           <div class="form-actions">
             <button class="button button--orange" type="button" data-add-another>Add another registration</button>
-            <a class="button button--outline" href="../public-dashboard/index.html">View registration insights</a>
             <a class="button button--outline" href="../../soft-launch/prototype/registration-tracker.html">Return to the Registration Tracker</a>
           </div>
         </section>
