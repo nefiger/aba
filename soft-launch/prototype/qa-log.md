@@ -1,7 +1,15 @@
 # Reference Prototype QA Log
 
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 Gate: G3 in progress
+
+## Illustrative insights link restored with watermark — 8 October 2026
+
+- Anna uses the registration insights page for demos, so the `View illustrative insights` button is back on the Registration Tracker landing page, under the `Insufficient data.` band. The privacy page and the intake success screen still do not link to it;
+- the insights page now carries a tiled `ILLUSTRATIVE DATA` watermark across the whole of `main`, so a screenshot of any single chart shows the label. It is a CSS pseudo-element with `pointer-events: none`, so chart tooltips and keyboard navigation are unaffected. The page's own label text is unchanged because the tracker preflight asserts its exact wording;
+- the tracker preflight gained a check that `main` carries the watermark class (182 checks pass), the public-site preflight passes, and the responsive render check reports zero blocking failures with 42 heading-wrap review warnings (the earlier baseline);
+- `registration-tracker-module.css` cache key moved to `?v=20261008a` on all five pages that load it;
+- visually confirmed at one desktop width only: the watermark is legible against both paper and sage fields without obscuring chart values.
 
 ## Public positioning alignment — 7 October 2026
 

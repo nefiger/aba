@@ -212,6 +212,7 @@ requireMatch("intake", /ABA can read this note, but it will not appear in public
 requireMatch("insights", /Which registration types wait longest[\s\S]*Where are applications blocked[\s\S]*Which types see different outcomes[\s\S]*Which applications are overdue[\s\S]*How often is the pathway a poor fit/i, "five direct public-insight questions");
 forbidMatch("insights", /<h3>/i, "H1-to-H3 heading-level skip (evidence-panel titles must be H2)");
 requireMatch("insights", /class="tracker-example-tag"[^>]*>Illustrative data — not sector findings\./i, "explicit illustrative-data label");
+requireMatch("insights", /<main id="main-content" class="tracker-illustrative"/, "illustrative-data watermark class on main");
 requireMatch("insights", /class="[^"]*tracker-module--data-infographic[^"]*"/i, "dedicated public data-infographic page type");
 requireMatch("insights", /class="[^"]*tracker-module--signal-infographic[^"]*"/i, "regulatory signal-infographic composition");
 requireMatch("insights", /data-summary-queue[\s\S]*Median pending time by registration type\. Hover, tap, or use the arrow keys for exact values\./i, "compact synopsis and self-explaining interactive median-wait chart");

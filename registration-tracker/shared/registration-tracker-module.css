@@ -1647,3 +1647,20 @@
     transition: none !important;
   }
 }
+
+/* Illustrative-data watermark. The insights page shows made-up figures, so a tiled label runs
+   across the whole page and appears in any screenshot of a chart. It sits above the content
+   but never intercepts the pointer, so tooltips and keyboard navigation still work. */
+.tracker-module main.tracker-illustrative {
+  position: relative;
+}
+
+.tracker-module main.tracker-illustrative::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='240'%3E%3Ctext x='210' y='125' text-anchor='middle' transform='rotate(-22 210 125)' font-family='Archivo,Helvetica,Arial,sans-serif' font-size='30' font-weight='800' letter-spacing='3' fill='%23808080' fill-opacity='0.17'%3EILLUSTRATIVE DATA%3C/text%3E%3C/svg%3E");
+  background-size: 420px 240px;
+}
