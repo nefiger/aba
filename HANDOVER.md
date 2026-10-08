@@ -1,10 +1,23 @@
 # Handover Note — ABA Prototype
 
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 
 ---
 
 ## Current state
+
+### Live site, relationship spec and decisions (2026-10-08)
+
+**Read this first: which site is "live".** The live site is `aba.datashaman.com`, the Laravel and React app in `unpoison-ecosystem/aba/` (public copy in `resources/js/pages/`: `home.tsx`, `privacy.tsx`, `membership-interest.tsx`, plus `components/public/` for the header and footer). This repository's `soft-launch/prototype/` is the review prototype that founding members look at (decision of 2026-09-06). The prototype is the reviewed experience the live site is meant to follow, but nothing carries changes across. Someone has to port them.
+
+- **Prototype copy.** PR #42 was merged on 2026-10-08 (`e8823b6`), so the GitHub Pages site carries the copy aligned to the positioning brief. The brief and audit were copied into the monorepo at `reference/aba/website/`. Update both copies if either changes. A follow-up commit on that branch changed "positions developed with members and technical advisers" to "through documented consultation" on home and About.
+- **Live site port: on hold until Jen says go.** The live home still carries April copy and lacks the prototype's reviewed sections. Jen chose to bring the live home up to the prototype and not only swap copy. Agreed approach: a separate worktree off the latest `origin/main` of the monorepo, edits limited to `home.tsx`, `privacy.tsx` and the public footer and header, then lint, type check, the Pest tests and a PR. Risks identified: the prototype home links to pages that do not exist live, the header and footer link to `#about` and `#what-we-do` anchors that must be kept, and the home test asserts the component name `home` and its consent props. Agreed calls to action: every membership button goes to `/membership-interest`; the tracker is a text-only staged band with no button; the Technical Network button is an interim `mailto:` to info@africanbiologicalsalliance.org. `/welcome` serves the default Laravel starter page and should be removed or redirected. Jen handles deploys and comms with Marlin.
+- **Wording agreed.** Keep "regulatory intelligence" and drop "infrastructure" from public copy (use "regulatory evidence base", or "a reviewed, sourced and dated view of how biological products move through registration"). Headline candidates for the regulatory and farmer position, which Jen liked: "Farmers deserve products they can trust." and "Proven biological products should reach farmers." Body sentences must read like a person talking.
+- **After-change copy.** The versions to use when applications open, when member logos arrive and when tracker findings publish are drafted in `docs/requirements/aba-state-block-copy-drafts.md`, awaiting Jen's approval.
+- **Decisions logged.** Nine decisions from this session are in the Drive decisions log (rows 34 to 42). New decisions go there once Jen has approved them, using the script described in the monorepo's `slack-listener/LOGGING-FOR-AI-SESSIONS.md`. Do not add them to `reference/shared/decisions-log.md`.
+- **Relationship spec, stage 1 (people, organisations and relationships).** Draft glossary and model, three diagrams and a draft code of conduct. Working copies are Google Docs and SVG diagrams in the Team shared drive under ABA Central (05 Programme and 01 Governance and legal, Policies). The repo copies are on the unpushed monorepo branch `docs/aba-relationships-glossary` (worktree `/Users/nefiger/projects/unpoison-ecosystem-glossary`). The model's principles, stated by Jen: membership is between ABA and an organisation; individuals can hold their own relationship with ABA and may own or work for organisations that are or are not members; stages are status flags on one record, not separate tables; some statuses trigger workflow and some are informational; a chapter is a country tenant; application and intake are separate; payment has a place in the flow although it is not set up; membership category and system role are different things. It conflicts with a locked item in the monorepo product decision register (approval creates a separate active membership relationship), so it needs Anna's and Jen's agreement. Open questions are listed in the glossary, the sharpest being whether a Technical Network participant is a member, and how a chapter and the code of conduct interact. Next stages: statuses (workflow or informational), system roles, workflows, and a mapping from the live database tables. Codex work review (another session) will quote the glossary in the ecosystem map as drafts only.
+- **Still waiting on Jen:** review of the glossary and code of conduct, then Lyle and Anna; approval of the state-block copy; a go on the live port; whether to insert the diagram PNGs into the Docs through Chrome.
+- **Working agreements.** Draft, Jen reviews, then the next stage. No merging, pushing or sharing without her say. Separate worktrees, never another session's checkout. Log decisions only after she approves them. Do not invent workflow she has not asked for. Check which site is live before changing copy.
 
 ### Public positioning alignment for the quiet launch (2026-10-07)
 
@@ -700,6 +713,8 @@ Current branch state after cleanup:
 | `docs/registration-tracker/index.html` | Registration tracker presenter page |
 | `docs/design-system/` | Extracted design tokens, design-system spec, and symbol-family assets — build spec for the monorepo (not wired into the prototype) |
 | `docs/site/assets/symbols/` | Composed ABA symbols (glyph + field-mark bands) used across the public site |
+| `docs/requirements/aba-public-positioning-and-language-brief.md` | Positioning and language brief for public copy (also in the monorepo at `reference/aba/website/`) |
+| `docs/requirements/aba-state-block-copy-drafts.md` | Draft copy for state changes after launch, awaiting approval |
 | `docs/requirements/aba-public-site-copy-working-document.md` | Full copy extract of all public-facing pages |
 | `docs/requirements/aba-whatsapp-group-synthesis-2026-07-20.md` | Internal synthesis of founding-group WhatsApp context; use before strategy, content, membership, regulatory, or advisory work |
 | `docs/database/assets/bioicons/ATTRIBUTION.md` | SVG icon licence attribution |
