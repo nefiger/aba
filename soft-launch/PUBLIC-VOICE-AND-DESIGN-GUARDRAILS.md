@@ -4,6 +4,8 @@ Status: governing soft-launch contract
 Accepted: 2026-07-21
 Applies to: every public page, public form, shared header/footer, and production implementation derived from `soft-launch/prototype/`
 
+> **Update, 6 Nov 2026 (Jen's decision, recorded in the Decisions log).** The live main site is being refreshed in the booth direction (`unpoisonsa/monorepo`, spec #328, PR #340). For that refresh the **voice rules in this document still apply**, and Anna's regulator-brochure lines are protected. The **composition and palette rules no longer apply**: one-line heroes, scarce orange, no oversized condensed headings, no icon badges, no equal cards. Where this document disagrees with the live site on those rules, the live site follows the booth direction.
+
 ## Why this exists
 
 The ABA prototype has repeatedly drifted into two recognisable failure modes:
